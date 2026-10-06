@@ -1,3 +1,6 @@
 # Audit fingerprints identify exact captured bytes on every checkout platform.
-sources/holoocean_drag_audit/** -text
-patches/holoocean-2.3-drag-units.patch text eol=lf
+sources/holoocean_drag_audit/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Unified diff markers before source tabs are meaningful patch syntax.
+patches/holoocean-2.3-drag-units.patch text eol=lf -whitespace
+# Matplotlib emits whitespace inside generated SVG path attributes.
+docs/figures/holoocean_drag_units.svg -whitespace
