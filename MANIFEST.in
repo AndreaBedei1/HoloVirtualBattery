@@ -1,6 +1,6 @@
 include README.md uv.lock
 recursive-include docs *.md
-recursive-include configs *.yaml
+recursive-include configs *.yaml *.json
 recursive-include examples *.py
 recursive-include tools *.py
 recursive-include sources *.json *.xlsx

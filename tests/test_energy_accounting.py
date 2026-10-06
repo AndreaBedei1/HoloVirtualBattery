@@ -44,6 +44,33 @@ def test_derating_is_applied_before_simulation(fake, config):
         assert e["dynamics_energy_consistent"]
 
 
+def test_public_simulator_force_bounds_limit_modelled_actions(fake, config):
+    class ActionSpace:
+        shape = [8]
+
+        def get_low(self):
+            return [-10] * 8
+
+        def get_high(self):
+            return [10] * 8
+
+    fake.action_space = ActionSpace()
+    with EnergyAwareEnv(fake, config=config) as env:
+        e = env.step([40.0] * 8)["Energy"]
+        assert e["derating_factor"] == pytest.approx(0.25)
+        assert fake.actions[-1] == pytest.approx([10] * 8)
+        assert e["power_propulsion_W"] == pytest.approx(200)
+        assert e["power_total_W"] == pytest.approx(218.75)
+
+
+def test_runtime_pid_action_space_is_rejected_before_advancing(fake, config):
+    fake.action_space = type("PIDSpace", (), {"shape": [6]})()
+    with EnergyAwareEnv(fake, config=config) as env:
+        with pytest.raises(ConfigurationError, match="direct thruster vector"):
+            env.step([5] * 8)
+        assert not fake.actions
+
+
 def test_nonlinear_derating_solves_action_curve_rather_than_watt_ratio(fake, config):
     tables = config["propulsion"]["thruster"]["voltage_tables"]
     for table in tables:

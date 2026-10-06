@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 
+from .._validation import number
 from .converters import ConverterModel
 
 
@@ -28,7 +29,10 @@ class PowerManager:
         self.propulsion = propulsion
         self.converters = converters or ConverterModel({})
 
-    def plan(self, action, payload_W, hotel_W, dt_s):
+    def plan(self, action, payload_W, hotel_W, dt_s, *, action_factor_limit=1.0):
+        action_factor_limit = number(
+            action_factor_limit, "action_factor_limit", minimum=0, maximum=1
+        )
         t = self.thermal.temperature_C
         u = self.battery.ocv(t)
         r = self.battery.resistance(t)
@@ -94,7 +98,10 @@ class PowerManager:
                 available - (payload_W + hotel_W) * service,
                 service,
             )
-        upper = self.propulsion.max_action_factor(action, v_min) if force_factor else 0.0
+        upper = min(
+            action_factor_limit,
+            self.propulsion.max_action_factor(action, v_min) if force_factor else 0.0,
+        )
 
         def load_at(factor, voltage):
             powers = self.propulsion.powers([a * factor for a in action], voltage)

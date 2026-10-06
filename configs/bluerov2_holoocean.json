@@ -1,0 +1,28 @@
+{
+  "name": "HoloEnergy-BlueROV2",
+  "package_name": "Ocean",
+  "world": "SimpleUnderwater",
+  "main_agent": "rov0",
+  "ticks_per_sec": 20,
+  "frames_per_sec": false,
+  "agents": [
+    {
+      "agent_name": "rov0",
+      "agent_type": "BlueROV2",
+      "control_scheme": 0,
+      "location": [0.0, 0.0, -5.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "sensors": [
+        {"sensor_type": "PoseSensor"},
+        {"sensor_type": "VelocitySensor"},
+        {
+          "sensor_type": "RGBCamera",
+          "sensor_name": "Camera",
+          "socket": "CameraSocket",
+          "Hz": 10,
+          "configuration": {"CaptureWidth": 128, "CaptureHeight": 128}
+        }
+      ]
+    }
+  ]
+}

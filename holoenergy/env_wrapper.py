@@ -3,7 +3,7 @@
 from collections.abc import Mapping
 from math import isclose
 
-from ._validation import ConfigurationError, keys
+from ._validation import ConfigurationError, keys, number
 from .config import load_config, model_warnings
 from .logging import EnergyLogger
 from .models.battery import make_battery
@@ -77,6 +77,15 @@ class EnergyAwareEnv:
         if contract is None:
             return
         expected = self.config["simulation"]
+        if type(self.env).__module__.startswith("holoocean.") and isinstance(agents, Mapping):
+            if len(agents) != 1:
+                raise ConfigurationError(
+                    "Reset HoloOcean before wrapping a single controlled agent"
+                )
+            agent = next(iter(agents.values()))
+            expected_type = expected.get("expected_agent_type", contract.get("agent_type"))
+            if expected_type and type(agent).__name__ != expected_type:
+                raise ConfigurationError("Runtime HoloOcean agent type does not match the contract")
         checks = {
             "action_units": self.propulsion.units,
             "thruster_count": self.propulsion.count,
@@ -99,6 +108,34 @@ class EnergyAwareEnv:
         ):
             raise ConfigurationError("BlueROV2 integration requires scheme 0 and eight forces in N")
 
+    def _backend_action_limit(self, action):
+        """Respect public simulator bounds before estimating applied thruster loads."""
+        space = getattr(self.env, "action_space", None)
+        if space is None:
+            return 1.0
+        if tuple(space.shape) != (self.propulsion.count,):
+            raise ConfigurationError(
+                "Runtime action space is not the configured direct thruster vector"
+            )
+        low, high = space.get_low(), space.get_high()
+        if low is None or high is None:
+            return 1.0
+        if isinstance(low, (int, float)):
+            low = [low] * self.propulsion.count
+        if isinstance(high, (int, float)):
+            high = [high] * self.propulsion.count
+        if len(low) != self.propulsion.count or len(high) != self.propulsion.count:
+            raise ConfigurationError("Simulator action bounds must match the thruster count")
+        factor = 1.0
+        for a, lo, hi in zip(action, low, high, strict=True):
+            lo = number(float(lo), "simulator action lower bound", maximum=0)
+            hi = number(float(hi), "simulator action upper bound", minimum=0)
+            if a > 0:
+                factor = min(factor, hi / a)
+            elif a < 0:
+                factor = min(factor, lo / a)
+        return factor
+
     @staticmethod
     def _action_like(original, values):
         if hasattr(original, "dtype") and hasattr(original, "copy"):
@@ -116,7 +153,11 @@ class EnergyAwareEnv:
         dt, t = self.dt_s, self.thermal.temperature_C
         sensor_requested = self.payload.preview(dt)
         plan = self.power_manager.plan(
-            action, sum(sensor_requested.values()), self.hotel.power_W, dt
+            action,
+            sum(sensor_requested.values()),
+            self.hotel.power_W,
+            dt,
+            action_factor_limit=self._backend_action_limit(action),
         )
         outgoing = self._action_like(original, plan.action) if self.apply_derating else original
         try:

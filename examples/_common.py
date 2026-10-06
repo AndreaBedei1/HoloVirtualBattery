@@ -38,8 +38,12 @@ def parser(description):
     result = argparse.ArgumentParser(description=description)
     result.add_argument("--backend", choices=["holoocean", "synthetic"], default="holoocean")
     result.add_argument(
-        "--scenario", type=Path, help="Native HoloOcean JSON with one BlueROV2 agent"
+        "--scenario",
+        type=Path,
+        default=ROOT / "configs/bluerov2_holoocean.json",
+        help="Native HoloOcean JSON with one BlueROV2 agent",
     )
+    result.add_argument("--show-viewport", action="store_true", help="Show the simulator window")
     result.add_argument("--config", type=Path, default=ROOT / "configs/bluerov2_energy.yaml")
     result.add_argument("--steps", type=int, default=300)
     result.add_argument("--output-dir", type=Path, default=ROOT / "logs")
@@ -91,10 +95,25 @@ def backend(args, config):
         raise ValueError("dt_s must equal the reciprocal of an integer ticks_per_sec")
     scenario = copy.deepcopy(scenario)
     scenario["ticks_per_sec"] = tps
+    scenario["frames_per_sec"] = False
     scenario["agents"][0]["control_scheme"] = 0
+    contract["agent_name"] = scenario["agents"][0]["agent_name"]
+    env = None
     try:
-        env = holoocean.make(scenario_cfg=scenario)
+        env = holoocean.make(
+            scenario_cfg=scenario,
+            ticks_per_sec=tps,
+            frames_per_sec=False,
+            show_viewport=getattr(args, "show_viewport", False),
+        )
+        env.reset()
     except Exception as exc:
+        if env is not None:
+            close = getattr(env, "close", None)
+            if close is not None:
+                close()
+            else:
+                env.__exit__(None, None, None)
         raise RuntimeError(
             f"HoloOcean failed to start {args.scenario}: {exc}. "
             "Check world installation, simulator binary, GPU and native scenario validity."
