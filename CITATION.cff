@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "Please cite this software with its exact version, commit and configuration hash."
+type: software
+title: "HoloVirtualBattery / HoloEnergy: an external electro-thermal energy wrapper for HoloOcean"
+authors:
+  - family-names: Bedei
+    given-names: Andrea
+version: 0.1.0
+date-released: 2026-10-06
+repository-code: "https://github.com/AndreaBedei1/HoloVirtualBattery"
+url: "https://github.com/AndreaBedei1/HoloVirtualBattery"
+license: MIT
+abstract: >-
+  Configurable discharge-only L0 and Rint L1 energy models, lumped battery
+  thermal dynamics, manufacturer T200 curves, stateful payload loads and
+  nonlinear action derating for a single direct-thruster HoloOcean agent.
+  Includes reproducible calibration and held-out evaluation tooling.
+  Software and native simulator checks do not establish physical BlueROV2 validation.
+keywords:
+  - marine robotics
+  - battery modelling
+  - electro-thermal simulation
+  - HoloOcean
+  - reproducibility

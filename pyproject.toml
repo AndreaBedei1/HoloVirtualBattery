@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,11 +7,20 @@ name = "holoenergy"
 version = "0.1.0"
 description = "Configurable electro-thermal energy wrapper for HoloOcean marine robots"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Andrea Bedei"}]
 requires-python = ">=3.10"
 dependencies = ["PyYAML>=6.0,<7"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1,<2", "openpyxl>=3.1,<4"]
+
+[project.scripts]
+holoenergy-study = "holoenergy.analysis.cli:main"
+
+[project.urls]
+Repository = "https://github.com/AndreaBedei1/HoloVirtualBattery"
 
 [tool.setuptools.packages.find]
 include = ["holoenergy*"]

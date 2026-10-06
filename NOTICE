@@ -1,0 +1,13 @@
+The MIT license covers project-authored software and documentation.
+It does not relicense third-party manufacturer datasets, scientific articles,
+or quoted/extracted research records. Those retain their original rights.
+
+Blue Robotics T200 performance data (September 2019):
+https://cad.bluerobotics.com/T200-Public-Performance-Data-10-20V-September-2019.xlsx
+The original workbook and a traceable processed profile are included for model
+reproducibility. No independent license grant for these data is asserted here.
+Consult Blue Robotics for conditions of reuse. See docs/scientific_sources.md
+and each profile's metadata for attribution, transformations and limitations.
+
+HoloOcean is an independently installed optional dependency. Its code, engine,
+world packages and trademarks are not covered by this project's license.
