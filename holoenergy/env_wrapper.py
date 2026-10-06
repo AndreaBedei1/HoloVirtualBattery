@@ -44,7 +44,15 @@ class EnergyAwareEnv:
         for item in self.payload.components.values():
             if item.active_is_upper_bound:
                 self.warnings.append(f"{item.name}.ACTIVE uses a datasheet maximum, not a mean")
-        self.logger = EnergyLogger(self.config.get("logging", {}), self.config, self.warnings)
+        self.logger = EnergyLogger(
+            self.config.get("logging", {}),
+            self.config,
+            self.warnings,
+            context={
+                "control_contract": self.contract,
+                "backend_class": f"{type(env).__module__}.{type(env).__qualname__}",
+            },
+        )
         self.time_s = 0.0
         self.episode = 0
         self.step_index = 0
@@ -77,6 +85,8 @@ class EnergyAwareEnv:
             checks["agent_type"] = expected["expected_agent_type"]
         if "control_scheme" in expected:
             checks["control_scheme"] = expected["control_scheme"]
+        if "agent_name" in expected:
+            checks["agent_name"] = expected["agent_name"]
         for name, value in checks.items():
             if contract.get(name) != value:
                 raise ConfigurationError(f"Control contract mismatch: {name} must be {value}")
@@ -135,6 +145,12 @@ class EnergyAwareEnv:
         self.payload.step(dt)
         if self.thermal.critical:
             self.battery.mark_cutoff("temperature")
+        if hasattr(self.battery, "cutoff_V") and point.current_A > 0:
+            end_voltage = self.battery.ocv(self.thermal.temperature_C) - (
+                point.current_A * self.battery.resistance(self.thermal.temperature_C)
+            )
+            if end_voltage <= self.battery.cutoff_V + 1e-10:
+                self.battery.mark_cutoff("voltage")
         self.time_s += dt
         served_sensors = {
             name: power * plan.auxiliary_service_factor for name, power in sensor_requested.items()
@@ -274,6 +290,8 @@ class EnergyAwareEnv:
             close = getattr(self.env, "close", None)
             if close is not None:
                 close()
+            elif getattr(self.env, "__exit__", None) is not None:
+                self.env.__exit__(None, None, None)
             self._closed = True
 
     def __enter__(self):

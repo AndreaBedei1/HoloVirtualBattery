@@ -206,7 +206,7 @@ class RintBattery:
         # Terminal voltage is a start-of-interval point; test end state separately.
         if self.available_charge_Ah(temperature_C) <= 1e-12:
             self.mark_cutoff("available_charge")
-        elif self.ocv(temperature_C) <= self.cutoff_V:
+        elif self.ocv(temperature_C) - i * self.resistance(temperature_C) <= self.cutoff_V + 1e-10:
             self.mark_cutoff("voltage")
         return BatteryPoint(v, i, power, heat, loss, u * i, requested)
 

@@ -44,7 +44,7 @@ class PowerManager:
             if u > self.propulsion.max_voltage + 1e-9:
                 raise ValueError("Battery OCV exceeds the thruster profile voltage range")
             if u < self.propulsion.min_voltage:
-                force_factor = 0.0
+                raise ValueError("Battery OCV is below the thruster profile measured voltage range")
             else:
                 if r > 0:
                     i_max = min(i_max, max(0, (u - self.propulsion.min_voltage) / r))

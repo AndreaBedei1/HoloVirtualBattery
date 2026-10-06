@@ -44,6 +44,44 @@ def test_derating_is_applied_before_simulation(fake, config):
         assert e["dynamics_energy_consistent"]
 
 
+def test_nonlinear_derating_solves_action_curve_rather_than_watt_ratio(fake, config):
+    tables = config["propulsion"]["thruster"]["voltage_tables"]
+    for table in tables:
+        for direction in ("forward", "reverse"):
+            table[direction][1]["power_W"] = 10
+    with EnergyAwareEnv(fake, config=config) as env:
+        e = env.step([40.0] * 8)["Energy"]
+        # Fixture branch: per-thruster P=3F-20, auxiliaries=18.75 W, supply=280 W.
+        expected = (280 - 18.75 + 160) / (24 * 40)
+        assert e["derating_factor"] == pytest.approx(expected, abs=1e-8)
+        assert e["derating_factor"] > e["available_power_W"] / e["requested_power_W"]
+        assert e["power_total_W"] == pytest.approx(280, abs=1e-6)
+
+
+def test_nonzero_thrust_below_measured_voltage_domain_fails(fake, config):
+    config["battery"]["ocv_curve"] = [[0, 7], [1, 8]]
+    config["battery"]["cutoff_voltage_V"] = 5
+    with EnergyAwareEnv(fake, config=config) as env:
+        with pytest.raises(ValueError, match="below.*measured"):
+            env.step([5.0] * 8)
+        assert not fake.actions
+
+
+def test_context_manager_backend_can_be_closed_without_close_method(config):
+    class ContextOnlyEnv:
+        def __init__(self):
+            self.exited = False
+
+        def __exit__(self, *args):
+            self.exited = True
+
+    config["power_manager"]["apply_derating_to_actions"] = False
+    base = ContextOnlyEnv()
+    with EnergyAwareEnv(base, config=config):
+        pass
+    assert base.exited
+
+
 def test_accounting_only_marks_dynamics_mismatch(fake, config):
     config["power_manager"]["apply_derating_to_actions"] = False
     with EnergyAwareEnv(fake, config=config) as env:

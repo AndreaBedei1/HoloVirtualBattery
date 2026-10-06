@@ -41,7 +41,7 @@ class ThrusterModel:
                     raise ConfigurationError("Thruster power and force must be nondecreasing")
                 # Zero-thrust deadband must have zero propulsion power; ESC idle is hotel load.
                 force_power = {}
-                for (_, f), (_, p) in zip(cmd_force, cmd_power, strict=False):
+                for (_, f), (_, p) in zip(cmd_force, cmd_power, strict=True):
                     force_power[f] = max(force_power.get(f, 0), p)
                 if force_power.get(0) != 0 or cmd_force[-1][1] <= 0:
                     raise ConfigurationError(
@@ -68,6 +68,8 @@ class ThrusterModel:
             )
 
     def power(self, action, voltage, units="force_N"):
+        if units not in ("force_N", "normalized_command"):
+            raise ValueError("Unsupported thruster action units")
         if action == 0:
             return 0.0
         self._voltage_check(voltage)
@@ -142,12 +144,12 @@ class PropulsionModel:
 
     def powers(self, action, voltage):
         return [
-            t.power(a, voltage, self.units) for t, a in zip(self.thrusters, action, strict=False)
+            t.power(a, voltage, self.units) for t, a in zip(self.thrusters, action, strict=True)
         ]
 
     def max_action_factor(self, action, voltage):
         factor = 1.0
-        for thruster, a in zip(self.thrusters, action, strict=False):
+        for thruster, a in zip(self.thrusters, action, strict=True):
             if a:
                 limit = (
                     1.0

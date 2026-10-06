@@ -51,7 +51,7 @@ FIELDS = [
 
 
 class EnergyLogger:
-    def __init__(self, config, resolved_config, model_warnings):
+    def __init__(self, config, resolved_config, model_warnings, *, context=None):
         keys(config, {"enabled", "format", "path"}, "logging")
         self.enabled = config.get("enabled", False)
         if not isinstance(self.enabled, bool):
@@ -74,6 +74,7 @@ class EnergyLogger:
                 "resolved_config_sha256": hashlib.sha256(canonical.encode()).hexdigest(),
                 "resolved_config": resolved_config,
                 "model_warnings": model_warnings,
+                "context": context or {},
                 "samples": "interval means for power/current/voltage; end states for SOC/temperature",
             }
             path.with_suffix(path.suffix + ".metadata.json").write_text(
