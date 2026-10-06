@@ -1,0 +1,51 @@
+schema_version: 1
+allow_placeholders: true
+simulation:
+  dt_s: 0.05
+  expected_agent_type: BlueROV2
+  control_scheme: 0
+battery:
+  profile: package:batteries/bluerobotics_4s18ah.yaml
+thermal:
+  water_temperature_C: 15.0
+  initial_temperature_C: 20.0
+  thermal_capacity_J_per_C: 1200.0
+  cooling_coeff_W_per_C: 2.0
+  derating_temperature_C: 40.0
+  cutoff_temperature_C: 50.0
+  minimum_temperature_C: null
+  metadata:
+    source_id: S2/S5
+    user_settings: [water_temperature_C, initial_temperature_C]
+    datasheet_fields: [cutoff_temperature_C]
+    placeholders: [thermal_capacity_J_per_C, cooling_coeff_W_per_C, derating_temperature_C]
+    notes: 50 C pack guide limit; 40 C derating threshold is a configurable policy placeholder.
+propulsion:
+  thruster_count: 8
+  action_units: force_N
+  thruster:
+    profile: package:thrusters/bluerobotics_t200.json
+hotel_load:
+  constant_W: 15.0
+  metadata:
+    placeholders: [constant_W]
+    notes: Aggregate computer/controller/switch/ESC idle, excludes camera and sonar already in payload.
+sensors:
+  Camera:
+    profile: package:sensors/bluerobotics_usb_camera.yaml
+  ImagingSonar:
+    profile: package:sensors/bluerobotics_ping360.yaml
+converters:
+  propulsion_efficiency: 1.0
+  payload_efficiency: 0.9
+  hotel_efficiency: 0.9
+  metadata:
+    source_id: S9
+    placeholders: [payload_efficiency, hotel_efficiency]
+    notes: Propulsion electrical table already includes test-drive losses; distribution assumed ideal.
+power_manager:
+  apply_derating_to_actions: false
+logging:
+  enabled: true
+  format: jsonl
+  path: logs/bluerov2_energy.jsonl

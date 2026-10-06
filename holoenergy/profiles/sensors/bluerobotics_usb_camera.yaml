@@ -1,0 +1,18 @@
+hardware_model: BlueRobotics_LowLight_HD_USB_Camera
+simulation_sensor: RGBCamera
+initial_state: ACTIVE
+active_is_upper_bound: true
+states:
+  off_W: 0.0
+  idle_W: null
+  active_W: 1.1
+  startup_W: null
+  startup_duration_s: null
+  ping_W: null
+  ping_duration_s: null
+metadata:
+  source_id: S7
+  value_kind: datasheet_upper_bound
+  active_W_derivation: 5 V * 0.220 A maximum = 1.1 W; not a measured active average
+  off_assumption: Physical power gate; standby is not OFF
+  calibrate: [idle_W, active_W_mean, startup_W, startup_duration_s]

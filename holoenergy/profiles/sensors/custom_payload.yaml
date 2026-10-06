@@ -1,0 +1,13 @@
+hardware_model: user_supplied
+initial_state: "OFF"
+states:
+  off_W: 0
+  idle_W: null
+  active_W: null
+  startup_W: null
+  startup_duration_s: null
+  ping_W: null
+  ping_duration_s: null
+metadata:
+  value_kind: user_configuration_required
+  notes: Use for DVL or other unidentified hardware. Missing state power raises an error.

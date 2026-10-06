@@ -1,0 +1,20 @@
+hardware_model: BlueRobotics_Ping360
+# Simulation geometry/physics is not guaranteed to match this mechanical scanning sonar.
+simulation_sensor: ImagingSonar
+initial_state: ACTIVE
+active_is_upper_bound: true
+states:
+  off_W: 0.0
+  idle_W: null
+  active_W: 5.0
+  startup_W: null
+  startup_duration_s: null
+  ping_W: null
+  ping_duration_s: null
+metadata:
+  source_id: S8
+  value_kind: datasheet_upper_bound
+  active_W_derivation: Manufacturer maximum 5 W; no state-specific mean published
+  off_assumption: Physical power gate; standby is not OFF
+  calibrate: [idle_W, active_W_mean, startup_W, startup_duration_s, ping_W, ping_duration_s]
+  notes: Map to a HoloOcean imaging sensor explicitly; this is an electrical proxy only.
