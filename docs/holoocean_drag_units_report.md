@@ -76,6 +76,13 @@ nel tag; l'esperimento sul binario identificato dal suo hash dimostra la scala
 0.01. Questi due risultati concordano sul percorso esaminato senza dimostrare
 che ogni altro file della build sia quello del tag.
 
+L'accelerazione identifica la forza effettiva e il prodotto dei coefficienti
+con la scala applicata; non misura separatamente rho, Cd e area compilati nel
+binario. Questi valori di riferimento provengono dal source ufficiale, senza
+fitting. CASE C indica l'incoerenza runtime rispetto all'equazione e ai parametri
+di quel tag. La conversione omessa è la diagnosi supportata dal source e
+dall'accordo numerico, non una prova ottenuta disassemblando il binario.
+
 ## 4. Unità Unreal verificate
 
 La documentazione ufficiale di
