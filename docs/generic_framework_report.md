@@ -25,7 +25,8 @@ Ricerca mirata su energia AUV/ROV, hotel load, effort, correnti, thruster,
 inflow/transienti, batterie ECM/termiche, Fossen e API HoloOcean 2.3.0.
 Fonti primarie prioritarie: publisher IEEE/Elsevier, arXiv degli autori,
 documentazione ufficiale del simulatore, Fossen e produttori. Ricontrollate
-le fonti elettro-termiche/manufacturer già consolidate. I risultati grezzi sono
+le fonti elettro-termiche/manufacturer già consolidate. Metadata dei risultati e hash
+degli output originali sono
 in [sources/generic_research1.json](../sources/generic_research1.json) fino a
 generic_research6.json. È una review ingegneristica focalizzata, non una ricerca
 sistematica esaustiva. parallel-cli non disponibile: fallback web.run.
@@ -294,6 +295,7 @@ Il BlueROV2 è il primo validation case, usando sempre la API generica.
 | `0b993b0` | feat: add optional realtime dashboard and reproducible native experiments |
 | `2b86c3d` | fix: preserve missing telemetry values in dashboard displays |
 | `docs: document generic contracts and scientific verification` | README, contratti, review/evidenze/report; identificabile nella storia del branch |
+| `docs: retain research metadata and source links` | Archivio di ricerca con metadata/hash e link primari, senza ripubblicare estratti dei publisher |
 
 I log native mantengono il commit/dirty flag effettivi di sviluppo, hash sorgente,
 profili/scenario/input. Non vengono retroattivamente marcati come clean-final.

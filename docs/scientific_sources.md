@@ -363,8 +363,9 @@ review. Searches combined marine energy/AUV/ROV, control effort, hotel loads,
 currents, thruster dynamics/inflow, ECM/thermal batteries and HoloOcean/Fossen
 APIs. Primary publisher records, author preprints and official simulator/vendor
 documentation were prioritized. Crossref was used to cross-check metadata; later
-requests encountered HTTP 429. Raw queries/results are retained in
-`sources/generic_research*.json`. No publisher paywall was bypassed.
+requests encountered HTTP 429. Search/open result metadata and original tool-output
+hashes are retained in `sources/generic_research*.json`; publisher excerpts are
+not redistributed. No publisher paywall was bypassed.
 The final citation checker resolved all nine unique DOI links and retrieved
 eight nonempty Crossref metadata records; the arXiv DataCite DOI resolves but
 has no Crossref record and was checked against the primary arXiv page.
