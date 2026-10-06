@@ -75,6 +75,11 @@ class PowerManager:
         if fixed > available:
             # Fractional service is an accounting approximation, not a brownout/reboot model.
             service = available / fixed
+            requested = (
+                c.input_power(sum(self.propulsion.powers(action, v_min)), payload_W, hotel_W)
+                if force_factor
+                else fixed
+            )
             return PowerPlan(
                 [0.0] * len(action),
                 0.0,
@@ -119,6 +124,11 @@ class PowerManager:
         voltage = u - current * r
         powers = self.propulsion.powers(scaled, voltage)
         power = c.input_power(sum(powers), payload_W, hotel_W)
+        requested = (
+            c.input_power(sum(self.propulsion.powers(action, voltage)), payload_W, hotel_W)
+            if force_factor
+            else fixed
+        )
         return PowerPlan(
             scaled,
             factor,
