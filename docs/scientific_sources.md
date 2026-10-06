@@ -58,7 +58,8 @@ above. Each entry distinguishes source values, calibration and simplifications.
 - Source values: 18 Ah * 14.8 V = 266.4 Wh if using the S5 nominal pack baseline.
 - Calibrate: actually usable Wh, initial charge and application limits.
 - Simplification: ideal constant voltage, no sag, internal loss or cold-capacity
-  correction. The wrapper can still apply thermal operational limits.
+  correction. L0 now keeps a fixed reference temperature and omits electro-thermal
+  operational derating; explicit application current/power limits remain.
 - Rationale: accounting baseline and independent integration verification.
 
 ### Rint discharge, SOC and voltage — battery.py
@@ -74,7 +75,8 @@ above. Each entry distinguishes source values, calibration and simplifications.
   Demo R=0.04 ohm and OCV interior knots are placeholders. The 12/16.8 V
   illustrative endpoints follow operating bounds, not measured relaxed OCV.
 - Simplifications: no RC polarization, diffusion, hysteresis, aging, regeneration,
-  charging or slow self-discharge. R varies with T, but currently not SOC.
+  charging or slow self-discharge. R(T) remains the default; a user-measured
+  R(SOC,T) map can replace it without adding polarization states.
   Discharge Coulomb counting is ideal; electrical loss is modeled separately.
 - Rationale: identifiable DC parameters for a first ROV mission-energy model.
   Add RC dynamics only if pulse and held-out mission errors justify them.
@@ -241,3 +243,115 @@ time t before incrementing its tick counter. Consecutive timestamps were verifie
 to differ by 0.05 s; the wrapper records relative interval-end energy time.
 The native motion comparison uses a deliberately imposed 8 A test current cap,
 clearly classified as a simulation intervention rather than a manufacturer value.
+
+## Scientific consolidation (2026-10-06)
+
+Additional raw search/access records: sources/consolidation_research*.json.
+Unsuccessful MDPI access for en11051033 was **not** used as evidence. Existing
+S2 was reread in full text: §3.2–3.3 and Table 2 explicitly discuss series
+resistance dependence on SOC and temperature. S4 full text was independently
+verified through the [Hungarian Academy institutional copy](https://real.mtak.hu/114143/1/energies-12-03755.pdf).
+No coefficients were transferred from either study.
+
+| ID | Verified primary reference | Use and limits |
+| --- | --- | --- |
+| S11 | MathWorks, [Estimate Battery Model Parameters from HPPC Data](https://www.mathworks.com/help/simscape-battery/ug/estimate-battery-model-parameters-from-hppc-data.html), accessed 2026-10-06. | Official HPPC/ECM identification documentation and SOC/temperature lookup tables. Our importer deliberately rejects missing cells instead of adopting its completion/interpolation of missing measurements. No MATLAB dependency or data transferred. |
+| S12 | JCGM (2008), *Evaluation of measurement data — Supplement 1 to the GUM — Propagation of distributions using a Monte Carlo method*, JCGM 101:2008. [Official BIPM full text](https://www.bipm.org/documents/20126/2071204/JCGM_101_2008_E.pdf). | Motivation for propagating explicitly assigned input distributions. Our fixed-sample independent-draw runner is a limited implementation, not a claim of full GUM compliance or BlueROV2 uncertainty characterization. |
+| S13 | DeSando, M., Texas Instruments (October 2016), technical article SSZTAQ7, [programmable delay and power-fail sections](https://www.ti.com/document-viewer/lit/html/SSZTAQ7/GUID-CD23080D-D75F-43C5-A90C-6B45DF979F50). | Technical basis for distinguishing supply supervision/reset from fractional accounting. It does not provide thresholds, delay or power-fraction parameters for our computer/camera/sonar. |
+| S6a | Blue Robotics technical reply by Adam (10 March 2020), [T200 Performance Data](https://discuss.bluerobotics.com/t/t200-perfomance-data/7022). | Clarifies that manufacturer characterization was underwater static/bollard. This technical clarification is secondary to the unchanged official workbook and is not an inflow dataset. |
+
+### R(SOC,T) — optional L1 map, battery.py / analysis/calibration.py
+
+Origin: S2 §3.3, Table 2 and S11 motivate a measured resistance surface. For SOC
+knots s_i and temperature knots T_j, interpolate R_j(s) linearly between adjacent
+measured SOC values, then R(s,T)=(1-w_T)R_j(s)+w_T R_(j+1)(s).
+Weights are coordinate fractions. This bilinear interpolation is our transparent
+representation, not an equation/fit copied from the papers. Resistance values
+are absolute pack ohms, nonnegative; no monotonicity in SOC is imposed. Clamp
+outside the measured temperature domain and flag it; this does not establish
+accuracy outside the domain. A single measured temperature establishes only that
+temperature. Default identity tables also have only their reference support.
+
+Required calibration: common complete reference-SOC grid at each temperature,
+specified pack DC pulse duration/rest, instrument calibration, repeatability and
+uncertainty. With no map, R=R_ref*f_R(T) is unchanged. A map supersedes both
+R_ref and its temperature factor; these are not multiplied a second time. No
+Blue Robotics SOC-resistance map is supplied. The existing 0.04 ohm placeholder
+and OCV knots are unchanged. R is held within each tick; dt refinement is needed
+where SOC/temperature dependence is steep. Rint may conflate ohmic and slower
+effective resistance depending on pulse protocol; RC states require more data.
+
+### Fidelity and thermal selection
+
+L0 and L1 compare identical commands/loads under declared capacity conventions.
+L0 temperature is a fixed reporting reference, not a thermal prediction. L1's
+one-node heat equation, optional entropy, accessible-charge convention and
+source/placeholder parameters above are retained. C_th and k remain uncalibrated.
+L2 is deferred: polarization/hysteresis, two thermal nodes, transient brownout or
+inflow models require identifiability and held-out evidence of improvement.
+The newly supported static R(SOC,T) map adds no dynamic L2 state.
+
+### Static thruster domain and demand estimates
+
+The current T200 energy model is based on static/bollard manufacturer
+characterization and does not explicitly model inflow-dependent propeller
+performance, vehicle-speed effects, thruster-thruster interaction or installation
+effects. Workbook values and envelope processing remain unchanged. Inverse
+force-power interpolation now uses only adjacent measured voltages and requires
+force support in both tables; this is a conservative engineering domain rule.
+The action ceiling covers the entire feasible voltage interval. Unattainable
+requested force is capped only for the demand estimate and flagged
+requested_power_is_capped. Its unmet-power estimate is not a verified physical
+power demand beyond the measured force domain. Applied energy never extrapolates.
+No inflow correction or invented thrust-power exponent is introduced.
+
+### Payload supply policy — optional, payload.py / env_wrapper.py
+
+Origin: S13 supports voltage-supervised devices conceptually. The implementation
+is **our** coarse tick-aligned rail-off policy: if bus voltage is below a user
+threshold OR supplied fraction below a user threshold, disconnect that payload
+for the interval, replan remaining loads and report BROWNOUT. No automatic
+reconnection within the same tick. Latch-off requires manual set_state/reset;
+auto_restart retries after an explicit delay and resets the wait on a failed
+retry. Delays/thresholds are user parameters with no bundled camera/sonar values.
+Voltage means the battery bus, not an inferred regulated 5 V device rail.
+
+This is not a model of a real supervisor circuit, voltage hysteresis, capacitor
+hold-up, stable-voltage timeout or exact reboot. A minimum supplied fraction is
+a modelling policy, not a hardware equation from S13. Above a user threshold,
+remaining fractional accounting can still be an approximation; use fraction=1
+to require full service. Logical payload state is distinct from power status;
+HoloOcean images are not invalidated by this electrical policy. Default continuous
+loads retain the old fractional accounting. Discrete hotel devices can be modelled
+as user-configured payloads, excluding their power from aggregate hotel load.
+Measured boot energy/duration and rail transfer functions are needed for richer
+models. HoloOcean 2.3's public sensor API supplies capture data/rates, no electrical
+state contract; sensor_linked therefore fails explicitly rather than guessing.
+
+### Studies, residuals and separation — analysis package
+
+S12 motivates propagation of user-assigned probability distributions, including
+the need to justify dependence. Our runner supports explicitly independent inputs
+only; uniform/normal/choice draws, seed and fixed sample count are user inputs.
+Invalid physical draws remain failures. No fitted uncertainty, automatic coverage
+interval or standard-compliance assertion is made. One-at-a-time perturbation
+values are likewise user inputs; they are not a prior on BlueROV2 parameters.
+
+MAE=mean|prediction-measurement|; RMSE=sqrt(mean(error²)); max absolute error is
+max|error|. These conventional arithmetic definitions and signed Wh/SOC/event-time
+differences are implemented directly, with no literature-derived coefficients.
+Trapezoidal integration of instantaneous power and exact interval-mean power × dt
+are numerical quadrature choices. Their sampling/coverage limitations, equal
+sample weighting and missing-channel semantics are documented in
+[experimental_tooling.md](experimental_tooling.md). Manifest checks are our
+reproducibility controls, not evidence that declared experiments were independent.
+
+### Evidence status
+
+VERIFIED SOFTWARE BEHAVIOUR: automated math/accounting checks and native simulator
+force/motion/lifecycle checks. DATASHEET-BASED PARAMETERS: the listed pack ratings,
+T200 manufacturer characterization and sensor maxima. PLACEHOLDER PARAMETERS:
+OCV/R/temperature maps, effective thermal values, hotel load and converter means.
+EXPERIMENTALLY CALIBRATED PARAMETERS: no project pack/vehicle parameters yet.
+EXPERIMENTALLY VALIDATED RESULTS: no quantitative physical BlueROV2 validation.
+Importing a user CSV and passing CI cannot promote either of the last two statuses.

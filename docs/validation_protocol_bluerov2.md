@@ -75,7 +75,7 @@ Measure forward/reverse and mounted interactions; record inflow and actual PWM.
 
 ## Maneuvers and held-out missions
 
-Measure electronics idle, hover, surge, yaw, vertical motion and complete
+Measure electronics idle, hover, surge, sway, yaw, vertical motion and complete
 representative missions, with consistent initial charge/temperature. Include
 current-limited segments and sonar OFF/ACTIVE comparisons. Record requested and
 realized control. Repeat missions across SOC and the operational temperature range.
@@ -107,3 +107,58 @@ Preserve calibrated profiles, equations, source DOI/URLs and simplifications,
 instrumentation uncertainty, code/core versions, hashes, log sidecars and independent
 validation metrics. Replace current pack-temperature, electrical, thermal and hotel
 placeholders before claiming quantitative BlueROV2 endurance or thermal accuracy.
+
+## Progressive campaign and tooling
+
+Preassign independent physical cycles/missions to parameter_identification,
+model_selection and final_validation in a versioned manifest. Include a shared
+independence_group for derived files from one physical cycle; hashes alone do not
+make subdivisions independent. Do not inspect held-out data to choose OCV knots,
+R/thermal complexity, onset policies, resampling or a favorable time shift. Use
+model-selection runs to select fidelity, then freeze parameters/code before final
+validation. Archive any revised protocol and acquire new held-out runs if needed.
+
+Proceed in this order, with repeats and documented instrumentation uncertainty:
+
+1. Battery/electronics idle and independently calibrated terminal V/I.
+2. Camera states and representative streaming settings.
+3. Sonar states, scans, startup and ping duty.
+4. Other identified sensors and payloads.
+5. Converter input/output losses across representative load and temperature.
+6. Mounted forward/reverse thruster characterization and wiring losses.
+7. Hover.
+8. Surge.
+9. Sway.
+10. Yaw.
+11. Vertical motion.
+12. Full mission for development/model selection.
+13. Frozen held-out mission for final accuracy and reserve assessment.
+
+Record numeric synchronized timestamps, terminal V/I, pack and water T, realized
+commands, vehicle state and sensor states; maintain raw rates and hashes. Electrical
+command units/order must be established before replay. A hardware PWM history is
+not automatically a HoloOcean force history. Keep complete cycles together.
+
+The new [experimental tooling](experimental_tooling.md) imports identified OCV/R
+maps and optional Q/I temperature tables, preserving source/role hashes. It does
+not fit pulses or claim instrument traceability. Evaluate V/I/P MAE/RMSE/max,
+terminal Wh/relative Wh, independent final SOC, thermal MAE/RMSE/max and peak/time,
+cutoff/derating times, mission completion/time and reserve violations. Retain
+null unavailable metrics and n counts. Define success/reserve thresholds before
+running the campaign. L0/L1 comparison uses identical histories, then closed-loop
+native/real missions test whether energy-aware behavior changes mission outcomes.
+
+Run user-defined sensitivity and independent Monte Carlo studies separately;
+derive intervals and dependencies from repeated identification/instrumentation
+data. Fixed sample count, coverage stability, failed draws and correlations must
+be discussed before uncertainty claims. Parameter uncertainty and model discrepancy
+are different: a placeholder distribution cannot validate a deficient model.
+
+One-node thermal calibration must independently excite heating and cooling.
+A two-node cells/package ↔ enclosure/internal environment ↔ water model is justified
+only by unresolved time constants/temperature lag in independent records. Inflow
+correction requires measured systematic residuals versus vehicle/water-relative
+speed; do not fit speed effects to soak up unmeasured hotel/converter/R errors.
+Record voltage-supervision/boot parameters only when device-specific measurements
+or datasheets support them. None of these physical experiments has been executed
+by this repository's software/native checks.

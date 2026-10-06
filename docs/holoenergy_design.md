@@ -160,8 +160,9 @@ contains [reference_soc,dU_oc/dT] spanning SOC 0–1.
 The default factor tables are reference identities only. Replace them with
 measurements before claiming cold-water accuracy. Keep SOC reference and
 accessible capacity conventions consistent when importing data. Only mark
-metadata.temperature_characterized=true and remove placeholder fields after
-characterization and held-out validation. Logs preserve the unresolved limitations.
+metadata.temperature_characterized=true only after characterization and remove
+only measured placeholder fields. Held-out validation is a separate status.
+Logs preserve unresolved limitations.
 
 ## Adding sensors and thrusters
 
@@ -249,3 +250,51 @@ See [verification.md](verification.md) for performed checks and
 [validation_protocol_bluerov2.md](validation_protocol_bluerov2.md) for future
 hardware calibration. Native HoloOcean integration and both demos now run on
 this machine; these checks do not calibrate the battery/payload energy parameters.
+
+## Consolidated v0.1 contracts
+
+`fidelity_level` resolves from battery.model and must agree if declared. L0 keeps
+a fixed temperature reference and omits thermal feedback; L1 uses the existing
+one-node dynamics. `with_fidelity` makes the same-mission baseline explicit; its
+nominal Ah×V conversion is uncalibrated usable energy. L2 RC/hysteresis/multi-node
+models are future work. Optional static R(SOC,T) tables add no polarization state.
+
+`resistance_soc_temperature_curves` is a list of temperature_C/curve mappings,
+where each curve is a common increasing reference-SOC grid with absolute ohms.
+SOC must span 0–1; values need not be monotone. Linear SOC then temperature
+interpolation clamps and flags domain violations. When configured, the surface
+supersedes internal_resistance_ohm and resistance_temperature_curve. Without it,
+the previous R(T) calculation remains. OCV and capacity examples are unchanged.
+
+Sensor `power_policy` defaults to manual. Sensor-linked mode is explicitly
+unavailable: public HoloOcean 2.3 sensor data/capture APIs do not establish hardware
+electrical states. The wrapper does not infer power from returned arrays or render
+frequency. Use set_payload_state and a correctly identified hardware profile.
+
+Payload `load_kind` defaults to continuous, retaining fractional service. For a
+user-characterized discrete device, optional brownout fields are
+minimum_bus_voltage_V, minimum_supplied_fraction, behavior (latch_off or
+auto_restart) and explicit restart_delay_s for auto_restart. Thresholds have no
+camera/sonar defaults. A tripped device is disconnected for the interval and
+remaining loads are replanned; logical state is retained and timed state progress
+pauses. Auto-restart retries at tick boundaries after the configured wait. Manual
+set_state/reset clears the latch. This rail-off policy assumes off_W=0 and is not
+exact reboot, regulated-rail transient or sensor-data validity modelling.
+Computer and other discrete electronics can be named payloads, avoiding duplicate
+hotel accounting. Above a minimum fraction below 1, fractional accounting may
+remain approximate. Dynamics consistency flags concern propulsion commands.
+
+Thruster metadata explicitly identifies static/bollard characterization. Inverse
+force-power lookup requires support in both adjacent voltage tables; conservative
+force limits cover the feasible voltage interval. Demand outside supported force
+is capped for the request estimate and flagged requested_power_is_capped; this is
+not extrapolated hardware consumption. Applied-action modelling stays in-domain.
+No inflow correction is implemented.
+
+Offline comparison, sensitivity/Monte Carlo, identified-map CSV import, manifest
+checking and synchronized-log evaluation are in holoenergy.analysis. Formats,
+CLI/API contracts, sampling limitations and calibration status are documented in
+[experimental_tooling.md](experimental_tooling.md). The wrapper's logger metadata
+is available even when file logging is disabled; enabled sidecars finalize output
+hashes on close. Multi-tick rows retain voltage/current/temperature extrema in
+addition to interval means. For event/duration studies, use one logged row per tick.
