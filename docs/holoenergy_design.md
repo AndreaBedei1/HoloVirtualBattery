@@ -86,6 +86,7 @@ at its configured path. Choose distinct paths to retain separate runs.
     from holoenergy import EnergyAwareEnv
 
     base = holoocean.make("YOUR_INSTALLED_SCENARIO")
+    base.reset()
     env = EnergyAwareEnv(base, config_path="configs/bluerov2_energy.yaml")
     state = env.step(action)  # eight main-BlueROV2 thruster forces
     print(state["Energy"]["soc"])
@@ -106,7 +107,11 @@ backend energy_action_contract, declaring:
 
 The contract is a caller assertion established from the actual scenario, not
 automatic inspection of undocumented simulator internals. The examples verify
-one BlueROV2 agent and scheme 0, then set the scenario tick rate.
+one BlueROV2 agent and scheme 0, then set the scenario tick rate and call reset.
+The wrapper additionally checks the actual HoloOcean agent class and public
+action-space shape, and respects get_low()/get_high() limits when selecting
+the derated vector. This catches runtime switches away from direct control
+without relying on private control-scheme fields.
 
 step(action,ticks=N) advances and replans once per simulated tick. It returns
 the final simulator state. Energy power, voltage and current are interval means;
@@ -192,12 +197,33 @@ Explicit energy-only synthetic backend, with derating enabled:
 The synthetic backend has no ROV physics and cannot validate mission completion.
 Actual HoloOcean runs require an installed native single-BlueROV2 scenario:
 
-    .venv\Scripts\python.exe examples\bluerov2_energy_demo.py --backend holoocean --scenario C:\path\scenario.json
-    .venv\Scripts\python.exe examples\bluerov2_sensor_payload_demo.py --backend holoocean --scenario C:\path\scenario.json
+    <HoloOcean-Python> examples/bluerov2_energy_demo.py --backend holoocean
+    <HoloOcean-Python> examples/bluerov2_sensor_payload_demo.py --backend holoocean
 
-Default backend is HoloOcean. Missing simulator/world or invalid scenario fails
-explicitly. No silent synthetic fallback exists. Options include --steps,
---config, --output-dir and --log-format csv.
+The default native scenario is configs/bluerov2_holoocean.json, using Ocean /
+SimpleUnderwater with a BlueROV2 and a small camera, plus pose/velocity sensors.
+The sonar energy component is an electrical proxy; no imaging sonar sensor is
+rendered by this lightweight scenario. --scenario selects another native JSON.
+Default backend is HoloOcean; startup requires it in the **selected interpreter**.
+Missing simulator/world or invalid scenario fails explicitly, without a synthetic
+fallback. Options include --steps, --config, --output-dir, --log-format csv and
+--show-viewport (offscreen by default).
+
+This machine's actual HoloOcean Python is
+C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe, version 3.10.20.
+HoloOcean 2.3.0 is installed there; the Python 3.13 energy-only .venv does not
+contain it. HoloEnergy is also installed as an editable package in the Conda
+environment without replacing HoloOcean or its dependencies.
+
+The native opt-in check compares actual pose displacement with and without
+action scaling under a deliberately imposed 8 A current limit:
+
+    <HoloOcean-Python> examples/verify_holoocean_integration.py --backend holoocean --steps 60 --output-dir logs/holoocean
+
+This test cap is an experimental simulation intervention, not a pack rating.
+It checks clock increments, available current/power, actuator bounds, physical
+motion differences and simulator-process cleanup. It is excluded from automatic
+unit-test launching; run it explicitly when an installed world/GPU is available.
 
 ## Logs, limits and core hooks
 
@@ -221,4 +247,5 @@ Temperature maps, DC resistance, hotel and thermal parameters remain uncalibrate
 
 See [verification.md](verification.md) for performed checks and
 [validation_protocol_bluerov2.md](validation_protocol_bluerov2.md) for future
-hardware calibration. HoloOcean binary/world integration has not been run here.
+hardware calibration. Native HoloOcean integration and both demos now run on
+this machine; these checks do not calibrate the battery/payload energy parameters.

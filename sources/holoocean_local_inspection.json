@@ -1,0 +1,34 @@
+{
+  "inspection_date": "2026-10-06",
+  "holoocean_version": "2.3.0",
+  "files": [
+    {
+      "path": "C:\\Users\\Andrea\\Desktop\\Holoocean2-3\\HoloOcean-2.3.0\\HoloOcean-2.3.0\\engine\\Source\\Holodeck\\Agents\\Private\\BlueROV2.cpp",
+      "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec"
+    },
+    {
+      "path": "C:\\Users\\Andrea\\Desktop\\Holoocean2-3\\HoloOcean-2.3.0\\HoloOcean-2.3.0\\engine\\Source\\Holodeck\\Agents\\Public\\BlueROV2.h",
+      "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca"
+    },
+    {
+      "path": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean\\holoocean.py",
+      "sha256": "e724540bb0bba91a2ba6da25337daafed364a1e16fa69f6f310ce4773e14adaf"
+    },
+    {
+      "path": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean\\environments.py",
+      "sha256": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1"
+    },
+    {
+      "path": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean\\agents.py",
+      "sha256": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54"
+    }
+  ],
+  "findings": {
+    "force_units": "N converted to cN in engine",
+    "source_max_thruster_force_N": 28.75,
+    "reset_required_before_step": true,
+    "public_force_bounds": "env.action_space.get_low()/get_high()",
+    "native_timestamp": "t is read before _num_ticks increments; consecutive delta matches dt",
+    "runtime_dependency": "existing Conda environment holoocean_joystick"
+  }
+}

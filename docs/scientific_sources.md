@@ -225,3 +225,19 @@ and propulsion is zero. This is an accounting approximation, not a reboot or
 sensor-validity model. Inspect auxiliary_service_factor and unmet_power_W.
 Default action scaling is false; uncurtailed simulator actions during shortage
 are flagged as inconsistent with the simulated energy supply.
+
+### Installed HoloOcean 2.3.0 verification
+
+The local engine source BlueROV2.cpp / ApplyThrusters explicitly labels the
+input force in Newtons, converts it to Unreal centi-Newtons and applies it at
+thruster locations. BlueROV2.h sets BR_MAX_THRUST=10*11.5/4=28.75 N. The installed
+Python action space independently exposes matching [-28.75,28.75] bounds.
+These are simulator limits, not T200 manufacturer thrust ratings. The wrapper
+uses public action-space bounds as an additional action-factor constraint.
+
+Source paths and SHA256 are recorded in sources/holoocean_local_inspection.json.
+The installed client requires reset() before step(), and exposes native state
+time t before incrementing its tick counter. Consecutive timestamps were verified
+to differ by 0.05 s; the wrapper records relative interval-end energy time.
+The native motion comparison uses a deliberately imposed 8 A test current cap,
+clearly classified as a simulation intervention rather than a manufacturer value.

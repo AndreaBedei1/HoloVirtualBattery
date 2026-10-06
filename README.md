@@ -30,7 +30,19 @@ Le demo abilitano il derating; il wrapper lo lascia disabilitato per default.
 
 Per HoloOcean:
 
-    .venv\Scripts\python.exe examples\bluerov2_energy_demo.py --backend holoocean --scenario C:\path\scenario.json
+    & "C:\Users\Andrea\miniconda3\envs\holoocean_joystick\python.exe" examples\bluerov2_energy_demo.py --backend holoocean
+    & "C:\Users\Andrea\miniconda3\envs\holoocean_joystick\python.exe" examples\bluerov2_sensor_payload_demo.py --backend holoocean
 
-Il JSON deve essere uno scenario nativo installato con un solo agente BlueROV2,
-controllo diretto scheme 0. Vedi [verifiche](docs/verification.md) per test e limiti.
+Su questa macchina HoloOcean 2.3.0 e il pacchetto Ocean sono presenti nell'ambiente
+Conda holoocean_joystick (Python 3.10.20). La .venv di HoloEnergy non contiene
+HoloOcean. Le demo usano per default configs/bluerov2_holoocean.json, con un solo
+BlueROV2, scheme 0, PoseSensor, VelocitySensor e camera. Il sonar è un carico
+elettrico modellato; questo scenario leggero non genera immagini sonar.
+--show-viewport apre la finestra; --scenario permette un altro JSON nativo.
+
+Le demo inizializzano il mondo con reset() prima degli step e rispettano i limiti
+di forza pubblici del simulatore. Verifica esplicita del movimento con derating:
+
+    & "C:\Users\Andrea\miniconda3\envs\holoocean_joystick\python.exe" examples\verify_holoocean_integration.py --backend holoocean --steps 60 --output-dir logs\holoocean
+
+Vedi [verifiche](docs/verification.md) per risultati e limiti scientifici.
