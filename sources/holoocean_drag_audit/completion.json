@@ -1,5 +1,5 @@
 {
-  "recorded_utc": "2026-10-06",
+  "recorded_utc": "2026-10-06T16:27:07.125022+00:00",
   "base_commit": "62c18cfcc6197684be246d08388cf4f11f9b8880",
   "branch": "investigation/holoocean-drag-units",
   "commits_before_results_archive": [
@@ -50,9 +50,176 @@
   },
   "push": {
     "mode": "ordinary; no force",
-    "status_at_this_record": "not yet pushed; checked receipt will be recorded after publication"
+    "receipt_checked_utc": "2026-10-06T16:27:07.125022+00:00",
+    "local_and_remote_head_at_receipt": "0a9fb499075ee5c1cc7a97a0af8f01bd9fca7c32",
+    "branch": "investigation/holoocean-drag-units",
+    "verified": true,
+    "note": "This completion record is committed after the receipt; the final response reports its final commit and final CI."
   },
   "ci": {
-    "status_at_this_record": "not yet triggered for this branch"
-  }
+    "workflow_run_id": 37495348112,
+    "url": "https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37495348112",
+    "tested_head_sha": "0a9fb499075ee5c1cc7a97a0af8f01bd9fca7c32",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "check (ubuntu-latest, 3.10)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (windows-latest, 3.10)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (windows-latest, 3.12)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (ubuntu-latest, 3.13)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (windows-latest, 3.11)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (windows-latest, 3.13)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (ubuntu-latest, 3.11)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      },
+      {
+        "name": "check (ubuntu-latest, 3.12)",
+        "conclusion": "success",
+        "steps": {
+          "Set up job": "success",
+          "Run actions/checkout@v4": "success",
+          "Run actions/setup-python@v5": "success",
+          "Install locked development environment": "success",
+          "Unit tests (no native simulator launch)": "success",
+          "Lint": "success",
+          "Format": "success",
+          "Reproduce manufacturer import": "success",
+          "Build wheel and source distribution": "success",
+          "Verify installed wheel resources and generic profiles": "success",
+          "Post Run actions/setup-python@v5": "success",
+          "Post Run actions/checkout@v4": "success",
+          "Complete job": "success"
+        }
+      }
+    ]
+  },
+  "commits_before_completion_record": [
+    "0a9fb499075ee5c1cc7a97a0af8f01bd9fca7c32 docs: record drag verification results and hashed observations",
+    "70aaf10f8b4975552a4cd875a5910bf0e1d31921 fix: add isolated HoloOcean drag magnitude patch",
+    "0fee6659c8acb0eba7e650549dbf732f924bd6a8 docs: document native current and force unit analysis",
+    "f7a3f7b6875815ba66d3a0ce41fb5d534b1b7964 test: add reproducible HoloOcean drag unit audit"
+  ]
 }

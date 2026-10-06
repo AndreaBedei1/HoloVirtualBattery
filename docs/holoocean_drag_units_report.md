@@ -429,8 +429,11 @@ identifica commit e controlli effettuati prima del commit finale dei risultati.
 
 ## 28. Push e tag stabile
 
-Il branch d'indagine è destinato al push ordinario senza force. Stato remoto
-e tag sono nel registro conclusivo e nel messaggio finale. `v0.1.0` non viene
+Il branch d'indagine è stato pubblicato con push ordinario senza force. HEAD
+locale/remoto verificati uguali al commit `0a9fb49`; CI 8/8 Linux/Windows,
+Python 3.10–3.13, passata su quel commit prima del presente registro finale.
+La ricevuta è in `completion.json`; il messaggio finale identifica l'ultimo
+commit di documentazione e lo stato della sua CI. `v0.1.0` non viene
 spostato; `feature/generic-marine-energy-framework` rimane il riferimento
 precedente. Questa indagine non pubblica una nuova release e non sostituisce
 il world Ocean installato.
