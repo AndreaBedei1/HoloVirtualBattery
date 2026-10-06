@@ -2073,25 +2073,21 @@
     "t200_importer": "reproduced original data exactly; git diff exit 0",
     "wheel": "isolated installed wheel: 3 built-in vehicles, registry and HTML resources, dashboard socket lifecycle passed",
     "custom_yaml": "6 actuators, 24 V, complete custom YAML ran",
-    "synthetic_demos": "generic ROV and AUV ran without core edits"
+    "synthetic_demos": "generic ROV and AUV ran without core edits",
+    "final_wording_change_regression": "52 analysis/generic tests passed; lint/format pass; no numerical change"
   },
   "ci": {
-    "run_id": 37478108601,
-    "head_sha": "0b993b0a549ba4c58a5feb739957a8faf38122ff",
-    "url": "https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37478108601",
+    "run_id": 37479055641,
+    "head_sha": "84c02a4b03ee6fe63eea5f54a02bbc5e5adb484c",
+    "url": "https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37479055641",
     "jobs": [
       {
-        "name": "check (windows-latest, 3.11)",
+        "name": "check (ubuntu-latest, 3.13)",
         "status": "completed",
         "conclusion": "success"
       },
       {
-        "name": "check (ubuntu-latest, 3.11)",
-        "status": "completed",
-        "conclusion": "success"
-      },
-      {
-        "name": "check (windows-latest, 3.10)",
+        "name": "check (ubuntu-latest, 3.10)",
         "status": "completed",
         "conclusion": "success"
       },
@@ -2101,12 +2097,7 @@
         "conclusion": "success"
       },
       {
-        "name": "check (ubuntu-latest, 3.13)",
-        "status": "completed",
-        "conclusion": "success"
-      },
-      {
-        "name": "check (windows-latest, 3.12)",
+        "name": "check (windows-latest, 3.11)",
         "status": "completed",
         "conclusion": "success"
       },
@@ -2116,10 +2107,37 @@
         "conclusion": "success"
       },
       {
-        "name": "check (ubuntu-latest, 3.10)",
+        "name": "check (ubuntu-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (windows-latest, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (windows-latest, 3.10)",
         "status": "completed",
         "conclusion": "success"
       }
     ]
+  },
+  "profile_provenance_audit": {
+    "yaml_profile_count": 11,
+    "complete_fields": [
+      "assumptions",
+      "datasheet_url",
+      "date_accessed",
+      "doi",
+      "manufacturer",
+      "model",
+      "operational_domain",
+      "revision",
+      "source",
+      "status",
+      "values_extracted"
+    ],
+    "result": "all pass; original custom_payload remains an unfilled user template, not a fabricated hardware profile"
   }
 }

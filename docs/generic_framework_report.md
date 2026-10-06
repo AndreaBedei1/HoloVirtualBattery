@@ -224,7 +224,7 @@ Matrice Linux/Windows × Python 3.10/3.11/3.12/3.13, locked install, pytest,
 ruff, importer, wheel/sdist. Aggiunto smoke test della wheel in ambiente
 isolato con Python -I: nessun import sorgente, registro profili/HTML presenti,
 tre veicoli utilizzabili e server avviabile/chiudibile. Wheel locale verificata.
-La [CI remota sul commit 0b993b0](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37478108601)
+La [CI remota sul commit 84c02a4](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37479055641)
 ha completato tutti gli otto job con successo; la verifica finale del nuovo HEAD
 documentale viene riportata nel messaggio di consegna.
 Unreal/GPU rimangono test manuali, non falsi job CI headless.
@@ -294,9 +294,10 @@ Il BlueROV2 è il primo validation case, usando sempre la API generica.
 | `22aa995` | refactor: generalize configurable marine energy models and accounting |
 | `0b993b0` | feat: add optional realtime dashboard and reproducible native experiments |
 | `2b86c3d` | fix: preserve missing telemetry values in dashboard displays |
-| `docs: document generic contracts and scientific verification` | README, contratti, review/evidenze/report; identificabile nella storia del branch |
-| `docs: retain research metadata and source links` | Archivio di ricerca con metadata/hash e link primari, senza ripubblicare estratti dei publisher |
-| `fix: use generic vehicle wording in control and study messages` | Messaggi coerenti con il contratto generico; nessuna modifica numerica |
+| `aafd890` | docs: document generic contracts and scientific verification |
+| `bfc9e31` | docs: retain research metadata and source links |
+| `84c02a4` | fix: use generic vehicle wording in control and study messages |
+| `docs: complete legacy custom profile provenance and final audit` | Completa metadata del template payload originale e registra l'audit finale; identificabile nella storia del branch |
 
 I log native mantengono il commit/dirty flag effettivi di sviluppo, hash sorgente,
 profili/scenario/input. Non vengono retroattivamente marcati come clean-final.

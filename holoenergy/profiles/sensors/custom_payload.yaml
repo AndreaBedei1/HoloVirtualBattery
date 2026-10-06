@@ -9,5 +9,17 @@ states:
   ping_W: null
   ping_duration_s: null
 metadata:
+  manufacturer: user-selected; unidentified hardware
+  model: custom electrical payload template
+  revision: legacy-v0.1 template
+  source: User must supply measured or datasheet state powers and timing.
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: USER-SUPPLIED
+  calibrated: false
+  values_extracted: None; null fields require user characterization before use.
+  assumptions: OFF is gated to zero; no standby, active, startup or ping power is inferred.
+  operational_domain: Defined by user-supplied powers, durations and supply policy.
   value_kind: user_configuration_required
   notes: Use for DVL or other unidentified hardware. Missing state power raises an error.
