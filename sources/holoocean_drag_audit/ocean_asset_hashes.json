@@ -1,0 +1,22 @@
+{
+  "Windows\\Holodeck\\Content\\Paks\\global.ucas": {
+    "sha256": "22a25f80f423b00244ef0ae45730ebf82b708dca6a999acf1c3e07330b935d1d",
+    "size_bytes": 2053824
+  },
+  "Windows\\Holodeck\\Content\\Paks\\global.utoc": {
+    "sha256": "d6cd1e1bb824d9bfaebc283eeaa8fa07ad6f8e9b2c324fe24cd47c88a678ebdd",
+    "size_bytes": 587
+  },
+  "Windows\\Holodeck\\Content\\Paks\\Holodeck-Windows.pak": {
+    "sha256": "1f47a2e77047e498bebc0a05668a8f571192345e365bb23d7f527674a884187d",
+    "size_bytes": 9982877
+  },
+  "Windows\\Holodeck\\Content\\Paks\\Holodeck-Windows.ucas": {
+    "sha256": "5ffc3dda8a6c641dde9e1f872e97ac92d72c0d220ee22845dd794f4f4f650f42",
+    "size_bytes": 5403766096
+  },
+  "Windows\\Holodeck\\Content\\Paks\\Holodeck-Windows.utoc": {
+    "sha256": "228fb134a0c8076070b49558081caf5b6bfc7341f71dbc7c2329df1b3548352c",
+    "size_bytes": 3369769
+  }
+}

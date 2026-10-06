@@ -1,0 +1,13 @@
+{
+  "kinematic_position_vs_velocity_max_error_m_s": 5.656573921469614e-05,
+  "kinematic_check_scope": "Consecutive thrust pulses, position finite differences against end-step DynamicsSensor SI velocity; vertical float quantization included.",
+  "max_native_sensor_vs_fd_acceleration_error_m_s2": 5.722045868239434e-06,
+  "max_source_prediction_velocity_error_m_s": 9.157922531422003e-08,
+  "max_angular_velocity_rad_s": 5.597657598712106e-17,
+  "current_signed_axis_ratio_min": 0.009999999188257584,
+  "current_signed_axis_ratio_max": 0.01000000038952784,
+  "effective_mass_kg_range": [
+    11.499999835897766,
+    11.50000071141838
+  ]
+}

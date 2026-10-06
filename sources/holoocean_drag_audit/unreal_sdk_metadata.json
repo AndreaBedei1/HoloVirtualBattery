@@ -1,0 +1,72 @@
+[
+  {
+    "path": "Engine/Source/Runtime/Engine/Private/PrimitiveComponentPhysics.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Engine/Private/PrimitiveComponentPhysics.cpp",
+    "blob_sha": "5fad1964757adc6ab0bd25392dc4c449b9c31bb7",
+    "sha256": "c74930f4bcbc427f3168c96e0b555a74d5a6a4c57716be23c46157e02e58fa11"
+  },
+  {
+    "path": "Engine/Source/Runtime/Engine/Private/PhysicsEngine/PhysicsInterfaceUtils.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Engine/Private/PhysicsEngine/PhysicsInterfaceUtils.cpp",
+    "blob_sha": "e9caa4dc055f9f828ff6355aa6bf34afcc37410d",
+    "sha256": "bdc4e2773fa8fc8e294dd01d46fe3e87517aeccbc64871d7f1312f2a73b726d1"
+  },
+  {
+    "path": "Engine/Source/Runtime/Engine/Private/PhysicsEngine/Experimental/PhysInterface_Chaos.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Engine/Private/PhysicsEngine/Experimental/PhysInterface_Chaos.cpp",
+    "blob_sha": "c3b02e4a2d5de1d3111bdfb5c766c6026ca5b4f2",
+    "sha256": "ba9b11e7a1338a10f827e7d04830f8706a7b595dad976458d03f387f991e2e41"
+  },
+  {
+    "path": "Engine/Source/Runtime/Experimental/Chaos/Private/Chaos/PBDRigidsEvolutionGBF.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Experimental/Chaos/Private/Chaos/PBDRigidsEvolutionGBF.cpp",
+    "blob_sha": "642815adc8f9a9ad87ab291f55f42ecec860b17f",
+    "sha256": "1d82a5d2f1e3382e7dcb562a110ceb70d75968438b8478465016b175ae0fadb9"
+  },
+  {
+    "path": "Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PerParticleEulerStepVelocity.h",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PerParticleEulerStepVelocity.h",
+    "blob_sha": "7ae64fb2851bf4357b5c9a7a38d39adea8bf3abe",
+    "sha256": "0b46edd49f5b85986e8615f503f8a6ec339ff3a7bd4ea1a386d78decf237f410"
+  },
+  {
+    "path": "Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PerParticleEtherDrag.h",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PerParticleEtherDrag.h",
+    "blob_sha": "45b9e4c1151a84d958f0ef717063513fefe164c2",
+    "sha256": "b40a2a8290e07169a476f1e43f092a106fa3127a525fd5b973827f9a80ce6dc7"
+  },
+  {
+    "path": "Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PBDRigidsEvolutionGBF.h",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PBDRigidsEvolutionGBF.h",
+    "blob_sha": "749bb4d922cbeafc07c1dbcf7e9d7af38ff6cff9",
+    "sha256": "0680c1cb8f00e8a70633c3057115725525fc5c2c52d6554c992390d42eb0be65"
+  },
+  {
+    "path": "Engine/Source/Runtime/PhysicsCore/Private/PhysicsSettingsCore.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/PhysicsCore/Private/PhysicsSettingsCore.cpp",
+    "blob_sha": "503a433819346326331ccd2cc88445b64899e0a2",
+    "sha256": "c0b02e1911ca166a0221ae8bd806ec43cbc86fb9bf5c02b0d28ca3ec3954b7ae"
+  },
+  {
+    "path": "Engine/Source/Runtime/Engine/Private/PhysicsEngine/PhysicsSettings.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Engine/Private/PhysicsEngine/PhysicsSettings.cpp",
+    "blob_sha": "39d1113554c8558971c0ce15cd53368df3b76eae",
+    "sha256": "bb80b70036d03dcadfef66fbe730ca963117e10bd66cc3153662988f2b285e5c"
+  },
+  {
+    "path": "Engine/Source/Runtime/Engine/Private/PhysicsEngine/BodyInstance.cpp",
+    "ref": "5.3",
+    "url": "https://github.com/EpicGames/UnrealEngine/blob/5.3/Engine/Source/Runtime/Engine/Private/PhysicsEngine/BodyInstance.cpp",
+    "blob_sha": "c9c9e43dcc5e5c8de37f3106a77e1e7b39d64356",
+    "sha256": "cde16f28cacb8d5562e04af066ffabeeb5e1e8dce1b0f26ccd79246246a8ad93"
+  }
+]

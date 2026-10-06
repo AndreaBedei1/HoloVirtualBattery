@@ -1,0 +1,7 @@
+{
+  "capture": "Exact audit source files used for the verified campaign; preserved before subsequent provenance-only additions.",
+  "sha256": {
+    "examples/verify_holoocean_drag_units.py": "b31b24a982f055985a6bac8c21ba47f17282f534014fe95a3aaa0d24664b8872",
+    "tools/audit_holoocean_drag.py": "22bb15c39caac71cdac808b4d99d4009a62bf7ab782567c66991ab5660c320f3"
+  }
+}

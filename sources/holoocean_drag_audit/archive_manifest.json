@@ -1,0 +1,14 @@
+{
+  "verified": {
+    "raw_sha256": "9e203224e8e7c3008708d8e767310e1f8ba9b881158d832d4008592a5e0ca25b",
+    "gzip_sha256": "23df39835547db28958a3bd9c802d28f9eec3c7b0e823bae04ecaad98f73dc7a",
+    "rows": 1224,
+    "report_sha256": "93849df9920119f91191d9fca0d444ff33cdf6fefa5a2697e0c5198c6cfc0682"
+  },
+  "diagnostic_20hz": {
+    "raw_sha256": "75451179fe1c067a173038a47f5352b55ac15ce113eb3f5ed52e92af7df4a5d8",
+    "gzip_sha256": "9124ffa0e03d4f1960e4fdbc80819e9ec3d9e9951b668409c371bbbe62a2e524",
+    "rows": 1224,
+    "report_sha256": "734df153dabc82961fe67385a2a0cdeea51e1995fa37165cf64c848dde0fb85a"
+  }
+}

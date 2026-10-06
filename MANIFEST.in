@@ -1,12 +1,14 @@
-include README.md uv.lock
+include README.md uv.lock .gitattributes
 include LICENSE NOTICE CITATION.cff CONTRIBUTING.md
 recursive-include .github *.yml
 recursive-include docs *.md
 recursive-include docs/screenshots *.png
+recursive-include docs/figures *.png *.pdf *.svg
+recursive-include patches *.patch *.md *.txt
 recursive-include configs *.yaml *.json
 recursive-include examples *.py
 recursive-include tools *.py
 recursive-include tests *.py
-recursive-include sources *.json *.xlsx
+recursive-include sources *.json *.xlsx *.csv *.gz *.py
 recursive-include holoenergy/profiles *.yaml *.json
 recursive-include holoenergy/dashboard *.html

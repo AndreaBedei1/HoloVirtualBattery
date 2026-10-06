@@ -1,0 +1,3 @@
+# Audit fingerprints identify exact captured bytes on every checkout platform.
+sources/holoocean_drag_audit/** -text
+patches/holoocean-2.3-drag-units.patch text eol=lf

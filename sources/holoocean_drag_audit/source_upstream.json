@@ -1,0 +1,195 @@
+{
+  "accessed_utc": "2026-10-06",
+  "tag": "v2.3.0",
+  "tag_commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+  "develop_reviewed_commit": "4c7637ab81f1d3bed2fd94b35f2832bf034c3a4e",
+  "source_local": {
+    "root": "C:\\Users\\Andrea\\Desktop\\Holoocean2-3\\HoloOcean-2.3.0\\HoloOcean-2.3.0",
+    "git": {
+      "commit": null,
+      "status": null
+    },
+    "parameters": {
+      "mass_kg": 11.5,
+      "drag_coefficient": 0.8,
+      "area_m2": 0.45,
+      "density_kg_m3": 997.0,
+      "ue_units_per_m": 100.0,
+      "linear_damping_per_s": 1.0,
+      "source_drag_scale_to_SI": 0.01,
+      "explicit_drag_unit_conversion": false,
+      "fully_submerged_ratio": 1.0,
+      "neutral_volume_m3": 0.011534603811434303,
+      "parameter_origin": "official/local C++ literals; no runtime fit"
+    },
+    "files": {
+      "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp": {
+        "sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+        "line_anchors": {
+          "DragForce": [
+            53,
+            91,
+            94
+          ],
+          "RelativeVel": [
+            90,
+            91,
+            92
+          ],
+          "AddForce": [
+            77,
+            84,
+            93
+          ],
+          "ConvertLinearVector": [
+            75,
+            82
+          ]
+        }
+      },
+      "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h": {
+        "sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+        "line_anchors": {
+          "DragForce": [
+            56
+          ]
+        }
+      },
+      "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": {
+        "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+        "line_anchors": {
+          "AddForce": [
+            66,
+            107
+          ],
+          "ConvertLinearVector": [
+            58,
+            97
+          ]
+        }
+      },
+      "engine/Source/Holodeck/Agents/Public/BlueROV2.h": {
+        "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+        "line_anchors": {}
+      },
+      "engine/Source/Holodeck/Agents/Private/BlueROV2ControlThrusters.cpp": {
+        "sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+        "line_anchors": {
+          "DragForce": [
+            29
+          ]
+        }
+      },
+      "engine/Source/Holodeck/General/Private/Conversion.cpp": {
+        "sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+        "line_anchors": {
+          "ConvertLinearVector": [
+            95
+          ]
+        }
+      },
+      "engine/Source/Holodeck/General/Public/Conversion.h": {
+        "sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+        "line_anchors": {
+          "ConvertLinearVector": [
+            19
+          ]
+        }
+      },
+      "engine/Source/Holodeck/ClientCommands/Private/OceanCurrentsCommand.cpp": {
+        "sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+        "line_anchors": {}
+      },
+      "engine/Source/Holodeck/Sensors/Private/DynamicsSensor.cpp": {
+        "sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+        "line_anchors": {
+          "ConvertLinearVector": [
+            66,
+            75
+          ]
+        }
+      }
+    }
+  },
+  "tag_file_comparison": {
+    "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp": {
+      "local_sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+      "official_tag_sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h": {
+      "local_sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+      "official_tag_sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": {
+      "local_sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+      "official_tag_sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/Agents/Public/BlueROV2.h": {
+      "local_sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+      "official_tag_sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/Agents/Private/BlueROV2ControlThrusters.cpp": {
+      "local_sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+      "official_tag_sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/General/Private/Conversion.cpp": {
+      "local_sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+      "official_tag_sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/General/Public/Conversion.h": {
+      "local_sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+      "official_tag_sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/ClientCommands/Private/OceanCurrentsCommand.cpp": {
+      "local_sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+      "official_tag_sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+      "byte_equal": true
+    },
+    "engine/Source/Holodeck/Sensors/Private/DynamicsSensor.cpp": {
+      "local_sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+      "official_tag_sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+      "byte_equal": true
+    },
+    "client/src/holoocean/environments.py": {
+      "local_sha256": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "official_tag_sha256": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "byte_equal": true
+    }
+  },
+  "source_binary_exact_build_identity": null,
+  "develop_drag_magnitude_conversion_in_three_reviewed_relative_flow_paths": false,
+  "installed_client_comparison": {
+    "agents.py": {
+      "installed_sha256": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+      "tag_sha256": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+      "byte_equal": true
+    },
+    "environments.py": {
+      "installed_sha256": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "tag_sha256": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "byte_equal": true
+    },
+    "command.py": {
+      "installed_sha256": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+      "tag_sha256": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+      "byte_equal": true
+    },
+    "sensors.py": {
+      "installed_sha256": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+      "tag_sha256": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+      "byte_equal": true
+    },
+    "packagemanager.py": {
+      "installed_sha256": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0",
+      "tag_sha256": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0",
+      "byte_equal": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "patch_sha256": "00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa",
+  "original_sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+  "apply_check": true,
+  "apply": true,
+  "reverse_check": true,
+  "reverse": true,
+  "original_restored_byte_for_byte": true,
+  "git_core_autocrlf_for_check": false,
+  "after_runtime_tested": false,
+  "reason": "No usable UE 5.3 development installation/cooker found; MSVC installations exist. Installed stable binary untouched."
+}

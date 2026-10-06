@@ -1,0 +1,58 @@
+{
+  "recorded_utc": "2026-10-06",
+  "base_commit": "62c18cfcc6197684be246d08388cf4f11f9b8880",
+  "branch": "investigation/holoocean-drag-units",
+  "commits_before_results_archive": [
+    "70aaf10f8b4975552a4cd875a5910bf0e1d31921 fix: add isolated HoloOcean drag magnitude patch",
+    "0fee6659c8acb0eba7e650549dbf732f924bd6a8 docs: document native current and force unit analysis",
+    "f7a3f7b6875815ba66d3a0ce41fb5d534b1b7964 test: add reproducible HoloOcean drag unit audit"
+  ],
+  "regression": {
+    "python": "3.13.12",
+    "pytest_passed": 152,
+    "baseline_tests_preserved": 144,
+    "new_audit_tests": 8,
+    "ruff_check_all": true,
+    "ruff_format_check_all": true,
+    "wheel_and_sdist_build": true,
+    "isolated_installed_wheel_smoke_check": true,
+    "core_holoenergy_diff_empty": true
+  },
+  "native_runtime": {
+    "python": "3.10.20",
+    "verified_campaign_cases": 153,
+    "verified_campaign_observations": 1224,
+    "case": "CASE C",
+    "scale_mean": 0.009999999703068724,
+    "frequencies_Hz": [
+      60,
+      100,
+      200
+    ],
+    "repeats": 3,
+    "diagnostic_20hz_campaign_retained_inconclusive": true,
+    "issue_draft_minimal_script_executed": true,
+    "station_keeping_repeated_before_binary": [
+      0,
+      0.2,
+      0.5,
+      0.8
+    ],
+    "physical_validation": false,
+    "patched_runtime_tested": false
+  },
+  "archive_integrity_verified": true,
+  "patch_apply_reverse_verified": true,
+  "stable_tag": {
+    "annotated_tag_object": "fdcd7ee1108e676fbcc79edb4f62433bcbdf84ee",
+    "peeled_commit": "a7a962b726be3df2856304d2c738a5c1f6e8fc92",
+    "remote_matches": true
+  },
+  "push": {
+    "mode": "ordinary; no force",
+    "status_at_this_record": "not yet pushed; checked receipt will be recorded after publication"
+  },
+  "ci": {
+    "status_at_this_record": "not yet triggered for this branch"
+  }
+}

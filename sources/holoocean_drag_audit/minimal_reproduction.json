@@ -1,0 +1,13 @@
+{
+  "tested": true,
+  "exit_code": 0,
+  "formatted_draft_ast_equal_to_executed_script": true,
+  "executed_script_sha256": "5e4c18654f4408d7f222bc1d8bdaf8673781109544685cf2ff6b155c75014a6f",
+  "output": [
+    "u=0.1, expected=1.794600 N, observed=0.017946 N",
+    "u=0.2, expected=7.178400 N, observed=0.071784 N",
+    "u=0.4, expected=28.713600 N, observed=0.287136 N",
+    "u=0.8, expected=114.854400 N, observed=1.148544 N",
+    "u=0.0, expected=10.000000 N, observed=9.999999 N"
+  ]
+}

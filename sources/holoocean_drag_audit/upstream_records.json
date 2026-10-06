@@ -1,0 +1,65 @@
+{
+  "accessed_utc": "2026-10-06",
+  "items": [
+    {
+      "number": 368,
+      "title": "Question - Unit Ocean Currents",
+      "html_url": "https://github.com/byu-holoocean/HoloOcean/issues/368",
+      "state": "open",
+      "created_at": "2026-08-04T11:12:41Z",
+      "updated_at": "2026-08-05T20:13:13Z",
+      "merged_at": null,
+      "merge_commit_sha": null
+    },
+    {
+      "number": 287,
+      "title": "Cleaning up Loose Ends from Currents",
+      "html_url": "https://github.com/byu-holoocean/HoloOcean/pull/287",
+      "state": "closed",
+      "created_at": "2025-11-08T18:51:44Z",
+      "updated_at": "2025-12-04T17:08:45Z",
+      "merged_at": "2025-11-12T23:48:17Z",
+      "merge_commit_sha": "d997151c7d1c773789d6409b579426fe39ccc68f"
+    },
+    {
+      "number": 308,
+      "title": "Updating test_currents.py",
+      "html_url": "https://github.com/byu-holoocean/HoloOcean/pull/308",
+      "state": "closed",
+      "created_at": "2026-01-09T18:36:23Z",
+      "updated_at": "2026-01-14T19:30:13Z",
+      "merged_at": "2026-01-14T19:27:25Z",
+      "merge_commit_sha": "b15b730a3be6797211337736aec7706786509dd3"
+    },
+    {
+      "number": 327,
+      "title": "v2.3.0",
+      "html_url": "https://github.com/byu-holoocean/HoloOcean/pull/327",
+      "state": "closed",
+      "created_at": "2026-02-04T22:07:46Z",
+      "updated_at": "2026-02-05T20:10:38Z",
+      "merged_at": "2026-02-05T20:10:38Z",
+      "merge_commit_sha": "49e70552dfd97273b7dfbe755fbe65d7738b24b7"
+    },
+    {
+      "number": 351,
+      "title": "Merging waves and buoyancy into holoocean 2.4.0",
+      "html_url": "https://github.com/byu-holoocean/HoloOcean/pull/351",
+      "state": "closed",
+      "created_at": "2026-06-04T23:38:15Z",
+      "updated_at": "2026-07-13T14:08:21Z",
+      "merged_at": null,
+      "merge_commit_sha": null
+    }
+  ],
+  "issue_368_comments": [
+    {
+      "html_url": "https://github.com/byu-holoocean/HoloOcean/issues/368#issuecomment-5196831202",
+      "created_at": "2026-08-05T20:13:13Z",
+      "updated_at": "2026-08-05T20:13:13Z",
+      "author_association": "MEMBER"
+    }
+  ],
+  "paraphrase": "Maintainer says currents should be in m/s and acknowledges a possible bug; the comment is not a merged unit fix.",
+  "search_scope": "GitHub issue search queries archived separately; latest 100 issues/PRs and 100 develop commits also inspected, not an exhaustive history of all branches."
+}
