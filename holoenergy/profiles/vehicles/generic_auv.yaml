@@ -1,0 +1,67 @@
+schema_version: 1
+allow_placeholders: true
+vehicle:
+  name: Generic AUV
+  kind: AUV
+  dynamics_source: user backend; no native Unreal asset claimed
+  dynamics_mode: descriptive
+  mass_kg: 32
+  volume_m3: 0.032
+  metadata:
+    status: PLACEHOLDER
+    placeholders: [mass_kg, volume_m3]
+    source: synthetic demonstration configuration
+simulation:
+  dt_s: 0.05
+battery:
+  profile: package:batteries/demo_24v30ah.yaml
+actuators:
+  - id: propulsor
+    profile: package:actuators/demo_auv_propulsor.yaml
+components:
+  - name: navigation
+    category: sensors
+    active_W: 7
+    metadata: {status: USER-SUPPLIED, source: synthetic demonstration inputs}
+  - name: scientific_sonar
+    category: sensors
+    active_W: 18
+    metadata: {status: USER-SUPPLIED, source: synthetic demonstration inputs}
+  - name: onboard_computer
+    category: compute
+    active_W: 25
+    metadata: {status: USER-SUPPLIED, source: synthetic demonstration inputs}
+  - name: modem
+    category: auxiliaries
+    initial_state: IDLE
+    states: {OFF: 0, IDLE: 2, TRANSMITTING: 15}
+    metadata: {status: USER-SUPPLIED, source: synthetic demonstration inputs}
+environment:
+  water_temperature_C: 8
+  current_velocity_m_s: [0, 0, 0]
+  current_mode: descriptive
+thermal:
+  initial_temperature_C: 20
+  thermal_capacity_J_per_C: 2000
+  cooling_coeff_W_per_C: 3
+  derating_temperature_C: 45
+  cutoff_temperature_C: 55
+  metadata:
+    status: PLACEHOLDER
+    source: synthetic demonstration inputs, not battery thermal characterization
+    placeholders: [thermal_capacity_J_per_C, cooling_coeff_W_per_C, derating_temperature_C, cutoff_temperature_C]
+power_manager:
+  apply_derating_to_actions: true
+metadata:
+  manufacturer: none; synthetic demonstration
+  model: Generic AUV
+  revision: '1'
+  source: demonstration configuration; no physical robot represented
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: PLACEHOLDER
+  calibrated: false
+  values_extracted: []
+  assumptions: Force-power input only, no inferred servo/fin loads; explicit hotel components.
+  operational_domain: Demonstration configuration, one propulsor and 24 V Rint pack.

@@ -6,6 +6,20 @@ from math import sqrt
 from .._validation import ConfigurationError, curve, interpolate, keys, number, required, timestep
 
 
+def battery_metadata(config):
+    chemistry = config.get("chemistry", "custom")
+    if not isinstance(chemistry, str) or not chemistry.strip():
+        raise ConfigurationError("battery.chemistry must be a nonempty descriptive string")
+    cells = config.get("cells", {})
+    keys(cells, {"series", "parallel", "cell_model"}, "battery.cells metadata")
+    for field in ("series", "parallel"):
+        if field in cells and (
+            isinstance(cells[field], bool) or not isinstance(cells[field], int) or cells[field] <= 0
+        ):
+            raise ConfigurationError(f"cells.{field} must be a positive integer")
+    return chemistry
+
+
 @dataclass(frozen=True)
 class BatteryPoint:
     voltage_V: float
@@ -45,11 +59,14 @@ class RintBattery:
                 "max_current_temperature_curve",
                 "entropy_curve_V_per_K",
                 "low_soc_threshold",
+                "chemistry",
+                "cells",
             },
             "Rint battery",
         )
         if config.get("model") != "rint":
             raise ConfigurationError("RintBattery requires model: rint")
+        self.chemistry = battery_metadata(config)
         self.capacity_Ah = number(required(config, "capacity_Ah"), "capacity_Ah", positive=True)
         self.nominal_V = number(
             required(config, "nominal_voltage_V"), "nominal_voltage_V", positive=True
@@ -170,6 +187,28 @@ class RintBattery:
             self.capacity_Ah * interpolate(self.capacity_curve, temperature_C)
         )
 
+    def remaining_energy_Wh(self, temperature_C):
+        """OCV electrical-work upper bound; no promise of load-dependent usable Wh."""
+        if self.cutoff:
+            return 0.0
+        lower = max(0, 1 - interpolate(self.capacity_curve, temperature_C))
+        upper = self.soc
+        if upper <= lower:
+            return 0.0
+        grids = [self.ocv_curve] if not self.ocv_tables else [p for _, p in self.ocv_tables]
+        knots = sorted({lower, upper, *(s for grid in grids for s, _ in grid if lower < s < upper)})
+
+        def voltage(soc):
+            if not self.ocv_tables:
+                return interpolate(self.ocv_curve, soc)
+            return interpolate(
+                tuple((t, interpolate(p, soc)) for t, p in self.ocv_tables), temperature_C
+            )
+
+        return self.capacity_Ah * sum(
+            (b - a) * (voltage(a) + voltage(b)) / 2 for a, b in zip(knots, knots[1:], strict=False)
+        )
+
     def current_limit(
         self, temperature_C, dt_s, *, thermal_factor=1.0, thermal_current_limit=float("inf")
     ):
@@ -261,11 +300,14 @@ class EnergyBucketBattery:
                 "max_current_A",
                 "max_power_W",
                 "low_soc_threshold",
+                "chemistry",
+                "cells",
             },
             "L0 battery",
         )
         if config.get("model") != "energy_bucket":
             raise ConfigurationError("EnergyBucketBattery requires model: energy_bucket")
+        self.chemistry = battery_metadata(config)
         self.capacity_Wh = number(required(config, "capacity_Wh"), "capacity_Wh", positive=True)
         self.nominal_V = number(
             required(config, "nominal_voltage_V"), "nominal_voltage_V", positive=True
@@ -297,6 +339,9 @@ class EnergyBucketBattery:
 
     def available_soc(self, temperature_C):
         return self.soc
+
+    def remaining_energy_Wh(self, temperature_C):
+        return 0.0 if self.cutoff else self.soc * self.capacity_Wh
 
     def temperature_outside_calibration(self, temperature_C):
         return False

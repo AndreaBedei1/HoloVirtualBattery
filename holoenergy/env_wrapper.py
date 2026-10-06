@@ -4,19 +4,30 @@ from collections.abc import Mapping
 from math import isclose
 
 from ._validation import ConfigurationError, keys, number
+from .accounting import EnergyRuntime
 from .config import load_config, model_warnings
 from .logging import EnergyLogger
 from .models.battery import make_battery
+from .models.components import ComponentModel
 from .models.converters import ConverterModel
 from .models.hotel_load import HotelLoad
-from .models.payload import PayloadModel
 from .models.power_manager import PowerManager
 from .models.propulsion import PropulsionModel
 from .models.thermal import IdealThermalModel, ThermalModel
+from .models.vehicle import VehicleProfile, vector3
 
 
 class EnergyAwareEnv:
-    def __init__(self, env, config_path=None, *, config=None, control_contract=None):
+    def __init__(
+        self,
+        env,
+        config_path=None,
+        *,
+        config=None,
+        control_contract=None,
+        dynamics_adapter=None,
+        telemetry=None,
+    ):
         self.env = env
         self.config = load_config(config_path, data=config)
         self.dt_s = self.config["simulation"]["dt_s"]
@@ -29,7 +40,9 @@ class EnergyAwareEnv:
         thermal_type = IdealThermalModel if self.config["fidelity_level"] == "L0" else ThermalModel
         self.thermal = thermal_type(self.config["thermal"])
         self.propulsion = PropulsionModel(self.config["propulsion"])
-        self.payload = PayloadModel(self.config.get("sensors", {}))
+        self.payload = ComponentModel(
+            self.config.get("sensors", {}), self.config.get("components", [])
+        )
         if "hotel_load" not in self.config:
             raise ConfigurationError("Supply explicit hotel_load.constant_W (zero is allowed)")
         self.hotel = HotelLoad(self.config["hotel_load"])
@@ -39,7 +52,30 @@ class EnergyAwareEnv:
         )
         self.contract = control_contract or getattr(env, "energy_action_contract", None)
         self._validate_contract()
+        self.vehicle = VehicleProfile(self.config.get("vehicle", {}))
+        self.dynamics_adapter = dynamics_adapter
+        self.dynamics_status = "backend_owned"
+        if self.vehicle.mode == "adapter":
+            if dynamics_adapter is None or not callable(
+                getattr(dynamics_adapter, "configure_vehicle", None)
+            ):
+                raise ConfigurationError(
+                    "vehicle.dynamics_mode: adapter requires configure_vehicle(profile)"
+                )
+            dynamics_adapter.configure_vehicle(self.vehicle)
+            self.dynamics_status = "applied_by_explicit_adapter"
+        elif self.vehicle.has_physical_description:
+            self.dynamics_status = "descriptive_only_not_applied"
+        self.environment = {}
+        initial_environment = self.config.get("environment", {})
+        self.set_environment(**{k: v for k, v in initial_environment.items() if k != "metadata"})
         self.warnings = model_warnings(self.config)
+        if self.dynamics_status == "descriptive_only_not_applied":
+            self.warnings.append(
+                "Vehicle/payload physical parameters are descriptive; dynamics backend must configure them"
+            )
+        if set(self.propulsion.ids) & (set(self.payload.components) | set(self.hotel.components)):
+            raise ConfigurationError("Actuator and component accounting IDs must not overlap")
         if self.contract is None:
             self.warnings.append("Caller must verify direct-thruster units and simulation dt_s")
         for item in self.payload.components.values():
@@ -59,6 +95,12 @@ class EnergyAwareEnv:
         self.step_index = 0
         self._faulted = False
         self._closed = False
+        self.energy = EnergyRuntime(self)
+        self.telemetry = telemetry
+        if telemetry is None and self.config.get("telemetry", {}).get("enabled", False):
+            from .telemetry import TelemetryPublisher
+
+            self.telemetry = TelemetryPublisher.from_config(self.config["telemetry"])
 
     def _validate_contract(self):
         agents = getattr(self.env, "agents", None)
@@ -102,12 +144,8 @@ class EnergyAwareEnv:
                 raise ConfigurationError(f"Control contract mismatch: {name} must be {value}")
         if not isclose(contract.get("dt_s", -1), self.dt_s, rel_tol=1e-9):
             raise ConfigurationError("Control contract dt_s does not match simulation.dt_s")
-        if contract.get("agent_type") == "BlueROV2" and (
-            contract.get("control_scheme") != 0
-            or self.propulsion.count != 8
-            or self.propulsion.units != "force_N"
-        ):
-            raise ConfigurationError("BlueROV2 integration requires scheme 0 and eight forces in N")
+        # Agent-specific action layouts belong to profiles/adapters. Runtime public
+        # action bounds and the explicit direct-effort contract remain authoritative.
 
     def _backend_action_limit(self, action):
         """Respect public simulator bounds before estimating applied thruster loads."""
@@ -148,6 +186,86 @@ class EnergyAwareEnv:
 
     def set_payload_state(self, name, state):
         self.payload.set_state(name, state)
+
+    def set_environment(self, **values):
+        keys(
+            values,
+            {"water_temperature_C", "water_density_kg_m3", "current_velocity_m_s", "current_mode"},
+            "environment update",
+        )
+        candidate = dict(self.environment)
+        if "water_temperature_C" in values:
+            candidate["water_temperature_C"] = number(
+                values["water_temperature_C"], "water_temperature_C", minimum=-273.14
+            )
+        if "water_density_kg_m3" in values:
+            candidate["water_density_kg_m3"] = number(
+                values["water_density_kg_m3"], "water_density_kg_m3", positive=True
+            )
+        if "current_velocity_m_s" in values:
+            candidate["current_velocity_m_s"] = vector3(
+                values["current_velocity_m_s"], "current_velocity_m_s"
+            )
+        mode = values.get("current_mode", candidate.get("current_mode", "descriptive"))
+        if mode not in ("descriptive", "native", "adapter"):
+            raise ConfigurationError("current_mode must be descriptive, native or adapter")
+        candidate["current_mode"] = mode
+        dynamics_values = {
+            k: candidate[k] for k in ("current_velocity_m_s", "water_density_kg_m3") if k in values
+        }
+        if dynamics_values and mode == "adapter":
+            setter = getattr(self.dynamics_adapter, "set_environment", None)
+            if not callable(setter):
+                raise ConfigurationError("Environment adapter requires set_environment(values)")
+            setter(dynamics_values)
+        elif dynamics_values and mode == "native":
+            if "water_density_kg_m3" in dynamics_values:
+                raise ConfigurationError(
+                    "Native HoloOcean has no public water-density setter; use a dynamics adapter"
+                )
+            contract = self.contract or {}
+            if contract.get("dynamics_mode") == "fossen":
+                raise ConfigurationError(
+                    "HoloOcean native currents are unsupported for Fossen; use an explicit adapter"
+                )
+            setter = getattr(self.env, "set_ocean_currents", None)
+            name = contract.get("agent_name", self.config["simulation"].get("agent_name"))
+            if not callable(setter) or not name:
+                raise ConfigurationError(
+                    "Native current requires public set_ocean_currents and an explicit agent_name"
+                )
+            setter(name, candidate["current_velocity_m_s"])
+        self.environment = candidate
+        if "water_temperature_C" in candidate:
+            self.thermal.ambient_C = candidate["water_temperature_C"]
+
+    def _vehicle_observation(self, state):
+        """Only documented sensors or explicit SI VehicleState; absent channels stay null."""
+        from math import sqrt
+
+        result = {
+            "linear_speed_m_s": None,
+            "angular_speed_rad_s": None,
+            "acceleration_m_s2": None,
+            "depth_m": None,
+        }
+        explicit = state.get("VehicleState", {})
+        if isinstance(explicit, Mapping):
+            for key in result:
+                if key in explicit and explicit[key] is not None:
+                    result[key] = (
+                        vector3(explicit[key], key)
+                        if key == "acceleration_m_s2"
+                        else number(float(explicit[key]), key)
+                    )
+        if result["linear_speed_m_s"] is None and "VelocitySensor" in state:
+            velocity = state["VelocitySensor"]
+            if len(velocity) == 3:
+                result["linear_speed_m_s"] = sqrt(sum(float(v) ** 2 for v in velocity))
+        if result["depth_m"] is None and "PoseSensor" in state:
+            pose = state["PoseSensor"]
+            result["depth_m"] = -float(pose[2][3])  # documented HoloOcean NWU frame
+        return result
 
     def _one_tick(self, action, original, kwargs):
         self._validate_contract()
@@ -297,6 +415,64 @@ class EnergyAwareEnv:
             "model_warnings": self.warnings,
             "step_completed": True,
         }
+        component_powers = dict(served_sensors)
+        # Legacy aggregate hotel remains explicit and separate from user components.
+        if self.hotel.constant_W:
+            component_powers["hotel_constant"] = (
+                self.hotel.constant_W * plan.auxiliary_service_factor
+            )
+        component_powers.update(
+            {n: p * plan.auxiliary_service_factor for n, p in self.hotel.components.items()}
+        )
+        category_power = {
+            k: sum(served_sensors[n] for n, c in self.payload.components.items() if c.category == k)
+            for k in ("sensors", "compute", "auxiliaries")
+        }
+        row.update(
+            power_sensors_W=category_power["sensors"],
+            power_compute_W=category_power["compute"],
+            power_auxiliary_W=category_power["auxiliaries"] + plan.hotel_power_W,
+            component_power_W=component_powers,
+            component_states={
+                **row["sensor_states"],
+                **{n: "ACTIVE" for n in component_powers if n not in served_sensors},
+            },
+            component_power_status=dict(row["sensor_power_status"]),
+            actuator_power_W=dict(zip(self.propulsion.ids, plan.thruster_power_W, strict=True)),
+            actuators={
+                identity: {
+                    "command": a,
+                    "applied_effort": b,
+                    "force_N": b
+                    if self.propulsion.units == "force_N"
+                    else thruster.force(b, point.voltage_V),
+                    "power_W": p,
+                    "action_units": self.propulsion.units,
+                    "effort_kind": "submitted to backend; realized thrust not measured",
+                }
+                for identity, a, b, p, thruster in zip(
+                    self.propulsion.ids,
+                    action,
+                    applied,
+                    plan.thruster_power_W,
+                    self.propulsion.thrusters,
+                    strict=True,
+                )
+            },
+            battery_temperature_C=self.thermal.temperature_C,
+            remaining_energy_Wh=self.battery.remaining_energy_Wh(self.thermal.temperature_C),
+            remaining_energy_basis="OCV work upper bound; load-dependent cutoff excluded"
+            if self.config["fidelity_level"] == "L1"
+            else "ideal energy storage",
+            chemistry=self.battery.chemistry,
+            environment=dict(self.environment),
+            vehicle_dynamics_status=self.dynamics_status,
+            **self._vehicle_observation(state),
+        )
+        self.energy.record(row)
+        row["endurance_estimates"] = self.energy.endurance()
+        if self.telemetry is not None:
+            self.telemetry.publish(row)
         return dict(state), row
 
     @staticmethod
@@ -316,6 +492,9 @@ class EnergyAwareEnv:
             "requested_power_W",
             "available_power_W",
             "unmet_power_W",
+            "power_sensors_W",
+            "power_compute_W",
+            "power_auxiliary_W",
         ):
             row[key] = sum(r[key] for r in rows) / count
         row["dt_s"] = sum(r["dt_s"] for r in rows)
@@ -332,6 +511,12 @@ class EnergyAwareEnv:
         row["sensor_power_W"] = {
             name: sum(r["sensor_power_W"][name] for r in rows) / count
             for name in row["sensor_power_W"]
+        }
+        for key in ("component_power_W", "actuator_power_W"):
+            row[key] = {name: sum(r[key][name] for r in rows) / count for name in row[key]}
+        row["actuators"] = {
+            name: {**item, "power_W": row["actuator_power_W"][name]}
+            for name, item in row["actuators"].items()
         }
         row["dynamics_energy_consistent"] = all(r["dynamics_energy_consistent"] for r in rows)
         row["requested_power_is_capped"] = any(r["requested_power_is_capped"] for r in rows)
@@ -369,6 +554,8 @@ class EnergyAwareEnv:
         if self._closed:
             raise RuntimeError("EnergyAwareEnv is closed")
         state = self.env.reset(*args, **kwargs)
+        if self.energy.duration_s:
+            self.energy.episodes.append(self.energy.summary())
         self.battery.reset()
         self.thermal.reset()
         self.payload.reset()
@@ -377,10 +564,25 @@ class EnergyAwareEnv:
         self.step_index = 0
         self.episode += 1
         self._faulted = False
+        self.energy.reset()
+        self.environment = {}
+        self.set_environment(
+            **{k: v for k, v in self.config["environment"].items() if k != "metadata"}
+        )
+        if self.telemetry is not None:
+            self.telemetry.event("reset", episode=self.episode)
         return state
 
     def close(self):
         if not self._closed:
+            summary = self.energy.summary()
+            self.logger.metadata["energy_summary"] = summary
+            if self.logger.path is not None:
+                self.energy.export_summary(str(self.logger.path) + ".summary.json")
+                self.energy.export_summary(str(self.logger.path) + ".summary.csv")
+            if self.telemetry is not None:
+                self.telemetry.event("end_mission", summary=summary)
+                self.telemetry.close()
             self.logger.close()
             close = getattr(self.env, "close", None)
             if close is not None:

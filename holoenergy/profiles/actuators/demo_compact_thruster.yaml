@@ -1,0 +1,22 @@
+model: custom_lookup
+voltage_tables:
+  - voltage_V: 10
+    forward: [{command: 0, force_N: 0, power_W: 0}, {command: 0.5, force_N: 4, power_W: 12}, {command: 1, force_N: 12, power_W: 55}]
+    reverse: [{command: 0, force_N: 0, power_W: 0}, {command: 0.5, force_N: 3, power_W: 12}, {command: 1, force_N: 9, power_W: 55}]
+  - voltage_V: 14
+    forward: [{command: 0, force_N: 0, power_W: 0}, {command: 0.5, force_N: 4, power_W: 12}, {command: 1, force_N: 12, power_W: 55}]
+    reverse: [{command: 0, force_N: 0, power_W: 0}, {command: 0.5, force_N: 3, power_W: 12}, {command: 1, force_N: 9, power_W: 55}]
+metadata:
+  manufacturer: none; synthetic demonstration
+  model: compact demonstrator
+  revision: '1'
+  source: user-selected demonstration inputs; no hardware represented
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: PLACEHOLDER
+  calibrated: false
+  values_extracted: []
+  placeholders: [voltage_tables]
+  assumptions: Demonstration of interpolation/API only; identical voltage curves intentionally simplify the fixture.
+  operational_domain: 10–14 V, force support in both directions; synthetic.

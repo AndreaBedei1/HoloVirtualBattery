@@ -115,9 +115,13 @@ def run_mission(
                 for name, state in item.get("sensor_states", {}).items():
                     env.set_payload_state(name, state)
                 if "water_temperature_C" in item:
-                    env.thermal.ambient_C = number(
-                        item["water_temperature_C"], "water_temperature_C", minimum=-273.14
-                    )
+                    env.energy.set_environment(water_temperature_C=item["water_temperature_C"])
+                if "phase" in item:
+                    env.energy.mark_phase(item["phase"])
+                for name, state in item.get("component_states", {}).items():
+                    env.energy.set_component_state(name, state)
+                for name, inputs in item.get("component_inputs", {}).items():
+                    env.energy.set_component_input(name, **inputs)
                 start = perf_counter()
                 state = env.step(action if action_adapter is None else action_adapter(action))
                 wrapped_seconds += perf_counter() - start

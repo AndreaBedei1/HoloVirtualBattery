@@ -1,4 +1,5 @@
 model: rint
+chemistry: Li-ion
 capacity_Ah: 18.0
 nominal_voltage_V: 14.8
 initial_soc: 1.0
@@ -20,6 +21,18 @@ capacity_temperature_curve: [[25.0, 1.0]]
 resistance_temperature_curve: [[25.0, 1.0]]
 max_current_temperature_curve: [[25.0, 1.0]]
 metadata:
+  manufacturer: Blue Robotics
+  model: 18 Ah 4S Lithium-ion battery
+  revision: Product page r3; installed hardware revision requires verification
+  source: S5; official pack ratings with explicitly retained modelling placeholders
+  datasheet_url: https://bluerobotics.com/store/comm-control-power/powersupplies-batteries/battery-li-4s-18ah-r3/
+  doi: null
+  date_accessed: '2026-10-06'
+  status: DATASHEET
+  calibrated: false
+  values_extracted: [capacity_Ah, nominal_voltage_V, cutoff_voltage_V, max_current_A]
+  assumptions: Pack-level Rint; physical pack OCV/resistance/temperature maps require experiments.
+  operational_domain: Discharge within pack ratings and supplied map support; reference identities are not temperature characterization.
   source_id: S5
   value_kind: mixed_datasheet_and_placeholder
   temperature_characterized: false

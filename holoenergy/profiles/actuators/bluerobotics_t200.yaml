@@ -1,0 +1,14 @@
+profile: package:thrusters/bluerobotics_t200.json
+metadata:
+  manufacturer: Blue Robotics
+  model: T200
+  revision: September 2019 performance dataset
+  source: S6, unchanged manufacturer workbook and reproducible importer
+  datasheet_url: https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/
+  doi: null
+  date_accessed: '2026-10-06'
+  status: MEASURED
+  calibrated: false
+  values_extracted: [command, force_N, power_W, voltage_V]
+  assumptions: Static bollard data; installed inflow and ESC mapping require calibration.
+  operational_domain: 10–20 V, separate measured forward/reverse force support.

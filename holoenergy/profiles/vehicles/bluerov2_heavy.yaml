@@ -20,11 +20,15 @@ thermal:
     datasheet_fields: [cutoff_temperature_C]
     placeholders: [thermal_capacity_J_per_C, cooling_coeff_W_per_C, derating_temperature_C]
     notes: 50 C pack guide limit; 40 C derating threshold is a configurable policy placeholder.
-propulsion:
-  thruster_count: 8
-  action_units: force_N
-  thruster:
-    profile: package:thrusters/bluerobotics_t200.json
+vehicle:
+  name: BlueROV2 Heavy
+  kind: ROV
+  dynamics_source: HoloOcean native agent; its C++/Unreal asset owns physical properties
+  dynamics_mode: descriptive
+actuators:
+  - count: 8
+    action_units: force_N
+    profile: package:actuators/bluerobotics_t200.yaml
 hotel_load:
   constant_W: 15.0
   metadata:
@@ -49,3 +53,16 @@ logging:
   enabled: true
   format: jsonl
   path: logs/bluerov2_energy.jsonl
+metadata:
+  manufacturer: Blue Robotics
+  model: BlueROV2 Heavy reference electrical configuration
+  revision: v0.1.0 electrical parameters retained
+  source: S5–S10; configuration assembled from sourced profiles and declared placeholders
+  datasheet_url: https://bluerobotics.com/store/rov/bluerov2/
+  doi: null
+  date_accessed: '2026-10-06'
+  status: DATASHEET
+  calibrated: false
+  values_extracted: [battery pack ratings, T200 tables, sensor upper bounds]
+  assumptions: Native simulator asset is not a measured dynamics model of the project vehicle.
+  operational_domain: Same L1 battery/thermal domain and limitations as v0.1.0.

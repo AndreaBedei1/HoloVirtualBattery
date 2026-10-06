@@ -1,0 +1,58 @@
+schema_version: 1
+allow_placeholders: true
+vehicle:
+  name: Generic lightweight ROV
+  kind: ROV
+  dynamics_source: user backend; no native Unreal asset claimed
+  dynamics_mode: descriptive
+  mass_kg: 6
+  volume_m3: 0.006
+  metadata:
+    status: PLACEHOLDER
+    placeholders: [mass_kg, volume_m3]
+    source: synthetic demonstration configuration; not hardware validation
+simulation:
+  dt_s: 0.05
+battery:
+  model: energy_bucket
+  chemistry: custom
+  capacity_Wh: 120
+  nominal_voltage_V: 12
+  initial_soc: 1
+  max_current_A: 20
+  metadata:
+    status: USER-SUPPLIED
+    source: chosen ideal demonstration storage; no real battery represented
+actuators:
+  - count: 4
+    profile: package:actuators/demo_compact_thruster.yaml
+components:
+  - name: camera
+    category: sensors
+    model: generic_load
+    states: {OFF: 0, IDLE: 0.5, ACTIVE: 2.5}
+    metadata: {status: USER-SUPPLIED, source: synthetic demonstration inputs}
+  - name: computer
+    category: compute
+    model: generic_load
+    active_W: 8
+    metadata: {status: USER-SUPPLIED, source: synthetic demonstration inputs}
+environment:
+  water_temperature_C: 15
+  current_velocity_m_s: [0, 0, 0]
+  current_mode: descriptive
+power_manager:
+  apply_derating_to_actions: true
+metadata:
+  manufacturer: none; synthetic demonstration
+  model: Generic lightweight ROV
+  revision: '1'
+  source: demonstration configuration; no physical robot represented
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: PLACEHOLDER
+  calibrated: false
+  values_extracted: []
+  assumptions: Energy-only demonstration; vehicle properties are descriptive until a dynamics adapter applies them.
+  operational_domain: Demonstration configuration, four actuators, ideal 12 V storage.

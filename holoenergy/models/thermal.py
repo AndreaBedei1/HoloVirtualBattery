@@ -115,6 +115,28 @@ class ThermalModel:
 class IdealThermalModel(ThermalModel):
     """L0 reference temperature only: no heat state prediction or thermal limits."""
 
+    def __init__(self, config):
+        keys(
+            config,
+            {
+                "water_temperature_C",
+                "initial_temperature_C",
+                "thermal_capacity_J_per_C",
+                "cooling_coeff_W_per_C",
+                "derating_temperature_C",
+                "cutoff_temperature_C",
+                "minimum_temperature_C",
+            },
+            "L0 temperature reference",
+        )
+        self.ambient_C = number(
+            required(config, "water_temperature_C"), "water_temperature_C", minimum=-273.14
+        )
+        self.initial_C = number(
+            required(config, "initial_temperature_C"), "initial_temperature_C", minimum=-273.14
+        )
+        self.temperature_C = self.initial_C
+
     @property
     def critical(self):
         return False

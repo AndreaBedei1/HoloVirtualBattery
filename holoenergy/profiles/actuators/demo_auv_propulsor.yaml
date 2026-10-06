@@ -1,0 +1,22 @@
+model: custom_lookup
+force_power_tables:
+  - voltage_V: 20
+    forward: [[0, 0], [10, 35], [50, 240]]
+    reverse: [[0, 0], [5, 35], [25, 240]]
+  - voltage_V: 30
+    forward: [[0, 0], [10, 35], [50, 240]]
+    reverse: [[0, 0], [5, 35], [25, 240]]
+metadata:
+  manufacturer: none; synthetic demonstration
+  model: AUV propulsor demonstration
+  revision: '1'
+  source: user-selected demonstration inputs; no hardware represented
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: PLACEHOLDER
+  calibrated: false
+  values_extracted: []
+  placeholders: [force_power_tables]
+  assumptions: Supplied force-power relation only; normalized commands cannot be inferred.
+  operational_domain: 20–30 V, documented force domain; synthetic.

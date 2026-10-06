@@ -2,6 +2,7 @@
 
 import copy
 import json
+import re
 import warnings
 from importlib.resources import files
 from pathlib import Path
@@ -9,6 +10,19 @@ from pathlib import Path
 import yaml
 
 from ._validation import ConfigurationError, keys, number
+
+
+class _ConfigLoader(yaml.SafeLoader):
+    """YAML 1.2 boolean spelling: OFF/ON are component labels, not booleans."""
+
+
+_ConfigLoader.yaml_implicit_resolvers = {
+    k: [(tag, pattern) for tag, pattern in values if tag != "tag:yaml.org,2002:bool"]
+    for k, values in yaml.SafeLoader.yaml_implicit_resolvers.items()
+}
+_ConfigLoader.add_implicit_resolver(
+    "tag:yaml.org,2002:bool", re.compile(r"^(?:true|false|True|False|TRUE|FALSE)$"), list("tTfF")
+)
 
 
 def _merge(base, overlay):
@@ -24,7 +38,11 @@ def _merge(base, overlay):
 def _read(path):
     try:
         text = path.read_text(encoding="utf-8")
-        value = json.loads(text) if str(path).endswith(".json") else yaml.safe_load(text)
+        value = (
+            json.loads(text)
+            if str(path).endswith(".json")
+            else yaml.load(text, Loader=_ConfigLoader)
+        )
     except (OSError, ValueError, yaml.YAMLError) as exc:
         raise ConfigurationError(f"Cannot load configuration {path}: {exc}") from exc
     if not isinstance(value, dict):
@@ -38,6 +56,10 @@ def _resolve(data, base_dir, stack=()):
     if not isinstance(data, dict):
         return data
     data = copy.deepcopy(data)
+    if data.get("model") == "BlueRobotics_T200" and not (
+        {"voltage_tables", "force_power_tables"} & data.keys()
+    ):
+        data.setdefault("profile", "package:actuators/bluerobotics_t200.yaml")
     if "profile" in data:
         name = data.pop("profile")
         if not isinstance(name, str):
@@ -68,7 +90,70 @@ def _placeholders(data, prefix=""):
         for key, value in data.items():
             if key != "metadata":
                 result.extend(_placeholders(value, f"{prefix}{key}."))
+    elif isinstance(data, list):
+        for index, item in enumerate(data):
+            result.extend(_placeholders(item, f"{prefix}{index}."))
     return result
+
+
+def _normalize_generic(config):
+    """Resolve the public vehicle schema to the existing numerical model inputs."""
+    if "actuators" in config:
+        if "propulsion" in config:
+            raise ConfigurationError("Supply actuators or legacy propulsion, not both")
+        raw = config.pop("actuators")
+        if not isinstance(raw, list) or not raw:
+            raise ConfigurationError("actuators must be a nonempty list")
+        models, identities, units = [], [], set()
+        for item in raw:
+            count = item.pop("count", 1)
+            if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+                raise ConfigurationError("actuator.count must be a positive integer")
+            identity = item.pop("id", None)
+            unit = item.pop("action_units", "force_N")
+            units.add(unit)
+            for i in range(count):
+                identities.append(
+                    f"{identity}_{i + 1}"
+                    if identity and count > 1
+                    else identity or f"T{len(identities) + 1}"
+                )
+                models.append(copy.deepcopy(item))
+        if len(units) != 1:
+            raise ConfigurationError("Direct action vectors require common actuator action_units")
+        config["propulsion"] = {
+            "thruster_count": len(models),
+            "action_units": units.pop(),
+            "actuator_ids": identities,
+        }
+        if all(model == models[0] for model in models):
+            config["propulsion"]["thruster"] = models[0]
+        else:
+            config["propulsion"]["thrusters"] = models
+        config.setdefault("hotel_load", {"constant_W": 0})
+    if "payload" in config:
+        vehicle = config.setdefault("vehicle", {})
+        if "payload" in vehicle:
+            raise ConfigurationError("Specify physical payload in one location")
+        vehicle["payload"] = config.pop("payload")
+    environment = config.setdefault("environment", {})
+    keys(
+        environment,
+        {"water_temperature_C", "water_density_kg_m3", "current_velocity_m_s", "current_mode"},
+        "environment",
+    )
+    thermal = config.setdefault("thermal", {})
+    if "water_temperature_C" in environment:
+        water = number(environment["water_temperature_C"], "water_temperature_C", minimum=-273.14)
+        if "water_temperature_C" in thermal and thermal["water_temperature_C"] != water:
+            raise ConfigurationError("Conflicting thermal/environment water_temperature_C")
+        thermal["water_temperature_C"] = water
+    elif "water_temperature_C" in thermal:
+        environment["water_temperature_C"] = thermal["water_temperature_C"]
+    if "components" in config:
+        config.setdefault("hotel_load", {"constant_W": 0})
+    if config.get("battery", {}).get("model") == "energy_bucket":
+        thermal.setdefault("initial_temperature_C", thermal.get("water_temperature_C"))
 
 
 def load_config(path=None, *, data=None):
@@ -98,11 +183,19 @@ def load_config(path=None, *, data=None):
             "allow_placeholders",
             "fidelity_level",
             "provenance",
+            "vehicle",
+            "actuators",
+            "components",
+            "environment",
+            "payload",
+            "telemetry",
         },
         "configuration",
     )
+    config.setdefault("schema_version", 1)
     if config.get("schema_version") != 1:
         raise ConfigurationError("schema_version must be 1")
+    _normalize_generic(config)
     for section in ("battery", "thermal", "propulsion"):
         if section not in config:
             raise ConfigurationError(f"Missing {section} section")

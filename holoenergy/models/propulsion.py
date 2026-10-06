@@ -7,6 +7,7 @@ ESC PWM convention from the selected profile, not an arbitrary cubic law.
 from bisect import bisect_left
 
 from .._validation import ConfigurationError, curve, interpolate, keys, number, required
+from .actuator import make_actuator
 
 
 class ThrusterModel:
@@ -116,7 +117,11 @@ class ThrusterModel:
 
 class PropulsionModel:
     def __init__(self, config):
-        keys(config, {"thruster_count", "action_units", "thruster", "thrusters"}, "propulsion")
+        keys(
+            config,
+            {"thruster_count", "action_units", "thruster", "thrusters", "actuator_ids"},
+            "propulsion",
+        )
         count = required(config, "thruster_count")
         if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
             raise ConfigurationError("thruster_count must be a positive integer")
@@ -127,12 +132,23 @@ class PropulsionModel:
         if ("thruster" in config) == ("thrusters" in config):
             raise ConfigurationError("Supply exactly one of thruster or per-thruster thrusters")
         if "thruster" in config:
-            shared = ThrusterModel(config["thruster"])
+            shared = make_actuator(config["thruster"])
             self.thrusters = [shared] * count
         else:
             if len(config["thrusters"]) != count:
                 raise ConfigurationError("thrusters length must equal thruster_count")
-            self.thrusters = [ThrusterModel(t) for t in config["thrusters"]]
+            self.thrusters = [make_actuator(t) for t in config["thrusters"]]
+        self.actuators = self.thrusters
+        self.ids = config.get("actuator_ids", [f"T{i + 1}" for i in range(count)])
+        if (
+            not isinstance(self.ids, list)
+            or len(self.ids) != count
+            or any(not isinstance(i, str) or not i for i in self.ids)
+            or len(set(self.ids)) != count
+        ):
+            raise ConfigurationError("actuator_ids must be unique nonempty strings matching count")
+        if self.units != "force_N" and any(getattr(t, "force_only", False) for t in self.thrusters):
+            raise ConfigurationError("Force-only actuator data requires action_units: force_N")
         self.min_voltage = max(t.min_voltage for t in self.thrusters)
         self.max_voltage = min(t.max_voltage for t in self.thrusters)
         if self.min_voltage > self.max_voltage:

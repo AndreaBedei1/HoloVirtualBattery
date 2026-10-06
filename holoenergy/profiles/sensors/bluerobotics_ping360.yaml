@@ -12,6 +12,18 @@ states:
   ping_W: null
   ping_duration_s: null
 metadata:
+  manufacturer: Blue Robotics
+  model: Ping360
+  revision: Product page r1; installed hardware revision requires verification
+  source: S8
+  datasheet_url: https://bluerobotics.com/store/sonars/imaging-sonars/ping360-sonar-r1-rp/
+  doi: null
+  date_accessed: '2026-10-06'
+  status: DATASHEET
+  calibrated: false
+  values_extracted: [maximum power_W, supply voltage domain]
+  assumptions: ACTIVE is a 5 W datasheet upper bound; not imaging-sonar physics equivalence.
+  operational_domain: Manufacturer 11–25 V supply; electrical states need characterization.
   source_id: S8
   value_kind: datasheet_upper_bound
   active_W_derivation: Manufacturer maximum 5 W; no state-specific mean published

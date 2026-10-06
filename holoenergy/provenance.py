@@ -76,7 +76,10 @@ def run_provenance(config, *, context=None, run_id=None):
         holo_version = importlib.metadata.version("holoocean")
     except importlib.metadata.PackageNotFoundError:
         holo_version = None
-    profiles = {k: config.get(k, {}) for k in ("battery", "propulsion", "sensors")}
+    profiles = {
+        k: config.get(k, {})
+        for k in ("vehicle", "battery", "propulsion", "sensors", "components", "environment")
+    }
     return {
         "run_id": run_id or str(uuid4()),
         "created_utc": datetime.now(timezone.utc).isoformat(),

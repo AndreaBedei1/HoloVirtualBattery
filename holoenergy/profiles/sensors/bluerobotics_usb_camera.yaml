@@ -11,6 +11,18 @@ states:
   ping_W: null
   ping_duration_s: null
 metadata:
+  manufacturer: Blue Robotics
+  model: Low-Light HD USB Camera
+  revision: Product page r1; installed hardware revision requires verification
+  source: S7
+  datasheet_url: https://bluerobotics.com/store/sensors-cameras/cameras/cam-usb-low-light-r1/
+  doi: null
+  date_accessed: '2026-10-06'
+  status: DATASHEET
+  calibrated: false
+  values_extracted: [5 V supply, 220 mA maximum]
+  assumptions: ACTIVE is the derived 1.1 W upper bound, not measured mean consumption.
+  operational_domain: Specified USB supply; state-specific behavior uncharacterized.
   source_id: S7
   value_kind: datasheet_upper_bound
   active_W_derivation: 5 V * 0.220 A maximum = 1.1 W; not a measured active average

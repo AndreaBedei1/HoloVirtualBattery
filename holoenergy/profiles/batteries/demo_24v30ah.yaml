@@ -1,0 +1,28 @@
+model: rint
+chemistry: LiFePO4
+capacity_Ah: 30
+nominal_voltage_V: 24
+initial_soc: 1
+internal_resistance_ohm: 0.08
+cutoff_voltage_V: 20
+max_current_A: 30
+max_power_W: 600
+ocv_curve: [[0, 21], [0.2, 24], [0.8, 25.5], [1, 26]]
+capacity_temperature_curve: [[0, 0.8], [25, 1]]
+resistance_temperature_curve: [[0, 2], [25, 1]]
+max_current_temperature_curve: [[0, 0.5], [25, 1]]
+metadata:
+  manufacturer: none; synthetic demonstration
+  model: 24 V 30 Ah demonstration pack
+  revision: '1'
+  source: user-selected demonstration values, not a universal chemistry model
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: PLACEHOLDER
+  calibrated: false
+  temperature_characterized: false
+  values_extracted: []
+  placeholders: [ocv_curve, internal_resistance_ohm, capacity_temperature_curve, resistance_temperature_curve, max_current_temperature_curve]
+  assumptions: Every numerical value is synthetic. Chemistry is descriptive only.
+  operational_domain: Demonstration at 0–25 C with no real accuracy claim.
