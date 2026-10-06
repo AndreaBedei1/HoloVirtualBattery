@@ -44,6 +44,14 @@ def git_state():
             return None
 
     commit, status = git("rev-parse", "HEAD"), git("status", "--porcelain")
+    repository_root = git("rev-parse", "--show-toplevel")
+    if repository_root is None or (Path(repository_root) / "holoenergy").resolve() != root:
+        return {
+            "commit": None,
+            "dirty": None,
+            "working_tree_status": None,
+            "reason": "Package is not the source tree of a Git checkout",
+        }
     return {
         "commit": commit,
         "dirty": None if status is None else bool(status),
@@ -74,6 +82,13 @@ def run_provenance(config, *, context=None, run_id=None):
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "holoenergy_version": __version__,
         "git": git_state(),
+        "package_source_sha256": digest(
+            {
+                str(p.relative_to(Path(__file__).parent)).replace("\\", "/"): file_hash(p)
+                for p in sorted(Path(__file__).parent.rglob("*"))
+                if p.is_file() and p.suffix in (".py", ".yaml", ".json")
+            }
+        ),
         "python_version": platform.python_version(),
         "python_executable": sys.executable,
         "platform": platform.platform(),

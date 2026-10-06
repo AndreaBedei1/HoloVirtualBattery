@@ -158,5 +158,6 @@ def apply_battery_maps(base, maps):
     ]
     result["metadata"]["superseded_fields"] = sorted(superseded)
     result["metadata"]["source_profile_sha256"] = digest(base)
+    result["metadata"]["value_kind"] = "mixed_profile_with_imported_measurements"
     RintBattery(result)
     return result

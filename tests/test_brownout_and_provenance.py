@@ -84,6 +84,7 @@ def test_finalized_provenance_hashes_and_parameter_inputs(fake, config, tmp_path
         env.step([0] * 8)
     meta = json.loads(path.with_suffix(".csv.metadata.json").read_text())
     assert meta["git"]["commit"]
+    assert len(meta["package_source_sha256"]) == 64
     assert meta["resolved_config_sha256"] == digest(resolved)
     assert meta["input_datasets"][str(source.resolve())] == file_hash(source)
     assert meta["output_dataset_sha256"] == file_hash(path)
