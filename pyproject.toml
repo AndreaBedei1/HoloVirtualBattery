@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "holoenergy"
+version = "0.1.0"
+description = "Configurable electro-thermal energy wrapper for HoloOcean marine robots"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0,<7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1,<2", "openpyxl>=3.1,<4"]
+
+[tool.setuptools.packages.find]
+include = ["holoenergy*"]
+
+[tool.setuptools.package-data]
+holoenergy = ["profiles/**/*.yaml", "profiles/**/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B"]
