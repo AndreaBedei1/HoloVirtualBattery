@@ -34,3 +34,14 @@ jobs:
           git diff --exit-code -- holoenergy/profiles/thrusters/bluerobotics_t200.json
       - name: Build wheel and source distribution
         run: uv build --out-dir dist
+      - name: Verify installed wheel resources and generic profiles
+        shell: bash
+        run: |
+          uv venv wheel-check --python ${{ matrix.python }}
+          uv pip install --python wheel-check 'PyYAML>=6.0,<7'
+          uv pip install --python wheel-check holoenergy --find-links dist --no-index
+          if [ -f wheel-check/Scripts/python.exe ]; then
+            wheel-check/Scripts/python.exe -I tools/check_installed_wheel.py
+          else
+            wheel-check/bin/python -I tools/check_installed_wheel.py
+          fi

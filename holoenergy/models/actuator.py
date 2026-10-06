@@ -11,6 +11,15 @@ from .._validation import ConfigurationError
 
 @runtime_checkable
 class ActuatorEnergyModel(Protocol):
+    """General electrical effort-to-power boundary; no thruster-specific geometry."""
+
+    def power(self, action, voltage, units="force_N"): ...
+
+
+@runtime_checkable
+class DirectEffortActuatorModel(ActuatorEnergyModel, Protocol):
+    """Extra domain contract required by the current direct-propulsion allocator."""
+
     min_voltage: float
     max_voltage: float
     tables: list
@@ -40,9 +49,9 @@ def make_actuator(config):
 
     if config.get("model") in _CUSTOM_MODELS:
         result = _CUSTOM_MODELS[config["model"]](config)
-        if not isinstance(result, ActuatorEnergyModel):
+        if not isinstance(result, DirectEffortActuatorModel):
             raise ConfigurationError(
-                "Custom direct-effort actuator must implement ActuatorEnergyModel"
+                "Custom direct-effort actuator must implement DirectEffortActuatorModel"
             )
         return result
 

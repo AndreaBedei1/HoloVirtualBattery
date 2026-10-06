@@ -2,6 +2,7 @@
 
 import copy
 import json
+from pathlib import Path
 
 import pytest
 
@@ -9,6 +10,7 @@ from holoenergy import EnergyAwareEnv
 from holoenergy._validation import ConfigurationError
 from holoenergy.config import load_config
 from holoenergy.models.actuator import ActuatorEnergyModel
+from holoenergy.models.battery import RintBattery
 from holoenergy.models.propulsion import PropulsionModel
 
 
@@ -261,3 +263,143 @@ def test_force_only_has_no_invented_normalized_command():
     config["propulsion"]["action_units"] = "normalized_command"
     with pytest.raises(ConfigurationError, match="Force-only"):
         PropulsionModel(config["propulsion"])
+
+
+def test_custom_factory_and_remaining_ocv_energy(monkeypatch):
+    from holoenergy import register_actuator_model
+    from holoenergy.models.actuator import _CUSTOM_MODELS, make_actuator
+
+    monkeypatch.setattr("holoenergy.models.actuator._CUSTOM_MODELS", dict(_CUSTOM_MODELS))
+    config = generic_config(1)
+    supplied = copy.deepcopy(config["actuators"][0])
+    supplied.pop("count")
+    register_actuator_model("my_calibrated_actuator", lambda _: make_actuator(supplied))
+    config["actuators"] = [{"model": "my_calibrated_actuator"}]
+    with EnergyAwareEnv(CustomBackend(1), config=config) as env:
+        assert env.step([5])["Energy"]["power_propulsion_W"] == 15
+    battery = RintBattery(config["battery"])
+    assert battery.remaining_energy_Wh(20) == pytest.approx(30 * (21 + 26) / 2)
+    battery.soc = 0.5
+    assert battery.remaining_energy_Wh(20) == pytest.approx(30 * 0.5 * (21 + 23.5) / 2)
+
+
+def test_payload_mass_does_not_create_electrical_load_and_atomic_environment():
+    plain, loaded = generic_config(1), generic_config(1)
+    loaded["vehicle"]["payload"] = {
+        "mass_kg": 5,
+        "displaced_volume_m3": 0.005,
+        "position_m": [0, 0, 0],
+    }
+    with (
+        EnergyAwareEnv(CustomBackend(1), config=plain) as a,
+        EnergyAwareEnv(CustomBackend(1), config=loaded) as b,
+    ):
+        first, second = a.step([5])["Energy"], b.step([5])["Energy"]
+        assert first["power_total_W"] == second["power_total_W"]
+        assert second["vehicle_dynamics_status"] == "descriptive_only_not_applied"
+        before = dict(b.environment)
+        with pytest.raises(ConfigurationError):
+            b.energy.set_environment(
+                water_temperature_C=4, current_mode="native", current_velocity_m_s=[1, 0, 0]
+            )
+        assert b.environment == before
+        assert b.thermal.ambient_C == 8
+
+
+def test_two_battery_profiles_and_temperature_maps_affect_configured_model():
+    baseline = generic_config(1)
+    cold = copy.deepcopy(baseline)
+    cold["battery"]["capacity_Ah"] = 15
+    cold["battery"]["resistance_temperature_curve"] = [[0, 2], [25, 1]]
+    cold["thermal"]["initial_temperature_C"] = 0
+    with (
+        EnergyAwareEnv(CustomBackend(1), config=baseline) as a,
+        EnergyAwareEnv(CustomBackend(1), config=cold) as b,
+    ):
+        ra, rb = a.step([5], ticks=10)["Energy"], b.step([5], ticks=10)["Energy"]
+        assert rb["voltage_V"] < ra["voltage_V"]
+        assert rb["soc"] < ra["soc"]
+        assert rb["power_battery_loss_W"] > ra["power_battery_loss_W"]
+
+
+def test_yaml_off_labels_are_strings_with_real_booleans(tmp_path):
+    import yaml
+
+    config = generic_config(1)
+    path = tmp_path / "robot.yaml"
+    text = yaml.safe_dump(config)
+    text += "allow_placeholders: false\n"
+    path.write_text(text, encoding="utf-8")
+    resolved = load_config(path)
+    assert resolved["allow_placeholders"] is False
+
+
+def test_shutdown_closes_backend_even_if_summary_export_fails(fake, config, tmp_path, monkeypatch):
+    config["logging"] = {"enabled": True, "path": str(tmp_path / "energy.jsonl")}
+    env = EnergyAwareEnv(fake, config=config)
+    env.step([0] * 8)
+
+    def fail(_):
+        raise OSError("summary output unavailable")
+
+    monkeypatch.setattr(env.energy, "export_summary", fail)
+    with pytest.raises(OSError, match="summary output"):
+        env.close()
+    assert fake.closed and env._closed
+    assert env.logger.metadata["status"] == "partial"
+
+
+def test_complete_custom_yaml_without_hardware_profile():
+    from holoenergy.analysis.replay import ReplayBackend
+
+    path = Path(__file__).resolve().parents[1] / "configs/custom_rov.yaml"
+    config = load_config(path)
+    with EnergyAwareEnv(ReplayBackend(config), config=config) as env:
+        row = env.step([5] * 6)["Energy"]
+        assert env.vehicle.name == "MyCustomROV"
+        assert env.propulsion.count == 6 and env.battery.nominal_V == 24
+        assert row["power_compute_W"] == 25 and row["power_sensors_W"] == 29
+        assert row["water_temperature_C"] == 8
+
+
+def test_l0_power_only_limit_has_no_invented_current_rating():
+    from holoenergy.models.battery import EnergyBucketBattery
+
+    battery = EnergyBucketBattery(
+        {
+            "model": "energy_bucket",
+            "capacity_Wh": 120,
+            "nominal_voltage_V": 12,
+            "initial_soc": 1,
+            "max_power_W": 24,
+        }
+    )
+    point = battery.step(30, 1)
+    assert point.current_A == 2 and point.power_W == 24
+    assert battery.energy_used_Wh == pytest.approx(24 / 3600)
+
+
+def test_csv_replay_preserves_generic_operating_inputs_and_phase(tmp_path):
+    import csv
+
+    from holoenergy.analysis.replay import read_mission
+
+    path = tmp_path / "mission.csv"
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle, fieldnames=["time_s", "action", "phase", "component_states", "component_inputs"]
+        )
+        writer.writeheader()
+        writer.writerow(
+            {
+                "time_s": 0,
+                "action": "[5]",
+                "phase": "inspection",
+                "component_states": '{"sonar":"IDLE"}',
+                "component_inputs": '{"compute":{"compute_load":0.8}}',
+            }
+        )
+    row = read_mission(path, 0.1)[0]
+    assert row["phase"] == "inspection"
+    assert row["component_states"] == {"sonar": "IDLE"}
+    assert row["component_inputs"] == {"compute": {"compute_load": 0.8}}

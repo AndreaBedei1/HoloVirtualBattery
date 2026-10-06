@@ -45,8 +45,11 @@ def read_mission(path, dt_s):
         if abs(t - i * dt_s) > 1e-8 * max(1, t):
             raise ConfigurationError("Mission must start at 0 with one row per configured dt_s")
         item = {"action": json.loads(row["action"])}
-        if row.get("sensor_states"):
-            item["sensor_states"] = json.loads(row["sensor_states"])
+        for field in ("sensor_states", "component_states", "component_inputs"):
+            if row.get(field):
+                item[field] = json.loads(row[field])
+        if row.get("phase"):
+            item["phase"] = row["phase"]
         if row.get("water_temperature_C"):
             item["water_temperature_C"] = number(
                 float(row["water_temperature_C"]), "water_temperature_C", minimum=-273.14

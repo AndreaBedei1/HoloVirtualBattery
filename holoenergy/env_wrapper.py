@@ -1,6 +1,7 @@
 """Single-agent, direct-thruster wrapper. No changes or connections to HoloOcean core."""
 
 from collections.abc import Mapping
+from contextlib import ExitStack
 from math import isclose
 
 from ._validation import ConfigurationError, keys, number
@@ -40,6 +41,10 @@ class EnergyAwareEnv:
         thermal_type = IdealThermalModel if self.config["fidelity_level"] == "L0" else ThermalModel
         self.thermal = thermal_type(self.config["thermal"])
         self.propulsion = PropulsionModel(self.config["propulsion"])
+        if not self.propulsion.min_voltage <= self.battery.nominal_V <= self.propulsion.max_voltage:
+            raise ConfigurationError(
+                "Battery nominal_voltage_V is incompatible with the actuator voltage domain"
+            )
         self.payload = ComponentModel(
             self.config.get("sensors", {}), self.config.get("components", [])
         )
@@ -74,7 +79,13 @@ class EnergyAwareEnv:
             self.warnings.append(
                 "Vehicle/payload physical parameters are descriptive; dynamics backend must configure them"
             )
-        if set(self.propulsion.ids) & (set(self.payload.components) | set(self.hotel.components)):
+        hotel_names = set(self.hotel.components) | (
+            {"hotel_constant"} if self.hotel.constant_W else set()
+        )
+        if (
+            set(self.propulsion.ids) & (set(self.payload.components) | hotel_names)
+            or set(self.payload.components) & hotel_names
+        ):
             raise ConfigurationError("Actuator and component accounting IDs must not overlap")
         if self.contract is None:
             self.warnings.append("Caller must verify direct-thruster units and simulation dt_s")
@@ -209,9 +220,15 @@ class EnergyAwareEnv:
         mode = values.get("current_mode", candidate.get("current_mode", "descriptive"))
         if mode not in ("descriptive", "native", "adapter"):
             raise ConfigurationError("current_mode must be descriptive, native or adapter")
+        if self.environment.get("current_mode") in ("native", "adapter") and mode == "descriptive":
+            raise ConfigurationError(
+                "Cannot relabel an applied environment as descriptive; reset with an explicit backend contract"
+            )
         candidate["current_mode"] = mode
         dynamics_values = {
-            k: candidate[k] for k in ("current_velocity_m_s", "water_density_kg_m3") if k in values
+            k: candidate[k]
+            for k in ("current_velocity_m_s", "water_density_kg_m3")
+            if k in values or (k in candidate and mode != self.environment.get("current_mode"))
         }
         if dynamics_values and mode == "adapter":
             setter = getattr(self.dynamics_adapter, "set_environment", None)
@@ -265,6 +282,19 @@ class EnergyAwareEnv:
         if result["depth_m"] is None and "PoseSensor" in state:
             pose = state["PoseSensor"]
             result["depth_m"] = -float(pose[2][3])  # documented HoloOcean NWU frame
+        if "DynamicsSensor" in state:
+            dynamics = state["DynamicsSensor"]
+            if len(dynamics) in (18, 19):
+                if result["linear_speed_m_s"] is None:
+                    result["linear_speed_m_s"] = sqrt(sum(float(v) ** 2 for v in dynamics[3:6]))
+                if result["angular_speed_rad_s"] is None:
+                    result["angular_speed_rad_s"] = sqrt(
+                        sum(float(v) ** 2 for v in dynamics[12:15])
+                    )
+                if result["acceleration_m_s2"] is None:
+                    result["acceleration_m_s2"] = [float(v) for v in dynamics[:3]]
+                if result["depth_m"] is None:
+                    result["depth_m"] = -float(dynamics[8])
         return result
 
     def _one_tick(self, action, original, kwargs):
@@ -554,6 +584,8 @@ class EnergyAwareEnv:
         if self._closed:
             raise RuntimeError("EnergyAwareEnv is closed")
         state = self.env.reset(*args, **kwargs)
+        if self.vehicle.mode == "adapter":
+            self.dynamics_adapter.configure_vehicle(self.vehicle)
         if self.energy.duration_s:
             self.energy.episodes.append(self.energy.summary())
         self.battery.reset()
@@ -575,26 +607,36 @@ class EnergyAwareEnv:
 
     def close(self):
         if not self._closed:
-            summary = self.energy.summary()
-            self.logger.metadata["energy_summary"] = summary
-            if self.logger.path is not None:
-                self.energy.export_summary(str(self.logger.path) + ".summary.json")
-                self.energy.export_summary(str(self.logger.path) + ".summary.csv")
-            if self.telemetry is not None:
-                self.telemetry.event("end_mission", summary=summary)
-                self.telemetry.close()
-            self.logger.close()
-            close = getattr(self.env, "close", None)
-            if close is not None:
-                close()
-            elif getattr(self.env, "__exit__", None) is not None:
-                self.env.__exit__(None, None, None)
             self._closed = True
+            with ExitStack() as cleanup:
+                close = getattr(self.env, "close", None)
+                if close is not None:
+                    cleanup.callback(close)
+                elif getattr(self.env, "__exit__", None) is not None:
+                    cleanup.callback(self.env.__exit__, None, None, None)
+                cleanup.callback(self.logger.close)
+                if self.telemetry is not None:
+                    cleanup.callback(self.telemetry.close)
+                try:
+                    summary = self.energy.summary()
+                    self.logger.metadata["energy_summary"] = summary
+                    if self.logger.path is not None:
+                        self.energy.export_summary(str(self.logger.path) + ".summary.json")
+                        self.energy.export_summary(str(self.logger.path) + ".summary.csv")
+                    if self.telemetry is not None:
+                        self.telemetry.event(
+                            "end_mission", summary=summary, energy=self.energy.latest
+                        )
+                except Exception as exc:
+                    self.logger.mark_failure(exc)
+                    raise
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc, tb):
+        if exc is not None:
+            self.logger.mark_failure(exc)
         self.close()
 
     def __getattr__(self, name):

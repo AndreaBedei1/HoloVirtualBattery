@@ -1,0 +1,20 @@
+model: custom_lookup
+force_power_tables:
+  - voltage_V: 20
+    forward: [[0, 0], [10, 30], [30, 150]]
+    reverse: [[0, 0], [10, 35], [30, 160]]
+  - voltage_V: 30
+    forward: [[0, 0], [10, 30], [30, 150]]
+    reverse: [[0, 0], [10, 35], [30, 160]]
+metadata:
+  manufacturer: user
+  model: demonstration actuator
+  revision: example-1
+  source: synthetic user-selected input
+  datasheet_url: null
+  doi: null
+  date_accessed: '2026-10-06'
+  status: USER-SUPPLIED
+  values_extracted: none; all curve points are demonstration inputs
+  assumptions: symmetric voltage domain; separate forward/reverse electrical curves
+  operational_domain: force_N actions; 20 to 30 V; maximum 30 N per direction

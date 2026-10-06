@@ -1,0 +1,52 @@
+vehicle:
+  name: MyCustomROV
+simulation:
+  dt_s: 0.05
+battery:
+  model: rint
+  chemistry: LiFePO4
+  capacity_Ah: 30
+  nominal_voltage_V: 24
+  initial_soc: 1
+  max_current_A: 30
+  internal_resistance_ohm: 0.08
+  cutoff_voltage_V: 20
+  ocv_curve: [[0, 21], [1, 26]]
+  metadata:
+    status: USER-SUPPLIED
+    source: synthetic pack inputs; not a universal LiFePO4 model
+actuators:
+  - count: 6
+    model: custom_lookup
+    profile: my_thruster.yaml
+components:
+  - name: sonar
+    model: generic_load
+    active_W: 18
+  - name: dvl
+    model: generic_load
+    active_W: 7
+  - name: camera
+    model: generic_load
+    states: {OFF: 0, IDLE: 1, ACTIVE: 4}
+  - name: onboard_computer
+    model: generic_load
+    category: compute
+    active_W: 25
+environment:
+  water_temperature_C: 8
+thermal:
+  initial_temperature_C: 20
+  thermal_capacity_J_per_C: 2000
+  cooling_coeff_W_per_C: 3
+  derating_temperature_C: 45
+  cutoff_temperature_C: 55
+  metadata:
+    status: USER-SUPPLIED
+    source: synthetic demonstration inputs
+power_manager:
+  apply_derating_to_actions: true
+metadata:
+  status: USER-SUPPLIED
+  source: demonstration configuration
+  assumptions: all physical values are synthetic; energy-only replay does not simulate motion

@@ -315,10 +315,14 @@ class EnergyBucketBattery:
         self.initial_soc = number(
             required(config, "initial_soc"), "initial_soc", minimum=0, maximum=1
         )
-        self.max_current_A = number(
-            required(config, "max_current_A"), "max_current_A", positive=True
-        )
         p = config.get("max_power_W")
+        if "max_current_A" not in config and p is None:
+            raise ConfigurationError("L0 requires max_current_A and/or max_power_W")
+        self.max_current_A = (
+            number(config["max_current_A"], "max_current_A", positive=True)
+            if "max_current_A" in config
+            else number(p, "max_power_W", positive=True) / self.nominal_V
+        )
         self.max_power_W = float("inf") if p is None else number(p, "max_power_W", positive=True)
         self.low_soc_threshold = number(
             config.get("low_soc_threshold", 0.2), "low_soc_threshold", minimum=0, maximum=1

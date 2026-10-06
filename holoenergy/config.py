@@ -4,6 +4,7 @@ import copy
 import json
 import re
 import warnings
+from functools import lru_cache
 from importlib.resources import files
 from pathlib import Path
 
@@ -50,16 +51,23 @@ def _read(path):
     return value
 
 
+@lru_cache(maxsize=1)
+def _builtin_models():
+    return _read(files("holoenergy").joinpath("profiles", "registry.json"))
+
+
 def _resolve(data, base_dir, stack=()):
     if isinstance(data, list):
         return [_resolve(item, base_dir, stack) for item in data]
     if not isinstance(data, dict):
         return data
     data = copy.deepcopy(data)
-    if data.get("model") == "BlueRobotics_T200" and not (
-        {"voltage_tables", "force_power_tables"} & data.keys()
+    if isinstance(data.get("model"), str) and not (
+        {"voltage_tables", "force_power_tables", "profile"} & data.keys()
     ):
-        data.setdefault("profile", "package:actuators/bluerobotics_t200.yaml")
+        profile = _builtin_models().get(data["model"])
+        if profile is not None:
+            data["profile"] = "package:" + profile
     if "profile" in data:
         name = data.pop("profile")
         if not isinstance(name, str):
@@ -98,6 +106,10 @@ def _placeholders(data, prefix=""):
 
 def _normalize_generic(config):
     """Resolve the public vehicle schema to the existing numerical model inputs."""
+    telemetry = config.get("telemetry", {})
+    keys(telemetry, {"enabled", "port", "publish_hz"}, "telemetry")
+    if "enabled" in telemetry and not isinstance(telemetry["enabled"], bool):
+        raise ConfigurationError("telemetry.enabled must be a boolean")
     if "actuators" in config:
         if "propulsion" in config:
             raise ConfigurationError("Supply actuators or legacy propulsion, not both")
@@ -106,6 +118,8 @@ def _normalize_generic(config):
             raise ConfigurationError("actuators must be a nonempty list")
         models, identities, units = [], [], set()
         for item in raw:
+            if not isinstance(item, dict):
+                raise ConfigurationError("Each actuator must be a model/profile mapping")
             count = item.pop("count", 1)
             if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
                 raise ConfigurationError("actuator.count must be a positive integer")
