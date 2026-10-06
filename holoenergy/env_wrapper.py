@@ -12,7 +12,7 @@ from .models.hotel_load import HotelLoad
 from .models.payload import PayloadModel
 from .models.power_manager import PowerManager
 from .models.propulsion import PropulsionModel
-from .models.thermal import ThermalModel
+from .models.thermal import IdealThermalModel, ThermalModel
 
 
 class EnergyAwareEnv:
@@ -26,7 +26,8 @@ class EnergyAwareEnv:
         if not isinstance(self.apply_derating, bool):
             raise ConfigurationError("apply_derating_to_actions must be a boolean")
         self.battery = make_battery(self.config["battery"])
-        self.thermal = ThermalModel(self.config["thermal"])
+        thermal_type = IdealThermalModel if self.config["fidelity_level"] == "L0" else ThermalModel
+        self.thermal = thermal_type(self.config["thermal"])
         self.propulsion = PropulsionModel(self.config["propulsion"])
         self.payload = PayloadModel(self.config.get("sensors", {}))
         if "hotel_load" not in self.config:
@@ -152,6 +153,12 @@ class EnergyAwareEnv:
         self._validate_contract()
         dt, t = self.dt_s, self.thermal.temperature_C
         sensor_requested = self.payload.preview(dt)
+        sensor_demand = dict(sensor_requested)
+        disconnected = {
+            name for name, item in self.payload.components.items() if not item.power_ready
+        }
+        for name in disconnected:
+            sensor_requested[name] = 0.0
         plan = self.power_manager.plan(
             action,
             sum(sensor_requested.values()),
@@ -159,6 +166,26 @@ class EnergyAwareEnv:
             dt,
             action_factor_limit=self._backend_action_limit(action),
         )
+        # Monotone shedding: never reconnect a tripped rail within the same tick.
+        for _ in range(len(sensor_requested)):
+            tripped = {
+                name
+                for name, item in self.payload.components.items()
+                if name not in disconnected
+                and item.requires_brownout(plan.voltage_V, plan.auxiliary_service_factor)
+            }
+            if not tripped:
+                break
+            disconnected.update(tripped)
+            for name in tripped:
+                sensor_requested[name] = 0.0
+            plan = self.power_manager.plan(
+                action,
+                sum(sensor_requested.values()),
+                self.hotel.power_W,
+                dt,
+                action_factor_limit=self._backend_action_limit(action),
+            )
         outgoing = self._action_like(original, plan.action) if self.apply_derating else original
         try:
             state = self.env.step(outgoing, **kwargs)
@@ -183,7 +210,8 @@ class EnergyAwareEnv:
         }
         point = self.battery.step(plan.power_W, dt, t, **limits)
         self.thermal.step(point.heat_W, dt)
-        self.payload.step(dt)
+        for name, item in self.payload.components.items():
+            item.commit_service(dt, name in disconnected)
         if self.thermal.critical:
             self.battery.mark_cutoff("temperature")
         if hasattr(self.battery, "cutoff_V") and point.current_A > 0:
@@ -209,6 +237,7 @@ class EnergyAwareEnv:
         applied = plan.action if self.apply_derating else action
         row = {
             "run_id": self.logger.run_id,
+            "fidelity_level": self.config["fidelity_level"],
             "episode": self.episode,
             "step": self.step_index,
             "time_s": self.time_s,
@@ -224,10 +253,17 @@ class EnergyAwareEnv:
             "power_conversion_loss_W": plan.conversion_loss_W,
             "power_battery_loss_W": point.resistive_loss_W,
             "heat_generated_W": point.heat_W,
-            "requested_power_W": plan.requested_power_W,
+            "requested_power_W": plan.requested_power_W
+            + sum(sensor_demand[name] for name in disconnected) / self.converters.payload,
             "available_power_W": plan.available_power_W,
-            "unmet_power_W": max(0, plan.requested_power_W - point.power_W),
+            "unmet_power_W": max(0, plan.requested_power_W - point.power_W)
+            + sum(sensor_demand[name] for name in disconnected) / self.converters.payload,
             "temperature_C": self.thermal.temperature_C,
+            "water_temperature_C": self.thermal.ambient_C,
+            "thermal_derating_factor": self.thermal.derating_factor,
+            "minimum_voltage_V": point.voltage_V,
+            "peak_current_A": point.current_A,
+            "peak_temperature_C": self.thermal.temperature_C,
             "energy_used_Wh": self.battery.energy_used_Wh,
             "battery_internal_loss_Wh": self.battery.internal_loss_Wh,
             "chemical_energy_used_Wh": self.battery.chemical_energy_Wh,
@@ -239,6 +275,10 @@ class EnergyAwareEnv:
             "sensor_power_W": served_sensors,
             "sensor_states": {
                 name: item.state.value for name, item in self.payload.components.items()
+            },
+            "sensor_power_status": {
+                name: "BROWNOUT" if name in disconnected else "POWERED"
+                for name in self.payload.components
             },
             "requested_action": action,
             "applied_action": applied,
@@ -273,6 +313,10 @@ class EnergyAwareEnv:
         row["dt_s"] = sum(r["dt_s"] for r in rows)
         row["derating_factor"] = min(r["derating_factor"] for r in rows)
         row["auxiliary_service_factor"] = min(r["auxiliary_service_factor"] for r in rows)
+        row["thermal_derating_factor"] = min(r["thermal_derating_factor"] for r in rows)
+        row["minimum_voltage_V"] = min(r["minimum_voltage_V"] for r in rows)
+        row["peak_current_A"] = max(r["peak_current_A"] for r in rows)
+        row["peak_temperature_C"] = max(r["peak_temperature_C"] for r in rows)
         row["thruster_power_W"] = [
             sum(r["thruster_power_W"][i] for r in rows) / count
             for i in range(len(row["thruster_power_W"]))

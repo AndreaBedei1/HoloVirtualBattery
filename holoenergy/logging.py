@@ -1,16 +1,17 @@
 """JSONL/CSV step logs and a reproducibility sidecar containing resolved inputs."""
 
 import csv
-import hashlib
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
 
-from . import __version__
 from ._validation import ConfigurationError, keys
+from .provenance import file_hash, run_provenance, write_json
 
 FIELDS = [
     "run_id",
+    "fidelity_level",
     "episode",
     "step",
     "time_s",
@@ -30,6 +31,11 @@ FIELDS = [
     "available_power_W",
     "unmet_power_W",
     "temperature_C",
+    "water_temperature_C",
+    "thermal_derating_factor",
+    "minimum_voltage_V",
+    "peak_current_A",
+    "peak_temperature_C",
     "energy_used_Wh",
     "battery_internal_loss_Wh",
     "chemical_energy_used_Wh",
@@ -40,6 +46,7 @@ FIELDS = [
     "thruster_power_W",
     "sensor_power_W",
     "sensor_states",
+    "sensor_power_status",
     "requested_action",
     "applied_action",
     "actions_derated",
@@ -62,30 +69,31 @@ class EnergyLogger:
         self.run_id = str(uuid4())
         self.handle = None
         self.writer = None
+        self.path = None
+        self.metadata = run_provenance(resolved_config, context=context, run_id=self.run_id)
+        self.metadata.update(
+            {
+                "model_warnings": model_warnings,
+                "samples": "interval means for power/current/voltage; end states for SOC/temperature",
+            }
+        )
+        self.rows_written = 0
+        self.steps_completed = True
         if self.enabled:
             if not config.get("path"):
                 raise ConfigurationError("Enabled logging requires path")
             path = Path(config["path"])
             path.parent.mkdir(parents=True, exist_ok=True)
-            canonical = json.dumps(resolved_config, sort_keys=True, allow_nan=False)
-            metadata = {
-                "run_id": self.run_id,
-                "holoenergy_version": __version__,
-                "resolved_config_sha256": hashlib.sha256(canonical.encode()).hexdigest(),
-                "resolved_config": resolved_config,
-                "model_warnings": model_warnings,
-                "context": context or {},
-                "samples": "interval means for power/current/voltage; end states for SOC/temperature",
-            }
-            path.with_suffix(path.suffix + ".metadata.json").write_text(
-                json.dumps(metadata, indent=2, allow_nan=False) + "\n", encoding="utf-8"
-            )
+            self.path = path
+            write_json(path.with_suffix(path.suffix + ".metadata.json"), self.metadata)
             self.handle = path.open("w", encoding="utf-8", newline="")
             if self.format == "csv":
                 self.writer = csv.DictWriter(self.handle, fieldnames=FIELDS)
                 self.writer.writeheader()
 
     def write(self, row):
+        self.rows_written += 1
+        self.steps_completed = self.steps_completed and row["step_completed"]
         if self.handle is None:
             return
         if self.format == "jsonl":
@@ -105,3 +113,12 @@ class EnergyLogger:
         if self.handle is not None:
             self.handle.close()
             self.handle = None
+            self.metadata.update(
+                {
+                    "closed_utc": datetime.now(timezone.utc).isoformat(),
+                    "output_dataset_sha256": file_hash(self.path),
+                    "rows_written": self.rows_written,
+                    "status": "closed" if self.steps_completed else "partial",
+                }
+            )
+            write_json(self.path.with_suffix(self.path.suffix + ".metadata.json"), self.metadata)

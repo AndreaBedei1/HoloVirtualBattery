@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from holoenergy.config import load_config
+from holoenergy.provenance import file_hash
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -60,6 +61,20 @@ def settings(args):
         "enabled": True,
         "format": args.log_format,
         "path": str(args.output_dir / f"energy_demo.{args.log_format}"),
+    }
+    config["provenance"] = {
+        "purpose": "software demonstration; not physical validation",
+        "calibration_status": "uncalibrated demonstration",
+        "scenario": {
+            "backend": args.backend,
+            "path": str(args.scenario.resolve()),
+            "sha256": file_hash(args.scenario),
+            "definition": json.loads(args.scenario.read_text(encoding="utf-8")),
+            "overrides": {
+                "ticks_per_sec": round(1 / config["simulation"]["dt_s"]),
+                "frames_per_sec": False,
+            },
+        },
     }
     return config
 

@@ -96,6 +96,8 @@ def load_config(path=None, *, data=None):
             "simulation",
             "power_manager",
             "allow_placeholders",
+            "fidelity_level",
+            "provenance",
         },
         "configuration",
     )
@@ -104,6 +106,12 @@ def load_config(path=None, *, data=None):
     for section in ("battery", "thermal", "propulsion"):
         if section not in config:
             raise ConfigurationError(f"Missing {section} section")
+    level = {"energy_bucket": "L0", "rint": "L1"}.get(config["battery"].get("model"))
+    if level is None:
+        raise ConfigurationError("Supported fidelity levels are L0 (energy_bucket) and L1 (rint)")
+    if config.get("fidelity_level", level) != level:
+        raise ConfigurationError("fidelity_level must match battery.model; L2 is deferred")
+    config["fidelity_level"] = level
     simulation = config.setdefault("simulation", {})
     keys(simulation, {"dt_s", "agent_name", "expected_agent_type", "control_scheme"}, "simulation")
     simulation["dt_s"] = number(simulation.get("dt_s"), "simulation.dt_s", positive=True)
@@ -125,6 +133,52 @@ def load_config(path=None, *, data=None):
 def model_warnings(config):
     result = ["placeholder: " + key for key in sorted(set(_placeholders(config)))]
     metadata = config.get("battery", {}).get("metadata", {})
-    if not metadata.get("temperature_characterized", False):
+    if config.get("fidelity_level") == "L0":
+        result.append("L0 temperature is a fixed reference, not a thermal prediction")
+    elif not metadata.get("temperature_characterized", False):
         result.append("Battery temperature tables are not characterized for this pack")
+    return result
+
+
+def with_fidelity(config, level, *, capacity_Wh=None):
+    """Select a baseline without inventing L1 parameters; retain all other inputs."""
+    result = copy.deepcopy(config)
+    battery = result["battery"]
+    if level == "L0" and battery["model"] == "rint":
+        capacity = (
+            number(capacity_Wh, "capacity_Wh", positive=True)
+            if capacity_Wh is not None
+            else battery["capacity_Ah"] * battery["nominal_voltage_V"]
+        )
+        result["battery"] = {
+            "model": "energy_bucket",
+            "capacity_Wh": capacity,
+            **{
+                k: battery[k]
+                for k in (
+                    "nominal_voltage_V",
+                    "initial_soc",
+                    "max_current_A",
+                    "max_power_W",
+                    "low_soc_threshold",
+                )
+                if k in battery
+            },
+            "metadata": {
+                "value_kind": "ideal_baseline",
+                "capacity_derivation": "user supplied Wh"
+                if capacity_Wh is not None
+                else "nominal capacity_Ah * nominal_voltage_V; not measured usable energy",
+                "source_battery_profile": battery,
+                "calibration_status": "uncalibrated",
+                "placeholders": ["capacity_Wh"],
+            },
+        }
+        result["allow_placeholders"] = True
+    elif (
+        level not in ("L0", "L1")
+        or battery["model"] != {"L0": "energy_bucket", "L1": "rint"}[level]
+    ):
+        raise ConfigurationError("L1 requires an explicit Rint profile; L2 is deferred")
+    result["fidelity_level"] = level
     return result

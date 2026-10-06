@@ -87,6 +87,8 @@ class ThermalModel:
 
     def current_limit(self, resistance, entropy_V_per_K, dt_s):
         """Anticipate the cutoff at the end of the interval, avoiding overshoot."""
+        resistance = number(resistance, "resistance", minimum=0)
+        entropy_V_per_K = number(entropy_V_per_K, "entropy_V_per_K")
         dt = timestep(dt_s)
         if self.critical:
             return 0.0
@@ -104,4 +106,27 @@ class ThermalModel:
         if resistance == 0:
             return heat_limit / (-a) if a < 0 else float("inf")
         # R I² - T*(dU/dT)*I <= heat_limit; positive root.
-        return (a + sqrt(a * a + 4 * resistance * heat_limit)) / (2 * resistance)
+        root = sqrt(a * a + 4 * resistance * heat_limit)
+        if a < 0:
+            return 2 * heat_limit / (root - a)
+        return (a + root) / (2 * resistance)
+
+
+class IdealThermalModel(ThermalModel):
+    """L0 reference temperature only: no heat state prediction or thermal limits."""
+
+    @property
+    def critical(self):
+        return False
+
+    @property
+    def derating_factor(self):
+        return 1.0
+
+    def current_limit(self, resistance, entropy_V_per_K, dt_s):
+        timestep(dt_s)
+        return float("inf")
+
+    def step(self, heat_W, dt_s):
+        timestep(dt_s)
+        return self.temperature_C

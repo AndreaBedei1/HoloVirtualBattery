@@ -41,6 +41,7 @@ class RintBattery:
                 "ocv_temperature_curves",
                 "capacity_temperature_curve",
                 "resistance_temperature_curve",
+                "resistance_soc_temperature_curves",
                 "max_current_temperature_curve",
                 "entropy_curve_V_per_K",
                 "low_soc_threshold",
@@ -56,8 +57,25 @@ class RintBattery:
         self.initial_soc = number(
             required(config, "initial_soc"), "initial_soc", minimum=0, maximum=1
         )
-        self.resistance_ref = number(
-            required(config, "internal_resistance_ohm"), "internal_resistance_ohm", minimum=0
+        self.resistance_tables = []
+        for table in config.get("resistance_soc_temperature_curves", []):
+            keys(table, {"temperature_C", "curve"}, "resistance temperature table")
+            t = number(required(table, "temperature_C"), "temperature_C", minimum=-273.14)
+            points = curve(required(table, "curve"), "resistance SOC curve", y_min=0)
+            if len(points) < 2 or points[0][0] != 0 or points[-1][0] != 1:
+                raise ConfigurationError("Resistance SOC curves must span SOC [0,1]")
+            if self.resistance_tables:
+                if t <= self.resistance_tables[-1][0]:
+                    raise ConfigurationError("Resistance temperatures must be strictly increasing")
+                if [p[0] for p in points] != [p[0] for p in self.resistance_tables[0][1]]:
+                    raise ConfigurationError("Resistance tables require a common SOC grid")
+            self.resistance_tables.append((t, points))
+        self.resistance_ref = (
+            0.0
+            if self.resistance_tables
+            else number(
+                required(config, "internal_resistance_ohm"), "internal_resistance_ohm", minimum=0
+            )
         )
         self.cutoff_V = number(
             required(config, "cutoff_voltage_V"), "cutoff_voltage_V", positive=True
@@ -133,6 +151,11 @@ class RintBattery:
         )
 
     def resistance(self, temperature_C):
+        if self.resistance_tables:
+            return interpolate(
+                tuple((t, interpolate(points, self.soc)) for t, points in self.resistance_tables),
+                temperature_C,
+            )
         return self.resistance_ref * interpolate(self.resistance_curve, temperature_C)
 
     def entropy(self):
@@ -182,7 +205,10 @@ class RintBattery:
             return 0.0
         if r == 0:
             return power / u
-        discriminant = max(0.0, u * u - 4 * r * power)
+        discriminant = u * u - 4 * r * power
+        if discriminant < -1e-10 * u * u:
+            raise ValueError("Requested power has no real high-voltage Rint solution")
+        discriminant = max(0.0, discriminant)
         # Algebraically stable root for small powers.
         return 2 * power / (u + sqrt(discriminant))
 
@@ -214,6 +240,10 @@ class RintBattery:
         tables = [self.capacity_curve, self.resistance_curve, self.current_curve]
         if self.ocv_tables:
             tables.append(self.ocv_tables)
+        if self.resistance_tables:
+            if not self.resistance_tables[0][0] <= temperature_C <= self.resistance_tables[-1][0]:
+                return True
+            tables.remove(self.resistance_curve)
         return any(len(p) > 1 and not p[0][0] <= temperature_C <= p[-1][0] for p in tables)
 
 

@@ -66,6 +66,8 @@ def build():
         "metadata": {
             "source_id": "S6",
             "value_kind": "manufacturer_test_data_processed",
+            "characterization": "static/bollard",
+            "limitations": "The current T200 energy model is based on static/bollard manufacturer characterization and does not explicitly model inflow-dependent propeller performance, vehicle-speed effects, thruster-thruster interaction or installation effects.",
             "url": "https://cad.bluerobotics.com/T200-Public-Performance-Data-10-20V-September-2019.xlsx",
             "retrieved_date": "2026-10-06",
             "sha256": hashlib.sha256(SOURCE.read_bytes()).hexdigest(),

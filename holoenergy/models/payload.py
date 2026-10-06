@@ -25,11 +25,57 @@ class PayloadComponent:
                 "frequency_Hz",
                 "active_is_upper_bound",
                 "hardware_model",
+                "power_policy",
+                "load_kind",
+                "brownout",
             },
             f"sensor {name}",
         )
         self.name = name
         self.simulation_sensor = config.get("simulation_sensor")
+        self.power_policy = config.get("power_policy", "manual")
+        if self.power_policy != "manual":
+            raise ConfigurationError(
+                f"{name}: sensor_linked is unavailable: HoloOcean has no public electrical-state "
+                "contract. Use manual states; capture timing is not a power state."
+            )
+        self.load_kind = config.get("load_kind", "continuous")
+        if self.load_kind not in ("continuous", "discrete"):
+            raise ConfigurationError("load_kind must be continuous or discrete")
+        brownout = config.get("brownout", {})
+        keys(
+            brownout,
+            {"minimum_bus_voltage_V", "minimum_supplied_fraction", "behavior", "restart_delay_s"},
+            f"{name} brownout",
+        )
+        self.minimum_voltage = (
+            None
+            if brownout.get("minimum_bus_voltage_V") is None
+            else number(brownout["minimum_bus_voltage_V"], "minimum_bus_voltage_V", positive=True)
+        )
+        self.minimum_fraction = (
+            None
+            if brownout.get("minimum_supplied_fraction") is None
+            else number(
+                brownout["minimum_supplied_fraction"],
+                "minimum_supplied_fraction",
+                positive=True,
+                maximum=1,
+            )
+        )
+        self.brownout_enabled = (
+            self.minimum_voltage is not None or self.minimum_fraction is not None
+        )
+        if self.brownout_enabled and self.load_kind != "discrete":
+            raise ConfigurationError("Brownout thresholds require load_kind: discrete")
+        self.brownout_behavior = brownout.get("behavior", "latch_off")
+        if self.brownout_behavior not in ("latch_off", "auto_restart"):
+            raise ConfigurationError("brownout.behavior must be latch_off or auto_restart")
+        self.restart_delay = (
+            number(required(brownout, "restart_delay_s"), "restart_delay_s", minimum=0)
+            if self.brownout_behavior == "auto_restart"
+            else 0.0
+        )
         self.initial_state = PayloadState(config.get("initial_state", "OFF"))
         states = required(config, "states")
         keys(
@@ -50,6 +96,8 @@ class PayloadComponent:
             self.states[key] = None if value is None else number(value, f"{name}.{key}", minimum=0)
         # OFF means physical power gating. This does not mean standby is zero.
         self.states.setdefault("off_W", 0.0)
+        if self.brownout_enabled and self.states["off_W"] != 0:
+            raise ConfigurationError("Brownout rail-off approximation requires off_W: 0")
         freq = config.get("frequency_Hz")
         self.frequency = None if freq is None else number(freq, "frequency_Hz", positive=True)
         if self.frequency is not None:
@@ -69,6 +117,8 @@ class PayloadComponent:
     def reset(self):
         self.state = self.initial_state
         self.elapsed_s = 0.0
+        self.brownout_latched = False
+        self.brownout_elapsed_s = 0.0
         self._validate_state(self.state)
 
     def _validate_state(self, state):
@@ -92,6 +142,36 @@ class PayloadComponent:
         self._validate_state(state)
         self.state = state
         self.elapsed_s = 0.0
+        self.brownout_latched = False
+        self.brownout_elapsed_s = 0.0
+
+    @property
+    def power_ready(self):
+        return not self.brownout_latched or (
+            self.brownout_behavior == "auto_restart"
+            and self.brownout_elapsed_s >= self.restart_delay
+        )
+
+    def requires_brownout(self, voltage, supplied_fraction):
+        if not self.brownout_enabled or self.state == PayloadState.OFF:
+            return False
+        return (self.minimum_voltage is not None and voltage < self.minimum_voltage) or (
+            self.minimum_fraction is not None and supplied_fraction < self.minimum_fraction - 1e-9
+        )
+
+    def commit_service(self, dt_s, tripped):
+        """Commit only after backend success; coarse tick-aligned rail-off/restart policy."""
+        if tripped or not self.power_ready:
+            if not self.brownout_latched:
+                self.brownout_elapsed_s = 0.0
+            self.brownout_latched = True
+            self.brownout_elapsed_s += dt_s
+            return
+        if self.brownout_latched:
+            self.brownout_latched = False
+            self.brownout_elapsed_s = 0.0
+            self.elapsed_s = 0.0
+        self.step(dt_s)
 
     def _ping_on_time(self, elapsed):
         period = 1 / self.frequency
