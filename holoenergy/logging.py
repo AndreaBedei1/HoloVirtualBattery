@@ -80,6 +80,7 @@ class EnergyLogger:
         )
         self.rows_written = 0
         self.steps_completed = True
+
         if self.enabled:
             if not config.get("path"):
                 raise ConfigurationError("Enabled logging requires path")
@@ -91,6 +92,10 @@ class EnergyLogger:
             if self.format == "csv":
                 self.writer = csv.DictWriter(self.handle, fieldnames=FIELDS)
                 self.writer.writeheader()
+
+    def mark_failure(self, error):
+        self.steps_completed = False
+        self.metadata["run_error"] = {"type": type(error).__name__, "message": str(error)}
 
     def write(self, row):
         self.rows_written += 1
@@ -111,15 +116,18 @@ class EnergyLogger:
         self.handle.flush()
 
     def close(self):
+        if self.metadata["status"] != "running":
+            return
         if self.handle is not None:
             self.handle.close()
             self.handle = None
-            self.metadata.update(
-                {
-                    "closed_utc": datetime.now(timezone.utc).isoformat(),
-                    "output_dataset_sha256": file_hash(self.path),
-                    "rows_written": self.rows_written,
-                    "status": "closed" if self.steps_completed else "partial",
-                }
-            )
+        self.metadata.update(
+            {
+                "closed_utc": datetime.now(timezone.utc).isoformat(),
+                "output_dataset_sha256": None if self.path is None else file_hash(self.path),
+                "rows_written": self.rows_written,
+                "status": "closed" if self.steps_completed else "partial",
+            }
+        )
+        if self.path is not None:
             write_json(self.path.with_suffix(self.path.suffix + ".metadata.json"), self.metadata)

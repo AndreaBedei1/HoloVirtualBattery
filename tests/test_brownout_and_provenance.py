@@ -90,3 +90,16 @@ def test_finalized_provenance_hashes_and_parameter_inputs(fake, config, tmp_path
     assert meta["random_seed"] == 123 and meta["status"] == "closed"
     assert meta["profiles"]["sensors"] == config["sensors"]
     assert meta["created_utc"] and meta["closed_utc"]
+
+
+def test_failure_before_first_sample_is_recorded(fake, config, tmp_path):
+    path = tmp_path / "failed.jsonl"
+    config["logging"] = {"enabled": True, "format": "jsonl", "path": str(path)}
+    fake.fail_on = 0
+    with EnergyAwareEnv(fake, config=config) as env:
+        with pytest.raises(RuntimeError):
+            env.step([0] * 8)
+    meta = json.loads(path.with_suffix(".jsonl.metadata.json").read_text())
+    assert meta["status"] == "partial" and meta["rows_written"] == 0
+    assert meta["run_error"]["type"] == "RuntimeError"
+    assert meta["output_dataset_sha256"] == file_hash(path)

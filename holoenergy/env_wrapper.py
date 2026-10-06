@@ -355,9 +355,10 @@ class EnergyAwareEnv:
             for _ in range(ticks):
                 state, row = self._one_tick(values, action, kwargs)
                 rows.append(row)
-        except Exception:
+        except Exception as exc:
             if rows:
                 self.logger.write(self._aggregate(rows, completed=False))
+            self.logger.mark_failure(exc)
             raise
         row = self._aggregate(rows)
         self.logger.write(row)
