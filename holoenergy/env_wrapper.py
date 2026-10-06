@@ -126,7 +126,7 @@ class EnergyAwareEnv:
         if self.apply_derating and contract is None:
             raise ConfigurationError(
                 "Action derating requires control_contract (or env.energy_action_contract) "
-                "with agent_type, control_scheme, action_units, thruster_count and dt_s"
+                "with action_units, thruster_count, dt_s and any profile-specific agent fields"
             )
         if contract is None:
             return

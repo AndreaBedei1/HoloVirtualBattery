@@ -296,6 +296,7 @@ Il BlueROV2 è il primo validation case, usando sempre la API generica.
 | `2b86c3d` | fix: preserve missing telemetry values in dashboard displays |
 | `docs: document generic contracts and scientific verification` | README, contratti, review/evidenze/report; identificabile nella storia del branch |
 | `docs: retain research metadata and source links` | Archivio di ricerca con metadata/hash e link primari, senza ripubblicare estratti dei publisher |
+| `fix: use generic vehicle wording in control and study messages` | Messaggi coerenti con il contratto generico; nessuna modifica numerica |
 
 I log native mantengono il commit/dirty flag effettivi di sviluppo, hash sorgente,
 profili/scenario/input. Non vengono retroattivamente marcati come clean-final.

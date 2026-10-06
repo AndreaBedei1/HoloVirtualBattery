@@ -124,7 +124,7 @@ def study(config, commands, specification, output_dir, **run_kwargs):
     report = {
         "specification": specification,
         "command_history_sha256": digest(commands),
-        "interpretation": "User-specified study; not calibrated BlueROV2 uncertainty. "
+        "interpretation": "User-specified study; not calibrated vehicle-specific uncertainty. "
         "Independent draws; invalid draws are retained as failures.",
         "records": records,
     }
