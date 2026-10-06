@@ -1,0 +1,11 @@
+--- a/engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp
++++ b/engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp
+@@ -90,6 +90,8 @@
+ 	FVector RelativeVel = AUVVel - OceanCurrentsVel;
+ 	FVector DragForce = -0.5 * WaterDensity * RelativeVel.SizeSquared()
+ 		* CoefficientOfDrag * AreaOfDrag * RelativeVel.GetSafeNormal();
++	// DragForce is SI newtons in UE world axes: scale units without reflecting Y.
++	DragForce *= UEUnitsPerMeter;
+ 	RootMesh->AddForceAtLocation(
+ 		DragForce * ratio,
+ 		COM); // Apply drag force proportional to how submerged the vehicle is
