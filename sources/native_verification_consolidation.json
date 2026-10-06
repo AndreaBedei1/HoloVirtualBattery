@@ -1,0 +1,1053 @@
+{
+  "evidence_kind": "software/native simulator verification",
+  "physical_energy_validation": false,
+  "integration_report_sha256": "3a73a689697b7b9df538028bdc8e2575ad7d02b1382abe206223638632912022",
+  "native_integration": {
+    "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+    "python_version": "3.10.20",
+    "holoocean_version": "2.3.0",
+    "scenario": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+    "steps_per_comparison": 60,
+    "test_current_limit_A": 8.0,
+    "test_current_limit_kind": "simulation intervention, not a manufacturer rating",
+    "derated": {
+      "apply_derating": true,
+      "control_contract": {
+        "agent_type": "BlueROV2",
+        "control_scheme": 0,
+        "action_units": "force_N",
+        "thruster_count": 8,
+        "dt_s": 0.05,
+        "agent_name": "rov0"
+      },
+      "action_low_N": [
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75
+      ],
+      "action_high_N": [
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75
+      ],
+      "start_position_m": [
+        0.0,
+        -0.0,
+        -5.0
+      ],
+      "end_position_m": [
+        2.4739415645599365,
+        -0.0,
+        -5.0
+      ],
+      "surge_displacement_m": 2.4739415645599365,
+      "displacement_norm_m": 2.4739415645599365,
+      "minimum_derating_factor": 0.49063788473722525,
+      "max_current_A": 7.999999999975927,
+      "last_applied_action_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9.812757694744505,
+        9.812757694744505,
+        9.812757694744505,
+        9.812757694744505
+      ],
+      "native_clock_increment_s": 0.04999999999999999,
+      "energy_time_s": 3.1999999999999966,
+      "terminal_energy_Wh": 0.11116167898772254,
+      "engine_process_closed": true,
+      "zero_action_ticks": 4,
+      "sent_actions_verified": true
+    },
+    "accounting_only": {
+      "apply_derating": false,
+      "control_contract": {
+        "agent_type": "BlueROV2",
+        "control_scheme": 0,
+        "action_units": "force_N",
+        "thruster_count": 8,
+        "dt_s": 0.05,
+        "agent_name": "rov0"
+      },
+      "action_low_N": [
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75,
+        -28.75
+      ],
+      "action_high_N": [
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75,
+        28.75
+      ],
+      "start_position_m": [
+        0.0,
+        -0.0,
+        -5.0
+      ],
+      "end_position_m": [
+        4.674220561981201,
+        -0.0,
+        -5.0
+      ],
+      "surge_displacement_m": 4.674220561981201,
+      "displacement_norm_m": 4.674220561981201,
+      "minimum_derating_factor": 0.49063788473722525,
+      "max_current_A": 7.999999999975927,
+      "last_applied_action_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "native_clock_increment_s": 0.04999999999999999,
+      "energy_time_s": 3.1999999999999966,
+      "terminal_energy_Wh": 0.11116167898772254,
+      "engine_process_closed": true,
+      "zero_action_ticks": 4,
+      "sent_actions_verified": true
+    },
+    "native_integration_passed": true,
+    "physical_energy_model_calibrated": false,
+    "sonar_note": "Default scenario renders a camera; sonar load is an electrical proxy"
+  },
+  "runs": [
+    {
+      "path": "logs/consolidation/comparison/L0/energy.jsonl",
+      "log_sha256": "5da02e0456c7d41a86339ace017dea0247aa9d2598c1e8d418df74a5411f25bc",
+      "sidecar_sha256": "d3dbfd7b8262a1bc92461ac3ae6b6d6966d5015003ed3cf2bb901fc483e1abb2",
+      "run_id": "9a2bd2c5-c1d6-4061-bcce-510c24647fc0",
+      "created_utc": "2026-10-06T10:25:00.568243+00:00",
+      "git": {
+        "commit": "e649c1d3d825b0215fec9d27df8f5af56dcbb789",
+        "dirty": true,
+        "working_tree_status": "?? examples/compare_energy_models.py\n?? holoenergy/analysis/\n?? sources/consolidation_research1.json\n?? sources/consolidation_research2.json\n?? sources/consolidation_research3.json\n?? sources/consolidation_research4.json\n?? tests/test_analysis_tooling.py"
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": null,
+      "package_source_sha256": null,
+      "configuration_sha256": "314eb7a7842dda5cc22c307d9a7be2f812ac820a56266dc8afa2f8ceae2901cd",
+      "profile_sha256": {
+        "battery": "8622863f6f4b9dd6626b04728d189ff944fa0afe49e8f94fc3885cd604972373",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_Wh",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "synthetic",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.8956336188510536,
+        "final_soc": 0.9966380119412579,
+        "minimum_voltage_V": 14.8,
+        "peak_current_A": 59.99999999960045,
+        "peak_temperature_C": 20.0,
+        "propulsion_energy_Wh": 0.7979484336658685,
+        "payload_energy_Wh": 0.025416666666666667,
+        "hotel_energy_Wh": 0.0625,
+        "conversion_loss_Wh": 0.009768518518518498,
+        "battery_internal_loss_Wh": 0.0,
+        "unmet_energy_Wh": 1.1504681161825803,
+        "peak_unmet_power_W": 1656.6740873029155,
+        "unmet_power_is_capped": false,
+        "derating_events": 1,
+        "derating_duration_s": 2.5,
+        "first_derating_time_s": 10.050000000000008,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 15.0,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/comparison/L1/energy.jsonl",
+      "log_sha256": "549d1b59c07c59de499277853bcbfbd20b491e369dde5b88c994c06a5fc3b246",
+      "sidecar_sha256": "103e84c720386d86c0c1147e3da9855e990965980d1082444cde8d88a16dd5d5",
+      "run_id": "5161b474-0410-4401-bb8d-c738faa04812",
+      "created_utc": "2026-10-06T10:25:01.162690+00:00",
+      "git": {
+        "commit": "e649c1d3d825b0215fec9d27df8f5af56dcbb789",
+        "dirty": true,
+        "working_tree_status": "?? examples/compare_energy_models.py\n?? holoenergy/analysis/\n?? sources/consolidation_research1.json\n?? sources/consolidation_research2.json\n?? sources/consolidation_research3.json\n?? sources/consolidation_research4.json\n?? tests/test_analysis_tooling.py"
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": null,
+      "package_source_sha256": null,
+      "configuration_sha256": "9914ba91915e589a7d545722b20ba3d17dc491846aecde4c887ec55b25a1461e",
+      "profile_sha256": {
+        "battery": "58e457629a5b4056992e29183f9cee186b580c7d352ad91d4c3715df4ce3b50d",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_temperature_curve",
+        "battery.internal_resistance_ohm",
+        "battery.max_current_temperature_curve",
+        "battery.ocv_curve",
+        "battery.resistance_temperature_curve",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "synthetic",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.8794171288689513,
+        "final_soc": 0.9967428139318579,
+        "minimum_voltage_V": 14.381059151756041,
+        "peak_current_A": 59.999999999983444,
+        "peak_temperature_C": 20.210963107131185,
+        "propulsion_energy_Wh": 0.7817319436837661,
+        "payload_energy_Wh": 0.025416666666666667,
+        "hotel_energy_Wh": 0.0625,
+        "conversion_loss_Wh": 0.009768518518518505,
+        "battery_internal_loss_Wh": 0.10498911379789001,
+        "unmet_energy_Wh": 1.08131990788691,
+        "peak_unmet_power_W": 1558.7449149255456,
+        "unmet_power_is_capped": false,
+        "derating_events": 1,
+        "derating_duration_s": 2.5,
+        "first_derating_time_s": 10.050000000000008,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 15.0,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/native_comparison/L0/energy.jsonl",
+      "log_sha256": "8a7ddc3691fdaf48a6edd0606d04a13dbc84c698f77107b2fa3eae6360527290",
+      "sidecar_sha256": "79caf54fa46fc6485862698c4cb32e986ac70a411d24c56af061f07d99d39231",
+      "run_id": "be8e8745-65b3-4af3-bab2-797bd4572793",
+      "created_utc": "2026-10-06T10:37:25.246007+00:00",
+      "git": {
+        "commit": "69023f0e166acbcf6261ad722476dc27b7c1f8ae",
+        "dirty": false,
+        "working_tree_status": ""
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": "2.3.0",
+      "package_source_sha256": null,
+      "configuration_sha256": "504a8a9d88c42ec94eb98aa57a51ee4506862c937199d08e1336e9057fdc2568",
+      "profile_sha256": {
+        "battery": "8622863f6f4b9dd6626b04728d189ff944fa0afe49e8f94fc3885cd604972373",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_Wh",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "holoocean",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.8956336188533159,
+        "final_soc": 0.9966380119412468,
+        "minimum_voltage_V": 14.8,
+        "peak_current_A": 59.99999999982056,
+        "peak_temperature_C": 20.0,
+        "propulsion_energy_Wh": 0.7979484336681308,
+        "payload_energy_Wh": 0.025416666666666667,
+        "hotel_energy_Wh": 0.0625,
+        "conversion_loss_Wh": 0.009768518518518498,
+        "battery_internal_loss_Wh": 0.0,
+        "unmet_energy_Wh": 1.007369753088153,
+        "peak_unmet_power_W": 1450.6124444469401,
+        "unmet_power_is_capped": true,
+        "derating_events": 1,
+        "derating_duration_s": 2.5,
+        "first_derating_time_s": 10.050000000000008,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 15.0,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/native_comparison/L1/energy.jsonl",
+      "log_sha256": "6e6932c99b9ca92c1cc531cccb3df5f7a6c3a333a29b60403298e018e5faa6ff",
+      "sidecar_sha256": "42fbbec4179a9c8e9c1df297dd9b1ae080bff1bbe35c43acb6257138fdafcec7",
+      "run_id": "6184fbc9-d5af-4aa9-acf4-02d0060fca6e",
+      "created_utc": "2026-10-06T10:37:37.939967+00:00",
+      "git": {
+        "commit": "69023f0e166acbcf6261ad722476dc27b7c1f8ae",
+        "dirty": false,
+        "working_tree_status": ""
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": "2.3.0",
+      "package_source_sha256": null,
+      "configuration_sha256": "a7d30906bc4ca04dde317e66cf0c73a5670ad0c4daeea48dcda5df9e8d36b247",
+      "profile_sha256": {
+        "battery": "58e457629a5b4056992e29183f9cee186b580c7d352ad91d4c3715df4ce3b50d",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_temperature_curve",
+        "battery.internal_resistance_ohm",
+        "battery.max_current_temperature_curve",
+        "battery.ocv_curve",
+        "battery.resistance_temperature_curve",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "holoocean",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.8794171288719732,
+        "final_soc": 0.9967428139318435,
+        "minimum_voltage_V": 14.38105915169174,
+        "peak_current_A": 59.99999999995556,
+        "peak_temperature_C": 20.21096310713484,
+        "propulsion_energy_Wh": 0.781731943686788,
+        "payload_energy_Wh": 0.025416666666666667,
+        "hotel_energy_Wh": 0.0625,
+        "conversion_loss_Wh": 0.009768518518518505,
+        "battery_internal_loss_Wh": 0.10498911379910068,
+        "unmet_energy_Wh": 1.0119414019898785,
+        "peak_unmet_power_W": 1457.3043262621459,
+        "unmet_power_is_capped": true,
+        "derating_events": 1,
+        "derating_duration_s": 2.5,
+        "first_derating_time_s": 10.050000000000008,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 15.0,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/holoocean/sonar_active.jsonl",
+      "log_sha256": "42905e97c64b5439c394c8dd975198176c5050ccf540592a6b9037d4458f7902",
+      "sidecar_sha256": "cdcdb19d2e144dd5a51ba478ac34bd98a35fdaadc2d86392577ac3021f1490e5",
+      "run_id": "c2c4335c-cfaa-4e71-88fb-54f938079ece",
+      "created_utc": "2026-10-06T10:36:40.889935+00:00",
+      "git": {
+        "commit": "6fe86eab7503299be734e971bee06a534fb21187",
+        "dirty": false,
+        "working_tree_status": ""
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": "2.3.0",
+      "package_source_sha256": null,
+      "configuration_sha256": "7033dbf779f324bb1a7c0cef0a46cddc9266a761df7d21fec660c4e048ae869a",
+      "profile_sha256": {
+        "battery": "58e457629a5b4056992e29183f9cee186b580c7d352ad91d4c3715df4ce3b50d",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_temperature_curve",
+        "battery.internal_resistance_ohm",
+        "battery.max_current_temperature_curve",
+        "battery.ocv_curve",
+        "battery.resistance_temperature_curve",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "holoocean",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.8794171288719732,
+        "final_soc": 0.9967428139318435,
+        "minimum_voltage_V": 14.38105915169174,
+        "peak_current_A": 59.99999999995556,
+        "peak_temperature_C": 20.21096310713484,
+        "propulsion_energy_Wh": 0.781731943686788,
+        "payload_energy_Wh": 0.025416666666666667,
+        "hotel_energy_Wh": 0.0625,
+        "conversion_loss_Wh": 0.009768518518518505,
+        "battery_internal_loss_Wh": 0.10498911379910068,
+        "unmet_energy_Wh": 1.0119414019898785,
+        "peak_unmet_power_W": 1457.3043262621459,
+        "unmet_power_is_capped": true,
+        "derating_events": 1,
+        "derating_duration_s": 2.5,
+        "first_derating_time_s": 10.050000000000008,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 15.0,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/holoocean/sonar_off.jsonl",
+      "log_sha256": "7a4c4877846254a0dc4b3b82eb68cf9ef26e177186ef87be2c6686a55f6c3708",
+      "sidecar_sha256": "a4ea53258e0b6c060acae429000f826a2071daff5d8894d8bae7dfd48a15e3d4",
+      "run_id": "ac275bf6-a551-4e6c-b7f0-dffaab56d905",
+      "created_utc": "2026-10-06T10:36:27.591506+00:00",
+      "git": {
+        "commit": "6fe86eab7503299be734e971bee06a534fb21187",
+        "dirty": false,
+        "working_tree_status": ""
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": "2.3.0",
+      "package_source_sha256": null,
+      "configuration_sha256": "164aafd63d3fcf8dd9100d17029b0c53a2f4808554906b7a1a95e2f441258605",
+      "profile_sha256": {
+        "battery": "58e457629a5b4056992e29183f9cee186b580c7d352ad91d4c3715df4ce3b50d",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "58691a039ba67b0a32d0465054011951ea671eceab8d69240e6f1a22b1997483"
+      },
+      "placeholders": [
+        "battery.capacity_temperature_curve",
+        "battery.internal_resistance_ohm",
+        "battery.max_current_temperature_curve",
+        "battery.ocv_curve",
+        "battery.resistance_temperature_curve",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "holoocean",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.8602578927565621,
+        "final_soc": 0.9968077132772254,
+        "minimum_voltage_V": 14.381371452119811,
+        "peak_current_A": 59.99999999994983,
+        "peak_temperature_C": 20.209712656808197,
+        "propulsion_energy_Wh": 0.7857208557195251,
+        "payload_energy_Wh": 0.004583333333333334,
+        "hotel_energy_Wh": 0.0625,
+        "conversion_loss_Wh": 0.007453703703703637,
+        "battery_internal_loss_Wh": 0.10454536478542031,
+        "unmet_energy_Wh": 1.008079913076575,
+        "peak_unmet_power_W": 1451.7437822421475,
+        "unmet_power_is_capped": true,
+        "derating_events": 1,
+        "derating_duration_s": 2.5,
+        "first_derating_time_s": 10.050000000000008,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 15.0,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/holoocean/motion_derating_false.jsonl",
+      "log_sha256": "5a6e9be087c34e851b1e3c34f07fd08f8356264cc97c72ddecd9cc52d955527a",
+      "sidecar_sha256": "af30037e9444648d584939c8d82334227c60f7bc90e1c633516a47a0d5dc11d7",
+      "run_id": "759c7463-dd6a-4c61-9071-453e2ac94386",
+      "created_utc": "2026-10-06T10:41:26.358954+00:00",
+      "git": {
+        "commit": "db660a7dc860ac12c3b4355759d161b76cb429ee",
+        "dirty": false,
+        "working_tree_status": ""
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": "2.3.0",
+      "package_source_sha256": "248a1d8e4d89aa5f6ec31ee6cdc6bb531d85898a7369671cf6a1f6fc0fae15b2",
+      "configuration_sha256": "7b9fa9527349fd916312c9f5a4fe020440aec338a33902ec0855752172597914",
+      "profile_sha256": {
+        "battery": "fc0e31ca690b79501fa2a1c4793a3e48f3d15b94090bba8d0147e748e6c29572",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_temperature_curve",
+        "battery.internal_resistance_ohm",
+        "battery.max_current_temperature_curve",
+        "battery.ocv_curve",
+        "battery.resistance_temperature_curve",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "holoocean",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.11116167898772254,
+        "final_soc": 0.9996253081133941,
+        "minimum_voltage_V": 16.47778888573483,
+        "peak_current_A": 7.999999999975927,
+        "peak_temperature_C": 19.99958661801996,
+        "propulsion_energy_Wh": 0.09032217281488304,
+        "payload_energy_Wh": 0.005422222222222222,
+        "hotel_energy_Wh": 0.013333333333333334,
+        "conversion_loss_Wh": 0.002083950617283942,
+        "battery_internal_loss_Wh": 0.0021376899544613167,
+        "unmet_energy_Wh": 0.2034479375828964,
+        "peak_unmet_power_W": 244.14536070161455,
+        "unmet_power_is_capped": false,
+        "derating_events": 1,
+        "derating_duration_s": 3.0,
+        "first_derating_time_s": 0.25,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 3.2,
+        "power_feasible": false,
+        "dynamics_energy_consistent": false,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    },
+    {
+      "path": "logs/consolidation/holoocean/motion_derating_true.jsonl",
+      "log_sha256": "d041d1e929388ec449971b323c405afe7c2a25a88c0d0113eef3dc30cbaa5327",
+      "sidecar_sha256": "71fe1f8206e00bf8d580493b6b1a686babcc4b7adf7b469498005e76072742f3",
+      "run_id": "94fb5502-2c9e-4d75-9fd8-1680cbbfcf29",
+      "created_utc": "2026-10-06T10:41:16.278573+00:00",
+      "git": {
+        "commit": "db660a7dc860ac12c3b4355759d161b76cb429ee",
+        "dirty": false,
+        "working_tree_status": ""
+      },
+      "holoenergy_version": "0.1.0",
+      "holoocean_version": "2.3.0",
+      "package_source_sha256": "248a1d8e4d89aa5f6ec31ee6cdc6bb531d85898a7369671cf6a1f6fc0fae15b2",
+      "configuration_sha256": "5ccb0f29571c796dc83e4db3358fcc91d51385d68fee4b7750165ffc6e20ab7c",
+      "profile_sha256": {
+        "battery": "fc0e31ca690b79501fa2a1c4793a3e48f3d15b94090bba8d0147e748e6c29572",
+        "propulsion": "737d49b3ed54f865a0d0defb5d5f0859fc74ef2188e026bfd8fcf1e9cea327e3",
+        "sensors": "6a834dcaecfd76798258075662a28ebc6d2ecd1a3f5d634b8d14805e9f588b9e"
+      },
+      "placeholders": [
+        "battery.capacity_temperature_curve",
+        "battery.internal_resistance_ohm",
+        "battery.max_current_temperature_curve",
+        "battery.ocv_curve",
+        "battery.resistance_temperature_curve",
+        "converters.hotel_efficiency",
+        "converters.payload_efficiency",
+        "hotel_load.constant_W",
+        "thermal.cooling_coeff_W_per_C",
+        "thermal.derating_temperature_C",
+        "thermal.thermal_capacity_J_per_C"
+      ],
+      "scenario": {
+        "backend": "holoocean",
+        "path": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+        "sha256": "a0573ee3c8bd65d7e945b80164c8820bc3f466b6366c0862492986c9c8eb6055",
+        "definition": {
+          "name": "HoloEnergy-BlueROV2",
+          "package_name": "Ocean",
+          "world": "SimpleUnderwater",
+          "main_agent": "rov0",
+          "ticks_per_sec": 20,
+          "frames_per_sec": false,
+          "agents": [
+            {
+              "agent_name": "rov0",
+              "agent_type": "BlueROV2",
+              "control_scheme": 0,
+              "location": [
+                0.0,
+                0.0,
+                -5.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "sensors": [
+                {
+                  "sensor_type": "PoseSensor"
+                },
+                {
+                  "sensor_type": "VelocitySensor"
+                },
+                {
+                  "sensor_type": "RGBCamera",
+                  "sensor_name": "Camera",
+                  "socket": "CameraSocket",
+                  "Hz": 10,
+                  "configuration": {
+                    "CaptureWidth": 128,
+                    "CaptureHeight": 128
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "overrides": {
+          "ticks_per_sec": 20,
+          "frames_per_sec": false
+        }
+      },
+      "metrics": {
+        "terminal_energy_Wh": 0.11116167898772254,
+        "final_soc": 0.9996253081133941,
+        "minimum_voltage_V": 16.47778888573483,
+        "peak_current_A": 7.999999999975927,
+        "peak_temperature_C": 19.99958661801996,
+        "propulsion_energy_Wh": 0.09032217281488304,
+        "payload_energy_Wh": 0.005422222222222222,
+        "hotel_energy_Wh": 0.013333333333333334,
+        "conversion_loss_Wh": 0.002083950617283942,
+        "battery_internal_loss_Wh": 0.0021376899544613167,
+        "unmet_energy_Wh": 0.2034479375828964,
+        "peak_unmet_power_W": 244.14536070161455,
+        "unmet_power_is_capped": false,
+        "derating_events": 1,
+        "derating_duration_s": 3.0,
+        "first_derating_time_s": 0.25,
+        "time_to_cutoff_s": null,
+        "cutoff_events": 0,
+        "command_sequence_completed": true,
+        "mission_completed": null,
+        "mission_completion_time_s": null,
+        "simulated_duration_s": 3.2,
+        "power_feasible": false,
+        "dynamics_energy_consistent": true,
+        "reserve_soc": null,
+        "reserve_violation_samples": null,
+        "reserve_violation_duration_s": null
+      }
+    }
+  ]
+}
