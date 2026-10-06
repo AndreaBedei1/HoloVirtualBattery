@@ -83,7 +83,10 @@ def test_finalized_provenance_hashes_and_parameter_inputs(fake, config, tmp_path
         resolved = env.config
         env.step([0] * 8)
     meta = json.loads(path.with_suffix(".csv.metadata.json").read_text())
-    assert meta["git"]["commit"]
+    if meta["git"]["commit"] is None:
+        assert meta["git"]["reason"] == "Package is not the source tree of a Git checkout"
+    else:
+        assert len(meta["git"]["commit"]) == 40
     assert len(meta["package_source_sha256"]) == 64
     assert meta["resolved_config_sha256"] == digest(resolved)
     assert meta["input_datasets"][str(source.resolve())] == file_hash(source)
