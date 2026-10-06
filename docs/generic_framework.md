@@ -78,8 +78,7 @@ class MyDynamicsAdapter:
         # Questa funzione deve avere una implementazione verificata per quel backend.
         ...
 
-    def set_environment(self, values):
-        ...
+    def set_environment(self, values): ...
 ```
 
 Selezionare `dynamics_mode: adapter` e passare `dynamics_adapter=...` al wrapper.
@@ -206,11 +205,14 @@ dalla curva e potenza. È un valore sottoposto al backend, non una misura di
 thrust effettivo dell'elica né di saturazioni private successive del motore.
 
 Le correnti di HoloOcean nativo e quelle Fossen hanno contratti differenti.
-L'ispezione del sorgente 2.3 trova densità 997 kg/m³ costante e una possibile
-conversione mancante newton→centinewton nel drag, mentre gravità/buoyancy la
-applicano. Non è stato modificato il motore; servono test dimensionali della
-build esatta prima di usare il test correnti per conclusioni quantitative reali.
-Vedi il registro scientifico e `sources/generic_native_source_inspection.json`.
+L'[audit dedicato](holoocean_drag_units_report.md) trova densità 997 kg/m³
+costante e conferma un drag 0.01× l'equazione SI nel binario Ocean 2.3.0
+installato, mentre gravity/buoyancy/thruster passano i riferimenti assoluti a
+60/100/200 Hz. A 20 Hz il passo fisico non coincide con il clock client.
+La patch è isolata, applicabile e reversibile, ma senza build/runtime after:
+i test correnti restano software coupling. L'energia non compensa la dinamica.
+L'identità esatta source/build non è stabilita; serve comunque validazione
+con dati reali dopo la correzione e la verifica del backend.
 
 ## Accounting, log e replay
 

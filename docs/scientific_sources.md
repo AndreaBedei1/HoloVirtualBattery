@@ -435,13 +435,27 @@ AddForceAtLocation without the newton→centinewton conversion used explicitly
 for gravity and buoyancy. This is a **source-level dimensional inconsistency**;
 the inspected local source may not exactly match the installed Ocean binary.
 Do not assign a correction multiplier to battery or mutate the engine from
-this layer. Quantitative current/drag validation needs a binary/source
-conformance test and known-force/known-flow experiment first.
+this layer. The subsequent [native drag unit audit](holoocean_drag_units_report.md)
+confirmed **CASE C** on the identified installed Ocean 2.3.0 binary: inferred
+drag/source-SI ratio 0.009999999703, with quadratic ratios near 4. Known net
+10 N thruster, gravity, neutrality and sensor/time/kinematic checks pass at
+60/100/200 Hz. The 20 Hz diagnostic fails the force-reference prerequisites,
+consistent with UE5.3's 1/30 s physics step limit. Exact binary build identity
+remains unknown despite relevant source files matching the official tag.
+The isolated magnitude-only backend patch has passed apply/reverse checks;
+it has **not** been compiled or verified after rebuilding. Neither installed
+backend nor energy numerical models were modified. This is implementation
+verification evidence, not validation of real vehicle dynamics or energy.
 
 The four native station-keeping runs at 0, 0.2, 0.5, 0.8 m/s show increasing
 controller effort/power while remaining almost stationary. These establish
 software coupling only. Small wattages reflect this native setup and cannot
-be presented as real BlueROV2 station-keeping measurements.
+be presented as real BlueROV2 station-keeping measurements. Repeated after
+the audit on the original unpatched binary, these values remain software
+coupling evidence, affected by the confirmed drag scale and 20 Hz clock/physics
+step discrepancy; no numerical multiplier can turn their Wh into corrected
+physical station-keeping estimates. Raw/provenance outputs are archived in
+`sources/holoocean_drag_audit/` and official physics/source links are in the audit.
 
 ### Reproduction and evidence boundary
 

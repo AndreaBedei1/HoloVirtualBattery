@@ -67,8 +67,9 @@ contract = {
     "thruster_count": 6,
     "dt_s": 0.05,
 }
-with EnergyAwareEnv(base_env, config_path="configs/custom_rov.yaml",
-                    control_contract=contract) as env:
+with EnergyAwareEnv(
+    base_env, config_path="configs/custom_rov.yaml", control_contract=contract
+) as env:
     env.energy.mark_phase("inspection")
     state = env.step([5.0] * 6)
     energy = state["Energy"]
@@ -279,9 +280,11 @@ termico a un nodo. Nessuna nuova fisica hydrodinamica è aggiunta al layer energ
 Un agente, un pack, scarica unidirezionale e controllo diretto degli attuatori.
 Un controller di alto livello/Fossen deve fornire un adapter esplicito. Il
 profilo energia non modifica automaticamente massa/drag/buoyancy Unreal.
-L'ispezione del sorgente nativo ha rilevato un possibile problema di conversione
-unità nel drag: i test con correnti dimostrano il coupling software, non una
-quantificazione fisica validata. La capacità residua L1 è un limite superiore
+L'[audit HoloOcean 2.3.0](docs/holoocean_drag_units_report.md) ha confermato sul
+binario Ocean installato un drag pari a circa 0.01× l'equazione SI (CASE C).
+La patch backend è separata e non ancora compilata; i test con correnti restano
+verifiche di coupling software. A 20 Hz è emerso anche un conflitto tra passo
+fisico e clock. La capacità residua L1 è un limite superiore
 di lavoro OCV; cutoff sotto carico può ridurre l'energia utilizzabile.
 
 Profili sintetici, OCV/R BlueROV2, scambio termico, hotel e conversioni richiedono

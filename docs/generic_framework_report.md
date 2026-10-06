@@ -4,6 +4,11 @@ Data: 6 ottobre 2026. Repository: AndreaBedei1/HoloVirtualBattery.
 Evidenze software e configurazioni dimostrative; nessuna calibrazione o
 validazione quantitativa dell'hardware reale viene dichiarata.
 
+Aggiornamento successivo: l'[audit del drag nativo](holoocean_drag_units_report.md)
+conferma CASE C nel binario Ocean 2.3.0 installato (drag 0.01× SI) e un conflitto
+passo fisico/clock a 20 Hz. I risultati correnti di questa fase restano
+software coupling; non sono stime fisiche quantitative corrette del veicolo.
+
 ## 1. Stato iniziale
 
 Workspace verificato pulito su main. HEAD, origin/main e commit puntato dal tag
