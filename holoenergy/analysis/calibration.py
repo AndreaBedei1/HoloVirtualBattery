@@ -140,6 +140,13 @@ def battery_maps(
 def apply_battery_maps(base, maps):
     """Keep unmeasured placeholders; replace status only for imported fields."""
     result = _merge(base, maps)
+    for metadata_key, field in (
+        ("reference_capacity_Ah", "capacity_Ah"),
+        ("reference_current_A", "max_current_A"),
+    ):
+        reference = maps["metadata"].get(metadata_key)
+        if reference is not None and reference != base[field]:
+            raise ConfigurationError(f"Measured-map reference does not match base {field}")
     measured = set(maps["metadata"]["measured_fields"])
     superseded = set()
     if "resistance_soc_temperature_curves" in maps:

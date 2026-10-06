@@ -189,6 +189,10 @@ def test_import_ocv_r_capacity_current_without_fabricated_cells(battery_config, 
     complete = apply_battery_maps(battery_config, result)
     assert complete["metadata"]["placeholders"] == []
     assert complete["metadata"]["source_profile_sha256"]
+    mismatched = copy.deepcopy(battery_config)
+    mismatched["capacity_Ah"] = 18
+    with pytest.raises(ConfigurationError, match="reference"):
+        apply_battery_maps(mismatched, result)
 
 
 @pytest.mark.parametrize("case", ["missing", "duplicate", "incomplete", "validation_role"])
