@@ -162,7 +162,7 @@ class PayloadComponent:
     def commit_service(self, dt_s, tripped):
         """Commit only after backend success; coarse tick-aligned rail-off/restart policy."""
         if tripped or not self.power_ready:
-            if not self.brownout_latched:
+            if not self.brownout_latched or self.power_ready:
                 self.brownout_elapsed_s = 0.0
             self.brownout_latched = True
             self.brownout_elapsed_s += dt_s

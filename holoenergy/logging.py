@@ -48,6 +48,7 @@ FIELDS = [
     "sensor_states",
     "sensor_power_status",
     "requested_action",
+    "requested_power_is_capped",
     "applied_action",
     "actions_derated",
     "dynamics_energy_consistent",

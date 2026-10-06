@@ -281,6 +281,14 @@ class EnergyAwareEnv:
                 for name in self.payload.components
             },
             "requested_action": action,
+            "requested_power_is_capped": any(
+                abs(a - b) > 1e-8
+                for a, b in zip(
+                    action, self.propulsion.bounded_request(action, point.voltage_V), strict=True
+                )
+            )
+            if any(action)
+            else False,
             "applied_action": applied,
             "actions_derated": self.apply_derating,
             "dynamics_energy_consistent": self.apply_derating
@@ -326,6 +334,7 @@ class EnergyAwareEnv:
             for name in row["sensor_power_W"]
         }
         row["dynamics_energy_consistent"] = all(r["dynamics_energy_consistent"] for r in rows)
+        row["requested_power_is_capped"] = any(r["requested_power_is_capped"] for r in rows)
         row["temperature_outside_calibration"] = any(
             r["temperature_outside_calibration"] for r in rows
         )

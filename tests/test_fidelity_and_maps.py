@@ -34,6 +34,8 @@ def test_resistance_map_bilinear_and_fallback(battery_config):
     assert original.resistance(7) == 0.1
     c = copy.deepcopy(battery_config)
     del c["internal_resistance_ohm"]
+    c["capacity_temperature_curve"] = [[0, 1], [20, 1]]
+    c["max_current_temperature_curve"] = [[0, 1], [20, 1]]
     c["resistance_soc_temperature_curves"] = [
         {"temperature_C": 0, "curve": [[0, 0.4], [0.5, 0.3], [1, 0.2]]},
         {"temperature_C": 20, "curve": [[0, 0.2], [0.5, 0.1], [1, 0.0]]},

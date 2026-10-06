@@ -244,7 +244,7 @@ class RintBattery:
             if not self.resistance_tables[0][0] <= temperature_C <= self.resistance_tables[-1][0]:
                 return True
             tables.remove(self.resistance_curve)
-        return any(len(p) > 1 and not p[0][0] <= temperature_C <= p[-1][0] for p in tables)
+        return any(not p[0][0] <= temperature_C <= p[-1][0] for p in tables)
 
 
 class EnergyBucketBattery:

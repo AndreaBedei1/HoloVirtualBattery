@@ -4,6 +4,8 @@ Force input uses inverse force->electrical power lookup. Normalized input uses
 ESC PWM convention from the selected profile, not an arbitrary cubic law.
 """
 
+from bisect import bisect_left
+
 from .._validation import ConfigurationError, curve, interpolate, keys, number, required
 
 
@@ -67,6 +69,14 @@ class ThrusterModel:
                 f"[{self.min_voltage:g}, {self.max_voltage:g}]"
             )
 
+    def _bracket(self, voltage):
+        index = bisect_left([v for v, _ in self.tables], voltage)
+        if index == len(self.tables):
+            return self.tables[-1:]
+        if index == 0 or abs(self.tables[index][0] - voltage) < 1e-9:
+            return self.tables[index : index + 1]
+        return self.tables[index - 1 : index + 1]
+
     def power(self, action, voltage, units="force_N"):
         if units not in ("force_N", "normalized_command"):
             raise ValueError("Unsupported thruster action units")
@@ -74,17 +84,20 @@ class ThrusterModel:
             return 0.0
         self._voltage_check(voltage)
         direction = "forward" if action > 0 else "reverse"
+        maximum = self.max_force(voltage, direction) if units == "force_N" else 1.0
+        if abs(action) > maximum + 1e-8:
+            raise ValueError("Thruster action exceeds the measured force/command domain")
         key = "force_power" if units == "force_N" else "command_power"
         values = tuple(
-            (v, interpolate(data[direction][key], abs(action))) for v, data in self.tables
+            (v, interpolate(data[direction][key], abs(action)))
+            for v, data in self._bracket(voltage)
         )
         return interpolate(values, voltage)
 
     def max_force(self, voltage, direction):
         self._voltage_check(voltage)
-        return interpolate(
-            tuple((v, data[direction]["max_force"]) for v, data in self.tables), voltage
-        )
+        # Inverse lookup requires force support in both bracketing voltage experiments.
+        return min(data[direction]["max_force"] for _, data in self._bracket(voltage))
 
     def force(self, command, voltage):
         if command == 0:
@@ -147,14 +160,39 @@ class PropulsionModel:
             t.power(a, voltage, self.units) for t, a in zip(self.thrusters, action, strict=True)
         ]
 
-    def max_action_factor(self, action, voltage):
+    def bounded_request(self, action, voltage):
+        """Cap only an unattainable demand estimate; applied powers never extrapolate."""
+        if self.units == "normalized_command":
+            return list(action)
+        return [
+            max(
+                -thruster.max_force(voltage, "reverse"),
+                min(thruster.max_force(voltage, "forward"), a),
+            )
+            if a
+            else 0.0
+            for thruster, a in zip(self.thrusters, action, strict=True)
+        ]
+
+    def max_action_factor(self, action, voltage, voltage_max=None):
         factor = 1.0
         for thruster, a in zip(self.thrusters, action, strict=True):
             if a:
                 limit = (
                     1.0
                     if self.units == "normalized_command"
-                    else thruster.max_force(voltage, "forward" if a > 0 else "reverse")
+                    else min(
+                        thruster.max_force(v, "forward" if a > 0 else "reverse")
+                        for v in [
+                            voltage,
+                            voltage_max or voltage,
+                            *(
+                                v
+                                for v, _ in thruster.tables
+                                if voltage <= v <= (voltage_max or voltage)
+                            ),
+                        ]
+                    )
                 )
                 factor = min(factor, limit / abs(a))
         return factor

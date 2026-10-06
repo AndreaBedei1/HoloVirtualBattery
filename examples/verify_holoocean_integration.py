@@ -6,12 +6,12 @@ manufacturer rating or calibrated battery parameter.
 
 import copy
 import importlib.metadata
-import json
 import sys
 
 from _common import backend, parser, settings, simulator_action
 
 from holoenergy import EnergyAwareEnv
+from holoenergy.provenance import file_hash, run_provenance, write_json
 
 
 def run(args, config, apply_derating):
@@ -19,6 +19,12 @@ def run(args, config, apply_derating):
 
     config = copy.deepcopy(config)
     config["battery"]["max_current_A"] = 8.0
+    metadata = config["battery"].setdefault("metadata", {})
+    metadata["datasheet_fields"] = [
+        f for f in metadata.get("datasheet_fields", []) if f != "max_current_A"
+    ]
+    metadata["user_settings"] = [*metadata.get("user_settings", []), "max_current_A"]
+    metadata["max_current_A_origin"] = "8 A simulation intervention; not a manufacturer rating"
     config["power_manager"]["apply_derating_to_actions"] = apply_derating
     config["logging"]["path"] = str(
         args.output_dir / f"motion_derating_{str(apply_derating).lower()}.{args.log_format}"
@@ -27,12 +33,32 @@ def run(args, config, apply_derating):
     initial = base.reset()
     start = np.asarray(initial["PoseSensor"])[:3, 3].copy()
     times, factors, currents, actions = [], [], [], []
+    sent_actions = []
+    native_step = base.step
+
+    def recording_step(action, **kwargs):
+        sent_actions.append(np.asarray(action).tolist())
+        return native_step(action, **kwargs)
+
+    base.step = recording_step
     with EnergyAwareEnv(base, config=config, control_contract=contract) as env:
+        env.reset()
+        for _ in range(4):
+            state = env.step(simulator_action(args, [0.0] * 8))
+            assert state["Energy"]["power_propulsion_W"] == 0
+            assert sent_actions[-1] == [0.0] * 8
+        start = np.asarray(state["PoseSensor"])[:3, 3].copy()
         low = list(base.action_space.get_low())
         high = list(base.action_space.get_high())
         for _ in range(args.steps):
             state = env.step(simulator_action(args, [0.0] * 4 + [20.0] * 4))
             e = state["Energy"]
+            assert np.allclose(sent_actions[-1], e["applied_action"], atol=1e-10)
+            expected = np.asarray([0.0] * 4 + [20.0] * 4) * (
+                e["derating_factor"] if apply_derating else 1
+            )
+            assert np.allclose(sent_actions[-1], expected, atol=1e-10)
+            assert e["dynamics_energy_consistent"] == apply_derating
             assert e["power_total_W"] <= e["available_power_W"] + 1e-6
             assert e["current_A"] <= 8 + 1e-8
             assert all(
@@ -47,6 +73,7 @@ def run(args, config, apply_derating):
         assert np.allclose(np.diff(times), env.dt_s, atol=1e-9)
         energy_time = e["time_s"]
         energy_used = e["energy_used_Wh"]
+    base.step = native_step
     displacement = finish - start
     return {
         "apply_derating": apply_derating,
@@ -64,6 +91,9 @@ def run(args, config, apply_derating):
         "energy_time_s": energy_time,
         "terminal_energy_Wh": energy_used,
         "engine_process_closed": base._world_process.poll() is not None,
+        "zero_action_ticks": 4,
+        "sent_actions_verified": True,
+        "provenance": env.logger.metadata,
     }
 
 
@@ -95,7 +125,10 @@ def main():
     }
     args.output_dir.mkdir(parents=True, exist_ok=True)
     path = args.output_dir / "integration_report.json"
-    path.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    write_json(path, report)
+    metadata = run_provenance(config, context={"check": "native motion and lifecycle"})
+    metadata.update({"status": "closed", "output_dataset_sha256": file_hash(path)})
+    write_json(path.with_suffix(".json.metadata.json"), metadata)
     print("Native integration passed: BlueROV2 pose, timing, current limit and motion derating.")
     print(
         f"Surge displacement: derated {limited['surge_displacement_m']:.6f} m; "

@@ -59,7 +59,11 @@ class PowerManager:
         available = i_max * v_min
         c = self.converters
         fixed = c.input_power(0, payload_W, hotel_W)
-        requested_prop = sum(self.propulsion.powers(action, u)) if force_factor else 0.0
+        requested_prop = (
+            sum(self.propulsion.powers(self.propulsion.bounded_request(action, u), u))
+            if force_factor
+            else 0.0
+        )
         requested = c.input_power(requested_prop, payload_W, hotel_W)
         if available <= 0:
             return PowerPlan(
@@ -80,7 +84,15 @@ class PowerManager:
             # Fractional service is an accounting approximation, not a brownout/reboot model.
             service = available / fixed
             requested = (
-                c.input_power(sum(self.propulsion.powers(action, v_min)), payload_W, hotel_W)
+                c.input_power(
+                    sum(
+                        self.propulsion.powers(
+                            self.propulsion.bounded_request(action, v_min), v_min
+                        )
+                    ),
+                    payload_W,
+                    hotel_W,
+                )
                 if force_factor
                 else fixed
             )
@@ -100,7 +112,7 @@ class PowerManager:
             )
         upper = min(
             action_factor_limit,
-            self.propulsion.max_action_factor(action, v_min) if force_factor else 0.0,
+            self.propulsion.max_action_factor(action, v_min, u) if force_factor else 0.0,
         )
 
         def load_at(factor, voltage):
@@ -132,7 +144,15 @@ class PowerManager:
         powers = self.propulsion.powers(scaled, voltage)
         power = c.input_power(sum(powers), payload_W, hotel_W)
         requested = (
-            c.input_power(sum(self.propulsion.powers(action, voltage)), payload_W, hotel_W)
+            c.input_power(
+                sum(
+                    self.propulsion.powers(
+                        self.propulsion.bounded_request(action, voltage), voltage
+                    )
+                ),
+                payload_W,
+                hotel_W,
+            )
             if force_factor
             else fixed
         )
