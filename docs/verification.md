@@ -1,8 +1,9 @@
 # Verification record
 
 Date: 2026-10-06. Workspace: Windows, Python 3.13.12 and 3.10.20.
-Branch: feature/holoenergy-battery-model. No remote or push was configured.
-The starting directory was empty, so a new repository and external package were created.
+Historical first implementation: feature/holoenergy-battery-model, initially
+without a remote. The latest consolidation started from a clean d179584 checkout
+with origin configured; see the consolidated record at the end of this document.
 
 ## Automated verification
 
@@ -143,3 +144,68 @@ Before quantitative publication:
 
 L2 RC polarization, aging, burst-current budgets, hot-cell gradients, exact
 brownouts, inflow/interference and PID/custom-dynamics hooks remain deferred.
+
+## Consolidation verification — 2026-10-06
+
+- Python 3.13.12: **106 tests passed**. Python 3.10.20 in the existing HoloOcean
+  environment: **105 passed, 1 skipped** (the intentional missing-HoloOcean check).
+- Source archive extracted under build/sdist-check: **106 passed**, importing
+  the extracted source, with complete conftest fixtures and explicit absent-Git
+  provenance. This identified a Git-dependent test assumption and verified its
+  portable contract. Wheel imports from isolated site-packages with PyYAML only;
+  installed-wheel Git provenance is explicitly absent even inside this workspace.
+- Ruff check/format pass; official T200 importer reproduces the committed profile.
+  Manufacturer workbook and all force/power values are unchanged. New metadata
+  states static/bollard limitations. Wheel/sdist build successfully with MIT SPDX
+  metadata, licenses, citation, tools, sources and full source tests.
+- New coverage includes L0 constant reporting T, R(SOC,T), complete map imports,
+  calibrated-domain flags, conservative force lookup, extrema, user brownout,
+  failed-run/in-memory provenance, seeded studies, role/group/hash separation,
+  synchronized residuals, sampling and unavailable-metric semantics.
+
+Final native motion check ran from clean commit db660a7, package source SHA256
+248a1d8e4d89aa5f6ec31ee6cdc6bb531d85898a7369671cf6a1f6fc0fae15b2.
+It includes initialization/reset, four zero-action ticks, 60 direct surge ticks,
+8 A imposed test limit, accounting-only/derated comparison, numerical arguments
+passed to native step, dt checks and process shutdown. No hardware was connected;
+HoloOcean was not reinstalled or modified.
+
+| Native mode | Surge displacement | Last angled force | Maximum modeled I |
+| --- | --- | --- | --- |
+| Derating enabled | 2.473942 m | 9.812758 N each | 8.0 A |
+| Accounting only | 4.674221 m | 20.0 N each | 8.0 A |
+
+Both processes closed; a separate process inventory found no Holodeck process.
+Accounting-only dynamics are explicitly inconsistent with curtailed energy.
+
+| Native 300-command run | Terminal Wh | Final SOC |
+| --- | --- | --- |
+| L0 baseline | 0.895634 | 0.996638 |
+| L1 | 0.879417 | 0.996743 |
+| L1 sonar OFF | 0.860258 | 0.996808 |
+| L1 sonar ACTIVE | 0.879417 | 0.996743 |
+
+These are simulator outputs using documented placeholders and sensor maxima;
+they are not accuracy or endurance measurements. No goal observer was supplied,
+so mission completion/time are null. L1's 15 s comparison reports min voltage
+14.381059 V, peak current 60 A, peak average-pack T 20.210963 C, terminal propulsion
+0.781732 Wh, payload 0.025417 Wh, hotel 0.062500 Wh, conversion loss 0.009769 Wh
+and separate internal loss 0.104989 Wh. The out-of-profile high-force demand is
+flagged capped: its unmet-power estimate is not extrapolated physical demand.
+
+Detailed logs/sidecars remain in logs/consolidation/. A compact versioned archive
+with numerical results, run/source/config/profile IDs and file hashes is
+sources/native_verification_consolidation.json. Rebuild it with
+tools/archive_verification.py. It preserves each run's actual source commit,
+including earlier clean commits used for payload/comparison checks; it does not
+rewrite their provenance to the release commit. Versioned code can reproduce
+the commands; raw generated logs are local ignored artifacts.
+
+CI is defined for Python 3.10–3.13 on Linux/Windows using uv.lock, pytest, Ruff,
+reproducible T200 import and package build. Native Unreal/GPU checks remain opt-in.
+Remote CI outcomes and release refs are reported separately in the consolidation
+report and final delivery; a workflow definition is not evidence of a completed run.
+
+Remote verification completed successfully: all eight matrix jobs passed for
+70f584f in [GitHub Actions run 37451876879](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37451876879).
+This adds actual Linux/Python 3.11/3.12 verification to the local Windows checks.
