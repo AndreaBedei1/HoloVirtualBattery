@@ -1,0 +1,106 @@
+{
+  "total_dois": 18,
+  "verified": [
+    "10.1149/1.2113792",
+    "10.1149/1.2113792",
+    "10.3390/en9070563",
+    "10.3390/en9070563",
+    "10.3390/en11092408",
+    "10.3390/en11092408",
+    "10.3390/en12193755",
+    "10.3390/en12193755",
+    "10.1109/CCTA49430.2022.9966180",
+    "10.1109/CCTA49430.2022.9966180",
+    "10.48550/arXiv.1809.05192",
+    "10.48550/arXiv.1809.05192",
+    "10.1109/AUV53081.2022.9965807",
+    "10.1109/AUV53081.2022.9965807",
+    "10.1016/j.oceaneng.2005.07.008",
+    "10.1016/j.oceaneng.2005.07.008",
+    "10.1109/48.107145",
+    "10.1109/48.107145"
+  ],
+  "failed": [],
+  "metadata": {
+    "10.1149/1.2113792": {
+      "title": "A General Energy Balance for Battery Systems",
+      "authors": "Bernardi, D., Pawlikowski, E., Newman, J.",
+      "year": "1985",
+      "journal": "Journal of The Electrochemical Society",
+      "volume": "132",
+      "pages": "5-12",
+      "doi": "10.1149/1.2113792"
+    },
+    "10.3390/en9070563": {
+      "title": "New Electro-Thermal Battery Pack Model of an Electric Vehicle",
+      "authors": "Alhanouti, M., Gießler, M., Blank, T., et al.",
+      "year": "2016",
+      "journal": "Energies",
+      "volume": "9",
+      "pages": "563",
+      "doi": "10.3390/en9070563"
+    },
+    "10.3390/en11092408": {
+      "title": "A Study on the Open Circuit Voltage and State of Charge Characterization of High Capacity Lithium-Ion Battery Under Different Temperature",
+      "authors": "Zhang, R., Xia, B., Li, B., et al.",
+      "year": "2018",
+      "journal": "Energies",
+      "volume": "11",
+      "pages": "2408",
+      "doi": "10.3390/en11092408"
+    },
+    "10.3390/en12193755": {
+      "title": "Temperature Dependent Parameter Estimation of Electrical Vehicle Batteries",
+      "authors": "Pózna, A., Hangos, K., Magyar, A.",
+      "year": "2019",
+      "journal": "Energies",
+      "volume": "12",
+      "pages": "3755",
+      "doi": "10.3390/en12193755"
+    },
+    "10.1109/CCTA49430.2022.9966180": {
+      "title": "Energy-optimal Three-dimensional Path-following Control of Autonomous Underwater Vehicles under Ocean Currents",
+      "authors": "Yang, N., Shen, C., Johnson-Roberson, M., et al.",
+      "year": "2022",
+      "journal": "2022 IEEE Conference on Control Technology and Applications (CCTA)",
+      "volume": "",
+      "pages": "1396-1401",
+      "doi": "10.1109/CCTA49430.2022.9966180"
+    },
+    "10.48550/arXiv.1809.05192": {},
+    "10.1109/AUV53081.2022.9965807": {
+      "title": "Power Efficiency Autonomy for Long Duration AUV Operation",
+      "authors": "Chang, J., Anderson, M., Merrifield, S., et al.",
+      "year": "2022",
+      "journal": "2022 IEEE/OES Autonomous Underwater Vehicles Symposium (AUV)",
+      "volume": "",
+      "pages": "1-6",
+      "doi": "10.1109/AUV53081.2022.9965807"
+    },
+    "10.1016/j.oceaneng.2005.07.008": {
+      "title": "Accurate and practical thruster modeling for underwater vehicles",
+      "authors": "Kim, J., Chung, W.",
+      "year": "2006",
+      "journal": "Ocean Engineering",
+      "volume": "33",
+      "pages": "566-586",
+      "doi": "10.1016/j.oceaneng.2005.07.008"
+    },
+    "10.1109/48.107145": {
+      "title": "The influence of thruster dynamics on underwater vehicle behavior and their incorporation into control system design",
+      "authors": "Yoerger, D., Cooke, J., Slotine, J.",
+      "year": "1990",
+      "journal": "IEEE Journal of Oceanic Engineering",
+      "volume": "15",
+      "pages": "167-178",
+      "doi": "10.1109/48.107145"
+    }
+  },
+  "audit_notes": {
+    "method": "literature-review verify_citations.py (Crossref metadata and DOI resolution), run 2026-10-06",
+    "unique_dois": 9,
+    "duplicates": "DOIs occur as label and link; 18 occurrences refer to 9 unique DOIs",
+    "arxiv_metadata": "10.48550/arXiv.1809.05192 resolves but Crossref record is empty; title/authors/year manually checked on primary arXiv page",
+    "limitations": "Resolver/metadata pass does not verify full-text content; access level recorded in scientific_sources.md"
+  }
+}

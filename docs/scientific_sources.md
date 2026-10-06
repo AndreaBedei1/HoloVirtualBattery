@@ -355,3 +355,104 @@ OCV/R/temperature maps, effective thermal values, hotel load and converter means
 EXPERIMENTALLY CALIBRATED PARAMETERS: no project pack/vehicle parameters yet.
 EXPERIMENTALLY VALIDATED RESULTS: no quantitative physical BlueROV2 validation.
 Importing a user CSV and passing CI cannot promote either of the last two statuses.
+
+## Generic marine framework research (2026-10-06)
+
+This is a focused engineering literature review, not an exhaustive systematic
+review. Searches combined marine energy/AUV/ROV, control effort, hotel loads,
+currents, thruster dynamics/inflow, ECM/thermal batteries and HoloOcean/Fossen
+APIs. Primary publisher records, author preprints and official simulator/vendor
+documentation were prioritized. Crossref was used to cross-check metadata; later
+requests encountered HTTP 429. Raw queries/results are retained in
+`sources/generic_research*.json`. No publisher paywall was bypassed.
+The final citation checker resolved all nine unique DOI links and retrieved
+eight nonempty Crossref metadata records; the arXiv DataCite DOI resolves but
+has no Crossref record and was checked against the primary arXiv page.
+Results and that distinction are retained in `sources/generic_citation_verification.json`.
+
+Selection criteria: an identified energy/dynamics assumption relevant to the
+integration, traceable primary source, and an explicit validity domain.
+Unrelated search hits, unverified coefficients and generic chemistry defaults
+were excluded. S1–S13 remain the basis for the unchanged electrical/thermal
+models. The new work changes configuration and coupling contracts, not those
+equations. Content access is stated below; an abstract is not full-text review.
+
+### New primary references
+
+| ID | Verified reference / access | Decision and domain |
+| --- | --- | --- |
+| S14 | Fossen, T. I., [Marine Craft Model, author reference](https://fossen.biz/html/marineCraftModel.html), accessed 2026-10-06. The page is a maintained reference, not assigned a publication year/DOI. | Relative water velocity, restoring forces and separation of rigid-body/hydrodynamic dynamics. No coefficients copied. |
+| S15 | Yang, N., Shen, C., Johnson-Roberson, M., Sun, J. (2022). *Energy-optimal Three-dimensional Path-following Control of Autonomous Underwater Vehicles under Ocean Currents*. [Author preprint v1](https://arxiv.org/abs/2203.12055v1), [full text](https://arxiv.org/html/2203.12055v1); related conference DOI [10.1109/CCTA49430.2022.9966180](https://doi.org/10.1109/CCTA49430.2022.9966180). arXiv v2 revised 2023; 2022 identifies first submission/conference. | Current changes dynamics, guidance and effort. Its optimized controller/vehicle coefficients are not implemented or transferred. |
+| S16 | Yang, N., Amini, M. R., Johnson-Roberson, M., Sun, J. (2018). *Real-Time Model Predictive Control for Energy Management in Autonomous Underwater Vehicle*. [Author preprint](https://arxiv.org/abs/1809.05192), [PDF](https://arxiv.org/pdf/1809.05192); repository DOI [10.48550/arXiv.1809.05192](https://doi.org/10.48550/arXiv.1809.05192). The repository record identifies the 57th IEEE CDC; no unverified proceedings DOI is assigned. | Buoyancy and drag enter the control/energy tradeoff. No MPC/planner added to HoloEnergy. |
+| S17 | Chang, J., Anderson, M., Merrifield, S., Nager, A., Hess, R., Young, R., Kitchen, S., Terrill, E. (2022). *Power Efficiency Autonomy for Long Duration AUV Operation*. IEEE/OES AUV. [Primary IEEE record/abstract](https://ieeexplore.ieee.org/document/9965807/), [DOI 10.1109/AUV53081.2022.9965807](https://doi.org/10.1109/AUV53081.2022.9965807). Metadata checked against Crossref; full text unavailable. | Motivation for distinct hotel and propulsion loads and current-aware control. No REMUS parameters or quantitative performance claims transferred. |
+| S18 | Kim, J., Chung, W. K. (2006). *Accurate and practical thruster modeling for underwater vehicles*. Ocean Engineering 33(5–6), 566–586. [Publisher abstract/preview](https://www.sciencedirect.com/science/article/pii/S0029801805001836), [DOI 10.1016/j.oceaneng.2005.07.008](https://doi.org/10.1016/j.oceaneng.2005.07.008). Full publisher text inaccessible. | Inflow velocity/angle affects thrust. Static lookup cannot claim all-flow validity; no universal force–power law introduced. |
+| S19 | Yoerger, D. R., Cooke, J. G., Slotine, J.-J. E. (1990). *The influence of thruster dynamics on underwater vehicle behavior and their incorporation into control system design*. IEEE Journal of Oceanic Engineering 15(3), 167–178. [DOI 10.1109/48.107145](https://doi.org/10.1109/48.107145), [primary IEEE record](https://ieeexplore.ieee.org/document/107145/). Metadata checked against Crossref; full text unavailable. | Identifies dynamics as a limitation of quasi-static actuator modeling. No time constants copied or new motor model claimed. |
+| S20 | HoloOcean 2.3.0, [agent API](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/holoocean/agents.html), [agent development](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/develop/agents.html). Accessed 2026-10-06. | Native C++/asset owns physical properties; assigning Python properties is not a physics setter. Explicit adapter boundary. |
+| S21 | HoloOcean 2.3.0, [ocean currents](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/agents/docs/currents.html), [Fossen-based dynamics](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/agents/docs/fossen-based-dynamics.html). Accessed 2026-10-06. | Public current API for supported native agents; documented Fossen limitations and different control meanings. No direct electrical inference from acceleration. |
+
+S18 is the **2006 journal paper** with two authors, distinct from a similarly
+titled 2005 ICRA paper. A preliminary DOI query ending `.009` returned an
+unrelated record and was rejected; only the verified `.008` is cited.
+
+### Scientific decisions and traceability
+
+| Model / extension | Equation or contract | Assumptions / validity | Parameter origin / calibration |
+| --- | --- | --- | --- |
+| Effort-based electrical power | P_i = supplied lookup(effort_i, V), P_prop = sum(P_i) | Quasi-static, within force/voltage table domain; installed propeller/inflow effects absent | T200: S6 measured. Custom curves: USER-SUPPLIED. Inflow/transients need separate measurements (S18/S19). |
+| Vehicle and physical payload | Backend dynamics produces effort; conceptual W = mg and B = rho g displaced-volume (S14) | No mass→power formula; volume and location matter; descriptive profile does not change native physics | Dynamics asset/backend owns values. Example masses/volumes USER-SUPPLIED; no duplicated derived buoyancy in energy core. |
+| Currents | Relative flow in dynamics/controller → changed effort → electrical lookup | Native supported-current backend or explicit adapter; station keeping can have motion≈0 and nonzero effort | S14–S17 conceptual basis; current velocities and example gains USER-SUPPLIED. No current power multiplier. |
+| Variable component | P = piecewise-linear supplied lookup(x) in configured states | Only provided input domain; no extrapolation or universal frequency/load law | Datasheet/measured curve or USER-SUPPLIED demo; OFF gating zero DERIVED when omitted. |
+| Chemistry / cells | Descriptive metadata; direct measured pack parameters | Chemistry label does not set OCV/R/thermal behavior; no cell balancing simulation | Pack/cell identification remains user/calibration responsibility; no chemistry coefficients copied. |
+| Water temperature | Existing C_th dT/dt = Q_heat − k(T_bat−T_water) | One average node, constant coefficients unless explicit model; external temperature input | S1/S2 equation basis; C_th/k and pack maps still require identification. No thermal defaults inferred from mass. |
+| Remaining energy L1 | E_ocv,max = Q_ref integral from unavailable SOC tail to SOC of U_ocv(s,T) ds | Fixed current temperature; future loaded cutoff excluded; upper bound | DERIVED exact trapezoidal integration of supplied piecewise-linear OCV. |
+| Endurance | E_remaining / P_current or weighted rolling mean P | Observed load estimate, not mission completion; includes less than full window at startup | DERIVED; window default 60 s is display policy, not physical coefficient. |
+| Accounting | E_category = sum(P_category dt / 3600), E_ocv = E_terminal + E_internal | Categories disjoint; phase labels mark future ticks; telemetry sampling does not change accounting | DERIVED SI-to-Wh conversion. Existing I²R/converter loss equations unchanged. |
+
+Mathematical custom models are registered as trusted Python factories with
+explicit domains; none is advertised as a universal marine actuator model.
+The synthetic compact ROV/AUV/custom pack and thruster profiles exist solely to
+demonstrate generic configuration. They are not manufacturer characterizations.
+
+### Conflicts and native source limits
+
+The current documentation uses a singular setter spelling in one snippet,
+while the installed public API is `set_ocean_currents(agent_name, vector)`.
+The implementation follows the inspected public method and the native test;
+it does not use private transport APIs. Fossen currents are documented as
+unsupported in the inspected 2.3 integration, so a declared Fossen contract is
+rejected for native current updates rather than silently assuming compatibility.
+
+Installed source inspection (hashes, paths and line anchors in
+`sources/generic_native_source_inspection.json`) found density 997 kg/m³ in the
+buoyant base class. BlueROV2 initialization uses perfect-neutral buoyancy unless
+otherwise configured; energy YAML does not override it. There is no verified
+public setter for density/mass/volume on the already-running native asset.
+
+In `HolodeckBuoyantAgent.cpp`, velocity is converted to SI before computing
+drag. The expression rho × |relative velocity|² × Cd × area is passed to
+AddForceAtLocation without the newton→centinewton conversion used explicitly
+for gravity and buoyancy. This is a **source-level dimensional inconsistency**;
+the inspected local source may not exactly match the installed Ocean binary.
+Do not assign a correction multiplier to battery or mutate the engine from
+this layer. Quantitative current/drag validation needs a binary/source
+conformance test and known-force/known-flow experiment first.
+
+The four native station-keeping runs at 0, 0.2, 0.5, 0.8 m/s show increasing
+controller effort/power while remaining almost stationary. These establish
+software coupling only. Small wattages reflect this native setup and cannot
+be presented as real BlueROV2 station-keeping measurements.
+
+### Reproduction and evidence boundary
+
+`sources/generic_verification.json` retains compact native/regression/performance
+reports and SHA-256 of raw local logs; screenshots preserve the actual UI.
+Raw logs include resolved profiles, scenario, commit/dirty flag and package
+source hash. They were produced during development and are not relabeled as
+clean-final-commit runs. Reproduce using commands in README/report with the
+same HoloOcean version/world and explicitly supplied controller parameters.
+
+Physical experiments still needed: measured pack OCV/R(SOC,T)/capacity and
+current limits, thermal identification, actual component duty cycles/rail
+efficiency, installed thruster inflow/transients, payload hydrodynamic changes,
+and independent mission validation. The retained calibration/validation tooling
+separates datasets and never promotes a synthetic/test pass to physical evidence.

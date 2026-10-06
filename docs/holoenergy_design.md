@@ -1,5 +1,10 @@
 # HoloEnergy v0.1 design and usage
 
+This document preserves the v0.1 numerical baseline and its historical examples.
+The current generic vehicle/component/environment contracts are documented in
+[generic_framework.md](generic_framework.md); the optional UI is described in
+[dashboard.md](dashboard.md). BlueROV2 is a reference profile, not a core constraint.
+
 ## Scope and architecture
 
 External Python package wrapping an already-created environment. No hardware

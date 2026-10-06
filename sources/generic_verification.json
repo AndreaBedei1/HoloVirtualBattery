@@ -1,0 +1,2125 @@
+{
+  "date": "2026-10-06",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "evidence_kind": "configured simulation software verification; no physical validation",
+  "run_source": "development working tree at commit 22aa995 with dirty flag; exact per-run source/config hashes in raw metadata",
+  "records": {
+    "native_regression": {
+      "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+      "python_version": "3.10.20",
+      "holoocean_version": "2.3.0",
+      "scenario": "C:\\Users\\Andrea\\Desktop\\Battery\\configs\\bluerov2_holoocean.json",
+      "steps_per_comparison": 60,
+      "test_current_limit_A": 8.0,
+      "test_current_limit_kind": "simulation intervention, not a manufacturer rating",
+      "derated": {
+        "apply_derating": true,
+        "control_contract": {
+          "agent_type": "BlueROV2",
+          "control_scheme": 0,
+          "action_units": "force_N",
+          "thruster_count": 8,
+          "dt_s": 0.05,
+          "agent_name": "rov0"
+        },
+        "action_low_N": [
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75
+        ],
+        "action_high_N": [
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75
+        ],
+        "start_position_m": [
+          0.0,
+          -0.0,
+          -5.0
+        ],
+        "end_position_m": [
+          2.4739415645599365,
+          -0.0,
+          -5.0
+        ],
+        "surge_displacement_m": 2.4739415645599365,
+        "displacement_norm_m": 2.4739415645599365,
+        "minimum_derating_factor": 0.49063788473722525,
+        "max_current_A": 7.999999999975927,
+        "last_applied_action_N": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          9.812757694744505,
+          9.812757694744505,
+          9.812757694744505,
+          9.812757694744505
+        ],
+        "native_clock_increment_s": 0.04999999999999999,
+        "energy_time_s": 3.1999999999999966,
+        "terminal_energy_Wh": 0.11116167898772254,
+        "engine_process_closed": true,
+        "zero_action_ticks": 4,
+        "sent_actions_verified": true
+      },
+      "accounting_only": {
+        "apply_derating": false,
+        "control_contract": {
+          "agent_type": "BlueROV2",
+          "control_scheme": 0,
+          "action_units": "force_N",
+          "thruster_count": 8,
+          "dt_s": 0.05,
+          "agent_name": "rov0"
+        },
+        "action_low_N": [
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75,
+          -28.75
+        ],
+        "action_high_N": [
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75,
+          28.75
+        ],
+        "start_position_m": [
+          0.0,
+          -0.0,
+          -5.0
+        ],
+        "end_position_m": [
+          4.674220561981201,
+          -0.0,
+          -5.0
+        ],
+        "surge_displacement_m": 4.674220561981201,
+        "displacement_norm_m": 4.674220561981201,
+        "minimum_derating_factor": 0.49063788473722525,
+        "max_current_A": 7.999999999975927,
+        "last_applied_action_N": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ],
+        "native_clock_increment_s": 0.04999999999999999,
+        "energy_time_s": 3.1999999999999966,
+        "terminal_energy_Wh": 0.11116167898772254,
+        "engine_process_closed": true,
+        "zero_action_ticks": 4,
+        "sent_actions_verified": true
+      },
+      "native_integration_passed": true,
+      "physical_energy_model_calibrated": false,
+      "sonar_note": "Default scenario renders a camera; sonar load is an electrical proxy"
+    },
+    "station_keeping": {
+      "evidence_kind": "native software/controller coupling; not physical energy validation",
+      "controller_policy": {
+        "position_P_N_per_m": 20,
+        "velocity_D_Ns_per_m": 15,
+        "position_I_N_per_m_s": 5,
+        "integral_clip_m_s": 10,
+        "attitude_P_Nm_per_rad": 5,
+        "angular_D_Nms_per_rad": 2,
+        "origin": "user-selected demonstration gains, not calibrated physics"
+      },
+      "actuator_geometry_source": "inspected HoloOcean 2.3.0 BlueROV2.h; retained in sources/generic_native_source_inspection.json",
+      "records": [
+        {
+          "current_m_s": 0,
+          "mean_tail_speed_m_s": 0.0,
+          "mean_tail_propulsion_W": 0.0,
+          "mean_tail_effort_norm_N": 0.0,
+          "final_position_error_m": 0.0,
+          "energy_summary": {
+            "run_id": "83a62ce3-ba66-467f-965d-b50689688751",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 0.1953703703703717,
+            "total_ocv_work_Wh": 0.19602401489745383,
+            "category_energy_Wh": {
+              "propulsion": 0.0,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0006536445270821347
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 0.0,
+              "sensors": 25.932196807582873,
+              "compute": 0.0,
+              "auxiliaries": 63.76769706782739,
+              "converters": 9.966654875045611,
+              "battery_losses": 0.3334512495441317
+            },
+            "device_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.0,
+              "T6": 0.0,
+              "T7": 0.0,
+              "T8": 0.0,
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "phases": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.195370370370369,
+                "battery_losses_Wh": 0.0006536445270821347
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 40932.09868788108,
+              "rolling_average_s": 40932.09868788163,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied"
+          },
+          "last_energy": {
+            "run_id": "83a62ce3-ba66-467f-965d-b50689688751",
+            "fidelity_level": "L1",
+            "episode": 0,
+            "step": 600,
+            "time_s": 30.00000000000029,
+            "dt_s": 0.05,
+            "soc": 0.9993516975097183,
+            "available_soc": 0.9993516975097183,
+            "voltage_V": 16.740096814941708,
+            "current_A": 1.4004963473997734,
+            "power_total_W": 23.444444444444443,
+            "power_propulsion_W": 0.0,
+            "power_payload_W": 6.1,
+            "power_hotel_W": 15.0,
+            "power_conversion_loss_W": 2.3444444444444414,
+            "power_battery_loss_W": 0.07845560076320426,
+            "heat_generated_W": 0.07845560076320426,
+            "requested_power_W": 23.444444444444443,
+            "available_power_W": 863.7670001302619,
+            "unmet_power_W": 0.0,
+            "temperature_C": 19.758059843404723,
+            "water_temperature_C": 15.0,
+            "thermal_derating_factor": 1.0,
+            "minimum_voltage_V": 16.740096814941708,
+            "peak_current_A": 1.4004963473997734,
+            "peak_temperature_C": 19.758059843404723,
+            "energy_used_Wh": 0.195370370370369,
+            "battery_internal_loss_Wh": 0.0006536445270821347,
+            "chemical_energy_used_Wh": 0.19602401489745241,
+            "derating_factor": 1.0,
+            "auxiliary_service_factor": 1.0,
+            "battery_state": "NORMAL",
+            "cutoff_reason": null,
+            "thruster_power_W": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "sensor_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0
+            },
+            "sensor_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE"
+            },
+            "sensor_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "requested_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "requested_power_is_capped": false,
+            "applied_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "actions_derated": true,
+            "dynamics_energy_consistent": true,
+            "temperature_outside_calibration": true,
+            "model_warnings": [
+              "placeholder: battery.capacity_temperature_curve",
+              "placeholder: battery.internal_resistance_ohm",
+              "placeholder: battery.max_current_temperature_curve",
+              "placeholder: battery.ocv_curve",
+              "placeholder: battery.resistance_temperature_curve",
+              "placeholder: converters.hotel_efficiency",
+              "placeholder: converters.payload_efficiency",
+              "placeholder: hotel_load.constant_W",
+              "placeholder: thermal.cooling_coeff_W_per_C",
+              "placeholder: thermal.derating_temperature_C",
+              "placeholder: thermal.thermal_capacity_J_per_C",
+              "Battery temperature tables are not characterized for this pack",
+              "Camera.ACTIVE uses a datasheet maximum, not a mean",
+              "ImagingSonar.ACTIVE uses a datasheet maximum, not a mean"
+            ],
+            "step_completed": true,
+            "power_sensors_W": 6.1,
+            "power_compute_W": 0.0,
+            "power_auxiliary_W": 15.0,
+            "component_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0,
+              "hotel_constant": 15.0
+            },
+            "component_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE",
+              "hotel_constant": "ACTIVE"
+            },
+            "component_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "actuator_power_W": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.0,
+              "T6": 0.0,
+              "T7": 0.0,
+              "T8": 0.0
+            },
+            "actuators": {
+              "T1": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T2": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T3": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T4": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T5": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T6": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T7": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T8": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              }
+            },
+            "battery_temperature_C": 19.758059843404723,
+            "remaining_energy_Wh": 266.56397602292924,
+            "remaining_energy_basis": "OCV work upper bound; load-dependent cutoff excluded",
+            "chemistry": "Li-ion",
+            "environment": {
+              "water_temperature_C": 15.0,
+              "current_velocity_m_s": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "current_mode": "native"
+            },
+            "vehicle_dynamics_status": "backend_owned",
+            "linear_speed_m_s": 0.0,
+            "angular_speed_rad_s": 0.0,
+            "acceleration_m_s2": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "depth_m": 5.0,
+            "mission_phase": "station_keeping",
+            "category_energy_Wh": {
+              "propulsion": 0.0,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0006536445270821347
+            },
+            "component_energy_Wh": {
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "actuator_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.0,
+              "T6": 0.0,
+              "T7": 0.0,
+              "T8": 0.0
+            },
+            "phase_energy_Wh": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.195370370370369,
+                "battery_losses_Wh": 0.0006536445270821347
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 40932.09868788108,
+              "rolling_average_s": 40932.09868788163,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            }
+          },
+          "physical_validation": false,
+          "dynamics": "native HoloOcean 2.3.0 currents; source drag-unit limitation"
+        },
+        {
+          "current_m_s": 0.2,
+          "mean_tail_speed_m_s": 2.597712528995544e-06,
+          "mean_tail_propulsion_W": 0.2198534053383851,
+          "mean_tail_effort_norm_N": 0.05077615106150613,
+          "final_position_error_m": 8.348131075308629e-08,
+          "energy_summary": {
+            "run_id": "5cf0d859-1506-4898-a7d3-18e6ce06bcf4",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 0.19720174322986087,
+            "total_ocv_work_Wh": 0.19786774414802624,
+            "category_energy_Wh": {
+              "propulsion": 0.0018313728594891647,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0006660009181653831
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 0.9255540196178219,
+              "sensors": 25.69056091088021,
+              "compute": 0.0,
+              "auxiliaries": 63.17351043659133,
+              "converters": 9.873785705274642,
+              "battery_losses": 0.3365889276359987
+            },
+            "device_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.00045784321487229117,
+              "T6": 0.00045784321487229117,
+              "T7": 0.00045784321487229117,
+              "T8": 0.00045784321487229117,
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "phases": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.19720174322985948,
+                "battery_losses_Wh": 0.0006660009181653831
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 40551.647939206305,
+              "rolling_average_s": 40551.690050278616,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied"
+          },
+          "last_energy": {
+            "run_id": "5cf0d859-1506-4898-a7d3-18e6ce06bcf4",
+            "fidelity_level": "L1",
+            "episode": 0,
+            "step": 600,
+            "time_s": 30.00000000000029,
+            "dt_s": 0.05,
+            "soc": 0.9993455991051755,
+            "available_soc": 0.9993455991051755,
+            "voltage_V": 16.739533201152863,
+            "current_A": 1.4136734565678188,
+            "power_total_W": 23.664233761805534,
+            "power_propulsion_W": 0.2197893173610869,
+            "power_payload_W": 6.1,
+            "power_hotel_W": 15.0,
+            "power_conversion_loss_W": 2.3444444444444485,
+            "power_battery_loss_W": 0.0799389056721762,
+            "heat_generated_W": 0.0799389056721762,
+            "requested_power_W": 23.664233761805534,
+            "available_power_W": 863.7648083649345,
+            "unmet_power_W": 0.0,
+            "temperature_C": 19.758096008641548,
+            "water_temperature_C": 15.0,
+            "thermal_derating_factor": 1.0,
+            "minimum_voltage_V": 16.739533201152863,
+            "peak_current_A": 1.4136734565678188,
+            "peak_temperature_C": 19.758096008641548,
+            "energy_used_Wh": 0.19720174322985948,
+            "battery_internal_loss_Wh": 0.0006660009181653831,
+            "chemical_energy_used_Wh": 0.19786774414802488,
+            "derating_factor": 1.0,
+            "auxiliary_service_factor": 1.0,
+            "battery_state": "NORMAL",
+            "cutoff_reason": null,
+            "thruster_power_W": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.054947329340271724,
+              0.054947329340271724,
+              0.054947329340271724,
+              0.054947329340271724
+            ],
+            "sensor_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0
+            },
+            "sensor_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE"
+            },
+            "sensor_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "requested_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              -0.025380246619636747,
+              -0.025380246619636747,
+              -0.025380246619636747,
+              -0.025380246619636747
+            ],
+            "requested_power_is_capped": false,
+            "applied_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              -0.025380246619636747,
+              -0.025380246619636747,
+              -0.025380246619636747,
+              -0.025380246619636747
+            ],
+            "actions_derated": true,
+            "dynamics_energy_consistent": true,
+            "temperature_outside_calibration": true,
+            "model_warnings": [
+              "placeholder: battery.capacity_temperature_curve",
+              "placeholder: battery.internal_resistance_ohm",
+              "placeholder: battery.max_current_temperature_curve",
+              "placeholder: battery.ocv_curve",
+              "placeholder: battery.resistance_temperature_curve",
+              "placeholder: converters.hotel_efficiency",
+              "placeholder: converters.payload_efficiency",
+              "placeholder: hotel_load.constant_W",
+              "placeholder: thermal.cooling_coeff_W_per_C",
+              "placeholder: thermal.derating_temperature_C",
+              "placeholder: thermal.thermal_capacity_J_per_C",
+              "Battery temperature tables are not characterized for this pack",
+              "Camera.ACTIVE uses a datasheet maximum, not a mean",
+              "ImagingSonar.ACTIVE uses a datasheet maximum, not a mean"
+            ],
+            "step_completed": true,
+            "power_sensors_W": 6.1,
+            "power_compute_W": 0.0,
+            "power_auxiliary_W": 15.0,
+            "component_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0,
+              "hotel_constant": 15.0
+            },
+            "component_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE",
+              "hotel_constant": "ACTIVE"
+            },
+            "component_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "actuator_power_W": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.054947329340271724,
+              "T6": 0.054947329340271724,
+              "T7": 0.054947329340271724,
+              "T8": 0.054947329340271724
+            },
+            "actuators": {
+              "T1": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T2": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T3": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T4": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T5": {
+                "command": -0.025380246619636747,
+                "applied_effort": -0.025380246619636747,
+                "force_N": -0.025380246619636747,
+                "power_W": 0.054947329340271724,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T6": {
+                "command": -0.025380246619636747,
+                "applied_effort": -0.025380246619636747,
+                "force_N": -0.025380246619636747,
+                "power_W": 0.054947329340271724,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T7": {
+                "command": -0.025380246619636747,
+                "applied_effort": -0.025380246619636747,
+                "force_N": -0.025380246619636747,
+                "power_W": 0.054947329340271724,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T8": {
+                "command": -0.025380246619636747,
+                "applied_effort": -0.025380246619636747,
+                "force_N": -0.025380246619636747,
+                "power_W": 0.054947329340271724,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              }
+            },
+            "battery_temperature_C": 19.758096008641548,
+            "remaining_energy_Wh": 266.5621322943938,
+            "remaining_energy_basis": "OCV work upper bound; load-dependent cutoff excluded",
+            "chemistry": "Li-ion",
+            "environment": {
+              "water_temperature_C": 15.0,
+              "current_velocity_m_s": [
+                0.2,
+                0.0,
+                0.0
+              ],
+              "current_mode": "native"
+            },
+            "vehicle_dynamics_status": "backend_owned",
+            "linear_speed_m_s": 9.447919637750601e-07,
+            "angular_speed_rad_s": 0.0,
+            "acceleration_m_s2": [
+              5.65937000374106e-07,
+              0.0,
+              0.0
+            ],
+            "depth_m": 5.0,
+            "mission_phase": "station_keeping",
+            "category_energy_Wh": {
+              "propulsion": 0.0018313728594891647,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0006660009181653831
+            },
+            "component_energy_Wh": {
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "actuator_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.00045784321487229117,
+              "T6": 0.00045784321487229117,
+              "T7": 0.00045784321487229117,
+              "T8": 0.00045784321487229117
+            },
+            "phase_energy_Wh": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.19720174322985948,
+                "battery_losses_Wh": 0.0006660009181653831
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 40551.647939206305,
+              "rolling_average_s": 40551.690050278616,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            }
+          },
+          "physical_validation": false,
+          "dynamics": "native HoloOcean 2.3.0 currents; source drag-unit limitation"
+        },
+        {
+          "current_m_s": 0.5,
+          "mean_tail_speed_m_s": 1.856027547546546e-05,
+          "mean_tail_propulsion_W": 1.3745535845670087,
+          "mean_tail_effort_norm_N": 0.317410902897545,
+          "final_position_error_m": 6.062125066819135e-06,
+          "energy_summary": {
+            "run_id": "4cc00b24-c428-4592-97f9-71005e249486",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 0.20681849825877532,
+            "total_ocv_work_Wh": 0.20755133834559003,
+            "category_energy_Wh": {
+              "propulsion": 0.01144812788840362,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0007328400868146948
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 5.515805380807301,
+              "sensors": 24.491932327938844,
+              "compute": 0.0,
+              "auxiliaries": 60.22606310148958,
+              "converters": 9.41311060326985,
+              "battery_losses": 0.3530885864944199
+            },
+            "device_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.002862031972100905,
+              "T6": 0.002862031972100905,
+              "T7": 0.002862031972100905,
+              "T8": 0.002862031972100905,
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "phases": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.20681849825877396,
+                "battery_losses_Wh": 0.0007328400868146948
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 38664.245745264045,
+              "rolling_average_s": 38664.691642410995,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied"
+          },
+          "last_energy": {
+            "run_id": "4cc00b24-c428-4592-97f9-71005e249486",
+            "fidelity_level": "L1",
+            "episode": 0,
+            "step": 600,
+            "time_s": 30.00000000000029,
+            "dt_s": 0.05,
+            "soc": 0.9993135689812729,
+            "available_soc": 0.999313568981273,
+            "voltage_V": 16.736572655741142,
+            "current_A": 1.4828905845170877,
+            "power_total_W": 24.81850600828469,
+            "power_propulsion_W": 1.3740615638402454,
+            "power_payload_W": 6.1,
+            "power_hotel_W": 15.0,
+            "power_conversion_loss_W": 2.3444444444444414,
+            "power_battery_loss_W": 0.08795857942597719,
+            "heat_generated_W": 0.08795857942597719,
+            "requested_power_W": 24.81850600828469,
+            "available_power_W": 863.7532967473095,
+            "unmet_power_W": 0.0,
+            "temperature_C": 19.758291638926906,
+            "water_temperature_C": 15.0,
+            "thermal_derating_factor": 1.0,
+            "minimum_voltage_V": 16.736572655741142,
+            "peak_current_A": 1.4828905845170877,
+            "peak_temperature_C": 19.758291638926906,
+            "energy_used_Wh": 0.20681849825877396,
+            "battery_internal_loss_Wh": 0.0007328400868146948,
+            "chemical_energy_used_Wh": 0.2075513383455887,
+            "derating_factor": 1.0,
+            "auxiliary_service_factor": 1.0,
+            "battery_state": "NORMAL",
+            "cutoff_reason": null,
+            "thruster_power_W": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.34351539096006134,
+              0.34351539096006134,
+              0.34351539096006134,
+              0.34351539096006134
+            ],
+            "sensor_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0
+            },
+            "sensor_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE"
+            },
+            "sensor_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "requested_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              -0.1586458435877856,
+              -0.1586458435877856,
+              -0.1586458435877856,
+              -0.1586458435877856
+            ],
+            "requested_power_is_capped": false,
+            "applied_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              -0.1586458435877856,
+              -0.1586458435877856,
+              -0.1586458435877856,
+              -0.1586458435877856
+            ],
+            "actions_derated": true,
+            "dynamics_energy_consistent": true,
+            "temperature_outside_calibration": true,
+            "model_warnings": [
+              "placeholder: battery.capacity_temperature_curve",
+              "placeholder: battery.internal_resistance_ohm",
+              "placeholder: battery.max_current_temperature_curve",
+              "placeholder: battery.ocv_curve",
+              "placeholder: battery.resistance_temperature_curve",
+              "placeholder: converters.hotel_efficiency",
+              "placeholder: converters.payload_efficiency",
+              "placeholder: hotel_load.constant_W",
+              "placeholder: thermal.cooling_coeff_W_per_C",
+              "placeholder: thermal.derating_temperature_C",
+              "placeholder: thermal.thermal_capacity_J_per_C",
+              "Battery temperature tables are not characterized for this pack",
+              "Camera.ACTIVE uses a datasheet maximum, not a mean",
+              "ImagingSonar.ACTIVE uses a datasheet maximum, not a mean"
+            ],
+            "step_completed": true,
+            "power_sensors_W": 6.1,
+            "power_compute_W": 0.0,
+            "power_auxiliary_W": 15.0,
+            "component_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0,
+              "hotel_constant": 15.0
+            },
+            "component_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE",
+              "hotel_constant": "ACTIVE"
+            },
+            "component_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "actuator_power_W": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.34351539096006134,
+              "T6": 0.34351539096006134,
+              "T7": 0.34351539096006134,
+              "T8": 0.34351539096006134
+            },
+            "actuators": {
+              "T1": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T2": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T3": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T4": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T5": {
+                "command": -0.1586458435877856,
+                "applied_effort": -0.1586458435877856,
+                "force_N": -0.1586458435877856,
+                "power_W": 0.34351539096006134,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T6": {
+                "command": -0.1586458435877856,
+                "applied_effort": -0.1586458435877856,
+                "force_N": -0.1586458435877856,
+                "power_W": 0.34351539096006134,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T7": {
+                "command": -0.1586458435877856,
+                "applied_effort": -0.1586458435877856,
+                "force_N": -0.1586458435877856,
+                "power_W": 0.34351539096006134,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T8": {
+                "command": -0.1586458435877856,
+                "applied_effort": -0.1586458435877856,
+                "force_N": -0.1586458435877856,
+                "power_W": 0.34351539096006134,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              }
+            },
+            "battery_temperature_C": 19.758291638926906,
+            "remaining_energy_Wh": 266.55244870406426,
+            "remaining_energy_basis": "OCV work upper bound; load-dependent cutoff excluded",
+            "chemistry": "Li-ion",
+            "environment": {
+              "water_temperature_C": 15.0,
+              "current_velocity_m_s": [
+                0.5,
+                0.0,
+                0.0
+              ],
+              "current_mode": "native"
+            },
+            "vehicle_dynamics_status": "backend_owned",
+            "linear_speed_m_s": 1.0928991287073586e-05,
+            "angular_speed_rad_s": 0.0,
+            "acceleration_m_s2": [
+              4.745418664242607e-06,
+              0.0,
+              0.0
+            ],
+            "depth_m": 5.0,
+            "mission_phase": "station_keeping",
+            "category_energy_Wh": {
+              "propulsion": 0.01144812788840362,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0007328400868146948
+            },
+            "component_energy_Wh": {
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "actuator_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.002862031972100905,
+              "T6": 0.002862031972100905,
+              "T7": 0.002862031972100905,
+              "T8": 0.002862031972100905
+            },
+            "phase_energy_Wh": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.20681849825877396,
+                "battery_losses_Wh": 0.0007328400868146948
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 38664.245745264045,
+              "rolling_average_s": 38664.691642410995,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            }
+          },
+          "physical_validation": false,
+          "dynamics": "native HoloOcean 2.3.0 currents; source drag-unit limitation"
+        },
+        {
+          "current_m_s": 0.8,
+          "mean_tail_speed_m_s": 5.436567158540129e-05,
+          "mean_tail_propulsion_W": 3.232518298761629,
+          "mean_tail_effort_norm_N": 0.8127451996763871,
+          "final_position_error_m": 3.588795880204998e-05,
+          "energy_summary": {
+            "run_id": "e3b83a13-cd61-4e53-90ef-06b2dd6132c3",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 0.22179420789451867,
+            "total_ocv_work_Wh": 0.22263761368796495,
+            "category_energy_Wh": {
+              "propulsion": 0.026423837524146985,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0008434057934462602
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 11.868541477084369,
+              "sensors": 22.832320420294362,
+              "compute": 0.0,
+              "auxiliaries": 56.14505021383917,
+              "converters": 8.775263403792637,
+              "battery_losses": 0.3788244849894616
+            },
+            "device_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.006605959381036746,
+              "T6": 0.006605959381036746,
+              "T7": 0.006605959381036746,
+              "T8": 0.006605959381036746,
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "phases": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.2217942078945174,
+                "battery_losses_Wh": 0.0008434057934462602
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 35969.31634482002,
+              "rolling_average_s": 36051.982371228296,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied"
+          },
+          "last_energy": {
+            "run_id": "e3b83a13-cd61-4e53-90ef-06b2dd6132c3",
+            "fidelity_level": "L1",
+            "episode": 0,
+            "step": 600,
+            "time_s": 30.00000000000029,
+            "dt_s": 0.05,
+            "soc": 0.999263667847646,
+            "available_soc": 0.999263667847646,
+            "voltage_V": 16.731815140294863,
+            "current_A": 1.5943562017432138,
+            "power_total_W": 26.676473235350116,
+            "power_propulsion_W": 3.2320287909056735,
+            "power_payload_W": 6.1,
+            "power_hotel_W": 15.0,
+            "power_conversion_loss_W": 2.3444444444444414,
+            "power_battery_loss_W": 0.1016788679214819,
+            "heat_generated_W": 0.1016788679214819,
+            "requested_power_W": 26.676473235350116,
+            "available_power_W": 863.7353633018754,
+            "unmet_power_W": 0.0,
+            "temperature_C": 19.75861542528829,
+            "water_temperature_C": 15.0,
+            "thermal_derating_factor": 1.0,
+            "minimum_voltage_V": 16.731815140294863,
+            "peak_current_A": 1.5943562017432138,
+            "peak_temperature_C": 19.75861542528829,
+            "energy_used_Wh": 0.2217942078945174,
+            "battery_internal_loss_Wh": 0.0008434057934462602,
+            "chemical_energy_used_Wh": 0.2226376136879635,
+            "derating_factor": 1.0,
+            "auxiliary_service_factor": 1.0,
+            "battery_state": "NORMAL",
+            "cutoff_reason": null,
+            "thruster_power_W": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.8080071977264184,
+              0.8080071977264184,
+              0.8080071977264184,
+              0.8080071977264184
+            ],
+            "sensor_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0
+            },
+            "sensor_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE"
+            },
+            "sensor_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "requested_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              -0.40621280654157405,
+              -0.40621280654157405,
+              -0.40621280654157405,
+              -0.40621280654157405
+            ],
+            "requested_power_is_capped": false,
+            "applied_action": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              -0.40621280654157405,
+              -0.40621280654157405,
+              -0.40621280654157405,
+              -0.40621280654157405
+            ],
+            "actions_derated": true,
+            "dynamics_energy_consistent": true,
+            "temperature_outside_calibration": true,
+            "model_warnings": [
+              "placeholder: battery.capacity_temperature_curve",
+              "placeholder: battery.internal_resistance_ohm",
+              "placeholder: battery.max_current_temperature_curve",
+              "placeholder: battery.ocv_curve",
+              "placeholder: battery.resistance_temperature_curve",
+              "placeholder: converters.hotel_efficiency",
+              "placeholder: converters.payload_efficiency",
+              "placeholder: hotel_load.constant_W",
+              "placeholder: thermal.cooling_coeff_W_per_C",
+              "placeholder: thermal.derating_temperature_C",
+              "placeholder: thermal.thermal_capacity_J_per_C",
+              "Battery temperature tables are not characterized for this pack",
+              "Camera.ACTIVE uses a datasheet maximum, not a mean",
+              "ImagingSonar.ACTIVE uses a datasheet maximum, not a mean"
+            ],
+            "step_completed": true,
+            "power_sensors_W": 6.1,
+            "power_compute_W": 0.0,
+            "power_auxiliary_W": 15.0,
+            "component_power_W": {
+              "Camera": 1.1,
+              "ImagingSonar": 5.0,
+              "hotel_constant": 15.0
+            },
+            "component_states": {
+              "Camera": "ACTIVE",
+              "ImagingSonar": "ACTIVE",
+              "hotel_constant": "ACTIVE"
+            },
+            "component_power_status": {
+              "Camera": "POWERED",
+              "ImagingSonar": "POWERED"
+            },
+            "actuator_power_W": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.8080071977264184,
+              "T6": 0.8080071977264184,
+              "T7": 0.8080071977264184,
+              "T8": 0.8080071977264184
+            },
+            "actuators": {
+              "T1": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T2": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T3": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T4": {
+                "command": 0.0,
+                "applied_effort": 0.0,
+                "force_N": 0.0,
+                "power_W": 0.0,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T5": {
+                "command": -0.40621280654157405,
+                "applied_effort": -0.40621280654157405,
+                "force_N": -0.40621280654157405,
+                "power_W": 0.8080071977264184,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T6": {
+                "command": -0.40621280654157405,
+                "applied_effort": -0.40621280654157405,
+                "force_N": -0.40621280654157405,
+                "power_W": 0.8080071977264184,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T7": {
+                "command": -0.40621280654157405,
+                "applied_effort": -0.40621280654157405,
+                "force_N": -0.40621280654157405,
+                "power_W": 0.8080071977264184,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              },
+              "T8": {
+                "command": -0.40621280654157405,
+                "applied_effort": -0.40621280654157405,
+                "force_N": -0.40621280654157405,
+                "power_W": 0.8080071977264184,
+                "action_units": "force_N",
+                "effort_kind": "submitted to backend; realized thrust not measured"
+              }
+            },
+            "battery_temperature_C": 19.75861542528829,
+            "remaining_energy_Wh": 266.5373624351202,
+            "remaining_energy_basis": "OCV work upper bound; load-dependent cutoff excluded",
+            "chemistry": "Li-ion",
+            "environment": {
+              "water_temperature_C": 15.0,
+              "current_velocity_m_s": [
+                0.8,
+                0.0,
+                0.0
+              ],
+              "current_mode": "native"
+            },
+            "vehicle_dynamics_status": "backend_owned",
+            "linear_speed_m_s": 4.128783257328905e-05,
+            "angular_speed_rad_s": 0.0,
+            "acceleration_m_s2": [
+              1.2301704373385292e-05,
+              0.0,
+              0.0
+            ],
+            "depth_m": 5.0,
+            "mission_phase": "station_keeping",
+            "category_energy_Wh": {
+              "propulsion": 0.026423837524146985,
+              "sensors": 0.05083333333333329,
+              "compute": 0.0,
+              "auxiliaries": 0.1250000000000012,
+              "converters": 0.019537037037037217,
+              "battery_losses": 0.0008434057934462602
+            },
+            "component_energy_Wh": {
+              "Camera": 0.009166666666666691,
+              "ImagingSonar": 0.04166666666666634,
+              "hotel_constant": 0.1250000000000012
+            },
+            "actuator_energy_Wh": {
+              "T1": 0.0,
+              "T2": 0.0,
+              "T3": 0.0,
+              "T4": 0.0,
+              "T5": 0.006605959381036746,
+              "T6": 0.006605959381036746,
+              "T7": 0.006605959381036746,
+              "T8": 0.006605959381036746
+            },
+            "phase_energy_Wh": {
+              "station_keeping": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 0.2217942078945174,
+                "battery_losses_Wh": 0.0008434057934462602
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 35969.31634482002,
+              "rolling_average_s": 36051.982371228296,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.00000000000029,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            }
+          },
+          "physical_validation": false,
+          "dynamics": "native HoloOcean 2.3.0 currents; source drag-unit limitation"
+        }
+      ]
+    },
+    "performance": {
+      "backend": "holoocean",
+      "means_ms_per_step": {
+        "baseline": 22.478457666648968,
+        "energy": 22.435601555431884,
+        "dashboard": 22.67780044439456
+      },
+      "energy_overhead_ms": -0.04285611121708399,
+      "dashboard_increment_ms": 0.24219888896267605,
+      "records": [
+        {
+          "trial": 0,
+          "mode": "baseline",
+          "mean_step_ms": 22.59027333348058,
+          "wall_s": 6.7770820000441745,
+          "steps": 300,
+          "telemetry_samples_sent": 0,
+          "dashboard_polls": 0,
+          "terminal_energy_Wh": null
+        },
+        {
+          "trial": 0,
+          "mode": "energy",
+          "mean_step_ms": 22.57462566640849,
+          "wall_s": 6.772387699922547,
+          "steps": 300,
+          "telemetry_samples_sent": 0,
+          "dashboard_polls": 0,
+          "terminal_energy_Wh": 0.2536784040776918
+        },
+        {
+          "trial": 0,
+          "mode": "dashboard",
+          "mean_step_ms": 23.646197333388653,
+          "wall_s": 7.093859200016595,
+          "steps": 300,
+          "telemetry_samples_sent": 62,
+          "dashboard_polls": 50,
+          "terminal_energy_Wh": 0.2536784040776918
+        },
+        {
+          "trial": 1,
+          "mode": "baseline",
+          "mean_step_ms": 22.673260666585218,
+          "wall_s": 6.801978199975565,
+          "steps": 300,
+          "telemetry_samples_sent": 0,
+          "dashboard_polls": 0,
+          "terminal_energy_Wh": null
+        },
+        {
+          "trial": 1,
+          "mode": "energy",
+          "mean_step_ms": 22.72445166677547,
+          "wall_s": 6.817335500032641,
+          "steps": 300,
+          "telemetry_samples_sent": 0,
+          "dashboard_polls": 0,
+          "terminal_energy_Wh": 0.2536784040776918
+        },
+        {
+          "trial": 1,
+          "mode": "dashboard",
+          "mean_step_ms": 22.29697366671947,
+          "wall_s": 6.689092100015841,
+          "steps": 300,
+          "telemetry_samples_sent": 58,
+          "dashboard_polls": 47,
+          "terminal_energy_Wh": 0.2536784040776918
+        },
+        {
+          "trial": 2,
+          "mode": "baseline",
+          "mean_step_ms": 22.1718389998811,
+          "wall_s": 6.65155169996433,
+          "steps": 300,
+          "telemetry_samples_sent": 0,
+          "dashboard_polls": 0,
+          "terminal_energy_Wh": null
+        },
+        {
+          "trial": 2,
+          "mode": "energy",
+          "mean_step_ms": 22.00772733311169,
+          "wall_s": 6.6023181999335065,
+          "steps": 300,
+          "telemetry_samples_sent": 0,
+          "dashboard_polls": 0,
+          "terminal_energy_Wh": 0.2536784040776918
+        },
+        {
+          "trial": 2,
+          "mode": "dashboard",
+          "mean_step_ms": 22.09023033307555,
+          "wall_s": 6.6270690999226645,
+          "steps": 300,
+          "telemetry_samples_sent": 58,
+          "dashboard_polls": 46,
+          "terminal_energy_Wh": 0.2536784040776918
+        }
+      ],
+      "logging": "disabled equally in energy/dashboard modes",
+      "dashboard_transport": "10 Hz maximum wall-clock publication, HTTP client polls at 4 Hz",
+      "browser_render_cost": "separate browser process; not included in simulator step timer",
+      "interpretation": "machine/load dependent repeated means; negative differences are timing noise, not speedup"
+    },
+    "realtime": {
+      "backend": "holoocean",
+      "steps": 600,
+      "phases": {
+        "transit": {
+          "duration_s": 8.999999999999993,
+          "terminal_energy_Wh": 1.077975658128112,
+          "battery_losses_Wh": 0.07827353246561794
+        },
+        "power_limit": {
+          "duration_s": 12.000000000000036,
+          "terminal_energy_Wh": 0.4387364540276235,
+          "battery_losses_Wh": 0.008533333332888299
+        },
+        "return": {
+          "duration_s": 8.999999999999993,
+          "terminal_energy_Wh": 1.1140360083772305,
+          "battery_losses_Wh": 0.08420364043205883
+        }
+      },
+      "minimum_derating_factor": 0.3957971479103435,
+      "power_limit_intervention_A": 8,
+      "telemetry_sent": 342,
+      "telemetry_dropped": 0,
+      "energy_summary": {
+        "run_id": "fcc3de25-be81-43a4-b563-183f5983930e",
+        "episode": 0,
+        "duration_s": 30.00000000000029,
+        "terminal_energy_Wh": 2.6307481205329633,
+        "total_ocv_work_Wh": 2.8017586267635286,
+        "category_energy_Wh": {
+          "propulsion": 2.440470342755185,
+          "sensors": 0.04624999999999936,
+          "compute": 0.0,
+          "auxiliaries": 0.1250000000000012,
+          "converters": 0.019027777777777737,
+          "battery_losses": 0.17101050623056513
+        },
+        "category_percent_of_ocv_work": {
+          "propulsion": 87.10494613785885,
+          "sensors": 1.6507489102808752,
+          "compute": 0.0,
+          "auxiliaries": 4.461483541299767,
+          "converters": 0.6791369390645121,
+          "battery_losses": 6.103684471496002
+        },
+        "device_energy_Wh": {
+          "T1": 0.0,
+          "T2": 0.0,
+          "T3": 0.0,
+          "T4": 0.0,
+          "T5": 0.6101175856887963,
+          "T6": 0.6101175856887963,
+          "T7": 0.6101175856887963,
+          "T8": 0.6101175856887963,
+          "Camera": 0.004583333333333332,
+          "ImagingSonar": 0.04166666666666634,
+          "hotel_constant": 0.1250000000000012
+        },
+        "phases": {
+          "transit": {
+            "duration_s": 8.999999999999993,
+            "terminal_energy_Wh": 1.077975658128112,
+            "battery_losses_Wh": 0.07827353246561794
+          },
+          "power_limit": {
+            "duration_s": 12.000000000000036,
+            "terminal_energy_Wh": 0.4387364540276235,
+            "battery_losses_Wh": 0.008533333332888299
+          },
+          "return": {
+            "duration_s": 8.999999999999993,
+            "terminal_energy_Wh": 1.1140360083772305,
+            "battery_losses_Wh": 0.08420364043205883
+          }
+        },
+        "endurance_estimates": {
+          "instantaneous_s": 1867.0863844293376,
+          "rolling_average_s": 3010.0743876940087,
+          "rolling_window_s": 60.0,
+          "observed_window_s": 30.00000000000029,
+          "basis": "remaining OCV work upper bound / terminal power",
+          "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+        },
+        "evidence_kind": "configured simulation; physical validation not implied"
+      },
+      "physical_validation": false,
+      "power_limit_applied_to_backend": true
+    },
+    "generic_scenarios": {
+      "evidence_kind": "synthetic configured models; not physical validation",
+      "current_comparison": "Separate native_station_keeping.py uses actual native currents",
+      "physical_payload_boundary": "Replay has no dynamics; mass/volume changes are descriptive and intentionally cannot alter energy for identical effort",
+      "records": {
+        "baseline": {
+          "summary": {
+            "run_id": "2ec1b457-51e9-4424-bb63-d38f60a7f4f0",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.0233333333333237,
+            "total_ocv_work_Wh": 1.0419945409532814,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.18333333333333499,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 0.018661207619957723
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 71.97734446035034,
+              "sensors": 17.594461979197153,
+              "compute": 8.637281335242074,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 1.7909122252104401
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.023333333333324,
+                "battery_losses_Wh": 0.018661207619957723
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 20637.205378304952,
+              "rolling_average_s": 20637.205378304952,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.9986639382084574,
+          "battery_temperature_C": 19.504817543827176,
+          "voltage_V": 25.52384553876679,
+          "vehicle_dynamics_status": "backend_owned"
+        },
+        "water_4C": {
+          "summary": {
+            "run_id": "a10533cd-954b-4d4d-a83b-9ef3c61e0f1b",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.0233333333333237,
+            "total_ocv_work_Wh": 1.042051181739154,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.18333333333333499,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 0.018717848405830323
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 71.97343212530701,
+              "sensors": 17.593505630631004,
+              "compute": 8.636811855036873,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 1.7962503890251114
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.023333333333324,
+                "battery_losses_Wh": 0.018717848405830323
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 20637.203717826626,
+              "rolling_average_s": 20637.203717826622,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.9986638655734346,
+          "battery_temperature_C": 19.328907908320968,
+          "voltage_V": 25.52109034152616,
+          "vehicle_dynamics_status": "backend_owned"
+        },
+        "water_25C": {
+          "summary": {
+            "run_id": "c8c37e9e-3c62-4f09-9747-dd8f8e193189",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.0233333333333237,
+            "total_ocv_work_Wh": 1.0417540017939921,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.18333333333333499,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 0.018420668460668393
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 71.99396390207511,
+              "sensors": 17.59852450939654,
+              "compute": 8.639275668249047,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 1.768235920279296
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.023333333333324,
+                "battery_losses_Wh": 0.018420668460668393
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 20637.212429938536,
+              "rolling_average_s": 20637.212429938532,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.9986642466711089,
+          "battery_temperature_C": 20.252433822536396,
+          "voltage_V": 25.53554837778507,
+          "vehicle_dynamics_status": "backend_owned"
+        },
+        "battery_15Ah": {
+          "summary": {
+            "run_id": "37c9024a-96b9-4970-aea8-384ca3f58f2f",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.0233333333333237,
+            "total_ocv_work_Wh": 1.0419995212774087,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.18333333333333499,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 0.0186661879440851
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 71.97700043859417,
+              "sensors": 17.594377884990088,
+              "compute": 8.637240052631332,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 1.7913816237844173
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.023333333333324,
+                "battery_losses_Wh": 0.0186661879440851
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 10303.329017348411,
+              "rolling_average_s": 10303.329017348411,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.9973275207555323,
+          "battery_temperature_C": 19.504826375960967,
+          "voltage_V": 25.517049694030124,
+          "vehicle_dynamics_status": "backend_owned"
+        },
+        "neutral_payload_5kg": {
+          "summary": {
+            "run_id": "fa6db591-8470-430c-80e8-2636c88ea08e",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.0233333333333237,
+            "total_ocv_work_Wh": 1.0419945409532814,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.18333333333333499,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 0.018661207619957723
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 71.97734446035034,
+              "sensors": 17.594461979197153,
+              "compute": 8.637281335242074,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 1.7909122252104401
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.023333333333324,
+                "battery_losses_Wh": 0.018661207619957723
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 20637.205378304952,
+              "rolling_average_s": 20637.205378304952,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.9986639382084574,
+          "battery_temperature_C": 19.504817543827176,
+          "voltage_V": 25.52384553876679,
+          "vehicle_dynamics_status": "descriptive_only_not_applied"
+        },
+        "dense_payload_5kg": {
+          "summary": {
+            "run_id": "1bfe96ee-b5c4-464f-926e-a723ad5df506",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.0233333333333237,
+            "total_ocv_work_Wh": 1.0419945409532814,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.18333333333333499,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 0.018661207619957723
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 71.97734446035034,
+              "sensors": 17.594461979197153,
+              "compute": 8.637281335242074,
+              "auxiliaries": 0.0,
+              "converters": 0.0,
+              "battery_losses": 1.7909122252104401
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.023333333333324,
+                "battery_losses_Wh": 0.018661207619957723
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 20637.205378304952,
+              "rolling_average_s": 20637.205378304952,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.9986639382084574,
+          "battery_temperature_C": 19.504817543827176,
+          "voltage_V": 25.52384553876679,
+          "vehicle_dynamics_status": "descriptive_only_not_applied"
+        },
+        "electrical_payload_18W": {
+          "summary": {
+            "run_id": "e771caee-9b94-4d8d-a31f-46d9b0c1dabf",
+            "episode": 0,
+            "duration_s": 30.00000000000029,
+            "terminal_energy_Wh": 1.1733333333333196,
+            "total_ocv_work_Wh": 1.197997199101445,
+            "category_energy_Wh": {
+              "propulsion": 0.7499999999999896,
+              "sensors": 0.3333333333333307,
+              "compute": 0.0899999999999991,
+              "auxiliaries": 0.0,
+              "converters": 1.1842378929334988e-16,
+              "battery_losses": 0.024663865768125463
+            },
+            "category_percent_of_ocv_work": {
+              "propulsion": 62.60448693557258,
+              "sensors": 27.824216415810202,
+              "compute": 7.512538432268738,
+              "auxiliaries": 0.0,
+              "converters": 9.8851474262355e-15,
+              "battery_losses": 2.0587582163484637
+            },
+            "device_energy_Wh": {
+              "T1": 0.1250000000000012,
+              "T2": 0.1250000000000012,
+              "T3": 0.1250000000000012,
+              "T4": 0.1250000000000012,
+              "T5": 0.1250000000000012,
+              "T6": 0.1250000000000012,
+              "my_sonar": 0.1500000000000001,
+              "my_camera": 0.03333333333333329,
+              "my_compute": 0.0899999999999991,
+              "added_scientific_sensor": 0.1500000000000001
+            },
+            "phases": {
+              "inspection": {
+                "duration_s": 30.00000000000029,
+                "terminal_energy_Wh": 1.1733333333333364,
+                "battery_losses_Wh": 0.024663865768125463
+              }
+            },
+            "endurance_estimates": {
+              "instantaneous_s": 17994.937579155427,
+              "rolling_average_s": 17994.937579155423,
+              "rolling_window_s": 60.0,
+              "observed_window_s": 30.0,
+              "basis": "remaining OCV work upper bound / terminal power",
+              "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+            },
+            "evidence_kind": "configured simulation; physical validation not implied",
+            "previous_episodes": []
+          },
+          "final_soc": 0.998463879642212,
+          "battery_temperature_C": 19.515383490709326,
+          "voltage_V": 25.452712173740395,
+          "vehicle_dynamics_status": "backend_owned"
+        }
+      }
+    }
+  },
+  "raw_file_sha256": {
+    "logs/generic_native/integration_report.json": "2b304cc70ab4b35ff8190d46adbad994640ad9f5436a876b7ecd2c729fac2bbe",
+    "logs/generic_native/integration_report.json.metadata.json": "80491280e383fc413f6097c34ecc25dccf62dc34830cffd8f5053b5bdd322a98",
+    "logs/generic_native/motion_derating_false.jsonl": "3ace636a516435d820bb503cda6fd7fb2d174f49fcfcd09722335f6b9934aab4",
+    "logs/generic_native/motion_derating_false.jsonl.metadata.json": "f03ff4344d167720651516e904769d6958d51cf6452d097f355a3bbc4c06c9ae",
+    "logs/generic_native/motion_derating_false.jsonl.summary.csv": "1405b630874c94c359dfe12f50fecf5c4f9d8f9001aed02afbe5d359b6ba4c35",
+    "logs/generic_native/motion_derating_false.jsonl.summary.json": "44e9f402698db0d04b630f3cbd0e22c34beb05f28f961e8fca08265e7852c8e4",
+    "logs/generic_native/motion_derating_true.jsonl": "d5a036965cc3b50b036733bc3005523d0bbe3cc3c62cf44d13a74c5ceaea8070",
+    "logs/generic_native/motion_derating_true.jsonl.metadata.json": "0e02692d87baa9329c1ab09ced74320396c49c293a12705491fbf8dd61a03670",
+    "logs/generic_native/motion_derating_true.jsonl.summary.csv": "1405b630874c94c359dfe12f50fecf5c4f9d8f9001aed02afbe5d359b6ba4c35",
+    "logs/generic_native/motion_derating_true.jsonl.summary.json": "f44a41e9a39a47c83b7a64a5c10530ff276ac488f0b07e769156c006fc0d3e29",
+    "logs/generic_currents/station_0.2.jsonl": "c483e3fa681c64cfd5e186a469e094f9200d35c18d9d298fd3a5b1d64558ac87",
+    "logs/generic_currents/station_0.2.jsonl.metadata.json": "1e50aff11cd9d677b3531b3ca00e1c7945b67ffdbfae1e1392e59d044765bce0",
+    "logs/generic_currents/station_0.2.jsonl.summary.csv": "b9a8f30dae9bc897caf1a6a1bbe8ef884a9da4e85cb019c8f77a086f8f0a0fc0",
+    "logs/generic_currents/station_0.2.jsonl.summary.json": "63a3e9e358145de652d81d4114493bc971548db2178f4023280c03ab1a26a427",
+    "logs/generic_currents/station_0.5.jsonl": "a7764204c433c6f86934911bab7ace2f83cd4126f8a9efd5d738cf87339a4a8b",
+    "logs/generic_currents/station_0.5.jsonl.metadata.json": "c9f5170a504b15beb4d9c556ed80dbcc715547213db72debc0e79476095e1e13",
+    "logs/generic_currents/station_0.5.jsonl.summary.csv": "5db961fcdb4e493ba65bfedc9986fa2bd2673236e2f2efc17c555aa1b4c6b5b3",
+    "logs/generic_currents/station_0.5.jsonl.summary.json": "bf46bdaee48d778a3dfe7e7fe1150ae8a2f9c2ad8255f0743d40f82100ed92b3",
+    "logs/generic_currents/station_0.8.jsonl": "38332c2144eaf5f90500b23ebb61f4671b33706c804cc76449ed8c2f68fc5dab",
+    "logs/generic_currents/station_0.8.jsonl.metadata.json": "310f24f9e2a1c9194dfbfec1eea814ecf3644bfde9e66871c26d31c73bb37c4a",
+    "logs/generic_currents/station_0.8.jsonl.summary.csv": "26c650dd14c0ef1eb87e4df892dfcf65421f5e5c4f3a6328145423a03e7d925c",
+    "logs/generic_currents/station_0.8.jsonl.summary.json": "dfb884b0dbced2faa76b600899a1daa8096d4edd4d14318574851e2df3c8687b",
+    "logs/generic_currents/station_0.jsonl": "081188c5fef59bfb2cee3b03fc57b3afb0a779a9f6f200c399e0991aaa34e883",
+    "logs/generic_currents/station_0.jsonl.metadata.json": "c35d267e167a6eb8d93b2243c44c3f2945e4a6819f4479d0b3c540a18f1dcae2",
+    "logs/generic_currents/station_0.jsonl.summary.csv": "af29ba4935865e31352f6b1d826cb8e5bf00bc8a1b3be1c15c7909fa1f2b888b",
+    "logs/generic_currents/station_0.jsonl.summary.json": "7eb0f57bd05501952cd1e6ece2750f058e1865367fbdb4011f1ce3cab94c356e",
+    "logs/generic_currents/station_keeping_report.json": "9c14311c557c1ebd57b9ab4291f1f0366bf4578e0e041b551b9feb9ab4d9b5b5",
+    "logs/generic_realtime_final/realtime_energy.jsonl": "aa78ea499328367fef5cce6f936de0f7db060f6645c966147bf9241810f10778",
+    "logs/generic_realtime_final/realtime_energy.jsonl.metadata.json": "0040bab23c4fb1dcac6ff38e16b397fbacbf2984cf37bad54d2ccf71e9aff10f",
+    "logs/generic_realtime_final/realtime_energy.jsonl.summary.csv": "2a083382a2c4ed4511eb0b90b78d0f9a926c68ba313c5efadd4d62d3fad9673e",
+    "logs/generic_realtime_final/realtime_energy.jsonl.summary.json": "50d1a3cca8bc27f42a77a4a4a6bab413bd9875ca3b5ea9ec59a81cb01ee68b50",
+    "logs/generic_realtime_final/realtime_report.json": "23c1a22d6173a0a33cffa8feb3385149fab25a4124b62fd57d669aa211633dca",
+    "logs/generic_benchmark/performance.json": "a8a05fe4714926d50125cdd0ffca62d3816ee427d82393eb9b6b5dd34dbe6321",
+    "logs/generic_scenarios/scenario_report.json": "33b50c93dca53c1f2eace97252789d2b459882409502b3d8f78d0cb7292a97b2"
+  },
+  "visual_checks": {
+    "browser": "Chrome",
+    "viewport_width_px": 1920,
+    "document_width_px": 1920,
+    "chart_count": 8,
+    "clipped_cards": 0,
+    "horizontal_overflow": false,
+    "javascript_warnings_errors": [],
+    "screenshots": [
+      "docs/screenshots/dashboard_native_live.png",
+      "docs/screenshots/dashboard_native_complete.png"
+    ],
+    "explicit_null_values": "Final HTML: eight missing/null battery values render as em dash, verified in Chrome; no JS errors",
+    "final_html_recorded_telemetry_check": {
+      "source": "Replay of actual 600-step native run, no new physics run",
+      "mission_time": "30.0 s",
+      "effort": "40.00 N",
+      "chart_count": 8,
+      "horizontal_overflow": false,
+      "javascript_warnings_errors": []
+    }
+  },
+  "local_checks": {
+    "python_3_13": "144 passed",
+    "python_3_10_native_environment": "143 passed, 1 skipped (unit tests intentionally avoid installed Unreal)",
+    "ruff": "lint and format passed",
+    "t200_importer": "reproduced original data exactly; git diff exit 0",
+    "wheel": "isolated installed wheel: 3 built-in vehicles, registry and HTML resources, dashboard socket lifecycle passed",
+    "custom_yaml": "6 actuators, 24 V, complete custom YAML ran",
+    "synthetic_demos": "generic ROV and AUV ran without core edits"
+  },
+  "ci": {
+    "run_id": 37478108601,
+    "head_sha": "0b993b0a549ba4c58a5feb739957a8faf38122ff",
+    "url": "https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37478108601",
+    "jobs": [
+      {
+        "name": "check (windows-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (ubuntu-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (windows-latest, 3.10)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (windows-latest, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (ubuntu-latest, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (windows-latest, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (ubuntu-latest, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "check (ubuntu-latest, 3.10)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  }
+}

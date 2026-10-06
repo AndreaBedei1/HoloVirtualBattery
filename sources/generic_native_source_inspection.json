@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-06",
+  "version": "HoloOcean 2.3.0 local source checkout",
+  "root": "C:\\Users\\Andrea\\Desktop\\Holoocean2-3\\HoloOcean-2.3.0\\HoloOcean-2.3.0",
+  "files": [
+    {
+      "relative_path": "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp",
+      "sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+      "line_anchors": {
+        "WaterDensity": [
+          80,
+          91
+        ],
+        "DragForce": [
+          53,
+          91,
+          94
+        ],
+        "RelativeVel": [
+          90,
+          91,
+          92
+        ],
+        "AddForceAtLocation": [
+          77,
+          84,
+          93
+        ],
+        "ToUE": [
+          76,
+          83
+        ],
+        "Mass": [
+          16,
+          17,
+          18,
+          59,
+          62,
+          74
+        ],
+        "Volume": [
+          80
+        ]
+      }
+    },
+    {
+      "relative_path": "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h",
+      "sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+      "line_anchors": {
+        "WaterDensity": [
+          26
+        ],
+        "DragForce": [
+          56
+        ],
+        "Mass": [
+          33,
+          36
+        ],
+        "Volume": [
+          34
+        ]
+      }
+    },
+    {
+      "relative_path": "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp",
+      "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+      "line_anchors": {
+        "WaterDensity": [
+          38
+        ],
+        "AddForceAtLocation": [
+          107
+        ],
+        "ToUE": [
+          58,
+          98
+        ],
+        "Mass": [
+          16,
+          17,
+          32,
+          33,
+          35,
+          38,
+          44,
+          104
+        ],
+        "Volume": [
+          15,
+          38
+        ],
+        "Perfect": [
+          31
+        ],
+        "Thruster": [
+          77,
+          80,
+          104,
+          107
+        ]
+      }
+    },
+    {
+      "relative_path": "engine/Source/Holodeck/Agents/Public/BlueROV2.h",
+      "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+      "line_anchors": {
+        "Perfect": [
+          60
+        ],
+        "Thruster": [
+          62
+        ]
+      }
+    }
+  ],
+  "findings": [
+    "Native density constant 997 kg/m3; no verified public setter on running asset",
+    "Python agent physical-property assignment does not configure C++ physics",
+    "BlueROV2 perfect-neutral initialization derives volume from mass/density",
+    "Drag uses SI relative velocity, but unlike gravity/buoyancy lacks explicit Newton-to-centiNewton force conversion before AddForceAtLocation",
+    "Local source-to-installed Ocean binary conformance unverified; current experiments prove software coupling only"
+  ],
+  "engine_modified": false,
+  "geometry_example": "BlueROV2.h positions cm converted to m, y reflected for NWU; kept only in native station keeping example"
+}
