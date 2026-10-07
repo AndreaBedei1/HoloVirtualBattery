@@ -364,6 +364,25 @@ def suite(src):
             and all(close(v, 1.0, 1e-3) for v in values["patched"]),
         )
     )
+    repro = load(src / "minimal_repro.json")
+    ratios = {}
+    for build in ("official", "patched"):
+        for line in (repro or {}).get(build, {}).get("output", []):
+            fields = dict(part.strip().split("=") for part in line.split(","))
+            expected = float(fields["expected"].split()[0])
+            ratios.setdefault(build, []).append(float(fields["observed"].split()[0]) / expected)
+    items.append(
+        entry(
+            "minimal reproduction script (upstream draft)",
+            "published script: official drag ~0.01, patched ~1 (printed precision); 10 N ~1",
+            {"observed_over_expected": ratios},
+            len(ratios.get("official", [])) == 5
+            and len(ratios.get("patched", [])) == 5
+            and all(close(v, 0.01, 1e-3) for v in ratios["official"][:4])
+            and all(close(v, 1.0, 1e-5) for v in ratios["patched"])
+            and close(ratios["official"][4], 1.0, 1e-5),
+        )
+    )
     demo = load(src / "demo/before_after_demo.json")
     if demo:
         before, after = demo["results"]["before"], demo["results"]["after"]

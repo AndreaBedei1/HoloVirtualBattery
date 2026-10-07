@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-07T22:03:16.729715+00:00",
+  "created_utc": "2026-10-07T22:04:36.447370+00:00",
   "scope": "native physics implementation verification; not physical vehicle validation",
   "items": [
     {
@@ -341,6 +341,29 @@
       "status": "PASS"
     },
     {
+      "item": "minimal reproduction script (upstream draft)",
+      "criterion": "published script: official drag ~0.01, patched ~1 (printed precision); 10 N ~1",
+      "values": {
+        "observed_over_expected": {
+          "official": [
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.9999999
+          ],
+          "patched": [
+            1.0,
+            1.0000001393068094,
+            1.0000000696534048,
+            1.0000000696534048,
+            0.9999999
+          ]
+        }
+      },
+      "status": "PASS"
+    },
+    {
       "item": "before/after mission demo",
       "criterion": "same mission and controller on both builds; AFTER mean drag > 10x BEFORE",
       "values": {
@@ -501,6 +524,6 @@
       "status": "PASS"
     }
   ],
-  "passed": 26,
+  "passed": 27,
   "failed": []
 }
