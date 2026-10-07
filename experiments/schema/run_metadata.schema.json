@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AndreaBedei1/HoloVirtualBattery/experiments/schema/run_metadata.schema.json",
+  "title": "HoloEnergy experimental run metadata",
+  "description": "Metadata of one physical BlueROV2 (or other vehicle) run. Real measurements only.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "dataset_kind",
+    "role",
+    "independence_group",
+    "protocol_step",
+    "start_time_utc",
+    "vehicle",
+    "battery",
+    "environment",
+    "instruments",
+    "channels",
+    "time_sync",
+    "safety",
+    "software",
+    "raw_files"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"},
+    "dataset_kind": {"const": "experimental"},
+    "role": {"enum": ["parameter_identification", "model_selection", "final_validation"]},
+    "independence_group": {"type": "string", "minLength": 1},
+    "protocol_step": {
+      "enum": [
+        "electronics_hotel_baseline",
+        "camera",
+        "sonar",
+        "dvl_other_sensors",
+        "converter_losses",
+        "battery_characterization",
+        "thruster_characterization_in_water",
+        "hover",
+        "surge",
+        "sway",
+        "yaw",
+        "vertical",
+        "calibration_mission",
+        "held_out_validation_mission"
+      ]
+    },
+    "start_time_utc": {"type": "string", "format": "date-time"},
+    "vehicle": {
+      "type": "object",
+      "required": ["model", "configuration", "thruster_layout", "payload"],
+      "properties": {
+        "model": {"type": "string"},
+        "serial": {"type": ["string", "null"]},
+        "configuration": {"type": "string"},
+        "thruster_layout": {"type": "string"},
+        "esc_firmware": {"type": ["string", "null"]},
+        "autopilot_firmware": {"type": ["string", "null"]},
+        "payload": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "battery": {
+      "type": "object",
+      "required": ["model", "chemistry", "nominal_voltage_V", "rated_capacity_Ah", "initial_soc_method"],
+      "properties": {
+        "model": {"type": "string"},
+        "serial": {"type": ["string", "null"]},
+        "chemistry": {"type": "string"},
+        "nominal_voltage_V": {"type": "number", "exclusiveMinimum": 0},
+        "rated_capacity_Ah": {"type": "number", "exclusiveMinimum": 0},
+        "cycle_count": {"type": ["integer", "null"], "minimum": 0},
+        "initial_soc_method": {"type": "string"},
+        "initial_rest_s": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "required": ["water_body", "water_temperature_sensor"],
+      "properties": {
+        "water_body": {"type": "string"},
+        "water_temperature_sensor": {"type": "string"},
+        "current_measurement": {"type": ["string", "null"]}
+      }
+    },
+    "instruments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "measures", "calibration_reference", "sample_rate_Hz", "uncertainty"],
+        "properties": {
+          "name": {"type": "string"},
+          "measures": {"type": "array", "items": {"type": "string"}},
+          "model": {"type": ["string", "null"]},
+          "calibration_reference": {"type": "string"},
+          "sample_rate_Hz": {"type": "number", "exclusiveMinimum": 0},
+          "uncertainty": {"type": "string"}
+        }
+      }
+    },
+    "channels": {
+      "type": "object",
+      "description": "Every timeseries.csv column except time_s and mission_phase: unit and source.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["unit", "source"],
+        "properties": {"unit": {"type": "string"}, "source": {"type": "string"}}
+      }
+    },
+    "time_sync": {
+      "type": "object",
+      "required": ["method", "max_offset_s"],
+      "properties": {"method": {"type": "string"}, "max_offset_s": {"type": "number", "minimum": 0}}
+    },
+    "safety": {
+      "type": "object",
+      "required": ["in_water", "secured", "authorized_personnel"],
+      "properties": {
+        "in_water": {"type": "boolean"},
+        "secured": {"type": "boolean"},
+        "authorized_personnel": {"type": "boolean"}
+      }
+    },
+    "software": {
+      "type": "object",
+      "required": ["holoenergy_commit"],
+      "properties": {"holoenergy_commit": {"type": ["string", "null"]}}
+    },
+    "raw_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "operator_notes": {"type": "string"}
+  }
+}
