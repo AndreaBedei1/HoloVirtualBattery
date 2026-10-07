@@ -1,0 +1,87 @@
+Completed 20 Hz, repetition 1/1
+{
+  "case": "INCONCLUSIVE",
+  "observed_expected_scale_mean": 0.6783625898740712,
+  "scale_min": 0.6783625898740698,
+  "scale_max": 0.6783625898740728,
+  "references_verified": false,
+  "checks": {
+    "thrust_10N_absolute_error_below_0_05N": false,
+    "gravity_default_9_8_error_below_0_02_m_s2": false,
+    "neutral_zero_motion_below_1e_6_m_s": true,
+    "no_collisions": true,
+    "sensor_delta_time_consistent_with_timestamp": true,
+    "angular_motion_below_1e_4_rad_s": true,
+    "quadratic_doubling_ratios_near_4": true
+  },
+  "max_thrust_reference_error_N": 3.216374202778561,
+  "max_gravity_error_m_s2": 3.1520461383618574,
+  "quadratic_doubling": [
+    {
+      "ticks_per_sec": 20,
+      "trial": 0,
+      "observed_force_ratios": [
+        4.000000000000005,
+        4.000000000000009,
+        3.999999999999982
+      ]
+    }
+  ],
+  "drag_families": {
+    "current_x_magnitudes": {
+      "cases": [
+        "current_x_0.1",
+        "current_x_0.2",
+        "current_x_0.4",
+        "current_x_0.8"
+      ],
+      "first_pulse_records": 4,
+      "first_pulse_scale_mean": 0.6783625898740712,
+      "first_pulse_scale_min": 0.6783625898740698,
+      "first_pulse_scale_max": 0.6783625898740728,
+      "first_pulse_scale_stdev": 1.3042167484290357e-15,
+      "maximum_source_prediction_error_m_s": 0.1525843398682139,
+      "step_observations": 32,
+      "step_scale_mean": 0.7549011213429229,
+      "step_scale_min": 0.6783625898740698,
+      "step_scale_max": 0.9141193328520395
+    },
+    "signed_axes_and_yaw": {
+      "cases": [
+        "current_1_-1",
+        "current_1_1",
+        "current_2_-1",
+        "current_2_1",
+        "current_x_negative",
+        "yaw90_world_current"
+      ],
+      "first_pulse_records": 6,
+      "first_pulse_scale_mean": 0.6783625898740718,
+      "first_pulse_scale_min": 0.6783625898740667,
+      "first_pulse_scale_max": 0.6783625898740728,
+      "first_pulse_scale_stdev": 2.492856585102617e-15,
+      "maximum_source_prediction_error_m_s": 0.038146084967053476,
+      "step_observations": 48,
+      "step_scale_mean": 0.7575315640313544,
+      "step_scale_min": 0.6783625898740667,
+      "step_scale_max": 0.8435957333303254
+    },
+    "autodrag_still_water": {
+      "cases": [
+        "moving_zero_current"
+      ],
+      "first_pulse_records": 1,
+      "first_pulse_scale_mean": 0.6202127723345872,
+      "first_pulse_scale_min": 0.6202127723345872,
+      "first_pulse_scale_max": 0.6202127723345872,
+      "first_pulse_scale_stdev": 0.0,
+      "maximum_source_prediction_error_m_s": 0.042089835842336665,
+      "step_observations": 8,
+      "step_scale_mean": 0.559707895096935,
+      "step_scale_min": 0.49731166237372043,
+      "step_scale_max": 0.6202127723345872
+    }
+  },
+  "force_reconstruction": "m*(v_next/(1-linear_damping*dt)-v_before)/dt; known UE5.3 integrator, no physical fitting"
+}
+Force-reference prerequisites unresolved; inspect raw outputs

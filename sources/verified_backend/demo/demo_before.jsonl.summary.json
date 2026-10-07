@@ -1,0 +1,98 @@
+{
+  "run_id": "863d7ce9-40af-4adc-9a15-1d2cc641bdc5",
+  "episode": 0,
+  "duration_s": 66.99999999999737,
+  "terminal_energy_Wh": 0.5071878988563955,
+  "total_ocv_work_Wh": 0.5091772027002543,
+  "category_energy_Wh": {
+    "propulsion": 0.07086073836258712,
+    "sensors": 0.11352777777777769,
+    "compute": 0.0,
+    "auxiliaries": 0.27916666666664425,
+    "converters": 0.043632716049386434,
+    "battery_losses": 0.0019893038438588695
+  },
+  "category_percent_of_ocv_work": {
+    "propulsion": 13.91671464998834,
+    "sensors": 22.296319861871336,
+    "compute": 0.0,
+    "auxiliaries": 54.82701605377762,
+    "converters": 8.569259546184439,
+    "battery_losses": 0.3906898881782705
+  },
+  "device_energy_Wh": {
+    "T1": 3.093310828210196e-07,
+    "T2": 2.2511177936282233e-07,
+    "T3": 2.9544789699866895e-07,
+    "T4": 2.3526637865093932e-07,
+    "T5": 0.01771293164563128,
+    "T6": 0.018146235319341897,
+    "T7": 0.017739324981763272,
+    "T8": 0.017261181258712774,
+    "Camera": 0.02047222222221906,
+    "ImagingSonar": 0.09305555555554505,
+    "hotel_constant": 0.27916666666664425
+  },
+  "phases": {
+    "hold_start": {
+      "duration_s": 2.99999999999998,
+      "terminal_energy_Wh": 0.020152276233119073,
+      "battery_losses_Wh": 6.955491738306512e-05
+    },
+    "accelerate": {
+      "duration_s": 3.9999999999999587,
+      "terminal_energy_Wh": 0.029474246283239844,
+      "battery_losses_Wh": 0.00011231365340235033
+    },
+    "transit_out": {
+      "duration_s": 15.999999999999703,
+      "terminal_energy_Wh": 0.12433252214495445,
+      "battery_losses_Wh": 0.0004972787976103583
+    },
+    "stop": {
+      "duration_s": 3.9999999999999587,
+      "terminal_energy_Wh": 0.028871912762263634,
+      "battery_losses_Wh": 0.00010736806324965013
+    },
+    "hold_turn": {
+      "duration_s": 2.99999999999998,
+      "terminal_energy_Wh": 0.021293405454404418,
+      "battery_losses_Wh": 7.77231407386026e-05
+    },
+    "yaw": {
+      "duration_s": 9.999999999999831,
+      "terminal_energy_Wh": 0.06909699755905718,
+      "battery_losses_Wh": 0.000245551723193261
+    },
+    "return_accelerate": {
+      "duration_s": 3.9999999999999587,
+      "terminal_energy_Wh": 0.030499468142044562,
+      "battery_losses_Wh": 0.00012036183907208216
+    },
+    "return_transit": {
+      "duration_s": 15.999999999999703,
+      "terminal_energy_Wh": 0.13392227791164282,
+      "battery_losses_Wh": 0.0005773894492216398
+    },
+    "return_stop": {
+      "duration_s": 3.9999999999999587,
+      "terminal_energy_Wh": 0.029661192985811286,
+      "battery_losses_Wh": 0.00011397724771809323
+    },
+    "hold_end": {
+      "duration_s": 2.99999999999998,
+      "terminal_energy_Wh": 0.01988359937987706,
+      "battery_losses_Wh": 6.778501226976775e-05
+    }
+  },
+  "endurance_estimates": {
+    "instantaneous_s": 40767.733475057794,
+    "rolling_average_s": 34913.456850313094,
+    "rolling_window_s": 60.0,
+    "observed_window_s": 59.999999999999154,
+    "basis": "remaining OCV work upper bound / terminal power",
+    "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+  },
+  "evidence_kind": "configured simulation; physical validation not implied",
+  "previous_episodes": []
+}

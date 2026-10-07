@@ -1,0 +1,5 @@
+C:\Users\Andrea\Desktop\Battery\examples\_common.py:74: UserWarning: Uncalibrated demo parameters: battery.capacity_temperature_curve, battery.internal_resistance_ohm, battery.max_current_temperature_curve, battery.ocv_curve, battery.resistance_temperature_curve, converters.hotel_efficiency, converters.payload_efficiency, hotel_load.constant_W, thermal.cooling_coeff_W_per_C, thermal.derating_temperature_C, thermal.thermal_capacity_J_per_C
+  config = load_config(args.config)
+Native integration passed: BlueROV2 pose, timing, current limit and motion derating.
+Surge displacement: derated 1.049912 m; accounting-only 1.553101 m
+Report: logs\verified_backend\derating_patched\integration_report.json

@@ -1,0 +1,14 @@
+C:\Users\Andrea\Desktop\Battery\examples\_common.py:74: UserWarning: Uncalibrated demo parameters: battery.capacity_temperature_curve, battery.internal_resistance_ohm, battery.max_current_temperature_curve, battery.ocv_curve, battery.resistance_temperature_curve, converters.hotel_efficiency, converters.payload_efficiency, hotel_load.constant_W, thermal.cooling_coeff_W_per_C, thermal.derating_temperature_C, thermal.thermal_capacity_J_per_C
+  config = load_config(args.config)
+Mission at 0.4 m/s current: stock vs patched HoloOcean 2.3.0
+quantity                                      stock      patched
+implementation drag, mean [N]               0.35578     34.08070
+implementation drag, peak [N]               0.82655     71.06848
+applied effort norm, last 3 s [N]           0.09605     41.45248
+saturated ticks [-]                         0.00000      0.00000
+propulsion energy [Wh]                      0.07086      3.83260
+terminal energy [Wh]                        0.50719      4.26893
+max position error [m]                      0.13432      1.17577
+max |roll|,|pitch| [deg]                    0.00057      0.00057
+final SOC [-]                               0.99832      0.98496
+{"output": "logs\\verified_backend\\demo\\before_after_demo.json"}

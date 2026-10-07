@@ -1,0 +1,17 @@
+C:\Users\Andrea\Desktop\Battery\examples\_common.py:74: UserWarning: Uncalibrated demo parameters: battery.capacity_temperature_curve, battery.internal_resistance_ohm, battery.max_current_temperature_curve, battery.ocv_curve, battery.resistance_temperature_curve, converters.hotel_efficiency, converters.payload_efficiency, hotel_load.constant_W, thermal.cooling_coeff_W_per_C, thermal.derating_temperature_C, thermal.thermal_capacity_J_per_C
+  config = load_config(args.config)
+station_0: tail speed 0.0000 m/s, tail propulsion 0.000 W, propulsion 0.00000 Wh, terminal 0.19537 Wh, saturated 0.000
+station_0.2: tail speed 0.0041 m/s, tail propulsion 15.875 W, propulsion 0.15771 Wh, terminal 0.35308 Wh, saturated 0.000
+station_0.5: tail speed 0.0312 m/s, tail propulsion 408.000 W, propulsion 3.11547 Wh, terminal 3.31084 Wh, saturated 0.000
+station_0.8: tail speed 0.1247 m/s, tail propulsion 833.528 W, propulsion 6.07631 Wh, terminal 6.27168 Wh, saturated 0.781
+mission_0: tail speed 0.0564 m/s, tail propulsion 2.893 W, propulsion 0.51427 Wh, terminal 0.95059 Wh, saturated 0.000
+mission_0.2: tail speed 0.1565 m/s, tail propulsion 92.355 W, propulsion 1.49038 Wh, terminal 1.92671 Wh, saturated 0.000
+mission_0.4: tail speed 0.1628 m/s, tail propulsion 362.749 W, propulsion 3.83260 Wh, terminal 4.26893 Wh, saturated 0.000
+water_5C: tail speed 0.0029 m/s, tail propulsion 335.068 W, propulsion 5.88530 Wh, terminal 6.27604 Wh, saturated 0.000
+water_15C: tail speed 0.0029 m/s, tail propulsion 335.068 W, propulsion 5.88530 Wh, terminal 6.27604 Wh, saturated 0.000
+water_25C: tail speed 0.0029 m/s, tail propulsion 335.068 W, propulsion 5.88530 Wh, terminal 6.27604 Wh, saturated 0.000
+payload_base: tail speed 0.0041 m/s, tail propulsion 15.875 W, propulsion 0.15771 Wh, terminal 0.35308 Wh, saturated 0.000
+payload_electrical_18W: tail speed 0.0041 m/s, tail propulsion 15.875 W, propulsion 0.15765 Wh, terminal 0.51969 Wh, saturated 0.000
+payload_battery_half_capacity: tail speed 0.0041 m/s, tail propulsion 15.875 W, propulsion 0.15771 Wh, terminal 0.35308 Wh, saturated 0.000
+payload_physical_declared: tail speed 0.0041 m/s, tail propulsion 15.875 W, propulsion 0.15771 Wh, terminal 0.35308 Wh, saturated 0.000
+Report: logs\verified_backend\energy_patched\patched_report.json

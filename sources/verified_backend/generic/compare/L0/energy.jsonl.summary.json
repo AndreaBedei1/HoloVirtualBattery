@@ -1,0 +1,53 @@
+{
+  "run_id": "d2ecbd8d-3c52-463f-8585-10e6dfce4031",
+  "episode": 0,
+  "duration_s": 10.000000000000007,
+  "terminal_energy_Wh": 0.2626860879909623,
+  "total_ocv_work_Wh": 0.2626860879909623,
+  "category_energy_Wh": {
+    "propulsion": 0.19756263120083892,
+    "sensors": 0.016944444444444432,
+    "compute": 0.0,
+    "auxiliaries": 0.04166666666666664,
+    "converters": 0.006512345679012335,
+    "battery_losses": 0.0
+  },
+  "category_percent_of_ocv_work": {
+    "propulsion": 75.20863884030129,
+    "sensors": 6.450453685627769,
+    "compute": 0.0,
+    "auxiliaries": 15.86177135810107,
+    "converters": 2.4791361159698684,
+    "battery_losses": 0.0
+  },
+  "device_energy_Wh": {
+    "T1": 0.0067205957155084236,
+    "T2": 0.0067205957155084236,
+    "T3": 0.0067205957155084236,
+    "T4": 0.0067205957155084236,
+    "T5": 0.038471478588782554,
+    "T6": 0.046868645580620226,
+    "T7": 0.038471478588782554,
+    "T8": 0.046868645580620226,
+    "Camera": 0.003055555555555544,
+    "ImagingSonar": 0.013888888888888905,
+    "hotel_constant": 0.04166666666666664
+  },
+  "phases": {
+    "unmarked": {
+      "duration_s": 10.000000000000007,
+      "terminal_energy_Wh": 0.26268608799096227,
+      "battery_losses_Wh": 0.0
+    }
+  },
+  "endurance_estimates": {
+    "instantaneous_s": 6047.577171334383,
+    "rolling_average_s": 10131.382135515527,
+    "rolling_window_s": 60.0,
+    "observed_window_s": 10.0,
+    "basis": "remaining ideal energy / terminal power",
+    "interpretation": "instantaneous / rolling-average estimate; not a mission prediction"
+  },
+  "evidence_kind": "configured simulation; physical validation not implied",
+  "previous_episodes": []
+}

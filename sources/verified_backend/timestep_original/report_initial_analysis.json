@@ -1,0 +1,2272 @@
+{
+  "scope": "physics implementation verification; not physical vehicle validation",
+  "provenance": {
+    "created_utc": "2026-10-07T21:01:14.942709+00:00",
+    "holoenergy_repository": {
+      "commit": "aeeb84f88d58dc42dc9935890f06683586acf567",
+      "status": ""
+    },
+    "tooling_sha256": {
+      "tools/audit_holoocean_timestep.py": "0944f7ace99b7b7eba3004e68f818fd9577cb01cfabd5b8414181d68ddd0bdff",
+      "tools/audit_holoocean_drag.py": "2a682eb5e018c90f6ac1a9de2946033015f23cce28d5a423b09c907887589801",
+      "tools/holoocean_backend.py": "a1e240df49b9946f61a33b9923d34ed1e8c606e6f2303b6aeaacc88e4cedd698"
+    },
+    "source": {
+      "root": "C:\\HOB\\src\\before",
+      "git": {
+        "commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+        "status": ""
+      },
+      "parameters": {
+        "mass_kg": 11.5,
+        "drag_coefficient": 0.8,
+        "area_m2": 0.45,
+        "density_kg_m3": 997.0,
+        "ue_units_per_m": 100.0,
+        "linear_damping_per_s": 1.0,
+        "source_drag_scale_to_SI": 0.01,
+        "explicit_drag_unit_conversion": false,
+        "fully_submerged_ratio": 1.0,
+        "neutral_volume_m3": 0.011534603811434303,
+        "parameter_origin": "official/local C++ literals; no runtime fit"
+      },
+      "files": {
+        "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp": {
+          "sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+          "line_anchors": {
+            "DragForce": [
+              53,
+              91,
+              94
+            ],
+            "RelativeVel": [
+              90,
+              91,
+              92
+            ],
+            "AddForce": [
+              77,
+              84,
+              93
+            ],
+            "ConvertLinearVector": [
+              75,
+              82
+            ]
+          }
+        },
+        "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h": {
+          "sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+          "line_anchors": {
+            "DragForce": [
+              56
+            ]
+          }
+        },
+        "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": {
+          "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+          "line_anchors": {
+            "AddForce": [
+              66,
+              107
+            ],
+            "ConvertLinearVector": [
+              58,
+              97
+            ]
+          }
+        },
+        "engine/Source/Holodeck/Agents/Public/BlueROV2.h": {
+          "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+          "line_anchors": {}
+        },
+        "engine/Source/Holodeck/Agents/Private/BlueROV2ControlThrusters.cpp": {
+          "sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+          "line_anchors": {
+            "DragForce": [
+              29
+            ]
+          }
+        },
+        "engine/Source/Holodeck/General/Private/Conversion.cpp": {
+          "sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              95
+            ]
+          }
+        },
+        "engine/Source/Holodeck/General/Public/Conversion.h": {
+          "sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              19
+            ]
+          }
+        },
+        "engine/Source/Holodeck/ClientCommands/Private/OceanCurrentsCommand.cpp": {
+          "sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+          "line_anchors": {}
+        },
+        "engine/Source/Holodeck/Sensors/Private/DynamicsSensor.cpp": {
+          "sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              66,
+              75
+            ]
+          }
+        }
+      }
+    },
+    "runtime": {
+      "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+      "python_version": "3.10.20",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "holoocean_version": "2.3.0",
+      "client_root": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean",
+      "client_file_sha256": {
+        "agents.py": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+        "environments.py": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+        "command.py": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+        "sensors.py": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+        "packagemanager.py": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0"
+      },
+      "client_install_origin": "{\"dir_info\": {}, \"url\": \"file:///C:/Users/Andrea/Downloads/HoloOcean-2.3.0/client\"}",
+      "binary_path": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "binary_sha256": "8c206c9cc05c640fb2efea6bd43bda33c585536ab16a931c55780855e7602253",
+      "binary_size_bytes": 255731200,
+      "pdb_sha256": "71feacc5f34f0004931c297c54361a2d8e67eed28c6884d3c2353b93dc7a5b3f",
+      "package_root": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean",
+      "package_config_path": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\config.json",
+      "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+      "build_manifest_path": null,
+      "build_manifest_sha256": null,
+      "build_variant": "installed package",
+      "build_source_commit": null,
+      "build_patch_sha256": null,
+      "package_version": "2.3.0",
+      "package_worlds": [
+        "Rooms",
+        "ModernOffice",
+        "CorporateOffice",
+        "ExampleLevel",
+        "Tank",
+        "SimpleUnderwater",
+        "PierHarbor",
+        "OpenWater",
+        "FlatUnderwater",
+        "Dam"
+      ],
+      "source_binary_build_identity": "not established by package version or behavioral conformance"
+    },
+    "cases": [
+      {
+        "name": "gravity_air",
+        "location": [
+          0,
+          0,
+          20
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "air_moving_x",
+        "location": [
+          0,
+          0,
+          20
+        ],
+        "velocity": [
+          1.0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "thrust_x_10N_water",
+        "location": [
+          0,
+          0,
+          -5
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "thrust": 1
+      },
+      {
+        "name": "still_water_deceleration_2_5",
+        "location": [
+          0,
+          0,
+          -5
+        ],
+        "velocity": [
+          2.5,
+          0,
+          0
+        ]
+      }
+    ],
+    "arguments": {
+      "source_dir": "C:\\HOB\\src\\before",
+      "binary": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "ticks_per_sec": [
+        20,
+        30,
+        40,
+        60,
+        100,
+        200
+      ],
+      "repeats": 3,
+      "steps_per_case": 12,
+      "drag_stability": true,
+      "output_dir": "logs\\verified_backend\\timestep_original"
+    },
+    "ue_reference": {
+      "MaxPhysicsDeltaTime_default_s": 0.03333333333333333,
+      "bSubstepping_default": false,
+      "rule": "FChaosScene::SetUpForFrame: MDeltaTime = min(DeltaSeconds, MaxPhysicsDeltaTime)"
+    }
+  },
+  "result_by_tick_rate": {
+    "20": {
+      "ticks_per_sec": 20,
+      "client_dt_s": 0.05,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.05,
+        "min": 0.04999999999999982,
+        "max": 0.05000000000000071,
+        "stdev": 2.745476982331266e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.05000000135414693,
+        "min": 0.049999894792190025,
+        "max": 0.05000004278166378,
+        "stdev": 2.63772734882664e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.033333337256001135,
+          "min": 0.033333313667669943,
+          "max": 0.033333360053096325,
+          "stdev": 1.0742044163439712e-08
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.03333333367038341,
+          "min": 0.03333333367038341,
+          "max": 0.03333333367038341,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.03333333395577104,
+          "min": 0.03333327448757406,
+          "max": 0.033333385666825754,
+          "stdev": 3.091145023204957e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.03333333495018617,
+          "min": 0.033333312443451835,
+          "max": 0.033333354062185155,
+          "stdev": 8.371413726846956e-09
+        }
+      },
+      "effective_physics_dt_s": 0.03333333552846598,
+      "effective_to_client_ratio": 0.6666667105693195,
+      "kinematic_to_client_ratio": 0.6666666990037234,
+      "world_delta_to_client_ratio": 1.0000000270829386,
+      "predicted_physics_dt_s": 0.03333333507180214,
+      "prediction_relative_error": 1.3699914536147162e-08,
+      "physics_consistent_with_client_clock": false,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.385239362716675,
+          "explicit_step_number_K_v_dt_over_m": 0.01240739357559262,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.013385517141328629,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.050000000000000044,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.277123212814331,
+              "continuous_velocity_m_s": 2.2792287508909017
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.09999999999999987,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.1751458644866943,
+              "continuous_velocity_m_s": 2.179097306558043
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.15000000000000013,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.078850507736206,
+              "continuous_velocity_m_s": 2.0844203364099614
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.19999999999999996,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 1.9878249168395996,
+              "continuous_velocity_m_s": 1.994812440689455
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.2500000000000002,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9016947746276855,
+              "continuous_velocity_m_s": 1.9099230660296889
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.30000000000000004,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8201202154159546,
+              "continuous_velocity_m_s": 1.829432649402885
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.34999999999999987,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.7427914142608643,
+              "continuous_velocity_m_s": 1.7530492634975359
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.40000000000000013,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.6694257259368896,
+              "continuous_velocity_m_s": 1.6805056890626462
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.44999999999999996,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.5997642278671265,
+              "continuous_velocity_m_s": 1.61155685213152
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.5000000000000002,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5335699319839478,
+              "continuous_velocity_m_s": 1.545977574145357
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.55,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.4706251621246338,
+              "continuous_velocity_m_s": 1.4835605912903809
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.5999999999999999,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4107292890548706,
+              "continuous_velocity_m_s": 1.4241148061961992
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.385239362716675,
+          "explicit_step_number_K_v_dt_over_m": 0.01240739357559262,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.013385517141328629,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.04999999999999982,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.277123212814331,
+              "continuous_velocity_m_s": 2.2792287508909017
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.10000000000000053,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.1751458644866943,
+              "continuous_velocity_m_s": 2.179097306558043
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.15000000000000036,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.078850507736206,
+              "continuous_velocity_m_s": 2.0844203364099614
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.20000000000000018,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 1.9878249168395996,
+              "continuous_velocity_m_s": 1.994812440689455
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.25,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9016947746276855,
+              "continuous_velocity_m_s": 1.9099230660296889
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.2999999999999998,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8201202154159546,
+              "continuous_velocity_m_s": 1.829432649402885
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.35000000000000053,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.7427914142608643,
+              "continuous_velocity_m_s": 1.7530492634975359
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.40000000000000036,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.6694257259368896,
+              "continuous_velocity_m_s": 1.6805056890626462
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.4500000000000002,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.5997642278671265,
+              "continuous_velocity_m_s": 1.61155685213152
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.5,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5335699319839478,
+              "continuous_velocity_m_s": 1.545977574145357
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.5499999999999998,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.4706251621246338,
+              "continuous_velocity_m_s": 1.4835605912903809
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.6000000000000005,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4107292890548706,
+              "continuous_velocity_m_s": 1.4241148061961992
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.385239362716675,
+          "explicit_step_number_K_v_dt_over_m": 0.01240739357559262,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.013385517141328629,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.04999999999999982,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.277123212814331,
+              "continuous_velocity_m_s": 2.2792287508909017
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.09999999999999964,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.1751458644866943,
+              "continuous_velocity_m_s": 2.179097306558043
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.14999999999999947,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.078850507736206,
+              "continuous_velocity_m_s": 2.0844203364099614
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.1999999999999993,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 1.9878249168395996,
+              "continuous_velocity_m_s": 1.994812440689455
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.25,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9016947746276855,
+              "continuous_velocity_m_s": 1.9099230660296889
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.2999999999999998,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8201202154159546,
+              "continuous_velocity_m_s": 1.829432649402885
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.34999999999999964,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.7427914142608643,
+              "continuous_velocity_m_s": 1.7530492634975359
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.39999999999999947,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.6694257259368896,
+              "continuous_velocity_m_s": 1.6805056890626462
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.4499999999999993,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.5997642278671265,
+              "continuous_velocity_m_s": 1.61155685213152
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.5,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5335699319839478,
+              "continuous_velocity_m_s": 1.545977574145357
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.5499999999999998,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.4706251621246338,
+              "continuous_velocity_m_s": 1.4835605912903809
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.5999999999999996,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4107292890548706,
+              "continuous_velocity_m_s": 1.4241148061961992
+            }
+          ]
+        }
+      ]
+    },
+    "30": {
+      "ticks_per_sec": 30,
+      "client_dt_s": 0.03333333333333333,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.03333333333333334,
+        "min": 0.033333333333333215,
+        "max": 0.0333333333333341,
+        "stdev": 2.0255091208160727e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.033333335382075634,
+        "min": 0.03333326579251179,
+        "max": 0.03333336375585153,
+        "stdev": 1.7575154531594496e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.033333337256001135,
+          "min": 0.033333313667669943,
+          "max": 0.033333360053096325,
+          "stdev": 1.0742044163439712e-08
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.03333333367038341,
+          "min": 0.03333333367038341,
+          "max": 0.03333333367038341,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.03333333395577104,
+          "min": 0.03333327448757406,
+          "max": 0.033333385666825754,
+          "stdev": 3.091145023204957e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.03333333495018617,
+          "min": 0.033333312443451835,
+          "max": 0.033333354062185155,
+          "stdev": 8.371413726846956e-09
+        }
+      },
+      "effective_physics_dt_s": 0.03333333552846598,
+      "effective_to_client_ratio": 1.0000000658539794,
+      "kinematic_to_client_ratio": 1.000000048505585,
+      "world_delta_to_client_ratio": 1.000000061462269,
+      "predicted_physics_dt_s": 0.03333333507180214,
+      "prediction_relative_error": 1.3699914536147162e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.385239362716675,
+          "explicit_step_number_K_v_dt_over_m": 0.01240739357559262,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.013385517141328629,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.033333333333333215,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.277123212814331,
+              "continuous_velocity_m_s": 2.2792287508909017
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.06666666666666665,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.1751458644866943,
+              "continuous_velocity_m_s": 2.179097306558043
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.09999999999999987,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.078850507736206,
+              "continuous_velocity_m_s": 2.0844203364099614
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.1333333333333333,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 1.9878249168395996,
+              "continuous_velocity_m_s": 1.994812440689455
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.16666666666666652,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9016947746276855,
+              "continuous_velocity_m_s": 1.9099230660296889
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.19999999999999996,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8201202154159546,
+              "continuous_velocity_m_s": 1.829432649402885
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.2333333333333334,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.7427914142608643,
+              "continuous_velocity_m_s": 1.7530492634975359
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.2666666666666666,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.6694257259368896,
+              "continuous_velocity_m_s": 1.6805056890626462
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.30000000000000004,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.5997642278671265,
+              "continuous_velocity_m_s": 1.61155685213152
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.33333333333333326,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5335699319839478,
+              "continuous_velocity_m_s": 1.545977574145357
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.3666666666666667,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.4706251621246338,
+              "continuous_velocity_m_s": 1.4835605912903809
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.3999999999999999,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4107292890548706,
+              "continuous_velocity_m_s": 1.4241148061961992
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.385239362716675,
+          "explicit_step_number_K_v_dt_over_m": 0.01240739357559262,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.013385517141328629,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.03333333333333366,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.277123212814331,
+              "continuous_velocity_m_s": 2.2792287508909017
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.06666666666666687,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.1751458644866943,
+              "continuous_velocity_m_s": 2.179097306558043
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.10000000000000009,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.078850507736206,
+              "continuous_velocity_m_s": 2.0844203364099614
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.1333333333333333,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 1.9878249168395996,
+              "continuous_velocity_m_s": 1.994812440689455
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.16666666666666696,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9016947746276855,
+              "continuous_velocity_m_s": 1.9099230660296889
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.20000000000000018,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8201202154159546,
+              "continuous_velocity_m_s": 1.829432649402885
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.2333333333333334,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.7427914142608643,
+              "continuous_velocity_m_s": 1.7530492634975359
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.2666666666666666,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.6694257259368896,
+              "continuous_velocity_m_s": 1.6805056890626462
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.30000000000000027,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.5997642278671265,
+              "continuous_velocity_m_s": 1.61155685213152
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.3333333333333335,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5335699319839478,
+              "continuous_velocity_m_s": 1.545977574145357
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.3666666666666667,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.4706251621246338,
+              "continuous_velocity_m_s": 1.4835605912903809
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.3999999999999999,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4107292890548706,
+              "continuous_velocity_m_s": 1.4241148061961992
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.385239362716675,
+          "explicit_step_number_K_v_dt_over_m": 0.01240739357559262,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.013385517141328629,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.033333333333333215,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.277123212814331,
+              "continuous_velocity_m_s": 2.2792287508909017
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.06666666666666643,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.1751458644866943,
+              "continuous_velocity_m_s": 2.179097306558043
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.09999999999999964,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.078850507736206,
+              "continuous_velocity_m_s": 2.0844203364099614
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.13333333333333375,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 1.9878249168395996,
+              "continuous_velocity_m_s": 1.994812440689455
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.16666666666666696,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9016947746276855,
+              "continuous_velocity_m_s": 1.9099230660296889
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.20000000000000018,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8201202154159546,
+              "continuous_velocity_m_s": 1.829432649402885
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.2333333333333334,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.7427914142608643,
+              "continuous_velocity_m_s": 1.7530492634975359
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.2666666666666666,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.6694257259368896,
+              "continuous_velocity_m_s": 1.6805056890626462
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.2999999999999998,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.5997642278671265,
+              "continuous_velocity_m_s": 1.61155685213152
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.33333333333333304,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5335699319839478,
+              "continuous_velocity_m_s": 1.545977574145357
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.36666666666666714,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.4706251621246338,
+              "continuous_velocity_m_s": 1.4835605912903809
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.40000000000000036,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4107292890548706,
+              "continuous_velocity_m_s": 1.4241148061961992
+            }
+          ]
+        }
+      ]
+    },
+    "40": {
+      "ticks_per_sec": 40,
+      "client_dt_s": 0.025,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.025,
+        "min": 0.02499999999999991,
+        "max": 0.025000000000000355,
+        "stdev": 1.372738491165633e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.024999999424569833,
+        "min": 0.024999933942496756,
+        "max": 0.025000029564934252,
+        "stdev": 1.4996872906092075e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.024999999931808823,
+          "min": 0.024999986590331317,
+          "max": 0.025000006880499068,
+          "stdev": 5.664706463445828e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.024999999745111714,
+          "min": 0.024999999745111714,
+          "max": 0.024999999745111714,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.025000001826560325,
+          "min": 0.02499995803269839,
+          "max": 0.02500005441461839,
+          "stdev": 3.185436841429222e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.02500000022290514,
+          "min": 0.024999979951766622,
+          "max": 0.02500001781782909,
+          "stdev": 7.60861000101941e-09
+        }
+      },
+      "effective_physics_dt_s": 0.02500000083382166,
+      "effective_to_client_ratio": 1.0000000333528662,
+      "kinematic_to_client_ratio": 1.0000000089162056,
+      "world_delta_to_client_ratio": 0.9999999769827933,
+      "predicted_physics_dt_s": 0.02500000037252903,
+      "prediction_relative_error": 1.8451704830724225e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.413726329803467,
+          "explicit_step_number_K_v_dt_over_m": 0.00941668116524405,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.008936302154782139,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.025000000000000022,
+              "physics_time_s": 0.02500000037252903,
+              "velocity_m_s": 2.3312220573425293,
+              "continuous_velocity_m_s": 2.3324396473462237
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.04999999999999993,
+              "physics_time_s": 0.05000000074505806,
+              "velocity_m_s": 2.252269744873047,
+              "continuous_velocity_m_s": 2.2545900588715213
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.07500000000000007,
+              "physics_time_s": 0.07500000111758709,
+              "velocity_m_s": 2.1766674518585205,
+              "continuous_velocity_m_s": 2.179986910752373
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.09999999999999998,
+              "physics_time_s": 0.10000000149011612,
+              "velocity_m_s": 2.104228973388672,
+              "continuous_velocity_m_s": 2.1084531776688222
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.1250000000000001,
+              "physics_time_s": 0.12500000186264515,
+              "velocity_m_s": 2.034780979156494,
+              "continuous_velocity_m_s": 2.039824264749423
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.15000000000000002,
+              "physics_time_s": 0.15000000223517418,
+              "velocity_m_s": 1.9681625366210938,
+              "continuous_velocity_m_s": 1.9739469339686122
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.17499999999999993,
+              "physics_time_s": 0.1750000026077032,
+              "velocity_m_s": 1.904223918914795,
+              "continuous_velocity_m_s": 1.9106783400176859
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.20000000000000007,
+              "physics_time_s": 0.20000000298023224,
+              "velocity_m_s": 1.8428256511688232,
+              "continuous_velocity_m_s": 1.8498851628432573
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.22499999999999998,
+              "physics_time_s": 0.22500000335276127,
+              "velocity_m_s": 1.7838373184204102,
+              "continuous_velocity_m_s": 1.7914428257309272
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.2500000000000001,
+              "physics_time_s": 0.2500000037252903,
+              "velocity_m_s": 1.7271374464035034,
+              "continuous_velocity_m_s": 1.735234789250683
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.275,
+              "physics_time_s": 0.27500000409781933,
+              "velocity_m_s": 1.6726124286651611,
+              "continuous_velocity_m_s": 1.6811519126133085
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.29999999999999993,
+              "physics_time_s": 0.30000000447034836,
+              "velocity_m_s": 1.6201555728912354,
+              "continuous_velocity_m_s": 1.6290918750460175
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.413726329803467,
+          "explicit_step_number_K_v_dt_over_m": 0.00941668116524405,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.008936302154782139,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.02499999999999991,
+              "physics_time_s": 0.02500000037252903,
+              "velocity_m_s": 2.3312220573425293,
+              "continuous_velocity_m_s": 2.3324396473462237
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.050000000000000266,
+              "physics_time_s": 0.05000000074505806,
+              "velocity_m_s": 2.252269744873047,
+              "continuous_velocity_m_s": 2.2545900588715213
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.07500000000000018,
+              "physics_time_s": 0.07500000111758709,
+              "velocity_m_s": 2.1766674518585205,
+              "continuous_velocity_m_s": 2.179986910752373
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.10000000000000009,
+              "physics_time_s": 0.10000000149011612,
+              "velocity_m_s": 2.104228973388672,
+              "continuous_velocity_m_s": 2.1084531776688222
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.125,
+              "physics_time_s": 0.12500000186264515,
+              "velocity_m_s": 2.034780979156494,
+              "continuous_velocity_m_s": 2.039824264749423
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.1499999999999999,
+              "physics_time_s": 0.15000000223517418,
+              "velocity_m_s": 1.9681625366210938,
+              "continuous_velocity_m_s": 1.9739469339686122
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.17500000000000027,
+              "physics_time_s": 0.1750000026077032,
+              "velocity_m_s": 1.904223918914795,
+              "continuous_velocity_m_s": 1.9106783400176859
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.20000000000000018,
+              "physics_time_s": 0.20000000298023224,
+              "velocity_m_s": 1.8428256511688232,
+              "continuous_velocity_m_s": 1.8498851628432573
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.2250000000000001,
+              "physics_time_s": 0.22500000335276127,
+              "velocity_m_s": 1.7838373184204102,
+              "continuous_velocity_m_s": 1.7914428257309272
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.25,
+              "physics_time_s": 0.2500000037252903,
+              "velocity_m_s": 1.7271374464035034,
+              "continuous_velocity_m_s": 1.735234789250683
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.2749999999999999,
+              "physics_time_s": 0.27500000409781933,
+              "velocity_m_s": 1.6726124286651611,
+              "continuous_velocity_m_s": 1.6811519126133085
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.30000000000000027,
+              "physics_time_s": 0.30000000447034836,
+              "velocity_m_s": 1.6201555728912354,
+              "continuous_velocity_m_s": 1.6290918750460175
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.413726329803467,
+          "explicit_step_number_K_v_dt_over_m": 0.00941668116524405,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.008936302154782139,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.02499999999999991,
+              "physics_time_s": 0.02500000037252903,
+              "velocity_m_s": 2.3312220573425293,
+              "continuous_velocity_m_s": 2.3324396473462237
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.04999999999999982,
+              "physics_time_s": 0.05000000074505806,
+              "velocity_m_s": 2.252269744873047,
+              "continuous_velocity_m_s": 2.2545900588715213
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.07499999999999973,
+              "physics_time_s": 0.07500000111758709,
+              "velocity_m_s": 2.1766674518585205,
+              "continuous_velocity_m_s": 2.179986910752373
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.09999999999999964,
+              "physics_time_s": 0.10000000149011612,
+              "velocity_m_s": 2.104228973388672,
+              "continuous_velocity_m_s": 2.1084531776688222
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.125,
+              "physics_time_s": 0.12500000186264515,
+              "velocity_m_s": 2.034780979156494,
+              "continuous_velocity_m_s": 2.039824264749423
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.1499999999999999,
+              "physics_time_s": 0.15000000223517418,
+              "velocity_m_s": 1.9681625366210938,
+              "continuous_velocity_m_s": 1.9739469339686122
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.17499999999999982,
+              "physics_time_s": 0.1750000026077032,
+              "velocity_m_s": 1.904223918914795,
+              "continuous_velocity_m_s": 1.9106783400176859
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.19999999999999973,
+              "physics_time_s": 0.20000000298023224,
+              "velocity_m_s": 1.8428256511688232,
+              "continuous_velocity_m_s": 1.8498851628432573
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.22499999999999964,
+              "physics_time_s": 0.22500000335276127,
+              "velocity_m_s": 1.7838373184204102,
+              "continuous_velocity_m_s": 1.7914428257309272
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.25,
+              "physics_time_s": 0.2500000037252903,
+              "velocity_m_s": 1.7271374464035034,
+              "continuous_velocity_m_s": 1.735234789250683
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.2749999999999999,
+              "physics_time_s": 0.27500000409781933,
+              "velocity_m_s": 1.6726124286651611,
+              "continuous_velocity_m_s": 1.6811519126133085
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.2999999999999998,
+              "physics_time_s": 0.30000000447034836,
+              "velocity_m_s": 1.6201555728912354,
+              "continuous_velocity_m_s": 1.6290918750460175
+            }
+          ]
+        }
+      ]
+    },
+    "60": {
+      "ticks_per_sec": 60,
+      "client_dt_s": 0.016666666666666666,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.01666666666666667,
+        "min": 0.016666666666666607,
+        "max": 0.01666666666666705,
+        "stdev": 1.0127545604080364e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.016666667465261128,
+        "min": 0.01666662662625737,
+        "max": 0.016666704312648373,
+        "stdev": 1.385131453319781e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.016666668416244527,
+          "min": 0.016666655769221713,
+          "max": 0.016666680112647946,
+          "stdev": 6.438800845200014e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.016666666908596438,
+          "min": 0.016666666908596438,
+          "max": 0.016666666908596438,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.01666666325012625,
+          "min": 0.01666663649583333,
+          "max": 0.01666670871264775,
+          "stdev": 2.1167437139534044e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.016666667513127825,
+          "min": 0.016666653985866253,
+          "max": 0.016666680022570716,
+          "stdev": 5.0404581490093516e-09
+        }
+      },
+      "effective_physics_dt_s": 0.01666666587620183,
+      "effective_to_client_ratio": 0.9999999525721098,
+      "kinematic_to_client_ratio": 1.0000000507876694,
+      "world_delta_to_client_ratio": 1.0000000479156677,
+      "predicted_physics_dt_s": 0.01666666753590107,
+      "prediction_relative_error": -9.95819491311778e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.4423487186431885,
+          "explicit_step_number_K_v_dt_over_m": 0.006352230781261398,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.004756857473795506,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.016666666666666607,
+              "physics_time_s": 0.01666666753590107,
+              "velocity_m_s": 2.3863871097564697,
+              "continuous_velocity_m_s": 2.386943481542331
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.033333333333333326,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.3320493698120117,
+              "continuous_velocity_m_s": 2.3331264590957383
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.04999999999999993,
+              "physics_time_s": 0.05000000260770321,
+              "velocity_m_s": 2.2792727947235107,
+              "continuous_velocity_m_s": 2.2808374858917477
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.06666666666666665,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.2279984951019287,
+              "continuous_velocity_m_s": 2.2300193525410914
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.08333333333333326,
+              "physics_time_s": 0.08333333767950535,
+              "velocity_m_s": 2.1781697273254395,
+              "continuous_velocity_m_s": 2.1806176261062986
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.09999999999999998,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.129732847213745,
+              "continuous_velocity_m_s": 2.132580483473259
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.1166666666666667,
+              "physics_time_s": 0.11666667275130749,
+              "velocity_m_s": 2.082637071609497,
+              "continuous_velocity_m_s": 2.0858585565896255
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.1333333333333333,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.0368335247039795,
+              "continuous_velocity_m_s": 2.040404788595605
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.15000000000000002,
+              "physics_time_s": 0.15000000782310963,
+              "velocity_m_s": 1.9922758340835571,
+              "continuous_velocity_m_s": 1.996174299963096
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.16666666666666663,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9489200115203857,
+              "continuous_velocity_m_s": 1.953124263840195
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.18333333333333335,
+              "physics_time_s": 0.18333334289491177,
+              "velocity_m_s": 1.9067238569259644,
+              "continuous_velocity_m_s": 1.9112137898708494
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.19999999999999996,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8656469583511353,
+              "continuous_velocity_m_s": 1.8704038158249308
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.4423487186431885,
+          "explicit_step_number_K_v_dt_over_m": 0.006352230781261398,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.004756857473795506,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.01666666666666683,
+              "physics_time_s": 0.01666666753590107,
+              "velocity_m_s": 2.3863871097564697,
+              "continuous_velocity_m_s": 2.386943481542331
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.03333333333333344,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.3320493698120117,
+              "continuous_velocity_m_s": 2.3331264590957383
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.050000000000000044,
+              "physics_time_s": 0.05000000260770321,
+              "velocity_m_s": 2.2792727947235107,
+              "continuous_velocity_m_s": 2.2808374858917477
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.06666666666666665,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.2279984951019287,
+              "continuous_velocity_m_s": 2.2300193525410914
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.08333333333333348,
+              "physics_time_s": 0.08333333767950535,
+              "velocity_m_s": 2.1781697273254395,
+              "continuous_velocity_m_s": 2.1806176261062986
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.10000000000000009,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.129732847213745,
+              "continuous_velocity_m_s": 2.132580483473259
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.1166666666666667,
+              "physics_time_s": 0.11666667275130749,
+              "velocity_m_s": 2.082637071609497,
+              "continuous_velocity_m_s": 2.0858585565896255
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.1333333333333333,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.0368335247039795,
+              "continuous_velocity_m_s": 2.040404788595605
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.15000000000000013,
+              "physics_time_s": 0.15000000782310963,
+              "velocity_m_s": 1.9922758340835571,
+              "continuous_velocity_m_s": 1.996174299963096
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.16666666666666674,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9489200115203857,
+              "continuous_velocity_m_s": 1.953124263840195
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.18333333333333335,
+              "physics_time_s": 0.18333334289491177,
+              "velocity_m_s": 1.9067238569259644,
+              "continuous_velocity_m_s": 1.9112137898708494
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.19999999999999996,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8656469583511353,
+              "continuous_velocity_m_s": 1.8704038158249308
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.4423487186431885,
+          "explicit_step_number_K_v_dt_over_m": 0.006352230781261398,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.004756857473795506,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.016666666666666607,
+              "physics_time_s": 0.01666666753590107,
+              "velocity_m_s": 2.3863871097564697,
+              "continuous_velocity_m_s": 2.386943481542331
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.033333333333333215,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.3320493698120117,
+              "continuous_velocity_m_s": 2.3331264590957383
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.04999999999999982,
+              "physics_time_s": 0.05000000260770321,
+              "velocity_m_s": 2.2792727947235107,
+              "continuous_velocity_m_s": 2.2808374858917477
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.06666666666666687,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.2279984951019287,
+              "continuous_velocity_m_s": 2.2300193525410914
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.08333333333333348,
+              "physics_time_s": 0.08333333767950535,
+              "velocity_m_s": 2.1781697273254395,
+              "continuous_velocity_m_s": 2.1806176261062986
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.10000000000000009,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.129732847213745,
+              "continuous_velocity_m_s": 2.132580483473259
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.1166666666666667,
+              "physics_time_s": 0.11666667275130749,
+              "velocity_m_s": 2.082637071609497,
+              "continuous_velocity_m_s": 2.0858585565896255
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.1333333333333333,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.0368335247039795,
+              "continuous_velocity_m_s": 2.040404788595605
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.1499999999999999,
+              "physics_time_s": 0.15000000782310963,
+              "velocity_m_s": 1.9922758340835571,
+              "continuous_velocity_m_s": 1.996174299963096
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.16666666666666652,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9489200115203857,
+              "continuous_velocity_m_s": 1.953124263840195
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.18333333333333357,
+              "physics_time_s": 0.18333334289491177,
+              "velocity_m_s": 1.9067238569259644,
+              "continuous_velocity_m_s": 1.9112137898708494
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.20000000000000018,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.8656469583511353,
+              "continuous_velocity_m_s": 1.8704038158249308
+            }
+          ]
+        }
+      ]
+    },
+    "100": {
+      "ticks_per_sec": 100,
+      "client_dt_s": 0.01,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.01,
+        "min": 0.009999999999999787,
+        "max": 0.010000000000000009,
+        "stdev": 3.2636048320370766e-17
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.010000000128300766,
+        "min": 0.009999940646483015,
+        "max": 0.01000004577746575,
+        "stdev": 1.5347857496839047e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.01000000037042928,
+          "min": 0.00999999377954371,
+          "max": 0.010000008475148675,
+          "stdev": 3.663611395090813e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.009999999375063547,
+          "min": 0.009999999375063547,
+          "max": 0.009999999375063547,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.010000000015865864,
+          "min": 0.00999996099110978,
+          "max": 0.010000051600487447,
+          "stdev": 2.5351910169747066e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.00999999972791621,
+          "min": 0.009999994305501853,
+          "max": 0.0100000061807774,
+          "stdev": 2.2142913002187196e-09
+        }
+      },
+      "effective_physics_dt_s": 0.01000000016042421,
+      "effective_to_client_ratio": 1.000000016042421,
+      "kinematic_to_client_ratio": 0.999999972791621,
+      "world_delta_to_client_ratio": 1.0000000128300766,
+      "predicted_physics_dt_s": 0.009999999776482582,
+      "prediction_relative_error": 3.839416362616532e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.465344190597534,
+          "explicit_step_number_K_v_dt_over_m": 0.003847223117874239,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.001993477692803225,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.010000000000000009,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.4313008785247803,
+              "continuous_velocity_m_s": 2.431505678925098
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.019999999999999962,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.397855520248413,
+              "continuous_velocity_m_s": 2.3982571537320023
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.02999999999999997,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.3649940490722656,
+              "continuous_velocity_m_s": 2.3655849379389684
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.03999999999999998,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.332703113555908,
+              "continuous_velocity_m_s": 2.333475767883093
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.04999999999999999,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.3009696006774902,
+              "continuous_velocity_m_s": 2.3019167777944705
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.06,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.269780397415161,
+              "continuous_velocity_m_s": 2.2708954849675242
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.07,
+              "physics_time_s": 0.06999999843537807,
+              "velocity_m_s": 2.2391233444213867,
+              "continuous_velocity_m_s": 2.240399775591043
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.07999999999999996,
+              "physics_time_s": 0.07999999821186066,
+              "velocity_m_s": 2.208986282348633,
+              "continuous_velocity_m_s": 2.210417891203044
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.08999999999999997,
+              "physics_time_s": 0.08999999798834324,
+              "velocity_m_s": 2.1793577671051025,
+              "continuous_velocity_m_s": 2.1809384157385407
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.09999999999999998,
+              "physics_time_s": 0.09999999776482582,
+              "velocity_m_s": 2.150226593017578,
+              "continuous_velocity_m_s": 2.151950263140164
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.10999999999999999,
+              "physics_time_s": 0.1099999975413084,
+              "velocity_m_s": 2.1215813159942627,
+              "continuous_velocity_m_s": 2.123442665503304
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.12,
+              "physics_time_s": 0.11999999731779099,
+              "velocity_m_s": 2.093411684036255,
+              "continuous_velocity_m_s": 2.095405161729058
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.465344190597534,
+          "explicit_step_number_K_v_dt_over_m": 0.003847223117874239,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.001993477692803225,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.010000000000000009,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.4313008785247803,
+              "continuous_velocity_m_s": 2.431505678925098
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.020000000000000018,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.397855520248413,
+              "continuous_velocity_m_s": 2.3982571537320023
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.029999999999999916,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.3649940490722656,
+              "continuous_velocity_m_s": 2.3655849379389684
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.039999999999999925,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.332703113555908,
+              "continuous_velocity_m_s": 2.333475767883093
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.04999999999999993,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.3009696006774902,
+              "continuous_velocity_m_s": 2.3019167777944705
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.05999999999999994,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.269780397415161,
+              "continuous_velocity_m_s": 2.2708954849675242
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.06999999999999995,
+              "physics_time_s": 0.06999999843537807,
+              "velocity_m_s": 2.2391233444213867,
+              "continuous_velocity_m_s": 2.240399775591043
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.07999999999999996,
+              "physics_time_s": 0.07999999821186066,
+              "velocity_m_s": 2.208986282348633,
+              "continuous_velocity_m_s": 2.210417891203044
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.08999999999999997,
+              "physics_time_s": 0.08999999798834324,
+              "velocity_m_s": 2.1793577671051025,
+              "continuous_velocity_m_s": 2.1809384157385407
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.09999999999999998,
+              "physics_time_s": 0.09999999776482582,
+              "velocity_m_s": 2.150226593017578,
+              "continuous_velocity_m_s": 2.151950263140164
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.10999999999999999,
+              "physics_time_s": 0.1099999975413084,
+              "velocity_m_s": 2.1215813159942627,
+              "continuous_velocity_m_s": 2.123442665503304
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.12,
+              "physics_time_s": 0.11999999731779099,
+              "velocity_m_s": 2.093411684036255,
+              "continuous_velocity_m_s": 2.095405161729058
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.465344190597534,
+          "explicit_step_number_K_v_dt_over_m": 0.003847223117874239,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.001993477692803225,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.010000000000000009,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.4313008785247803,
+              "continuous_velocity_m_s": 2.431505678925098
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.020000000000000018,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.397855520248413,
+              "continuous_velocity_m_s": 2.3982571537320023
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.030000000000000027,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.3649940490722656,
+              "continuous_velocity_m_s": 2.3655849379389684
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.040000000000000036,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.332703113555908,
+              "continuous_velocity_m_s": 2.333475767883093
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.050000000000000044,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.3009696006774902,
+              "continuous_velocity_m_s": 2.3019167777944705
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.06000000000000005,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.269780397415161,
+              "continuous_velocity_m_s": 2.2708954849675242
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.07000000000000006,
+              "physics_time_s": 0.06999999843537807,
+              "velocity_m_s": 2.2391233444213867,
+              "continuous_velocity_m_s": 2.240399775591043
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.08000000000000007,
+              "physics_time_s": 0.07999999821186066,
+              "velocity_m_s": 2.208986282348633,
+              "continuous_velocity_m_s": 2.210417891203044
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.09000000000000008,
+              "physics_time_s": 0.08999999798834324,
+              "velocity_m_s": 2.1793577671051025,
+              "continuous_velocity_m_s": 2.1809384157385407
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.10000000000000009,
+              "physics_time_s": 0.09999999776482582,
+              "velocity_m_s": 2.150226593017578,
+              "continuous_velocity_m_s": 2.151950263140164
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.1100000000000001,
+              "physics_time_s": 0.1099999975413084,
+              "velocity_m_s": 2.1215813159942627,
+              "continuous_velocity_m_s": 2.123442665503304
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.1200000000000001,
+              "physics_time_s": 0.11999999731779099,
+              "velocity_m_s": 2.093411684036255,
+              "continuous_velocity_m_s": 2.095405161729058
+            }
+          ]
+        }
+      ]
+    },
+    "200": {
+      "ticks_per_sec": 200,
+      "client_dt_s": 0.005,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.005,
+        "min": 0.004999999999999893,
+        "max": 0.0050000000000000044,
+        "stdev": 1.6318024160185383e-17
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.0050000003052029,
+        "min": 0.004999965227712123,
+        "max": 0.005000049114298368,
+        "stdev": 1.1765571744681201e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.0050000001632781775,
+          "min": 0.004999995772110257,
+          "max": 0.00500000527938633,
+          "stdev": 2.2183711757677647e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.005000000000564438,
+          "min": 0.005000000000564438,
+          "max": 0.005000000000564438,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.005000001325858566,
+          "min": 0.004999952226594329,
+          "max": 0.005000020966457908,
+          "stdev": 1.837127956126498e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.004999999842435278,
+          "min": 0.0049999971515037305,
+          "max": 0.0050000028059820545,
+          "stdev": 1.2136539087587238e-09
+        }
+      },
+      "effective_physics_dt_s": 0.0050000007148082145,
+      "effective_to_client_ratio": 1.000000142961643,
+      "kinematic_to_client_ratio": 0.9999999684870556,
+      "world_delta_to_client_ratio": 1.0000000610405801,
+      "predicted_physics_dt_s": 0.004999999888241291,
+      "prediction_relative_error": 1.6531338831171638e-07,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.482647657394409,
+          "explicit_step_number_K_v_dt_over_m": 0.0019371127766847661,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.000561411087273811,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.0050000000000000044,
+              "physics_time_s": 0.004999999888241291,
+              "velocity_m_s": 2.465449333190918,
+              "continuous_velocity_m_s": 2.4655013666340198
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.009999999999999981,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.4484031200408936,
+              "continuous_velocity_m_s": 2.4485061086936053
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.014999999999999986,
+              "physics_time_s": 0.014999999664723873,
+              "velocity_m_s": 2.431507110595703,
+              "continuous_velocity_m_s": 2.4316601064204706
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.01999999999999999,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.414759397506714,
+              "continuous_velocity_m_s": 2.4149616100411357
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.024999999999999994,
+              "physics_time_s": 0.024999999441206455,
+              "velocity_m_s": 2.398158550262451,
+              "continuous_velocity_m_s": 2.398408896635412
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.03,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.3817028999328613,
+              "continuous_velocity_m_s": 2.38200026962256
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.035,
+              "physics_time_s": 0.03499999921768904,
+              "velocity_m_s": 2.3653905391693115,
+              "continuous_velocity_m_s": 2.36573405825921
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.03999999999999998,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.349219799041748,
+              "continuous_velocity_m_s": 2.3496086171487303
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.044999999999999984,
+              "physics_time_s": 0.04499999899417162,
+              "velocity_m_s": 2.333189010620117,
+              "continuous_velocity_m_s": 2.3336223257617417
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.04999999999999999,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.3172967433929443,
+              "continuous_velocity_m_s": 2.317773587967479
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.05499999999999999,
+              "physics_time_s": 0.0549999987706542,
+              "velocity_m_s": 2.301541328430176,
+              "continuous_velocity_m_s": 2.302060831575726
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.06,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.285921096801758,
+              "continuous_velocity_m_s": 2.2864825078890316
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.482647657394409,
+          "explicit_step_number_K_v_dt_over_m": 0.0019371127766847661,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.000561411087273811,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.0050000000000000044,
+              "physics_time_s": 0.004999999888241291,
+              "velocity_m_s": 2.465449333190918,
+              "continuous_velocity_m_s": 2.4655013666340198
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.010000000000000009,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.4484031200408936,
+              "continuous_velocity_m_s": 2.4485061086936053
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.014999999999999958,
+              "physics_time_s": 0.014999999664723873,
+              "velocity_m_s": 2.431507110595703,
+              "continuous_velocity_m_s": 2.4316601064204706
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.019999999999999962,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.414759397506714,
+              "continuous_velocity_m_s": 2.4149616100411357
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.024999999999999967,
+              "physics_time_s": 0.024999999441206455,
+              "velocity_m_s": 2.398158550262451,
+              "continuous_velocity_m_s": 2.398408896635412
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.02999999999999997,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.3817028999328613,
+              "continuous_velocity_m_s": 2.38200026962256
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.034999999999999976,
+              "physics_time_s": 0.03499999921768904,
+              "velocity_m_s": 2.3653905391693115,
+              "continuous_velocity_m_s": 2.36573405825921
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.03999999999999998,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.349219799041748,
+              "continuous_velocity_m_s": 2.3496086171487303
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.044999999999999984,
+              "physics_time_s": 0.04499999899417162,
+              "velocity_m_s": 2.333189010620117,
+              "continuous_velocity_m_s": 2.3336223257617417
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.04999999999999999,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.3172967433929443,
+              "continuous_velocity_m_s": 2.317773587967479
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.05499999999999999,
+              "physics_time_s": 0.0549999987706542,
+              "velocity_m_s": 2.301541328430176,
+              "continuous_velocity_m_s": 2.302060831575726
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.06,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.285921096801758,
+              "continuous_velocity_m_s": 2.2864825078890316
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.482647657394409,
+          "explicit_step_number_K_v_dt_over_m": 0.0019371127766847661,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_continuous_m_s": 0.000561411087273811,
+          "trace": [
+            {
+              "step": 0,
+              "client_time_s": 0.0050000000000000044,
+              "physics_time_s": 0.004999999888241291,
+              "velocity_m_s": 2.465449333190918,
+              "continuous_velocity_m_s": 2.4655013666340198
+            },
+            {
+              "step": 1,
+              "client_time_s": 0.010000000000000009,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.4484031200408936,
+              "continuous_velocity_m_s": 2.4485061086936053
+            },
+            {
+              "step": 2,
+              "client_time_s": 0.015000000000000013,
+              "physics_time_s": 0.014999999664723873,
+              "velocity_m_s": 2.431507110595703,
+              "continuous_velocity_m_s": 2.4316601064204706
+            },
+            {
+              "step": 3,
+              "client_time_s": 0.020000000000000018,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.414759397506714,
+              "continuous_velocity_m_s": 2.4149616100411357
+            },
+            {
+              "step": 4,
+              "client_time_s": 0.025000000000000022,
+              "physics_time_s": 0.024999999441206455,
+              "velocity_m_s": 2.398158550262451,
+              "continuous_velocity_m_s": 2.398408896635412
+            },
+            {
+              "step": 5,
+              "client_time_s": 0.030000000000000027,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.3817028999328613,
+              "continuous_velocity_m_s": 2.38200026962256
+            },
+            {
+              "step": 6,
+              "client_time_s": 0.03500000000000003,
+              "physics_time_s": 0.03499999921768904,
+              "velocity_m_s": 2.3653905391693115,
+              "continuous_velocity_m_s": 2.36573405825921
+            },
+            {
+              "step": 7,
+              "client_time_s": 0.040000000000000036,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.349219799041748,
+              "continuous_velocity_m_s": 2.3496086171487303
+            },
+            {
+              "step": 8,
+              "client_time_s": 0.04500000000000004,
+              "physics_time_s": 0.04499999899417162,
+              "velocity_m_s": 2.333189010620117,
+              "continuous_velocity_m_s": 2.3336223257617417
+            },
+            {
+              "step": 9,
+              "client_time_s": 0.050000000000000044,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.3172967433929443,
+              "continuous_velocity_m_s": 2.317773587967479
+            },
+            {
+              "step": 10,
+              "client_time_s": 0.05500000000000005,
+              "physics_time_s": 0.0549999987706542,
+              "velocity_m_s": 2.301541328430176,
+              "continuous_velocity_m_s": 2.302060831575726
+            },
+            {
+              "step": 11,
+              "client_time_s": 0.06000000000000005,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.285921096801758,
+              "continuous_velocity_m_s": 2.2864825078890316
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "verified_ticks_per_sec": [
+    30,
+    40,
+    60,
+    100,
+    200
+  ],
+  "rejected_ticks_per_sec": [
+    20
+  ],
+  "consistency_tolerance": 0.0001,
+  "raw_sha256": "900d308acda45fcfac6bb6b2f4196eb15543057a3ef5c74676a0ff665ffc3870",
+  "scenario_sha256": {
+    "20": "20929650187881c1bdb4fb93e09cfb2f054a20dc13fb8e882d1ec5257673483e",
+    "30": "a0327e4158383f688597b5ae4896a435c6c65acd673995cf9aba2e39a8719ba7",
+    "40": "f05898131ce1ad5cfc44602fc9c5c21cc1486326753498989016bdbd7b5744a5",
+    "60": "981454f2ee74e5c87cfe58bd078703cf9e28384731218713be592257c91fa340",
+    "100": "8a969dccbf55daadde383f1dff2cf58168acbc357c7cced574c9b0acf8db5e98",
+    "200": "38ecfb374141f2e88bc81730c3251abe8a7617ac4a7ab177a1dc586b6c5611e7"
+  }
+}

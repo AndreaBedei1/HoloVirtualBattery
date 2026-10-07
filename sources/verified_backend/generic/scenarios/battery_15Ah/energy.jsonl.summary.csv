@@ -1,0 +1,17 @@
+group,name,energy_Wh
+category,propulsion,0.7499999999999896
+category,sensors,0.18333333333333499
+category,compute,0.0899999999999991
+category,auxiliaries,0.0
+category,converters,0.0
+category,battery_losses,0.0186661879440851
+device,T1,0.1250000000000012
+device,T2,0.1250000000000012
+device,T3,0.1250000000000012
+device,T4,0.1250000000000012
+device,T5,0.1250000000000012
+device,T6,0.1250000000000012
+device,my_sonar,0.1500000000000001
+device,my_camera,0.03333333333333329
+device,my_compute,0.0899999999999991
+phase_terminal,inspection,1.023333333333324

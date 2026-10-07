@@ -1,0 +1,123 @@
+{
+  "checked_utc": "2026-10-07T21:59:10.560851+00:00",
+  "method": "tasklist /FO CSV after the last native run; image names containing 'holodeck'",
+  "holodeck_processes_after_campaign": 0,
+  "holodeck_process_names": [],
+  "runs": [
+    {
+      "run": "check_original",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "run": "check_rebuilt",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "run": "check_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "drag_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "drag_rebuilt",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "drag_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "autodrag_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "autodrag_rebuilt",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "autodrag_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "diag20_original",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "run": "diag20_patched",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "run": "timestep_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "timestep_rebuilt",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "timestep_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "energy_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "energy_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "demo_original+patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "upstream_test_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "upstream_test_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "refinement_200hz",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "derating_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "dashboard_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ],
+  "exit_code_notes": {
+    "check_original/check_rebuilt = 1": "backend check FAIL by design (drag ~0.01)",
+    "diag20_* = 1": "20 Hz diagnostic reports INCONCLUSIVE (physics step capped at 1/30 s)"
+  },
+  "all_exit_codes_as_expected": true
+}

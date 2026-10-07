@@ -1,0 +1,9 @@
+== upstream_test_original: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/reproduce_upstream_currents_test.py --binary C:/Users/Andrea/AppData/Local/holoocean/2.3.0/worlds/Ocean/Windows/Holodeck/Binaries/Win64/Holodeck.exe --output logs/verified_backend/upstream_test_original.json
+   exit 0 in 10 s
+== upstream_test_patched: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/reproduce_upstream_currents_test.py --binary C:/HOB/packages/patched-after/Ocean/Windows/Holodeck/Binaries/Win64/Holodeck.exe --output logs/verified_backend/upstream_test_patched.json
+   exit 0 in 13 s
+== refinement_200hz: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/native_current_energy_study.py --holoocean-binary C:/HOB/packages/patched-after/Ocean/Windows/Holodeck/Binaries/Win64/Holodeck.exe --dt 0.005 --experiments station mission --currents 0.5 --mission-currents 0.2 --output-dir logs/verified_backend/energy_patched_200hz --label patched_200hz
+   exit 0 in 339 s
+== derating_patched: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_integration.py --backend holoocean --holoocean-binary C:/HOB/packages/patched-after/Ocean/Windows/Holodeck/Binaries/Win64/Holodeck.exe --steps 300 --output-dir logs/verified_backend/derating_patched
+   exit 0 in 39 s
+DONE

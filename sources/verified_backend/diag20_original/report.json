@@ -1,0 +1,2136 @@
+{
+  "scope": "physics implementation verification; not physical vehicle validation",
+  "source_binary_identity": "behavioral agreement is not proof of exact build commit",
+  "provenance": {
+    "created_utc": "2026-10-07T21:00:00.784741+00:00",
+    "holoenergy_repository": {
+      "commit": "aeeb84f88d58dc42dc9935890f06683586acf567",
+      "status": ""
+    },
+    "tooling_sha256": {
+      "examples/verify_holoocean_drag_units.py": "b3e256dafe80629e4992a15ec0d1e266d01b4428cc6cfa7f0ff76a5dce2c82a1",
+      "tools/audit_holoocean_drag.py": "2a682eb5e018c90f6ac1a9de2946033015f23cce28d5a423b09c907887589801",
+      "tools/holoocean_backend.py": "a1e240df49b9946f61a33b9923d34ed1e8c606e6f2303b6aeaacc88e4cedd698"
+    },
+    "case_set": "standard",
+    "cases": [
+      {
+        "name": "neutral_zero",
+        "current": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "current_x_0.1",
+        "current": [
+          0.1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "current_x_0.2",
+        "current": [
+          0.2,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "current_x_0.4",
+        "current": [
+          0.4,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "current_x_0.8",
+        "current": [
+          0.8,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "current_x_negative",
+        "current": [
+          -0.4,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "current_1_-1",
+        "current": [
+          0,
+          -0.4,
+          0
+        ]
+      },
+      {
+        "name": "current_1_1",
+        "current": [
+          0,
+          0.4,
+          0
+        ]
+      },
+      {
+        "name": "current_2_-1",
+        "current": [
+          0,
+          0,
+          -0.4
+        ]
+      },
+      {
+        "name": "current_2_1",
+        "current": [
+          0,
+          0,
+          0.4
+        ]
+      },
+      {
+        "name": "yaw90_world_current",
+        "current": [
+          0.4,
+          0,
+          0
+        ],
+        "yaw_deg": 90
+      },
+      {
+        "name": "thrust_0_10N",
+        "current": [
+          0,
+          0,
+          0
+        ],
+        "thrust_axis": 0
+      },
+      {
+        "name": "thrust_1_10N",
+        "current": [
+          0,
+          0,
+          0
+        ],
+        "thrust_axis": 1
+      },
+      {
+        "name": "thrust_2_10N",
+        "current": [
+          0,
+          0,
+          0
+        ],
+        "thrust_axis": 2
+      },
+      {
+        "name": "gravity_air",
+        "current": [
+          0,
+          0,
+          0
+        ],
+        "in_air": true
+      },
+      {
+        "name": "moving_zero_current",
+        "current": [
+          0,
+          0,
+          0
+        ],
+        "initial_velocity": [
+          0.4,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "moving_matched_current",
+        "current": "match_velocity",
+        "initial_velocity": [
+          0.4,
+          0,
+          0
+        ]
+      }
+    ],
+    "source": {
+      "root": "C:\\HOB\\src\\before",
+      "git": {
+        "commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+        "status": ""
+      },
+      "parameters": {
+        "mass_kg": 11.5,
+        "drag_coefficient": 0.8,
+        "area_m2": 0.45,
+        "density_kg_m3": 997.0,
+        "ue_units_per_m": 100.0,
+        "linear_damping_per_s": 1.0,
+        "source_drag_scale_to_SI": 0.01,
+        "explicit_drag_unit_conversion": false,
+        "fully_submerged_ratio": 1.0,
+        "neutral_volume_m3": 0.011534603811434303,
+        "parameter_origin": "official/local C++ literals; no runtime fit"
+      },
+      "files": {
+        "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp": {
+          "sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+          "line_anchors": {
+            "DragForce": [
+              53,
+              91,
+              94
+            ],
+            "RelativeVel": [
+              90,
+              91,
+              92
+            ],
+            "AddForce": [
+              77,
+              84,
+              93
+            ],
+            "ConvertLinearVector": [
+              75,
+              82
+            ]
+          }
+        },
+        "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h": {
+          "sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+          "line_anchors": {
+            "DragForce": [
+              56
+            ]
+          }
+        },
+        "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": {
+          "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+          "line_anchors": {
+            "AddForce": [
+              66,
+              107
+            ],
+            "ConvertLinearVector": [
+              58,
+              97
+            ]
+          }
+        },
+        "engine/Source/Holodeck/Agents/Public/BlueROV2.h": {
+          "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+          "line_anchors": {}
+        },
+        "engine/Source/Holodeck/Agents/Private/BlueROV2ControlThrusters.cpp": {
+          "sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+          "line_anchors": {
+            "DragForce": [
+              29
+            ]
+          }
+        },
+        "engine/Source/Holodeck/General/Private/Conversion.cpp": {
+          "sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              95
+            ]
+          }
+        },
+        "engine/Source/Holodeck/General/Public/Conversion.h": {
+          "sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              19
+            ]
+          }
+        },
+        "engine/Source/Holodeck/ClientCommands/Private/OceanCurrentsCommand.cpp": {
+          "sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+          "line_anchors": {}
+        },
+        "engine/Source/Holodeck/Sensors/Private/DynamicsSensor.cpp": {
+          "sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              66,
+              75
+            ]
+          }
+        }
+      }
+    },
+    "runtime": {
+      "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+      "python_version": "3.10.20",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "holoocean_version": "2.3.0",
+      "client_root": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean",
+      "client_file_sha256": {
+        "agents.py": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+        "environments.py": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+        "command.py": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+        "sensors.py": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+        "packagemanager.py": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0"
+      },
+      "client_install_origin": "{\"dir_info\": {}, \"url\": \"file:///C:/Users/Andrea/Downloads/HoloOcean-2.3.0/client\"}",
+      "binary_path": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "binary_sha256": "8c206c9cc05c640fb2efea6bd43bda33c585536ab16a931c55780855e7602253",
+      "binary_size_bytes": 255731200,
+      "pdb_sha256": "71feacc5f34f0004931c297c54361a2d8e67eed28c6884d3c2353b93dc7a5b3f",
+      "package_root": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean",
+      "package_config_path": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\config.json",
+      "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+      "build_manifest_path": null,
+      "build_manifest_sha256": null,
+      "build_variant": "installed package",
+      "build_source_commit": null,
+      "build_patch_sha256": null,
+      "package_version": "2.3.0",
+      "package_worlds": [
+        "Rooms",
+        "ModernOffice",
+        "CorporateOffice",
+        "ExampleLevel",
+        "Tank",
+        "SimpleUnderwater",
+        "PierHarbor",
+        "OpenWater",
+        "FlatUnderwater",
+        "Dam"
+      ],
+      "source_binary_build_identity": "not established by package version or behavioral conformance"
+    },
+    "arguments": {
+      "source_dir": "C:\\HOB\\src\\before",
+      "binary": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "ticks_per_sec": [
+        20
+      ],
+      "repeats": 1,
+      "steps_per_case": 8,
+      "case_set": "standard",
+      "output_dir": "logs\\verified_backend\\diag20_original"
+    }
+  },
+  "result": {
+    "case": "INCONCLUSIVE",
+    "observed_expected_scale_mean": 0.006783626095057176,
+    "scale_min": 0.006783626095057163,
+    "scale_max": 0.006783626095057193,
+    "references_verified": false,
+    "checks": {
+      "thrust_10N_absolute_error_below_0_05N": false,
+      "gravity_default_9_8_error_below_0_02_m_s2": false,
+      "neutral_zero_motion_below_1e_6_m_s": true,
+      "no_collisions": true,
+      "sensor_delta_time_consistent_with_timestamp": true,
+      "angular_motion_below_1e_4_rad_s": true,
+      "quadratic_doubling_ratios_near_4": true
+    },
+    "max_thrust_reference_error_N": 3.216374202778561,
+    "max_gravity_error_m_s2": 3.1520461383618574,
+    "quadratic_doubling": [
+      {
+        "ticks_per_sec": 20,
+        "trial": 0,
+        "observed_force_ratios": [
+          4.000000000000004,
+          4.000000000000009,
+          3.9999999999999822
+        ]
+      }
+    ],
+    "drag_families": {
+      "current_x_magnitudes": {
+        "cases": [
+          "current_x_0.1",
+          "current_x_0.2",
+          "current_x_0.4",
+          "current_x_0.8"
+        ],
+        "first_pulse_records": 4,
+        "first_pulse_scale_mean": 0.006783626095057176,
+        "first_pulse_scale_min": 0.006783626095057163,
+        "first_pulse_scale_max": 0.006783626095057193,
+        "first_pulse_scale_stdev": 1.3039306074440298e-17,
+        "maximum_source_prediction_error_m_s": 0.0015258433055498812,
+        "step_observations": 32,
+        "step_scale_mean": 0.007157700387590896,
+        "step_scale_min": 0.006783626095057163,
+        "step_scale_max": 0.007519637119098902
+      },
+      "signed_axes_and_yaw": {
+        "cases": [
+          "current_1_-1",
+          "current_1_1",
+          "current_2_-1",
+          "current_2_1",
+          "current_x_negative",
+          "yaw90_world_current"
+        ],
+        "first_pulse_records": 6,
+        "first_pulse_scale_mean": 0.006783626095057183,
+        "first_pulse_scale_min": 0.0067836260950571315,
+        "first_pulse_scale_max": 0.006783626095057193,
+        "first_pulse_scale_stdev": 2.514102521907469e-17,
+        "maximum_source_prediction_error_m_s": 0.0003814608263874703,
+        "step_observations": 48,
+        "step_scale_mean": 0.007157943091579834,
+        "step_scale_min": 0.0067836260950571315,
+        "step_scale_max": 0.007509894850803946
+      },
+      "autodrag_still_water": {
+        "cases": [
+          "moving_zero_current"
+        ],
+        "first_pulse_records": 1,
+        "first_pulse_scale_mean": -0.05136631738413976,
+        "first_pulse_scale_min": -0.05136631738413976,
+        "first_pulse_scale_max": -0.05136631738413976,
+        "first_pulse_scale_stdev": 0.0,
+        "maximum_source_prediction_error_m_s": 0.00680090860565391,
+        "step_observations": 8,
+        "step_scale_mean": -0.059344567796059525,
+        "step_scale_min": -0.06788205052182754,
+        "step_scale_max": -0.05136631738413976
+      }
+    },
+    "force_reconstruction": "m*(v_next/(1-linear_damping*dt)-v_before)/dt; known UE5.3 integrator, no physical fitting"
+  },
+  "result_by_tick_rate": {
+    "20": {
+      "case": "INCONCLUSIVE",
+      "observed_expected_scale_mean": 0.006783626095057176,
+      "scale_min": 0.006783626095057163,
+      "scale_max": 0.006783626095057193,
+      "references_verified": false,
+      "checks": {
+        "thrust_10N_absolute_error_below_0_05N": false,
+        "gravity_default_9_8_error_below_0_02_m_s2": false,
+        "neutral_zero_motion_below_1e_6_m_s": true,
+        "no_collisions": true,
+        "sensor_delta_time_consistent_with_timestamp": true,
+        "angular_motion_below_1e_4_rad_s": true,
+        "quadratic_doubling_ratios_near_4": true
+      },
+      "max_thrust_reference_error_N": 3.216374202778561,
+      "max_gravity_error_m_s2": 3.1520461383618574,
+      "quadratic_doubling": [
+        {
+          "ticks_per_sec": 20,
+          "trial": 0,
+          "observed_force_ratios": [
+            4.000000000000004,
+            4.000000000000009,
+            3.9999999999999822
+          ]
+        }
+      ],
+      "drag_families": {
+        "current_x_magnitudes": {
+          "cases": [
+            "current_x_0.1",
+            "current_x_0.2",
+            "current_x_0.4",
+            "current_x_0.8"
+          ],
+          "first_pulse_records": 4,
+          "first_pulse_scale_mean": 0.006783626095057176,
+          "first_pulse_scale_min": 0.006783626095057163,
+          "first_pulse_scale_max": 0.006783626095057193,
+          "first_pulse_scale_stdev": 1.3039306074440298e-17,
+          "maximum_source_prediction_error_m_s": 0.0015258433055498812,
+          "step_observations": 32,
+          "step_scale_mean": 0.007157700387590896,
+          "step_scale_min": 0.006783626095057163,
+          "step_scale_max": 0.007519637119098902
+        },
+        "signed_axes_and_yaw": {
+          "cases": [
+            "current_1_-1",
+            "current_1_1",
+            "current_2_-1",
+            "current_2_1",
+            "current_x_negative",
+            "yaw90_world_current"
+          ],
+          "first_pulse_records": 6,
+          "first_pulse_scale_mean": 0.006783626095057183,
+          "first_pulse_scale_min": 0.0067836260950571315,
+          "first_pulse_scale_max": 0.006783626095057193,
+          "first_pulse_scale_stdev": 2.514102521907469e-17,
+          "maximum_source_prediction_error_m_s": 0.0003814608263874703,
+          "step_observations": 48,
+          "step_scale_mean": 0.007157943091579834,
+          "step_scale_min": 0.0067836260950571315,
+          "step_scale_max": 0.007509894850803946
+        },
+        "autodrag_still_water": {
+          "cases": [
+            "moving_zero_current"
+          ],
+          "first_pulse_records": 1,
+          "first_pulse_scale_mean": -0.05136631738413976,
+          "first_pulse_scale_min": -0.05136631738413976,
+          "first_pulse_scale_max": -0.05136631738413976,
+          "first_pulse_scale_stdev": 0.0,
+          "maximum_source_prediction_error_m_s": 0.00680090860565391,
+          "step_observations": 8,
+          "step_scale_mean": -0.059344567796059525,
+          "step_scale_min": -0.06788205052182754,
+          "step_scale_max": -0.05136631738413976
+        }
+      },
+      "force_reconstruction": "m*(v_next/(1-linear_damping*dt)-v_before)/dt; known UE5.3 integrator, no physical fitting"
+    }
+  },
+  "records": [
+    {
+      "case": "neutral_zero",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 0.05,
+      "dt_s": 0.05,
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        0.0,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": null,
+      "step_observed_expected_scales": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 0.0,
+      "maximum_source_prediction_error_m_s": 0.0
+    },
+    {
+      "case": "current_x_0.1",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 0.5,
+      "dt_s": 0.04999999999999999,
+      "current_m_s": [
+        0.1,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        5.0283480959478766e-05,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        1.6761160850364831e-06,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0010056696191895755,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0010056695900857449,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        0.011565200620680118,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.012173895390189598,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        1.7946000000000002,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.012173895390189598,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        7.412478260869566e-05,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 2.3841301649216894e-05,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.00678362609505717,
+      "step_observed_expected_scales": [
+        0.00678362609505717,
+        0.006896800294815848,
+        0.0070063052146355255,
+        0.007112249144312743,
+        0.007214748420111092,
+        0.007313900804168989,
+        0.007409817529022591,
+        0.007502590992040899
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 2.3283064441281115e-10,
+      "maximum_source_prediction_error_m_s": 2.3841301649216894e-05
+    },
+    {
+      "case": "current_x_0.2",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 0.95,
+      "dt_s": 0.04999999999999993,
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.00020113392383791506,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        6.7044643401459325e-06,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0040226784767583065,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.004022678360342979,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        0.04626080248272053,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.04869558156075845,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        7.178400000000001,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.04869558156075845,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.00029649913043478264,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 9.536520659686758e-05,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.0067836260950571775,
+      "step_observed_expected_scales": [
+        0.0067836260950571775,
+        0.006896914105500956,
+        0.007006630824183644,
+        0.0071128753442114044,
+        0.007215743178345935,
+        0.007315327477045348,
+        0.007411726281300602,
+        0.0075050243758426685
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 6.98491933997375e-10,
+      "maximum_source_prediction_error_m_s": 9.536520659686758e-05
+    },
+    {
+      "case": "current_x_0.4",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 1.4,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0.4,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0008045356953516603,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        2.681785736058373e-05,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.01609071390703326,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.016090713441371918,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        0.1850432099308825,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.19478232624303424,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        28.713600000000003,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.19478232624303424,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0011859965217391306,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057193,
+      "step_observed_expected_scales": [
+        0.006783626095057193,
+        0.006897142751253394,
+        0.007007286637809593,
+        0.007114126115271092,
+        0.007217736879010674,
+        0.007318184801941969,
+        0.00741554660149086,
+        0.007509894850803913
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.58793543728453e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "current_x_0.8",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 1.85,
+      "dt_s": 0.050000000000000044,
+      "current_m_s": [
+        0.8,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.003218142781406641,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        0.00010727142944233492,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.06436285562813276,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.06436285376548767,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        0.7401728397235268,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.7791293049721335,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        114.85440000000001,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.7791293049721335,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.004743986086956522,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0015258433055498812,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057163,
+      "step_observed_expected_scales": [
+        0.006783626095057163,
+        0.006897601195822454,
+        0.007008601167568331,
+        0.007116641403118786,
+        0.007221735700795276,
+        0.007323913683489558,
+        0.007423205129666937,
+        0.007519637119098902
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 1.4901161145275399e-08,
+      "maximum_source_prediction_error_m_s": 0.0015258433055498812
+    },
+    {
+      "case": "current_x_negative",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 2.3,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        -0.4,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        -0.0008045356953516603,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        -2.681785736058373e-05,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        -0.01609071390703326,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        -0.016090713441371918,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        -0.1850432099308825,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        -0.19478232624303424,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -28.713600000000003,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        -0.19478232624303424,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        -0.0011859965217391306,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057193,
+      "step_observed_expected_scales": [
+        0.006783626095057193,
+        0.006897142751253363,
+        0.007007286637809625,
+        0.007114126115271062,
+        0.007217736879010707,
+        0.007318184801941969,
+        0.007415546601490828,
+        0.007509894850803946
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.587935491060958e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "current_1_-1",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 2.75,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        -0.4,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        -0.0008045356953516603,
+        0.0
+      ],
+      "position_m": [
+        0.0,
+        -2.681785736058373e-05,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        -0.01609071390703326,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        -0.016090713441371918,
+        0.0
+      ],
+      "force_ma_N": [
+        0.0,
+        -0.1850432099308825,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        -0.19478232624303424,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        -28.713600000000003,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.0,
+        -0.19478232624303424,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        -0.0011859965217391306,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057193,
+      "step_observed_expected_scales": [
+        0.006783626095057193,
+        0.006897142751253423,
+        0.007007286637809563,
+        0.0071141261152711235,
+        0.007217736879010643,
+        0.007318184801941969,
+        0.007415546601490893,
+        0.007509894850803881
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.587935381773379e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "current_1_1",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 3.2,
+      "dt_s": 0.050000000000000266,
+      "current_m_s": [
+        0,
+        0.4,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        0.0008045356953516603,
+        0.0
+      ],
+      "position_m": [
+        0.0,
+        2.681785736058373e-05,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        0.01609071390703312,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.016090713441371918,
+        0.0
+      ],
+      "force_ma_N": [
+        0.0,
+        0.18504320993088086,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        0.1947823262430325,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        28.713600000000003,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.0,
+        0.1947823262430325,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.0011859965217391306,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.0067836260950571315,
+      "step_observed_expected_scales": [
+        0.0067836260950571315,
+        0.006897142751253423,
+        0.007007286637809625,
+        0.007114126115271062,
+        0.007217736879010707,
+        0.007318184801941904,
+        0.007415546601490893,
+        0.007509894850803946
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.587935491060958e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "current_2_-1",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 3.65,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        0,
+        -0.4
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        -0.0,
+        -0.0008045356953516603
+      ],
+      "position_m": [
+        0.0,
+        -0.0,
+        -5.000026702880859
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        0.0,
+        -0.01609071390703326
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.0,
+        -0.016090713441371918
+      ],
+      "force_ma_N": [
+        0.0,
+        0.0,
+        -0.1850432099308825
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        0.0,
+        -0.19478232624303424
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        0.0,
+        -28.713600000000003
+      ],
+      "observed_drag_N": [
+        0.0,
+        0.0,
+        -0.19478232624303424
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.0,
+        -0.0011859965217391306
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057193,
+      "step_observed_expected_scales": [
+        0.006783626095057193,
+        0.006897142751253363,
+        0.007007286637809625,
+        0.0071141261152711235,
+        0.007217736879010643,
+        0.007318184801941969,
+        0.007415546601490828,
+        0.007509894850803946
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.587935491060958e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "current_2_1",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 4.1,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        0,
+        0.4
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        -0.0,
+        0.0008045356953516603
+      ],
+      "position_m": [
+        0.0,
+        -0.0,
+        -4.999973297119141
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        0.0,
+        0.01609071390703326
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.0,
+        0.016090713441371918
+      ],
+      "force_ma_N": [
+        0.0,
+        0.0,
+        0.1850432099308825
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        0.0,
+        0.19478232624303424
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        0.0,
+        28.713600000000003
+      ],
+      "observed_drag_N": [
+        0.0,
+        0.0,
+        0.19478232624303424
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.0,
+        0.0011859965217391306
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057193,
+      "step_observed_expected_scales": [
+        0.006783626095057193,
+        0.006897142751253302,
+        0.007007286637809625,
+        0.0071141261152711235,
+        0.007217736879010707,
+        0.007318184801941969,
+        0.007415546601490761,
+        0.007509894850803946
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.587935491060958e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "yaw90_world_current",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 4.55,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0.4,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0008045356953516603,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        2.681785736058373e-05,
+        -3.3306689994292145e-18,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        90.00000762939453
+      ],
+      "acceleration_fd_m_s2": [
+        0.01609071390703326,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.016090713441371918,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        0.1850432099308825,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.19478232624303424,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        28.713600000000003,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.19478232624303424,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0011859965217391306,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.0003814608263874703,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": 0.006783626095057193,
+      "step_observed_expected_scales": [
+        0.006783626095057193,
+        0.006897142751253423,
+        0.0070072866378095,
+        0.0071141261152711235,
+        0.007217736879010707,
+        0.007318184801941969,
+        0.007415546601490893,
+        0.007509894850803813
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 5.5879352724858e-09,
+      "maximum_source_prediction_error_m_s": 0.0003814608263874703
+    },
+    {
+      "case": "thrust_0_10N",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 5.0,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.02801932394504547,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        0.0009339775424450636,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.5603864789009114,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.5603864789009094,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        6.4444445073604815,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        6.78362579722156,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        10,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        -3.2163742027784403,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.041304347826086954,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.013285023881041483,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": null,
+      "step_observed_expected_scales": [
+        null,
+        22.03314069190769,
+        5.501877988992931,
+        2.443791907788607,
+        1.3745620773929184,
+        0.8801645396943861,
+        0.6118734555750598,
+        0.4502649034204361
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 1.4901161032865318e-07,
+      "maximum_source_prediction_error_m_s": 0.013285023881041483
+    },
+    {
+      "case": "thrust_1_10N",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 5.45,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        0.02801932394504547,
+        0.0
+      ],
+      "position_m": [
+        0.0,
+        0.0009339775424450636,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        -2.202285834517314e-22,
+        1.4432900445092668e-17
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        0.5603864789009114,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.5603864789009094,
+        0.0
+      ],
+      "force_ma_N": [
+        0.0,
+        6.4444445073604815,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        6.78362579722156,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        10,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.0,
+        -3.2163742027784403,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.041304347826086954,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.013285023881041483,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": null,
+      "step_observed_expected_scales": [
+        null,
+        22.03314069190769,
+        5.501877988992931,
+        2.4437919077885004,
+        1.374562077392981,
+        0.8801645396943861,
+        0.6118734555750598,
+        0.4502649034204361
+      ],
+      "maximum_angular_velocity_rad_s": 9.881381241083211e-17,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 1.4901161032865318e-07,
+      "maximum_source_prediction_error_m_s": 0.013285023881041483
+    },
+    {
+      "case": "thrust_2_10N",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 5.9,
+      "dt_s": 0.05000000000000071,
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.0,
+        -0.0,
+        0.02801932394504547
+      ],
+      "position_m": [
+        0.0,
+        -0.0,
+        -4.99906587600708
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        4.933120026980713e-20,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        0.0,
+        0.5603864789009014
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.0,
+        0.5603864789009094
+      ],
+      "force_ma_N": [
+        0.0,
+        0.0,
+        6.444444507360366
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        0.0,
+        6.783625797221439
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        10
+      ],
+      "expected_drag_N": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        0.0,
+        0.0,
+        -3.216374202778561
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.0,
+        0.041304347826086954
+      ],
+      "source_prediction_velocity_error_m_s": 0.013285023881041483,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": null,
+      "step_observed_expected_scales": [
+        null,
+        22.03314069190769,
+        5.501874678352066,
+        2.4437929055059233,
+        1.3745620773929184,
+        0.8801645396944283,
+        0.6118734555750598,
+        0.4502649034204361
+      ],
+      "maximum_angular_velocity_rad_s": 3.61791480836619e-19,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 1.4901161032865318e-07,
+      "maximum_source_prediction_error_m_s": 0.013285023881041483
+    },
+    {
+      "case": "gravity_air",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 6.35,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_m_s": [
+        0.0,
+        -0.0,
+        -0.31577780842781067
+      ],
+      "position_m": [
+        0.0,
+        -0.0,
+        19.989473342895508
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        0.0,
+        -0.0,
+        -6.315556168556236
+      ],
+      "acceleration_sensor_m_s2": [
+        0.0,
+        0.0,
+        -6.315556049346924
+      ],
+      "force_ma_N": [
+        0.0,
+        -0.0,
+        -72.62889593839671
+      ],
+      "force_reconstructed_N": [
+        0.0,
+        -0.0,
+        -76.45146940883865
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        0,
+        0,
+        0
+      ],
+      "observed_drag_N": [
+        0.0,
+        -0.0,
+        36.248530591161355
+      ],
+      "predicted_source_velocity_m_s": [
+        0.0,
+        0.0,
+        -0.4655
+      ],
+      "source_prediction_velocity_error_m_s": 0.14972219157218936,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": null,
+      "step_observed_expected_scales": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 9.536743350579968e-07,
+      "maximum_source_prediction_error_m_s": 0.14972219157218936
+    },
+    {
+      "case": "moving_zero_current",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 6.8,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "velocity_before_m_s": [
+        0.3866666555404663,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.3730259835720062,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        0.025323089212179184,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        -0.2728134393692026,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        -0.2728136479854584,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        -3.1373545527458297,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        1.3782231431258463,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -26.831262455879237,
+        0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        1.3782231431258463,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.3662250749663523,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.00680090860565391,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": -0.05136631738413976,
+      "step_observed_expected_scales": [
+        -0.05136631738413976,
+        -0.05349264905742899,
+        -0.055692325326911964,
+        -0.05796782000288768,
+        -0.060321954479210065,
+        -0.06275719193884274,
+        -0.06527623365722748,
+        -0.06788205052182754
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 3.129243821009542e-07,
+      "maximum_source_prediction_error_m_s": 0.00680090860565391
+    },
+    {
+      "case": "moving_matched_current",
+      "trial": 0,
+      "ticks_per_sec": 20,
+      "step": 0,
+      "time_s": 7.25,
+      "dt_s": 0.04999999999999982,
+      "current_m_s": [
+        0.3866666555404663,
+        -0.0,
+        0.0
+      ],
+      "velocity_before_m_s": [
+        0.3866666555404663,
+        -0.0,
+        0.0
+      ],
+      "velocity_m_s": [
+        0.3737777769565582,
+        -0.0,
+        0.0
+      ],
+      "position_m": [
+        0.025348149240016937,
+        -0.0,
+        -5.0
+      ],
+      "angular_velocity_rad_s": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rpy_deg": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "acceleration_fd_m_s2": [
+        -0.2577775716781625,
+        0.0,
+        0.0
+      ],
+      "acceleration_sensor_m_s2": [
+        -0.25777778029441833,
+        0.0,
+        0.0
+      ],
+      "force_ma_N": [
+        -2.964442074298869,
+        0.0,
+        0.0
+      ],
+      "force_reconstructed_N": [
+        1.5602362783331702,
+        0.0,
+        0.0
+      ],
+      "thrust_reference_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_drag_N": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "observed_drag_N": [
+        1.5602362783331702,
+        0.0,
+        0.0
+      ],
+      "predicted_source_velocity_m_s": [
+        0.367333322763443,
+        0.0,
+        0.0
+      ],
+      "source_prediction_velocity_error_m_s": 0.006444454193115234,
+      "damping_gain": 0.95,
+      "collision": false,
+      "observed_expected_scale": null,
+      "step_observed_expected_scales": [
+        null,
+        50.597313761561026,
+        12.651591978670528,
+        5.624899960882008,
+        3.165666219131207,
+        2.0274105512954668,
+        1.409126082239659,
+        1.036343615195106
+      ],
+      "maximum_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "maximum_sensor_fd_error_m_s2": 4.91738318592061e-07,
+      "maximum_source_prediction_error_m_s": 0.006444454193115234
+    }
+  ],
+  "raw_sha256": "e2698fd5f9a0fd54dbdb06afd299272883027296693229b119e05c218606e1f0",
+  "scenario_sha256": {
+    "20": "2e77b9280decaf35f392c65f458fb3ff244f6be710d984507090622a0a992844"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-10-07T22:03:10.355442+00:00",
+  "purpose": "minimal reproduction script of docs/holoocean_drag_issue_draft.md, run as published on both binaries",
+  "script_sha256": "d894013be2c2417b1866fee5e0550895fe776152433e58216623a0721fc080f4",
+  "patched_variant": "identical except the environment is started with tools/holoocean_backend.make_env(cfg, 100, binary=<patched Holodeck.exe>)",
+  "official": {
+    "binary_sha256": "8c206c9cc05c640fb2efea6bd43bda33c585536ab16a931c55780855e7602253",
+    "output": [
+      "u=0.1, expected=1.794600 N, observed=0.017946 N",
+      "u=0.2, expected=7.178400 N, observed=0.071784 N",
+      "u=0.4, expected=28.713600 N, observed=0.287136 N",
+      "u=0.8, expected=114.854400 N, observed=1.148544 N",
+      "u=0.0, expected=10.000000 N, observed=9.999999 N"
+    ]
+  },
+  "patched": {
+    "binary_sha256": "4d6c2d46be8703758fbe4e9b62a99d4037aec0e220cca3a60b22b488d441684a",
+    "output": [
+      "u=0.1, expected=1.794600 N, observed=1.794600 N",
+      "u=0.2, expected=7.178400 N, observed=7.178401 N",
+      "u=0.4, expected=28.713600 N, observed=28.713602 N",
+      "u=0.8, expected=114.854400 N, observed=114.854408 N",
+      "u=0.0, expected=10.000000 N, observed=9.999999 N"
+    ]
+  },
+  "holodeck_processes_after": 0
+}

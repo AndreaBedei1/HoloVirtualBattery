@@ -1,0 +1,2 @@
+HoloOcean backend drag scale: FAIL: current detected ~0.0100 drag scaling associated with unpatched HoloOcean 2.3.0 (missing N -> UE force conversion; see patches/README.md); still water detected ~0.0100 drag scaling associated with unpatched HoloOcean 2.3.0 (missing N -> UE force conversion; see patches/README.md)
+HoloOcean physics step at 100 Hz: PASS: physics/client step ratio 1.000000

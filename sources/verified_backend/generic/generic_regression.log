@@ -1,0 +1,29 @@
+== my_vehicle_energy_demo.py 
+MyCustomROV: 6 actuators, 24 V
+Terminal energy: 0.355278 Wh
+Demonstration configuration; no vehicle dynamics or physical validation
+exit=0
+== my_vehicle_energy_demo.py --config configs/custom_rov.yaml
+MyCustomROV: 6 actuators, 24 V
+Terminal energy: 0.400000 Wh
+Demonstration configuration; no vehicle dynamics or physical validation
+exit=0
+== my_vehicle_energy_demo.py --config configs/generic_lightweight_rov.yaml
+Generic lightweight ROV: 4 actuators, 12 V
+Terminal energy: 0.222222 Wh
+Demonstration configuration; no vehicle dynamics or physical validation
+exit=0
+== my_vehicle_energy_demo.py --config configs/generic_auv.yaml
+Generic AUV: 1 actuators, 24 V
+Terminal energy: 0.193056 Wh
+Demonstration configuration; no vehicle dynamics or physical validation
+exit=0
+== bluerov2 synthetic
+Final temperature: 19.932 C
+Log: logs\verified_backend\generic\energy_demo.jsonl
+== generic_scenarios
+Verified 7 same-effort scenarios: logs\verified_backend\generic\scenarios
+== compare L0/L1 synthetic
+L0: 0.262686 Wh; SOC 0.999014; overhead 0.395708 s; mission completion None
+L1: 0.263642 Wh; SOC 0.999112; overhead 0.309893 s; mission completion None
+Placeholders remain; no vehicle goal criterion was supplied. See comparison.json/csv.

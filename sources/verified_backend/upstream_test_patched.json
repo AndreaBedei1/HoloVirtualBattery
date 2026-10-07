@@ -1,0 +1,121 @@
+{
+  "created_utc": "2026-10-07T21:46:18.490920+00:00",
+  "scope": "second-agent implementation check; not vehicle validation",
+  "holoenergy_repository": {
+    "commit": "a77741395b88aa2abd1d0782211c183ef7acee2b",
+    "status": ""
+  },
+  "runtime": {
+    "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+    "python_version": "3.10.20",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "holoocean_version": "2.3.0",
+    "client_root": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean",
+    "client_file_sha256": {
+      "agents.py": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+      "environments.py": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "command.py": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+      "sensors.py": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+      "packagemanager.py": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0"
+    },
+    "client_install_origin": "{\"dir_info\": {}, \"url\": \"file:///C:/Users/Andrea/Downloads/HoloOcean-2.3.0/client\"}",
+    "binary_path": "C:\\HOB\\packages\\patched-after\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+    "binary_sha256": "4d6c2d46be8703758fbe4e9b62a99d4037aec0e220cca3a60b22b488d441684a",
+    "binary_size_bytes": 254710784,
+    "pdb_sha256": "0d3196d968e1f9f73b770e536ae00a595dda613f63254b1edfacacf91c7e6ca5",
+    "package_root": "C:\\HOB\\packages\\patched-after\\Ocean",
+    "package_config_path": "C:\\HOB\\packages\\patched-after\\Ocean\\config.json",
+    "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+    "build_manifest_path": "C:\\HOB\\packages\\patched-after\\Ocean\\holoenergy_build_manifest.json",
+    "build_manifest_sha256": "39ee5b3559f9ea3aba3e54be34617735a227348b6a442427efcb0393701cd1da",
+    "build_variant": "patched-after",
+    "build_source_commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+    "build_patch_sha256": "00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa",
+    "package_version": "2.3.0",
+    "package_worlds": [
+      "Rooms",
+      "ModernOffice",
+      "CorporateOffice",
+      "ExampleLevel",
+      "Tank",
+      "SimpleUnderwater",
+      "PierHarbor",
+      "OpenWater",
+      "FlatUnderwater",
+      "Dam"
+    ],
+    "source_binary_build_identity": "separate build: see build manifest"
+  },
+  "parameters": {
+    "mass_kg": 31.02,
+    "drag_coefficient": 0.8,
+    "area_m2": 0.5,
+    "density_kg_m3": 997.0,
+    "linear_damping_per_s": 1.0,
+    "ticks_per_sec": 60
+  },
+  "upstream_expected_m_s2": 0.06320982,
+  "si_expected_m_s2": 6.320975714592736,
+  "upstream_value_over_si": 0.010000009943729493,
+  "rows": [
+    {
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "acceleration_m_s2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "current_m_s": [
+        1,
+        0,
+        0
+      ],
+      "acceleration_m_s2": [
+        6.3209757804870605,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "current_m_s": [
+        0,
+        1,
+        0
+      ],
+      "acceleration_m_s2": [
+        0.0,
+        6.3209757804870605,
+        0.0
+      ]
+    },
+    {
+      "current_m_s": [
+        0,
+        0,
+        1
+      ],
+      "acceleration_m_s2": [
+        0.0,
+        0.0,
+        6.3209757804870605
+      ]
+    }
+  ],
+  "measured_over_si": [
+    1.0000000104247078,
+    1.0000000104247078,
+    1.0000000104247078
+  ],
+  "measured_over_upstream": [
+    99.99990160527368,
+    99.99990160527368,
+    99.99990160527368
+  ],
+  "null_current_max_abs_m_s2": 0.0
+}

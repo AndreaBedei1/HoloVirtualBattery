@@ -1,0 +1,506 @@
+{
+  "created_utc": "2026-10-07T22:03:16.729715+00:00",
+  "scope": "native physics implementation verification; not physical vehicle validation",
+  "items": [
+    {
+      "item": "drag BEFORE (official 2.3.0)",
+      "criterion": "decisive campaign CASE C, applied/expected mean within 0.1% of 0.01, references verified",
+      "values": {
+        "case": "CASE C",
+        "scale_mean": 0.009999999703068724
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "control rebuild reproduces official binary",
+      "criterion": "same case and every first-step velocity within 1e-6 m/s of the official run",
+      "values": {
+        "case": "CASE C",
+        "scale_mean": 0.009999999703068724,
+        "max_velocity_difference_m_s": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "drag AFTER (patched 2.3.0)",
+      "criterion": "decisive campaign CASE A, applied/expected mean within 0.1% of 1",
+      "values": {
+        "case": "CASE A",
+        "scale_mean": 1.0000000073866224
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "thruster force 10 N X/Y/Z",
+      "criterion": "every build: error < 0.05",
+      "values": {
+        "original": 6.186246395145645e-07,
+        "rebuilt": 6.186246395145645e-07,
+        "patched": 6.186246395145645e-07
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "gravity 9.8 m/s^2",
+      "criterion": "every build: error < 0.02",
+      "values": {
+        "original": 7.160639707848304e-07,
+        "rebuilt": 7.160639707848304e-07,
+        "patched": 7.160639707848304e-07
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "neutral buoyancy, zero current",
+      "criterion": "check 'neutral_zero_motion_below_1e_6_m_s' in every build",
+      "values": {
+        "original": true,
+        "rebuilt": true,
+        "patched": true
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "angular stability",
+      "criterion": "check 'angular_motion_below_1e_4_rad_s' in every build",
+      "values": {
+        "original": true,
+        "rebuilt": true,
+        "patched": true
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "no collisions",
+      "criterion": "check 'no_collisions' in every build",
+      "values": {
+        "original": true,
+        "rebuilt": true,
+        "patched": true
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "quadratic scaling",
+      "criterion": "check 'quadratic_doubling_ratios_near_4' in every build",
+      "values": {
+        "original": true,
+        "rebuilt": true,
+        "patched": true
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "current axes and signs, yaw 90 deg",
+      "criterion": "before ~0.01, after ~1 for +-X/+-Y/+-Z and yawed vehicle",
+      "values": {
+        "original": 0.009999999703068705,
+        "rebuilt": 0.009999999703068705,
+        "patched": 1.0000000073866206
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "autodrag (moving vehicle, still water)",
+      "criterion": "before ~0.01, after ~1 on first pulse and on every step",
+      "values": {
+        "original": {
+          "first_pulse": 0.010000136472730571,
+          "all_steps": 0.009999993034349099
+        },
+        "rebuilt": {
+          "first_pulse": 0.010000136472730571,
+          "all_steps": 0.009999993034349099
+        },
+        "patched": {
+          "first_pulse": 1.000000168635534,
+          "all_steps": 1.0000000180308002
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "timestep (original)",
+      "criterion": ">= 30 Hz consistent (|ratio-1| < 1e-4); 20 Hz capped at 1/30 s (ratio 2/3)",
+      "values": {
+        "verified": [
+          30,
+          40,
+          60,
+          100,
+          200
+        ],
+        "rejected": [
+          20
+        ],
+        "ratios": {
+          "20": 0.6666667105693195,
+          "30": 1.0000000658539794,
+          "40": 1.0000000333528662,
+          "60": 0.9999999525721098,
+          "100": 1.000000016042421,
+          "200": 1.000000142961643
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "timestep (rebuilt)",
+      "criterion": ">= 30 Hz consistent (|ratio-1| < 1e-4); 20 Hz capped at 1/30 s (ratio 2/3)",
+      "values": {
+        "verified": [
+          30,
+          40,
+          60,
+          100,
+          200
+        ],
+        "rejected": [
+          20
+        ],
+        "ratios": {
+          "20": 0.6666667105693195,
+          "30": 1.0000000658539794,
+          "40": 1.0000000333528662,
+          "60": 0.9999999525721098,
+          "100": 1.000000016042421,
+          "200": 1.000000142961643
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "timestep (patched)",
+      "criterion": ">= 30 Hz consistent (|ratio-1| < 1e-4); 20 Hz capped at 1/30 s (ratio 2/3)",
+      "values": {
+        "verified": [
+          30,
+          40,
+          60,
+          100,
+          200
+        ],
+        "rejected": [
+          20
+        ],
+        "ratios": {
+          "20": 0.6666667105693195,
+          "30": 1.0000000658539794,
+          "40": 1.0000000333528662,
+          "60": 0.9999999525721098,
+          "100": 1.000000016042421,
+          "200": 1.000000142961643
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "backend check (original)",
+      "criterion": "drag FAIL, physics step PASS at 100 Hz",
+      "values": {
+        "drag": {
+          "status": "FAIL",
+          "current_ratio": 0.009999999531420507,
+          "still_water_ratio": 0.010000365838689138
+        },
+        "physics_step": {
+          "status": "PASS",
+          "physics_to_client_ratio": 0.9999999202892736
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "backend check (rebuilt)",
+      "criterion": "drag FAIL, physics step PASS at 100 Hz",
+      "values": {
+        "drag": {
+          "status": "FAIL",
+          "current_ratio": 0.009999999531420507,
+          "still_water_ratio": 0.010000365838689138
+        },
+        "physics_step": {
+          "status": "PASS",
+          "physics_to_client_ratio": 0.9999999202892736
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "backend check (patched)",
+      "criterion": "drag PASS, physics step PASS at 100 Hz",
+      "values": {
+        "drag": {
+          "status": "PASS",
+          "current_ratio": 1.0000000096573967,
+          "still_water_ratio": 1.0000002332166544
+        },
+        "physics_step": {
+          "status": "PASS",
+          "physics_to_client_ratio": 0.9999999822475638
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "station keeping, patched",
+      "criterion": "tail propulsion power strictly increasing with current (no fitting)",
+      "values": {
+        "current_m_s": [
+          0,
+          0.2,
+          0.5,
+          0.8
+        ],
+        "mean_tail_propulsion_W": [
+          0.0,
+          15.874734858911804,
+          408.0000081512582,
+          833.5279602905674
+        ],
+        "tail_saturated_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "mission movement, patched",
+      "criterion": "all missions completed the reference plan; energies reported",
+      "values": {
+        "current_m_s": [
+          0,
+          0.2,
+          0.4
+        ],
+        "terminal_Wh": [
+          0.9505931685315068,
+          1.9267106877612223,
+          4.2689256600842205
+        ],
+        "max_position_error_m": [
+          0.5374872088900756,
+          0.9648723851321357,
+          1.1757654665289308
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "energy step refinement 100 -> 200 Hz, patched",
+      "criterion": "propulsion energy changes by less than 1% when the step is halved",
+      "values": {
+        "relative_change": {
+          "station_0.5": 0.00010129972467565196,
+          "mission_0.2": -0.00035861857385777185
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "HoloEnergy derating, patched",
+      "criterion": "8 A test limit derates actions (factor < 1) and shortens surge vs accounting-only",
+      "values": {
+        "minimum_derating_factor": 0.4906378807500005,
+        "surge_derated_m": 1.049912452697754,
+        "surge_accounting_only_m": 1.5531010627746582
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "dashboard, patched",
+      "criterion": "telemetry published during the native run, none dropped, power limit applied",
+      "values": {
+        "telemetry_sent": 1454,
+        "telemetry_dropped": 0,
+        "minimum_derating_factor": 0.39548370070406236
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "upstream test_currents reproduction (HoveringAUV, 60 Hz)",
+      "criterion": "official binary = upstream constant = 0.01 x SI; patched = SI (each axis, 0.1%)",
+      "values": {
+        "measured_over_si": {
+          "original": [
+            0.010000000009950489,
+            0.010000000009950489,
+            0.010000000009950489
+          ],
+          "patched": [
+            1.0000000104247078,
+            1.0000000104247078,
+            1.0000000104247078
+          ]
+        },
+        "upstream_constant_over_si": 0.010000009943729493
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "before/after mission demo",
+      "criterion": "same mission and controller on both builds; AFTER mean drag > 10x BEFORE",
+      "values": {
+        "current_m_s": 0.4,
+        "mean_drag_N": [
+          0.3557848378925656,
+          34.08069505324257
+        ],
+        "propulsion_Wh": [
+          0.07086073836258712,
+          3.832598499590412
+        ],
+        "terminal_Wh": [
+          0.5071878988563955,
+          4.2689256600842205
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "genericity regression (non-HoloOcean configurations)",
+      "criterion": "generic scenarios and L0/L1 comparison run unchanged",
+      "values": {
+        "generic_scenarios": 7,
+        "comparison_models": [
+          "L0",
+          "L1"
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "item": "clean shutdown",
+      "criterion": "no Holodeck process left; integration processes closed; exit codes as expected",
+      "values": {
+        "checked_utc": "2026-10-07T21:59:10.560851+00:00",
+        "method": "tasklist /FO CSV after the last native run; image names containing 'holodeck'",
+        "holodeck_processes_after_campaign": 0,
+        "holodeck_process_names": [],
+        "runs": [
+          {
+            "run": "check_original",
+            "exit_code": 1,
+            "expected_exit_code": 1
+          },
+          {
+            "run": "check_rebuilt",
+            "exit_code": 1,
+            "expected_exit_code": 1
+          },
+          {
+            "run": "check_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "drag_original",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "drag_rebuilt",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "drag_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "autodrag_original",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "autodrag_rebuilt",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "autodrag_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "diag20_original",
+            "exit_code": 1,
+            "expected_exit_code": 1
+          },
+          {
+            "run": "diag20_patched",
+            "exit_code": 1,
+            "expected_exit_code": 1
+          },
+          {
+            "run": "timestep_original",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "timestep_rebuilt",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "timestep_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "energy_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "energy_original",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "demo_original+patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "upstream_test_original",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "upstream_test_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "refinement_200hz",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "derating_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "dashboard_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          }
+        ],
+        "exit_code_notes": {
+          "check_original/check_rebuilt = 1": "backend check FAIL by design (drag ~0.01)",
+          "diag20_* = 1": "20 Hz diagnostic reports INCONCLUSIVE (physics step capped at 1/30 s)"
+        },
+        "all_exit_codes_as_expected": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "passed": 26,
+  "failed": []
+}

@@ -1,0 +1,34 @@
+== check [original]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/check_holoocean_backend.py --binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --source-dir C:\HOB\src\before --output logs\verified_backend\check_original.json
+   exit 1 in 15 s
+== check [rebuilt]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/check_holoocean_backend.py --binary C:\HOB\packages\rebuilt-before\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --source-dir C:\HOB\src\before --output logs\verified_backend\check_rebuilt.json
+   exit 1 in 17 s
+== check [patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/check_holoocean_backend.py --binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --source-dir C:\HOB\src\after --output logs\verified_backend\check_patched.json
+   exit 0 in 17 s
+== drag [original]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\before --binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --ticks-per-sec 60 100 200 --repeats 3 --steps-per-case 8 --output-dir logs\verified_backend\drag_original
+   exit 0 in 291 s
+== drag [rebuilt]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\before --binary C:\HOB\packages\rebuilt-before\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --ticks-per-sec 60 100 200 --repeats 3 --steps-per-case 8 --output-dir logs\verified_backend\drag_rebuilt
+   exit 0 in 311 s
+== drag [patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\after --binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --ticks-per-sec 60 100 200 --repeats 3 --steps-per-case 8 --output-dir logs\verified_backend\drag_patched
+   exit 0 in 330 s
+== autodrag [original]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\before --binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --case-set autodrag --ticks-per-sec 60 100 200 --repeats 3 --steps-per-case 8 --output-dir logs\verified_backend\autodrag_original
+   exit 0 in 219 s
+== autodrag [rebuilt]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\before --binary C:\HOB\packages\rebuilt-before\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --case-set autodrag --ticks-per-sec 60 100 200 --repeats 3 --steps-per-case 8 --output-dir logs\verified_backend\autodrag_rebuilt
+   exit 0 in 223 s
+== autodrag [patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\after --binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --case-set autodrag --ticks-per-sec 60 100 200 --repeats 3 --steps-per-case 8 --output-dir logs\verified_backend\autodrag_patched
+   exit 0 in 211 s
+== diag20 [original]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\before --binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --ticks-per-sec 20 --repeats 1 --steps-per-case 8 --output-dir logs\verified_backend\diag20_original
+   exit 1 in 35 s
+== diag20 [patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/verify_holoocean_drag_units.py --source-dir C:\HOB\src\after --binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --ticks-per-sec 20 --repeats 1 --steps-per-case 8 --output-dir logs\verified_backend\diag20_patched
+   exit 1 in 39 s
+== timestep [original]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/audit_holoocean_timestep.py --source-dir C:\HOB\src\before --binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --drag-stability --output-dir logs\verified_backend\timestep_original
+   exit 0 in 172 s
+== timestep [rebuilt]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/audit_holoocean_timestep.py --source-dir C:\HOB\src\before --binary C:\HOB\packages\rebuilt-before\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --drag-stability --output-dir logs\verified_backend\timestep_rebuilt
+   exit 0 in 178 s
+== timestep [patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/audit_holoocean_timestep.py --source-dir C:\HOB\src\after --binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --drag-stability --output-dir logs\verified_backend\timestep_patched
+   exit 0 in 171 s
+== energy [patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/native_current_energy_study.py --holoocean-binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --output-dir logs\verified_backend\energy_patched --label patched
+   exit 0 in 1209 s
+== energy [original]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/native_current_energy_study.py --holoocean-binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --experiments station mission --output-dir logs\verified_backend\energy_original --label original
+   exit 0 in 626 s
+== demo [original+patched]: C:/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/holoocean_before_after_demo.py --before-binary C:\Users\Andrea\AppData\Local\holoocean\2.3.0\worlds\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --after-binary C:\HOB\packages\patched-after\Ocean\Windows\Holodeck\Binaries\Win64\Holodeck.exe --current 0.4 --output-dir logs\verified_backend\demo
+   exit 0 in 256 s

@@ -1,0 +1,2459 @@
+{
+  "scope": "physics implementation verification; not physical vehicle validation",
+  "provenance": {
+    "created_utc": "2026-10-07T21:01:14.942709+00:00",
+    "holoenergy_repository": {
+      "commit": "aeeb84f88d58dc42dc9935890f06683586acf567",
+      "status": ""
+    },
+    "tooling_sha256": {
+      "tools/audit_holoocean_timestep.py": "0944f7ace99b7b7eba3004e68f818fd9577cb01cfabd5b8414181d68ddd0bdff",
+      "tools/audit_holoocean_drag.py": "2a682eb5e018c90f6ac1a9de2946033015f23cce28d5a423b09c907887589801",
+      "tools/holoocean_backend.py": "a1e240df49b9946f61a33b9923d34ed1e8c606e6f2303b6aeaacc88e4cedd698"
+    },
+    "source": {
+      "root": "C:\\HOB\\src\\before",
+      "git": {
+        "commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+        "status": ""
+      },
+      "parameters": {
+        "mass_kg": 11.5,
+        "drag_coefficient": 0.8,
+        "area_m2": 0.45,
+        "density_kg_m3": 997.0,
+        "ue_units_per_m": 100.0,
+        "linear_damping_per_s": 1.0,
+        "source_drag_scale_to_SI": 0.01,
+        "explicit_drag_unit_conversion": false,
+        "fully_submerged_ratio": 1.0,
+        "neutral_volume_m3": 0.011534603811434303,
+        "parameter_origin": "official/local C++ literals; no runtime fit"
+      },
+      "files": {
+        "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp": {
+          "sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+          "line_anchors": {
+            "DragForce": [
+              53,
+              91,
+              94
+            ],
+            "RelativeVel": [
+              90,
+              91,
+              92
+            ],
+            "AddForce": [
+              77,
+              84,
+              93
+            ],
+            "ConvertLinearVector": [
+              75,
+              82
+            ]
+          }
+        },
+        "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h": {
+          "sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+          "line_anchors": {
+            "DragForce": [
+              56
+            ]
+          }
+        },
+        "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": {
+          "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+          "line_anchors": {
+            "AddForce": [
+              66,
+              107
+            ],
+            "ConvertLinearVector": [
+              58,
+              97
+            ]
+          }
+        },
+        "engine/Source/Holodeck/Agents/Public/BlueROV2.h": {
+          "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+          "line_anchors": {}
+        },
+        "engine/Source/Holodeck/Agents/Private/BlueROV2ControlThrusters.cpp": {
+          "sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+          "line_anchors": {
+            "DragForce": [
+              29
+            ]
+          }
+        },
+        "engine/Source/Holodeck/General/Private/Conversion.cpp": {
+          "sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              95
+            ]
+          }
+        },
+        "engine/Source/Holodeck/General/Public/Conversion.h": {
+          "sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              19
+            ]
+          }
+        },
+        "engine/Source/Holodeck/ClientCommands/Private/OceanCurrentsCommand.cpp": {
+          "sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+          "line_anchors": {}
+        },
+        "engine/Source/Holodeck/Sensors/Private/DynamicsSensor.cpp": {
+          "sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+          "line_anchors": {
+            "ConvertLinearVector": [
+              66,
+              75
+            ]
+          }
+        }
+      }
+    },
+    "runtime": {
+      "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+      "python_version": "3.10.20",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "holoocean_version": "2.3.0",
+      "client_root": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean",
+      "client_file_sha256": {
+        "agents.py": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+        "environments.py": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+        "command.py": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+        "sensors.py": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+        "packagemanager.py": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0"
+      },
+      "client_install_origin": "{\"dir_info\": {}, \"url\": \"file:///C:/Users/Andrea/Downloads/HoloOcean-2.3.0/client\"}",
+      "binary_path": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "binary_sha256": "8c206c9cc05c640fb2efea6bd43bda33c585536ab16a931c55780855e7602253",
+      "binary_size_bytes": 255731200,
+      "pdb_sha256": "71feacc5f34f0004931c297c54361a2d8e67eed28c6884d3c2353b93dc7a5b3f",
+      "package_root": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean",
+      "package_config_path": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\config.json",
+      "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+      "build_manifest_path": null,
+      "build_manifest_sha256": null,
+      "build_variant": "installed package",
+      "build_source_commit": null,
+      "build_patch_sha256": null,
+      "package_version": "2.3.0",
+      "package_worlds": [
+        "Rooms",
+        "ModernOffice",
+        "CorporateOffice",
+        "ExampleLevel",
+        "Tank",
+        "SimpleUnderwater",
+        "PierHarbor",
+        "OpenWater",
+        "FlatUnderwater",
+        "Dam"
+      ],
+      "source_binary_build_identity": "not established by package version or behavioral conformance"
+    },
+    "cases": [
+      {
+        "name": "gravity_air",
+        "location": [
+          0,
+          0,
+          20
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "air_moving_x",
+        "location": [
+          0,
+          0,
+          20
+        ],
+        "velocity": [
+          1.0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "thrust_x_10N_water",
+        "location": [
+          0,
+          0,
+          -5
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "thrust": 1
+      },
+      {
+        "name": "still_water_deceleration_2_5",
+        "location": [
+          0,
+          0,
+          -5
+        ],
+        "velocity": [
+          2.5,
+          0,
+          0
+        ]
+      }
+    ],
+    "arguments": {
+      "source_dir": "C:\\HOB\\src\\before",
+      "binary": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "ticks_per_sec": [
+        20,
+        30,
+        40,
+        60,
+        100,
+        200
+      ],
+      "repeats": 3,
+      "steps_per_case": 12,
+      "drag_stability": true,
+      "output_dir": "logs\\verified_backend\\timestep_original"
+    },
+    "ue_reference": {
+      "MaxPhysicsDeltaTime_default_s": 0.03333333333333333,
+      "bSubstepping_default": false,
+      "rule": "FChaosScene::SetUpForFrame: MDeltaTime = min(DeltaSeconds, MaxPhysicsDeltaTime)"
+    }
+  },
+  "result_by_tick_rate": {
+    "20": {
+      "ticks_per_sec": 20,
+      "client_dt_s": 0.05,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.05,
+        "min": 0.04999999999999982,
+        "max": 0.05000000000000071,
+        "stdev": 2.745476982331266e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.05000000135414693,
+        "min": 0.049999894792190025,
+        "max": 0.05000004278166378,
+        "stdev": 2.63772734882664e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.033333337256001135,
+          "min": 0.033333313667669943,
+          "max": 0.033333360053096325,
+          "stdev": 1.0742044163439712e-08
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.03333333367038341,
+          "min": 0.03333333367038341,
+          "max": 0.03333333367038341,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.03333333395577104,
+          "min": 0.03333327448757406,
+          "max": 0.033333385666825754,
+          "stdev": 3.091145023204957e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.03333333495018617,
+          "min": 0.033333312443451835,
+          "max": 0.033333354062185155,
+          "stdev": 8.371413726846956e-09
+        }
+      },
+      "effective_physics_dt_s": 0.03333333552846598,
+      "effective_to_client_ratio": 0.6666667105693195,
+      "kinematic_to_client_ratio": 0.6666666990037234,
+      "world_delta_to_client_ratio": 1.0000000270829386,
+      "predicted_physics_dt_s": 0.03333333507180214,
+      "prediction_relative_error": 1.3699914536147162e-08,
+      "physics_consistent_with_client_clock": false,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.01300434850431655,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.063722281953062e-07,
+          "max_abs_error_vs_continuous_m_s": 0.014589754068107919,
+          "first_step_relative_error_vs_continuous": -0.0009485691953160513,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.385239362716675,
+              "explicit_euler_prediction_m_s": 2.3852394868249154,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.277123212814331,
+              "explicit_euler_prediction_m_s": 2.2771232631038565,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1751458644866943,
+              "explicit_euler_prediction_m_s": 2.175145658114466,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.078850507736206,
+              "explicit_euler_prediction_m_s": 2.078850578776385,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9878249168395996,
+              "explicit_euler_prediction_m_s": 1.9878248804196998,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9016947746276855,
+              "explicit_euler_prediction_m_s": 1.901694827364076,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.8201202154159546,
+              "explicit_euler_prediction_m_s": 1.8201202112081238,
+              "continuous_velocity_m_s": 1.831059751827376
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.7427914142608643,
+              "explicit_euler_prediction_m_s": 1.7427914378287768,
+              "continuous_velocity_m_s": 1.7545939600746954
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.6694257259368896,
+              "explicit_euler_prediction_m_s": 1.6694256522784954,
+              "continuous_velocity_m_s": 1.6819732900623952
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5997642278671265,
+              "explicit_euler_prediction_m_s": 1.5997642819707139,
+              "continuous_velocity_m_s": 1.6129522322714118
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.5335699319839478,
+              "explicit_euler_prediction_m_s": 1.5335699732031658,
+              "continuous_velocity_m_s": 1.5473052163916496
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4706251621246338,
+              "explicit_euler_prediction_m_s": 1.4706250778493761,
+              "continuous_velocity_m_s": 1.484824625469997
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.4333333559334278,
+              "velocity_m_s": 1.4107292890548706,
+              "explicit_euler_prediction_m_s": 1.410729319514409,
+              "continuous_velocity_m_s": 1.4253190431229785
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.01300434850431655,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.063722281953062e-07,
+          "max_abs_error_vs_continuous_m_s": 0.014589754068107919,
+          "first_step_relative_error_vs_continuous": -0.0009485691953160513,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.385239362716675,
+              "explicit_euler_prediction_m_s": 2.3852394868249154,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.277123212814331,
+              "explicit_euler_prediction_m_s": 2.2771232631038565,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1751458644866943,
+              "explicit_euler_prediction_m_s": 2.175145658114466,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.078850507736206,
+              "explicit_euler_prediction_m_s": 2.078850578776385,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9878249168395996,
+              "explicit_euler_prediction_m_s": 1.9878248804196998,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9016947746276855,
+              "explicit_euler_prediction_m_s": 1.901694827364076,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.8201202154159546,
+              "explicit_euler_prediction_m_s": 1.8201202112081238,
+              "continuous_velocity_m_s": 1.831059751827376
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.7427914142608643,
+              "explicit_euler_prediction_m_s": 1.7427914378287768,
+              "continuous_velocity_m_s": 1.7545939600746954
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.6694257259368896,
+              "explicit_euler_prediction_m_s": 1.6694256522784954,
+              "continuous_velocity_m_s": 1.6819732900623952
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5997642278671265,
+              "explicit_euler_prediction_m_s": 1.5997642819707139,
+              "continuous_velocity_m_s": 1.6129522322714118
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.5335699319839478,
+              "explicit_euler_prediction_m_s": 1.5335699732031658,
+              "continuous_velocity_m_s": 1.5473052163916496
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4706251621246338,
+              "explicit_euler_prediction_m_s": 1.4706250778493761,
+              "continuous_velocity_m_s": 1.484824625469997
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.4333333559334278,
+              "velocity_m_s": 1.4107292890548706,
+              "explicit_euler_prediction_m_s": 1.410729319514409,
+              "continuous_velocity_m_s": 1.4253190431229785
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.01300434850431655,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.063722281953062e-07,
+          "max_abs_error_vs_continuous_m_s": 0.014589754068107919,
+          "first_step_relative_error_vs_continuous": -0.0009485691953160513,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.385239362716675,
+              "explicit_euler_prediction_m_s": 2.3852394868249154,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.277123212814331,
+              "explicit_euler_prediction_m_s": 2.2771232631038565,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1751458644866943,
+              "explicit_euler_prediction_m_s": 2.175145658114466,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.078850507736206,
+              "explicit_euler_prediction_m_s": 2.078850578776385,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9878249168395996,
+              "explicit_euler_prediction_m_s": 1.9878248804196998,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9016947746276855,
+              "explicit_euler_prediction_m_s": 1.901694827364076,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.8201202154159546,
+              "explicit_euler_prediction_m_s": 1.8201202112081238,
+              "continuous_velocity_m_s": 1.831059751827376
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.7427914142608643,
+              "explicit_euler_prediction_m_s": 1.7427914378287768,
+              "continuous_velocity_m_s": 1.7545939600746954
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.6694257259368896,
+              "explicit_euler_prediction_m_s": 1.6694256522784954,
+              "continuous_velocity_m_s": 1.6819732900623952
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5997642278671265,
+              "explicit_euler_prediction_m_s": 1.5997642819707139,
+              "continuous_velocity_m_s": 1.6129522322714118
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.5335699319839478,
+              "explicit_euler_prediction_m_s": 1.5335699732031658,
+              "continuous_velocity_m_s": 1.5473052163916496
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4706251621246338,
+              "explicit_euler_prediction_m_s": 1.4706250778493761,
+              "continuous_velocity_m_s": 1.484824625469997
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.4333333559334278,
+              "velocity_m_s": 1.4107292890548706,
+              "explicit_euler_prediction_m_s": 1.410729319514409,
+              "continuous_velocity_m_s": 1.4253190431229785
+            }
+          ]
+        }
+      ]
+    },
+    "30": {
+      "ticks_per_sec": 30,
+      "client_dt_s": 0.03333333333333333,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.03333333333333334,
+        "min": 0.033333333333333215,
+        "max": 0.0333333333333341,
+        "stdev": 2.0255091208160727e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.033333335382075634,
+        "min": 0.03333326579251179,
+        "max": 0.03333336375585153,
+        "stdev": 1.7575154531594496e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.033333337256001135,
+          "min": 0.033333313667669943,
+          "max": 0.033333360053096325,
+          "stdev": 1.0742044163439712e-08
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.03333333367038341,
+          "min": 0.03333333367038341,
+          "max": 0.03333333367038341,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.03333333395577104,
+          "min": 0.03333327448757406,
+          "max": 0.033333385666825754,
+          "stdev": 3.091145023204957e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.03333333495018617,
+          "min": 0.033333312443451835,
+          "max": 0.033333354062185155,
+          "stdev": 8.371413726846956e-09
+        }
+      },
+      "effective_physics_dt_s": 0.03333333552846598,
+      "effective_to_client_ratio": 1.0000000658539794,
+      "kinematic_to_client_ratio": 1.000000048505585,
+      "world_delta_to_client_ratio": 1.000000061462269,
+      "predicted_physics_dt_s": 0.03333333507180214,
+      "prediction_relative_error": 1.3699914536147162e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.01300434850431655,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.063722281953062e-07,
+          "max_abs_error_vs_continuous_m_s": 0.014589754068107919,
+          "first_step_relative_error_vs_continuous": -0.0009485691953160513,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.385239362716675,
+              "explicit_euler_prediction_m_s": 2.3852394868249154,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.277123212814331,
+              "explicit_euler_prediction_m_s": 2.2771232631038565,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1751458644866943,
+              "explicit_euler_prediction_m_s": 2.175145658114466,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.078850507736206,
+              "explicit_euler_prediction_m_s": 2.078850578776385,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9878249168395996,
+              "explicit_euler_prediction_m_s": 1.9878248804196998,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9016947746276855,
+              "explicit_euler_prediction_m_s": 1.901694827364076,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.8201202154159546,
+              "explicit_euler_prediction_m_s": 1.8201202112081238,
+              "continuous_velocity_m_s": 1.831059751827376
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.7427914142608643,
+              "explicit_euler_prediction_m_s": 1.7427914378287768,
+              "continuous_velocity_m_s": 1.7545939600746954
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.6694257259368896,
+              "explicit_euler_prediction_m_s": 1.6694256522784954,
+              "continuous_velocity_m_s": 1.6819732900623952
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5997642278671265,
+              "explicit_euler_prediction_m_s": 1.5997642819707139,
+              "continuous_velocity_m_s": 1.6129522322714118
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.5335699319839478,
+              "explicit_euler_prediction_m_s": 1.5335699732031658,
+              "continuous_velocity_m_s": 1.5473052163916496
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4706251621246338,
+              "explicit_euler_prediction_m_s": 1.4706250778493761,
+              "continuous_velocity_m_s": 1.484824625469997
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.4333333559334278,
+              "velocity_m_s": 1.4107292890548706,
+              "explicit_euler_prediction_m_s": 1.410729319514409,
+              "continuous_velocity_m_s": 1.4253190431229785
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.01300434850431655,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.063722281953062e-07,
+          "max_abs_error_vs_continuous_m_s": 0.014589754068107919,
+          "first_step_relative_error_vs_continuous": -0.0009485691953160513,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.385239362716675,
+              "explicit_euler_prediction_m_s": 2.3852394868249154,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.277123212814331,
+              "explicit_euler_prediction_m_s": 2.2771232631038565,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1751458644866943,
+              "explicit_euler_prediction_m_s": 2.175145658114466,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.078850507736206,
+              "explicit_euler_prediction_m_s": 2.078850578776385,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9878249168395996,
+              "explicit_euler_prediction_m_s": 1.9878248804196998,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9016947746276855,
+              "explicit_euler_prediction_m_s": 1.901694827364076,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.8201202154159546,
+              "explicit_euler_prediction_m_s": 1.8201202112081238,
+              "continuous_velocity_m_s": 1.831059751827376
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.7427914142608643,
+              "explicit_euler_prediction_m_s": 1.7427914378287768,
+              "continuous_velocity_m_s": 1.7545939600746954
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.6694257259368896,
+              "explicit_euler_prediction_m_s": 1.6694256522784954,
+              "continuous_velocity_m_s": 1.6819732900623952
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5997642278671265,
+              "explicit_euler_prediction_m_s": 1.5997642819707139,
+              "continuous_velocity_m_s": 1.6129522322714118
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.5335699319839478,
+              "explicit_euler_prediction_m_s": 1.5335699732031658,
+              "continuous_velocity_m_s": 1.5473052163916496
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4706251621246338,
+              "explicit_euler_prediction_m_s": 1.4706250778493761,
+              "continuous_velocity_m_s": 1.484824625469997
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.4333333559334278,
+              "velocity_m_s": 1.4107292890548706,
+              "explicit_euler_prediction_m_s": 1.410729319514409,
+              "continuous_velocity_m_s": 1.4253190431229785
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.01300434850431655,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.063722281953062e-07,
+          "max_abs_error_vs_continuous_m_s": 0.014589754068107919,
+          "first_step_relative_error_vs_continuous": -0.0009485691953160513,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.385239362716675,
+              "explicit_euler_prediction_m_s": 2.3852394868249154,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.277123212814331,
+              "explicit_euler_prediction_m_s": 2.2771232631038565,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1751458644866943,
+              "explicit_euler_prediction_m_s": 2.175145658114466,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.078850507736206,
+              "explicit_euler_prediction_m_s": 2.078850578776385,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9878249168395996,
+              "explicit_euler_prediction_m_s": 1.9878248804196998,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9016947746276855,
+              "explicit_euler_prediction_m_s": 1.901694827364076,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.23333334550261497,
+              "velocity_m_s": 1.8201202154159546,
+              "explicit_euler_prediction_m_s": 1.8201202112081238,
+              "continuous_velocity_m_s": 1.831059751827376
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.2666666805744171,
+              "velocity_m_s": 1.7427914142608643,
+              "explicit_euler_prediction_m_s": 1.7427914378287768,
+              "continuous_velocity_m_s": 1.7545939600746954
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.30000001564621925,
+              "velocity_m_s": 1.6694257259368896,
+              "explicit_euler_prediction_m_s": 1.6694256522784954,
+              "continuous_velocity_m_s": 1.6819732900623952
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.3333333507180214,
+              "velocity_m_s": 1.5997642278671265,
+              "explicit_euler_prediction_m_s": 1.5997642819707139,
+              "continuous_velocity_m_s": 1.6129522322714118
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.36666668578982353,
+              "velocity_m_s": 1.5335699319839478,
+              "explicit_euler_prediction_m_s": 1.5335699732031658,
+              "continuous_velocity_m_s": 1.5473052163916496
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.40000002086162567,
+              "velocity_m_s": 1.4706251621246338,
+              "explicit_euler_prediction_m_s": 1.4706250778493761,
+              "continuous_velocity_m_s": 1.484824625469997
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.4333333559334278,
+              "velocity_m_s": 1.4107292890548706,
+              "explicit_euler_prediction_m_s": 1.410729319514409,
+              "continuous_velocity_m_s": 1.4253190431229785
+            }
+          ]
+        }
+      ]
+    },
+    "40": {
+      "ticks_per_sec": 40,
+      "client_dt_s": 0.025,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.025,
+        "min": 0.02499999999999991,
+        "max": 0.025000000000000355,
+        "stdev": 1.372738491165633e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.024999999424569833,
+        "min": 0.024999933942496756,
+        "max": 0.025000029564934252,
+        "stdev": 1.4996872906092075e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.024999999931808823,
+          "min": 0.024999986590331317,
+          "max": 0.025000006880499068,
+          "stdev": 5.664706463445828e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.024999999745111714,
+          "min": 0.024999999745111714,
+          "max": 0.024999999745111714,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.025000001826560325,
+          "min": 0.02499995803269839,
+          "max": 0.02500005441461839,
+          "stdev": 3.185436841429222e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.02500000022290514,
+          "min": 0.024999979951766622,
+          "max": 0.02500001781782909,
+          "stdev": 7.60861000101941e-09
+        }
+      },
+      "effective_physics_dt_s": 0.02500000083382166,
+      "effective_to_client_ratio": 1.0000000333528662,
+      "kinematic_to_client_ratio": 1.0000000089162056,
+      "world_delta_to_client_ratio": 0.9999999769827933,
+      "predicted_physics_dt_s": 0.02500000037252903,
+      "prediction_relative_error": 1.8451704830724225e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00975326101490013,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.038785495983575e-07,
+          "max_abs_error_vs_continuous_m_s": 0.00972714202575431,
+          "first_step_relative_error_vs_continuous": -0.0005325817817355416,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.02500000037252903,
+              "velocity_m_s": 2.413726329803467,
+              "explicit_euler_prediction_m_s": 2.413726425353942,
+              "continuous_velocity_m_s": 2.4150125214750675
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.05000000074505806,
+              "velocity_m_s": 2.3312220573425293,
+              "explicit_euler_prediction_m_s": 2.3312221116814484,
+              "continuous_velocity_m_s": 2.3336710659125326
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.07500000111758709,
+              "velocity_m_s": 2.252269744873047,
+              "explicit_euler_prediction_m_s": 2.2522695409944973,
+              "continuous_velocity_m_s": 2.2557697691481677
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.10000000149011612,
+              "velocity_m_s": 2.1766674518585205,
+              "explicit_euler_prediction_m_s": 2.1766675349453206,
+              "continuous_velocity_m_s": 2.181117756487117
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.12500000186264515,
+              "velocity_m_s": 2.104228973388672,
+              "explicit_euler_prediction_m_s": 2.104228945892898,
+              "continuous_velocity_m_s": 2.1095378011448975
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.15000000223517418,
+              "velocity_m_s": 2.034780979156494,
+              "explicit_euler_prediction_m_s": 2.0347809852207566,
+              "continuous_velocity_m_s": 2.0408651243377607
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.1750000026077032,
+              "velocity_m_s": 1.9681625366210938,
+              "explicit_euler_prediction_m_s": 1.9681625696266092,
+              "continuous_velocity_m_s": 1.9749463198750363
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.20000000298023224,
+              "velocity_m_s": 1.904223918914795,
+              "explicit_euler_prediction_m_s": 1.904223939481092,
+              "continuous_velocity_m_s": 1.911638388437998
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.22500000335276127,
+              "velocity_m_s": 1.8428256511688232,
+              "explicit_euler_prediction_m_s": 1.8428255822601618,
+              "continuous_velocity_m_s": 1.8508078687108946
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.2500000037252903,
+              "velocity_m_s": 1.7838373184204102,
+              "explicit_euler_prediction_m_s": 1.7838373759190895,
+              "continuous_velocity_m_s": 1.7923300542177958
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.27500000409781933,
+              "velocity_m_s": 1.7271374464035034,
+              "explicit_euler_prediction_m_s": 1.7271374954620162,
+              "continuous_velocity_m_s": 1.7360882861611735
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.30000000447034836,
+              "velocity_m_s": 1.6726124286651611,
+              "explicit_euler_prediction_m_s": 1.6726123440399376,
+              "continuous_velocity_m_s": 1.6819733137938009
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.3250000048428774,
+              "velocity_m_s": 1.6201555728912354,
+              "explicit_euler_prediction_m_s": 1.620155562352778,
+              "continuous_velocity_m_s": 1.6298827149169897
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00975326101490013,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.038785495983575e-07,
+          "max_abs_error_vs_continuous_m_s": 0.00972714202575431,
+          "first_step_relative_error_vs_continuous": -0.0005325817817355416,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.02500000037252903,
+              "velocity_m_s": 2.413726329803467,
+              "explicit_euler_prediction_m_s": 2.413726425353942,
+              "continuous_velocity_m_s": 2.4150125214750675
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.05000000074505806,
+              "velocity_m_s": 2.3312220573425293,
+              "explicit_euler_prediction_m_s": 2.3312221116814484,
+              "continuous_velocity_m_s": 2.3336710659125326
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.07500000111758709,
+              "velocity_m_s": 2.252269744873047,
+              "explicit_euler_prediction_m_s": 2.2522695409944973,
+              "continuous_velocity_m_s": 2.2557697691481677
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.10000000149011612,
+              "velocity_m_s": 2.1766674518585205,
+              "explicit_euler_prediction_m_s": 2.1766675349453206,
+              "continuous_velocity_m_s": 2.181117756487117
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.12500000186264515,
+              "velocity_m_s": 2.104228973388672,
+              "explicit_euler_prediction_m_s": 2.104228945892898,
+              "continuous_velocity_m_s": 2.1095378011448975
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.15000000223517418,
+              "velocity_m_s": 2.034780979156494,
+              "explicit_euler_prediction_m_s": 2.0347809852207566,
+              "continuous_velocity_m_s": 2.0408651243377607
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.1750000026077032,
+              "velocity_m_s": 1.9681625366210938,
+              "explicit_euler_prediction_m_s": 1.9681625696266092,
+              "continuous_velocity_m_s": 1.9749463198750363
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.20000000298023224,
+              "velocity_m_s": 1.904223918914795,
+              "explicit_euler_prediction_m_s": 1.904223939481092,
+              "continuous_velocity_m_s": 1.911638388437998
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.22500000335276127,
+              "velocity_m_s": 1.8428256511688232,
+              "explicit_euler_prediction_m_s": 1.8428255822601618,
+              "continuous_velocity_m_s": 1.8508078687108946
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.2500000037252903,
+              "velocity_m_s": 1.7838373184204102,
+              "explicit_euler_prediction_m_s": 1.7838373759190895,
+              "continuous_velocity_m_s": 1.7923300542177958
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.27500000409781933,
+              "velocity_m_s": 1.7271374464035034,
+              "explicit_euler_prediction_m_s": 1.7271374954620162,
+              "continuous_velocity_m_s": 1.7360882861611735
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.30000000447034836,
+              "velocity_m_s": 1.6726124286651611,
+              "explicit_euler_prediction_m_s": 1.6726123440399376,
+              "continuous_velocity_m_s": 1.6819733137938009
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.3250000048428774,
+              "velocity_m_s": 1.6201555728912354,
+              "explicit_euler_prediction_m_s": 1.620155562352778,
+              "continuous_velocity_m_s": 1.6298827149169897
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00975326101490013,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 2.038785495983575e-07,
+          "max_abs_error_vs_continuous_m_s": 0.00972714202575431,
+          "first_step_relative_error_vs_continuous": -0.0005325817817355416,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.02500000037252903,
+              "velocity_m_s": 2.413726329803467,
+              "explicit_euler_prediction_m_s": 2.413726425353942,
+              "continuous_velocity_m_s": 2.4150125214750675
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.05000000074505806,
+              "velocity_m_s": 2.3312220573425293,
+              "explicit_euler_prediction_m_s": 2.3312221116814484,
+              "continuous_velocity_m_s": 2.3336710659125326
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.07500000111758709,
+              "velocity_m_s": 2.252269744873047,
+              "explicit_euler_prediction_m_s": 2.2522695409944973,
+              "continuous_velocity_m_s": 2.2557697691481677
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.10000000149011612,
+              "velocity_m_s": 2.1766674518585205,
+              "explicit_euler_prediction_m_s": 2.1766675349453206,
+              "continuous_velocity_m_s": 2.181117756487117
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.12500000186264515,
+              "velocity_m_s": 2.104228973388672,
+              "explicit_euler_prediction_m_s": 2.104228945892898,
+              "continuous_velocity_m_s": 2.1095378011448975
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.15000000223517418,
+              "velocity_m_s": 2.034780979156494,
+              "explicit_euler_prediction_m_s": 2.0347809852207566,
+              "continuous_velocity_m_s": 2.0408651243377607
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.1750000026077032,
+              "velocity_m_s": 1.9681625366210938,
+              "explicit_euler_prediction_m_s": 1.9681625696266092,
+              "continuous_velocity_m_s": 1.9749463198750363
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.20000000298023224,
+              "velocity_m_s": 1.904223918914795,
+              "explicit_euler_prediction_m_s": 1.904223939481092,
+              "continuous_velocity_m_s": 1.911638388437998
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.22500000335276127,
+              "velocity_m_s": 1.8428256511688232,
+              "explicit_euler_prediction_m_s": 1.8428255822601618,
+              "continuous_velocity_m_s": 1.8508078687108946
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.2500000037252903,
+              "velocity_m_s": 1.7838373184204102,
+              "explicit_euler_prediction_m_s": 1.7838373759190895,
+              "continuous_velocity_m_s": 1.7923300542177958
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.27500000409781933,
+              "velocity_m_s": 1.7271374464035034,
+              "explicit_euler_prediction_m_s": 1.7271374954620162,
+              "continuous_velocity_m_s": 1.7360882861611735
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.30000000447034836,
+              "velocity_m_s": 1.6726124286651611,
+              "explicit_euler_prediction_m_s": 1.6726123440399376,
+              "continuous_velocity_m_s": 1.6819733137938009
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.3250000048428774,
+              "velocity_m_s": 1.6201555728912354,
+              "explicit_euler_prediction_m_s": 1.620155562352778,
+              "continuous_velocity_m_s": 1.6298827149169897
+            }
+          ]
+        }
+      ]
+    },
+    "60": {
+      "ticks_per_sec": 60,
+      "client_dt_s": 0.016666666666666666,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.01666666666666667,
+        "min": 0.016666666666666607,
+        "max": 0.01666666666666705,
+        "stdev": 1.0127545604080364e-16
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.016666667465261128,
+        "min": 0.01666662662625737,
+        "max": 0.016666704312648373,
+        "stdev": 1.385131453319781e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.016666668416244527,
+          "min": 0.016666655769221713,
+          "max": 0.016666680112647946,
+          "stdev": 6.438800845200014e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.016666666908596438,
+          "min": 0.016666666908596438,
+          "max": 0.016666666908596438,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.01666666325012625,
+          "min": 0.01666663649583333,
+          "max": 0.01666670871264775,
+          "stdev": 2.1167437139534044e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.016666667513127825,
+          "min": 0.016666653985866253,
+          "max": 0.016666680022570716,
+          "stdev": 5.0404581490093516e-09
+        }
+      },
+      "effective_physics_dt_s": 0.01666666587620183,
+      "effective_to_client_ratio": 0.9999999525721098,
+      "kinematic_to_client_ratio": 1.0000000507876694,
+      "world_delta_to_client_ratio": 1.0000000479156677,
+      "predicted_physics_dt_s": 0.01666666753590107,
+      "prediction_relative_error": -9.95819491311778e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.006502174252158275,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.2442862074024674e-07,
+          "max_abs_error_vs_continuous_m_s": 0.005170332799001587,
+          "first_step_relative_error_vs_continuous": -0.00023628253090102191,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.01666666753590107,
+              "velocity_m_s": 2.4423487186431885,
+              "explicit_euler_prediction_m_s": 2.4423488194711545,
+              "continuous_velocity_m_s": 2.442925939366946
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.3863871097564697,
+              "explicit_euler_prediction_m_s": 2.3863871145589934,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.05000000260770321,
+              "velocity_m_s": 2.3320493698120117,
+              "explicit_euler_prediction_m_s": 2.3320493025468294,
+              "continuous_velocity_m_s": 2.333671059982738
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.2792727947235107,
+              "explicit_euler_prediction_m_s": 2.2792729125694287,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.08333333767950535,
+              "velocity_m_s": 2.2279984951019287,
+              "explicit_euler_prediction_m_s": 2.227998370673308,
+              "continuous_velocity_m_s": 2.230533744698128
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1781697273254395,
+              "explicit_euler_prediction_m_s": 2.178169704420272,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.11666667275130749,
+              "velocity_m_s": 2.129732847213745,
+              "explicit_euler_prediction_m_s": 2.129732930135742,
+              "continuous_velocity_m_s": 2.133066849564162
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.082637071609497,
+              "explicit_euler_prediction_m_s": 2.0826369873943933,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.15000000782310963,
+              "velocity_m_s": 2.0368335247039795,
+              "explicit_euler_prediction_m_s": 2.036833514961997,
+              "continuous_velocity_m_s": 2.040865109301505
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9922758340835571,
+              "explicit_euler_prediction_m_s": 1.9922759300490176,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.18333334289491177,
+              "velocity_m_s": 1.9489200115203857,
+              "explicit_euler_prediction_m_s": 1.9489200139403402,
+              "continuous_velocity_m_s": 1.953560340722712
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9067238569259644,
+              "explicit_euler_prediction_m_s": 1.9067238019068464,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.2166666779667139,
+              "velocity_m_s": 1.8656469583511353,
+              "explicit_euler_prediction_m_s": 1.865647008379646,
+              "continuous_velocity_m_s": 1.8708172911501368
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.006502174252158275,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.2442862074024674e-07,
+          "max_abs_error_vs_continuous_m_s": 0.005170332799001587,
+          "first_step_relative_error_vs_continuous": -0.00023628253090102191,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.01666666753590107,
+              "velocity_m_s": 2.4423487186431885,
+              "explicit_euler_prediction_m_s": 2.4423488194711545,
+              "continuous_velocity_m_s": 2.442925939366946
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.3863871097564697,
+              "explicit_euler_prediction_m_s": 2.3863871145589934,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.05000000260770321,
+              "velocity_m_s": 2.3320493698120117,
+              "explicit_euler_prediction_m_s": 2.3320493025468294,
+              "continuous_velocity_m_s": 2.333671059982738
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.2792727947235107,
+              "explicit_euler_prediction_m_s": 2.2792729125694287,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.08333333767950535,
+              "velocity_m_s": 2.2279984951019287,
+              "explicit_euler_prediction_m_s": 2.227998370673308,
+              "continuous_velocity_m_s": 2.230533744698128
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1781697273254395,
+              "explicit_euler_prediction_m_s": 2.178169704420272,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.11666667275130749,
+              "velocity_m_s": 2.129732847213745,
+              "explicit_euler_prediction_m_s": 2.129732930135742,
+              "continuous_velocity_m_s": 2.133066849564162
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.082637071609497,
+              "explicit_euler_prediction_m_s": 2.0826369873943933,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.15000000782310963,
+              "velocity_m_s": 2.0368335247039795,
+              "explicit_euler_prediction_m_s": 2.036833514961997,
+              "continuous_velocity_m_s": 2.040865109301505
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9922758340835571,
+              "explicit_euler_prediction_m_s": 1.9922759300490176,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.18333334289491177,
+              "velocity_m_s": 1.9489200115203857,
+              "explicit_euler_prediction_m_s": 1.9489200139403402,
+              "continuous_velocity_m_s": 1.953560340722712
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9067238569259644,
+              "explicit_euler_prediction_m_s": 1.9067238019068464,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.2166666779667139,
+              "velocity_m_s": 1.8656469583511353,
+              "explicit_euler_prediction_m_s": 1.865647008379646,
+              "continuous_velocity_m_s": 1.8708172911501368
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.006502174252158275,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.2442862074024674e-07,
+          "max_abs_error_vs_continuous_m_s": 0.005170332799001587,
+          "first_step_relative_error_vs_continuous": -0.00023628253090102191,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.01666666753590107,
+              "velocity_m_s": 2.4423487186431885,
+              "explicit_euler_prediction_m_s": 2.4423488194711545,
+              "continuous_velocity_m_s": 2.442925939366946
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.03333333507180214,
+              "velocity_m_s": 2.3863871097564697,
+              "explicit_euler_prediction_m_s": 2.3863871145589934,
+              "continuous_velocity_m_s": 2.38750407553642
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.05000000260770321,
+              "velocity_m_s": 2.3320493698120117,
+              "explicit_euler_prediction_m_s": 2.3320493025468294,
+              "continuous_velocity_m_s": 2.333671059982738
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.06666667014360428,
+              "velocity_m_s": 2.2792727947235107,
+              "explicit_euler_prediction_m_s": 2.2792729125694287,
+              "continuous_velocity_m_s": 2.281366695969721
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.08333333767950535,
+              "velocity_m_s": 2.2279984951019287,
+              "explicit_euler_prediction_m_s": 2.227998370673308,
+              "continuous_velocity_m_s": 2.230533744698128
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.10000000521540642,
+              "velocity_m_s": 2.1781697273254395,
+              "explicit_euler_prediction_m_s": 2.178169704420272,
+              "continuous_velocity_m_s": 2.181117745596228
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.11666667275130749,
+              "velocity_m_s": 2.129732847213745,
+              "explicit_euler_prediction_m_s": 2.129732930135742,
+              "continuous_velocity_m_s": 2.133066849564162
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.13333334028720856,
+              "velocity_m_s": 2.082637071609497,
+              "explicit_euler_prediction_m_s": 2.0826369873943933,
+              "continuous_velocity_m_s": 2.08633166409563
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.15000000782310963,
+              "velocity_m_s": 2.0368335247039795,
+              "explicit_euler_prediction_m_s": 2.036833514961997,
+              "continuous_velocity_m_s": 2.040865109301505
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.1666666753590107,
+              "velocity_m_s": 1.9922758340835571,
+              "explicit_euler_prediction_m_s": 1.9922759300490176,
+              "continuous_velocity_m_s": 1.996622283950443
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.18333334289491177,
+              "velocity_m_s": 1.9489200115203857,
+              "explicit_euler_prediction_m_s": 1.9489200139403402,
+              "continuous_velocity_m_s": 1.953560340722712
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.20000001043081284,
+              "velocity_m_s": 1.9067238569259644,
+              "explicit_euler_prediction_m_s": 1.9067238019068464,
+              "continuous_velocity_m_s": 1.911638369946332
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.2166666779667139,
+              "velocity_m_s": 1.8656469583511353,
+              "explicit_euler_prediction_m_s": 1.865647008379646,
+              "continuous_velocity_m_s": 1.8708172911501368
+            }
+          ]
+        }
+      ]
+    },
+    "100": {
+      "ticks_per_sec": 100,
+      "client_dt_s": 0.01,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.01,
+        "min": 0.009999999999999787,
+        "max": 0.010000000000000009,
+        "stdev": 3.2636048320370766e-17
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.010000000128300766,
+        "min": 0.009999940646483015,
+        "max": 0.01000004577746575,
+        "stdev": 1.5347857496839047e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.01000000037042928,
+          "min": 0.00999999377954371,
+          "max": 0.010000008475148675,
+          "stdev": 3.663611395090813e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.009999999375063547,
+          "min": 0.009999999375063547,
+          "max": 0.009999999375063547,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.010000000015865864,
+          "min": 0.00999996099110978,
+          "max": 0.010000051600487447,
+          "stdev": 2.5351910169747066e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.00999999972791621,
+          "min": 0.009999994305501853,
+          "max": 0.0100000061807774,
+          "stdev": 2.2142913002187196e-09
+        }
+      },
+      "effective_physics_dt_s": 0.01000000016042421,
+      "effective_to_client_ratio": 1.000000016042421,
+      "kinematic_to_client_ratio": 0.999999972791621,
+      "world_delta_to_client_ratio": 1.0000000128300766,
+      "predicted_physics_dt_s": 0.009999999776482582,
+      "prediction_relative_error": 3.839416362616532e-08,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00390130426062514,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.8669817070104955e-07,
+          "max_abs_error_vs_continuous_m_s": 0.0021640792706536516,
+          "first_step_relative_error_vs_continuous": -8.495205538716633e-05,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.465344190597534,
+              "explicit_euler_prediction_m_s": 2.465344272511566,
+              "continuous_velocity_m_s": 2.465553644447297
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.4313008785247803,
+              "explicit_euler_prediction_m_s": 2.431300867368538,
+              "continuous_velocity_m_s": 2.431711470033734
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.397855520248413,
+              "explicit_euler_prediction_m_s": 2.3978555229225695,
+              "continuous_velocity_m_s": 2.398459367319446
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.3649940490722656,
+              "explicit_euler_prediction_m_s": 2.364994142111017,
+              "continuous_velocity_m_s": 2.3657836566393815
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.332703113555908,
+              "explicit_euler_prediction_m_s": 2.3327030870751297,
+              "continuous_velocity_m_s": 2.333671071842328
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.3009696006774902,
+              "explicit_euler_prediction_m_s": 2.3009694139793195,
+              "continuous_velocity_m_s": 2.3021087447631494
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.06999999843537807,
+              "velocity_m_s": 2.269780397415161,
+              "explicit_euler_prediction_m_s": 2.2697804049338974,
+              "continuous_velocity_m_s": 2.2710841903899723
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.07999999821186066,
+              "velocity_m_s": 2.2391233444213867,
+              "explicit_euler_prediction_m_s": 2.239123333980261,
+              "continuous_velocity_m_s": 2.2405852926902847
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.08999999798834324,
+              "velocity_m_s": 2.208986282348633,
+              "explicit_euler_prediction_m_s": 2.208986404853651,
+              "continuous_velocity_m_s": 2.2106002910620655
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.09999999776482582,
+              "velocity_m_s": 2.1793577671051025,
+              "explicit_euler_prediction_m_s": 2.179357814016708,
+              "continuous_velocity_m_s": 2.181117767378006
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.1099999975413084,
+              "velocity_m_s": 2.150226593017578,
+              "explicit_euler_prediction_m_s": 2.1502264541438727,
+              "continuous_velocity_m_s": 2.1521266335927702
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.11999999731779099,
+              "velocity_m_s": 2.1215813159942627,
+              "explicit_euler_prediction_m_s": 2.1215814457356212,
+              "continuous_velocity_m_s": 2.123616119884936
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.12999999709427357,
+              "velocity_m_s": 2.093411684036255,
+              "explicit_euler_prediction_m_s": 2.0934116684588178,
+              "continuous_velocity_m_s": 2.0955757633069085
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00390130426062514,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.8669817070104955e-07,
+          "max_abs_error_vs_continuous_m_s": 0.0021640792706536516,
+          "first_step_relative_error_vs_continuous": -8.495205538716633e-05,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.465344190597534,
+              "explicit_euler_prediction_m_s": 2.465344272511566,
+              "continuous_velocity_m_s": 2.465553644447297
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.4313008785247803,
+              "explicit_euler_prediction_m_s": 2.431300867368538,
+              "continuous_velocity_m_s": 2.431711470033734
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.397855520248413,
+              "explicit_euler_prediction_m_s": 2.3978555229225695,
+              "continuous_velocity_m_s": 2.398459367319446
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.3649940490722656,
+              "explicit_euler_prediction_m_s": 2.364994142111017,
+              "continuous_velocity_m_s": 2.3657836566393815
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.332703113555908,
+              "explicit_euler_prediction_m_s": 2.3327030870751297,
+              "continuous_velocity_m_s": 2.333671071842328
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.3009696006774902,
+              "explicit_euler_prediction_m_s": 2.3009694139793195,
+              "continuous_velocity_m_s": 2.3021087447631494
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.06999999843537807,
+              "velocity_m_s": 2.269780397415161,
+              "explicit_euler_prediction_m_s": 2.2697804049338974,
+              "continuous_velocity_m_s": 2.2710841903899723
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.07999999821186066,
+              "velocity_m_s": 2.2391233444213867,
+              "explicit_euler_prediction_m_s": 2.239123333980261,
+              "continuous_velocity_m_s": 2.2405852926902847
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.08999999798834324,
+              "velocity_m_s": 2.208986282348633,
+              "explicit_euler_prediction_m_s": 2.208986404853651,
+              "continuous_velocity_m_s": 2.2106002910620655
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.09999999776482582,
+              "velocity_m_s": 2.1793577671051025,
+              "explicit_euler_prediction_m_s": 2.179357814016708,
+              "continuous_velocity_m_s": 2.181117767378006
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.1099999975413084,
+              "velocity_m_s": 2.150226593017578,
+              "explicit_euler_prediction_m_s": 2.1502264541438727,
+              "continuous_velocity_m_s": 2.1521266335927702
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.11999999731779099,
+              "velocity_m_s": 2.1215813159942627,
+              "explicit_euler_prediction_m_s": 2.1215814457356212,
+              "continuous_velocity_m_s": 2.123616119884936
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.12999999709427357,
+              "velocity_m_s": 2.093411684036255,
+              "explicit_euler_prediction_m_s": 2.0934116684588178,
+              "continuous_velocity_m_s": 2.0955757633069085
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00390130426062514,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.8669817070104955e-07,
+          "max_abs_error_vs_continuous_m_s": 0.0021640792706536516,
+          "first_step_relative_error_vs_continuous": -8.495205538716633e-05,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.465344190597534,
+              "explicit_euler_prediction_m_s": 2.465344272511566,
+              "continuous_velocity_m_s": 2.465553644447297
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.4313008785247803,
+              "explicit_euler_prediction_m_s": 2.431300867368538,
+              "continuous_velocity_m_s": 2.431711470033734
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.397855520248413,
+              "explicit_euler_prediction_m_s": 2.3978555229225695,
+              "continuous_velocity_m_s": 2.398459367319446
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.3649940490722656,
+              "explicit_euler_prediction_m_s": 2.364994142111017,
+              "continuous_velocity_m_s": 2.3657836566393815
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.332703113555908,
+              "explicit_euler_prediction_m_s": 2.3327030870751297,
+              "continuous_velocity_m_s": 2.333671071842328
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.3009696006774902,
+              "explicit_euler_prediction_m_s": 2.3009694139793195,
+              "continuous_velocity_m_s": 2.3021087447631494
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.06999999843537807,
+              "velocity_m_s": 2.269780397415161,
+              "explicit_euler_prediction_m_s": 2.2697804049338974,
+              "continuous_velocity_m_s": 2.2710841903899723
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.07999999821186066,
+              "velocity_m_s": 2.2391233444213867,
+              "explicit_euler_prediction_m_s": 2.239123333980261,
+              "continuous_velocity_m_s": 2.2405852926902847
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.08999999798834324,
+              "velocity_m_s": 2.208986282348633,
+              "explicit_euler_prediction_m_s": 2.208986404853651,
+              "continuous_velocity_m_s": 2.2106002910620655
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.09999999776482582,
+              "velocity_m_s": 2.1793577671051025,
+              "explicit_euler_prediction_m_s": 2.179357814016708,
+              "continuous_velocity_m_s": 2.181117767378006
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.1099999975413084,
+              "velocity_m_s": 2.150226593017578,
+              "explicit_euler_prediction_m_s": 2.1502264541438727,
+              "continuous_velocity_m_s": 2.1521266335927702
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.11999999731779099,
+              "velocity_m_s": 2.1215813159942627,
+              "explicit_euler_prediction_m_s": 2.1215814457356212,
+              "continuous_velocity_m_s": 2.123616119884936
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.12999999709427357,
+              "velocity_m_s": 2.093411684036255,
+              "explicit_euler_prediction_m_s": 2.0934116684588178,
+              "continuous_velocity_m_s": 2.0955757633069085
+            }
+          ]
+        }
+      ]
+    },
+    "200": {
+      "ticks_per_sec": 200,
+      "client_dt_s": 0.005,
+      "python_timestamp_dt_s": {
+        "n": 144,
+        "mean": 0.005,
+        "min": 0.004999999999999893,
+        "max": 0.0050000000000000044,
+        "stdev": 1.6318024160185383e-17
+      },
+      "world_delta_from_sensor_s": {
+        "n": 144,
+        "mean": 0.0050000003052029,
+        "min": 0.004999965227712123,
+        "max": 0.005000049114298368,
+        "stdev": 1.1765571744681201e-08
+      },
+      "physics_dt_estimates_s": {
+        "gravity_velocity": {
+          "n": 36,
+          "mean": 0.0050000001632781775,
+          "min": 0.004999995772110257,
+          "max": 0.00500000527938633,
+          "stdev": 2.2183711757677647e-09
+        },
+        "thrust_first_step": {
+          "n": 3,
+          "mean": 0.005000000000564438,
+          "min": 0.005000000000564438,
+          "max": 0.005000000000564438,
+          "stdev": 0.0
+        },
+        "damping_ratio": {
+          "n": 36,
+          "mean": 0.005000001325858566,
+          "min": 0.004999952226594329,
+          "max": 0.005000020966457908,
+          "stdev": 1.837127956126498e-08
+        },
+        "kinematic_position": {
+          "n": 108,
+          "mean": 0.004999999842435278,
+          "min": 0.0049999971515037305,
+          "max": 0.0050000028059820545,
+          "stdev": 1.2136539087587238e-09
+        }
+      },
+      "effective_physics_dt_s": 0.0050000007148082145,
+      "effective_to_client_ratio": 1.000000142961643,
+      "kinematic_to_client_ratio": 0.9999999684870556,
+      "world_delta_to_client_ratio": 1.0000000610405801,
+      "predicted_physics_dt_s": 0.004999999888241291,
+      "prediction_relative_error": 1.6531338831171638e-07,
+      "physics_consistent_with_client_clock": true,
+      "max_angular_velocity_rad_s": 0.0,
+      "any_collision": false,
+      "drag_stability": [
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00195065213031257,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.6405949843090184e-07,
+          "max_abs_error_vs_continuous_m_s": 0.0006089149247907599,
+          "first_step_relative_error_vs_continuous": -2.124424616212206e-05,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.004999999888241291,
+              "velocity_m_s": 2.482647657394409,
+              "explicit_euler_prediction_m_s": 2.4826477531046995,
+              "continuous_velocity_m_s": 2.482700400492864
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.465449333190918,
+              "explicit_euler_prediction_m_s": 2.4654492967296973,
+              "continuous_velocity_m_s": 2.465553644447297
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.014999999664723873,
+              "velocity_m_s": 2.4484031200408936,
+              "explicit_euler_prediction_m_s": 2.4484030315480223,
+              "continuous_velocity_m_s": 2.448557926706708
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.431507110595703,
+              "explicit_euler_prediction_m_s": 2.431507079337719,
+              "continuous_velocity_m_s": 2.431711470033734
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.024999999441206455,
+              "velocity_m_s": 2.414759397506714,
+              "explicit_euler_prediction_m_s": 2.4147595615662123,
+              "continuous_velocity_m_s": 2.4150125245718583
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.398158550262451,
+              "explicit_euler_prediction_m_s": 2.398158599394783,
+              "continuous_velocity_m_s": 2.398459367319446
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.03499999921768904,
+              "velocity_m_s": 2.3817028999328613,
+              "explicit_euler_prediction_m_s": 2.3817027863603784,
+              "continuous_velocity_m_s": 2.382050301615867
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.3653905391693115,
+              "explicit_euler_prediction_m_s": 2.3653904794065346,
+              "continuous_velocity_m_s": 2.3657836566393815
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.04499999899417162,
+              "velocity_m_s": 2.349219799041748,
+              "explicit_euler_prediction_m_s": 2.3492197988564305,
+              "continuous_velocity_m_s": 2.349657786916473
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.333189010620117,
+              "explicit_euler_prediction_m_s": 2.333189101100319,
+              "continuous_velocity_m_s": 2.333671071842328
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.0549999987706542,
+              "velocity_m_s": 2.3172967433929443,
+              "explicit_euler_prediction_m_s": 2.3172967422666733,
+              "continuous_velocity_m_s": 2.317821915212168
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.301541328430176,
+              "explicit_euler_prediction_m_s": 2.30154131459446,
+              "continuous_velocity_m_s": 2.3021087447631494
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.06499999854713678,
+              "velocity_m_s": 2.285921096801758,
+              "explicit_euler_prediction_m_s": 2.2859211737169867,
+              "continuous_velocity_m_s": 2.2865300117265486
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00195065213031257,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.6405949843090184e-07,
+          "max_abs_error_vs_continuous_m_s": 0.0006089149247907599,
+          "first_step_relative_error_vs_continuous": -2.124424616212206e-05,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.004999999888241291,
+              "velocity_m_s": 2.482647657394409,
+              "explicit_euler_prediction_m_s": 2.4826477531046995,
+              "continuous_velocity_m_s": 2.482700400492864
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.465449333190918,
+              "explicit_euler_prediction_m_s": 2.4654492967296973,
+              "continuous_velocity_m_s": 2.465553644447297
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.014999999664723873,
+              "velocity_m_s": 2.4484031200408936,
+              "explicit_euler_prediction_m_s": 2.4484030315480223,
+              "continuous_velocity_m_s": 2.448557926706708
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.431507110595703,
+              "explicit_euler_prediction_m_s": 2.431507079337719,
+              "continuous_velocity_m_s": 2.431711470033734
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.024999999441206455,
+              "velocity_m_s": 2.414759397506714,
+              "explicit_euler_prediction_m_s": 2.4147595615662123,
+              "continuous_velocity_m_s": 2.4150125245718583
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.398158550262451,
+              "explicit_euler_prediction_m_s": 2.398158599394783,
+              "continuous_velocity_m_s": 2.398459367319446
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.03499999921768904,
+              "velocity_m_s": 2.3817028999328613,
+              "explicit_euler_prediction_m_s": 2.3817027863603784,
+              "continuous_velocity_m_s": 2.382050301615867
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.3653905391693115,
+              "explicit_euler_prediction_m_s": 2.3653904794065346,
+              "continuous_velocity_m_s": 2.3657836566393815
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.04499999899417162,
+              "velocity_m_s": 2.349219799041748,
+              "explicit_euler_prediction_m_s": 2.3492197988564305,
+              "continuous_velocity_m_s": 2.349657786916473
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.333189010620117,
+              "explicit_euler_prediction_m_s": 2.333189101100319,
+              "continuous_velocity_m_s": 2.333671071842328
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.0549999987706542,
+              "velocity_m_s": 2.3172967433929443,
+              "explicit_euler_prediction_m_s": 2.3172967422666733,
+              "continuous_velocity_m_s": 2.317821915212168
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.301541328430176,
+              "explicit_euler_prediction_m_s": 2.30154131459446,
+              "continuous_velocity_m_s": 2.3021087447631494
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.06499999854713678,
+              "velocity_m_s": 2.285921096801758,
+              "explicit_euler_prediction_m_s": 2.2859211737169867,
+              "continuous_velocity_m_s": 2.2865300117265486
+            }
+          ]
+        },
+        {
+          "initial_velocity_m_s": 2.5,
+          "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+          "explicit_step_number_K_v_dt_over_m": 0.00195065213031257,
+          "sign_reversal_observed": false,
+          "max_abs_error_vs_explicit_prediction_m_s": 1.6405949843090184e-07,
+          "max_abs_error_vs_continuous_m_s": 0.0006089149247907599,
+          "first_step_relative_error_vs_continuous": -2.124424616212206e-05,
+          "trace": [
+            {
+              "step": -1,
+              "physics_time_s": 0.004999999888241291,
+              "velocity_m_s": 2.482647657394409,
+              "explicit_euler_prediction_m_s": 2.4826477531046995,
+              "continuous_velocity_m_s": 2.482700400492864
+            },
+            {
+              "step": 0,
+              "physics_time_s": 0.009999999776482582,
+              "velocity_m_s": 2.465449333190918,
+              "explicit_euler_prediction_m_s": 2.4654492967296973,
+              "continuous_velocity_m_s": 2.465553644447297
+            },
+            {
+              "step": 1,
+              "physics_time_s": 0.014999999664723873,
+              "velocity_m_s": 2.4484031200408936,
+              "explicit_euler_prediction_m_s": 2.4484030315480223,
+              "continuous_velocity_m_s": 2.448557926706708
+            },
+            {
+              "step": 2,
+              "physics_time_s": 0.019999999552965164,
+              "velocity_m_s": 2.431507110595703,
+              "explicit_euler_prediction_m_s": 2.431507079337719,
+              "continuous_velocity_m_s": 2.431711470033734
+            },
+            {
+              "step": 3,
+              "physics_time_s": 0.024999999441206455,
+              "velocity_m_s": 2.414759397506714,
+              "explicit_euler_prediction_m_s": 2.4147595615662123,
+              "continuous_velocity_m_s": 2.4150125245718583
+            },
+            {
+              "step": 4,
+              "physics_time_s": 0.029999999329447746,
+              "velocity_m_s": 2.398158550262451,
+              "explicit_euler_prediction_m_s": 2.398158599394783,
+              "continuous_velocity_m_s": 2.398459367319446
+            },
+            {
+              "step": 5,
+              "physics_time_s": 0.03499999921768904,
+              "velocity_m_s": 2.3817028999328613,
+              "explicit_euler_prediction_m_s": 2.3817027863603784,
+              "continuous_velocity_m_s": 2.382050301615867
+            },
+            {
+              "step": 6,
+              "physics_time_s": 0.03999999910593033,
+              "velocity_m_s": 2.3653905391693115,
+              "explicit_euler_prediction_m_s": 2.3653904794065346,
+              "continuous_velocity_m_s": 2.3657836566393815
+            },
+            {
+              "step": 7,
+              "physics_time_s": 0.04499999899417162,
+              "velocity_m_s": 2.349219799041748,
+              "explicit_euler_prediction_m_s": 2.3492197988564305,
+              "continuous_velocity_m_s": 2.349657786916473
+            },
+            {
+              "step": 8,
+              "physics_time_s": 0.04999999888241291,
+              "velocity_m_s": 2.333189010620117,
+              "explicit_euler_prediction_m_s": 2.333189101100319,
+              "continuous_velocity_m_s": 2.333671071842328
+            },
+            {
+              "step": 9,
+              "physics_time_s": 0.0549999987706542,
+              "velocity_m_s": 2.3172967433929443,
+              "explicit_euler_prediction_m_s": 2.3172967422666733,
+              "continuous_velocity_m_s": 2.317821915212168
+            },
+            {
+              "step": 10,
+              "physics_time_s": 0.05999999865889549,
+              "velocity_m_s": 2.301541328430176,
+              "explicit_euler_prediction_m_s": 2.30154131459446,
+              "continuous_velocity_m_s": 2.3021087447631494
+            },
+            {
+              "step": 11,
+              "physics_time_s": 0.06499999854713678,
+              "velocity_m_s": 2.285921096801758,
+              "explicit_euler_prediction_m_s": 2.2859211737169867,
+              "continuous_velocity_m_s": 2.2865300117265486
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "verified_ticks_per_sec": [
+    30,
+    40,
+    60,
+    100,
+    200
+  ],
+  "rejected_ticks_per_sec": [
+    20
+  ],
+  "consistency_tolerance": 0.0001,
+  "raw_sha256": "900d308acda45fcfac6bb6b2f4196eb15543057a3ef5c74676a0ff665ffc3870",
+  "scenario_sha256": {
+    "20": "20929650187881c1bdb4fb93e09cfb2f054a20dc13fb8e882d1ec5257673483e",
+    "30": "a0327e4158383f688597b5ae4896a435c6c65acd673995cf9aba2e39a8719ba7",
+    "40": "f05898131ce1ad5cfc44602fc9c5c21cc1486326753498989016bdbd7b5744a5",
+    "60": "981454f2ee74e5c87cfe58bd078703cf9e28384731218713be592257c91fa340",
+    "100": "8a969dccbf55daadde383f1dff2cf58168acbc357c7cced574c9b0acf8db5e98",
+    "200": "38ecfb374141f2e88bc81730c3251abe8a7617ac4a7ab177a1dc586b6c5611e7"
+  },
+  "analysis_revision": {
+    "revised_utc": "2026-10-07T21:45:48.556693+00:00",
+    "tooling_sha256": "2a38ce994d453aaca22d655b0d480a50a50f51344f86829c696eea83dd93b13b",
+    "raw_sha256_unchanged": true,
+    "initial_report_sha256": "5159311453c2273e1cc24b30f85e947b903bcfca3f279600c67d1d86c40381fd",
+    "change": "drag-stability summary starts from the set state (2.5 m/s at t = 0, priming tick = first drag step) instead of the post-priming state; sign-aware continuous solution; per-step explicit-Euler prediction added"
+  }
+}

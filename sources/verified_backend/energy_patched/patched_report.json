@@ -1,0 +1,1458 @@
+{
+  "evidence_kind": "implementation-verified native simulation coupled to configured energy models; not physical vehicle validation",
+  "label": "patched",
+  "runtime": {
+    "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+    "python_version": "3.10.20",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "holoocean_version": "2.3.0",
+    "client_root": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean",
+    "client_file_sha256": {
+      "agents.py": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+      "environments.py": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "command.py": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+      "sensors.py": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+      "packagemanager.py": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0"
+    },
+    "client_install_origin": "{\"dir_info\": {}, \"url\": \"file:///C:/Users/Andrea/Downloads/HoloOcean-2.3.0/client\"}",
+    "binary_path": "C:\\HOB\\packages\\patched-after\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+    "binary_sha256": "4d6c2d46be8703758fbe4e9b62a99d4037aec0e220cca3a60b22b488d441684a",
+    "binary_size_bytes": 254710784,
+    "pdb_sha256": "0d3196d968e1f9f73b770e536ae00a595dda613f63254b1edfacacf91c7e6ca5",
+    "package_root": "C:\\HOB\\packages\\patched-after\\Ocean",
+    "package_config_path": "C:\\HOB\\packages\\patched-after\\Ocean\\config.json",
+    "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+    "build_manifest_path": "C:\\HOB\\packages\\patched-after\\Ocean\\holoenergy_build_manifest.json",
+    "build_manifest_sha256": "39ee5b3559f9ea3aba3e54be34617735a227348b6a442427efcb0393701cd1da",
+    "build_variant": "patched-after",
+    "build_source_commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+    "build_patch_sha256": "00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa",
+    "package_version": "2.3.0",
+    "package_worlds": [
+      "Rooms",
+      "ModernOffice",
+      "CorporateOffice",
+      "ExampleLevel",
+      "Tank",
+      "SimpleUnderwater",
+      "PierHarbor",
+      "OpenWater",
+      "FlatUnderwater",
+      "Dam"
+    ],
+    "source_binary_build_identity": "separate build: see build manifest"
+  },
+  "controller_policy": {
+    "position_P_N_per_m": 20.0,
+    "velocity_D_Ns_per_m": 15.0,
+    "position_I_N_per_m_s": 5.0,
+    "integral_clip_m_s": 10.0,
+    "attitude_P_Nm_per_rad": 5.0,
+    "angular_D_Nms_per_rad": 2.0,
+    "origin": "user-selected demonstration gains, not calibrated; unchanged from examples/native_station_keeping.py"
+  },
+  "transit_speed_m_s": 0.25,
+  "backend_thrust_limit_N": 28.75,
+  "dt_s": 0.01,
+  "ticks_per_sec": 100,
+  "scenario_sha256": "15ffc6c5f00f6994b64cb59f8d6ec54f2292f9e43606f7ee2e50ab24ce3a79d8",
+  "config_sha256": "0b8f08d8f6fc4151f4fea939812b200d44b6eeac9d3930373974f5f1161f2bbb",
+  "physical_payload_boundary": "Native HoloOcean 2.3.0 exposes no verified setter for agent mass/volume/drag: a declared physical payload is descriptive only and cannot change the simulated dynamics.",
+  "records": {
+    "station_0": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.0,
+      "max_speed_m_s": 0.0,
+      "mean_tail_position_error_m": 0.0,
+      "max_position_error_m": 0.0,
+      "final_position_error_m": 0.0,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_tail_applied_effort_norm_N": 0.0,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 0.0,
+      "mean_tail_total_W": 23.444444444444454,
+      "propulsion_Wh": 0.0,
+      "terminal_Wh": 0.19537037037036478,
+      "battery_losses_Wh": 0.0006536447302743064,
+      "category_energy_Wh": {
+        "propulsion": 0.0,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.019537037037036943,
+        "battery_losses": 0.0006536447302743064
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 0.19537037037037963,
+          "battery_losses_Wh": 0.0006536447302743064
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 0.0
+      },
+      "min_voltage_V": 16.74009160989559,
+      "final_voltage_V": 16.74009160989559,
+      "mean_current_A": 1.4003335966627735,
+      "peak_current_A": 1.4004967828602388,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.999351697408953,
+      "final_battery_temperature_C": 19.758059843999455,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "station_0.trace.jsonl.gz",
+        "sha256": "2e41083634e0bd3709c4ca38df30bfba22f3bab5dadb6bcf35c6be6c02a9b7ee",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "station_0.jsonl",
+        "sha256": "2495daaf8960e2346505c99d749de002f00eb71e4697d700dde14d373fff47cf"
+      },
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "station_0.2": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.004074318046303233,
+      "max_speed_m_s": 0.07745768874883652,
+      "mean_tail_position_error_m": 0.026565098961116747,
+      "max_position_error_m": 0.19314433634281158,
+      "final_position_error_m": 0.002615512115880847,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_norm_N": 4.841936693327855,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 15.874734858911804,
+      "mean_tail_total_W": 39.31917930335624,
+      "propulsion_Wh": 0.15771286899017983,
+      "terminal_Wh": 0.35308323936054464,
+      "battery_losses_Wh": 0.0021938274873645287,
+      "category_energy_Wh": {
+        "propulsion": 0.15771286899017983,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.01953703703703695,
+        "battery_losses": 0.0021938274873645287
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 0.3530832393605505,
+          "battery_losses_Wh": 0.0021938274873645287
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 18.92554427882162
+      },
+      "min_voltage_V": 16.677043103523133,
+      "final_voltage_V": 16.698628539332173,
+      "mean_current_A": 2.5382257747946593,
+      "peak_current_A": 3.005791440299881,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.998824895474633,
+      "final_battery_temperature_C": 19.762565895796865,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "station_0.2.trace.jsonl.gz",
+        "sha256": "cca727eeab34b3982a639320aea34943c19fea05f4439825473e444a3b151a26",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "station_0.2.jsonl",
+        "sha256": "7395898b768332c0f73dd07fad665c27466fcee1a8c7421a78c5821fbd65f4e0"
+      },
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "station_0.5": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.03115187451057136,
+      "max_speed_m_s": 0.2748125493526459,
+      "mean_tail_position_error_m": 0.0903806556228701,
+      "max_position_error_m": 0.9700917601585388,
+      "final_position_error_m": 0.057367317378520966,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        18.022452856535455,
+        18.022452856535455,
+        18.022452856535455,
+        18.022452856535455
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        18.022452856535455,
+        18.022452856535455,
+        18.022452856535455,
+        18.022452856535455
+      ],
+      "mean_tail_applied_effort_norm_N": 36.04490571307091,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 408.0000081512582,
+      "mean_tail_total_W": 431.4444525957027,
+      "propulsion_Wh": 3.115465587230261,
+      "terminal_Wh": 3.310835957600626,
+      "battery_losses_Wh": 0.25004430261041444,
+      "category_energy_Wh": {
+        "propulsion": 3.115465587230261,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.01953703703703695,
+        "battery_losses": 0.25004430261041444
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 3.3108359576006356,
+          "battery_losses_Wh": 0.25004430261041444
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 373.85587046763214
+      },
+      "min_voltage_V": 15.219366186531289,
+      "final_voltage_V": 15.711800972648724,
+      "mean_current_A": 25.48854749432065,
+      "peak_current_A": 38.917240253238006,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9881997465304083,
+      "final_battery_temperature_C": 20.49059476138748,
+      "peak_battery_temperature_C": 20.49059476138748,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "station_0.5.trace.jsonl.gz",
+        "sha256": "3785f5e57b25c96bc98801e79898b6acb0b8b40197ca346d2e3dfdd69bf8910c",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "station_0.5.jsonl",
+        "sha256": "1a873665f8ed39747c480022ea32c69b33496768e19709c3cec7ddb95b7497e5"
+      },
+      "current_m_s": [
+        0.5,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "station_0.8": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.12467560531198979,
+      "max_speed_m_s": 0.5001707077026367,
+      "mean_tail_position_error_m": 4.280235543012619,
+      "max_position_error_m": 4.903512477874756,
+      "final_position_error_m": 4.903512477874756,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        48.595878330281465,
+        48.595878330281465,
+        48.595878330281465,
+        48.595878330281465
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        28.42436996760536,
+        28.42436996760536,
+        28.42436996760536,
+        28.42436996760536
+      ],
+      "mean_tail_applied_effort_norm_N": 56.84873993521072,
+      "saturated_tick_fraction": 0.7806666666666666,
+      "tail_saturated_tick_fraction": 1.0,
+      "min_derating_factor": 0.5357315988040261,
+      "mean_tail_propulsion_W": 833.5279602905674,
+      "mean_tail_total_W": 856.9724047350119,
+      "propulsion_Wh": 6.0763131214418475,
+      "terminal_Wh": 6.271683491812213,
+      "battery_losses_Wh": 1.0014001236467573,
+      "category_energy_Wh": {
+        "propulsion": 6.0763131214418475,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.019537037037036943,
+        "battery_losses": 1.0014001236467573
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 6.2716834918122135,
+          "battery_losses_Wh": 1.0014001236467573
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 729.1575745730214
+      },
+      "min_voltage_V": 14.255123412453509,
+      "final_voltage_V": 14.255123412453509,
+      "mean_current_A": 52.175571531095216,
+      "peak_current_A": 59.99999999999925,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9758446428096818,
+      "final_battery_temperature_C": 22.698373178364,
+      "peak_battery_temperature_C": 22.698373178364,
+      "battery_states": [
+        "NORMAL",
+        "POWER_LIMITED"
+      ],
+      "trace": {
+        "path": "station_0.8.trace.jsonl.gz",
+        "sha256": "e71c402a416eab8fabeee718924420184df7b168ad1d53d69acb4c1be10829ed",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "station_0.8.jsonl",
+        "sha256": "d41d26c6624ea6c1cceb4e0799d589ca750dad0a3ad0d05a06efda40da3ebec7"
+      },
+      "current_m_s": [
+        0.8,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "mission_0": {
+      "duration_s": 66.99999999999737,
+      "ticks": 6700,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 3,
+      "mean_tail_speed_m_s": 0.056426815301192146,
+      "max_speed_m_s": 0.29331114888191223,
+      "mean_tail_position_error_m": 0.5071199675841422,
+      "max_position_error_m": 0.5374872088900756,
+      "final_position_error_m": 0.47483235607875507,
+      "max_angular_speed_rad_s": 0.4961424171935056,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "mean_tail_requested_effort_N": [
+        7.310949004144869e-06,
+        8.04189632992304e-06,
+        7.158976208548884e-06,
+        7.893058890847655e-06,
+        0.5042772688674141,
+        0.5043084814694021,
+        0.5042771932248328,
+        0.5043085571119829
+      ],
+      "mean_tail_applied_effort_N": [
+        7.310949004144869e-06,
+        8.04189632992304e-06,
+        7.158976208548884e-06,
+        7.893058890847655e-06,
+        0.5042772688674141,
+        0.5043084814694021,
+        0.5042771932248328,
+        0.5043085571119829
+      ],
+      "mean_tail_applied_effort_norm_N": 1.0085857564511695,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 2.8933444109485347,
+      "mean_tail_total_W": 26.33778885539298,
+      "propulsion_Wh": 0.5142660080376984,
+      "terminal_Wh": 0.9505931685315068,
+      "battery_losses_Wh": 0.008517720609249857,
+      "category_energy_Wh": {
+        "propulsion": 0.5142660080376984,
+        "sensors": 0.11352777777777769,
+        "compute": 0.0,
+        "auxiliaries": 0.27916666666664425,
+        "converters": 0.043632716049386434,
+        "battery_losses": 0.008517720609249857
+      },
+      "phase_energy_Wh": {
+        "hold_start": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.01953703703703701,
+          "battery_losses_Wh": 6.535076085755218e-05
+        },
+        "accelerate": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.03162492697469247,
+          "battery_losses_Wh": 0.00013157695165490768
+        },
+        "transit_out": {
+          "duration_s": 15.999999999999703,
+          "terminal_energy_Wh": 0.31861537682686836,
+          "battery_losses_Wh": 0.003416788535797049
+        },
+        "stop": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.05824330495459804,
+          "battery_losses_Wh": 0.00047376732233629605
+        },
+        "hold_turn": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.021943120252074504,
+          "battery_losses_Wh": 8.273647341181386e-05
+        },
+        "yaw": {
+          "duration_s": 9.999999999999831,
+          "terminal_energy_Wh": 0.0716574059701242,
+          "battery_losses_Wh": 0.00026520902499519534
+        },
+        "return_accelerate": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.03146672727135438,
+          "battery_losses_Wh": 0.000130351372674022
+        },
+        "return_transit": {
+          "duration_s": 15.999999999999703,
+          "terminal_energy_Wh": 0.31719110559940905,
+          "battery_losses_Wh": 0.003392666924620016
+        },
+        "return_stop": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.05836600626587431,
+          "battery_losses_Wh": 0.0004763958868587321
+        },
+        "hold_end": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.021948157379494147,
+          "battery_losses_Wh": 8.287735604425686e-05
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "hold_start": 0.0,
+        "accelerate": 5.01798983277878,
+        "transit_out": 48.24401534160084,
+        "stop": 28.974530014693798,
+        "hold_turn": 2.887299858044956,
+        "yaw": 2.3522217048002676,
+        "return_accelerate": 4.875610099774516,
+        "return_transit": 47.92355431542255,
+        "return_stop": 29.084961194842393,
+        "hold_end": 2.8933444109485347
+      },
+      "min_voltage_V": 16.584240810333437,
+      "final_voltage_V": 16.716862544528592,
+      "mean_current_A": 3.069257835999613,
+      "peak_current_A": 5.042973198659214,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.996826538965866,
+      "final_battery_temperature_C": 19.495955544119703,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "mission_0.trace.jsonl.gz",
+        "sha256": "c02c1e61b5e1a5be9efb6d598524d4268f133a30274d79998a40c0c7739799f2",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "mission_0.jsonl",
+        "sha256": "49cbc8d7133a6ab1fb09dd220213177897cefdc9e854e8d2b5e404571f915735"
+      },
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "mission_0.2": {
+      "duration_s": 66.99999999999737,
+      "ticks": 6700,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 3,
+      "mean_tail_speed_m_s": 0.1565223538140735,
+      "max_speed_m_s": 0.3179786053116257,
+      "mean_tail_position_error_m": 0.7647008420898622,
+      "max_position_error_m": 0.9648723851321357,
+      "final_position_error_m": 0.9648723851321357,
+      "max_angular_speed_rad_s": 0.4961424171935056,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "mean_tail_requested_effort_N": [
+        5.398229318149625e-06,
+        6.191276991124725e-06,
+        9.644903340371894e-06,
+        1.0295577346244493e-05,
+        8.641944569483096,
+        8.641852882332739,
+        8.641944496060294,
+        8.641852955755544
+      ],
+      "mean_tail_applied_effort_N": [
+        5.398229318149625e-06,
+        6.191276991124725e-06,
+        9.644903340371894e-06,
+        1.0295577346244493e-05,
+        8.641944569483096,
+        8.641852882332739,
+        8.641944496060294,
+        8.641852955755544
+      ],
+      "mean_tail_applied_effort_norm_N": 17.283797462695567,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 92.35482821480832,
+      "mean_tail_total_W": 115.79927265925275,
+      "propulsion_Wh": 1.490383527267414,
+      "terminal_Wh": 1.9267106877612223,
+      "battery_losses_Wh": 0.062475638827932355,
+      "category_energy_Wh": {
+        "propulsion": 1.490383527267414,
+        "sensors": 0.11352777777777769,
+        "compute": 0.0,
+        "auxiliaries": 0.27916666666664425,
+        "converters": 0.04363271604938644,
+        "battery_losses": 0.062475638827932355
+      },
+      "phase_energy_Wh": {
+        "hold_start": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.02477832576815155,
+          "battery_losses_Wh": 0.00010631300450345415
+        },
+        "accelerate": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.03498291348389253,
+          "battery_losses_Wh": 0.00016132708514314512
+        },
+        "transit_out": {
+          "duration_s": 15.999999999999703,
+          "terminal_energy_Wh": 0.1322468681751588,
+          "battery_losses_Wh": 0.0005630028916973354
+        },
+        "stop": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.02989830839805991,
+          "battery_losses_Wh": 0.00011531811087572712
+        },
+        "hold_turn": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.02977836322047565,
+          "battery_losses_Wh": 0.00015448721701903612
+        },
+        "yaw": {
+          "duration_s": 9.999999999999831,
+          "terminal_energy_Wh": 0.13125761803559574,
+          "battery_losses_Wh": 0.0008948565058224848
+        },
+        "return_accelerate": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.06245034773802306,
+          "battery_losses_Wh": 0.0005313318867768526
+        },
+        "return_transit": {
+          "duration_s": 15.999999999999703,
+          "terminal_energy_Wh": 1.0876318315787474,
+          "battery_losses_Wh": 0.04551767738755971
+        },
+        "return_stop": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.29718671748042547,
+          "battery_losses_Wh": 0.012651597824004657
+        },
+        "hold_end": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.09649939388271064,
+          "battery_losses_Wh": 0.0017797269145299773
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "hold_start": 6.289546477337392,
+        "accelerate": 8.040177691058839,
+        "transit_out": 6.311100894966293,
+        "stop": 3.4640331138094664,
+        "hold_turn": 12.289591420126346,
+        "yaw": 23.80829804836994,
+        "return_accelerate": 32.76086851977635,
+        "return_transit": 221.27271766077368,
+        "return_stop": 244.02360128793848,
+        "hold_end": 92.35482821480832
+      },
+      "min_voltage_V": 15.962811515455595,
+      "final_voltage_V": 16.599884216292914,
+      "mean_current_A": 6.369491545015093,
+      "peak_current_A": 20.22869786470964,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9934142602852506,
+      "final_battery_temperature_C": 19.65547825625753,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "mission_0.2.trace.jsonl.gz",
+        "sha256": "9e7cc4b4d96d799c23cfe2ffdea3693dd4c3349fa7cdc3a6d881ff9307c100de",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "mission_0.2.jsonl",
+        "sha256": "b7076214ef309c781ecbfd50c8d9fa62b259eddbd64c6143959fee76603efb46"
+      },
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "mission_0.4": {
+      "duration_s": 66.99999999999737,
+      "ticks": 6700,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 3,
+      "mean_tail_speed_m_s": 0.1627839587985335,
+      "max_speed_m_s": 0.30349841713905334,
+      "mean_tail_position_error_m": 0.5516999627742142,
+      "max_position_error_m": 1.1757654665289308,
+      "final_position_error_m": 0.31903582677103565,
+      "max_angular_speed_rad_s": 0.49614241719350555,
+      "max_abs_roll_pitch_deg": 0.0005723004578612745,
+      "mean_tail_requested_effort_N": [
+        1.0003244666609881e-05,
+        9.965426535277608e-06,
+        1.5351331350620183e-05,
+        1.5855172316186364e-05,
+        20.729983419634642,
+        20.722493863622432,
+        20.729983316402333,
+        20.72249396685474
+      ],
+      "mean_tail_applied_effort_N": [
+        1.0003244666609881e-05,
+        9.965426535277608e-06,
+        1.5351331350620183e-05,
+        1.5855172316186364e-05,
+        20.729983419634642,
+        20.722493863622432,
+        20.729983316402333,
+        20.72249396685474
+      ],
+      "mean_tail_applied_effort_norm_N": 41.45247797233556,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 362.7490291132812,
+      "mean_tail_total_W": 386.1934735577256,
+      "propulsion_Wh": 3.832598499590412,
+      "terminal_Wh": 4.2689256600842205,
+      "battery_losses_Wh": 0.2677646320458362,
+      "category_energy_Wh": {
+        "propulsion": 3.832598499590412,
+        "sensors": 0.11352777777777769,
+        "compute": 0.0,
+        "auxiliaries": 0.27916666666664425,
+        "converters": 0.04363271604938644,
+        "battery_losses": 0.2677646320458362
+      },
+      "phase_energy_Wh": {
+        "hold_start": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.0412836615508935,
+          "battery_losses_Wh": 0.0003205049758522735
+        },
+        "accelerate": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.11136512491536468,
+          "battery_losses_Wh": 0.001639519591551544
+        },
+        "transit_out": {
+          "duration_s": 15.999999999999703,
+          "terminal_energy_Wh": 0.16497273886988117,
+          "battery_losses_Wh": 0.0010878004050069413
+        },
+        "stop": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.037739007359570864,
+          "battery_losses_Wh": 0.00020121181835110037
+        },
+        "hold_turn": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.08084478587468964,
+          "battery_losses_Wh": 0.0012111669724144132
+        },
+        "yaw": {
+          "duration_s": 9.999999999999831,
+          "terminal_energy_Wh": 0.5717233015558592,
+          "battery_losses_Wh": 0.018044236642365458
+        },
+        "return_accelerate": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.289297439440789,
+          "battery_losses_Wh": 0.011744406246854171
+        },
+        "return_transit": {
+          "duration_s": 15.999999999999703,
+          "terminal_energy_Wh": 2.0983711330328765,
+          "battery_losses_Wh": 0.16706607808431345
+        },
+        "return_stop": {
+          "duration_s": 3.9999999999999587,
+          "terminal_energy_Wh": 0.5515005728528838,
+          "battery_losses_Wh": 0.04625284475407226
+        },
+        "hold_end": {
+          "duration_s": 2.99999999999998,
+          "terminal_energy_Wh": 0.32182789463143785,
+          "battery_losses_Wh": 0.020196862555054502
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "hold_start": 26.095949416627768,
+        "accelerate": 76.78416797938377,
+        "transit_out": 13.674421801278708,
+        "stop": 10.520662179169337,
+        "hold_turn": 73.56929860518312,
+        "yaw": 182.37594411566505,
+        "return_accelerate": 236.92325105226567,
+        "return_transit": 448.68906048795276,
+        "return_stop": 472.9060711231509,
+        "hold_end": 362.7490291132812
+      },
+      "min_voltage_V": 15.333113999164562,
+      "final_voltage_V": 15.831416635280867,
+      "mean_current_A": 14.548741256843542,
+      "peak_current_A": 34.85821523167913,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9849573199967738,
+      "final_battery_temperature_C": 20.256768483937986,
+      "peak_battery_temperature_C": 20.256768483937986,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "mission_0.4.trace.jsonl.gz",
+        "sha256": "5c3c5c0da5646fffd021ee8a0556529bee64e12657601d4020f81d70986d6261",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "mission_0.4.jsonl",
+        "sha256": "c2e636e5390027a445661a5b27bf4aee305ee9c48bb6c6adcebd4fa0eb15930c"
+      },
+      "current_m_s": [
+        0.4,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "water_5C": {
+      "duration_s": 59.99999999999663,
+      "ticks": 6000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.0029295771854597205,
+      "max_speed_m_s": 0.2748125493526459,
+      "mean_tail_position_error_m": 0.03200243600457907,
+      "max_position_error_m": 0.9700917601585388,
+      "final_position_error_m": 0.034115493297576904,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505
+      ],
+      "mean_tail_applied_effort_norm_N": 31.445020403475,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 335.06843319758076,
+      "mean_tail_total_W": 358.5128776420252,
+      "propulsion_Wh": 5.88529883368663,
+      "terminal_Wh": 6.276039574427354,
+      "battery_losses_Wh": 0.41956482667563844,
+      "category_energy_Wh": {
+        "propulsion": 5.88529883368663,
+        "sensors": 0.10166666666666659,
+        "compute": 0.0,
+        "auxiliaries": 0.2499999999999808,
+        "converters": 0.03907407407407708,
+        "battery_losses": 0.41956482667563844
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 59.99999999999663,
+          "terminal_energy_Wh": 6.276039574427397,
+          "battery_losses_Wh": 0.41956482667563844
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 353.1179300211988
+      },
+      "min_voltage_V": 15.219366186531289,
+      "final_voltage_V": 15.73418104369914,
+      "mean_current_A": 24.008158373196288,
+      "peak_current_A": 38.917240253238006,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9777702237285215,
+      "final_battery_temperature_C": 19.767046395446442,
+      "peak_battery_temperature_C": 20.01150228117662,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "water_5C.trace.jsonl.gz",
+        "sha256": "3c9f19b4e7f3942a50992ff0943f75ff1418d545491b22112e378784985e0062",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "water_5C.jsonl",
+        "sha256": "2098ce5647f2c601d94702d72ff4d71f8aa37ef491ff48670dda2a977047a9ee"
+      },
+      "current_m_s": [
+        0.5,
+        0,
+        0
+      ],
+      "water_temperature_C": 5.0
+    },
+    "water_15C": {
+      "duration_s": 59.99999999999663,
+      "ticks": 6000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.0029295771854597205,
+      "max_speed_m_s": 0.2748125493526459,
+      "mean_tail_position_error_m": 0.03200243600457907,
+      "max_position_error_m": 0.9700917601585388,
+      "final_position_error_m": 0.034115493297576904,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505
+      ],
+      "mean_tail_applied_effort_norm_N": 31.445020403475,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 335.06843319758076,
+      "mean_tail_total_W": 358.5128776420252,
+      "propulsion_Wh": 5.88529883368663,
+      "terminal_Wh": 6.276039574427354,
+      "battery_losses_Wh": 0.41956482667563844,
+      "category_energy_Wh": {
+        "propulsion": 5.88529883368663,
+        "sensors": 0.10166666666666659,
+        "compute": 0.0,
+        "auxiliaries": 0.2499999999999808,
+        "converters": 0.03907407407407708,
+        "battery_losses": 0.41956482667563844
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 59.99999999999663,
+          "terminal_energy_Wh": 6.276039574427397,
+          "battery_losses_Wh": 0.41956482667563844
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 353.1179300211988
+      },
+      "min_voltage_V": 15.219366186531289,
+      "final_voltage_V": 15.73418104369914,
+      "mean_current_A": 24.008158373196288,
+      "peak_current_A": 38.917240253238006,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9777702237285215,
+      "final_battery_temperature_C": 20.71867221508618,
+      "peak_battery_temperature_C": 20.71867221508618,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "water_15C.trace.jsonl.gz",
+        "sha256": "9d5b5b5a28f17f5508ef7a66694f6379b8b11255d2859fefcb182596f114de05",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "water_15C.jsonl",
+        "sha256": "aaa11cef28eb82d57776ae98ffa3170df5fc35dade51b31d70da0f98cfda47e8"
+      },
+      "current_m_s": [
+        0.5,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "water_25C": {
+      "duration_s": 59.99999999999663,
+      "ticks": 6000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.0029295771854597205,
+      "max_speed_m_s": 0.2748125493526459,
+      "mean_tail_position_error_m": 0.03200243600457907,
+      "max_position_error_m": 0.9700917601585388,
+      "final_position_error_m": 0.034115493297576904,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505,
+        15.722510201737505
+      ],
+      "mean_tail_applied_effort_norm_N": 31.445020403475,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 335.06843319758076,
+      "mean_tail_total_W": 358.5128776420252,
+      "propulsion_Wh": 5.88529883368663,
+      "terminal_Wh": 6.276039574427354,
+      "battery_losses_Wh": 0.41956482667563844,
+      "category_energy_Wh": {
+        "propulsion": 5.88529883368663,
+        "sensors": 0.10166666666666659,
+        "compute": 0.0,
+        "auxiliaries": 0.2499999999999808,
+        "converters": 0.03907407407407708,
+        "battery_losses": 0.41956482667563844
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 59.99999999999663,
+          "terminal_energy_Wh": 6.276039574427397,
+          "battery_losses_Wh": 0.41956482667563844
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 353.1179300211988
+      },
+      "min_voltage_V": 15.219366186531289,
+      "final_voltage_V": 15.73418104369914,
+      "mean_current_A": 24.008158373196288,
+      "peak_current_A": 38.917240253238006,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.9777702237285215,
+      "final_battery_temperature_C": 21.670298034726223,
+      "peak_battery_temperature_C": 21.670298034726223,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "water_25C.trace.jsonl.gz",
+        "sha256": "e135e6b2f5ce1f100f6898874afd5bddc27c3e5f40d30ef5be16d6d902547f87",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "water_25C.jsonl",
+        "sha256": "d6dca2103c3f8705cb7f7fb38a8ac46f9ff395a2944ce48587b24cae45d73194"
+      },
+      "current_m_s": [
+        0.5,
+        0,
+        0
+      ],
+      "water_temperature_C": 25.0
+    },
+    "payload_base": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.004074318046303233,
+      "max_speed_m_s": 0.07745768874883652,
+      "mean_tail_position_error_m": 0.026565098961116747,
+      "max_position_error_m": 0.19314433634281158,
+      "final_position_error_m": 0.002615512115880847,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_norm_N": 4.841936693327855,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 15.874734858911804,
+      "mean_tail_total_W": 39.31917930335624,
+      "propulsion_Wh": 0.15771286899017983,
+      "terminal_Wh": 0.35308323936054464,
+      "battery_losses_Wh": 0.0021938274873645287,
+      "category_energy_Wh": {
+        "propulsion": 0.15771286899017983,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.01953703703703695,
+        "battery_losses": 0.0021938274873645287
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 0.3530832393605505,
+          "battery_losses_Wh": 0.0021938274873645287
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 18.92554427882162
+      },
+      "min_voltage_V": 16.677043103523133,
+      "final_voltage_V": 16.698628539332173,
+      "mean_current_A": 2.5382257747946593,
+      "peak_current_A": 3.005791440299881,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.998824895474633,
+      "final_battery_temperature_C": 19.762565895796865,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "payload_base.trace.jsonl.gz",
+        "sha256": "96f1d453ab482a8615a141b394748ef66f78d3d005a848b598f34fe59fc9f700",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "payload_base.jsonl",
+        "sha256": "91b0df9167a864267a87468813056cdf3cdd5922ac3c81b6e80866858c2cae9e"
+      },
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "payload_electrical_18W": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.004074318046303233,
+      "max_speed_m_s": 0.07745768874883652,
+      "mean_tail_position_error_m": 0.026565098961116747,
+      "max_position_error_m": 0.19314433634281158,
+      "final_position_error_m": 0.002615512115880847,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_norm_N": 4.841936693327855,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 15.8750269468293,
+      "mean_tail_total_W": 59.31947139127375,
+      "propulsion_Wh": 0.1576511886325027,
+      "terminal_Wh": 0.5196882256695236,
+      "battery_losses_Wh": 0.004726761159771614,
+      "category_energy_Wh": {
+        "propulsion": 0.1576511886325027,
+        "sensors": 0.20083333333332287,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.036203703703703446,
+        "battery_losses": 0.004726761159771614
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 0.5196882256695403,
+          "battery_losses_Wh": 0.004726761159771614
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 18.91814263590031
+      },
+      "min_voltage_V": 16.627445419236228,
+      "final_voltage_V": 16.646919149857005,
+      "mean_current_A": 3.7469816473840245,
+      "peak_current_A": 4.212815339281328,
+      "initial_soc": 0.9999995984413448,
+      "final_soc": 0.9982652862743591,
+      "final_battery_temperature_C": 19.769978248616148,
+      "peak_battery_temperature_C": 19.99991892431725,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "payload_electrical_18W.trace.jsonl.gz",
+        "sha256": "add521810d5d57207b5b65bf8b1f34b6002d2ab436652592c1e39ad5b4ed2709",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "payload_electrical_18W.jsonl",
+        "sha256": "6c027b59ae24549e02c634f3faa80d610d51a4d822ccfff7a2567bd4f7fe00da"
+      },
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "payload_battery_half_capacity": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.004074318046303233,
+      "max_speed_m_s": 0.07745768874883652,
+      "mean_tail_position_error_m": 0.026565098961116747,
+      "max_position_error_m": 0.19314433634281158,
+      "final_position_error_m": 0.002615512115880847,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_norm_N": 4.841936693327855,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 15.87471516585863,
+      "mean_tail_total_W": 39.319159610303075,
+      "propulsion_Wh": 0.15771145902322,
+      "terminal_Wh": 0.3530818293935848,
+      "battery_losses_Wh": 0.00219473176206706,
+      "category_energy_Wh": {
+        "propulsion": 0.15771145902322,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.01953703703703695,
+        "battery_losses": 0.00219473176206706
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 0.3530818293935898,
+          "battery_losses_Wh": 0.00219473176206706
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 18.925375082786395
+      },
+      "min_voltage_V": 16.674307521805535,
+      "final_voltage_V": 16.69153668152493,
+      "mean_current_A": 2.5387550470207354,
+      "peak_current_A": 3.006022007814175,
+      "initial_soc": 0.999999567848627,
+      "final_soc": 0.9976493008823886,
+      "final_battery_temperature_C": 19.76256856182168,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "payload_battery_half_capacity.trace.jsonl.gz",
+        "sha256": "0002db64bb182e41c165a4a3db4110091603bd4879135044af228fcf787bd997",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "payload_battery_half_capacity.jsonl",
+        "sha256": "57ed237185c3fe97c0da76af0ec52b9d49f91ee1cd50320f071cf4916424bed7"
+      },
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    },
+    "payload_physical_declared": {
+      "duration_s": 30.00000000000189,
+      "ticks": 3000,
+      "energy_dt_s": 0.01,
+      "physics_dt_s": 0.01,
+      "physics_dt_basis": "client step verified equal to integrated step at this rate",
+      "tail_window_s": 10,
+      "mean_tail_speed_m_s": 0.004074318046303233,
+      "max_speed_m_s": 0.07745768874883652,
+      "mean_tail_position_error_m": 0.026565098961116747,
+      "max_position_error_m": 0.19314433634281158,
+      "final_position_error_m": 0.002615512115880847,
+      "max_angular_speed_rad_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "mean_tail_requested_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_N": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302,
+        2.4209683466639302
+      ],
+      "mean_tail_applied_effort_norm_N": 4.841936693327855,
+      "saturated_tick_fraction": 0.0,
+      "tail_saturated_tick_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "mean_tail_propulsion_W": 15.874734858911804,
+      "mean_tail_total_W": 39.31917930335624,
+      "propulsion_Wh": 0.15771286899017983,
+      "terminal_Wh": 0.35308323936054464,
+      "battery_losses_Wh": 0.0021938274873645287,
+      "category_energy_Wh": {
+        "propulsion": 0.15771286899017983,
+        "sensors": 0.05083333333333329,
+        "compute": 0.0,
+        "auxiliaries": 0.12499999999999455,
+        "converters": 0.01953703703703695,
+        "battery_losses": 0.0021938274873645287
+      },
+      "phase_energy_Wh": {
+        "station_keeping": {
+          "duration_s": 30.00000000000189,
+          "terminal_energy_Wh": 0.3530832393605505,
+          "battery_losses_Wh": 0.0021938274873645287
+        }
+      },
+      "phase_mean_propulsion_W": {
+        "station_keeping": 18.92554427882162
+      },
+      "min_voltage_V": 16.677043103523133,
+      "final_voltage_V": 16.698628539332173,
+      "mean_current_A": 2.5382257747946593,
+      "peak_current_A": 3.005791440299881,
+      "initial_soc": 0.9999997839243135,
+      "final_soc": 0.998824895474633,
+      "final_battery_temperature_C": 19.762565895796865,
+      "peak_battery_temperature_C": 19.999917320848088,
+      "battery_states": [
+        "NORMAL"
+      ],
+      "trace": {
+        "path": "payload_physical_declared.trace.jsonl.gz",
+        "sha256": "0f4ea8771b1011426f96429478efc32cc59fafce8954fb1f4b339d27ef712f06",
+        "every_ticks": 10
+      },
+      "energy_log": {
+        "path": "payload_physical_declared.jsonl",
+        "sha256": "44c9ff716e70c186ecb4b4b64e0437d3d9367de4bf6d11bb6957d416384d05b6"
+      },
+      "current_m_s": [
+        0.2,
+        0,
+        0
+      ],
+      "water_temperature_C": 15.0
+    }
+  }
+}

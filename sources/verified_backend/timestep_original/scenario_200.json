@@ -1,0 +1,37 @@
+{
+  "name": "Native timestep audit",
+  "package_name": "Ocean",
+  "world": "SimpleUnderwater",
+  "main_agent": "rov0",
+  "ticks_per_sec": 200,
+  "frames_per_sec": false,
+  "agents": [
+    {
+      "agent_name": "rov0",
+      "agent_type": "BlueROV2",
+      "control_scheme": 0,
+      "location": [
+        0,
+        0,
+        -5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "sensors": [
+        {
+          "sensor_type": "CollisionSensor"
+        },
+        {
+          "sensor_type": "DynamicsSensor",
+          "configuration": {
+            "UseCOM": true,
+            "UseRPY": true
+          }
+        }
+      ]
+    }
+  ]
+}

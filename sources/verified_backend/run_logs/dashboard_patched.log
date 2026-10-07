@@ -1,0 +1,6 @@
+C:\Users\Andrea\Desktop\Battery\examples\_common.py:74: UserWarning: Uncalibrated demo parameters: battery.capacity_temperature_curve, battery.internal_resistance_ohm, battery.max_current_temperature_curve, battery.ocv_curve, battery.resistance_temperature_curve, converters.hotel_efficiency, converters.payload_efficiency, hotel_load.constant_W, thermal.cooling_coeff_W_per_C, thermal.derating_temperature_C, thermal.thermal_capacity_J_per_C
+  config = load_config(args.config)
+Dashboard: http://127.0.0.1:8765/
+Demo complete: 6000 steps; minimum action factor 0.3955
+Report: logs\verified_backend\dashboard_patched\realtime_report.json
+exit 0

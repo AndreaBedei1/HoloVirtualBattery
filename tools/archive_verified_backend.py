@@ -1,10 +1,11 @@
 """Archive the native verified-backend campaign and summarize the native suite.
 
 Copies machine-readable outputs from logs/verified_backend into
-sources/verified_backend (deterministic gzip for raw JSONL, hashes for large local
-logs) and writes native_suite.json: one entry per native verification item with the
-quantitative criterion, the measured values and PASS/FAIL. Nothing is recomputed
-from scratch except comparisons between archived reports.
+sources/verified_backend (deterministic gzip for raw JSONL, run metadata and large
+JSON; hashes only for the full per-tick energy logs, which stay local; console logs
+under run_logs/) and writes native_suite.json: one entry per native verification
+item with the quantitative criterion, the measured values and PASS/FAIL. Nothing is
+recomputed from scratch except comparisons between archived reports.
 """
 
 import argparse
@@ -18,6 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDS = ("original", "rebuilt", "patched")
+LARGE_JSON_BYTES = 500_000
 
 
 def sha(path):
@@ -34,6 +36,13 @@ def gzip_copy(source, target):
     return {"raw_sha256": hashlib.sha256(data).hexdigest(), "raw_bytes": len(data)}
 
 
+def compress(path):
+    """Run metadata repeats the resolved profiles; large JSON is archived compressed."""
+    return path.name.endswith(".metadata.json") or (
+        path.suffix == ".json" and path.stat().st_size > LARGE_JSON_BYTES
+    )
+
+
 def load(path):
     path = Path(path)
     return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
@@ -44,23 +53,24 @@ def archive(src, dst):
     dst.mkdir(parents=True, exist_ok=True)
     for item in sorted(src.iterdir()):
         if item.is_dir():
-            sub = dst / item.name
-            sub.mkdir(exist_ok=True)
-            for child in sorted(item.iterdir()):
-                if child.suffix == ".jsonl" and child.name == "raw.jsonl":
-                    index[f"{item.name}/{child.name}.gz"] = gzip_copy(
-                        child, sub / (child.name + ".gz")
-                    )
+            for child in sorted(p for p in item.rglob("*") if p.is_file()):
+                key = child.relative_to(src).as_posix()
+                target = dst / key
+                if child.name == "raw.jsonl" or compress(child):
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    index[key + ".gz"] = gzip_copy(child, target.with_name(child.name + ".gz"))
                 elif child.suffix == ".jsonl":
                     # Full per-tick energy logs stay local; their hashes are in the reports.
-                    index[f"{item.name}/{child.name}"] = {"local_only_sha256": sha(child)}
-                elif child.suffix in (".json", ".csv") or child.name.endswith(".jsonl.gz"):
-                    shutil.copy2(child, sub / child.name)
-                    index[f"{item.name}/{child.name}"] = {"sha256": sha(child)}
+                    index[key] = {"local_only_sha256": sha(child)}
+                elif child.suffix in (".json", ".csv", ".log") or child.name.endswith(".jsonl.gz"):
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(child, target)
+                    index[key] = {"sha256": sha(child)}
         elif item.suffix in (".json", ".log"):
-            target = dst / ("campaign_" + item.name if item.suffix == ".log" else item.name)
+            target = dst / ("run_logs/" + item.name if item.suffix == ".log" else item.name)
+            target.parent.mkdir(exist_ok=True)
             shutil.copy2(item, target)
-            index[target.name] = {"sha256": sha(item)}
+            index[target.relative_to(dst).as_posix()] = {"sha256": sha(item)}
     return index
 
 
@@ -133,6 +143,7 @@ def suite(src):
             and close(o["observed_expected_scale_mean"], 0.01, 1e-3),
         )
     )
+    control_difference = paired_difference(drag["original"], drag["rebuilt"], "velocity_m_s")
     items.append(
         entry(
             "control rebuild reproduces official binary",
@@ -140,13 +151,12 @@ def suite(src):
             {
                 "case": r and r["case"],
                 "scale_mean": r and r["observed_expected_scale_mean"],
-                "max_velocity_difference_m_s": paired_difference(
-                    drag["original"], drag["rebuilt"], "velocity_m_s"
-                ),
+                "max_velocity_difference_m_s": control_difference,
             },
             bool(r)
             and r["case"] == "CASE C"
-            and (paired_difference(drag["original"], drag["rebuilt"], "velocity_m_s") or 1) < 1e-6,
+            and control_difference is not None
+            and control_difference < 1e-6,
         )
     )
     items.append(
@@ -290,6 +300,20 @@ def suite(src):
                 len(missions) == 3,
             )
         )
+        fine = load(src / "energy_patched_200hz/patched_200hz_report.json")
+        if fine:
+            change = {
+                k: v["propulsion_Wh"] / study["records"][k]["propulsion_Wh"] - 1
+                for k, v in fine["records"].items()
+            }
+            items.append(
+                entry(
+                    "energy step refinement 100 -> 200 Hz, patched",
+                    "propulsion energy changes by less than 1% when the step is halved",
+                    {"relative_change": change},
+                    bool(change) and all(abs(c) < 0.01 for c in change.values()),
+                )
+            )
     integration = load(src / "derating_patched/integration_report.json")
     items.append(
         entry(
@@ -324,14 +348,63 @@ def suite(src):
             and realtime["power_limit_applied_to_backend"],
         )
     )
+    upstream = {b: load(src / f"upstream_test_{b}.json") for b in ("original", "patched")}
+    values = {b: u and u["measured_over_si"] for b, u in upstream.items()}
+    items.append(
+        entry(
+            "upstream test_currents reproduction (HoveringAUV, 60 Hz)",
+            "official binary = upstream constant = 0.01 x SI; patched = SI (each axis, 0.1%)",
+            {
+                "measured_over_si": values,
+                "upstream_constant_over_si": upstream["original"]
+                and upstream["original"]["upstream_value_over_si"],
+            },
+            all(values.values())
+            and all(close(v, 0.01, 1e-3) for v in values["original"])
+            and all(close(v, 1.0, 1e-3) for v in values["patched"]),
+        )
+    )
+    demo = load(src / "demo/before_after_demo.json")
+    if demo:
+        before, after = demo["results"]["before"], demo["results"]["after"]
+        items.append(
+            entry(
+                "before/after mission demo",
+                "same mission and controller on both builds; AFTER mean drag > 10x BEFORE",
+                {
+                    "current_m_s": demo["current_m_s"],
+                    "mean_drag_N": [
+                        before["mean_implementation_drag_N"],
+                        after["mean_implementation_drag_N"],
+                    ],
+                    "propulsion_Wh": [before["propulsion_Wh"], after["propulsion_Wh"]],
+                    "terminal_Wh": [before["terminal_Wh"], after["terminal_Wh"]],
+                },
+                after["mean_implementation_drag_N"] > 10 * before["mean_implementation_drag_N"],
+            )
+        )
+    scenarios = load(src / "generic/scenarios/scenario_report.json")
+    comparison = load(src / "generic/compare/comparison.json")
+    items.append(
+        entry(
+            "genericity regression (non-HoloOcean configurations)",
+            "generic scenarios and L0/L1 comparison run unchanged",
+            {
+                "generic_scenarios": scenarios and len(scenarios["records"]),
+                "comparison_models": comparison and sorted(comparison),
+            },
+            bool(scenarios) and bool(comparison) and len(scenarios["records"]) > 0,
+        )
+    )
     shutdown = load(src / "clean_shutdown.json")
     items.append(
         entry(
             "clean shutdown",
-            "no Holodeck process left after every native run; integration processes closed",
+            "no Holodeck process left; integration processes closed; exit codes as expected",
             shutdown,
             bool(shutdown)
             and shutdown.get("holodeck_processes_after_campaign") == 0
+            and shutdown.get("all_exit_codes_as_expected") is True
             and bool(integration)
             and integration["derated"]["engine_process_closed"]
             and integration["accounting_only"]["engine_process_closed"],

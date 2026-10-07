@@ -1,0 +1,12 @@
+Completed 20 Hz
+Completed 30 Hz
+Completed 40 Hz
+Completed 60 Hz
+Completed 100 Hz
+Completed 200 Hz
+  20 Hz client 0.050000 s, physics 0.033333336 s, ratio 0.6666667, consistent=False
+  30 Hz client 0.033333 s, physics 0.033333336 s, ratio 1.0000001, consistent=True
+  40 Hz client 0.025000 s, physics 0.025000001 s, ratio 1.0000000, consistent=True
+  60 Hz client 0.016667 s, physics 0.016666666 s, ratio 1.0000000, consistent=True
+ 100 Hz client 0.010000 s, physics 0.010000000 s, ratio 1.0000000, consistent=True
+ 200 Hz client 0.005000 s, physics 0.005000001 s, ratio 1.0000001, consistent=True
