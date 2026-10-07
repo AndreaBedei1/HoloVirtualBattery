@@ -149,3 +149,42 @@ def test_continuous_solution_is_sign_symmetric():
     forward = timestep.continuous_still_water_velocity(1.2, 0.3, PARAMETERS)
     backward = timestep.continuous_still_water_velocity(-1.2, 0.3, PARAMETERS)
     assert backward == pytest.approx(-forward)
+
+
+def assert_close(a, b):
+    if isinstance(a, dict):
+        assert a.keys() == b.keys()
+        for key in a:
+            assert_close(a[key], b[key])
+    elif isinstance(a, list):
+        assert len(a) == len(b)
+        for x, y in zip(a, b, strict=True):
+            assert_close(x, y)
+    elif isinstance(a, float):
+        assert a == pytest.approx(b, rel=1e-12, abs=1e-300)
+    else:
+        assert a == b
+
+
+def test_archived_campaign_reanalyzes_without_a_source_checkout(tmp_path, monkeypatch):
+    import gzip
+    import json
+    import shutil
+    import sys
+
+    archived = ROOT / "sources/verified_backend/timestep_patched"
+    work = tmp_path / "timestep_patched"
+    shutil.copytree(archived, work)
+    with gzip.open(work / "raw.jsonl.gz", "rb") as packed, (work / "raw.jsonl").open("wb") as raw:
+        shutil.copyfileobj(packed, raw)
+    monkeypatch.setattr(sys, "argv", ["audit", "--output-dir", str(work), "--reanalyze"])
+    timestep.main()
+    redone = json.loads((work / "report.json").read_text(encoding="utf-8"))
+    original = json.loads((archived / "report.json").read_text(encoding="utf-8"))
+    # Same raw data, same verdicts; floats agree to the last bits across Python versions.
+    assert_close(redone["result_by_tick_rate"], original["result_by_tick_rate"])
+    assert redone["verified_ticks_per_sec"] == [30, 40, 60, 100, 200]
+    assert redone["rejected_ticks_per_sec"] == [20]
+    monkeypatch.setattr(sys, "argv", ["audit", "--output-dir", str(work)])
+    with pytest.raises(SystemExit):
+        timestep.main()

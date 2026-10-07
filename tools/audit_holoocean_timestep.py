@@ -380,7 +380,9 @@ def reanalyze(output_dir):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source-dir", type=Path, required=True)
+    parser.add_argument(
+        "--source-dir", type=Path, help="HoloOcean checkout (required unless --reanalyze)"
+    )
     parser.add_argument(
         "--binary",
         type=Path,
@@ -405,6 +407,8 @@ def main():
     if args.reanalyze:
         reanalyze(args.output_dir)
         return
+    if args.source_dir is None:
+        parser.error("--source-dir is required to run the audit")
     if min(args.ticks_per_sec) < 2 or args.repeats <= 0 or args.steps_per_case < 2:
         parser.error("Positive repeats, >=2 steps and >=2 ticks/s required")
     audit = source_parameters(args.source_dir)
