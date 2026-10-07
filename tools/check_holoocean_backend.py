@@ -110,6 +110,18 @@ def verdict(ratio):
     return "FAIL", f"unexpected drag scale {ratio:.6f}; run the full audit"
 
 
+def summary(drag_status, step_status, ratios):
+    """One-line result: PASS, the unpatched-2.3.0 signature, or a pointer to the details."""
+    if drag_status == step_status == "PASS":
+        return "PASS"
+    if drag_status == "FAIL" and all(
+        math.isclose(r, UNPATCHED_SCALE, rel_tol=TOLERANCE) for r in ratios
+    ):
+        return "FAIL: detected ~0.01 drag scaling associated with unpatched HoloOcean 2.3.0"
+    status = "INCONCLUSIVE" if drag_status == "INCONCLUSIVE" else "FAIL"
+    return f"{status}: drag {drag_status}, physics step {step_status} (details above)"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", type=Path, help="Package executable; default: installed Ocean")
@@ -160,6 +172,8 @@ def main():
         )
     print(f"HoloOcean backend drag scale: {drag_status}: {drag_detail}")
     print(f"HoloOcean physics step at {tps} Hz: {step_status}: {step_detail}")
+    result = summary(drag_status, step_status, (current_ratio, auto_ratio))
+    print(result)
     report = {
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "scope": "implementation smoke test; not vehicle hydrodynamic validation",
@@ -175,6 +189,7 @@ def main():
             "still_water_ratio": auto_ratio,
         },
         "physics_step": {"status": step_status, "physics_to_client_ratio": dt_ratio},
+        "result": result,
     }
     if args.output:
         write_json(args.output, report)
