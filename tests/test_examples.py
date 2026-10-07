@@ -88,15 +88,40 @@ def test_native_backend_resets_and_sets_simulated_timing(monkeypatch, tmp_path):
 
     monkeypatch.setitem(sys.modules, "holoocean", SimpleNamespace(make=make))
     args = SimpleNamespace(backend="holoocean", scenario=path, show_viewport=False)
-    env, contract = common.backend(args, {"simulation": {"dt_s": 0.05}})
+    env, contract = common.backend(args, {"simulation": {"dt_s": 0.01}})
     assert isinstance(env, NativeBackend)
     assert calls[1] == "reset"
-    assert calls[0]["ticks_per_sec"] == 20
+    assert calls[0]["ticks_per_sec"] == 100
     assert calls[0]["frames_per_sec"] is False
     assert calls[0]["show_viewport"] is False
-    assert calls[0]["scenario_cfg"]["ticks_per_sec"] == 20
+    assert calls[0]["scenario_cfg"]["ticks_per_sec"] == 100
     assert contract["agent_name"] == "rov0"
     assert json.loads(path.read_text()) == scenario
+
+
+def test_native_backend_rejects_steps_beyond_the_physics_cap(monkeypatch, tmp_path):
+    # UE 5.3 integrates at most 1/30 s per tick without substepping (timestep audit):
+    # 20 Hz would integrate 0.05 s of energy per 0.0333 s of physics.
+    common = example_common()
+    path = tmp_path / "scenario.json"
+    path.write_text(json.dumps({"agents": [{"agent_type": "BlueROV2", "agent_name": "rov0"}]}))
+    calls = []
+
+    class NativeBackend:
+        def reset(self):
+            calls.append("reset")
+
+    def make(**kwargs):
+        calls.append(kwargs["ticks_per_sec"])
+        return NativeBackend()
+
+    monkeypatch.setitem(sys.modules, "holoocean", SimpleNamespace(make=make))
+    args = SimpleNamespace(backend="holoocean", scenario=path, show_viewport=False)
+    with pytest.raises(ValueError, match="1/30 s"):
+        common.backend(args, {"simulation": {"dt_s": 0.05}})
+    assert calls == []  # rejected before any simulator start
+    common.backend(args, {"simulation": {"dt_s": 1 / 30}})
+    assert calls == [30, "reset"]
 
 
 def test_native_backend_closes_when_reset_fails(monkeypatch, tmp_path):
@@ -117,5 +142,5 @@ def test_native_backend_closes_when_reset_fails(monkeypatch, tmp_path):
     monkeypatch.setitem(sys.modules, "holoocean", SimpleNamespace(make=lambda **kwargs: env))
     args = SimpleNamespace(backend="holoocean", scenario=path, show_viewport=False)
     with pytest.raises(RuntimeError, match="initialization failed"):
-        common.backend(args, {"simulation": {"dt_s": 0.05}})
+        common.backend(args, {"simulation": {"dt_s": 0.01}})
     assert env.exited

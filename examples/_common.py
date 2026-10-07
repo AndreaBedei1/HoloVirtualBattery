@@ -3,12 +3,18 @@
 import argparse
 import copy
 import json
+import sys
 from pathlib import Path
 
 from holoenergy.config import load_config
 from holoenergy.provenance import file_hash
 
 ROOT = Path(__file__).resolve().parents[1]
+# UE 5.3 integrates at most MaxPhysicsDeltaTime = 1/30 s per tick without substepping;
+# a longer energy step would integrate energy over time the physics never simulated.
+NATIVE_MAX_DT_S = 1 / 30
+# Native rate verified by tools/audit_holoocean_timestep.py and the drag audit.
+NATIVE_DEFAULT_DT_S = 0.01
 
 
 class SyntheticThrusterEnv:
@@ -45,6 +51,16 @@ def parser(description):
         help="Native HoloOcean JSON with one BlueROV2 agent",
     )
     result.add_argument("--show-viewport", action="store_true", help="Show the simulator window")
+    result.add_argument(
+        "--holoocean-binary",
+        type=Path,
+        help="Executable of a separately built Ocean package (e.g. the drag-patched build)",
+    )
+    result.add_argument(
+        "--dt",
+        type=float,
+        help=f"Energy and simulator step in s; native default {NATIVE_DEFAULT_DT_S} (verified)",
+    )
     result.add_argument("--config", type=Path, default=ROOT / "configs/bluerov2_energy.yaml")
     result.add_argument("--steps", type=int, default=300)
     result.add_argument("--output-dir", type=Path, default=ROOT / "logs")
@@ -56,6 +72,13 @@ def settings(args):
     if args.steps <= 0:
         raise ValueError("--steps must be positive")
     config = load_config(args.config)
+    dt = getattr(args, "dt", None)
+    if dt is None and args.backend == "holoocean":
+        dt = NATIVE_DEFAULT_DT_S
+    if dt is not None:
+        if not dt > 0:
+            raise ValueError("--dt must be positive")
+        config["simulation"]["dt_s"] = dt
     config["power_manager"]["apply_derating_to_actions"] = True
     config["logging"] = {
         "enabled": True,
@@ -74,6 +97,9 @@ def settings(args):
                 "ticks_per_sec": round(1 / config["simulation"]["dt_s"]),
                 "frames_per_sec": False,
             },
+            "holoocean_binary": str(binary)
+            if (binary := getattr(args, "holoocean_binary", None))
+            else None,
         },
     }
     return config
@@ -108,19 +134,35 @@ def backend(args, config):
     tps = round(1 / dt)
     if abs(tps * dt - 1) > 1e-9:
         raise ValueError("dt_s must equal the reciprocal of an integer ticks_per_sec")
+    if dt > NATIVE_MAX_DT_S + 1e-12:
+        raise ValueError(
+            f"dt_s={dt} exceeds the UE 5.3 physics step cap of 1/30 s (MaxPhysicsDeltaTime, "
+            "no substepping): HoloOcean would integrate less time than the energy model. "
+            f"Use dt_s <= 1/30; {NATIVE_DEFAULT_DT_S} s is verified "
+            "(see docs/holoocean_timestep_report.md)."
+        )
     scenario = copy.deepcopy(scenario)
     scenario["ticks_per_sec"] = tps
     scenario["frames_per_sec"] = False
     scenario["agents"][0]["control_scheme"] = 0
     contract["agent_name"] = scenario["agents"][0]["agent_name"]
+    binary = getattr(args, "holoocean_binary", None)
     env = None
     try:
-        env = holoocean.make(
-            scenario_cfg=scenario,
-            ticks_per_sec=tps,
-            frames_per_sec=False,
-            show_viewport=getattr(args, "show_viewport", False),
-        )
+        if binary is None:
+            env = holoocean.make(
+                scenario_cfg=scenario,
+                ticks_per_sec=tps,
+                frames_per_sec=False,
+                show_viewport=getattr(args, "show_viewport", False),
+            )
+        else:
+            sys.path.insert(0, str(ROOT))
+            from tools.holoocean_backend import make_env
+
+            env = make_env(
+                scenario, tps, binary, show_viewport=getattr(args, "show_viewport", False)
+            )
         env.reset()
     except Exception as exc:
         if env is not None:
