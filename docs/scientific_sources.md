@@ -471,3 +471,19 @@ current limits, thermal identification, actual component duty cycles/rail
 efficiency, installed thruster inflow/transients, payload hydrodynamic changes,
 and independent mission validation. The retained calibration/validation tooling
 separates datasets and never promotes a synthetic/test pass to physical evidence.
+
+## Verified backend: timestep and build sources (2026-10-07)
+
+Primary sources read for the patched-backend build and the timestep audit. Epic
+source files were read locally from the GitHub tag `5.3.2-release` (commit
+`072300df18a94f18077ca20a14224b5d99fee872`, account-gated); they are cited by path
+and not redistributed.
+
+| ID | Source | Use and limits |
+| --- | --- | --- |
+| S22 | Unreal Engine 5.3.2, `Engine/Source/Runtime/PhysicsCore/Private/ChaosScene.cpp`, `FChaosScene::SetUpForFrame` | Without substepping the solver step is `min(DeltaSeconds, MaxPhysicsDeltaTime)`; the excess frame time is not integrated. Explains the 20 Hz clock/physics mismatch; verified at runtime by the timestep audit, not assumed. |
+| S23 | Unreal Engine 5.3.2, `Engine/Source/Runtime/Engine/Private/PhysicsEngine/PhysicsSettings.cpp` (constructor) and `Engine/Config/BaseEngine.ini` | Defaults `MaxPhysicsDeltaTime = 1/30 s`, `bSubstepping = false`, `bTickPhysicsAsync = false`; not overridden by BaseEngine.ini nor by HoloOcean's `DefaultEngine.ini` (commented entries). |
+| S24 | Unreal Engine 5.3.2, `Engine/Source/Runtime/Experimental/Chaos/Public/Chaos/PBDRigidsEvolutionGBF.h`, `FPBDRigidsEvolutionGBF::Integrate` | Order `V += a·dt; V *= max(0, 1 − c·dt); X += V·dt` (semi-implicit Euler with ether drag): basis of the force reconstruction and of the mass-free kinematic step estimator. |
+| S25 | HoloOcean 2.3.0, `HolodeckWorldSettings.{h,cpp}` (`FixupDeltaSeconds` returns `1/TicksPerSec`), `AdjustTPSCommand.cpp`, client `environments.py` (`t = num_ticks/ticks_per_sec`, default 30 Hz) and `DynamicsSensor.cpp` (acceleration = Δv/world DeltaTime) | The client clock and the world tick advance 1/tps; the physics step is capped separately (S22). |
+| S26 | Epic Developer Community Forums, [ConcurrentLinearAllocator.h `__has_feature` C4668 thread](https://forums.unrealengine.com/t/bug-engine-source-runtime-core-public-experimental-concurrentlinearallocator-h/2143771), accessed 2026-10-07 | Community report of the MSVC >= 14.40 failure for UE 5.2–5.5 and Epic-toolchain workaround (older MSVC). Context for the documented syntax-only build fixes; not a physics source. |
+| S27 | Official HoloOcean 2.3.0 Ocean `Holodeck.pdb` and executable strings (installed package) | Build identity of the official binary: UE 5.3.2 Launcher (`++UE5+Release-5.3-CL-29314046`), MSVC 14.44.35207, Windows SDK 10.0.22621.0, develop checkout path. Identifies the toolchain to reproduce; not the exact source commit. |
