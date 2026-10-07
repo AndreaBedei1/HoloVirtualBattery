@@ -111,3 +111,41 @@ def test_continuous_still_water_solution_limits():
     assert timestep.continuous_still_water_velocity(2.5, 1.0, no_drag) == pytest.approx(
         2.5 * math.exp(-1.0)
     )
+
+
+def explicit_still_water_rows(tps, steps=6, v0=2.5):
+    """Explicit-Euler drag + ether drag from the set state; the priming tick is step -1."""
+    k = (
+        0.5
+        * PARAMETERS["density_kg_m3"]
+        * PARAMETERS["drag_coefficient"]
+        * PARAMETERS["area_m2"]
+        / PARAMETERS["mass_kg"]
+    )
+    dt = timestep.predicted_physics_dt(tps)
+    v, rows = v0, []
+    for step in range(-1, steps):
+        v = (v - k * v * abs(v) * dt) * (1 - PARAMETERS["linear_damping_per_s"] * dt)
+        rows.append({"ticks_per_sec": tps, "step": step, "velocity_m_s": [v, 0.0, 0.0]})
+    return rows
+
+
+@pytest.mark.parametrize("tps,reversal", [(30, True), (100, False), (200, False)])
+def test_drag_stability_starts_from_the_set_state(tps, reversal):
+    result = timestep.drag_stability(explicit_still_water_rows(tps), PARAMETERS)
+    k = 0.5 * 997 * 0.8 * 0.45 / 11.5
+    assert result["initial_velocity_m_s"] == 2.5
+    assert result["explicit_step_number_K_v_dt_over_m"] == pytest.approx(
+        k * 2.5 * timestep.predicted_physics_dt(tps)
+    )
+    assert result["max_abs_error_vs_explicit_prediction_m_s"] < 1e-12
+    assert result["sign_reversal_observed"] is reversal
+    assert result["trace"][0]["physics_time_s"] == pytest.approx(timestep.predicted_physics_dt(tps))
+    # Explicit integration under-predicts the speed against the continuous solution.
+    assert result["first_step_relative_error_vs_continuous"] < 0
+
+
+def test_continuous_solution_is_sign_symmetric():
+    forward = timestep.continuous_still_water_velocity(1.2, 0.3, PARAMETERS)
+    backward = timestep.continuous_still_water_velocity(-1.2, 0.3, PARAMETERS)
+    assert backward == pytest.approx(-forward)

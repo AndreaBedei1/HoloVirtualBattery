@@ -40,6 +40,7 @@ from tools.holoocean_backend import make_env  # noqa: E402
 GRAVITY_M_S2 = 9.8  # UE default world gravity -980 cm/s^2, verified by the drag audit
 UE_MAX_PHYSICS_DT_S = 1.0 / 30.0  # UPhysicsSettings default in UE 5.3 (float)
 CONSISTENCY_TOLERANCE = 1e-4
+STILL_WATER_INITIAL_SPEED_M_S = 2.5  # set state of the still_water_deceleration case
 
 
 def f32(value):
@@ -89,7 +90,7 @@ def cases(drag_stability):
             {
                 "name": "still_water_deceleration_2_5",
                 "location": [0, 0, -5],
-                "velocity": [2.5, 0, 0],
+                "velocity": [STILL_WATER_INITIAL_SPEED_M_S, 0, 0],
             }
         )
     return result
@@ -231,27 +232,17 @@ def continuous_still_water_velocity(v0, t, parameters):
         / parameters["mass_kg"]
     )
     decay = math.exp(-c * t)
-    return c * v0 * decay / (c + k * v0 * (1 - decay))
+    speed = abs(v0)
+    return math.copysign(c * speed * decay / (c + k * speed * (1 - decay)), v0)
 
 
-def drag_stability(rows, parameters):
-    v0 = rows[0]["velocity_m_s"][0]
-    t0 = rows[0]["time_s"]
-    trace = []
-    for r in rows[1:]:
-        dt_client = r["time_s"] - t0
-        physics_t = predicted_physics_dt(r["ticks_per_sec"]) * (r["step"] + 1)
-        trace.append(
-            {
-                "step": r["step"],
-                "client_time_s": dt_client,
-                "physics_time_s": physics_t,
-                "velocity_m_s": r["velocity_m_s"][0],
-                "continuous_velocity_m_s": continuous_still_water_velocity(
-                    v0, physics_t, parameters
-                ),
-            }
-        )
+def drag_stability(rows, parameters, initial_speed=STILL_WATER_INITIAL_SPEED_M_S):
+    """Explicit-step behaviour of the drag from the set state.
+
+    The case sets 2.5 m/s at t = 0 with zero current, so the priming tick (step -1)
+    is already the first drag step: row k is at physics time (k + 2) * dt.
+    """
+    c = parameters["linear_damping_per_s"]
     k_over_m = (
         0.5
         * parameters["density_kg_m3"]
@@ -261,13 +252,38 @@ def drag_stability(rows, parameters):
         / parameters["mass_kg"]
     )
     dt = predicted_physics_dt(rows[0]["ticks_per_sec"])
+    trace, previous = [], initial_speed
+    for r in rows:
+        physics_t = dt * (r["step"] + 2)
+        measured = r["velocity_m_s"][0]
+        continuous = continuous_still_water_velocity(initial_speed, physics_t, parameters)
+        trace.append(
+            {
+                "step": r["step"],
+                "physics_time_s": physics_t,
+                "velocity_m_s": measured,
+                "explicit_euler_prediction_m_s": (
+                    previous - k_over_m * previous * abs(previous) * dt
+                )
+                * (1 - c * dt),
+                "continuous_velocity_m_s": continuous,
+            }
+        )
+        previous = measured
     return {
-        "initial_velocity_m_s": v0,
-        "explicit_step_number_K_v_dt_over_m": k_over_m * v0 * dt,
+        "initial_velocity_m_s": initial_speed,
+        "initial_condition": "set state at t = 0; the priming tick is the first drag step",
+        "explicit_step_number_K_v_dt_over_m": k_over_m * initial_speed * dt,
         "sign_reversal_observed": any(t["velocity_m_s"] < 0 for t in trace),
+        "max_abs_error_vs_explicit_prediction_m_s": max(
+            abs(t["velocity_m_s"] - t["explicit_euler_prediction_m_s"]) for t in trace
+        ),
         "max_abs_error_vs_continuous_m_s": max(
             abs(t["velocity_m_s"] - t["continuous_velocity_m_s"]) for t in trace
         ),
+        "first_step_relative_error_vs_continuous": trace[0]["velocity_m_s"]
+        / trace[0]["continuous_velocity_m_s"]
+        - 1,
         "trace": trace,
     }
 
@@ -327,6 +343,41 @@ def evaluate(all_rows, parameters, frequencies):
     return by_rate
 
 
+def reanalyze(output_dir):
+    """Re-evaluate archived raw observations with the current analysis code."""
+    report_path = output_dir / "report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    raw_path = output_dir / "raw.jsonl"
+    if file_hash(raw_path) != report["raw_sha256"]:
+        raise ValueError("raw.jsonl does not match the report it belongs to")
+    initial = output_dir / "report_initial_analysis.json"
+    if not initial.exists():
+        initial.write_text(report_path.read_text(encoding="utf-8"), encoding="utf-8")
+    raw = [json.loads(line) for line in raw_path.read_text(encoding="utf-8").splitlines()]
+    params = report["provenance"]["source"]["parameters"]
+    frequencies = report["provenance"]["arguments"]["ticks_per_sec"]
+    by_rate = evaluate(raw, params, frequencies)
+    verified = [
+        r["ticks_per_sec"] for r in by_rate.values() if r["physics_consistent_with_client_clock"]
+    ]
+    report.update(
+        result_by_tick_rate=by_rate,
+        verified_ticks_per_sec=verified,
+        rejected_ticks_per_sec=[t for t in frequencies if t not in verified],
+        analysis_revision={
+            "revised_utc": datetime.now(timezone.utc).isoformat(),
+            "tooling_sha256": file_hash(Path(__file__)),
+            "raw_sha256_unchanged": True,
+            "initial_report_sha256": file_hash(initial),
+            "change": "drag-stability summary starts from the set state (2.5 m/s at t = 0, "
+            "priming tick = first drag step) instead of the post-priming state; "
+            "sign-aware continuous solution; per-step explicit-Euler prediction added",
+        },
+    )
+    write_json(report_path, report)
+    print(f"Re-analyzed {output_dir} from raw data")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-dir", type=Path, required=True)
@@ -344,7 +395,16 @@ def main():
         help="Add still-water deceleration from 2.5 m/s versus the continuous solution",
     )
     parser.add_argument("--output-dir", type=Path, default=ROOT / "logs/timestep_audit")
+    parser.add_argument(
+        "--reanalyze",
+        action="store_true",
+        help="Recompute the evaluation of --output-dir from its raw.jsonl (no simulator run); "
+        "the previous report is kept as report_initial_analysis.json",
+    )
     args = parser.parse_args()
+    if args.reanalyze:
+        reanalyze(args.output_dir)
+        return
     if min(args.ticks_per_sec) < 2 or args.repeats <= 0 or args.steps_per_case < 2:
         parser.error("Positive repeats, >=2 steps and >=2 ticks/s required")
     audit = source_parameters(args.source_dir)
