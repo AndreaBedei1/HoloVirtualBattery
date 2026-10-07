@@ -16,6 +16,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.holoocean_backend import package_identity, resolve_binary  # noqa: E402
+
 BASE = "engine/Source/Holodeck/"
 SOURCE_FILES = [
     "HolodeckCore/Private/HolodeckBuoyantAgent.cpp",
@@ -131,18 +134,14 @@ def predicted_velocity(velocity, force_N, dt_s, parameters):
 
 
 def runtime_provenance(binary=None):
+    """Identity of the package actually launched (installed or separately built)."""
     import holoocean
-    from holoocean import packagemanager
 
-    configured = Path(binary or packagemanager.get_binary_path_for_package("Ocean"))
-    executable = configured if configured.is_file() else Path(str(configured) + ".exe")
-    if not executable.is_file():
-        raise ValueError(f"Binary is not a file: {executable}")
-    package_root = Path(packagemanager.get_binary_path_for_package("Ocean")).parents[4]
-    package_config = package_root / "config.json"
+    _, _, package_config = resolve_binary(binary)
     config = json.loads(package_config.read_text(encoding="utf-8"))
     modules = ["agents.py", "environments.py", "command.py", "sensors.py", "packagemanager.py"]
     client_root = Path(holoocean.__file__).parent
+    identity = package_identity(binary)
     return {
         "python_executable": sys.executable,
         "python_version": platform.python_version(),
@@ -153,14 +152,14 @@ def runtime_provenance(binary=None):
         "client_install_origin": importlib.metadata.distribution("holoocean").read_text(
             "direct_url.json"
         ),
-        "binary_path": str(executable.resolve()),
-        "binary_sha256": file_hash(executable),
-        "binary_size_bytes": executable.stat().st_size,
-        "package_config_path": str(package_config),
-        "package_config_sha256": file_hash(package_config),
+        **identity,
         "package_version": config["version"],
         "package_worlds": [world["name"] for world in config["worlds"]],
-        "source_binary_build_identity": "not established by package version or behavioral conformance",
+        "source_binary_build_identity": (
+            "separate build: see build manifest"
+            if identity["build_manifest_path"]
+            else "not established by package version or behavioral conformance"
+        ),
     }
 
 

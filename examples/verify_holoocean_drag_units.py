@@ -21,6 +21,7 @@ from tools.audit_holoocean_drag import (  # noqa: E402
     source_parameters,
     write_json,
 )
+from tools.holoocean_backend import make_env  # noqa: E402
 
 
 def scenario(tps):
@@ -76,6 +77,48 @@ def cases():
     return result
 
 
+def autodrag_cases():
+    """Moving vehicle in still water, plus the absolute force references of the audit."""
+    result = [
+        {"name": "neutral_zero", "current": [0, 0, 0]},
+        {"name": "thrust_0_10N", "current": [0, 0, 0], "thrust_axis": 0},
+        {"name": "gravity_air", "current": [0, 0, 0], "in_air": True},
+    ]
+    for speed in (0.2, 0.4, 0.8):
+        result.append(
+            {
+                "name": f"autodrag_x_{speed:g}",
+                "current": [0, 0, 0],
+                "initial_velocity": [speed, 0, 0],
+            }
+        )
+    for axis in range(3):
+        for sign in (-1, 1):
+            if axis == 0 and sign == 1:
+                continue
+            velocity = [0, 0, 0]
+            velocity[axis] = sign * 0.4
+            result.append(
+                {
+                    "name": f"autodrag_{axis}_{sign}",
+                    "current": [0, 0, 0],
+                    "initial_velocity": velocity,
+                }
+            )
+    result.append(
+        {
+            "name": "autodrag_yaw90_world_x",
+            "current": [0, 0, 0],
+            "initial_velocity": [0.4, 0, 0],
+            "yaw_deg": 90,
+        }
+    )
+    return result
+
+
+CASE_SETS = {"standard": cases, "autodrag": autodrag_cases}
+
+
 def thrust_action(axis):
     if axis == 2:
         return [2.5] * 4 + [0] * 4
@@ -85,6 +128,14 @@ def thrust_action(axis):
 
 def norm(values):
     return math.sqrt(sum(v * v for v in values))
+
+
+def projected_scale(observed, expected):
+    """Least-squares scale s minimizing |observed - s * expected|; None without drag."""
+    magnitude = norm(expected)
+    if magnitude <= 1e-9:
+        return None
+    return sum(a * b for a, b in zip(observed, expected, strict=True)) / magnitude**2
 
 
 def run_case(env, case, parameters, tps, trial, steps):
@@ -176,18 +227,14 @@ def run_case(env, case, parameters, tps, trial, steps):
         rows.append(row)
         v0, t0 = velocity, time
     first = rows[0]
-    magnitude = norm(first["expected_drag_N"])
     first_summary = {
         **first,
-        "observed_expected_scale": (
-            sum(
-                a * b
-                for a, b in zip(first["observed_drag_N"], first["expected_drag_N"], strict=True)
-            )
-            / magnitude**2
-            if magnitude > 1e-9
-            else None
+        "observed_expected_scale": projected_scale(
+            first["observed_drag_N"], first["expected_drag_N"]
         ),
+        "step_observed_expected_scales": [
+            projected_scale(r["observed_drag_N"], r["expected_drag_N"]) for r in rows
+        ],
         "maximum_angular_velocity_rad_s": max(norm(r["angular_velocity_rad_s"]) for r in rows),
         "any_collision": any(r["collision"] for r in rows),
         "maximum_sensor_fd_error_m_s2": max(
@@ -208,13 +255,54 @@ def run_case(env, case, parameters, tps, trial, steps):
     return rows, first_summary
 
 
+def family_summary(rows):
+    """First-pulse and every-step drag scales of one family of drag cases."""
+    if not rows:
+        return None
+    first = [r["observed_expected_scale"] for r in rows if r["observed_expected_scale"] is not None]
+    steps = [s for r in rows for s in r.get("step_observed_expected_scales", []) if s is not None]
+    summary = {
+        "cases": sorted({r["case"] for r in rows}),
+        "first_pulse_records": len(first),
+        "first_pulse_scale_mean": statistics.mean(first),
+        "first_pulse_scale_min": min(first),
+        "first_pulse_scale_max": max(first),
+        "first_pulse_scale_stdev": statistics.stdev(first) if len(first) > 1 else 0.0,
+        "maximum_source_prediction_error_m_s": max(
+            r["maximum_source_prediction_error_m_s"] for r in rows
+        ),
+    }
+    if steps:
+        summary |= {
+            "step_observations": len(steps),
+            "step_scale_mean": statistics.mean(steps),
+            "step_scale_min": min(steps),
+            "step_scale_max": max(steps),
+        }
+    return summary
+
+
 def evaluate(records, parameters):
     currents = [
         r
         for r in records
         if r["case"].startswith("current_x_") and r["case"] != "current_x_negative"
     ]
-    scales = [r["observed_expected_scale"] for r in currents]
+    signed = [
+        r
+        for r in records
+        if r["case"] in ("current_x_negative", "yaw90_world_current")
+        or r["case"].startswith(("current_1_", "current_2_"))
+    ]
+    autodrag = [
+        r
+        for r in records
+        if r["case"] == "moving_zero_current" or r["case"].startswith("autodrag_")
+    ]
+    # Classification uses the current magnitudes, as in the decisive campaign; an
+    # autodrag-only campaign uses its +X speed series instead.
+    primary = currents or [r for r in autodrag if r["case"].startswith("autodrag_x_")]
+    scales = [r["observed_expected_scale"] for r in primary]
     refs = [r for r in records if r["case"].startswith("thrust_")]
     thrust_errors = [
         norm(
@@ -242,10 +330,12 @@ def evaluate(records, parameters):
     }
     scale = statistics.mean(scales)
     doubling = []
-    for tps, trial in sorted({(r["ticks_per_sec"], r["trial"]) for r in currents}):
+    for tps, trial in sorted({(r["ticks_per_sec"], r["trial"]) for r in primary}):
         ordered = sorted(
-            [r for r in currents if (r["ticks_per_sec"], r["trial"]) == (tps, trial)],
-            key=lambda r: r["current_m_s"][0],
+            [r for r in primary if (r["ticks_per_sec"], r["trial"]) == (tps, trial)],
+            key=lambda r: norm(
+                [v - c for v, c in zip(r["velocity_before_m_s"], r["current_m_s"], strict=True)]
+            ),
         )
         doubling.append(
             {
@@ -272,6 +362,11 @@ def evaluate(records, parameters):
         "max_thrust_reference_error_N": max(thrust_errors),
         "max_gravity_error_m_s2": max(gravity_errors),
         "quadratic_doubling": doubling,
+        "drag_families": {
+            "current_x_magnitudes": family_summary(currents),
+            "signed_axes_and_yaw": family_summary(signed),
+            "autodrag_still_water": family_summary(autodrag),
+        },
         "force_reconstruction": "m*(v_next/(1-linear_damping*dt)-v_before)/dt; known UE5.3 integrator, no physical fitting",
     }
 
@@ -280,16 +375,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-dir", type=Path, required=True)
     parser.add_argument(
-        "--binary", type=Path, help="Separate build executable prefix; original remains untouched"
+        "--binary",
+        type=Path,
+        help="Executable of a separately built package (<package>/Windows/Holodeck/Binaries/"
+        "Win64/Holodeck.exe); launched with the same parameters as holoocean.make",
     )
     parser.add_argument("--ticks-per-sec", nargs="+", type=int, default=[60, 100, 200])
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--steps-per-case", type=int, default=8)
+    parser.add_argument("--case-set", choices=sorted(CASE_SETS), default="standard")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "logs/drag_audit")
     args = parser.parse_args()
     if min(args.ticks_per_sec) < 2 or args.repeats <= 0 or args.steps_per_case < 2:
         parser.error("Positive repeats, >=2 steps and >=2 ticks/s required")
-    import holoocean
+    case_list = CASE_SETS[args.case_set]()
 
     audit = source_parameters(args.source_dir)
     params = audit["parameters"]
@@ -301,8 +400,11 @@ def main():
             for relative in (
                 "examples/verify_holoocean_drag_units.py",
                 "tools/audit_holoocean_drag.py",
+                "tools/holoocean_backend.py",
             )
         },
+        "case_set": args.case_set,
+        "cases": case_list,
         "source": audit,
         "runtime": runtime_provenance(args.binary),
         "arguments": vars(args)
@@ -317,24 +419,9 @@ def main():
     for tps in args.ticks_per_sec:
         definition = scenario(tps)
         write_json(args.output_dir / f"scenario_{tps}.json", definition)
-        if args.binary:
-            native = holoocean.environments.HoloOceanEnvironment(
-                scenario=definition,
-                binary_path=str(args.binary).removesuffix(".exe"),
-                ticks_per_sec=tps,
-                frames_per_sec=False,
-                show_viewport=False,
-            )
-        else:
-            native = holoocean.make(
-                scenario_cfg=definition,
-                ticks_per_sec=tps,
-                frames_per_sec=False,
-                show_viewport=False,
-            )
-        with native as env:
+        with make_env(definition, tps, args.binary) as env:
             for trial in range(args.repeats):
-                for case in cases():
+                for case in case_list:
                     rows, record = run_case(env, case, params, tps, trial, args.steps_per_case)
                     raw.extend(rows)
                     records.append(record)
