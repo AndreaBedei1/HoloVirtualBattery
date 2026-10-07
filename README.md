@@ -1,8 +1,11 @@
 # HoloEnergy
 
-HoloEnergy is a configurable energy-aware simulation framework for marine robots
-integrated with HoloOcean. BlueROV2 Heavy is provided as the first reference
-hardware profile and experimental validation platform.
+HoloEnergy is a generic, configurable energy-aware simulation framework for marine
+robots that couples vehicle dynamics, actuator effort, electrical loads,
+electro-thermal battery behaviour and available vehicle performance. It runs with
+HoloOcean or any backend that executes the efforts it submits. BlueROV2 Heavy is the
+first reference hardware profile and the planned experimentally calibrated and
+validated reference platform (no physical validation has been performed yet).
 
 Il framework collega sforzo degli attuatori, carichi elettrici, batteria,
 temperatura e potenza disponibile. ROV, AUV e veicoli custom usano la stessa API;
@@ -76,7 +79,9 @@ with EnergyAwareEnv(
 ```
 
 Il contratto va adattato al veicolo reale del backend: non basta dichiarare sei
-attuatori per trasformare un BlueROV2 nativo a otto thruster.
+attuatori per trasformare un BlueROV2 nativo a otto thruster. Con HoloOcean nativo
+`dt_s` deve essere al massimo 1/30 s (100 Hz verificato, vedi
+[HoloOcean backend](#holoocean-backend)).
 
 ## Generic robot configuration
 
@@ -199,6 +204,50 @@ nativo ispezionato non espone un setter pubblico affidabile per la densità.
 Massa/volume/posizione del payload sono separati dai suoi carichi elettrici:
 vedi [confini fisici e unità](docs/generic_framework.md).
 
+## HoloOcean backend
+
+HoloEnergy non corregge la dinamica del backend: conta l'energia degli sforzi che
+il backend esegue. Per questo il backend va verificato. Con HoloOcean 2.3.0 è
+verificato a runtime il percorso nativo BlueROV2 (control scheme 0,
+Ocean/SimpleUnderwater).
+
+**HoloOcean 2.3.0 ufficiale applica il drag del veicolo a 1/100 della propria
+equazione SI** (newton passati a un'API di forza in kg·cm/s²), sia con corrente sia
+con veicolo in moto in acqua ferma; spinte, gravità e galleggiamento sono corretti.
+HoloEnergy non compensa: la correzione è una riga nel backend,
+[`patches/holoocean-2.3-drag-units.patch`](patches/README.md), compilata in una build
+separata di `Holodeck.exe` e verificata (rapporto applicato/atteso 1.0000000 contro
+0.0100; build di controllo non patchata bit-identica a quella ufficiale; spinte,
+gravità e galleggiamento invariati). Procedura di build:
+[holoocean_patched_build.md](docs/holoocean_patched_build.md). L'installazione
+ufficiale non viene mai modificata.
+
+```bash
+python tools/check_holoocean_backend.py                                 # package installato: ultima riga FAIL: detected ~0.01 drag scaling ...
+python tools/check_holoocean_backend.py --binary <patched Holodeck.exe>  # ultima riga PASS
+```
+
+Usare `ticks_per_sec >= 30`: UE 5.3 integra al massimo 1/30 s per tick, quindi a
+20 Hz la fisica avanza di 2/3 del clock. Gli esempi nativi usano 100 Hz, frequenza
+verificata, e rifiutano un passo energetico più lungo di 1/30 s
+([passo temporale](docs/holoocean_timestep_report.md)). Gli esempi accettano
+`--holoocean-binary <Holodeck.exe>` per scegliere la build.
+
+Sul backend corretto a 100 Hz la catena equazione del drag → forza Unreal →
+accelerazione → sforzo applicato → domanda elettrica è chiusa tick per tick in
+anello chiuso; station keeping, missioni, temperatura dell'acqua e payload sono
+stati rieseguiti ([report del backend verificato](docs/verified_backend_report.md),
+[compatibilità delle versioni](docs/holoocean_compatibility.md),
+[dati](sources/verified_backend)). Esempio: station keeping in corrente di 0.5 m/s,
+3.115 Wh propulsivi in 30 s sul backend corretto contro 0.011 Wh su quello
+ufficiale. Questi numeri dipendono da Cd e area del simulatore e non sono
+previsioni validate del veicolo reale.
+
+La verifica del backend è un contributo secondario emerso preparando un backend
+fisicamente coerente; la correzione è proposta a HoloOcean
+([draft per la issue #368 e la PR](docs/holoocean_drag_issue_draft.md), non ancora
+pubblicati).
+
 ## Real-time dashboard
 
 La dashboard locale è opzionale e usa solo la libreria standard Python, HTML e
@@ -213,14 +262,17 @@ In una configurazione: `telemetry: {enabled: true, port: 8766, publish_hz: 10}`.
 Oppure la demo avvia simulatore, HoloEnergy e server insieme:
 
 ```bash
-python examples/realtime_energy_demo.py --backend holoocean --steps 600 --hold-seconds 30
+python examples/realtime_energy_demo.py --backend holoocean --steps 3000 --hold-seconds 30
+python examples/realtime_energy_demo.py --backend holoocean --holoocean-binary <patched Holodeck.exe> --current 0.3 --steps 6000 --hold-seconds 60
 ```
 
 Aprire `http://127.0.0.1:8765/`. La demo nativa usa
-[scenario riproducibile](configs/bluerov2_realtime_holoocean.json), comandi
+[scenario riproducibile](configs/bluerov2_realtime_holoocean.json) a 100 Hz, comandi
 alternati, limite simulato a 8 A, variazione della temperatura dell'acqua e
-spegnimento della camera. Il limite riduce realmente le azioni inviate a HoloOcean.
-`--backend synthetic` verifica la UI senza dinamica nativa.
+spegnimento della camera; `--current` applica una corrente nativa lungo X. Il limite
+riduce realmente le azioni inviate a HoloOcean (verificato sulla build patchata:
+6000 passi, 0 messaggi di telemetria persi). `--backend synthetic` verifica la UI
+senza dinamica nativa.
 
 ![Dashboard al termine della demo nativa: limiti, carichi, grafici e fasi](docs/screenshots/dashboard_native_complete.png)
 
@@ -253,19 +305,37 @@ uv run pytest -q
 uv run ruff check holoenergy examples tools tests
 uv run ruff format --check holoenergy examples tools tests
 uv run python tools/import_t200.py
-python examples/verify_holoocean_integration.py --backend holoocean --steps 60 --output-dir logs/generic_native
-python examples/native_station_keeping.py --steps 600 --output-dir logs/generic_currents
+python examples/verify_holoocean_integration.py --backend holoocean --steps 300 --output-dir logs/generic_native
+python examples/native_station_keeping.py --steps 3000 --output-dir logs/generic_currents
 uv run python examples/generic_scenarios.py --steps 600 --output-dir logs/generic_scenarios
 python tools/benchmark_energy.py --backend holoocean --steps 300 --trials 3 --output-dir logs/generic_benchmark
 ```
 
-I tre ultimi comandi richiedono l'ambiente HoloOcean. La CI verifica Python
-3.10–3.13 su Linux/Windows, importer, build e risorse della wheel installata;
-Unreal/GPU rimangono verifiche manuali. Sensitivity/Monte Carlo, calibrazione,
-importazione mappe e valutazione dati reali restano in `holoenergy-study`.
-Vedi [protocollo BlueROV2](docs/validation_protocol_bluerov2.md),
-[verifiche v0.1](docs/verification.md) e
-[report di questa fase](docs/generic_framework_report.md).
+I comandi con HoloOcean richiedono il suo ambiente Python. Verifiche native del
+backend (simulatore reale, separate dai test unitari):
+
+```bash
+python tools/check_holoocean_backend.py [--binary <Holodeck.exe>]
+python examples/verify_holoocean_drag_units.py --source-dir <checkout> [--binary <Holodeck.exe>] [--case-set autodrag]
+python tools/audit_holoocean_timestep.py --source-dir <checkout> [--binary <Holodeck.exe>] --drag-stability
+python examples/native_current_energy_study.py --backend holoocean --holoocean-binary <patched Holodeck.exe>
+python tools/verify_energy_chain.py --run-dir <study output> --report <label>_report.json --source-dir <checkout> --output <json>
+python tools/archive_verified_backend.py
+```
+
+La CI verifica Python 3.10–3.13 su Linux/Windows, importer, build e risorse della
+wheel installata; Unreal/GPU rimangono verifiche manuali (suite nativa 29/29 PASS
+sulla build patchata, archiviata in [sources/verified_backend](sources/verified_backend)).
+Sensitivity/Monte Carlo, calibrazione, importazione mappe e valutazione dati reali
+restano in `holoenergy-study`; la sensibilità ha senso solo dopo la calibrazione.
+
+**Stato della validazione:** nessuna validazione fisica del BlueROV2. Il
+[protocollo](docs/validation_protocol_bluerov2.md) e la struttura
+[`experiments/`](experiments/README.md) sono pronti per i run di calibrazione e
+validazione (mai attivare il veicolo fuori dall'acqua né i thruster a secco); il
+repository non contiene dati reali. Vedi anche [verifiche v0.1](docs/verification.md),
+[framework generico](docs/generic_framework_report.md) e
+[backend verificato](docs/verified_backend_report.md).
 
 ## Scientific model
 
@@ -280,18 +350,20 @@ termico a un nodo. Nessuna nuova fisica hydrodinamica è aggiunta al layer energ
 Un agente, un pack, scarica unidirezionale e controllo diretto degli attuatori.
 Un controller di alto livello/Fossen deve fornire un adapter esplicito. Il
 profilo energia non modifica automaticamente massa/drag/buoyancy Unreal.
-L'[audit HoloOcean 2.3.0](docs/holoocean_drag_units_report.md) ha confermato sul
-binario Ocean installato un drag pari a circa 0.01× l'equazione SI (CASE C).
-La patch backend è separata e non ancora compilata; i test con correnti restano
-verifiche di coupling software. A 20 Hz è emerso anche un conflitto tra passo
-fisico e clock. La capacità residua L1 è un limite superiore
-di lavoro OCV; cutoff sotto carico può ridurre l'energia utilizzabile.
+Con HoloOcean 2.3.0 ufficiale il drag è 0.01× l'equazione SI
+([audit](docs/holoocean_drag_units_report.md)): risultati con correnti o veicolo in
+moto su quel backend sono solo prove di coupling software; usare la build patchata
+([compatibilità](docs/holoocean_compatibility.md)). Altri agenti, Fossen, `develop`
+e versioni diverse dalla 2.3.0 non sono verificati. Il payload fisico non è
+simulato dal backend nativo. La capacità residua L1 è un limite superiore di
+lavoro OCV; cutoff sotto carico può ridurre l'energia utilizzabile.
 
 Profili sintetici, OCV/R BlueROV2, scambio termico, hotel e conversioni richiedono
 dati sperimentali. Multi-pack, aging, L2, planner, CFD e BMS completo restano
 estensioni future. Licenza MIT; [NOTICE](NOTICE) distingue i dati del produttore.
 [CITATION.cff](CITATION.cff) e [CONTRIBUTING.md](CONTRIBUTING.md) restano validi.
-Il tag stabile `v0.1.0` rimane invariato; questa fase non crea una nuova release.
+Il tag stabile `v0.1.0` rimane invariato; questa fase non crea una nuova release
+(proposta `v0.2.0` nel [report](docs/verified_backend_report.md)).
 
 [^agents]: [HoloOcean 2.3 agent API](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/holoocean/agents.html).
 [^currents]: [HoloOcean 2.3 ocean currents](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/agents/docs/currents.html).
