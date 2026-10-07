@@ -24,6 +24,12 @@ def main():
     p.add_argument(
         "--hold-seconds", type=float, default=0, help="Keep dashboard available after mission"
     )
+    p.add_argument(
+        "--current",
+        type=float,
+        default=0.0,
+        help="Constant world-X native current in m/s (HoloOcean set_ocean_currents)",
+    )
     args = p.parse_args()
     if args.hold_seconds < 0:
         p.error("--hold-seconds must be nonnegative")
@@ -74,6 +80,10 @@ def main():
                 )
                 if "Camera" in env.payload.components and step == args.steps // 2:
                     env.energy.set_component_state("Camera", "OFF")
+                if args.backend == "holoocean" and step == 0:
+                    env.energy.set_environment(
+                        current_velocity_m_s=[args.current, 0, 0], current_mode="native"
+                    )
                 env.energy.set_environment(water_temperature_C=8 if fraction < 0.5 else 15)
                 state = env.step(simulator_action(args, action))
                 rows.append(state["Energy"])
