@@ -538,13 +538,14 @@ SVG e PDF con il CSV da cui è disegnata; generate da
 
 | Controllo | Ambiente | Esito |
 | --- | --- | --- |
-| `pytest -q` | `.venv`, Python 3.13.12 (Windows) | **221 passed, 1 skipped** (NumPy assente: test dello studio nativo con NumPy) |
-| `pytest -q` | ambiente HoloOcean, Python 3.10.20 | **221 passed, 1 skipped** (avvio del simulatore installato escluso dai test unitari per costruzione); 2 warning attesi di parametri non calibrati |
+| `pytest -q` | `.venv`, Python 3.13.12 (Windows) | **222 passed, 1 skipped** (NumPy assente: test dello studio nativo con NumPy) |
+| `pytest -q` | ambiente HoloOcean, Python 3.10.20 | **222 passed, 1 skipped** (avvio del simulatore installato escluso dai test unitari per costruzione); 2 warning attesi di parametri non calibrati |
 | `ruff check holoenergy examples tools tests` | Python 3.13 | nessun problema |
 | `ruff format --check holoenergy examples tools tests` | Python 3.13 | 81 file già formattati |
 | `uv build` | uv 0.11.7 | `holoenergy-0.1.0` wheel e sdist costruiti |
 | wheel installato (`tools/check_installed_wheel.py`) | venv pulito, Python 3.13 | verificato |
 | `uv lock --check` | — | lockfile coerente |
+| `tools/import_t200.py` + `git diff --exit-code` | Python 3.13 | profilo T200 riprodotto identico |
 
 Nuovi test di questo lavoro (fixture sintetiche e, per la rianalisi, l'archivio reale;
 nessun avvio del simulatore): passo temporale
@@ -579,9 +580,10 @@ Workflow `package checks` (`.github/workflows/ci.yml`): Ubuntu e Windows × Pyth
 3.10–3.13; test unitari senza simulatore, ruff check/format, riproduzione
 dell'import T200, build di wheel e sdist, verifica del wheel installato.
 
-Stato al momento di questo commit: il branch non è mai stato pubblicato, quindi la
-CI non ha ancora girato su di esso; l'esito sul branch pubblicato è registrato qui
-dopo il push.
+Esito sul branch pubblicato, commit `04893af` (HEAD del primo push):
+[run 37696935390](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37696935390), **success, 8/8 job (Ubuntu e Windows × Python 3.10, 3.11, 3.12, 3.13)**. La CI non avvia Unreal: la suite nativa
+(§28) resta una verifica manuale sulla macchina con il simulatore. L'esito della CI
+sul commit che aggiorna questa sezione è riportato nel messaggio di consegna.
 
 ## 30. Claim scientifici ora supportati
 
@@ -690,15 +692,23 @@ riscritto, nessun tag creato o spostato. Dal punto di partenza `07deed7`:
 | `91e6bc0` | docs: add verified-backend figures A-E with their source tables |
 | `8829973` | test: close the drag-to-electrical-demand chain on closed-loop traces |
 | `a0724d4` | test: archive the closed-loop chain closure and extend the native suite |
+| `e4f4829` | fix: reanalyze archived timestep data without a HoloOcean checkout |
+| `9e45ac2` | docs: prepare the upstream HoloOcean contribution |
+| `3c881fd` | feat: one-line result for the backend check |
+| `dfeed3c` | test: rerun the backend check with its one-line result |
+| `fc54743` | docs: record verified HoloOcean backend behaviour |
+| `04893af` | docs: update the README for the verified HoloOcean backend |
 
-Seguono i commit di documentazione (report, passo temporale, compatibilità,
-upstream, README); l'elenco completo è aggiornato qui dopo il push.
+Segue il commit che aggiorna queste sezioni dopo il push (`docs: record push and CI results of the verified-backend phase`).
 
 ## 36. Push
 
-Il branch non era mai stato pubblicato. Previsto: push ordinario (nessun force push)
-di `fix/verified-holoocean-drag-backend` verso `origin`, verifica dell'HEAD remoto e
-della CI; nessun tag. Esito registrato qui dopo il push.
+Push ordinario (nessun force push) di `fix/verified-holoocean-drag-backend` verso
+`origin` (`https://github.com/AndreaBedei1/HoloVirtualBattery`), branch nuovo con
+tracking. HEAD remoto verificato uguale all'HEAD locale (`04893af`) dopo il push.
+Tag `v0.1.0` invariato sul remoto (oggetto `fdcd7ee`, commit `a7a962b`), `main`
+invariato (`a7a962b`); nessun tag creato. Il commit di aggiornamento di questa
+sezione è pubblicato con lo stesso push ordinario.
 
 ## 37. Blocchi residui
 
