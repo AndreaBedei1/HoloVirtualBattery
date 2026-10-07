@@ -6,3 +6,6 @@ patches/holoocean-2.3-drag-units.patch text eol=lf -whitespace
 docs/figures/holoocean_drag_units.svg -whitespace
 # Verified-backend archive: exact captured bytes, as for the drag audit archive.
 sources/verified_backend/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Matplotlib emits whitespace inside generated SVG path attributes.
+docs/figures/verified_backend/*.svg -whitespace
