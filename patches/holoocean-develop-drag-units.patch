@@ -1,0 +1,60 @@
+diff --git a/client/tests/scenarios/test_currents.py b/client/tests/scenarios/test_currents.py
+index 38033c6..94cf071 100644
+--- a/client/tests/scenarios/test_currents.py
++++ b/client/tests/scenarios/test_currents.py
+@@ -59,21 +59,21 @@ def test_currents_underwater(env):
+     data = env.tick()
+     dynamics_data = data["DynamicsSensor"]
+     acceleration = dynamics_data[:3]
+-    assert np.allclose(acceleration, [0.06320982, 0, 0]), "X current failed"
++    assert np.allclose(acceleration, [6.320976, 0, 0]), "X current failed"
+ 
+     env.reset()
+     env.set_ocean_currents("auv0", [0, 1, 0])
+     data = env.tick()
+     dynamics_data = data["DynamicsSensor"]
+     acceleration = dynamics_data[:3]
+-    assert np.allclose(acceleration, [0, 0.06320982, 0]), "Y current failed"
++    assert np.allclose(acceleration, [0, 6.320976, 0]), "Y current failed"
+ 
+     env.reset()
+     env.set_ocean_currents("auv0", [0, 0, 1])
+     data = env.tick()
+     dynamics_data = data["DynamicsSensor"]
+     acceleration = dynamics_data[:3]
+-    assert np.allclose(acceleration, [0, 0, 0.06320982]), "Z current failed"
++    assert np.allclose(acceleration, [0, 0, 6.320976]), "Z current failed"
+ 
+ 
+ def test_currents_surface(env):
+diff --git a/engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp b/engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp
+index bf573d9..2fcd881 100644
+--- a/engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp
++++ b/engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp
+@@ -468,6 +468,8 @@ void AHolodeckBuoyantAgent::ApplySurfaceBuoyancy(
+ 	FVector RelativeVel = AUVVel - OceanCurrentsVel;
+ 	FVector DragForce = -0.5 * WaterDensity * RelativeVel.SizeSquared()
+ 		* CoefficientOfDrag * AreaOfDrag * RelativeVel.GetSafeNormal();
++	// DragForce is SI newtons in UE world axes: scale units without reflecting Y.
++	DragForce *= UEUnitsPerMeter;
+ 	float Ratio = SubmergedSurfaceArea / TotalSurfaceArea;
+ 	RootMesh->AddForceAtLocation(DragForce * Ratio, COM);
+ 
+@@ -509,6 +511,8 @@ void AHolodeckBuoyantAgent::ApplyUnderwaterBuoyancy(
+ 	FVector RelativeVel = AUVVel - OceanCurrentsVel;
+ 	FVector DragForce = -0.5 * WaterDensity * RelativeVel.SizeSquared()
+ 		* CoefficientOfDrag * AreaOfDrag * RelativeVel.GetSafeNormal();
++	// DragForce is SI newtons in UE world axes: scale units without reflecting Y.
++	DragForce *= UEUnitsPerMeter;
+ 	RootMesh->AddForceAtLocation(DragForce, COM); // Apply drag force
+ 
+ 	TotalForce.Z *= 100;
+@@ -539,6 +543,8 @@ void AHolodeckBuoyantAgent::ApplyWavelessForces(
+ 	FVector RelativeVel = AUVVel - OceanCurrentsVel;
+ 	FVector DragForce = -0.5 * WaterDensity * RelativeVel.SizeSquared()
+ 		* CoefficientOfDrag * AreaOfDrag * RelativeVel.GetSafeNormal();
++	// DragForce is SI newtons in UE world axes: scale units without reflecting Y.
++	DragForce *= UEUnitsPerMeter;
+ 	RootMesh->AddForceAtLocation(
+ 		DragForce * ratio,
+ 		COM); // Apply drag force proportional to how submerged the vehicle is (this

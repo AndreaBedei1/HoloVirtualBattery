@@ -9,3 +9,5 @@ sources/verified_backend/** -text whitespace=blank-at-eol,blank-at-eof,space-bef
 
 # Matplotlib emits whitespace inside generated SVG path attributes.
 docs/figures/verified_backend/*.svg -whitespace
+# Proposed upstream diff for the unreleased develop branch, same rules.
+patches/holoocean-develop-drag-units.patch text eol=lf -whitespace

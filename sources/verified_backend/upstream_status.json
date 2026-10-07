@@ -1,0 +1,109 @@
+{
+  "retrieved_utc": "2026-10-07T20:11:00.848465+00:00",
+  "method": "GitHub REST API GET with the user's existing git credential (read-only); anonymous requests return 404 because the repository is private",
+  "repository": {
+    "full_name": "byu-holoocean/HoloOcean",
+    "private": true,
+    "visibility": "private",
+    "default_branch": "release",
+    "pushed_at": "2026-10-07T19:33:38Z",
+    "allow_forking": true,
+    "fork": true,
+    "has_issues": true
+  },
+  "user_permissions": {
+    "admin": false,
+    "maintain": false,
+    "push": false,
+    "triage": false,
+    "pull": true
+  },
+  "license_reported_by_api": "Other",
+  "issue_368": {
+    "url": "https://github.com/byu-holoocean/HoloOcean/issues/368",
+    "state": "open",
+    "title": "Question - Unit Ocean Currents",
+    "created_at": "2026-08-04T11:12:41Z",
+    "updated_at": "2026-08-05T20:13:13Z",
+    "closed_at": null,
+    "comments": [
+      {
+        "author": "sarahiod22",
+        "created_at": "2026-08-05T20:13:13Z",
+        "url": "https://github.com/byu-holoocean/HoloOcean/issues/368#issuecomment-5196831202",
+        "summary": "maintainer: units should be m/s; a bug in the current implementation is suspected; will look into it"
+      }
+    ]
+  },
+  "releases": [
+    {
+      "tag": "v2.3.0",
+      "published_at": "2026-02-05T20:13:33Z"
+    },
+    {
+      "tag": "v2.2.2",
+      "published_at": "2025-11-19T21:51:45Z"
+    },
+    {
+      "tag": "v2.2.1",
+      "published_at": "2025-11-04T18:58:26Z"
+    },
+    {
+      "tag": "v2.2.0",
+      "published_at": "2025-10-22T20:43:52Z"
+    },
+    {
+      "tag": "v2.1.0",
+      "published_at": "2025-09-29T22:49:26Z"
+    },
+    {
+      "tag": "v2.0.1",
+      "published_at": "2025-07-07T22:25:47Z"
+    },
+    {
+      "tag": "v2.0.0",
+      "published_at": "2025-05-30T22:19:03Z"
+    },
+    {
+      "tag": "v1.0.0",
+      "published_at": "2024-05-03T22:29:11Z"
+    }
+  ],
+  "latest_release": "v2.3.0",
+  "develop_head": {
+    "sha": "f3d1230c4050b57982d122fa2093e1097c21111a",
+    "date": "2026-10-07T19:33:34Z",
+    "subject": "Correct direction of positive y coordinate in docs (#398)"
+  },
+  "develop_buoyant_agent_cpp": {
+    "path": "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp",
+    "git_blob_sha": "bf573d9f308b51d0ccf461afd4e66f3dd5c5627c",
+    "sha256": "147b6ed3a78a2571345ac7a438771ad8d0b782edf5972f706d366e3b9d440033",
+    "vehicle_level_drag_paths": [
+      {
+        "function": "ApplySurfaceBuoyancy",
+        "relative_velocity_line": 468,
+        "add_force_line": 472,
+        "magnitude_conversion_present": false
+      },
+      {
+        "function": "ApplyUnderwaterBuoyancy",
+        "relative_velocity_line": 509,
+        "add_force_line": 512,
+        "magnitude_conversion_present": false
+      },
+      {
+        "function": "ApplyWavelessForces",
+        "relative_velocity_line": 539,
+        "add_force_line": 542,
+        "magnitude_conversion_present": false
+      }
+    ],
+    "not_audited": "triangle-level wave/drag forces in CalculateSubtriangleForces (develop only)"
+  },
+  "recent_pull_requests_checked": 30,
+  "recent_pull_requests_touching_drag_units": [],
+  "recent_pr_author_associations": [
+    "MEMBER"
+  ]
+}
