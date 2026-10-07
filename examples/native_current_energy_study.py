@@ -37,6 +37,9 @@ THRUSTER_POSITIONS_M = [
     [-0.1562, 0.0988, 0],
     [-0.1562, -0.0988, 0],
 ]
+_D = 1 / math.sqrt(2)
+# Unit thrust directions in the body frame, same source: four vertical, four vectored at 45 deg.
+THRUSTER_DIRECTIONS = [[0, 0, 1]] * 4 + [[_D, _D, 0], [_D, -_D, 0], [_D, _D, 0], [_D, -_D, 0]]
 BACKEND_THRUST_LIMIT_N = 28.75  # public HoloOcean action bound for BlueROV2 scheme 0
 GAINS = {
     "position_P_N_per_m": 20.0,
@@ -55,8 +58,7 @@ def allocation_inverse():
     import numpy as np
 
     positions = np.array(THRUSTER_POSITIONS_M)
-    d = 1 / np.sqrt(2)
-    directions = np.array([[0, 0, 1]] * 4 + [[d, d, 0], [d, -d, 0], [d, d, 0], [d, -d, 0]])
+    directions = np.array(THRUSTER_DIRECTIONS)
     return np.linalg.pinv(np.vstack([directions.T, np.cross(positions, directions).T]))
 
 
@@ -166,6 +168,8 @@ def compact(energy, state, refs, current):
         "position_m": pose[:3, 3].tolist(),
         "position_ref_m": refs["position"].tolist(),
         "velocity_m_s": np.asarray(state["VelocitySensor"]).tolist(),
+        # Centre-of-mass velocity (DynamicsSensor UseCOM): the momentum balance reference.
+        "com_velocity_m_s": np.asarray(state["DynamicsSensor"])[3:6].tolist(),
         "rpy_deg": rpy.tolist(),
         "speed_m_s": energy["linear_speed_m_s"],
         "angular_speed_rad_s": energy["angular_speed_rad_s"],
