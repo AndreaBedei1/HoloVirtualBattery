@@ -1,0 +1,103 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "log": "attempt1_ubt_before.log",
+      "outcome": "failed before compiling",
+      "cause": "PowerShell split '-CompilerVersion=14.44.35207' into two batch arguments; UBT: 'Unable to find valid 14 C++ toolchain'",
+      "fix": "quote the arguments (documented)"
+    },
+    {
+      "attempt": 2,
+      "log": "attempt2_ubt_before.log",
+      "outcome": "engine compile errors (C4668/C4067)",
+      "cause": "UE 5.3.2 ConcurrentLinearAllocator.h evaluates __has_feature with MSVC >= 14.38",
+      "fix": "syntax-only compatibility fix 1 (build script COMPAT_FIXES)"
+    },
+    {
+      "attempt": 3,
+      "log": "attempt3_ubt_before.log",
+      "outcome": "560/562 units compiled; D3D12RHI errors (C3878/C2760)",
+      "cause": "member template ResourceCast of an incomplete class needs the 'template' disambiguator with MSVC >= 14.40",
+      "fix": "syntax-only compatibility fix 2"
+    },
+    {
+      "attempt": 4,
+      "log": "attempt4_ubt_before.log",
+      "outcome": "build succeeded; packaged game exited at startup",
+      "cause": "cooked plugin manifest mounts EOSShared, not compiled into the source-engine build",
+      "fix": "-EnablePlugin=EOSShared (UBT target option)"
+    },
+    {
+      "attempt": 5,
+      "log": "final_ubt_before.log / final_ubt_after.log",
+      "outcome": "both variants built; smoke tests: rebuilt-before drag scale 0.0100, patched-after 1.000000; physics step PASS at 100 Hz",
+      "cause": null,
+      "fix": null
+    }
+  ],
+  "logs": {
+    "attempt1_ubt_before.log": {
+      "raw_sha256": "4e07ba3048b1d39f8693d758bc863014f68147c94f31e1fca4d3791eb3637825",
+      "raw_bytes": 8751,
+      "gzip_sha256": "5aa41c32c24607e05e75fa8bdea204d8cb35a6e1cd95de11f655874dc3fde4a3"
+    },
+    "attempt2_ubt_before.log": {
+      "raw_sha256": "e2318592a04994b4a336e31138d42fa12023be021d5b5bdacdb7f3fc1429a45f",
+      "raw_bytes": 619621,
+      "gzip_sha256": "663b052850320abb49b73d1491be80d1d7901c6fde006fb6a1c320fc55ad1a74"
+    },
+    "attempt3_ubt_before.log": {
+      "raw_sha256": "6e91abd9efad87ca3beedec60c1c79ec53b0b95ee961551181d879ec6b5a49f5",
+      "raw_bytes": 264990,
+      "gzip_sha256": "21c7fedcafaca8d8ea2754d6e5b535deafe087e7cf249209a60c8b2f51ac1a7d"
+    },
+    "attempt3_build_before.out": {
+      "raw_sha256": "d118e3e4103c05618680f97d7a770909f88c35021145a4b9187189c482142a67",
+      "raw_bytes": 63747,
+      "gzip_sha256": "e6ba840af142804625fdc0e58fe9e8b517032b628dd1b432f39ef74b60e7310f"
+    },
+    "attempt4_ubt_before.log": {
+      "raw_sha256": "449f79cf13fd2c7723956c17fca44c06825214366e5c9860cea554231eba607a",
+      "raw_bytes": 6372,
+      "gzip_sha256": "c8c62eda37565c928b2fc4960f13314e05c8db5639d65ee0e7a47e7f9f244e64"
+    },
+    "attempt4_ubt_after.log": {
+      "raw_sha256": "593468ae7f1298b4457c458761f6589ae188f11b73d296c0f14dd223868ad511",
+      "raw_bytes": 8053,
+      "gzip_sha256": "7da49e8ba7615f0e1667922c19e29b19c2a7be2c7d8c2dbf4beaf4fae99ff10f"
+    },
+    "final_ubt_before.log": {
+      "raw_sha256": "157c85774c9fd802e1bb6ef5923325a5fd7dd06df033a64c592ca4d7398e41da",
+      "raw_bytes": 325223,
+      "gzip_sha256": "c1a8eb462e3bd2e5013997d5facd90a73d945ef899b653f1c4b3db31b2a8f831"
+    },
+    "final_ubt_after.log": {
+      "raw_sha256": "36593e52bb84aff01c978c5bd8468be8fade5283768d4122907a9299eb5049a9",
+      "raw_bytes": 8077,
+      "gzip_sha256": "ca1e7706373bd9ecabffb1cdf7bfb57c3cb0b67aec88cd497253aa583f45ac8e"
+    },
+    "final_build_before.out": {
+      "raw_sha256": "d2c43665d14b8f7ff9bf9f81665a3f5108739f881385e1db1449ca77fa4feef5",
+      "raw_bytes": 5389,
+      "gzip_sha256": "1012486e06d888c22d92590c71ae4f985547f61807d3b2320ff772f7cdcf278f"
+    },
+    "final_build_after.out": {
+      "raw_sha256": "89e599e5b8f500d486f85b0e4f05f76fbaec1526309606f051db39fa6ed20b0a",
+      "raw_bytes": 5199,
+      "gzip_sha256": "1d8bcdc339b3a62626293481032fb46db42d139bcedde36842ebe08d0284dce2"
+    },
+    "buildscript_build.out": {
+      "raw_sha256": "fa4da0af5de85340011c7b298e8faaa0f66e7fca029f4c297106dd7df23ed2bc",
+      "raw_bytes": 1582,
+      "gzip_sha256": "cec80838001aaf0314f05a52ab578998bac3c11e0386d788328bdf6c90938fed"
+    },
+    "ue_gitdependencies.log": {
+      "raw_sha256": "461681e8004a252e1b93c99a734af37976339858e9cec8c6112ce82d0e0bfdcb",
+      "raw_bytes": 228209,
+      "gzip_sha256": "02c16e8c8a728975f00a669b59041d46fe654a86700b5a5d261b177cee78b523"
+    }
+  },
+  "note": "UBT logs record compile/link actions, toolchain selection and warnings; local paths retained",
+  "log_directory": "ubt_logs (gzip, mtime 0)"
+}

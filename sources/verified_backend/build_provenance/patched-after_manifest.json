@@ -1,0 +1,149 @@
+{
+  "variant": "patched-after",
+  "created_utc": "2026-10-07T20:28:16.071831+00:00",
+  "purpose": "separate code-only rebuild of Holodeck.exe for physics verification",
+  "holoocean_source": {
+    "repository": "https://github.com/byu-holoocean/HoloOcean.git",
+    "tag": "v2.3.0",
+    "commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+    "tree": "C:\\HOB\\src\\before",
+    "working_tree_diff_sha256": "a258f71e74dd88d3e403a61d52e01eb2d4a502c3b7bfef07b413df3e9014afa9",
+    "buoyant_agent_cpp_sha256": "3876cccff1d5dfb8ece8c98fd3e1491d364019e9f03f80e69577fe1ac6e2ca9f",
+    "recorded_at_build_time": "C:\\HOB\\outputs\\patched-after\\source_state.json"
+  },
+  "patched_reference_tree": {
+    "path": "C:\\HOB\\src\\after",
+    "buoyant_agent_cpp_sha256": "3876cccff1d5dfb8ece8c98fd3e1491d364019e9f03f80e69577fe1ac6e2ca9f"
+  },
+  "patch": {
+    "path": "patches\\holoocean-2.3-drag-units.patch",
+    "sha256": "00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa",
+    "applied": true
+  },
+  "toolchain": {
+    "msvc_toolset": "14.44.35207",
+    "cl_banner": "Microsoft (R) C/C++ Optimizing Compiler versione 19.44.35228 per x64",
+    "cl_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+    "windows_sdk": "10.0.22621.0",
+    "unreal_engine": {
+      "repository": "https://github.com/EpicGames/UnrealEngine.git",
+      "tag": "5.3.2-release",
+      "commit": "072300df18a94f18077ca20a14224b5d99fee872",
+      "build_version": {
+        "MajorVersion": 5,
+        "MinorVersion": 3,
+        "PatchVersion": 2,
+        "Changelist": 0,
+        "CompatibleChangelist": 27405482,
+        "IsLicenseeVersion": 0,
+        "IsPromotedBuild": 0,
+        "BranchName": "UE5"
+      },
+      "gitdependencies_excludes": [
+        "Android",
+        "IOS",
+        "TVOS",
+        "Linux",
+        "LinuxArm64",
+        "Mac",
+        "osx",
+        "osx64",
+        "HoloLens",
+        "Win32",
+        "VisionOS",
+        "Lumin",
+        "Content",
+        "Samples",
+        "Documentation",
+        "Maya_AnimationRiggingTools",
+        "P4VUtils",
+        "UnrealEngineLauncher"
+      ],
+      "local_modifications": {
+        "Engine/Source/Runtime/Core/Public/Experimental/ConcurrentLinearAllocator.h": {
+          "sha256": "92e5803dabe32fd4993750c39ade4b8292b85ac9a559fc2fffc42a231f858f3b",
+          "original_sha256": "d97c1ccbc30222fe01f320b4e9cda24c9dfcceffb0bd26562df722441fb7cad5",
+          "reason": "MSVC >= 14.38 ships sanitizer/asan_interface.h, so the header evaluates __has_feature(), which MSVC does not define (C4668/C4067 are errors in engine modules). Nested under defined(__has_feature); IS_ASAN_ENABLED stays 0."
+        },
+        "Engine/Source/Runtime/D3D12RHI/Private/D3D12CommandContext.h": {
+          "sha256": "6877d6adddd7dd3a4765a5581108e92ca5a093d655f310ebda54e37d549cc720",
+          "original_sha256": "8726657d7cbf2203309cd1d82621d46c0dac8ad1d718b878eea358d8005f18af",
+          "reason": "MSVC >= 14.40 parses the member template of a class that is incomplete at this point as a comparison (C3878/C2760); the standard 'template' disambiguator names the same function."
+        }
+      }
+    },
+    "bundled_dotnet_sdk": [
+      "6.0.302"
+    ],
+    "host": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.20"
+  },
+  "build_command": [
+    "C:\\UE532\\Engine\\Build\\BatchFiles\\Build.bat",
+    "Holodeck",
+    "Win64",
+    "Development",
+    "-Project=C:\\HOB\\src\\before\\engine\\Holodeck.uproject",
+    "-WaitMutex",
+    "-NoHotReload",
+    "-DisableAdaptiveUnity",
+    "-CompilerVersion=14.44.35207",
+    "-WindowsSDKVersion=10.0.22621.0",
+    "-EnablePlugin=EOSShared",
+    "-MaxParallelActions=10",
+    "-Log=C:\\HOB\\logs\\ubt_after.log"
+  ],
+  "build_environment": {
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+    "DOTNET_NOLOGO": "1",
+    "DOTNET_SKIP_FIRST_TIME_EXPERIENCE": "1",
+    "DOTNET_GENERATE_ASPNET_CERTIFICATE": "false"
+  },
+  "build_log": {
+    "path": "C:\\HOB\\logs\\ubt_after.log",
+    "sha256": "36593e52bb84aff01c978c5bd8468be8fade5283768d4122907a9299eb5049a9"
+  },
+  "outputs": {
+    "executable": "C:\\HOB\\packages\\patched-after\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+    "executable_sha256": "4d6c2d46be8703758fbe4e9b62a99d4037aec0e220cca3a60b22b488d441684a",
+    "executable_size_bytes": 254710784,
+    "pdb_sha256": "0d3196d968e1f9f73b770e536ae00a595dda613f63254b1edfacacf91c7e6ca5"
+  },
+  "original_package": {
+    "root": "C:\\Users\\Andrea\\AppData\\Local\\holoocean\\2.3.0\\worlds\\Ocean",
+    "executable_sha256": "8c206c9cc05c640fb2efea6bd43bda33c585536ab16a931c55780855e7602253",
+    "config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd"
+  },
+  "reused_official_cooked_content": {
+    "Windows/Holodeck/Content/Paks/global.ucas": {
+      "sha256": "22a25f80f423b00244ef0ae45730ebf82b708dca6a999acf1c3e07330b935d1d",
+      "size_bytes": 2053824,
+      "mode": "NTFS hard link to the official package file"
+    },
+    "Windows/Holodeck/Content/Paks/global.utoc": {
+      "sha256": "d6cd1e1bb824d9bfaebc283eeaa8fa07ad6f8e9b2c324fe24cd47c88a678ebdd",
+      "size_bytes": 587,
+      "mode": "NTFS hard link to the official package file"
+    },
+    "Windows/Holodeck/Content/Paks/Holodeck-Windows.pak": {
+      "sha256": "1f47a2e77047e498bebc0a05668a8f571192345e365bb23d7f527674a884187d",
+      "size_bytes": 9982877,
+      "mode": "NTFS hard link to the official package file"
+    },
+    "Windows/Holodeck/Content/Paks/Holodeck-Windows.ucas": {
+      "sha256": "5ffc3dda8a6c641dde9e1f872e97ac92d72c0d220ee22845dd794f4f4f650f42",
+      "size_bytes": 5403766096,
+      "mode": "NTFS hard link to the official package file"
+    },
+    "Windows/Holodeck/Content/Paks/Holodeck-Windows.utoc": {
+      "sha256": "228fb134a0c8076070b49558081caf5b6bfc7341f71dbc7c2329df1b3548352c",
+      "size_bytes": 3369769,
+      "mode": "NTFS hard link to the official package file"
+    }
+  },
+  "limitations": [
+    "Ocean worlds are not public; official cooked content reused unchanged",
+    "engine built from GitHub source (Build.version Changelist 0), official binary from the Launcher build of the same 5.3.2 release (CL 29314046)",
+    "behavioural equivalence with the official binary is tested, not assumed"
+  ]
+}
