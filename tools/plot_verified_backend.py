@@ -81,7 +81,7 @@ def figure_a(plt, before, after, out_dir):
     ax.set_xlabel("Expected SI drag from the source equation [N]")
     ax.set_ylabel("Applied drag inferred from runtime [N]")
     ax.set_title("A. Native drag magnitude, first step from rest", loc="left", color=INK)
-    ax.legend(loc="upper left")
+    ax.legend(loc="lower right")
     save(
         fig,
         out_dir,
