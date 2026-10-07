@@ -118,21 +118,66 @@ R/thermal complexity, onset policies, resampling or a favorable time shift. Use
 model-selection runs to select fidelity, then freeze parameters/code before final
 validation. Archive any revised protocol and acquire new held-out runs if needed.
 
-Proceed in this order, with repeats and documented instrumentation uncertainty:
+Proceed in this order, with repeats and documented instrumentation uncertainty
+(`protocol_step` values of [the run metadata schema](../experiments/schema/run_metadata.schema.json)):
 
-1. Battery/electronics idle and independently calibrated terminal V/I.
-2. Camera states and representative streaming settings.
-3. Sonar states, scans, startup and ping duty.
-4. Other identified sensors and payloads.
-5. Converter input/output losses across representative load and temperature.
-6. Mounted forward/reverse thruster characterization and wiring losses.
-7. Hover.
-8. Surge.
-9. Sway.
-10. Yaw.
-11. Vertical motion.
-12. Full mission for development/model selection.
-13. Frozen held-out mission for final accuracy and reserve assessment.
+1. `electronics_hotel_baseline`: electronics/hotel idle with independently calibrated terminal V/I.
+2. `camera`: camera states and representative streaming settings.
+3. `sonar`: sonar states, scans, startup and ping duty.
+4. `dvl_other_sensors`: DVL and other identified sensors/payloads.
+5. `converter_losses`: converter input/output losses across load and temperature.
+6. `battery_characterization`: capacity, OCV(SOC,T), effective R(SOC,T), thermal tests.
+7. `thruster_characterization_in_water`: mounted forward/reverse thrusters and wiring losses.
+8. `hover`.
+9. `surge`.
+10. `sway`.
+11. `yaw`.
+12. `vertical`.
+13. `calibration_mission`: full missions for development/model selection.
+14. `held_out_validation_mission`: frozen held-out missions for final accuracy and reserve.
+
+Safety rules for every step: never activate the BlueROV2 unless it is in water;
+never power thrusters dry; steps 7–14 require the vehicle in water, secured and
+supervised by authorized personnel (`safety.in_water/secured/authorized_personnel`
+are mandatory in the metadata and checked by `tools/check_experiment_run.py`).
+HoloEnergy never commands hardware.
+
+### Run archive and checks
+
+Runs are stored under [`experiments/`](../experiments/README.md) (calibration or
+validation), one directory per physical run with `metadata.json`, `timeseries.csv`,
+untouched `raw/` logs and notes. Each run must contain or reference timestamp,
+battery voltage, battery current, battery temperature, water temperature, thruster
+commands with units, vehicle state, sensor states and mission phase
+([column contract](../experiments/schema/timeseries.md)).
+
+### L0 vs L1 vs real
+
+The comparison uses the existing tooling, unchanged:
+
+```powershell
+# identical measured command history through both fidelity levels
+python -m holoenergy.analysis.cli compare --config <calibrated_profile.yaml> --mission <run_commands.csv> --output-dir logs/l0_l1/<run_id>
+# each prediction against the registered held-out measurement
+python -m holoenergy.analysis.cli evaluate --predicted logs/l0_l1/<run_id>/L0/energy.jsonl --measured <run.csv> --manifest <manifest.json> --run-id <run_id> --columns <columns.json> --output logs/l0_l1/<run_id>/L0_vs_real.json
+python -m holoenergy.analysis.cli evaluate --predicted logs/l0_l1/<run_id>/L1/energy.jsonl --measured <run.csv> --manifest <manifest.json> --run-id <run_id> --columns <columns.json> --output logs/l0_l1/<run_id>/L1_vs_real.json
+```
+
+`evaluate` reports voltage/current/power MAE and RMSE, terminal Wh and relative Wh
+error, final SOC error, temperature MAE/RMSE and peak/time error (L1 only: L0 has no
+thermal prediction), mission completion and completion time, derating and cutoff
+timing, and reserve violations; it refuses a measured file that is not the
+registered `final_validation` run. Endurance prediction is assessed through the
+cutoff/completion timing on held-out missions. Native closed-loop predictions must
+use the verified backend (patched HoloOcean, 100 Hz; see
+[verified backend report](verified_backend_report.md)).
+
+### Sensitivity after calibration
+
+`python -m holoenergy.analysis.cli sensitivity` is kept for use **after**
+calibration, with parameter ranges derived from identification uncertainty.
+Running it on placeholder profiles produces software demonstrations only and must
+not be presented as a scientific sensitivity result.
 
 Record numeric synchronized timestamps, terminal V/I, pack and water T, realized
 commands, vehicle state and sensor states; maintain raw rates and hashes. Electrical

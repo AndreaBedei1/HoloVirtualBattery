@@ -206,13 +206,15 @@ thrust effettivo dell'elica né di saturazioni private successive del motore.
 
 Le correnti di HoloOcean nativo e quelle Fossen hanno contratti differenti.
 L'[audit dedicato](holoocean_drag_units_report.md) trova densità 997 kg/m³
-costante e conferma un drag 0.01× l'equazione SI nel binario Ocean 2.3.0
-installato, mentre gravity/buoyancy/thruster passano i riferimenti assoluti a
-60/100/200 Hz. A 20 Hz il passo fisico non coincide con il clock client.
-La patch è isolata, applicabile e reversibile, ma senza build/runtime after:
-i test correnti restano software coupling. L'energia non compensa la dinamica.
-L'identità esatta source/build non è stabilita; serve comunque validazione
-con dati reali dopo la correzione e la verifica del backend.
+costante e un drag 0.01× l'equazione SI nel binario Ocean 2.3.0 ufficiale,
+mentre gravity/buoyancy/thruster passano i riferimenti assoluti. La patch di una
+riga, compilata in una build separata, porta il rapporto a 1.0000000 senza
+cambiare le altre forze ([backend verificato](verified_backend_report.md),
+[compatibilità](holoocean_compatibility.md)). Sotto i 30 Hz UE 5.3 integra al
+massimo 1/30 s per tick: gli esempi nativi usano 100 Hz e rifiutano dt > 1/30 s
+([passo temporale](holoocean_timestep_report.md)). Sul backend ufficiale i test con
+correnti restano software coupling e `tools/check_holoocean_backend.py` lo segnala.
+L'energia non compensa la dinamica; serve comunque validazione con dati reali.
 
 ## Accounting, log e replay
 

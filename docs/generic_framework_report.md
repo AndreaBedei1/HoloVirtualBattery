@@ -244,6 +244,15 @@ Demo realtime 600 tick/30 s: minimum factor **0.395797**, azioni ridotte al back
 342 pacchetti inviati/0 dropped. Lo scenario cambia acqua e spegne camera.
 Nessun processo simulator/server di questi esempi rimasto attivo al controllo.
 
+*Nota successiva (7–8 ottobre 2026):* questi controlli usavano dt 0.05 s (20 Hz),
+dove UE 5.3 integra solo 1/30 s per tick, e il binario 2.3.0 ufficiale, che applica
+il drag a 1/100 della propria equazione. Gli esempi nativi usano ora 100 Hz e
+rifiutano dt > 1/30 s; il derating è stato riverificato sul backend corretto
+(build patchata, 100 Hz: fattore minimo 0.4906, surge 1.050 m contro 1.553 m).
+I numeri sopra restano validi come prova di accoppiamento software, non come
+dinamica quantitativa: vedi [verified_backend_report.md](verified_backend_report.md)
+e [holoocean_compatibility.md](holoocean_compatibility.md).
+
 ## 26. Screenshots e visual verification
 
 Chrome reale, full-page live a 11.7 s e ended a 30.0 s. Verificati leggibilità,

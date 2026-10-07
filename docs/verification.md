@@ -209,3 +209,27 @@ report and final delivery; a workflow definition is not evidence of a completed 
 Remote verification completed successfully: all eight matrix jobs passed for
 70f584f in [GitHub Actions run 37451876879](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/37451876879).
 This adds actual Linux/Python 3.11/3.12 verification to the local Windows checks.
+
+## Verified HoloOcean backend — 2026-10-07/08
+
+The native checks above ran on the official HoloOcean 2.3.0 binary at 20 Hz. Two
+backend properties were established afterwards and change how they should be read
+(details in [verified_backend_report.md](verified_backend_report.md)):
+
+- The official 2.3.0 binary applies the vehicle drag at 0.0100 of its own SI
+  equation (newtons passed to a kg·cm/s² force API). Thrust units, gravity and
+  buoyancy were and remain correct. A separately built 2.3.0 with
+  `patches/holoocean-2.3-drag-units.patch` applies 1.0000000 ± 1e-7 of it; an
+  unpatched control rebuild is bit-identical to the official binary.
+- Below 30 Hz UE 5.3 integrates at most 1/30 s per tick while the client clock
+  advances 1/ticks_per_sec. The native examples now default to the verified 100 Hz
+  and refuse an energy step longer than 1/30 s.
+
+Native results obtained before this on the official binary (currents, motion,
+station keeping) are software-coupling evidence only. On the patched build at
+100 Hz the native suite passes 29/29 items
+([native_suite.json](../sources/verified_backend/native_suite.json)), including a
+per-tick closed-loop closure of the chain from the drag equation to HoloEnergy
+electrical demand. `tools/check_holoocean_backend.py` identifies an unpatched
+backend; [holoocean_compatibility.md](holoocean_compatibility.md) lists what is
+verified. No physical BlueROV2 was connected.

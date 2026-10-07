@@ -10,6 +10,19 @@ Questa è *physics implementation verification*. Non è validazione fisica del
 BlueROV2 reale. La patch è preparata e reversibile, ma non compilata né provata
 su una build UE corretta. L'installazione originale rimane invariata.
 
+> **Aggiornamento 7–8 ottobre 2026.** La patch è stata compilata in una build
+> separata di `Holodeck.exe` (UE 5.3.2 da sorgente, toolchain del binario
+> ufficiale), insieme a una build di controllo non patchata, e verificata a
+> runtime: applicato/atteso `1.0000000074` sulla stessa campagna di 153 casi e
+> `1.0000001686` per il veicolo in moto in acqua ferma (117 casi); il controllo
+> produce dati bit-identici al binario ufficiale; spinte, gravità e galleggiamento
+> sono invariati. Il conflitto a 20 Hz è spiegato dal limite del passo fisico di
+> UE 5.3 (`MaxPhysicsDeltaTime = 1/30 s`), misurato direttamente. Dettagli:
+> [verified_backend_report.md](verified_backend_report.md) e
+> [holoocean_timestep_report.md](holoocean_timestep_report.md). Le sezioni 12, 19,
+> 20, 24 e 25 sono annotate di conseguenza; il resto documenta l'audit del 6
+> ottobre così com'era.
+
 ## 1. Versione realmente utilizzata
 
 Client Python `holoocean==2.3.0`, Python 3.10.20 nell'ambiente
@@ -228,6 +241,11 @@ Questo è un effetto distinto, non una correzione fittata del Cd.
 Il rapporto normalizzato drag/thruster a 20 Hz resta circa 0.01.
 L'audit rifiuta comunque la classificazione globale quando i riferimenti falliscono.
 
+*Aggiornamento 7 ottobre:* il passo integrato è stato misurato con quattro
+stimatori indipendenti a 20–200 Hz su tre build: `min(1/tps, 1/30 s)`, rapporto
+fisica/clock 0.6666667 a 20 Hz e 1 entro 1.7·10⁻⁷ da 30 a 200 Hz
+([timestep report](holoocean_timestep_report.md)).
+
 ## 13. Esperimenti e controlli
 
 Campagna decisiva: **17 casi × 3 frequenze × 3 ripetizioni = 153 casi**, 8
@@ -326,6 +344,11 @@ build cooked, non sostituisce l'engine di sviluppo. Nessun numero analitico
 è etichettato come misura after. Prima di adottare la patch occorre compilare
 un world separato e rieseguire la campagna con `--binary` puntato a esso.
 
+*Aggiornamento 7 ottobre:* fatto. Build patchata `4d6c2d46…`, stessa campagna:
+after misurato 1.794600013 / 7.178400053 / 28.713600212 / 114.854400848 N
+(rapporto `1.0000000074`), build di controllo identica al before
+([report del backend verificato](verified_backend_report.md), §10–§12).
+
 ## 20. Regressioni delle altre forze
 
 Sul binario **before**: passano gravity, neutralità/buoyancy netta, thruster
@@ -333,6 +356,11 @@ X/Y/Z, corrente zero e corrente costante alle tre frequenze valide. La patch
 ha un diff limitato al drag e la reversibilità è verificata. Le regressioni
 fisiche **after non sono eseguite**; non si dichiara la build patchata sicura
 o numericamente verificata sulla sola base di un diff.
+
+*Aggiornamento 7 ottobre:* regressioni after eseguite. Spinta 10 N X/Y/Z,
+gravità, neutralità, stabilità angolare e collisioni passano su ufficiale,
+controllo e build patchata; nei casi senza drag controllo e build patchata sono
+bit-identici ([report del backend verificato](verified_backend_report.md), §14–§16).
 
 ## 21. Station keeping dopo l'audit
 
@@ -381,11 +409,18 @@ runtime della release 2.4 o di tutti gli altri agenti, nessuna identità esatta
 source/build del binario, nessuna verifica dopo ricompilazione della patch.
 Il backend originale non implementa correttamente la scala assoluta del drag.
 
+*Aggiornamento 7 ottobre:* la verifica dopo ricompilazione della patch è stata
+eseguita (vedi sopra); restano non supportati gli altri punti, aggiornati in
+[verified_backend_report.md](verified_backend_report.md), §31.
+
 ## 25. Draft upstream
 
 Preparato [holoocean_drag_issue_draft.md](holoocean_drag_issue_draft.md), con
 riproduzione, riferimenti assoluti e proposta minima. Può integrare la issue
 368 già esistente. **Nessuna issue o commento è stato pubblicato.**
+
+*Aggiornamento 7 ottobre:* il draft contiene ora il testo definitivo del commento
+(con i risultati after) e la proposta di PR; nulla è stato pubblicato.
 
 ## 26. Tooling, provenance e test
 
