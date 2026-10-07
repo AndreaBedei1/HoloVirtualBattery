@@ -188,6 +188,27 @@
   "run_logs/chain_runs.log": {
     "sha256": "4b6cf0f6863631131e0ae8904c5f7efba647037f91a5d198b73080e8ec807d30"
   },
+  "run_logs/check_final_default.log": {
+    "sha256": "c0e479c399c1c00a1db1d86eba7ce067c0c067f99ceb4f9c4eed3280dbc29aa5"
+  },
+  "check_final_original.json": {
+    "sha256": "6387ebf3f62fcd40db68037454d4cbdd685d33bd31d7c3ade8a89d42ed426252"
+  },
+  "run_logs/check_final_original.log": {
+    "sha256": "c0e479c399c1c00a1db1d86eba7ce067c0c067f99ceb4f9c4eed3280dbc29aa5"
+  },
+  "check_final_patched.json": {
+    "sha256": "a95bb4af89043068a3bc7b8d97f5ea38e34b7eaf5c131bb3477a5aa4b79881d1"
+  },
+  "run_logs/check_final_patched.log": {
+    "sha256": "627197cab9d99ade69042649fc0e71bdde4bb42ef2baf888844fe9eb4f9060aa"
+  },
+  "check_final_rebuilt.json": {
+    "sha256": "e7bdca2ecb44e1bf334c496bf360bbc046057e8ec7490e2af1a98d812329885a"
+  },
+  "run_logs/check_final_rebuilt.log": {
+    "sha256": "c0e479c399c1c00a1db1d86eba7ce067c0c067f99ceb4f9c4eed3280dbc29aa5"
+  },
   "check_original.json": {
     "sha256": "63390795f7edccf509d9df4176bf439e17ae0e29906111e3df03611002bfdd5f"
   },
@@ -207,7 +228,7 @@
     "sha256": "84d6445f296506a9826a4da7128e71f7f3d117230b926aca8ee010412fa97df9"
   },
   "clean_shutdown.json": {
-    "sha256": "f4e874a75debe47754ab99707a780ba1ded2ce4692aa7017de79e52f7d2ba0a4"
+    "sha256": "e910d3b093772bbea30af24c60cfe26691061fc5196a7d314d87b6ac0fabae54"
   },
   "run_logs/closure_original.log": {
     "sha256": "f18c271cfdb5ddf073645be56ed352d129be7bf8eef6c45b1b3282351603ef7b"

@@ -1,0 +1,3 @@
+HoloOcean backend drag scale: PASS: current observed/expected = 1.000000; still water observed/expected = 1.000000
+HoloOcean physics step at 100 Hz: PASS: physics/client step ratio 1.000000
+PASS

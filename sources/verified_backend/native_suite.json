@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-07T22:17:24.865736+00:00",
+  "created_utc": "2026-10-07T22:29:03.144581+00:00",
   "scope": "native physics implementation verification; not physical vehicle validation",
   "items": [
     {
@@ -243,6 +243,16 @@
       "status": "PASS"
     },
     {
+      "item": "backend check one-line result (final tool)",
+      "criterion": "official and control print the unpatched-2.3.0 signature; patched prints PASS",
+      "values": {
+        "original": "FAIL: detected ~0.01 drag scaling associated with unpatched HoloOcean 2.3.0",
+        "rebuilt": "FAIL: detected ~0.01 drag scaling associated with unpatched HoloOcean 2.3.0",
+        "patched": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
       "item": "station keeping, patched",
       "criterion": "tail propulsion power strictly increasing with current (no fitting)",
       "values": {
@@ -418,7 +428,7 @@
       "item": "clean shutdown",
       "criterion": "no Holodeck process left; integration processes closed; exit codes as expected",
       "values": {
-        "checked_utc": "2026-10-07T22:16:42.510087+00:00",
+        "checked_utc": "2026-10-07T22:29:00.208518+00:00",
         "method": "tasklist /FO CSV after the last native run; image names containing 'holodeck'",
         "holodeck_processes_after_campaign": 0,
         "holodeck_process_names": [],
@@ -562,17 +572,38 @@
             "run": "minimal_repro_patched",
             "exit_code": 0,
             "expected_exit_code": 0
+          },
+          {
+            "run": "check_final_original",
+            "exit_code": 1,
+            "expected_exit_code": 1
+          },
+          {
+            "run": "check_final_rebuilt",
+            "exit_code": 1,
+            "expected_exit_code": 1
+          },
+          {
+            "run": "check_final_patched",
+            "exit_code": 0,
+            "expected_exit_code": 0
+          },
+          {
+            "run": "check_final_default",
+            "exit_code": 1,
+            "expected_exit_code": 1
           }
         ],
         "exit_code_notes": {
           "check_original/check_rebuilt = 1": "backend check FAIL by design (drag ~0.01)",
-          "diag20_* = 1": "20 Hz diagnostic reports INCONCLUSIVE (physics step capped at 1/30 s)"
+          "diag20_* = 1": "20 Hz diagnostic reports INCONCLUSIVE (physics step capped at 1/30 s)",
+          "check_final_original/rebuilt/default = 1": "backend check FAIL by design (unpatched drag)"
         },
         "all_exit_codes_as_expected": true
       },
       "status": "PASS"
     }
   ],
-  "passed": 28,
+  "passed": 29,
   "failed": []
 }

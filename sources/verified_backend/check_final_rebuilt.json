@@ -1,0 +1,98 @@
+{
+  "created_utc": "2026-10-07T22:28:18.629360+00:00",
+  "scope": "implementation smoke test; not vehicle hydrodynamic validation",
+  "runtime": {
+    "python_executable": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\python.exe",
+    "python_version": "3.10.20",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "holoocean_version": "2.3.0",
+    "client_root": "C:\\Users\\Andrea\\miniconda3\\envs\\holoocean_joystick\\lib\\site-packages\\holoocean",
+    "client_file_sha256": {
+      "agents.py": "110120ed0c4276f9473e1e6fa54426d3d0c2185bdeefcd29c06dfa3fbc5aad54",
+      "environments.py": "d6c7de077b3ed05835b095d5196730a58071922f5da5efa0337103855d44b4b1",
+      "command.py": "57556c5498b844c9801beddd950169d8674cd5123ec23a08ba3f39d277b99fda",
+      "sensors.py": "6799f97a9cef7a3093c9b44f51eed13715ae69ac9b6996379c9993ff59bb864f",
+      "packagemanager.py": "bf19dd11210b94eba7da30bbaadca2d5f140a187985a0f75240e62369ce80cc0"
+    },
+    "client_install_origin": "{\"dir_info\": {}, \"url\": \"file:///C:/Users/Andrea/Downloads/HoloOcean-2.3.0/client\"}",
+    "binary_path": "C:\\HOB\\packages\\rebuilt-before\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+    "binary_sha256": "f52999dee2b064c492ec610d3b7ac450d77293ec3108d2ec20f22c42b2d6b524",
+    "binary_size_bytes": 254710272,
+    "pdb_sha256": "e89ed016454a9b0b30447eda21db953f136c05e6babd92a8465e372eb09904e3",
+    "package_root": "C:\\HOB\\packages\\rebuilt-before\\Ocean",
+    "package_config_path": "C:\\HOB\\packages\\rebuilt-before\\Ocean\\config.json",
+    "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+    "build_manifest_path": "C:\\HOB\\packages\\rebuilt-before\\Ocean\\holoenergy_build_manifest.json",
+    "build_manifest_sha256": "89f8b55cb9cd27d348b6594829cb883f16c9e0908340ce0504a792adc982b10f",
+    "build_variant": "rebuilt-before",
+    "build_source_commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+    "build_patch_sha256": "00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa",
+    "package_version": "2.3.0",
+    "package_worlds": [
+      "Rooms",
+      "ModernOffice",
+      "CorporateOffice",
+      "ExampleLevel",
+      "Tank",
+      "SimpleUnderwater",
+      "PierHarbor",
+      "OpenWater",
+      "FlatUnderwater",
+      "Dam"
+    ],
+    "source_binary_build_identity": "separate build: see build manifest"
+  },
+  "parameters": {
+    "mass_kg": 11.5,
+    "drag_coefficient": 0.8,
+    "area_m2": 0.45,
+    "density_kg_m3": 997.0,
+    "ue_units_per_m": 100.0,
+    "linear_damping_per_s": 1.0,
+    "source_drag_scale_to_SI": 0.01,
+    "explicit_drag_unit_conversion": false,
+    "fully_submerged_ratio": 1.0,
+    "neutral_volume_m3": 0.011534603811434303,
+    "parameter_origin": "official/local C++ literals; no runtime fit"
+  },
+  "ticks_per_sec": 100,
+  "thrust_reference_N": [
+    9.999999381376034,
+    0.0,
+    0.0
+  ],
+  "current_case": {
+    "expected_N": [
+      28.713600000000003,
+      -0.0,
+      -0.0
+    ],
+    "inferred_N": [
+      0.2871359865453959,
+      0.0,
+      0.0
+    ]
+  },
+  "still_water_case": {
+    "expected_N": [
+      -28.14219905501713,
+      0.0,
+      -0.0
+    ],
+    "inferred_N": [
+      -0.28143228605538306,
+      0.0,
+      0.0
+    ]
+  },
+  "drag": {
+    "status": "FAIL",
+    "current_ratio": 0.009999999531420507,
+    "still_water_ratio": 0.010000365838689138
+  },
+  "physics_step": {
+    "status": "PASS",
+    "physics_to_client_ratio": 0.9999999202892736
+  },
+  "result": "FAIL: detected ~0.01 drag scaling associated with unpatched HoloOcean 2.3.0"
+}

@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-07T22:16:42.510087+00:00",
+  "checked_utc": "2026-10-07T22:29:00.208518+00:00",
   "method": "tasklist /FO CSV after the last native run; image names containing 'holodeck'",
   "holodeck_processes_after_campaign": 0,
   "holodeck_process_names": [],
@@ -143,11 +143,32 @@
       "run": "minimal_repro_patched",
       "exit_code": 0,
       "expected_exit_code": 0
+    },
+    {
+      "run": "check_final_original",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "run": "check_final_rebuilt",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "run": "check_final_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "check_final_default",
+      "exit_code": 1,
+      "expected_exit_code": 1
     }
   ],
   "exit_code_notes": {
     "check_original/check_rebuilt = 1": "backend check FAIL by design (drag ~0.01)",
-    "diag20_* = 1": "20 Hz diagnostic reports INCONCLUSIVE (physics step capped at 1/30 s)"
+    "diag20_* = 1": "20 Hz diagnostic reports INCONCLUSIVE (physics step capped at 1/30 s)",
+    "check_final_original/rebuilt/default = 1": "backend check FAIL by design (unpatched drag)"
   },
   "all_exit_codes_as_expected": true
 }

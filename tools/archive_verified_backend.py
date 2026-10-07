@@ -261,6 +261,19 @@ def suite(src):
                     c["drag"]["status"] == expected and c["physics_step"]["status"] == "PASS",
                 )
             )
+    final = {b: load(src / f"check_final_{b}.json") for b in BUILDS}
+    if any(final.values()):
+        signature = "FAIL: detected ~0.01 drag scaling associated with unpatched HoloOcean 2.3.0"
+        results = {b: f and f["result"] for b, f in final.items()}
+        items.append(
+            entry(
+                "backend check one-line result (final tool)",
+                "official and control print the unpatched-2.3.0 signature; patched prints PASS",
+                results,
+                results["original"] == results["rebuilt"] == signature
+                and results["patched"] == "PASS",
+            )
+        )
     study = load(src / "energy_patched/patched_report.json")
     if study:
         station = sorted(
