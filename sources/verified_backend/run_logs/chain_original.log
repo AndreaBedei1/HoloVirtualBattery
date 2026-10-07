@@ -1,0 +1,5 @@
+C:\Users\Andrea\Desktop\Battery\examples\_common.py:74: UserWarning: Uncalibrated demo parameters: battery.capacity_temperature_curve, battery.internal_resistance_ohm, battery.max_current_temperature_curve, battery.ocv_curve, battery.resistance_temperature_curve, converters.hotel_efficiency, converters.payload_efficiency, hotel_load.constant_W, thermal.cooling_coeff_W_per_C, thermal.derating_temperature_C, thermal.thermal_capacity_J_per_C
+  config = load_config(args.config)
+station_0.5: tail speed 0.0034 m/s, tail propulsion 1.372 W, propulsion 0.00381 Wh, terminal 0.06893 Wh, saturated 0.000
+mission_0.4: tail speed 0.0234 m/s, tail propulsion 0.416 W, propulsion 0.07086 Wh, terminal 0.50719 Wh, saturated 0.000
+Report: logs\verified_backend\chain_original\chain_report.json

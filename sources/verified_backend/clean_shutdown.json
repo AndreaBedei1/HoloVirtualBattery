@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-07T21:59:10.560851+00:00",
+  "checked_utc": "2026-10-07T22:16:42.510087+00:00",
   "method": "tasklist /FO CSV after the last native run; image names containing 'holodeck'",
   "holodeck_processes_after_campaign": 0,
   "holodeck_process_names": [],
@@ -111,6 +111,36 @@
     },
     {
       "run": "dashboard_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "chain_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "chain_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "closure_patched",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "closure_original",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "minimal_repro_official",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "run": "minimal_repro_patched",
       "exit_code": 0,
       "expected_exit_code": 0
     }

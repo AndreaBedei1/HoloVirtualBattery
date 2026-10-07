@@ -23,5 +23,11 @@
       "u=0.0, expected=10.000000 N, observed=9.999999 N"
     ]
   },
-  "holodeck_processes_after": 0
+  "holodeck_processes_after": 0,
+  "python_exit_codes": {
+    "official": 0,
+    "patched": 0
+  },
+  "rerun_identical_output": true,
+  "note": "rerun 2026-10-08 with the Python exit code captured directly; printed lines identical to the first run"
 }

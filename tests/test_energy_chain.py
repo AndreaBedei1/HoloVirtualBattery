@@ -24,7 +24,9 @@ PARAMETERS = {
     "linear_damping_per_s": 1.0,
     "fully_submerged_ratio": 1.0,
 }
-PROFILE = json.loads((ROOT / "holoenergy/profiles/thrusters/bluerobotics_t200.json").read_text())
+PROFILE = json.loads(
+    (ROOT / "holoenergy/profiles/thrusters/bluerobotics_t200.json").read_text(encoding="utf-8")
+)
 
 
 def synthetic_trace(scale, steps=50, dt=0.01, yaw_deg=30.0):

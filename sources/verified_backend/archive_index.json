@@ -71,6 +71,123 @@
   "run_logs/campaign_console.log": {
     "sha256": "c666f902fd8465c46d0e730778d7afcbaeffb9c3417f722c11091989feac346e"
   },
+  "chain_original/chain_closure.json": {
+    "sha256": "fdc1e5a727975e1d9d297e158d3ae46f03fe3753e63d292b496ab5f2939dc293"
+  },
+  "chain_original/chain_report.json": {
+    "sha256": "feae3a1800caa101f6a6fa30e663be18d3cdf8740d26864cd7a1aa86e5928a69"
+  },
+  "chain_original/mission_0.4.jsonl": {
+    "local_only_sha256": "7e58e79148ad9bcb44244423b41905e82430a1bd4021c8c14ed95b9a97443976"
+  },
+  "chain_original/mission_0.4.jsonl.metadata.json.gz": {
+    "raw_sha256": "3bc4069200ac9168503de2fb40572b3b8e9c9de36613aef29b0f3f59a2d9a1dd",
+    "raw_bytes": 380681
+  },
+  "chain_original/mission_0.4.jsonl.summary.csv": {
+    "sha256": "9c87f3a96a07afd44e56ff04054886c7a84ec061149ff4a89d0f1ce7fe3ca3e2"
+  },
+  "chain_original/mission_0.4.jsonl.summary.json": {
+    "sha256": "c5974b1a33c4ed13ea125d85fa5840383ebfa0c5901323271d32727a6cf6b5f7"
+  },
+  "chain_original/mission_0.4.trace.jsonl.gz": {
+    "sha256": "08e2cf6d0fa78f19f778fb269cc2ccff85aaac9f258983d7b8bd726335fc48df"
+  },
+  "chain_original/station_0.5.jsonl": {
+    "local_only_sha256": "9603bf4baf8b2c23c0da545c0198c97058ceb29d30e4ea92997fffcf772a4038"
+  },
+  "chain_original/station_0.5.jsonl.metadata.json.gz": {
+    "raw_sha256": "61e8b824681ef355e839264131a10ad80e6156d46534fddc1873d278befdcdc9",
+    "raw_bytes": 379001
+  },
+  "chain_original/station_0.5.jsonl.summary.csv": {
+    "sha256": "694bd66dd5e59d693c50c555016761404b471dad709340d0fac36ada22a24b04"
+  },
+  "chain_original/station_0.5.jsonl.summary.json": {
+    "sha256": "32e6e0feb579b82e71f50059b6cbba3a38fab065b9a4bc9252916d6e3ed29fef"
+  },
+  "chain_original/station_0.5.trace.jsonl.gz": {
+    "sha256": "186a477a786cc7d8c5184cbf242e8f2789db6db6da4a31900a23d51d6116b8df"
+  },
+  "run_logs/chain_original.log": {
+    "sha256": "3208ebc36c38de5fe57a9798fc39b4d7d022dac471ea5d56763e2e91ee603cf9"
+  },
+  "chain_patched/chain_closure.json": {
+    "sha256": "13282b46a1a0f26573c3c7057f979971932e598e57743125ba02815f9b61da41"
+  },
+  "chain_patched/chain_report.json": {
+    "sha256": "98748c875fecca297bb9fd427c8dd6106aaf0e106a7fb384c15b80ac6a00f3de"
+  },
+  "chain_patched/mission_0.4.jsonl": {
+    "local_only_sha256": "e2468c4fffff8e44c04e98d544be37d5692345235a9bab1c7964abb5907c6b16"
+  },
+  "chain_patched/mission_0.4.jsonl.metadata.json.gz": {
+    "raw_sha256": "d60b90c3fb1a205f45c3651dc5e3921e698a808ef46af4e05d1641849bc3e5b7",
+    "raw_bytes": 380815
+  },
+  "chain_patched/mission_0.4.jsonl.summary.csv": {
+    "sha256": "fa79320a6d002ad984e0efcf064699fd2442775e1757b855355e5c227fb51d56"
+  },
+  "chain_patched/mission_0.4.jsonl.summary.json": {
+    "sha256": "8777d78bba0120b63d906cbca070bbbcb96899bf9c5a33d7344b4cb40208e52d"
+  },
+  "chain_patched/mission_0.4.trace.jsonl.gz": {
+    "sha256": "df8db92f50924a126142e8bf89c1ca9e87e9e1e2eb8ddc99256d29e8382ac093"
+  },
+  "chain_patched/station_0.2.jsonl": {
+    "local_only_sha256": "968ea7242f7950bf057fa09278624a63c8ed1834c42c2a53e4ebc0a7ac162427"
+  },
+  "chain_patched/station_0.2.jsonl.metadata.json.gz": {
+    "raw_sha256": "3a5564eddc6fc77404bc11b032eaac0f0670853e87bd62b7016a636782382ce8",
+    "raw_bytes": 379172
+  },
+  "chain_patched/station_0.2.jsonl.summary.csv": {
+    "sha256": "49c8137f9812e0d139fbdb8418e3615333a058fb154fe484582be33dbec11195"
+  },
+  "chain_patched/station_0.2.jsonl.summary.json": {
+    "sha256": "a5a8e4070b322d8147c7e3eda3ccac20b2d89c55d845e4f34b6d2e39eef0c2a9"
+  },
+  "chain_patched/station_0.2.trace.jsonl.gz": {
+    "sha256": "a03fb142a5be4241a2a8bf54a8eb69ad20f6b8cafa36c0352cdebb0886cb1cb7"
+  },
+  "chain_patched/station_0.5.jsonl": {
+    "local_only_sha256": "9b0dba7ecaa39132fde26ac003ea366e759e03d957cac0d030c17c1f3a5c9452"
+  },
+  "chain_patched/station_0.5.jsonl.metadata.json.gz": {
+    "raw_sha256": "c855ce8614553cae6ef4ce8a881650bd6dc6ad3fa4779dbcddbc847b42785310",
+    "raw_bytes": 379154
+  },
+  "chain_patched/station_0.5.jsonl.summary.csv": {
+    "sha256": "5745ebe6b9e91629e52f03359aa834dfa7ecacc9ce5d54d4566438ee19daa8f8"
+  },
+  "chain_patched/station_0.5.jsonl.summary.json": {
+    "sha256": "4a42b1ead997cb10a4e44f4eb3957a2d7f0a0de94b07ac688264bf18a22fbc9d"
+  },
+  "chain_patched/station_0.5.trace.jsonl.gz": {
+    "sha256": "93688d316012c65d0f0b1207890ded71e6be07530deb4fa1b2e05da721dfeb71"
+  },
+  "chain_patched/station_0.8.jsonl": {
+    "local_only_sha256": "5c9c609c5e84ce674c79c229d7931ec552600edb2635546805e5a9dd564123fd"
+  },
+  "chain_patched/station_0.8.jsonl.metadata.json.gz": {
+    "raw_sha256": "a3e557188b617fce9502348cb8671c7566d27bc89d6d69c00c00fb092b27a948",
+    "raw_bytes": 379155
+  },
+  "chain_patched/station_0.8.jsonl.summary.csv": {
+    "sha256": "d5df9ae540854f73f8a4f6e679a45ed4647542fb370093ce2d46da928901cf5b"
+  },
+  "chain_patched/station_0.8.jsonl.summary.json": {
+    "sha256": "bd88d9f1997bf72e2f2fd6b80fe7d6d28ac94cc8c990d06f673316c615ccb0a5"
+  },
+  "chain_patched/station_0.8.trace.jsonl.gz": {
+    "sha256": "7adfda456c33c97c01cf65809b6f60c8f1e2df39661530576aef2f70893ab882"
+  },
+  "run_logs/chain_patched.log": {
+    "sha256": "9cff71ed99fac458974885c58f5bb4ddd55b7a21ed0b7a25887a4ade90ed7771"
+  },
+  "run_logs/chain_runs.log": {
+    "sha256": "4b6cf0f6863631131e0ae8904c5f7efba647037f91a5d198b73080e8ec807d30"
+  },
   "check_original.json": {
     "sha256": "63390795f7edccf509d9df4176bf439e17ae0e29906111e3df03611002bfdd5f"
   },
@@ -90,7 +207,13 @@
     "sha256": "84d6445f296506a9826a4da7128e71f7f3d117230b926aca8ee010412fa97df9"
   },
   "clean_shutdown.json": {
-    "sha256": "3fcd713d97415ece7cac0af2004c1bc7bafabcbaccbfc6271686b7f88d12fef8"
+    "sha256": "f4e874a75debe47754ab99707a780ba1ded2ce4692aa7017de79e52f7d2ba0a4"
+  },
+  "run_logs/closure_original.log": {
+    "sha256": "f18c271cfdb5ddf073645be56ed352d129be7bf8eef6c45b1b3282351603ef7b"
+  },
+  "run_logs/closure_patched.log": {
+    "sha256": "4c6c4aeed49d81dd53627183d467d21bb39bf4dbf429ebac7d4736e126d56668"
   },
   "dashboard_patched/realtime_energy.jsonl": {
     "local_only_sha256": "c37c2e506ac638a79932b1185812027cb9285159f695b3ea3aaadf51f3f32b60"
@@ -835,7 +958,7 @@
     "sha256": "256d967871fd780c3226e0be54ab044ae84e8a32d43a038012b44fe3d8c8624a"
   },
   "minimal_repro.json": {
-    "sha256": "18ca7dbf7596674759cba100eb30b85d6a7f119b38209b614be8f7b9587730e9"
+    "sha256": "aa12b2f02c832baa3c68731f07cb9ff85a0d09da638696a6bdde555d9fce2b15"
   },
   "run_logs/refinement_200hz.log": {
     "sha256": "6c376da8af355bd393a24c858b35c6e4fb7017453c906ef29506f3f94321c155"

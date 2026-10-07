@@ -1,0 +1,189 @@
+{
+  "created_utc": "2026-10-07T22:15:39.595906+00:00",
+  "scope": "implementation chain closure on a closed-loop native run; not vehicle validation",
+  "chain": [
+    "HoloOcean drag equation (source literals)",
+    "SI units -> UE force (source drag scale)",
+    "runtime acceleration (centre-of-mass velocity change, verified physics step)",
+    "applied actuator effort (HoloEnergy applied action, BlueROV2 geometry)",
+    "HoloEnergy electrical demand (T200 tables at the logged bus voltage)"
+  ],
+  "source": {
+    "root": "C:\\HOB\\src\\before",
+    "git": {
+      "commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+      "status": ""
+    },
+    "files": {
+      "engine/Source/Holodeck/HolodeckCore/Private/HolodeckBuoyantAgent.cpp": {
+        "sha256": "580ce38bd1a226133d8e03c702e75740cd051b6efae90c1c0c1414c72ac0118d",
+        "line_anchors": {
+          "DragForce": [
+            53,
+            91,
+            94
+          ],
+          "RelativeVel": [
+            90,
+            91,
+            92
+          ],
+          "AddForce": [
+            77,
+            84,
+            93
+          ],
+          "ConvertLinearVector": [
+            75,
+            82
+          ]
+        }
+      },
+      "engine/Source/Holodeck/HolodeckCore/Public/HolodeckBuoyantAgent.h": {
+        "sha256": "7c0873840916304fd9993ad4433191e04ee1f89431a8bfbc7ebab2be2ea9d692",
+        "line_anchors": {
+          "DragForce": [
+            56
+          ]
+        }
+      },
+      "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": {
+        "sha256": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec",
+        "line_anchors": {
+          "AddForce": [
+            66,
+            107
+          ],
+          "ConvertLinearVector": [
+            58,
+            97
+          ]
+        }
+      },
+      "engine/Source/Holodeck/Agents/Public/BlueROV2.h": {
+        "sha256": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+        "line_anchors": {}
+      },
+      "engine/Source/Holodeck/Agents/Private/BlueROV2ControlThrusters.cpp": {
+        "sha256": "41cc2106b7d8e4b01b86a79324cfedc998958d65feae164c09adb73f5df6f2ed",
+        "line_anchors": {
+          "DragForce": [
+            29
+          ]
+        }
+      },
+      "engine/Source/Holodeck/General/Private/Conversion.cpp": {
+        "sha256": "b3280ad414fa7c9ce9c5cf2a2e33f97c09fc514a4cc11de81cdeff8828670ea9",
+        "line_anchors": {
+          "ConvertLinearVector": [
+            95
+          ]
+        }
+      },
+      "engine/Source/Holodeck/General/Public/Conversion.h": {
+        "sha256": "c8a8d3fa353d5320343c4fcecccc51016561e46c274691212ee4489146bcd16e",
+        "line_anchors": {
+          "ConvertLinearVector": [
+            19
+          ]
+        }
+      },
+      "engine/Source/Holodeck/ClientCommands/Private/OceanCurrentsCommand.cpp": {
+        "sha256": "62a93b423baf44fd9531d8ed48a9e271a3cbc94e679267afd68c3da737a7552c",
+        "line_anchors": {}
+      },
+      "engine/Source/Holodeck/Sensors/Private/DynamicsSensor.cpp": {
+        "sha256": "a4430a278a1a0ee139ca48082331715da20a69103deba0d61afd1aac3f6c4624",
+        "line_anchors": {
+          "ConvertLinearVector": [
+            66,
+            75
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "mass_kg": 11.5,
+    "drag_coefficient": 0.8,
+    "area_m2": 0.45,
+    "density_kg_m3": 997.0,
+    "ue_units_per_m": 100.0,
+    "linear_damping_per_s": 1.0,
+    "source_drag_scale_to_SI": 0.01,
+    "explicit_drag_unit_conversion": false,
+    "fully_submerged_ratio": 1.0,
+    "neutral_volume_m3": 0.011534603811434303,
+    "parameter_origin": "official/local C++ literals; no runtime fit"
+  },
+  "drag_scale_used": 0.01,
+  "tolerances": {
+    "force_N": 0.001,
+    "thruster_power_W": 1e-06,
+    "energy_relative": 1e-09
+  },
+  "study_report": {
+    "path": "logs\\verified_backend\\chain_original\\chain_report.json",
+    "sha256": "feae3a1800caa101f6a6fa30e663be18d3cdf8740d26864cd7a1aa86e5928a69"
+  },
+  "profile_sha256": "3bfa5458a770d1ffdf01a8f660404d8093478c86dc2966f4ac0db7e7cf0c5a2b",
+  "records": {
+    "station_0.5": {
+      "force_steps": 999,
+      "max_abs_force_residual_N": [
+        9.475905266703721e-07,
+        0.0,
+        0.0
+      ],
+      "rms_force_residual_N": [
+        1.822819581096622e-07,
+        0.0,
+        0.0
+      ],
+      "max_abs_force_residual_assuming_SI_drag_N": [
+        45.07220641462594,
+        0.0,
+        0.0
+      ],
+      "peak_drag_N": 0.4552748144390631,
+      "peak_thrust_N": 0.5073346009751276,
+      "peak_runtime_force_N": 0.4420862249904219,
+      "max_abs_thruster_power_residual_W": 2.1815882433884326e-14,
+      "max_abs_propulsion_power_residual_W": 8.72635297355373e-14,
+      "propulsion_Wh_from_trace": 0.0038104177199923483,
+      "propulsion_Wh_reported": 0.0038104177199923504,
+      "propulsion_Wh_relative_difference": -5.551115123125783e-16,
+      "trace_sha256": "186a477a786cc7d8c5184cbf242e8f2789db6db6da4a31900a23d51d6116b8df",
+      "status": "PASS"
+    },
+    "mission_0.4": {
+      "force_steps": 6699,
+      "max_abs_force_residual_N": [
+        3.389613781923373e-05,
+        5.828305031174123e-07,
+        8.870282527867879e-12
+      ],
+      "rms_force_residual_N": [
+        9.680061232240399e-06,
+        1.3633834418058702e-07,
+        8.369506531845146e-13
+      ],
+      "max_abs_force_residual_assuming_SI_drag_N": [
+        81.82867608909896,
+        0.17781049434807425,
+        1.004575686444011e-06
+      ],
+      "peak_drag_N": 0.8265523066896452,
+      "peak_thrust_N": 4.176730245916834,
+      "peak_runtime_force_N": 3.487943203160244,
+      "max_abs_thruster_power_residual_W": 1.929567616798522e-13,
+      "max_abs_propulsion_power_residual_W": 7.718270467194088e-13,
+      "propulsion_Wh_from_trace": 0.0708607383625872,
+      "propulsion_Wh_reported": 0.07086073836258712,
+      "propulsion_Wh_relative_difference": 1.1102230246251565e-15,
+      "trace_sha256": "08e2cf6d0fa78f19f778fb269cc2ccff85aaac9f258983d7b8bd726335fc48df",
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}

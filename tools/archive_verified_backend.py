@@ -314,6 +314,36 @@ def suite(src):
                     bool(change) and all(abs(c) < 0.01 for c in change.values()),
                 )
             )
+    closure = {b: load(src / f"chain_{b}/chain_closure.json") for b in ("patched", "original")}
+    values = {
+        b: c
+        and {
+            "drag_scale_used": c["drag_scale_used"],
+            "status": c["status"],
+            "max_force_residual_N": max(
+                max(r["max_abs_force_residual_N"]) for r in c["records"].values()
+            ),
+            "max_residual_assuming_SI_drag_N": max(
+                max(r["max_abs_force_residual_assuming_SI_drag_N"]) for r in c["records"].values()
+            ),
+        }
+        for b, c in closure.items()
+    }
+    items.append(
+        entry(
+            "energy chain closure, closed loop (drag equation -> electrical demand)",
+            "patched: closes per tick at SI scale (force < 1e-3 N, power, energy); "
+            "official: closes only at scale 0.01",
+            values,
+            bool(values["patched"])
+            and values["patched"]["status"] == "PASS"
+            and values["patched"]["drag_scale_used"] == 1.0
+            and bool(values["original"])
+            and values["original"]["status"] == "PASS"
+            and values["original"]["drag_scale_used"] == 0.01
+            and values["original"]["max_residual_assuming_SI_drag_N"] > 1.0,
+        )
+    )
     integration = load(src / "derating_patched/integration_report.json")
     items.append(
         entry(

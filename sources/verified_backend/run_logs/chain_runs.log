@@ -1,0 +1,10 @@
+== chain_patched: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/native_current_energy_study.py --backend holoocean --holoocean-binary C:/HOB/packages/patched-after/Ocean/Windows/Holodeck/Binaries/Win64/Holodeck.exe --dt 0.01 --experiments station mission --currents 0.2 0.5 0.8 --mission-currents 0.4 --station-seconds 10 --trace-every 1 --label chain --output-dir logs/verified_backend/chain_patched
+   exit 0 in 186 s
+== chain_original: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe examples/native_current_energy_study.py --backend holoocean --dt 0.01 --experiments station mission --currents 0.5 --mission-currents 0.4 --station-seconds 10 --trace-every 1 --label chain --output-dir logs/verified_backend/chain_original
+   exit 0 in 137 s
+== closure_patched: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/verify_energy_chain.py --run-dir logs/verified_backend/chain_patched --report chain_report.json --source-dir C:/HOB/src/after --output logs/verified_backend/chain_patched/chain_closure.json
+   exit 0 in 3 s
+== closure_original: /c/Users/Andrea/miniconda3/envs/holoocean_joystick/python.exe tools/verify_energy_chain.py --run-dir logs/verified_backend/chain_original --report chain_report.json --source-dir C:/HOB/src/before --output logs/verified_backend/chain_original/chain_closure.json
+   exit 0 in 2 s
+holodeck processes: 0
+DONE

@@ -1,0 +1,3 @@
+PASS station_0.5: max force residual 9.48e-07 N (peak drag 0.46 N, assuming SI drag 4.51e+01 N); power 2.2e-14 W; energy -5.6e-16
+PASS mission_0.4: max force residual 3.39e-05 N (peak drag 0.83 N, assuming SI drag 8.18e+01 N); power 1.9e-13 W; energy 1.1e-15
+Chain closure: PASS -> logs\verified_backend\chain_original\chain_closure.json
