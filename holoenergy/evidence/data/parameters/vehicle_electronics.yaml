@@ -1,0 +1,28 @@
+# BlueROV2 electronics whose consumption is not published: explicit gaps (grade D).
+parameters:
+  - id: bluerobotics_fathom_x.power
+    component: bluerobotics_fathom_x_tether_interface
+    quantity: electrical_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Tether interface board consumption not found in manufacturer documentation.
+  - id: bluerov2.bec_5v_efficiency
+    component: bluerov2_5v_power_supply
+    quantity: converter_efficiency
+    unit: "1"
+    value: null
+    relation: unsupported
+    grade: D
+    notes: >-
+      Efficiency of the 5 V supply feeding the Raspberry Pi/Navigator/camera is not published;
+      converter losses are therefore NOT modelled (efficiency treated as 1, reported as a gap).
+  - id: bluerov2.power_sense_module.power
+    component: bluerobotics_power_sense_module
+    quantity: electrical_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Not published.

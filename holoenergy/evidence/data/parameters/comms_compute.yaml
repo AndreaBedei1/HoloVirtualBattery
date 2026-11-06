@@ -1,0 +1,953 @@
+# Communication modems and onboard computers, verified on 2026-11-06.
+# Electrical input power only; acoustic source level / optical / RF output are not electrical W.
+parameters:
+- id: subnero_wnc_m25mso4.tx_average
+  component: subnero_wnc_m25mso4
+  quantity: electrical_power
+  unit: W
+  value: 45
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: &id002
+  - DS-SN-WNC-M25MSO4
+  location: &id001
+    section: Specifications
+  conditions:
+    state: TX
+    supply_V: 24
+  snippet: < 45 W (transmit mode, avg.)
+  notes: Depends on configured transmit level; no per-level figures published.
+- id: subnero_wnc_m25mso4.rx_listen
+  component: subnero_wnc_m25mso4
+  quantity: electrical_power
+  unit: W
+  value: 4
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-SN-WNC-M25MSO4
+  - DS-SN-FAQ
+  location: *id001
+  conditions:
+    state: RX/LISTEN
+  snippet: < 4 W (receive mode, nominal)
+  notes: 'FAQ: listening continuously for frames, less than 4 W.'
+- id: subnero_wnc_m25mso4.deep_sleep
+  component: subnero_wnc_m25mso4
+  quantity: electrical_power
+  unit: W
+  value: 0.001
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id002
+  location: *id001
+  conditions:
+    state: SLEEP
+    note: deep sleep, acoustic wake-up disabled
+- id: subnero_wnc_m25mso4.bitrate
+  component: subnero_wnc_m25mso4
+  quantity: bitrate
+  unit: kbit/s
+  value: 15
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id002
+  location: *id001
+  conditions: {}
+- id: evologics_s2cm_18_34.tx_1000m
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 2.8
+  bound: exact
+  relation: exact
+  grade: A
+  sources: &id003
+  - DS-EL-S2CM-2017
+  location: &id004
+    page: 1
+    section: Technical specifications - Power consumption
+    table: S2CM 18/34 column
+  conditions:
+    state: TX
+    setting: 1000m range
+    supply_V: 24
+  snippet: 2.8 W, 1000 m range
+- id: evologics_s2cm_18_34.tx_2000m
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 8.0
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions:
+    state: TX
+    setting: 2000m range
+    supply_V: 24
+  snippet: 8 W, 2000 m range
+- id: evologics_s2cm_18_34.tx_3500m
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 35.0
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions:
+    state: TX
+    setting: 3500m range
+    supply_V: 24
+  snippet: 35 W, 3500 m range
+- id: evologics_s2cm_18_34.tx_max
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 55
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions:
+    state: TX
+    setting: max. available
+- id: evologics_s2cm_18_34.rx
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 0.8
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions:
+    state: RX
+    interface: RS-232
+  snippet: less than 0.8 W
+- id: evologics_s2cm_18_34.listen_wakeup
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions:
+    state: LISTEN
+    note: only with optional Wake-Up module
+  value_min: 0.005
+  value_max: 0.285
+- id: evologics_s2cm_18_34.standby
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 0.0025
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions:
+    state: SLEEP
+- id: evologics_s2cm_18_34.bitrate
+  component: evologics_s2cm_18_34
+  quantity: bitrate
+  unit: kbit/s
+  value: 13.9
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id003
+  location: *id004
+  conditions: {}
+- id: evologics_s2cr_18_34.tx_max
+  component: evologics_s2cr_18_34
+  quantity: electrical_power
+  unit: W
+  value: 65
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: &id005
+  - DS-EL-GUIDE-2024
+  location: &id006
+    page: 4
+    section: Technical specifications
+    table: R 18/34 column
+  conditions:
+    state: TX
+  notes: '2025 web pages label the same figure ''Max. Output Power'' and list 60 W for 18/34H: conflicting.'
+- id: evologics_s2cr_18_34.rx
+  component: evologics_s2cr_18_34
+  quantity: electrical_power
+  unit: W
+  value: 0.8
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id005
+  location: *id006
+  conditions:
+    state: RX
+    interface: RS-232
+- id: whoi_micromodem2.tx_25khz
+  component: whoi_micromodem2
+  quantity: electrical_power
+  unit: W
+  value: 60
+  bound: typical
+  relation: exact
+  grade: A
+  sources: &id007
+  - DS-WHOI-MM2-TABLE
+  location: &id008
+    table: 403005-TBL, Standard configuration
+  conditions:
+    state: TX
+    band: 25 kHz
+  snippet: TX (25kHz) | ~60
+  notes: Approximate (~); depends on transducer and matching network.
+- id: whoi_micromodem2.tx_10khz
+  component: whoi_micromodem2
+  quantity: electrical_power
+  unit: W
+  value: 35
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id007
+  location: *id008
+  conditions:
+    state: TX
+    band: 10 kHz
+- id: whoi_micromodem2.rx_fsk
+  component: whoi_micromodem2
+  quantity: electrical_power
+  unit: W
+  value: 0.82
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id007
+  location: *id008
+  conditions:
+    state: RX
+    mode: FSK
+    supply_V: 12
+- id: whoi_micromodem2.rx_psk
+  component: whoi_micromodem2
+  quantity: electrical_power
+  unit: W
+  value: 2.74
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id007
+  location: *id008
+  conditions:
+    state: RX
+    mode: S-PSK coprocessor
+    supply_V: 12
+- id: whoi_micromodem2.idle
+  component: whoi_micromodem2
+  quantity: electrical_power
+  unit: W
+  value: 0.82
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id007
+  location: *id008
+  conditions:
+    state: LISTEN
+    supply_V: 12
+- id: whoi_micromodem2.hibernate
+  component: whoi_micromodem2
+  quantity: electrical_power
+  unit: W
+  value: 0.00096
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id007
+  location: *id008
+  conditions:
+    state: SLEEP
+    supply_V: 12
+- id: benthos_atm900.tx_level8
+  component: benthos_atm900
+  quantity: electrical_power
+  unit: W
+  value: 20
+  bound: typical
+  relation: exact
+  grade: A
+  sources: &id009
+  - DS-TB-ATM900
+  location: &id010
+    page: 2-2
+    section: 2 Specifications - General
+  conditions:
+    state: TX
+    power_level: 8
+    supply_V: 21
+    note: average transmit power
+- id: benthos_atm900.tx_level6
+  component: benthos_atm900
+  quantity: electrical_power
+  unit: W
+  value: 10
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id009
+  location: *id010
+  conditions:
+    state: TX
+    power_level: 6
+    supply_V: 21
+    note: average transmit power
+- id: benthos_atm900.tx_level4
+  component: benthos_atm900
+  quantity: electrical_power
+  unit: W
+  value: 5
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id009
+  location: *id010
+  conditions:
+    state: TX
+    power_level: 4
+    supply_V: 21
+    note: average transmit power
+- id: benthos_atm900.tx_level2
+  component: benthos_atm900
+  quantity: electrical_power
+  unit: W
+  value: 2.5
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id009
+  location: *id010
+  conditions:
+    state: TX
+    power_level: 2
+    supply_V: 21
+    note: average transmit power
+- id: benthos_atm900.rx
+  component: benthos_atm900
+  quantity: electrical_power
+  unit: W
+  value: 0.65
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id009
+  location: *id010
+  conditions:
+    state: RX
+    supply_V: 24
+  value_max: 0.72
+- id: benthos_atm900.lowpower
+  component: benthos_atm900
+  quantity: electrical_power
+  unit: W
+  value: 0.0102
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id009
+  location: *id010
+  conditions:
+    state: SLEEP
+    supply_V: 24
+  value_max: 0.012
+  notes: Section 3 of the same manual gives 16.8 mW lowpower and 768 mW receive maxima (conflicting).
+- id: ahoi.tx_bridge
+  component: ahoi
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources: &id011
+  - RENNER2020
+  location: &id012
+    page: 18
+    section: 4.3 Power Consumption
+    figure: Fig. 14
+  conditions:
+    state: TX
+    note: bridge amplifier, lowest to highest output level
+  value_min: 1.1
+  value_max: 2.1
+- id: ahoi.idle_rx
+  component: ahoi
+  quantity: electrical_power
+  unit: W
+  value: 0.3
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources: *id011
+  location: *id012
+  conditions:
+    state: RX/LISTEN
+  snippet: Total consumption in idle and receive mode is 300 mW
+- id: ahoi.sleep
+  component: ahoi
+  quantity: electrical_power
+  unit: W
+  value: 0.001
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id011
+  location: *id012
+  conditions:
+    state: SLEEP
+    note: transmitter board; receiver <0.2 mW
+- id: sonardyne_bluecomm200.receiver_unit
+  component: sonardyne_bluecomm200
+  quantity: electrical_power
+  unit: W
+  value: 10
+  bound: exact
+  relation: exact
+  grade: A
+  sources: &id013
+  - DS-SD-BLUECOMM200
+  location: &id014
+    page: 2
+    section: Specifications
+  conditions:
+    state: RX/LISTEN
+    unit: Receiver Unit
+  snippet: Power Consumption | 10 W
+- id: sonardyne_bluecomm200.emitter_unit
+  component: sonardyne_bluecomm200
+  quantity: electrical_power
+  unit: W
+  value: 15
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id013
+  location: *id014
+  conditions:
+    unit: Emitter Unit
+    note: bandwidth allocation dependent
+- id: sonardyne_bluecomm200.tx_node
+  component: sonardyne_bluecomm200
+  quantity: electrical_power
+  unit: W
+  value: 25
+  bound: upper_bound
+  relation: representative
+  grade: B
+  sources: *id013
+  location: *id014
+  conditions:
+    state: TX
+  derivation: Receiver Unit 10 W (kept powered) + Emitter Unit 15 W (full allocation)
+  notes: Two-unit system; per-node TX power is an interpretation of two published unit figures.
+- id: sonardyne_bluecomm200.standby
+  component: sonardyne_bluecomm200
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: unknown
+  relation: unsupported
+  grade: D
+  sources: *id013
+  location: {}
+  conditions: {}
+  notes: Standby/idle not published.
+  status: unconfigured
+- id: hydromea_luma250lp.tx
+  component: hydromea_luma250lp
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources: &id015
+  - DS-HM-LUMA250LP
+  location: &id016
+    page: 1
+    section: System Specifications
+  conditions:
+    state: TX
+    note: typical, four LED-bank power levels
+  value_min: 2
+  value_max: 5
+- id: hydromea_luma250lp.rx
+  component: hydromea_luma250lp
+  quantity: electrical_power
+  unit: W
+  value: 0.5
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id015
+  location: *id016
+  conditions:
+    state: RX/LISTEN
+- id: hydromea_luma250lp.sleep
+  component: hydromea_luma250lp
+  quantity: electrical_power
+  unit: W
+  value: 0.01
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources: *id015
+  location: *id016
+  conditions:
+    state: SLEEP
+- id: hydromea_lumax.tx
+  component: hydromea_lumax
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources: &id017
+  - DS-HM-LUMAX
+  location: &id018
+    page: 1
+    section: System Specifications
+  conditions:
+    state: TX
+    note: typical, 1-5 LED banks
+  value_min: 2
+  value_max: 20
+- id: hydromea_lumax.rx
+  component: hydromea_lumax
+  quantity: electrical_power
+  unit: W
+  value: 2
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id017
+  location: *id018
+  conditions:
+    state: RX/LISTEN
+- id: semtech_sx1276.tx_13dbm_rfo
+  component: semtech_sx1276
+  quantity: electrical_power
+  unit: W
+  value: 0.0957
+  bound: typical
+  relation: exact
+  grade: A
+  sources: &id019
+  - DS-ST-SX1276
+  location:
+    page: 14
+    table: Table 6
+  conditions:
+    state: TX
+    rf_dBm: 13
+    pin: RFO_LF/HF
+    supply_V: 3.3
+  derivation: 29 mA x 3.3 V
+- id: semtech_sx1276.tx_17dbm_paboost
+  component: semtech_sx1276
+  quantity: electrical_power
+  unit: W
+  value: 0.2871
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id019
+  location:
+    page: 14
+    table: Table 6
+  conditions:
+    state: TX
+    rf_dBm: 17
+    pin: PA_BOOST
+    supply_V: 3.3
+  derivation: 87 mA x 3.3 V
+- id: semtech_sx1276.tx_14dbm_interval
+  component: semtech_sx1276
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: proxy
+  grade: C
+  sources: *id019
+  location:
+    page: 14
+    table: Table 6
+  conditions:
+    state: TX
+    rf_dBm: 14
+  value_min: 0.0957
+  value_max: 0.2871
+  derivation: +14 dBm is not tabulated; bracketed by the +13 dBm RFO (29 mA) and +17 dBm PA_BOOST (87
+    mA) rows at 3.3 V
+  notes: No interpolation in dBm is assumed.
+- id: semtech_sx1276.rx_lora_125khz
+  component: semtech_sx1276
+  quantity: electrical_power
+  unit: W
+  value: 0.034
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id019
+  location:
+    page: 19
+    table: Table 10
+  conditions:
+    state: RX/LISTEN
+    bandwidth_kHz: 125
+    band: 1
+  derivation: 10.3 mA x 3.3 V
+- id: semtech_sx1276.standby
+  component: semtech_sx1276
+  quantity: electrical_power
+  unit: W
+  value: 0.00528
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id019
+  location:
+    page: 14
+    table: Table 6
+  conditions:
+    state: IDLE
+  derivation: 1.6 mA x 3.3 V (crystal oscillator on)
+- id: semtech_sx1276.sleep
+  component: semtech_sx1276
+  quantity: electrical_power
+  unit: W
+  value: 6.6e-07
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id019
+  location:
+    page: 14
+    table: Table 6
+  conditions:
+    state: SLEEP
+  derivation: 0.2 uA x 3.3 V
+- id: wfs_seatooth_s100.tx
+  component: wfs_seatooth_s100
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources: &id020
+  - DS-WFS-SEATOOTH-S100
+  location: &id021
+    page: 2
+    section: Specifications
+  conditions:
+    state: TX
+  value_min: 1
+  value_max: 7
+- id: wfs_seatooth_s100.rx
+  component: wfs_seatooth_s100
+  quantity: electrical_power
+  unit: W
+  value: 0.086
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id020
+  location: *id021
+  conditions:
+    state: RX/LISTEN
+- id: wfs_seatooth_s100.sleep
+  component: wfs_seatooth_s100
+  quantity: electrical_power
+  unit: W
+  value: 0.005
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id020
+  location: *id021
+  conditions:
+    state: SLEEP
+- id: wfs_seatooth_s100.bitrate
+  component: wfs_seatooth_s100
+  quantity: bitrate
+  unit: kbit/s
+  value: 2.4
+  bound: typical
+  relation: exact
+  grade: A
+  sources: *id020
+  location: *id021
+  conditions: {}
+  value_max: 4.8
+- id: rpi4b.idle
+  component: raspberry_pi_4b
+  quantity: electrical_power
+  unit: W
+  value: 3.0
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources: &id022
+  - DOC-RPI-POWER
+  location: &id023
+    section: Power supply > Typical power requirements; per-workload current table
+  conditions:
+    state: IDLE
+    supply_V: 5
+  derivation: 0.6 A average idle x 5 V
+- id: rpi4b.video
+  component: raspberry_pi_4b
+  quantity: electrical_power
+  unit: W
+  value: 3.9
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources: *id022
+  location: *id023
+  conditions:
+    state: VIDEO
+    workload: H.264 video playback
+  value_max: 4.25
+  derivation: 0.78 A average (0.85 A max) x 5 V
+- id: rpi4b.stress
+  component: raspberry_pi_4b
+  quantity: electrical_power
+  unit: W
+  value: 6.0
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources: *id022
+  location: *id023
+  conditions:
+    state: HIGH_LOAD
+    workload: stress test
+  value_max: 6.25
+  derivation: 1.2 A average (1.25 A max) x 5 V
+- id: rpi4b.halt
+  component: raspberry_pi_4b
+  quantity: electrical_power
+  unit: W
+  value: 0.115
+  bound: exact
+  relation: exact
+  grade: A
+  sources: *id022
+  location: *id023
+  conditions:
+    state: OFF_HALT
+  derivation: 0.023 A halt x 5 V
+- id: rpi4b.idle_baller2021
+  component: raspberry_pi_4b
+  quantity: electrical_power
+  unit: W
+  value: 2.643
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - BALLER2021
+  location:
+    page: 8
+    table: TABLE III
+  conditions:
+    state: IDLE
+    note: LAN connected
+  notes: Independent idle measurement; 2.100 W without LAN. Differs from the official 3.0 W.
+- id: jetson_orin_nx_16gb.budget_10w
+  component: jetson_orin_nx_16gb
+  quantity: electrical_power
+  unit: W
+  value: 10
+  bound: budget
+  relation: exact
+  grade: A
+  sources: &id024
+  - DOC-NV-JETSON-R36
+  location: &id025
+    section: Supported Modes and Power Efficiency
+    table: NVP model clock configuration, Orin NX 16GB/8GB
+  conditions:
+    nvpmodel: 10W
+  notes: Power budget enforced by clock capping, not a consumption measurement.
+- id: jetson_orin_nx_16gb.budget_15w
+  component: jetson_orin_nx_16gb
+  quantity: electrical_power
+  unit: W
+  value: 15
+  bound: budget
+  relation: exact
+  grade: A
+  sources: *id024
+  location: *id025
+  conditions:
+    nvpmodel: 15W
+  notes: Power budget enforced by clock capping, not a consumption measurement.
+- id: jetson_orin_nx_16gb.budget_25w
+  component: jetson_orin_nx_16gb
+  quantity: electrical_power
+  unit: W
+  value: 25
+  bound: budget
+  relation: exact
+  grade: A
+  sources: *id024
+  location: *id025
+  conditions:
+    nvpmodel: 25W
+  notes: Power budget enforced by clock capping, not a consumption measurement.
+- id: jetson_orin_nx_16gb.yolov8s_fp16
+  component: jetson_orin_nx_16gb
+  quantity: electrical_power
+  unit: W
+  value: 12.815
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - REY2025
+  location:
+    page: 15
+    table: Table 4
+  conditions:
+    state: AI_INFERENCE
+    workload: YOLOv8s FP16 TensorRT 640x640
+    nvpmodel: not stated
+- id: jetson_orin_nx_16gb.yolov8s_int8
+  component: jetson_orin_nx_16gb
+  quantity: electrical_power
+  unit: W
+  value: 11.002
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - REY2025
+  location:
+    page: 15
+    table: Table 4
+  conditions:
+    state: AI_INFERENCE
+    workload: YOLOv8s INT8 TensorRT
+- id: jetson_orin_nx_16gb.idle
+  component: jetson_orin_nx_16gb
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: unknown
+  relation: unsupported
+  grade: D
+  sources: []
+  location: {}
+  conditions: {}
+  notes: No accessible measurement of Orin NX idle power.
+  status: unconfigured
+- id: jetson_orin_nano.yolov8s_fp16
+  component: jetson_orin_nano
+  quantity: electrical_power
+  unit: W
+  value: 7.836
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - REY2025
+  location:
+    page: 15
+    table: Table 4
+  conditions:
+    state: AI_INFERENCE
+    workload: YOLOv8s FP16 TensorRT
+- id: jetson_agx_orin.idle_15w
+  component: jetson_agx_orin
+  quantity: electrical_power
+  unit: W
+  value: 6.39
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - ULMAMEI2025
+  location:
+    section: '4.3'
+  conditions:
+    state: IDLE
+    nvpmodel: 15W
+- id: jetson_agx_orin.inference_15w
+  component: jetson_agx_orin
+  quantity: electrical_power
+  unit: W
+  value: 9.91
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - ULMAMEI2025
+  location:
+    section: '4.3'
+  conditions:
+    state: AI_INFERENCE
+    nvpmodel: 15W
+    workload: YOLO detector, max rate
+- id: rpi5.yolov8s_ncnn
+  component: raspberry_pi_5
+  quantity: electrical_power
+  unit: W
+  value: 5.422
+  bound: measured_mean
+  relation: exact
+  grade: A
+  sources:
+  - REY2025
+  location:
+    page: 15
+    table: Table 4
+  conditions:
+    state: AI_INFERENCE
+    workload: YOLOv8s FP32 NCNN
+- id: rpi5.bare_board
+  component: raspberry_pi_5
+  quantity: electrical_power
+  unit: W
+  value: 4.0
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DOC-RPI-POWER
+  location:
+    section: Typical power requirements
+  conditions:
+    state: IDLE
+  derivation: 800 mA typical bare-board active current x 5 V

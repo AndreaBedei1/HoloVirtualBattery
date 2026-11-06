@@ -257,3 +257,153 @@ sources:
     url: https://bluerobotics.com/store/rov/bluerov2-upgrade-kits/brov2-heavy-retrofit/
     accessed: '2026-11-06'
     revision: not recorded
+  # --- communication modems and onboard computers (verified 2026-11-06) ---
+  - id: DS-SN-WNC-M25MSO4
+    type: manufacturer_webpage
+    title: Subnero WNC-M25MSO4 product page (Specifications)
+    publisher: Subnero
+    url: https://subnero.com/products/wnc-m25mso4.html
+    accessed: '2026-11-06'
+  - id: DS-SN-FAQ
+    type: manufacturer_webpage
+    title: Subnero Frequently Asked Questions (operating modes)
+    publisher: Subnero
+    url: https://subnero.com/faq/
+    accessed: '2026-11-06'
+  - id: DS-EL-GUIDE-2024
+    type: manufacturer_datasheet
+    title: EvoLogics Underwater Acoustic Modems Product Information Guide
+    publisher: EvoLogics GmbH
+    url: https://service.evologics.com/web/content/15634?unique=be7aa65d1c113e56664940ddea7cf65757e6648e
+    revision: April 2024
+    accessed: '2026-11-06'
+  - id: DS-EL-S2CM-2017
+    type: manufacturer_datasheet
+    title: Underwater Acoustic Communication System S2C M Series - Product Information
+    publisher: EvoLogics GmbH
+    url: https://service.evologics.com/web/content/15973?unique=6c74b2fd25e9815cecbb6a744c3453d5c3cc4fd2
+    revision: December 2017
+    accessed: '2026-11-06'
+  - id: DS-WHOI-MM2-TABLE
+    type: official_documentation
+    title: WHOI Micromodem Configurations and Power Consumption (table 403005)
+    publisher: Woods Hole Oceanographic Institution
+    url: https://acomms.whoi.edu/wp-content/uploads/sites/20/2018/02/403005-TBL-Micromodem-Configurations-and-Power-Consumption-1.png
+    revision: 2018-02
+    accessed: '2026-11-06'
+  - id: GALLIMORE2010
+    type: conference_paper
+    title: 'The WHOI Micromodem-2: A Scalable System for Acoustic Communications and Networking'
+    authors:
+    - E. Gallimore
+    - J. Partan
+    - I. Vaughn
+    - S. Singh
+    - J. Shusta
+    - L. Freitag
+    year: 2010
+    doi: 10.1109/OCEANS.2010.5664354
+    url: https://acomms.whoi.edu/wp-content/uploads/sites/20/2014/08/Micromodem2_2010.pdf
+    accessed: '2026-11-06'
+  - id: DS-TB-ATM900
+    type: manufacturer_datasheet
+    title: ATM-900 Series Acoustic Telemetry Modems User's Manual
+    publisher: Teledyne Benthos
+    url: https://rts.as/wp-content/uploads/2018/09/ATM-900-Series-Acoustic-Telemetry-Modem-Users-Manual-Rev-D.pdf
+    revision: P/N M-270-26 Rev. D (hosted by distributor)
+    accessed: '2026-11-06'
+  - id: RENNER2020
+    type: journal_article
+    title: 'ahoi: Inexpensive, Low-power Communication and Localization for Underwater Sensor Networks and
+      muAUVs'
+    authors:
+    - B.-C. Renner
+    - J. Heitmann
+    - F. Steinmetz
+    year: 2020
+    doi: 10.1145/3376921
+    url: https://tore.tuhh.de/bitstreams/24394579-75c4-4a18-9d2b-c464a753ba49/download
+    accessed: '2026-11-06'
+  - id: DS-SD-BLUECOMM200
+    type: manufacturer_datasheet
+    title: Datasheet BlueComm 200 - Optical Communications System (Type 8361)
+    publisher: Sonardyne
+    url: https://www.sonardyne.com/wp-content/uploads/2021/07/Sonardyne_8361_BlueComm_200.pdf
+    revision: 06/2021
+    accessed: '2026-11-06'
+  - id: DS-HM-LUMA250LP
+    type: manufacturer_datasheet
+    title: LUMA 250LP datasheet
+    publisher: Hydromea
+    url: https://files.hydromea.com/luma/Hydromea_LUMA_250LP_datasheet.pdf
+    revision: V1.241007 (preliminary)
+    accessed: '2026-11-06'
+  - id: DS-HM-LUMAX
+    type: manufacturer_datasheet
+    title: LUMA X datasheet
+    publisher: Hydromea
+    url: https://files.hydromea.com/luma/LUMA_X.pdf
+    revision: V2.2602
+    accessed: '2026-11-06'
+  - id: DS-ST-SX1276
+    type: manufacturer_datasheet
+    title: SX1276/77/78/79 - 137 MHz to 1020 MHz Low Power Long Range Transceiver
+    publisher: Semtech
+    url: https://github.com/jgromes/RadioLib/files/8646997/DS_SX1276-7-8-9_W_APP_V7.pdf
+    revision: Rev. 7 - May 2020 (copy attached to RadioLib issue)
+    accessed: '2026-11-06'
+  - id: DS-WFS-SEATOOTH-S100
+    type: manufacturer_datasheet
+    title: Seatooth S100 Wireless Data logger / Multiplexer / Controller
+    publisher: WFS Technologies
+    url: https://docs.rs-online.com/94dc/0900766b8132e86a.pdf
+    revision: 14.1.8 (hosted by distributor)
+    accessed: '2026-11-06'
+  - id: DOC-RPI-POWER
+    type: official_documentation
+    title: Raspberry Pi hardware documentation - Power supply, typical power requirements
+    publisher: Raspberry Pi Ltd
+    url: https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#typical-power-requirements
+    accessed: '2026-11-06'
+  - id: DOC-NV-JETSON-R36
+    type: official_documentation
+    title: Jetson Linux Developer Guide r36.4.4 - Platform Power and Performance (Orin series)
+    publisher: NVIDIA
+    url: https://docs.nvidia.com/jetson/archives/r36.4.4/DeveloperGuide/SD/PlatformPowerAndPerformance/JetsonOrinNanoSeriesJetsonOrinNxSeriesAndJetsonAgxOrinSeries.html
+    accessed: '2026-11-06'
+  - id: REY2025
+    type: journal_article
+    title: A Performance Analysis of You Only Look Once Models for Deployment on Constrained Computational
+      Edge Devices in Drone Applications
+    authors:
+    - L. Rey
+    - et al.
+    year: 2025
+    doi: 10.3390/electronics14030638
+    url: https://arxiv.org/pdf/2502.15737
+    accessed: '2026-11-06'
+    notes: Table 4 column headed W*s; text and J/inference values read as mean W.
+  - id: ULMAMEI2025
+    type: journal_article
+    title: Human Detection in UAV Thermal Imagery (embedded costs on Jetson AGX Orin)
+    authors:
+    - Ulmamei
+    - D'Adamo
+    - Vasile
+    - Hobincu
+    year: 2025
+    doi: 10.3390/jimaging11120436
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12733663/
+    accessed: '2026-11-06'
+  - id: BALLER2021
+    type: conference_paper
+    title: 'DeepEdgeBench: Benchmarking Deep Neural Networks on Edge Devices'
+    authors:
+    - S. P. Baller
+    - A. Jindal
+    - M. Chadha
+    - M. Gerndt
+    year: 2021
+    doi: 10.1109/IC2E52221.2021.00016
+    url: https://arxiv.org/pdf/2108.09457
+    accessed: '2026-11-06'
