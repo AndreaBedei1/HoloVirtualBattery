@@ -1,0 +1,8 @@
+name: hydromea_lumax_max
+medium: optical
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: hydromea_lumax.tx, use: value_max}
+  RX: {evidence: hydromea_lumax.rx}
+  LISTEN: {evidence: hydromea_lumax.rx}

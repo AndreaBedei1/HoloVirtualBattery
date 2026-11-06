@@ -1,0 +1,10 @@
+# Mechanical scanning sonar; mapping to HoloOcean ImagingSonar is an electrical proxy only.
+name: scanning_sonar
+device: bluerobotics_ping360
+category: sensors
+simulation_sensor: ImagingSonar
+relation: exact
+active_is_upper_bound: true
+states:
+  ACTIVE: {evidence: bluerobotics_ping360.power_max}
+initial_state: ACTIVE

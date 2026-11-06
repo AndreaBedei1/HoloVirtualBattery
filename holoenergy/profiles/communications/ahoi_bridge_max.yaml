@@ -1,0 +1,9 @@
+name: ahoi_bridge_max
+medium: acoustic
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: ahoi.tx_bridge, use: value_max}
+  RX: {evidence: ahoi.idle_rx}
+  LISTEN: {evidence: ahoi.idle_rx}
+  SLEEP: {evidence: ahoi.sleep}

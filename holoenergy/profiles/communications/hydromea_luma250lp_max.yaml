@@ -1,0 +1,9 @@
+name: hydromea_luma250lp_max
+medium: optical
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: hydromea_luma250lp.tx, use: value_max}
+  RX: {evidence: hydromea_luma250lp.rx}
+  LISTEN: {evidence: hydromea_luma250lp.rx}
+  SLEEP: {evidence: hydromea_luma250lp.sleep}

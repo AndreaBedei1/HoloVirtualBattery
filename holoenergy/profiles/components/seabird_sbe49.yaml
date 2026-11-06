@@ -1,0 +1,9 @@
+# CTD portion of HoloOcean BSTSensor only (no biomass).
+name: ctd
+device: seabird_sbe49
+category: sensors
+simulation_sensor: BSTSensor
+relation: representative
+states:
+  ACTIVE: {evidence: seabird_sbe49.power_sampling}
+initial_state: ACTIVE

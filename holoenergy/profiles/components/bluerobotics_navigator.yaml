@@ -1,0 +1,9 @@
+# Blue Robotics Navigator flight controller (includes IMUs, magnetometer, barometer).
+name: navigator
+device: bluerobotics_navigator
+category: compute
+includes: [imu, magnetometer, barometer]
+states:
+  IDLE: {evidence: bluerobotics_navigator.power_idle}
+  ACTIVE: {evidence: bluerobotics_navigator.power_typical}
+initial_state: ACTIVE

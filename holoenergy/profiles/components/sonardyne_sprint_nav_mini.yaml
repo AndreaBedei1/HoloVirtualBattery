@@ -1,0 +1,9 @@
+# Integrated DVL + INS + pressure: replaces separate DVL/IMU/depth loads.
+name: navigation_suite
+device: sonardyne_sprint_nav_mini
+category: sensors
+simulation_sensor: DVLSensor
+includes: [dvl, imu, magnetometer, pressure]
+states:
+  ACTIVE: {evidence: sonardyne_sprint_nav_mini.power_nominal}
+initial_state: ACTIVE

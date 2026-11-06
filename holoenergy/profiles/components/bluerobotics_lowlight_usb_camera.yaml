@@ -1,0 +1,8 @@
+name: camera
+device: bluerobotics_lowlight_usb_camera
+category: sensors
+simulation_sensor: RGBCamera
+active_is_upper_bound: true
+states:
+  ACTIVE: {evidence: bluerobotics_lowlight_usb_camera.power_max}
+initial_state: ACTIVE

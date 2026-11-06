@@ -1,0 +1,8 @@
+name: profiling_sonar
+device: cerulean_surveyor_240_16
+category: sensors
+simulation_sensor: ProfilingSonar
+states:
+  IDLE: {evidence: cerulean_surveyor_240_16.power_idle}
+  PINGING_MAX: {evidence: cerulean_surveyor_240_16.power_pinging_max}
+initial_state: IDLE

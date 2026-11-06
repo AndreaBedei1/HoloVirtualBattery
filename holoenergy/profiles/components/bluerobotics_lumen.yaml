@@ -1,0 +1,6 @@
+name: light
+device: bluerobotics_lumen
+category: auxiliaries
+states:
+  ACTIVE: {evidence: bluerobotics_lumen.power_full}
+initial_state: OFF

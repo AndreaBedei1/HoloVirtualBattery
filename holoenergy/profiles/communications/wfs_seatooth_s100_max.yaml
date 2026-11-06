@@ -1,0 +1,11 @@
+# Real subsea EM modem (2.4 kbit/s); a representative of 'EM modem' hardware, not of the
+# holo_desert 27 kbit/s 868 MHz configuration.
+name: wfs_seatooth_s100_max
+medium: em
+relation: proxy
+idle_state: LISTEN
+states:
+  TX: {evidence: wfs_seatooth_s100.tx, use: value_max}
+  RX: {evidence: wfs_seatooth_s100.rx}
+  LISTEN: {evidence: wfs_seatooth_s100.rx}
+  SLEEP: {evidence: wfs_seatooth_s100.sleep}

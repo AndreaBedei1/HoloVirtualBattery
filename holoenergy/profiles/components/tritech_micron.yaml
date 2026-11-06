@@ -1,0 +1,7 @@
+name: scanning_sonar_micron
+device: tritech_micron
+category: sensors
+simulation_sensor: ImagingSonar
+states:
+  ACTIVE: {evidence: tritech_micron.power_average}
+initial_state: ACTIVE

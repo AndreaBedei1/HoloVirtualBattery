@@ -1,0 +1,11 @@
+# Raspberry Pi 4 Model B companion computer (BlueROV2 ships it with BlueOS).
+# Workload states use the official per-workload current table; they are not BlueOS measurements.
+name: companion_computer
+device: raspberry_pi_4b
+category: compute
+relation: representative
+states:
+  IDLE: {evidence: rpi4b.idle}
+  VIDEO: {evidence: rpi4b.video}
+  HIGH_LOAD: {evidence: rpi4b.stress}
+initial_state: IDLE

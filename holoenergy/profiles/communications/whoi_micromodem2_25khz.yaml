@@ -1,0 +1,9 @@
+name: whoi_micromodem2_25khz
+medium: acoustic
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: whoi_micromodem2.tx_25khz}
+  RX: {evidence: whoi_micromodem2.rx_psk}
+  LISTEN: {evidence: whoi_micromodem2.idle}
+  SLEEP: {evidence: whoi_micromodem2.hibernate}

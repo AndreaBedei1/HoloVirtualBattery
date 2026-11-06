@@ -1,0 +1,8 @@
+name: depth_sensor
+device: te_ms5837_30ba
+category: sensors
+simulation_sensor: DepthSensor
+includes: [pressure]
+states:
+  ACTIVE: {evidence: te_ms5837_30ba.power_1sps_osr8192}
+initial_state: ACTIVE

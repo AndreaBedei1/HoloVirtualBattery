@@ -1,0 +1,7 @@
+name: echosounder
+device: bluerobotics_ping_sonar
+category: sensors
+simulation_sensor: SinglebeamSonar
+states:
+  ACTIVE: {evidence: bluerobotics_ping_sonar.power_typical}
+initial_state: ACTIVE

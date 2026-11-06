@@ -1,0 +1,10 @@
+# All Subnero figures are published upper bounds (<45 W TX avg, <4 W listen/receive).
+name: subnero_wnc_m25mso4
+medium: acoustic
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: subnero_wnc_m25mso4.tx_average}
+  RX: {evidence: subnero_wnc_m25mso4.rx_listen}
+  LISTEN: {evidence: subnero_wnc_m25mso4.rx_listen}
+  SLEEP: {evidence: subnero_wnc_m25mso4.deep_sleep}

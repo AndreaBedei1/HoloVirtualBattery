@@ -1,0 +1,74 @@
+# BlueROV2 Heavy as simulated by HoloOcean 2.3.0 (8 x T200), HoloEnergy profile v0.2.
+# Geometry and clamp are simulator-exact (HoloOcean sources); T200 electrical curves are
+# manufacturer measurements (static/bollard). Relation to a physical BlueROV2: representative.
+schema_version: 1
+allow_placeholders: true
+simulation:
+  dt_s: 0.01
+  expected_agent_type: BlueROV2
+  control_scheme: 0
+vehicle:
+  name: BlueROV2 Heavy (HoloOcean 2.3.0)
+  kind: ROV
+  dynamics_source: HoloOcean native BlueROV2 agent (mass 11.5 kg, Cd 0.8, A 0.45 m2 literals)
+  dynamics_mode: descriptive
+battery:
+  profile: package:batteries/bluerobotics_4s18ah_v2.yaml
+thermal:
+  water_temperature_C: 15.0
+  initial_temperature_C: 20.0
+  thermal_capacity_J_per_C: 1200.0
+  cooling_coeff_W_per_C: 2.0
+  derating_temperature_C: 40.0
+  cutoff_temperature_C: 50.0
+  minimum_temperature_C: null
+  metadata:
+    placeholders: [thermal_capacity_J_per_C, cooling_coeff_W_per_C, derating_temperature_C]
+    evidence: {cutoff_temperature_C: bluerobotics_4s_18ah.max_temperature}
+actuators:
+  - {id: V1, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.12, -0.2181, 0.0809], direction: [0, 0, 1], backend_index: 0}
+  - {id: V2, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.12, 0.2181, 0.0809], direction: [0, 0, 1], backend_index: 1}
+  - {id: V3, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [-0.12, 0.2181, 0.0809], direction: [0, 0, 1], backend_index: 2}
+  - {id: V4, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [-0.12, -0.2181, 0.0809], direction: [0, 0, 1], backend_index: 3}
+  - {id: H1, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.1562, -0.0988, 0.0], direction: [0.7071067811865476, 0.7071067811865476, 0.0], backend_index: 4}
+  - {id: H2, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.1562, 0.0988, 0.0], direction: [0.7071067811865476, -0.7071067811865476, 0.0], backend_index: 5}
+  - {id: H3, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [-0.1562, 0.0988, 0.0], direction: [0.7071067811865476, 0.7071067811865476, 0.0], backend_index: 6}
+  - {id: H4, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [-0.1562, -0.0988, 0.0], direction: [0.7071067811865476, -0.7071067811865476, 0.0], backend_index: 7}
+actuation:
+  action_mode: thrusters
+  allocation: {method: redistributed}
+  backend: {mapping: direct, native_clamp_N: 28.75, agent_type: BlueROV2}
+components:
+  - {profile: package:components/bluerobotics_navigator.yaml}
+  - {profile: package:components/raspberry_pi_4b.yaml, initial_state: VIDEO}
+  - {profile: package:components/bluerobotics_lowlight_usb_camera.yaml}
+  - {profile: package:components/bluerobotics_lumen.yaml, name: light_1}
+  - {profile: package:components/bluerobotics_lumen.yaml, name: light_2}
+  - name: tether_interface
+    device: bluerobotics_fathom_x_tether_interface
+    category: auxiliaries
+    status: unconfigured
+    states: {ACTIVE: {evidence: bluerobotics_fathom_x.power}}
+  - name: esc_standby
+    device: bluerobotics_basic_esc
+    category: auxiliaries
+    status: unconfigured
+    states: {ACTIVE: {evidence: bluerobotics_t200.esc_idle_power}}
+hotel_load: {constant_W: 0}
+converters:
+  propulsion_efficiency: 1.0
+  payload_efficiency: 1.0
+  hotel_efficiency: 1.0
+  metadata:
+    evidence: {payload_efficiency: bluerov2.bec_5v_efficiency}
+    notes: T200 data already include ESC losses; 5 V supply losses are an unconfigured gap.
+evidence:
+  propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: exact}
+  battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: exact}
+  geometry: {record: holoocean_bluerov2.actuator_geometry, relation: exact}
+  vehicle_relation: representative
+power_manager: {apply_derating_to_actions: true}
+metadata:
+  profile_id: bluerov2-heavy
+  profile_version: 0.2.0
+  status: simulator-exact actuation, manufacturer electrical data, placeholder battery maps

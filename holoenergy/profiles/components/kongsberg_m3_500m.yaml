@@ -1,0 +1,7 @@
+name: multibeam_sonar
+device: kongsberg_m3_500m
+category: sensors
+simulation_sensor: ImagingSonar
+states:
+  ACTIVE: {evidence: kongsberg_m3_500m.power_average}
+initial_state: ACTIVE

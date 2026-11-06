@@ -1,0 +1,9 @@
+# Emitter + receiver units; TX is the derived sum of both published unit figures.
+name: sonardyne_bluecomm200
+medium: optical
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: sonardyne_bluecomm200.tx_node}
+  RX: {evidence: sonardyne_bluecomm200.receiver_unit}
+  LISTEN: {evidence: sonardyne_bluecomm200.receiver_unit}

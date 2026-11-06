@@ -67,6 +67,11 @@ class ModemPowerProfile:
     @classmethod
     def from_mapping(cls, data, registry=None):
         """Mapping with ``states: {TX: {evidence: id} | number | null, ...}``."""
+        from ..evidence import RELATION_MAX_GRADE, cap_grade
+
+        relation = data.get("relation", "exact")
+        if relation not in RELATION_MAX_GRADE:
+            raise ConfigurationError(f"Unknown modem profile relation {relation}")
         states = data.get("states", {})
         powers, evidence, grades = {}, {}, {}
         for state, value in states.items():
@@ -77,15 +82,16 @@ class ModemPowerProfile:
                     registry = default_registry()
                 record = registry.get(value["evidence"])
                 evidence[state] = record.id
-                grades[state] = record.grade
+                grades[state] = cap_grade(record.grade, relation) if record.configured else "D"
+                use = value.get("use", "value")
+                if use not in ("value", "value_min", "value_max"):
+                    raise ConfigurationError(f"{record.id}: use must be value/value_min/value_max")
                 if not record.configured:
                     powers[state] = None
-                elif record.value is not None:
-                    powers[state] = record.si()
-                elif value.get("use") == "upper_bound" and record.value_max is not None:
-                    powers[state] = record.si("value_max")
+                elif getattr(record, use) is not None:
+                    powers[state] = record.si(use)
                 else:
-                    raise ConfigurationError(f"{record.id}: no point value; state 'use' required")
+                    raise ConfigurationError(f"{record.id}: no {use}; set 'use' explicitly")
             else:
                 powers[state] = value
                 grades[state] = "D"

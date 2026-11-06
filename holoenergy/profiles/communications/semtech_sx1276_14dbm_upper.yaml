@@ -1,0 +1,11 @@
+# Chip-level proxy for the holo_desert 868 MHz / 125 kHz / 14 dBm EM PHY; excludes MCU and
+# any external PA. TX uses the upper end of the +13..+17 dBm bracket (14 dBm not tabulated).
+name: semtech_sx1276_14dbm_upper
+medium: em
+relation: proxy
+idle_state: LISTEN
+states:
+  TX: {evidence: semtech_sx1276.tx_14dbm_interval, use: value_max}
+  RX: {evidence: semtech_sx1276.rx_lora_125khz}
+  LISTEN: {evidence: semtech_sx1276.rx_lora_125khz}
+  SLEEP: {evidence: semtech_sx1276.sleep}

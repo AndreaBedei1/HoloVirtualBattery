@@ -1,0 +1,8 @@
+# No published power: cannot be included in the energy bus until the user supplies it.
+name: sidescan_sonar
+device: edgetech_2205
+category: sensors
+simulation_sensor: SidescanSonar
+status: unconfigured
+states:
+  ACTIVE: {evidence: edgetech_2205.power}

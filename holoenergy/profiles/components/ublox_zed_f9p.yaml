@@ -1,0 +1,10 @@
+# Surface-only GNSS: keep SLEEP (backup) while submerged unless the mission says otherwise.
+name: gnss
+device: ublox_zed_f9p
+category: sensors
+simulation_sensor: GPSSensor
+states:
+  STARTING: {evidence: ublox_zed_f9p.power_acquisition}
+  ACTIVE: {evidence: ublox_zed_f9p.power_tracking_gps}
+  SLEEP: {evidence: ublox_zed_f9p.power_backup}
+initial_state: SLEEP

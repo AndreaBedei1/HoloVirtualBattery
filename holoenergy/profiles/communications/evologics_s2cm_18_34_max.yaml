@@ -1,0 +1,9 @@
+name: evologics_s2cm_18_34_max
+medium: acoustic
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: evologics_s2cm_18_34.tx_max}
+  RX: {evidence: evologics_s2cm_18_34.rx}
+  LISTEN: {evidence: evologics_s2cm_18_34.rx}
+  SLEEP: {evidence: evologics_s2cm_18_34.standby}

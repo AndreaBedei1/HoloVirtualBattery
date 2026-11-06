@@ -1,0 +1,8 @@
+# Power-on surge (35 W max) has no published duration: STARTING is not configured.
+name: dvl
+device: waterlinked_dvl_a50
+category: sensors
+simulation_sensor: DVLSensor
+states:
+  ACTIVE: {evidence: waterlinked_dvl_a50.power_average}
+initial_state: ACTIVE

@@ -22,14 +22,44 @@ from .models.vehicle import VehicleProfile, vector3
 class EnergyAwareEnv:
     def __init__(
         self,
-        env,
+        env=None,
         config_path=None,
         *,
         config=None,
+        vehicle_profile=None,
+        battery_profile=None,
+        components=None,
+        overrides=None,
+        holoocean_env=None,
         control_contract=None,
         dynamics_adapter=None,
         telemetry=None,
     ):
+        """Wrap a direct-actuator backend with energy, battery and power-limit coupling.
+
+        Configuration comes from exactly one of ``config_path``, ``config`` or a named
+        ``vehicle_profile`` (see :func:`holoenergy.catalog.list_profiles`), optionally with
+        ``battery_profile``, extra ``components`` and ``overrides``.
+        """
+        if holoocean_env is not None:
+            if env is not None:
+                raise ConfigurationError("Pass env or holoocean_env, not both")
+            env = holoocean_env
+        if env is None:
+            raise ConfigurationError("An environment/backend instance is required")
+        if vehicle_profile is not None:
+            if config_path is not None or config is not None:
+                raise ConfigurationError("Use vehicle_profile or config/config_path, not both")
+            from .catalog import vehicle_config
+
+            config = vehicle_config(
+                vehicle_profile,
+                battery_profile=battery_profile,
+                components=components,
+                overrides=overrides,
+            )
+        elif battery_profile is not None or components is not None or overrides is not None:
+            raise ConfigurationError("battery_profile/components/overrides need vehicle_profile")
         self.env = env
         self.config = load_config(config_path, data=config)
         self.dt_s = self.config["simulation"]["dt_s"]
@@ -77,6 +107,10 @@ class EnergyAwareEnv:
         initial_environment = self.config.get("environment", {})
         self.set_environment(**{k: v for k, v in initial_environment.items() if k != "metadata"})
         self.warnings = model_warnings(self.config)
+        from .evidence.runtime import EvidenceMap
+
+        self.evidence_map = EvidenceMap(self.config, self.payload, self.propulsion)
+        self.warnings.extend(self.evidence_map.warnings())
         if self.dynamics_status == "descriptive_only_not_applied":
             self.warnings.append(
                 "Vehicle/payload physical parameters are descriptive; dynamics backend must configure them"
@@ -224,6 +258,9 @@ class EnergyAwareEnv:
         if any(s is source for s in self.load_sources):
             raise ConfigurationError("Load source already attached")
         self.load_sources.append(source)
+        grades = getattr(source, "grades", None)
+        if callable(grades):
+            self.evidence_map.add_external(grades())
         return source
 
     def _external_loads(self, dt):

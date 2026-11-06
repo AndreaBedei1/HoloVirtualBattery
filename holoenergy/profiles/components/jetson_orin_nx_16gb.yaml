@@ -1,0 +1,11 @@
+# NVIDIA Jetson Orin NX 16GB. AI_INFERENCE = measured YOLOv8s FP16 TensorRT (Rey et al. 2025);
+# other inference networks (e.g. semantic segmentation) are a representative workload only.
+name: ai_computer
+device: jetson_orin_nx_16gb
+category: compute
+relation: representative
+status: configured
+states:
+  AI_INFERENCE: {evidence: jetson_orin_nx_16gb.yolov8s_fp16}
+initial_state: AI_INFERENCE
+notes: Idle power is not published (unconfigured); budgets 10/15/25 W are caps, not consumption.

@@ -1,0 +1,10 @@
+name: benthos_atm900_level8
+medium: acoustic
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: benthos_atm900.tx_level8}
+  RX: {evidence: benthos_atm900.rx}
+  LISTEN: {evidence: benthos_atm900.rx}
+  SLEEP: {evidence: benthos_atm900.lowpower}
+notes: LISTEN assumes the receiver is active (lowpower mode requires an explicit wake-up policy).

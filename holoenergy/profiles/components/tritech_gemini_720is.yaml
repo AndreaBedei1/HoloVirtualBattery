@@ -1,0 +1,9 @@
+# Range dependent 16-27 W: ACTIVE uses the published upper end (conservative, labelled).
+name: imaging_sonar
+device: tritech_gemini_720is
+category: sensors
+simulation_sensor: ImagingSonar
+active_is_upper_bound: true
+states:
+  ACTIVE: {evidence: tritech_gemini_720is.power_range, use: value_max}
+initial_state: ACTIVE

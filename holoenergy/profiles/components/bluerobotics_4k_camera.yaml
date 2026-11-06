@@ -1,0 +1,8 @@
+name: camera_4k
+device: bluerobotics_4k_camera
+category: sensors
+simulation_sensor: RGBCamera
+active_is_upper_bound: true
+states:
+  ACTIVE: {evidence: bluerobotics_4k_camera.power_max}
+initial_state: ACTIVE

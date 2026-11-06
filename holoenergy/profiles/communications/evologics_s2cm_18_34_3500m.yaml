@@ -1,0 +1,13 @@
+# EvoLogics S2C M 18/34 (18-34 kHz band) at its published 3500m transmit setting.
+# Representative electrical profile for the holo_desert 25 kHz acoustic PHY; the DESERT
+# source level (dB re 1 uPa) is NOT mapped to this setting (no published relation).
+name: evologics_s2cm_18_34_3500m
+medium: acoustic
+relation: representative
+idle_state: LISTEN
+states:
+  TX: {evidence: evologics_s2cm_18_34.tx_3500m}
+  RX: {evidence: evologics_s2cm_18_34.rx}
+  LISTEN: {evidence: evologics_s2cm_18_34.rx}
+  SLEEP: {evidence: evologics_s2cm_18_34.standby}
+notes: LISTEN uses receive-mode power (no wake-up module); 0.8 W is a published upper bound.

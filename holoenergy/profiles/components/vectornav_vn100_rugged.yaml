@@ -1,0 +1,9 @@
+# Do not combine with a Navigator or SPRINT-Nav profile that already includes an IMU.
+name: imu_ahrs
+device: vectornav_vn100_rugged
+category: sensors
+simulation_sensor: IMUSensor
+includes: [imu, magnetometer]
+states:
+  ACTIVE: {evidence: vectornav_vn100_rugged.power}
+initial_state: ACTIVE

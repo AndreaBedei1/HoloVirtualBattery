@@ -37,6 +37,8 @@ class EnergyRuntime:
         self.duration_s = 0.0
         self.history = deque()
         self.latest = None
+        self.peak_current_A = None
+        self.minimum_voltage_V = None
 
     def set_component_state(self, name, state):
         self.owner.payload.set_state(name, state)
@@ -82,6 +84,15 @@ class EnergyRuntime:
         phase["terminal_energy_Wh"] += row["power_total_W"] * dt / 3600
         phase["battery_losses_Wh"] += row["power_battery_loss_W"] * dt / 3600
         self.duration_s += dt
+        peak, vmin = row.get("peak_current_A"), row.get("minimum_voltage_V")
+        if peak is not None:
+            self.peak_current_A = (
+                peak if self.peak_current_A is None else max(self.peak_current_A, peak)
+            )
+        if vmin is not None:
+            self.minimum_voltage_V = (
+                vmin if self.minimum_voltage_V is None else min(self.minimum_voltage_V, vmin)
+            )
         self.history.append((row["time_s"], dt, row["power_total_W"]))
         # Retain a bounded time window for optional rolling endurance, independent of UI.
         while self.history and self.history[0][0] <= row["time_s"] - 60:
@@ -94,6 +105,27 @@ class EnergyRuntime:
             phase_energy_Wh=copy.deepcopy(self.phases),
         )
         self.latest = row
+
+    # -- convenience API -------------------------------------------------------------
+    @property
+    def power_w(self):
+        """Battery terminal power of the last tick (W), or None before the first step."""
+        return None if self.latest is None else self.latest["power_total_W"]
+
+    @property
+    def energy_wh(self):
+        """Cumulative terminal energy (Wh) of the current episode."""
+        return sum(v for k, v in self.categories.items() if k != "battery_losses")
+
+    @property
+    def energy_by_category_wh(self):
+        return dict(self.categories)
+
+    def report(self, **kwargs):
+        """Provenance-aware :class:`holoenergy.report.EnergyReport` of the current episode."""
+        from .report import EnergyReport
+
+        return EnergyReport.from_runtime(self, **kwargs)
 
     def endurance(self, window_s=60):
         window = number(window_s, "rolling endurance window_s", positive=True, maximum=60)
@@ -137,6 +169,9 @@ class EnergyRuntime:
             "device_state_energy_Wh": copy.deepcopy(self.device_states),
             "phases": copy.deepcopy(self.phases),
             "endurance_estimates": self.endurance(),
+            "evidence": self.owner.evidence_map.summarize(self.device_states, self.categories)
+            if getattr(self.owner, "evidence_map", None) is not None
+            else None,
             "evidence_kind": "configured simulation; physical validation not implied",
         }
 
