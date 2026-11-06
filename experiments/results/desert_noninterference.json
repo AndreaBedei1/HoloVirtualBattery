@@ -1,0 +1,104 @@
+{
+  "mode": "scripted",
+  "scenario": "e01_chat",
+  "messages": 6,
+  "identical": {
+    "backend_log": true,
+    "events": true,
+    "deliveries": true,
+    "summary": true
+  },
+  "verdict": "PASS",
+  "observed_energy": {
+    "observed_events": 1038,
+    "event_counts": {
+      "position_applied": 1020,
+      "phy_tx_start": 6,
+      "phy_rx_start": 6,
+      "rx": 6
+    },
+    "rx_outcomes": {
+      "acoustic:synchronized": 6
+    },
+    "unmapped_interfaces": {},
+    "generated_messages": 0,
+    "deliveries": 0,
+    "delivery_ratio": null,
+    "mean_latency_s": null,
+    "delivered_bytes": 0,
+    "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+    "forwards": {},
+    "retransmissions": null,
+    "retransmissions_basis": null,
+    "communication_energy_Wh": 0.008880555555555555,
+    "energy_per_delivered_byte_J": null,
+    "energy_per_delivered_message_J": null,
+    "scope": "all observed nodes",
+    "interfaces": {
+      "comms.auv_01/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 1.2050000000000003,
+          "RX": 1.2066666666666654,
+          "LISTEN": 14.555
+        },
+        "state_energy_Wh": {
+          "TX": 0.0009372222222222224,
+          "RX": 0.0002681481481481479,
+          "LISTEN": 0.0032344444444444443
+        },
+        "energy_Wh": 0.004439814814814815,
+        "tx_frames": 3,
+        "tx_bits": 5784,
+        "rx_frames": 3,
+        "rx_bits": 0,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      },
+      "comms.auv_02/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 1.2066666666666657,
+          "RX": 1.0533333333333332,
+          "LISTEN": 14.706666666666667
+        },
+        "state_energy_Wh": {
+          "TX": 0.0009385185185185177,
+          "RX": 0.00023407407407407407,
+          "LISTEN": 0.0032681481481481485
+        },
+        "energy_Wh": 0.00444074074074074,
+        "tx_frames": 3,
+        "tx_bits": 5792,
+        "rx_frames": 3,
+        "rx_bits": 0,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      }
+    },
+    "last_stats": {}
+  },
+  "scope": "scripted backend: verifies the observation seam only"
+}

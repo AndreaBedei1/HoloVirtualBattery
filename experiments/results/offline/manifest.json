@@ -1,0 +1,41 @@
+{
+  "holoenergy_version": "0.1.0",
+  "git": {
+    "commit": "dfe7546b0d3f45116654f62be4cca885cc08389a",
+    "dirty": true,
+    "working_tree_status": "M holoenergy/integrations/desert.py\n M holoenergy/models/components.py\n?? experiments/results/\n?? experiments/run_offline_campaign.py\n?? holoenergy/sensor_policy.py\n?? tools/check_desert_noninterference.py"
+  },
+  "evidence_registry_version": "0.2.0-dev",
+  "numpy": "2.5.4",
+  "inputs": {
+    "mission_0.2.trace.jsonl.gz": "9e7cc4b4d96d799c23cfe2ffdea3693dd4c3349fa7cdc3a6d881ff9307c100de",
+    "mission_0.4.trace.jsonl.gz": "5c3c5c0da5646fffd021ee8a0556529bee64e12657601d4020f81d70986d6261",
+    "mission_0.trace.jsonl.gz": "c02c1e61b5e1a5be9efb6d598524d4268f133a30274d79998a40c0c7739799f2",
+    "payload_base.trace.jsonl.gz": "96f1d453ab482a8615a141b394748ef66f78d3d005a848b598f34fe59fc9f700",
+    "payload_battery_half_capacity.trace.jsonl.gz": "0002db64bb182e41c165a4a3db4110091603bd4879135044af228fcf787bd997",
+    "payload_electrical_18W.trace.jsonl.gz": "add521810d5d57207b5b65bf8b1f34b6002d2ab436652592c1e39ad5b4ed2709",
+    "payload_physical_declared.trace.jsonl.gz": "0f4ea8771b1011426f96429478efc32cc59fafce8954fb1f4b339d27ef712f06",
+    "station_0.2.trace.jsonl.gz": "cca727eeab34b3982a639320aea34943c19fea05f4439825473e444a3b151a26",
+    "station_0.5.trace.jsonl.gz": "3785f5e57b25c96bc98801e79898b6acb0b8b40197ca346d2e3dfdd69bf8910c",
+    "station_0.8.trace.jsonl.gz": "e71c402a416eab8fabeee718924420184df7b168ad1d53d69acb4c1be10829ed",
+    "station_0.trace.jsonl.gz": "2e41083634e0bd3709c4ca38df30bfba22f3bab5dadb6bcf35c6be6c02a9b7ee",
+    "water_15C.trace.jsonl.gz": "9d5b5b5a28f17f5508ef7a66694f6379b8b11255d2859fefcb182596f114de05",
+    "water_25C.trace.jsonl.gz": "e135e6b2f5ce1f100f6898874afd5bddc27c3e5f40d30ef5be16d6d902547f87",
+    "water_5C.trace.jsonl.gz": "3c9f19b4e7f3942a50992ff0943f75ff1418d545491b22112e378784985e0062"
+  },
+  "backend": "HoloOcean 2.3.0 drag-patched build, 100 Hz closed loop (archived); decimated to 0.1 s in the archive",
+  "simulator_launched": false,
+  "random_seed": null,
+  "deterministic": true,
+  "outputs": [
+    "E0_replay_fidelity.csv",
+    "E1_layouts.csv",
+    "E1b_directional.csv",
+    "E2_payload_suites.csv",
+    "E3_environment.csv",
+    "E4_backend_consistency.csv",
+    "E4_external_drag.csv",
+    "E5_ablations.csv",
+    "E5_baselines.csv"
+  ]
+}
