@@ -77,7 +77,11 @@ class DesertEnergyAdapter(CommunicationEnergyAdapter):
             for k, v in interfaces.items()
         }
         self.node = node
-        self.node_map = {int(k): v for k, v in (node_map or {}).items()}
+        # Accept Scenario.node_map ({name: number}) or its inverse ({number: name}).
+        mapping = dict(node_map or {})
+        if mapping and all(isinstance(v, int) for v in mapping.values()):
+            mapping = {v: k for k, v in mapping.items()}
+        self.node_map = {int(k): str(v) for k, v in mapping.items()}
         self.rx_outcomes = frozenset(rx_outcomes)
         self.include_control = bool(include_control)
         self.start_time_s = start_time_s

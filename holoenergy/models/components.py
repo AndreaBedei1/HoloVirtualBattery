@@ -107,6 +107,13 @@ class ElectricalComponent(PayloadComponent):
             if "ACTIVE" in self.state_powers:
                 raise ConfigurationError("Supply active_W or states.ACTIVE, not both")
             self.state_powers["ACTIVE"] = number(config["active_W"], "active_W", minimum=0)
+        from ..sensor_policy import check_component_mapping
+
+        check_component_mapping(
+            name,
+            config.get("simulation_sensor"),
+            any(v > 0 for v in self.state_powers.values()) or "power_model" in config,
+        )
         # Derived OFF is physical rail gating, explicitly documented, not standby.
         self.state_powers.setdefault("OFF", 0.0)
         self.state_grades.setdefault("OFF", "A")

@@ -20,6 +20,7 @@ dependencies = [
 dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1,<2", "openpyxl>=3.1,<4"]
 
 [project.scripts]
+holoenergy = "holoenergy.cli:main"
 holoenergy-study = "holoenergy.analysis.cli:main"
 holoenergy-dashboard = "holoenergy.dashboard.server:main"
 
