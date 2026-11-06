@@ -11,7 +11,10 @@ license = "MIT"
 license-files = ["LICENSE", "NOTICE"]
 authors = [{name = "Andrea Bedei"}]
 requires-python = ">=3.10"
-dependencies = ["PyYAML>=6.0,<7"]
+dependencies = [
+    "numpy>=1.24",
+    "PyYAML>=6.0,<7",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1,<2", "openpyxl>=3.1,<4"]
@@ -27,7 +30,7 @@ Repository = "https://github.com/AndreaBedei1/HoloVirtualBattery"
 include = ["holoenergy*"]
 
 [tool.setuptools.package-data]
-holoenergy = ["profiles/*.json", "profiles/**/*.yaml", "profiles/**/*.json", "dashboard/*.html"]
+holoenergy = ["profiles/*.json", "profiles/*.yaml", "profiles/**/*.yaml", "profiles/**/*.json", "dashboard/*.html", "evidence/data/*.yaml", "evidence/data/**/*.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
