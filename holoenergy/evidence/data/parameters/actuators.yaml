@@ -1,0 +1,120 @@
+# Actuator electrical evidence and simulator actuator constants.
+parameters:
+  - id: bluerobotics_t200.static_force_power_curve
+    component: bluerobotics_t200
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    dataset:
+      path: profiles/thrusters/bluerobotics_t200.json
+      description: >-
+        Forward/reverse command, force (kgf -> N) and published electrical power at
+        10, 12, 14, 16, 18 and 20 V, processed by tools/import_t200.py (cumulative-max
+        envelope removes nine monotonicity inversions; 14 V / 1548 us power anomaly retained).
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [S6]
+    location: {sheet: "10 V ... 20 V", note: "columns PWM (us), Force (Kg f), Power (W)"}
+    conditions:
+      characterization: static/bollard (zero advance speed)
+      medium: manufacturer test tank (water type not stated)
+      esc: Blue Robotics Basic ESC (as used in the published test)
+    notes: >-
+      Published power is electrical drive input: ESC losses are included; do not add a
+      separate ESC efficiency. Valid only at zero advance speed.
+  - id: bluerobotics_t200.voltage_domain
+    component: bluerobotics_t200
+    quantity: supply_voltage
+    unit: V
+    value_min: 10
+    value_max: 20
+    bound: range
+    relation: exact
+    grade: A
+    sources: [S6]
+    location: {sheet: "10 V ... 20 V"}
+    notes: Thrust/power outside 10-20 V are not extrapolated (runtime error).
+  - id: bluerobotics_t200.inflow_model
+    component: bluerobotics_t200
+    quantity: advance_ratio_dependent_thrust_power
+    unit: null
+    value: null
+    relation: unsupported
+    grade: D
+    notes: >-
+      No published T200 thrust/power data at non-zero advance speed were identified
+      (see docs/EVIDENCE_GAPS.md). Only the static/bollard mode is available.
+  - id: bluerobotics_t200.esc_idle_power
+    component: bluerobotics_t200
+    quantity: electrical_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Basic ESC standby consumption at zero command is not published.
+
+  # --- HoloOcean 2.3.0 agents (simulator-exact constants; not physical vehicle data) ---
+  - id: holoocean_bluerov2.thruster_clamp
+    component: holoocean_bluerov2
+    quantity: max_thrust_per_actuator
+    unit: N
+    value: 28.75
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/BlueROV2.h", line: "BR_MAX_THRUST = BR_MAX_LIN_ACCEL * 11.5 / 4"}
+    notes: Simulator clamp applied in ABlueROV2::ApplyThrusters; lower than T200 capability.
+  - id: holoocean_bluerov2.actuator_geometry
+    component: holoocean_bluerov2
+    quantity: actuator_geometry
+    unit: null
+    dataset: {path: profiles/holoocean/agents_2.3.0.json, description: "agents.BlueROV2.actuators"}
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/BlueROV2.h thrusterLocations; Agents/Private/BlueROV2.cpp ApplyThrusters"}
+    notes: >-
+      Exact for the simulated agent. Relation to a physical BlueROV2 Heavy is
+      representative only (no measured geometry of a physical vehicle is used).
+  - id: holoocean_hoveringauv.thruster_clamp
+    component: holoocean_hoveringauv
+    quantity: max_thrust_per_actuator
+    unit: N
+    value: 77.55
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/HoveringAUV.h", line: "AUV_MAX_THRUST = AUV_MAX_LIN_ACCEL * 31.02 / 4"}
+  - id: holoocean_hoveringauv.actuator_geometry
+    component: holoocean_hoveringauv
+    quantity: actuator_geometry
+    unit: null
+    dataset: {path: profiles/holoocean/agents_2.3.0.json, description: "agents.HoveringAUV.actuators"}
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/HoveringAUV.h thrusterLocations; Agents/Private/HoveringAUV.cpp"}
+  - id: holoocean_surfacevessel.thruster_clamp
+    component: holoocean_surfacevessel
+    quantity: max_thrust_per_actuator
+    unit: N
+    value: 1500
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/SurfaceVessel.h", line: "SV_MAX_THRUST = 1500"}
+  - id: holoocean_torpedoauv.thruster_clamp
+    component: holoocean_torpedoauv
+    quantity: max_thrust_per_actuator
+    unit: N
+    value: 100
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/TorpedoAUV.h", line: "TAUV_MAX_THRUST = 100"}

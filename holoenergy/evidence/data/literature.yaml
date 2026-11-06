@@ -1,0 +1,2023 @@
+registry: HoloEnergy literature registry
+generated: '2026-11-06'
+generator: tools/build_literature_registry.py
+workbook:
+  file: HoloEnergy_literature_and_hardware_database.xlsx
+  sha256: 5851eeda0fc291dfd611264d64d76897c5d52ec13beddacba2de02e9327ddc14
+pdf_directory_name: paper
+matching:
+  order:
+  - doi on first two pages
+  - exact normalised title
+  - fuzzy filename/title
+  fuzzy_threshold: 0.8
+policy: Workbook values are an initial evidence map, not verified evidence; verified parameters live in
+  parameters/*.yaml with exact source locations. PDFs are not redistributed; only names and hashes are
+  recorded.
+entries:
+- paper_id: P001
+  kind: paper
+  title: Propeller Characterization Testing of a Blue Robotics T200 Thruster
+  authors:
+  - Jessica Lam
+  - Audrey Chen
+  - Andrew Bennett
+  - Michael Triantafyllou
+  year: 2023
+  doi: 10.1109/oceanslimerick52467.2023.10244513
+  source_type: conference_paper
+  publication_type_workbook: Proceedings / journal-indexed
+  publisher_url: https://doi.org/10.1109/oceanslimerick52467.2023.10244513
+  open_access_url: null
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: Blue Robotics T200
+  evidence_type: Tank + bollard experimental
+  why_useful: Direct thrust, current, voltage, input power and non-bollard propeller performance; core
+    source for F→P mapping
+  workbook_confidence: A
+  workbook_citations: 6
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P002
+  kind: paper
+  title: Numerical modelling and experimental testing of the hydrodynamic characteristics for an open-frame
+    remotely operated vehicle
+  authors:
+  - Qian Li
+  - Yu Cao
+  - Boyang Li
+  - David Ingram
+  - Aristides Kiprakis
+  year: 2020
+  doi: 10.3390/jmse8090688
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/jmse8090688
+  open_access_url: https://www.mdpi.com/2077-1312/8/9/688/pdf
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: BlueROV2 / open-frame ROV
+  evidence_type: CFD + experimental validation
+  why_useful: Hydrodynamic forces, moments and coefficients useful for drag/environment validation
+  workbook_confidence: A
+  workbook_citations: 24
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P003
+  kind: paper
+  title: Experimental Force Data of a Restrained ROV under Waves and Current
+  authors:
+  - Roman Gabl
+  - Thomas Davey
+  - Yu Cao
+  - Qian Li
+  - Boyang Li
+  - Kyle L. Walker
+  - Francesco Giorgio-Serchi
+  - Simona Aracri
+  - Aristides Kiprakis
+  - Adam A. Stokes
+  - David Ingram
+  year: 2020
+  doi: 10.3390/data5030057
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/data5030057
+  open_access_url: https://www.mdpi.com/2306-5729/5/3/57/pdf
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: BlueROV2
+  evidence_type: Experimental dataset
+  why_useful: Measured 3-axis forces under waves/current; excellent environmental-load validation source
+  workbook_confidence: A
+  workbook_citations: 32
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P004
+  kind: paper
+  title: 'An Open-Source Benchmark Simulator: Control of a BlueROV2 Underwater Robot'
+  authors:
+  - Malte von Benzon
+  - Fredrik Fogh Sørensen
+  - Esben Uth
+  - Jerome Jouffroy
+  - Jesper Liniger
+  - Simon Pedersen
+  year: 2022
+  doi: 10.3390/jmse10121898
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/jmse10121898
+  open_access_url: https://www.mdpi.com/2077-1312/10/12/1898/pdf
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: BlueROV2 Heavy, 8 T200
+  evidence_type: Model + experimental parameter validation
+  why_useful: Reference dynamics, Heavy thruster geometry and experimentally supported hydrodynamic/thruster
+    model
+  workbook_confidence: A
+  workbook_citations: 54
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P005
+  kind: paper
+  title: Mathematical Modeling and Simulation of a Hybrid Additive–Subtractive ROV with Experimental Validation
+    for Reef Exploration
+  authors:
+  - Miguel Fernando Delgado-Pamanes
+  - Bruno Yael Silva-Morales
+  - Luis Arturo Reyes Osorio
+  - Octavio García Salazar
+  - Marisol Vázquez-Tzompantzi
+  - Aldo Jonathan Muñoz-Vázquez
+  year: 2026
+  doi: 10.3390/math14101723
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/math14101723
+  open_access_url: null
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: Open-frame ROV, 4 T200
+  evidence_type: Bollard experiment + CFD/simulation
+  why_useful: Useful 4-thruster T200 profile; experimental thrust law and current/power information
+  workbook_confidence: A
+  workbook_citations: 1
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P006
+  kind: paper
+  title: Modifications to ArduSub That Improve BlueROV SITL Accuracy and Design of Hybrid Autopilot
+  authors:
+  - Patrick Ng
+  - Michael Krieg
+  year: 2024
+  doi: 10.3390/app14177453
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/app14177453
+  open_access_url: null
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: BlueROV2 Heavy
+  evidence_type: Real testing + simulation
+  why_useful: Real-world-derived BlueROV2 parameters and SITL validation; supports realistic dynamics
+    mapping
+  workbook_confidence: A
+  workbook_citations: 5
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P007
+  kind: paper
+  title: Uncertainty-Aware Adaptive Dynamics For Underwater Vehicle-Manipulator Robots
+  authors:
+  - Edward Morgan
+  - N. K. Dadson
+  - Corina Barbalata
+  year: 2026
+  doi: 10.48550/arxiv.2603.06548
+  source_type: journal_article
+  publication_type_workbook: Preprint / article
+  publisher_url: https://doi.org/10.48550/arxiv.2603.06548
+  open_access_url: null
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: BlueROV2 Heavy + manipulator
+  evidence_type: Experimental adaptive identification
+  why_useful: Useful for parameter uncertainty and evidence-aware dynamics rather than fixed coefficients
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P008
+  kind: paper
+  title: Energy-optimal linear quadratic tracking control for unmanned underwater vehicles in offshore
+    aquaculture fish net-pen visual inspection
+  authors:
+  - Loulin Huang
+  - Mark Anthony Preece
+  year: 2026
+  doi: 10.1177/02783649261453998
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1177/02783649261453998
+  open_access_url: null
+  topic: bluerov_t200
+  category_workbook: BlueROV/T200
+  vehicle_or_component: UUV / aquaculture inspection
+  evidence_type: Model/simulation
+  why_useful: Energy-optimal control formulation and mission-level energy objective
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P009
+  kind: paper
+  title: Comparative performance investigations of the intervention-class underwater vehicle with different
+    possible thruster configurations using eight identical thrusters
+  authors:
+  - A. S.
+  - Jagadeesh Kadiyam
+  - Santhakumar Mohan
+  year: 2023
+  doi: 10.1016/j.oceaneng.2023.116147
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1016/j.oceaneng.2023.116147
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: 8-thruster intervention ROV
+  evidence_type: Numerical simulation
+  why_useful: Direct comparison of layouts; reported ~30% and ~23% energy differences in tested cases
+  workbook_confidence: A
+  workbook_citations: 9
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P010
+  kind: paper
+  title: Design and Optimization of an Eight-Thruster Control System for a Ship-Hull Inspection ROV
+  authors:
+  - Chiheb Zaoui
+  - Tarek Azzabi
+  - Saber Hachicha
+  - Youssef Ben Gaied Hassine
+  - Habib Dallagi
+  year: 2026
+  doi: 10.1109/ic_aset69920.2026.11502459
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/ic_aset69920.2026.11502459
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: 8-thruster ROV
+  evidence_type: Simulation/optimization
+  why_useful: Eight-thruster geometry and energy-oriented design/control
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P011
+  kind: paper
+  title: Power Distribution in Multi-thruster Propulsion System of Undersea Robotic Vehicle
+  authors:
+  - Jerzy Garus
+  - Bogdan Zak
+  year: 2009
+  doi: 10.3182/20090819-3-pl-3002.00033
+  source_type: conference_paper
+  publication_type_workbook: Article / Proceedings
+  publisher_url: https://doi.org/10.3182/20090819-3-pl-3002.00033
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: Multi-thruster underwater robot
+  evidence_type: Analytical + simulation
+  why_useful: Energy-aware thrust allocation / power distribution
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P012
+  kind: paper
+  title: Power Distribution in Propulsion System of Semiautonomous Underwater Vehicle
+  authors:
+  - Jerzy Garus
+  year: 2011
+  doi: 10.4028/www.scientific.net/ssp.180.125
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.4028/www.scientific.net/ssp.180.125
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: Multi-thruster underwater vehicle
+  evidence_type: Analytical/model
+  why_useful: Optimization of propulsion power distribution
+  workbook_confidence: B
+  workbook_citations: 7
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P013
+  kind: paper
+  title: The Basic Study of Underwater Robot Control for Over Actuated Systems
+  authors:
+  - Keon Seok Nam
+  - Dong Gu Lee
+  - Je Doo Ryu
+  - Kyoung Nam Ha
+  year: 2019
+  doi: null
+  source_type: journal_article
+  publication_type_workbook: Article
+  publisher_url: https://scispace.com/papers/the-basic-study-of-underwater-robot-control-for-over-1v9l4p5mef
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: Over-actuated ROV
+  evidence_type: Prototype + model
+  why_useful: Thruster allocation and efficiency rationale for redundant propulsion
+  workbook_confidence: B
+  workbook_citations: 4
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P014
+  kind: paper
+  title: The practical aspects of implementation of the thrust allocation procedure for a multi-propulsor
+    underwater robot
+  authors:
+  - Jerzy Garus
+  - Bogdan Żak
+  year: 2018
+  doi: 10.2478/phr-2018-0022
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.2478/phr-2018-0022
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: Multi-propulsor underwater robot
+  evidence_type: Implementation + tests
+  why_useful: Practical constrained thrust allocation
+  workbook_confidence: B
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: The_practical_aspects_of_implementation_of_the_thrust_allocation_procedure_for_a_multi-propulsor_und.pdf
+    local_pdf_sha256: 7a976bb52dfcfadfb8357f226d31dabbc1c0b56e09e839f14d6a027200118769
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P015
+  kind: paper
+  title: A Novel Thrust Allocation Method for Underwater Robots
+  authors:
+  - Xinhui Zheng et al.
+  year: 2022
+  doi: 10.1109/cyber55403.2022.9907540
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/cyber55403.2022.9907540
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: Underwater robot
+  evidence_type: Simulation
+  why_useful: Compares alternative thruster configurations and SQP allocation
+  workbook_confidence: B
+  workbook_citations: 3
+  local_copies:
+  - local_pdf: A_Novel_Thrust_Allocation_Method_for_Underwater_Robots.pdf
+    local_pdf_sha256: 5405bccbd7e91f2b23bdfe30b86455b19b258a8ceeaff10e0f65cc196ec5d1ea
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P016
+  kind: paper
+  title: Energy-efficient optimal thrust allocation for spherical underwater robot
+  authors:
+  - Bhuneshwar Prasad
+  - Alok Chandra Agrawal
+  - Vinothkumar Viswanathan
+  - Parikshit Yadav
+  - Rajesh Kumar
+  - Sanjib Kumar Panda
+  year: 2013
+  doi: 10.1109/isie.2013.6563834
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/isie.2013.6563834
+  open_access_url: null
+  topic: thruster_configuration
+  category_workbook: Thruster configurations
+  vehicle_or_component: Redundant spherical underwater robot
+  evidence_type: Simulation/optimization
+  why_useful: Explicit energy-minimizing thrust allocation
+  workbook_confidence: B
+  workbook_citations: 3
+  local_copies:
+  - local_pdf: Energy-efficient_optimal_thrust_allocation_for_spherical_underwater_robot.pdf
+    local_pdf_sha256: 5c7593dbb8fc114edc99fe574bc8f707e827a11cbc25a6cecf627341d0486b99
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P017
+  kind: paper
+  title: Optimizing the Power Budget of Hovering AUVs
+  authors:
+  - Nuno Cruz
+  year: 2019
+  doi: 10.1109/ut.2019.8734437
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/ut.2019.8734437
+  open_access_url: null
+  topic: hovering_auv
+  category_workbook: Hovering AUV
+  vehicle_or_component: MARES hovering AUV
+  evidence_type: Analytical + vehicle data
+  why_useful: Hotel-load vs propulsion tradeoff; reported optimal speed ~0.66 m/s in studied case
+  workbook_confidence: A
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: P-00Q-TAM.pdf
+    local_pdf_sha256: 1d3b772aa2e778d4d794c00fef9a1998fd8f9c89285d434de7920822e549e46d
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P018
+  kind: paper
+  title: 'Variable Buoyancy or Propeller-Based Systems for Hovering Capable Vehicles: An Energetic Comparison'
+  authors:
+  - João Falcão Carneiro
+  - João Bravo Pinto
+  - Fernando Gomes de Almeida
+  - Nuno Cruz
+  year: 2021
+  doi: 10.1109/joe.2020.3000703
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1109/joe.2020.3000703
+  open_access_url: null
+  topic: hovering_auv
+  category_workbook: Hovering AUV
+  vehicle_or_component: Hover-capable AUV
+  evidence_type: Analytical/simulation
+  why_useful: Energetic comparison of hover mechanisms
+  workbook_confidence: A
+  workbook_citations: 13
+  local_copies:
+  - local_pdf: Variable_Buoyancy_or_Propeller-Based_Systems_for_Hovering_Capable_Vehicles_An_Energetic_Comparison.pdf
+    local_pdf_sha256: 1ca49c64df836fdcde5532a01f158d5416792d89cd69ff75ca2780847ab663aa
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P019
+  kind: paper
+  title: 'AMOUR V: A Hovering Energy Efficient Underwater Robot Capable of Dynamic Payloads'
+  authors:
+  - Iuliu Vasilescu
+  - Carrick Detweiler
+  - Marek Doniec
+  - Daniel Gurdan
+  - Stefan Sosnowski
+  - Jan Stumpf
+  - Daniela Rus
+  year: 2010
+  doi: 10.1177/0278364909358275
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1177/0278364909358275
+  open_access_url: http://iuliu.com/pub/IJRR10draft%20Amour%20v%20a%20Hovering%20Energy%20Efficient%20Underwater%20Robot%20Capable%20of%20Dynamic%20Payloads.pdf
+  topic: hovering_auv
+  category_workbook: Hovering AUV
+  vehicle_or_component: AMOUR hovering AUV
+  evidence_type: Pool + ocean experiments
+  why_useful: Experimental energy-efficient hovering vehicle and payload design
+  workbook_confidence: A
+  workbook_citations: 95
+  local_copies:
+  - local_pdf: IJRR10draft Amour v a Hovering Energy Efficient Underwater Robot Capable of Dynamic Payloads.pdf
+    local_pdf_sha256: f9f6698f8d22887db9178b3aea5d730cb17abb977036f76892ead5f238437e90
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P020
+  kind: paper
+  title: Low-cost energy measurement and estimation for autonomous underwater vehicles
+  authors:
+  - Valerio De Carolis
+  - David M. Lane
+  - Keith Brown
+  year: 2014
+  doi: 10.1109/oceans-taipei.2014.6964490
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceans-taipei.2014.6964490
+  open_access_url: http://osl.eps.hw.ac.uk/files/uploads/publications/OCEANS14_final.pdf
+  topic: hovering_auv
+  category_workbook: Hovering AUV
+  vehicle_or_component: Nessie VII AUV
+  evidence_type: Simulation + experimental vehicle measurements
+  why_useful: Direct energy measurement/estimation methodology; reported ~10% task-level prediction error
+  workbook_confidence: A
+  workbook_citations: 19
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P021
+  kind: paper
+  title: Real time Optimal Allocation for I-AUV with Interacting Thrusters
+  authors:
+  - Michael Alibani
+  - Carmelo Ferrara
+  - Lorenzo Pollini
+  year: 2020
+  doi: 10.1109/ieeeconf38699.2020.9389110
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/ieeeconf38699.2020.9389110
+  open_access_url: null
+  topic: hovering_auv
+  category_workbook: Hovering AUV
+  vehicle_or_component: Intervention AUV
+  evidence_type: Model/simulation
+  why_useful: Thruster-interaction-aware allocation; useful for non-independent actuator effects
+  workbook_confidence: B
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: Real_time_Optimal_Allocation_for_I-AUV_with_Interacting_Thrusters.pdf
+    local_pdf_sha256: 8249b63d4ef8fcac4fb6fa5989d5899f5287977062b8552be856ee8be8faab9f
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P022
+  kind: paper
+  title: Propulsion system performance enhancements on REMUS AUVs
+  authors:
+  - B. Allen
+  - W. S. Vorus
+  - T. Prestero
+  year: 2000
+  doi: 10.1109/oceans.2000.882209
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceans.2000.882209
+  open_access_url: null
+  topic: hovering_auv
+  category_workbook: Hovering AUV
+  vehicle_or_component: REMUS AUV
+  evidence_type: Experimental + engineering analysis
+  why_useful: Propulsive efficiency improvements and practical propulsion characterization
+  workbook_confidence: A
+  workbook_citations: 53
+  local_copies:
+  - local_pdf: Propulsion_system_performance_enhancements_on_REMUS_AUVs.pdf
+    local_pdf_sha256: f209451065d7ce576eb4292c8df35bd8cc838e753c4bf05f881203120b32d5f4
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P023
+  kind: paper
+  title: Power Efficiency Autonomy for Long Duration AUV Operation
+  authors:
+  - Justin Chang
+  - M. J. Anderson
+  - Sophia Merrifield
+  - Andy Nager
+  - Robert Hess
+  - Raymond Young
+  - Sean Kitchen
+  - Eric Terrill
+  year: 2022
+  doi: 10.1109/auv53081.2022.9965807
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/auv53081.2022.9965807
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: REMUS 100
+  evidence_type: Model + ocean tests
+  why_useful: Power-vs-speed/hotel-load model validated in tidal harbor; current-aware optimal speed
+  workbook_confidence: A
+  workbook_citations: 3
+  local_copies:
+  - local_pdf: Power_Efficiency_Autonomy_for_Long_Duration_AUV_Operation.pdf
+    local_pdf_sha256: 053b8089acfcddfc4e581bdd63de8af7fec5dc927c0e5a83294abbfd0816c007
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P024
+  kind: paper
+  title: 'Autosub Long Range 6000: A Multiple-Month Endurance AUV for Deep-Ocean Monitoring and Survey'
+  authors:
+  - Daniel T. Roper
+  - Catherine A. Harris
+  - Georgios Salavasidis
+  - Miles Pebody
+  - Robert Templeton
+  - Thomas Prampart
+  - Matthew Kingsland
+  - Richard Morrison
+  - Maaten Furlong
+  - Alexander B. Phillips
+  - Stephen D. McPhail
+  year: 2021
+  doi: 10.1109/joe.2021.3058416
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1109/joe.2021.3058416
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: Autosub Long Range 6000
+  evidence_type: Theory + initial sea trials
+  why_useful: Subsystem power budgeting, long-endurance battery design, 2–3 month / up to 1800 km operating
+    envelope
+  workbook_confidence: A
+  workbook_citations: 72
+  local_copies:
+  - local_pdf: Autosub_Long_Range_6000_A_Multiple-Month_Endurance_AUV_for_Deep-Ocean_Monitoring_and_Survey.pdf
+    local_pdf_sha256: 62ae1feec34155ac005c890886e45ed0a753ee326119621ca703772fb92b7290
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P025
+  kind: paper
+  title: Tethys-class long range AUVs - extending the endurance of propeller-driven cruising AUVs from
+    days to weeks
+  authors:
+  - Brett Hobson
+  - James G. Bellingham
+  - Brian Kieft
+  - Rob McEwen
+  - Michael Godin
+  - Yanwu Zhang
+  year: 2012
+  doi: 10.1109/auv.2012.6380735
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/auv.2012.6380735
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: Tethys-class LRAUV
+  evidence_type: Field vehicle / system design
+  why_useful: Whole-system power budgeting and endurance architecture
+  workbook_confidence: A
+  workbook_citations: 166
+  local_copies:
+  - local_pdf: Tethys-class_long_range_AUVs_-_extending_the_endurance_of_propeller-driven_cruising_AUVs_from_days_to_weeks.pdf
+    local_pdf_sha256: 135066c73cceb6ab1c7c0528ef78c93c737bcd831a602ab1a5c915890a709b2f
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P026
+  kind: paper
+  title: A Modular, Compact, and Efficient Next Generation REMUS 600 AUV
+  authors:
+  - Carl Fiester
+  - Daniel Gomez-Ibanez
+  - M. Grund
+  - M. Purcell
+  - Frederic Jaffre
+  - Ned C. Forrester
+  - T. Austin
+  - R. Stokey
+  year: 2019
+  doi: 10.1109/oceanse.2019.8867248
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceanse.2019.8867248
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: REMUS 600
+  evidence_type: Vehicle engineering / field-oriented
+  why_useful: Battery/propulsion/endurance architecture of a real torpedo AUV
+  workbook_confidence: A
+  workbook_citations: 9
+  local_copies:
+  - local_pdf: A_Modular_Compact_and_Efficient_Next_Generation_REMUS_600_AUV.pdf
+    local_pdf_sha256: 7fa11a2ba36b488536c3bf887c1d4959557c05e0c62059e2ea4d3ef304e9be92
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P027
+  kind: paper
+  title: The systematic optimization of the propulsion efficiency of in-service autonomous underwater
+    vehicles
+  authors:
+  - C. D. Fallows
+  year: 2003
+  doi: 10.1109/oceans.2003.178362
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceans.2003.178362
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: In-service AUV
+  evidence_type: Engineering optimization
+  why_useful: Propulsion efficiency optimization methodology
+  workbook_confidence: B
+  workbook_citations: 1
+  local_copies:
+  - local_pdf: The_systematic_optimization_of_the_propulsion_efficiency_of_in-service_autonomous_underwater_vehicles.pdf
+    local_pdf_sha256: f4ee549326d90e5f99399f5c7baf54a9fee04c41020d373fad66d42cfced020f
+    match_method: fuzzy_filename_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P028
+  kind: paper
+  title: Runtime Energy Estimation and Route Optimization for Autonomous Underwater Vehicles
+  authors:
+  - Valerio De Carolis
+  - Keith Brown
+  - David M. Lane
+  year: 2018
+  doi: 10.1109/joe.2017.2707261
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1109/joe.2017.2707261
+  open_access_url: https://pure.hw.ac.uk/ws/portalfiles/portal/15662901/IEEEjoeRuntimeEneryFullText.pdf
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: IVER3 and Nessie VII
+  evidence_type: Real sea trials + simulation
+  why_useful: Runtime energy estimation validated on two real AUVs; environment-aware mission feasibility
+  workbook_confidence: A
+  workbook_citations: 11
+  local_copies:
+  - local_pdf: IEEEjoeRuntimeEneryFullText.pdf
+    local_pdf_sha256: 6dc80d9fa6db50305b4b548ca50db0715ea140cc84058057ffbfb6bd4b0b9ffb
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P029
+  kind: paper
+  title: 'REMUS: a small, low cost AUV; system description, field trials and performance results'
+  authors:
+  - B. Allen
+  - R. Stokey
+  - T. Austin
+  - Ned C. Forrester
+  - R. Goldsborough
+  - M. Purcell
+  - C. von Alt
+  year: 1997
+  doi: 10.1109/oceans.1997.624126
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceans.1997.624126
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: REMUS
+  evidence_type: Field trials
+  why_useful: Real vehicle system, endurance and performance baseline
+  workbook_confidence: A
+  workbook_citations: 223
+  local_copies:
+  - local_pdf: REMUS_a_small_low_cost_AUV_system_description_field_trials_and_performance_results.pdf
+    local_pdf_sha256: 56d52ae32605073a796874e3a10f01aaf588ff01172aae428125f434c06a72f3
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P030
+  kind: paper
+  title: 'Autosub Long Range: A long range deep diving AUV for ocean monitoring'
+  authors:
+  - Maaten Furlong
+  - Dave Paxton
+  - P. Stevenson
+  - Miles Pebody
+  - Stephen D. McPhail
+  - James Perrett
+  year: 2012
+  doi: 10.1109/auv.2012.6380737
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/auv.2012.6380737
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: Autosub Long Range
+  evidence_type: Design + trials
+  why_useful: Vehicle-level energy/endurance design and long-range operational evidence
+  workbook_confidence: A
+  workbook_citations: 142
+  local_copies:
+  - local_pdf: Autosub_Long_Range_A_long_range_deep_diving_AUV_for_ocean_monitoring.pdf
+    local_pdf_sha256: 6f772dfee46d3d3d21dbbe14ee11ca68875bf0453e5806d352607e1f79c48986
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P031
+  kind: paper
+  title: Dynamics And Control Simulator For the Theseus AUV
+  authors:
+  - Mae Seto
+  - George D. Watt
+  year: 2000
+  doi: null
+  source_type: journal_article
+  publication_type_workbook: Article
+  publisher_url: https://scispace.com/papers/dynamics-and-control-simulator-for-the-theseus-auv-m77302v4r4
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: Theseus AUV
+  evidence_type: Full-scale trial validation + simulation
+  why_useful: Validated dynamics/propulsion simulator including range and battery-capacity effects
+  workbook_confidence: A
+  workbook_citations: 9
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P032
+  kind: paper
+  title: Efficient propulsion for the Tethys long-range autonomous underwater vehicle
+  authors:
+  - James G. Bellingham
+  - Yanwu Zhang
+  - Justin E. Kerwin
+  - Jonathan Erikson
+  - Brett Hobson
+  - Brian Kieft
+  - Michael Godin
+  - R. McEwen
+  - Thomas Hoover
+  - James C. Paul
+  - Andrew Hamilton
+  - Jeffrey D. Franklin
+  - Andrew L. Banka
+  year: 2010
+  doi: 10.1109/auv.2010.5779645
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/auv.2010.5779645
+  open_access_url: null
+  topic: torpedo_auv
+  category_workbook: Torpedo AUV
+  vehicle_or_component: Tethys LRAUV
+  evidence_type: Bollard + underwater experiments
+  why_useful: Measured propulsion power/efficiency; one reported operating point about 12 W; strong propulsion
+    reference
+  workbook_confidence: A
+  workbook_citations: 104
+  local_copies:
+  - local_pdf: Efficient_propulsion_for_the_Tethys_long-range_autonomous_underwater_vehicle.pdf
+    local_pdf_sha256: 67f00466b7fd97adc280c8426fbfe11e28d71e23cb8afb3d654f4f005c134c25
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P033
+  kind: paper
+  title: Data-driven learning and modeling of AUV operational characteristics for optimal path planning
+  authors:
+  - Joseph R. Edwards
+  - Joshua R. Smith
+  - Andrew Girard
+  - Diana Wickman
+  - Pierre F. J. Lermusiaux
+  - Deepak N. Subramani
+  - Patrick J. Haley
+  - Chris Mirabito
+  - Chinmay S. Kulkarni
+  - Sudip Jana
+  year: 2017
+  doi: 10.1109/oceanse.2017.8084779
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceanse.2017.8084779
+  open_access_url: null
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: Mid-size AUVs
+  evidence_type: Operational data from two AUVs
+  why_useful: Learns mission-to-mission variability in power budget
+  workbook_confidence: A
+  workbook_citations: 29
+  local_copies:
+  - local_pdf: Data-driven_learning_and_modeling_of_AUV_operational_characteristics_for_optimal_path_planning.pdf
+    local_pdf_sha256: 65437d2e3edf71fa9deae1fe2af56a2d0f6f7e844b6925b13640ebfb6faa9a26
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P034
+  kind: paper
+  title: Energy-efficient path planning for fully propelled AUVs in congested coastal waters
+  authors:
+  - Teong Beng Koay
+  - Mandar Chitre
+  year: 2013
+  doi: 10.1109/oceans-bergen.2013.6608168
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceans-bergen.2013.6608168
+  open_access_url: null
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: Fully propelled AUV
+  evidence_type: Simulation with environmental data
+  why_useful: Current-aware path planning and propulsion-energy minimization
+  workbook_confidence: B
+  workbook_citations: 56
+  local_copies:
+  - local_pdf: Energy-efficient_path_planning_for_fully_propelled_AUVs_in_congested_coastal_waters.pdf
+    local_pdf_sha256: 129890462b3ed23e0a6003c658563b131cd8a4b3b72b30051aeb666a621240f7
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P035
+  kind: paper
+  title: Towards Energy-Aware Feedback Planning for Long-Range Autonomous Underwater Vehicles
+  authors:
+  - Tauhidul Alam
+  - Abdullah Al Redwan Newaz
+  - Leonardo Bobadilla
+  - Wesam H. Al-Sabban
+  - Ryan N. Smith
+  - Ali Karimoddini
+  year: 2021
+  doi: 10.3389/frobt.2021.621820
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3389/frobt.2021.621820
+  open_access_url: https://www.frontiersin.org/articles/10.3389/frobt.2021.621820/pdf
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: Long-range AUV
+  evidence_type: Model/simulation
+  why_useful: Energy-aware feedback planning under uncertain environment
+  workbook_confidence: B
+  workbook_citations: 9
+  local_copies:
+  - local_pdf: frobt-08-621820.pdf
+    local_pdf_sha256: d07d504386de497ee1530c03efba64723f12db4421a56afc13e058e1906aba74
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P036
+  kind: paper
+  title: Energy-optimal path planning of autonomous underwater vehicles using adaptive flow models
+  authors:
+  - Henry Valachovic
+  - Niankai Yang
+  - Jing Sun
+  year: 2022
+  doi: 10.1109/oceans47191.2022.9977374
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/oceans47191.2022.9977374
+  open_access_url: null
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: AUV
+  evidence_type: Simulation/model
+  why_useful: Flow-aware mission energy optimization
+  workbook_confidence: B
+  workbook_citations: 1
+  local_copies:
+  - local_pdf: Energy-optimal_path_planning_of_autonomous_underwater_vehicles_using_adaptive_flow_models.pdf
+    local_pdf_sha256: bc5975f6a9f55294edc0e319bdb11f408687b89f9f8940faaae96370b2a306f9
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P037
+  kind: paper
+  title: Ensuring the safe operation of large AUVs by predicting and controlling their energy resources
+  authors:
+  - L. A. Martynova
+  year: 2024
+  doi: 10.31776/rtcj.12201
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.31776/rtcj.12201
+  open_access_url: null
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: Large AUV
+  evidence_type: Model/method
+  why_useful: Energy-resource prediction and safety margins
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P038
+  kind: paper
+  title: Application of On-Board Evolutionary Algorithms to Underwater Robots to Optimally Replan Missions
+    with Energy Constraints
+  authors:
+  - Mae Seto
+  year: 2012
+  doi: 10.1155/2012/542124
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1155/2012/542124
+  open_access_url: http://downloads.hindawi.com/journals/jr/2012/542124.pdf
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: AUV
+  evidence_type: Algorithm + simulation
+  why_useful: On-board re-planning with explicit energy constraints
+  workbook_confidence: B
+  workbook_citations: 4
+  local_copies:
+  - local_pdf: Application of On‐Board Evolutionary Algorithms to Underwater Robots to Optimally Replan
+      Missions with Energy Constraints.pdf
+    local_pdf_sha256: 68795af61a17fc05d7a6269d85b9f870e6fc1104b38ab7ea32176e86a25e0626
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P039
+  kind: paper
+  title: Path Planning for AUVs with Energy-Optimal Velocity in Current Fields
+  authors:
+  - Feng Wang
+  - Wenliang Chen
+  - Chenlong Li
+  year: 2022
+  doi: 10.1088/1742-6596/2402/1/012006
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1088/1742-6596/2402/1/012006
+  open_access_url: null
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: AUV
+  evidence_type: Simulation/model
+  why_useful: Combines current field and energy-optimal speed
+  workbook_confidence: B
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: Wang_2022_J._Phys.__Conf._Ser._2402_012006.pdf
+    local_pdf_sha256: 41a88ea74069d90192ed1de8c797016a1f6b333342c953c8bdef62868d8968b3
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P040
+  kind: paper
+  title: A Real-time Approach to Optimal Energy-Consumption for Autonomous Underwater Vehicles in Unknown
+    Time-Varying Flow Fields
+  authors:
+  - Jorge Luis Bustamante
+  year: 2011
+  doi: null
+  source_type: journal_article
+  publication_type_workbook: Article
+  publisher_url: https://scispace.com/papers/a-real-time-approach-to-optimal-energy-consumption-for-77bivmurku
+  open_access_url: null
+  topic: mission_energy
+  category_workbook: Mission energy
+  vehicle_or_component: AUV
+  evidence_type: Optimization/model
+  why_useful: Real-time energy-optimal paths under unknown time-varying flows
+  workbook_confidence: C
+  workbook_citations: 3
+  local_copies:
+  - local_pdf: a-real-time-approach-to-optimal-energy-consumption-for-77bivmurku.pdf
+    local_pdf_sha256: d29bb0c372f179b76a41862c3e5038c067121ef4e79d969c59ea04c02e5fd968
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P041
+  kind: paper
+  title: Hydrostatic pressure adaptive dual-polarized model for state of charge estimation of lithium-ion
+    batteries
+  authors:
+  - Mengjie Li
+  - Yuli Hu
+  - Zhaoyong Mao
+  - Peiyu Chen
+  - Liteng Zeng
+  - Cheng Lu
+  year: 2023
+  doi: 10.1016/j.est.2023.108979
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1016/j.est.2023.108979
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: Pressure-tolerant Li-ion / AUV
+  evidence_type: Battery experiment + model
+  why_useful: Pressure-dependent ECM/SOC modeling; useful advanced optional battery model
+  workbook_confidence: A
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: 1-s2.0-S2352152X23023770-main (1).pdf
+    local_pdf_sha256: 038c93b1debb94bc780568762eef4c451194c1b43ea9180d8e9024f0e4fbdc54
+    match_method: doi
+    match_score: 1.0
+  - local_pdf: 1-s2.0-S2352152X23023770-main.pdf
+    local_pdf_sha256: c03b0eae1d2c2575dd805793228ea0f2cf821b7a9d6ce5d84e7d96b0caa338b7
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P042
+  kind: paper
+  title: State of Charge Estimation of Lithium-Ion Batteries Based on an Adaptive Iterative Extended Kalman
+    Filter for AUVs
+  authors:
+  - You Fu
+  - Binhao Zhai
+  - Zhuoqun Shi
+  - Jun Liang
+  - Zhouhua Peng
+  year: 2022
+  doi: 10.3390/s22239277
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/s22239277
+  open_access_url: https://www.mdpi.com/1424-8220/22/23/9277/pdf
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: AUV Li-ion battery
+  evidence_type: Battery experiments + algorithm
+  why_useful: SOC estimation benchmark and AUV operating context
+  workbook_confidence: A
+  workbook_citations: 16
+  local_copies:
+  - local_pdf: sensors-22-09277.pdf
+    local_pdf_sha256: 5fd0d50df87a7756ff6de539c551e09ac42afa705b4048dd97026d86acf94f64
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P043
+  kind: paper
+  title: A Design Methodology for Lithium-Ion Battery Management System and its Application to an Autonomous
+    Underwater Vehicle
+  authors:
+  - Chao Shen
+  - Lei Wan
+  year: 2011
+  doi: 10.4028/www.scientific.net/amr.383-390.7175
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.4028/www.scientific.net/amr.383-390.7175
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: AUV Li-ion BMS
+  evidence_type: Design/method
+  why_useful: Voltage/current/temperature monitoring and BMS architecture
+  workbook_confidence: B
+  workbook_citations: 2
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P044
+  kind: paper
+  title: State of Charge Estimation of Lithium-ion Battery for Underwater Vehicles Using MM-UKF under
+    Hierarchical Temperature Compensation
+  authors:
+  - Guangyi Yang
+  - Xiang-Bing Fan
+  - Ran Li
+  - Xiaoyu Zhang
+  year: 2024
+  doi: 10.1109/access.2024.3425950
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1109/access.2024.3425950
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: Underwater vehicle Li-ion
+  evidence_type: Battery model + validation
+  why_useful: Temperature-dependent SOC estimation; relevant to L1 thermal coupling
+  workbook_confidence: A
+  workbook_citations: 5
+  local_copies:
+  - local_pdf: State_of_Charge_Estimation_of_Lithium-Ion_Battery_for_Underwater_Vehicles_Using_MM-UKF_Under_Hierarchical_Temperature_Compensation.pdf
+    local_pdf_sha256: bc4cd2e6a292216022157627081c1218867c41319b110b3b53940a773d048128
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P045
+  kind: paper
+  title: State-of-Charge Estimation Algorithm for Lithium-ion Battery Considering the Operational Characteristics
+    of Unmanned Underwater Vehicles
+  authors:
+  - Hyunwoo Kim
+  - Jeong Soo Ko
+  - Jong Hun Lim
+  - Je-Yeong Lim
+  - Dong Hwan Kim
+  - Byoung Kuk Lee
+  year: 2025
+  doi: 10.23919/icems66262.2025.11316943
+  source_type: conference_paper
+  publication_type_workbook: Article / Proceedings
+  publisher_url: https://doi.org/10.23919/icems66262.2025.11316943
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: UUV Li-ion
+  evidence_type: Battery model/algorithm
+  why_useful: Operational-profile-aware SOC estimation
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies:
+  - local_pdf: State-of-Charge_Estimation_Algorithm_for_Lithium-ion_Battery_Considering_the_Operational_Characteristics_of_Unmanned_Underwater_Vehicles.pdf
+    local_pdf_sha256: a9dfaee744454f4b5ba928a3b14a9bbabdf0e8470c7434dd947ee1576c183e89
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P046
+  kind: paper
+  title: Effect of hydrostatic pressure on electrochemical performance of soft package lithium-ion battery
+    for autonomous underwater vehicles
+  authors:
+  - Mengjie Li
+  - Yuli Hu
+  - Cheng Lu
+  - Bo Li
+  - Wenlong Tian
+  - Jiming Zhang
+  - Zhaoyong Mao
+  year: 2022
+  doi: 10.1016/j.est.2022.105325
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1016/j.est.2022.105325
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: AUV soft-pack Li-ion
+  evidence_type: Cell experiments
+  why_useful: Direct evidence of pressure effects on battery electrochemistry
+  workbook_confidence: A
+  workbook_citations: 11
+  local_copies:
+  - local_pdf: 1-s2.0-S2352152X22013226-main.pdf
+    local_pdf_sha256: 2197d4d1eff8955f05c1e2ef5fc449db621ce3452c24d3aeb0b36bdc1240fa0f
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P047
+  kind: paper
+  title: Influence of deep sea environment on the performance of a LiFePO4 polymer battery
+  authors:
+  - Changwen Zheng
+  - Shiyao Zhou
+  - Ziqiang Chen
+  - Ge Yunlong
+  - Deyang Huang
+  - Jian Liu
+  - Qi Yang
+  year: 2018
+  doi: 10.1631/jzus.a1700660
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1631/jzus.a1700660
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: LiFePO4 underwater battery
+  evidence_type: Cell/environment experiments
+  why_useful: Pressure/environment effects; chemistry-specific evidence
+  workbook_confidence: A
+  workbook_citations: 5
+  local_copies:
+  - local_pdf: jzus.A1700660.pdf
+    local_pdf_sha256: 0ddf0a9d293c6fdc4396bc74b9dbc048fca506b68fcbdbc53c303a03f7f0920e
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P048
+  kind: paper
+  title: Analysing the effect of pressure on the charge holding capacity of Lithium-Ion Batteries
+  authors:
+  - Shreyas Maitreya
+  - Sameer Soni
+  - Priyanka Paliwal
+  year: 2021
+  doi: 10.2139/ssrn.3808494
+  source_type: journal_article
+  publication_type_workbook: Working paper/article
+  publisher_url: https://doi.org/10.2139/ssrn.3808494
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: Li-ion
+  evidence_type: Battery pressure experiment
+  why_useful: Additional pressure/capacity evidence; lower priority than peer-reviewed sources
+  workbook_confidence: C
+  workbook_citations: null
+  local_copies:
+  - local_pdf: ssrn-3808494 (1).pdf
+    local_pdf_sha256: df4cd314634113eec6e47be56b195dca96ea94b2e8ef0c12ae6bb1481b1cf06a
+    match_method: exact_title
+    match_score: 1.0
+  - local_pdf: ssrn-3808494.pdf
+    local_pdf_sha256: df4cd314634113eec6e47be56b195dca96ea94b2e8ef0c12ae6bb1481b1cf06a
+    duplicate_of_file: ssrn-3808494 (1).pdf
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P049
+  kind: paper
+  title: Evaluation of Various Offline and Online ECM Parameter Identification Methods of Lithium-Ion
+    Batteries in Underwater Vehicles
+  authors:
+  - Peiyu Chen
+  - Cheng Lu
+  - Zhaoyong Mao
+  - Bo Li
+  - Wenlong Tian
+  - Mengjie Li
+  - Yunwei Xu
+  year: 2022
+  doi: 10.1021/acsomega.2c03985
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1021/acsomega.2c03985
+  open_access_url: https://pubs.acs.org/doi/pdf/10.1021/acsomega.2c03985
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: Underwater vehicle Li-ion
+  evidence_type: Battery experiments + model identification
+  why_useful: Strong source for Rint/ECM parameter identification methodology
+  workbook_confidence: A
+  workbook_citations: 28
+  local_copies:
+  - local_pdf: ao2c03985.pdf
+    local_pdf_sha256: 164875f261eb058807757abf8f8fdf276aedfdfba4b837686793cf88738f66c9
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P050
+  kind: paper
+  title: Underwater Thruster Saturation Detection and Prevention Considering Battery Voltage Sag
+  authors:
+  - Aaron M. Hanai
+  - Giacomo Marani
+  - Kaikala H. Rosa
+  - Song K. Choi
+  year: 2009
+  doi: null
+  source_type: journal_article
+  publication_type_workbook: Article
+  publisher_url: https://scispace.com/papers/underwater-thruster-saturation-detection-and-prevention-2yfpt4s8gx
+  open_access_url: null
+  topic: battery
+  category_workbook: Battery
+  vehicle_or_component: AUV thrusters + battery
+  evidence_type: Control + battery sag model
+  why_useful: 'Directly supports HoloEnergy concept: voltage sag changes available thrust'
+  workbook_confidence: A
+  workbook_citations: null
+  local_copies: []
+  redistribution: reference_only
+- paper_id: P051
+  kind: paper
+  title: Energy Consumption Analysis of Electric Propulsion System Used in Autonomous Surface Vehicle
+  authors:
+  - Jianhua Wang
+  - Wei Gu
+  - Jianxin Zhu
+  - Jubiao Zhang
+  year: 2009
+  doi: 10.1109/iccae.2009.67
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/iccae.2009.67
+  open_access_url: null
+  topic: surface_vessel
+  category_workbook: USV
+  vehicle_or_component: Silver Frog ASV, twin propeller
+  evidence_type: Field trials + model
+  why_useful: Real trials at 2/4/6 kn; twin 24 V 600 W motors and 60 Ah battery reported
+  workbook_confidence: A
+  workbook_citations: null
+  local_copies:
+  - local_pdf: Energy_Consumption_Analysis_of_Electric_Propulsion_System_Used_in_Autonomous_Surface_Vehicle.pdf
+    local_pdf_sha256: 88b9979aa22552c770f0730d72e7e837698bc135447fe71f41cf743f792c9412
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P052
+  kind: paper
+  title: Endurance Driven Energy Management System for All-Electric Marine Autonomous Surface Vehicle
+  authors:
+  - Taimur Zaman
+  - Mazheruddin H. Syed
+  - Graeme Burt
+  - Ali Wahoud
+  - Gianfranco Gobbo
+  - G. Millard
+  - Stefano Malagodi
+  year: 2022
+  doi: 10.1109/iecon49645.2022.9968947
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/iecon49645.2022.9968947
+  open_access_url: null
+  topic: surface_vessel
+  category_workbook: USV
+  vehicle_or_component: All-electric ASV
+  evidence_type: Energy-system simulation
+  why_useful: DC microgrid, storage/generation and sensor/navigation loads
+  workbook_confidence: B
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: Endurance_Driven_Energy_Management_System_for_All-Electric_Marine_Autonomous_Surface_Vehicle.pdf
+    local_pdf_sha256: 848193fb24a3c59b3079535db1e6fe84d852cc7e0e4bdce87eb293c69c0729cc
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P053
+  kind: paper
+  title: Comparison of station keeping strategies for long endurance autonomous surface vehicle
+  authors:
+  - Hyondong Oh
+  - Seungkeun Kim
+  - Antonios Tsourdos
+  - Al Savvaris
+  year: 2020
+  doi: 10.1007/s00773-019-00628-1
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1007/s00773-019-00628-1
+  open_access_url: null
+  topic: surface_vessel
+  category_workbook: USV
+  vehicle_or_component: C-Enduro-like dual-thruster ASV
+  evidence_type: Simulation
+  why_useful: Station keeping energy comparisons under environmental disturbances
+  workbook_confidence: B
+  workbook_citations: 7
+  local_copies:
+  - local_pdf: s00773-019-00628-1.pdf
+    local_pdf_sha256: 6c4fe4503591862e2af4422677fb44e70ffae46bc20099cf058ebf9c6d0a6ba5
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P054
+  kind: paper
+  title: Design and Energy Management of an Electric Marine Eco Unmanned Surface Vehicle
+  authors:
+  - Filippo Scamardella
+  - Marco Penta
+  - Maria Acanfora
+  - Marco Altosole
+  - Flavio Balsamo
+  - Andrea Del Pizzo
+  - Nunziante Ianniello
+  - Diego Iannuzzi
+  - Paolo Marsilia
+  - Giancarlo Rufino
+  - Vincenzo Sorrentino
+  - Luigi Vitiello
+  year: 2025
+  doi: 10.1109/iccep65222.2025.11143779
+  source_type: conference_paper
+  publication_type_workbook: Article / Proceedings
+  publisher_url: https://doi.org/10.1109/iccep65222.2025.11143779
+  open_access_url: null
+  topic: surface_vessel
+  category_workbook: USV
+  vehicle_or_component: Electric/hybrid USV
+  evidence_type: Design + simulation
+  why_useful: Battery/fuel-cell sizing and marine mission energy management
+  workbook_confidence: B
+  workbook_citations: null
+  local_copies:
+  - local_pdf: Design_and_Energy_Management_of_an_Electric_Marine_Eco_Unmanned_Surface_Vehicle.pdf
+    local_pdf_sha256: e87ae812e7a10a7df00c503b4807de853fbdff95418b5e1760750be7342d43d9
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P055
+  kind: paper
+  title: Modelling and Performance Analysis of an Autonomous Marine Vehicle Powered by a Fuel Cell Hybrid
+    Powertrain
+  authors:
+  - G. De Lorenzo
+  - Francesco Piraino
+  - Francesco Longo
+  - Giovanni Tine
+  - Valeria Boscaino
+  - Nicola Panzavecchia
+  - Massimo Caccia
+  - Petronilla Fragiacomo
+  year: 2022
+  doi: 10.3390/en15196926
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.3390/en15196926
+  open_access_url: https://www.mdpi.com/1996-1073/15/19/6926/pdf
+  topic: surface_vessel
+  category_workbook: USV
+  vehicle_or_component: Hybrid autonomous marine vehicle
+  evidence_type: Model + component/mission analysis
+  why_useful: Full hybrid energy-system model useful for optional future non-battery profiles
+  workbook_confidence: B
+  workbook_citations: 20
+  local_copies:
+  - local_pdf: energies-15-06926-v2.pdf
+    local_pdf_sha256: 744e57b2460dbb62ffc716592aa2e5642c1681510029e8bdd2f4ef409113bad4
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P056
+  kind: paper
+  title: 'HoloOcean: A Full-Featured Marine Robotics Simulator for Perception and Autonomy'
+  authors:
+  - Easton Potokar
+  - Kalliyan Lay
+  - Kalin Norman
+  - Derek Benham
+  - Spencer Ashford
+  - Randy Peirce
+  - Tracianne B. Neilsen
+  - Michael Kaess
+  - Joshua G. Mangelson
+  year: 2024
+  doi: 10.1109/joe.2024.3410290
+  source_type: journal_article
+  publication_type_workbook: Journal Article
+  publisher_url: https://doi.org/10.1109/joe.2024.3410290
+  open_access_url: null
+  topic: simulation
+  category_workbook: Simulation / HoloOcean
+  vehicle_or_component: HoloOcean
+  evidence_type: Simulator framework
+  why_useful: Primary simulator reference; sensors, multi-agent architecture and intended use
+  workbook_confidence: A
+  workbook_citations: 15
+  local_copies:
+  - local_pdf: HoloOcean_A_Full-Featured_Marine_Robotics_Simulator_for_Perception_and_Autonomy.pdf
+    local_pdf_sha256: 7856c8ccebd3005bc39f9427452226dd36a015cb3778fef40e97bf182e680d8a
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P057
+  kind: paper
+  title: A Preview of HoloOcean 2.0
+  authors:
+  - Blake Romrell
+  - Abigail Austin
+  - Braden Meyers
+  - Ryan Anderson
+  - Carter Noh
+  - Joshua G. Mangelson
+  year: 2025
+  doi: 10.48550/arxiv.2510.06160
+  source_type: journal_article
+  publication_type_workbook: Preprint
+  publisher_url: https://doi.org/10.48550/arxiv.2510.06160
+  open_access_url: https://arxiv.org/pdf/2510.06160
+  topic: simulation
+  category_workbook: Simulation / HoloOcean
+  vehicle_or_component: HoloOcean 2.0
+  evidence_type: Simulator framework
+  why_useful: UE5.3, advanced dynamics, BlueROV/CougUV integration and future sensors
+  workbook_confidence: A
+  workbook_citations: 3
+  local_copies:
+  - local_pdf: 2510.06160v1.pdf
+    local_pdf_sha256: cff219a76f12251f7a2c56fd5c42bca2bcf1cc5d57d7e4103321b47a03d74f36
+    match_method: arxiv_id
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P058
+  kind: paper
+  title: 'HoloOcean: An Underwater Robotics Simulator'
+  authors:
+  - Easton Potokar
+  - Spencer Ashford
+  - Michael Kaess
+  - Joshua G. Mangelson
+  year: 2022
+  doi: 10.1109/icra46639.2022.9812353
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/icra46639.2022.9812353
+  open_access_url: https://www.cs.cmu.edu/~kaess/pub/Potokar22icra.pdf
+  topic: simulation
+  category_workbook: Simulation / HoloOcean
+  vehicle_or_component: HoloOcean
+  evidence_type: Simulator framework
+  why_useful: Original HoloOcean architecture and real-world-inspired sensor definitions
+  workbook_confidence: A
+  workbook_citations: 116
+  local_copies:
+  - local_pdf: Potokar22icra.pdf
+    local_pdf_sha256: e1a489f3fd4a692c279df5c04b3ee19a9e8281a57c85a1da0f5cd7ac2893ba8e
+    match_method: exact_title
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P059
+  kind: paper
+  title: 'Navigating the Sim-to-Real Gap: A Critical Analysis of Underwater Robotics Simulators'
+  authors:
+  - Larissa e Silva Gomes
+  - Paulo L. J. Drews
+  year: 2025
+  doi: 10.1109/icar65334.2025.11338622
+  source_type: conference_paper
+  publication_type_workbook: Article / Proceedings
+  publisher_url: https://doi.org/10.1109/icar65334.2025.11338622
+  open_access_url: null
+  topic: simulation
+  category_workbook: Simulation / HoloOcean
+  vehicle_or_component: Underwater robotics simulators
+  evidence_type: Review
+  why_useful: Useful threats-to-validity and positioning source for simulator fidelity claims
+  workbook_confidence: B
+  workbook_citations: 2
+  local_copies:
+  - local_pdf: Navigating_the_Sim-to-Real_Gap_A_Critical_Analysis_of_Underwater_Robotics_Simulators.pdf
+    local_pdf_sha256: 5ac6c891953c9627487865fa472ec4de618bb7a1d2d1009c9d66ec0a5ffc6d1a
+    match_method: doi
+    match_score: 1.0
+  redistribution: reference_only
+- paper_id: P060
+  kind: paper
+  title: 'HoloOcean: Realistic Sonar Simulation'
+  authors:
+  - Easton Potokar
+  - Kalliyan Lay
+  - Kalin Norman
+  - Derek Benham
+  - Tracianne B. Neilsen
+  - Michael Kaess
+  - Joshua G. Mangelson
+  year: 2022
+  doi: 10.1109/iros47612.2022.9981119
+  source_type: conference_paper
+  publication_type_workbook: Proceedings Article
+  publisher_url: https://doi.org/10.1109/iros47612.2022.9981119
+  open_access_url: https://www.cs.cmu.edu/~kaess/pub/Potokar22iros.pdf
+  topic: simulation
+  category_workbook: Simulation / HoloOcean
+  vehicle_or_component: HoloOcean sonar suite
+  evidence_type: Simulator/sensor model
+  why_useful: Defines imaging, profiling, side-scan and single-beam sonar simulation scope
+  workbook_confidence: A
+  workbook_citations: 20
+  local_copies: []
+  redistribution: reference_only
+- paper_id: D001
+  kind: manufacturer_source
+  title: Blue Robotics T200 Thruster
+  manufacturer: Blue Robotics
+  category_workbook: Propulsion
+  holoocean_mapping: BlueROV2 / generic ROV actuator
+  url: https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/
+  workbook_values_unverified:
+    supply: 7–20 V
+    typical_power: 205 W @12 V; 390 W @16 V; 645 W @20 V full throttle
+    peak_or_other: 17 A @12 V; 24 A @16 V; 32 A @20 V
+  modelling_note: Manufacturer performance curves include thrust, current, power, RPM and efficiency
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D002
+  kind: manufacturer_source
+  title: BlueROV2
+  manufacturer: Blue Robotics
+  category_workbook: Vehicle
+  holoocean_mapping: Vehicle profile
+  url: https://bluerobotics.com/store/rov/bluerov2/
+  workbook_values_unverified:
+    supply: Battery-dependent
+    typical_power: ~2 h normal / ~4 h light use with specified battery on product page
+    peak_or_other: null
+  modelling_note: Standard = 6 thrusters (4 vectored + 2 vertical); Heavy retrofit = 8
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D003
+  kind: manufacturer_source
+  title: Lithium-ion Battery 14.8 V 18 Ah
+  manufacturer: Blue Robotics
+  category_workbook: Battery
+  holoocean_mapping: BlueROV2 battery profile
+  url: https://bluerobotics.com/store/comm-control-power/powersupplies-batteries/battery-li-4s-18ah-r3/
+  workbook_values_unverified:
+    supply: 14.8 V nominal; 16.8 V max; 12 V min
+    typical_power: 266.4 Wh nominal from V×Ah
+    peak_or_other: 60 A continuous; 132 A burst
+  modelling_note: 4S; use only as exact profile when this battery is selected
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D004
+  kind: manufacturer_source
+  title: Lithium-ion Battery 14.8 V 15.6 Ah
+  manufacturer: Blue Robotics
+  category_workbook: Battery
+  holoocean_mapping: BlueROV2 battery profile
+  url: https://bluerobotics.com/store/comm-control-power/powersupplies-batteries/battery-li-4s-15-6ah/
+  workbook_values_unverified:
+    supply: 14.8 V nominal; 16.8 V max; 12 V min
+    typical_power: 230 Wh nominal
+    peak_or_other: 60 A continuous; 132 A burst
+  modelling_note: Thermistor present; useful alternative BlueROV2 pack
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D005
+  kind: manufacturer_source
+  title: DVL A50
+  manufacturer: Water Linked
+  category_workbook: DVL
+  holoocean_mapping: HoloOcean DVLSensor
+  url: https://waterlinked.com/datasheets/dvl-a50
+  workbook_values_unverified:
+    supply: 10–30 VDC
+    typical_power: 4 W average
+    peak_or_other: 35 W power-on surge
+  modelling_note: Representative modern compact ROV/AUV DVL
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D006
+  kind: manufacturer_source
+  title: Oculus M750d / MD-series
+  manufacturer: Blueprint Subsea
+  category_workbook: Imaging sonar
+  holoocean_mapping: HoloOcean ImagingSonar
+  url: https://www.blueprintsubsea.com/oculus/oculus-md-series
+  workbook_values_unverified:
+    supply: 12–32 V (M-series)
+    typical_power: 10–35 W
+    peak_or_other: model/range dependent
+  modelling_note: Use explicit operating state/range setting rather than one fixed value
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D007
+  kind: manufacturer_source
+  title: Gemini 720is
+  manufacturer: Tritech
+  category_workbook: Imaging sonar
+  holoocean_mapping: HoloOcean ImagingSonar
+  url: https://www.tritech.co.uk/files/Datasheets/Gemini-720is-2023-updated-1.pdf
+  workbook_values_unverified:
+    supply: 19–74 VDC
+    typical_power: 16–27 W
+    peak_or_other: range dependent
+  modelling_note: Alternative representative imaging sonar
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D008
+  kind: manufacturer_source
+  title: Surveyor 240-16
+  manufacturer: Cerulean Sonar
+  category_workbook: Profiling / multibeam sonar
+  holoocean_mapping: HoloOcean ProfilingSonar
+  url: https://docs.ceruleansonar.com/c/surveyor-240-16/specifications
+  workbook_values_unverified:
+    supply: 10–30 V
+    typical_power: 5 W idle; 15 W typical max pinging
+    peak_or_other: null
+  modelling_note: State-dependent load can map idle/pinging
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D009
+  kind: manufacturer_source
+  title: Kongsberg M3
+  manufacturer: Kongsberg
+  category_workbook: Profiling / multibeam sonar
+  holoocean_mapping: HoloOcean ProfilingSonar / multibeam proxy
+  url: https://www.kongsberg.com/maritime/products/ocean-science/multibeam-echo-sounders/m3-sonar/
+  workbook_values_unverified:
+    supply: 12–36 V
+    typical_power: 22 W average
+    peak_or_other: <60 W peak
+  modelling_note: Representative multibeam profile; verify exact variant when implemented
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D010
+  kind: manufacturer_source
+  title: EdgeTech 2205
+  manufacturer: EdgeTech
+  category_workbook: Sidescan sonar
+  holoocean_mapping: HoloOcean SidescanSonar
+  url: https://www.edgetech.com/product/autonomous-underwater-vehicle-auv-uuv-sonar-systems/
+  workbook_values_unverified:
+    supply: Configuration-dependent
+    typical_power: Configuration-dependent
+    peak_or_other: null
+  modelling_note: Use manufacturer configuration-specific values; do not assume a universal wattage
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D011
+  kind: manufacturer_source
+  title: Ping1D
+  manufacturer: Blue Robotics
+  category_workbook: Single-beam sonar
+  holoocean_mapping: HoloOcean SinglebeamSonar
+  url: https://bluerobotics.com/store/sensors-sonars-cameras/sonar/ping-sonar-r1/
+  workbook_values_unverified:
+    supply: 4.5–5.5 V
+    typical_power: ~0.5 W typical from 5 V × 100 mA
+    peak_or_other: ~4.5 W peak from 5 V × 900 mA
+  modelling_note: Use measured/product current state if exact device chosen
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D012
+  kind: manufacturer_source
+  title: Ping360
+  manufacturer: Blue Robotics
+  category_workbook: Scanning sonar
+  holoocean_mapping: HoloOcean ImagingSonar / scanning-sonar custom profile
+  url: https://bluerobotics.com/store/sonars/imaging-sonars/ping360-sonar-r1-rp/
+  workbook_values_unverified:
+    supply: 11–25 V
+    typical_power: 5 W
+    peak_or_other: null
+  modelling_note: Mechanical scanning sonar; not the same geometry as multibeam imaging sonar
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D013
+  kind: manufacturer_source
+  title: Micron DST
+  manufacturer: Tritech
+  category_workbook: Scanning/profiling sonar
+  holoocean_mapping: HoloOcean ProfilingSonar / scanning proxy
+  url: https://www.tritech.co.uk/product/micron-dst
+  workbook_values_unverified:
+    supply: 20–48 V
+    typical_power: 4 W
+    peak_or_other: null
+  modelling_note: Small mechanical scanning sonar
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D014
+  kind: manufacturer_source
+  title: Low-Light HD USB Camera
+  manufacturer: Blue Robotics
+  category_workbook: Camera
+  holoocean_mapping: HoloOcean RGBCamera / Camera
+  url: https://bluerobotics.com/store/sensors-cameras/cameras/cam-usb-low-light-r1/
+  workbook_values_unverified:
+    supply: 5 V
+    typical_power: ~1.1 W max from 5 V × 220 mA
+    peak_or_other: 220 mA max
+  modelling_note: Representative BlueROV2 camera
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D015
+  kind: manufacturer_source
+  title: 4K Cam Low-Light ROV Camera
+  manufacturer: Blue Robotics
+  category_workbook: Camera
+  holoocean_mapping: HoloOcean RGBCamera / Camera
+  url: https://bluerobotics.com/store/sensors-cameras/cameras/4k-cam/
+  workbook_values_unverified:
+    supply: 5–55 V
+    typical_power: 5 W max
+    peak_or_other: null
+  modelling_note: Useful configurable high-resolution camera profile
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D016
+  kind: manufacturer_source
+  title: Lumen Subsea Light
+  manufacturer: Blue Robotics
+  category_workbook: Lighting
+  holoocean_mapping: Auxiliary mission load
+  url: https://bluerobotics.com/store/thrusters/lights/lumen-subsea-light-r2-rp/
+  workbook_values_unverified:
+    supply: 7–48 V
+    typical_power: ~15 W at full output
+    peak_or_other: null
+  modelling_note: Treat intensity as state-dependent if dimming is simulated
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D017
+  kind: manufacturer_source
+  title: VN-100
+  manufacturer: VectorNav
+  category_workbook: IMU / AHRS
+  holoocean_mapping: HoloOcean IMUSensor + Magnetometer
+  url: https://www.vectornav.com/products/detail/vn-100
+  workbook_values_unverified:
+    supply: 4.5–5.5 V rugged
+    typical_power: ~0.22 W
+    peak_or_other: null
+  modelling_note: Representative navigation-grade IMU/AHRS
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D018
+  kind: manufacturer_source
+  title: ZED-F9P
+  manufacturer: u-blox
+  category_workbook: GNSS
+  holoocean_mapping: HoloOcean GPSSensor
+  url: https://www.u-blox.com/en/product/zed-f9p-module
+  workbook_values_unverified:
+    supply: 2.7–3.6 V
+    typical_power: ~0.204 W from 68 mA @ 3.0 V
+    peak_or_other: startup transient exists
+  modelling_note: Surface-only GNSS mapping; do not consume when explicitly powered off underwater
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D019
+  kind: manufacturer_source
+  title: MS5837-30BA
+  manufacturer: TE Connectivity
+  category_workbook: Pressure/depth
+  holoocean_mapping: HoloOcean DepthSensor
+  url: https://www.te.com/en/product-MS583730BA01-50.html
+  workbook_values_unverified:
+    supply: 1.5–3.6 V
+    typical_power: µW-scale average depending sample rate
+    peak_or_other: ~1.25 mA conversion peak
+  modelling_note: Very low load; sampling-rate dependent
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D020
+  kind: manufacturer_source
+  title: Navigator
+  manufacturer: Blue Robotics
+  category_workbook: Flight controller
+  holoocean_mapping: Vehicle avionics / IMU / magnetometer / control
+  url: https://bluerobotics.com/store/comm-control-power/control/navigator/
+  workbook_values_unverified:
+    supply: 5–5.35 V
+    typical_power: ~0.75 W typical
+    peak_or_other: ~1.07 W max at 5.35 V × 200 mA
+  modelling_note: Do not double-count onboard IMU if Navigator profile already includes it
+  workbook_confidence: A
+  redistribution: reference_only
+- paper_id: D021
+  kind: manufacturer_source
+  title: Raspberry Pi 4 Model B
+  manufacturer: Raspberry Pi
+  category_workbook: Compute
+  holoocean_mapping: Companion computer
+  url: https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
+  workbook_values_unverified:
+    supply: 5 V
+    typical_power: ~3 W board current baseline using 600 mA typical figure
+    peak_or_other: 15 W recommended PSU capacity
+  modelling_note: Actual compute load must be a workload-dependent profile, not PSU rating
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D022
+  kind: manufacturer_source
+  title: Jetson Orin NX
+  manufacturer: NVIDIA
+  category_workbook: Compute
+  holoocean_mapping: High-performance onboard compute / semantic processing
+  url: https://developer.nvidia.com/blog/nvidia-jetpack-6-2-brings-super-mode-to-nvidia-jetson-orin-nano-and-jetson-orin-nx-modules/
+  workbook_values_unverified:
+    supply: 5–20 V module input
+    typical_power: 10/15/20 or 25/40 W reference modes depending module
+    peak_or_other: MAXN is not a fixed consumption value
+  modelling_note: Use configured nvpmodel as a discrete operating state
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D023
+  kind: manufacturer_source
+  title: WNC-M25MSO4 Gen4
+  manufacturer: Subnero
+  category_workbook: Acoustic modem
+  holoocean_mapping: HoloOcean AcousticBeaconSensor / acoustic communications
+  url: https://subnero.com/products/wnc/gen4/wnc-m25mso4
+  workbook_values_unverified:
+    supply: 22–28 VDC
+    typical_power: <4 W receive; <45 W average transmit
+    peak_or_other: <150 mW sleep; <1 mW deep sleep
+  modelling_note: 'Excellent state-machine mapping: Tx/Rx/Sleep/DeepSleep'
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D024
+  kind: manufacturer_source
+  title: BlueComm 200
+  manufacturer: Sonardyne
+  category_workbook: Optical modem
+  holoocean_mapping: HoloOcean OpticalModemSensor
+  url: https://www.sonardyne.com/product/blue-comm/
+  workbook_values_unverified:
+    supply: 24–36 V
+    typical_power: 10 W receiver; 15–30 W emitter depending variant/config
+    peak_or_other: null
+  modelling_note: Model Tx and Rx separately
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D025
+  kind: manufacturer_source
+  title: SBE 49 FastCAT
+  manufacturer: Sea-Bird Scientific
+  category_workbook: CTD
+  holoocean_mapping: HoloOcean BST salinity + temperature + pressure portion
+  url: https://www.seabird.com/products/sbe-49-fastcat-ctd-sensor
+  workbook_values_unverified:
+    supply: 9–24 V
+    typical_power: ~3.15–3.42 W sampling/pumping in specified examples
+    peak_or_other: 0.75 A turn-on transient
+  modelling_note: Does NOT measure biomass; only map CTD portion
+  workbook_confidence: B
+  redistribution: reference_only
+- paper_id: D026
+  kind: manufacturer_source
+  title: Cyclops-7F / C-FLUOR class
+  manufacturer: Turner Designs
+  category_workbook: Biomass/fluorescence
+  holoocean_mapping: HoloOcean BST biomass proxy
+  url: https://docs.turnerdesigns.com/t2/doc/manuals/998-2100.pdf
+  workbook_values_unverified:
+    supply: 3–15 V
+    typical_power: ~0.12–0.53 W depending optical channel
+    peak_or_other: null
+  modelling_note: Use chlorophyll/phyco channel only as a biomass proxy; declare proxy explicitly
+  workbook_confidence: C
+  redistribution: reference_only
+- paper_id: D027
+  kind: manufacturer_source
+  title: SPRINT-Nav M / equivalent
+  manufacturer: Sonardyne
+  category_workbook: Navigation system
+  holoocean_mapping: Integrated DVL+INS profile
+  url: https://www.sonardyne.com/product/sprint-nav-mini/
+  workbook_values_unverified:
+    supply: 24 V
+    typical_power: ~10 W nominal
+    peak_or_other: null
+  modelling_note: Alternative integrated navigation profile; use instead of separately counting overlapping
+    sensors
+  workbook_confidence: B
+  redistribution: reference_only
+unmatched_local_pdfs: []

@@ -1,0 +1,259 @@
+# HoloEnergy bibliography of sources NOT already in literature.yaml.
+# literature.yaml (generated from the evidence workbook by tools/build_literature_registry.py)
+# supplies the papers P001-P060 and manufacturer sources D001-D027; they are loaded as
+# sources with the same ids.  Each source is defined in exactly one of the two files.
+registry_version: "0.2.0-dev"
+sources:
+  - id: S1
+    type: journal_article
+    title: A General Energy Balance for Battery Systems
+    authors: [D. Bernardi, E. Pawlikowski, J. Newman]
+    year: 1985
+    doi: 10.1149/1.2113792
+    notes: Heat-balance framework (v0.1 bibliography S1).
+  - id: S2
+    type: journal_article
+    title: New Electro-Thermal Battery Pack Model of an Electric Vehicle
+    authors: [M. Alhanouti, M. Giessler, T. Blank, F. Gauterin]
+    year: 2016
+    doi: 10.3390/en9070563
+    notes: ECM trade-offs and lumped thermal balance, section 4 Eq. 7a-b (v0.1 bibliography S2).
+  - id: S3
+    type: journal_article
+    title: A Study on the Open Circuit Voltage and State of Charge Characterization of High Capacity Lithium-Ion Battery Under Different Temperature
+    authors: [R. Zhang, et al.]
+    year: 2018
+    doi: 10.3390/en11092408
+  - id: S4
+    type: journal_article
+    title: Temperature Dependent Parameter Estimation of Electrical Vehicle Batteries
+    authors: [A. I. Pozna, K. M. Hangos, A. Magyar]
+    year: 2019
+    doi: 10.3390/en12193755
+  - id: S5
+    type: manufacturer_webpage
+    title: Blue Robotics Lithium-ion Battery (14.8V, 18Ah) product page, battery guide and Samsung INR18650-30Q datasheet hosted by Blue Robotics
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/comm-control-power/powersupplies-batteries/battery-li-4s-18ah-r3/
+    accessed: "2026-10-06"
+    notes: Pack ratings; v0.1 bibliography S5. Cell ratings do not replace pack ratings.
+  - id: S6
+    type: manufacturer_dataset
+    title: T200 Public Performance Data 10-20V (September 2019)
+    publisher: Blue Robotics
+    url: https://cad.bluerobotics.com/T200-Public-Performance-Data-10-20V-September-2019.xlsx
+    accessed: "2026-10-06"
+    sha256: 1399b76df7a176cfbb08760c11731199053336e7d92182dece11824c73285085
+    local_file: sources/T200-Public-Performance-Data-10-20V-September-2019.xlsx
+    redistribution: retained_unchanged_with_attribution
+    notes: Measured electrical input power and thrust vs PWM at 10-20 V (static/bollard).
+  - id: S7
+    type: manufacturer_webpage
+    title: Blue Robotics Low-Light HD USB Camera product page
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/sensors-cameras/cameras/cam-usb-low-light-r1/
+    accessed: "2026-10-06"
+  - id: S8
+    type: manufacturer_webpage
+    title: Blue Robotics Ping360 Scanning Imaging Sonar product page
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/sonars/imaging-sonars/ping360-sonar-r1-rp/
+    accessed: "2026-10-06"
+  - id: S9
+    type: official_documentation
+    title: Calculating Efficiency (Application Report SLVA390A)
+    authors: [A. Raj]
+    year: 2010
+    publisher: Texas Instruments
+    url: https://www.ti.com/lit/an/slva390/slva390.pdf
+    notes: Converter efficiency eta = Pout/Pin, Eq. 13.
+  - id: S10
+    type: official_documentation
+    title: HoloOcean 2.2/2.3 documentation (BlueROV2 agent, agent API, environment API)
+    publisher: BYU FRoSt Lab
+    url: https://byu-holoocean.github.io/holoocean-docs/v2.3.0/holoocean/environments.html
+  - id: HO-SRC-2.3.0
+    type: simulator_source
+    title: HoloOcean v2.3.0 engine sources (Agents/Public/*.h, Agents/Private/*.cpp, HolodeckCore)
+    publisher: BYU FRoSt Lab
+    url: https://github.com/byu-holoocean/HoloOcean
+    revision: v2.3.0 pristine sources, local mirror commit 403ebb7
+    notes: >-
+      Thruster locations, thrust directions, per-thruster clamps, mass and drag literals of
+      the simulated agents, extracted by tools/extract_holoocean_geometry.py with per-file
+      SHA-256 recorded in holoenergy/profiles/holoocean/agents_2.3.0.json.
+  - id: HO-DRAG-AUDIT
+    type: derived
+    title: HoloEnergy verification of the HoloOcean 2.3.0 drag implementation (patched backend)
+    url: https://github.com/AndreaBedei1/HoloVirtualBattery/blob/fix/verified-holoocean-drag-backend/docs/verified_backend_report.md
+    notes: Backend verification only; it is not validation of any vehicle's hydrodynamics.
+  - id: ALLOC-JF2013
+    type: journal_article
+    title: Control allocation - A survey
+    authors: [T. A. Johansen, T. I. Fossen]
+    year: 2013
+    doi: 10.1016/j.automatica.2013.01.035
+    publisher: Automatica 49(5):1087-1103
+    notes: Effector configuration matrix, pseudo-inverse and redistributed allocation.
+  - id: USER
+    type: user
+    title: User-supplied value (no external evidence)
+    notes: Grade D by construction.
+  # --- manufacturer documents verified on 2026-11-06 (sensors/avionics) ---
+  - id: DS-WL-DVLA50-ELEC
+    type: official_documentation
+    title: Water Linked DVL documentation - Electrical connection
+    publisher: Water Linked AS
+    url: https://docs.waterlinked.com/dvl/electrical/
+    accessed: '2026-11-06'
+    revision: not shown
+  - id: DS-WL-DVLA50-PRODUCT
+    type: manufacturer_webpage
+    title: DVL A50 product page (Water Linked)
+    publisher: Water Linked AS
+    url: https://waterlinked.com/dvl-a50
+    accessed: '2026-11-06'
+    revision: not shown
+  - id: DS-BR-PING360
+    type: manufacturer_webpage
+    title: Ping360 Scanning Imaging Sonar (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/sonars/imaging-sonars/ping360-sonar-r1-rp/
+    accessed: '2026-11-06'
+    revision: 'Revision history: latest entry 2 April 2026 (type III anodizing); R2 initial release 15 February
+      2022; SKU BR-100399 since 29 June 2023'
+  - id: DS-BR-PING-SONAR
+    type: manufacturer_webpage
+    title: Ping Sonar Altimeter and Echosounder (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/sonars/echosounders/ping-sonar-r2-rp/
+    accessed: '2026-11-06'
+    revision: 'BR-101684 RevB, initial release 4 May 2023 (earlier: R3 4 Oct 2021, R2 29 Jan 2019)'
+  - id: DS-BR-LOWLIGHT-CAM
+    type: manufacturer_webpage
+    title: Low-Light HD USB Camera (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/sensors-cameras/cameras/cam-usb-low-light-r1/
+    accessed: '2026-11-06'
+    revision: R1 initial release 28 August 2017; latest entry (SKU changed to BR-100126) carries placeholder
+      date 'D Month YEAR'
+  - id: DS-BR-4K-CAM
+    type: manufacturer_webpage
+    title: 4K Cam Low-Light ROV Camera (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/sensors-cameras/cameras/4k-cam/
+    accessed: '2026-11-06'
+    revision: BR-103829 initial release 9 September 2026
+  - id: DS-BR-LUMEN
+    type: manufacturer_webpage
+    title: Lumen Subsea Light for ROV/AUV (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/thrusters/lights/lumen-r2-rp/
+    accessed: '2026-11-06'
+    revision: R4 initial release 6 January 2022; LUMEN-LIGHT-R4-RP SKU changed to BR-100857 on 29 June 2023;
+      latest entry 23 April 2025. R2 initial release was 10 July 2018 (superseded)
+  - id: DS-BP-OCULUS
+    type: manufacturer_datasheet
+    title: Oculus Datasheet (DA-148-P01443-10)
+    publisher: Blueprint Subsea
+    url: https://www.blueprintsubsea.com/downloads/oculus/DA-148-P01443-10.pdf
+    accessed: '2026-11-06'
+    revision: Rev 10, 2026-02-16 (support-page listing; PDF created 16 Feb 2026)
+  - id: DS-TT-GEMINI720IS
+    type: manufacturer_datasheet
+    title: Gemini 720is datasheet
+    publisher: Tritech International (Moog)
+    url: https://www.tritech.co.uk/files/Datasheets/Gemini-720is-Datasheet-0703-SOM-00001-Issue-15-Website.pdf
+    accessed: '2026-11-06'
+    revision: 0703-SOM-00001 Issue 15
+  - id: DS-CS-SURVEYOR240
+    type: manufacturer_webpage
+    title: Surveyor 240-16 (product page)
+    publisher: Cerulean Sonar
+    url: https://ceruleansonar.com/products/surveyor-240-16
+    accessed: '2026-11-06'
+    revision: not shown
+  - id: DS-KM-M3-500
+    type: manufacturer_datasheet
+    title: M3 SONAR - 500 M spec sheet
+    publisher: Kongsberg Discovery (Kongsberg Mesotech)
+    url: https://www.kongsbergdiscovery.online/ca/spec_sheets/92220017901_spec_sheet_m3_sonar_500m_us_en.pdf
+    accessed: '2026-11-06'
+    revision: 922-20017901-1.6 (PDF last modified 2025-10-23)
+  - id: DS-TT-MICRON
+    type: manufacturer_datasheet
+    title: Micron Sonar datasheet
+    publisher: Tritech International (Moog)
+    url: https://www.tritech.co.uk/files/Datasheets/Micron-Sonar-2023-datasheet-rev8.pdf
+    accessed: '2026-11-06'
+    revision: 0650-SOM-00004 Issue 08 (PDF dated March 2023)
+  - id: DS-ET-2205
+    type: manufacturer_datasheet
+    title: EdgeTech 2205 product brochure (2205-1-AUV-based-sonar-5-7-24.pdf)
+    publisher: EdgeTech
+    url: https://www.edgetech.com/wp-content/uploads/2023/04/2205-1-AUV-based-sonar-5-7-24.pdf
+    accessed: '2026-11-06'
+    revision: filename date 5-7-24 (PDF last modified 2024-05-07)
+  - id: DS-VN-VN100
+    type: manufacturer_webpage
+    title: VN-100 IMU/AHRS product page
+    publisher: VectorNav Technologies
+    url: https://www.vectornav.com/products/detail/vn-100
+    accessed: '2026-11-06'
+    revision: not shown
+  - id: DS-UB-ZEDF9P-01B
+    type: manufacturer_datasheet
+    title: ZED-F9P-01B Data sheet
+    publisher: u-blox AG
+    url: https://content.u-blox.com/sites/default/files/documents/ZED-F9P-01B_DataSheet_UBX-17051259.pdf
+    accessed: '2026-11-06'
+    revision: UBX-17051259 R09, 24-Mar-2023 (legacy document for 01B variant)
+  - id: DS-TE-MS5837-30BA
+    type: manufacturer_datasheet
+    title: MS5837-30BA Ultra-small, gel-filled pressure sensor with stainless steel cap - Data sheet
+    publisher: TE Connectivity (Measurement Specialties)
+    url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7FMS5837-30BA%7FB1%7Fpdf%7FEnglish%7FENG_DS_MS5837-30BA_B1.pdf%7FCAT-BLPS0017
+    accessed: '2026-11-06'
+    revision: REV C6 02/2025
+  - id: DS-BR-NAVIGATOR
+    type: manufacturer_webpage
+    title: Navigator Flight Controller for Raspberry Pi 4 (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/comm-control-power/control/navigator/
+    accessed: '2026-11-06'
+    revision: latest revision entry 9 August 2025 (BMP280 replaced with BMP390)
+  - id: DS-SD-SPRINTNAV-MINI
+    type: manufacturer_datasheet
+    title: SPRINT-Nav Mini datasheet (Sonardyne 8334; file named '_legacy')
+    publisher: Sonardyne International
+    url: https://www.sonardyne.com/wp-content/uploads/2026/05/Sonardyne_8334_SPRINT_Nav_Mini_legacy.pdf
+    accessed: '2026-11-06'
+    revision: '''Specifications subject to change without notice – 12/2025'''
+  - id: DS-SB-SBE49
+    type: manufacturer_datasheet
+    title: SBE 49 FastCAT CTD Sensor datasheet
+    publisher: Sea-Bird Scientific
+    url: https://www.seabird.com/hubfs/Product%20Assets/SBE%2049/Datasheets/SBE_49DS53May25.pdf
+    accessed: '2026-11-06'
+    revision: SBE 49.DS.53.May25
+  - id: DS-TD-CYCLOPS7F
+    type: manufacturer_datasheet
+    title: Cyclops-7F Submersible Sensor User's Manual
+    publisher: Turner Designs
+    url: https://docs.turnerdesigns.com/t2/doc/manuals/998-2100.pdf
+    accessed: '2026-11-06'
+    revision: P/N 998-2100 Revision 4.0, September 05, 2023
+  - id: DS-BR-BLUEROV2
+    type: manufacturer_webpage
+    title: BlueROV2 (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/rov/bluerov2/
+    accessed: '2026-11-06'
+    revision: not recorded
+  - id: DS-BR-BLUEROV2-HEAVY-KIT
+    type: manufacturer_webpage
+    title: BlueROV2 Heavy Configuration Retrofit Kit (product page)
+    publisher: Blue Robotics
+    url: https://bluerobotics.com/store/rov/bluerov2-upgrade-kits/brov2-heavy-retrofit/
+    accessed: '2026-11-06'
+    revision: not recorded

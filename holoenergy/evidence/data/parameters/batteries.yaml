@@ -1,0 +1,156 @@
+# Battery pack evidence. Pack ratings are manufacturer data; electrochemical maps of the
+# Blue Robotics packs are not published, so they remain placeholders (D) or cell-derived
+# proxies (C) with their derivation.
+parameters:
+  - id: bluerobotics_4s_18ah.capacity
+    component: bluerobotics_4s_18ah
+    quantity: nominal_capacity
+    unit: Ah
+    value: 18.0
+    bound: nominal
+    relation: exact
+    grade: A
+    sources: [D003]
+    location: {section: "Technical Details > Specifications"}
+    snippet: "Nominal Capacity 18.0Ah / 266.4Wh"
+    conditions: {verified: "2026-11-06"}
+  - id: bluerobotics_4s_18ah.energy_nominal
+    component: bluerobotics_4s_18ah
+    quantity: nominal_energy
+    unit: Wh
+    value: 266.4
+    bound: nominal
+    relation: exact
+    grade: A
+    sources: [D003]
+    location: {section: "Technical Details > Specifications"}
+    notes: Nominal (V x Ah); usable energy above 12 V under load is not published.
+  - id: bluerobotics_4s_18ah.nominal_voltage
+    component: bluerobotics_4s_18ah
+    quantity: nominal_voltage
+    unit: V
+    value: 14.8
+    bound: nominal
+    relation: exact
+    grade: A
+    sources: [D003]
+    location: {section: "Technical Details > Specifications"}
+  - id: bluerobotics_4s_18ah.minimum_voltage
+    component: bluerobotics_4s_18ah
+    quantity: cutoff_voltage
+    unit: V
+    value: 12.0
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [D003]
+    location: {section: "Technical Details > Specifications"}
+    snippet: "Minimum Safe Voltage 12V / 3.0V/Cell"
+  - id: bluerobotics_4s_18ah.max_continuous_current
+    component: bluerobotics_4s_18ah
+    quantity: max_current
+    unit: A
+    value: 60
+    bound: upper_bound
+    relation: exact
+    grade: A
+    sources: [D003]
+    location: {section: "Technical Details > Specifications"}
+    notes: 132 A for 10 s burst rating exists; not enabled in the continuous limit.
+  - id: bluerobotics_4s_18ah.max_temperature
+    component: bluerobotics_4s_18ah
+    quantity: max_temperature
+    unit: degC
+    value: 50
+    bound: upper_bound
+    relation: exact
+    grade: A
+    sources: [D003]
+    location: {section: "Safety"}
+    snippet: "Do not expose batteries to temperatures above 50 °C"
+  - id: samsung_inr18650_30q.dc_resistance
+    component: samsung_inr18650_30q
+    quantity: resistance
+    unit: mohm
+    value: 19.94
+    value_min: 17.94
+    value_max: 21.94
+    bound: typical
+    relation: exact
+    grade: A
+    sources: [S5]
+    location: {page: 3, section: "Specification; p.5 AC/DC Impedance", note: "Initial IR DC (10A-1A), typical 19.94 +/- 2"}
+    conditions: {cell: fresh, method: "DC IR between 10 A and 1 A"}
+    notes: Samsung SDI 'Introduction of INR18650-30Q' (August 2014) hosted by Blue Robotics.
+  - id: bluerobotics_4s_18ah.dc_resistance_cell_derived
+    component: bluerobotics_4s_18ah
+    quantity: resistance
+    unit: ohm
+    value: 0.01329
+    value_min: 0.01196
+    value_max: 0.01463
+    bound: lower_bound
+    relation: proxy
+    grade: C
+    sources: [S5, D003]
+    derivation: >-
+      4 series x 19.94 mOhm / 6 parallel (4S6P) = 13.29 mOhm; cell tolerance +/-2 mOhm gives
+      11.96-14.63 mOhm. Assumes the pack uses INR18650-30Q cells (implied by the linked
+      datasheet, not stated) and excludes interconnects, wiring and connector resistance.
+    notes: >-
+      Pack-level DC resistance of the installed battery is unpublished; this value is a
+      lower-bound proxy. A pulse test of the actual pack is required.
+  - id: bluerobotics_4s_18ah.ocv_curve
+    component: bluerobotics_4s_18ah
+    quantity: open_circuit_voltage_curve
+    unit: null
+    value: null
+    relation: unsupported
+    grade: D
+    notes: >-
+      No OCV-SOC data published for the pack or the INR18650-30Q cell (datasheet gives
+      discharge curves under load only). The v0.1 illustrative curve remains a declared
+      placeholder; L1 voltage predictions inherit grade D.
+  - id: bluerobotics_4s_15_6ah.capacity
+    component: bluerobotics_4s_15_6ah
+    quantity: nominal_capacity
+    unit: Ah
+    value: 15.6
+    bound: nominal
+    relation: exact
+    grade: A
+    sources: [D004]
+    location: {section: "Technical Details > Specifications"}
+    snippet: "Nominal Capacity 15.6 Ah / 230 Wh"
+    notes: Molicel P26A cells, 4S6P; product discontinued until further notice (2026-11-06).
+  - id: bluerobotics_4s_15_6ah.minimum_voltage
+    component: bluerobotics_4s_15_6ah
+    quantity: cutoff_voltage
+    unit: V
+    value: 12.0
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [D004]
+    location: {section: "Technical Details > Specifications"}
+  - id: bluerobotics_4s_15_6ah.max_continuous_current
+    component: bluerobotics_4s_15_6ah
+    quantity: max_current
+    unit: A
+    value: 60
+    bound: upper_bound
+    relation: exact
+    grade: A
+    sources: [D004]
+    location: {section: "Technical Details > Specifications"}
+  - id: battery.hydrostatic_pressure_effect
+    component: generic_li_ion
+    quantity: capacity_pressure_dependence
+    unit: null
+    value: null
+    relation: unsupported
+    grade: D
+    sources: []
+    notes: >-
+      Published effects disagree in sign across chemistries (P041: NCM811 pouch +9.2% at
+      60 MPa; P047: LiFePO4 polymer -7% at 100 MPa). Not modelled; see EVIDENCE_GAPS.md.

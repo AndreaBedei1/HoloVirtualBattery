@@ -1,0 +1,578 @@
+# Sensor/avionics evidence verified against manufacturer documentation on 2026-11-06.
+# Curated from the datasheet verification extraction; relation 'exact' = the named device.
+parameters:
+- id: waterlinked_dvl_a50.supply_voltage
+  component: waterlinked_dvl_a50
+  quantity: supply_voltage
+  unit: V
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources:
+  - DS-WL-DVLA50-ELEC
+  location:
+    section: Power specifications
+  conditions: {}
+  value_min: 10
+  value_max: 30
+  snippet: Input voltage | 10–30 Vdc
+- id: waterlinked_dvl_a50.power_average
+  component: waterlinked_dvl_a50
+  quantity: electrical_power
+  unit: W
+  value: 4
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-WL-DVLA50-ELEC
+  location:
+    section: Power specifications
+  conditions:
+    state: ACTIVE
+    note: average; ping rate/altitude not stated
+  snippet: Power consumption, average | 4 W
+- id: waterlinked_dvl_a50.power_on_surge
+  component: waterlinked_dvl_a50
+  quantity: peak_electrical_power
+  unit: W
+  value: 35
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-WL-DVLA50-PRODUCT
+  location:
+    section: Specifications
+  conditions:
+    state: STARTING
+  snippet: Power-on current surge 35 W (maximum)
+  notes: 'Surge duration not published: affects peak current only; startup energy unconfigured.'
+- id: waterlinked_dvl_a50.startup_duration
+  component: waterlinked_dvl_a50
+  quantity: duration
+  unit: s
+  value: null
+  bound: unknown
+  relation: unsupported
+  grade: D
+  sources:
+  - DS-WL-DVLA50-ELEC
+  location: {}
+  conditions: {}
+  notes: Not published by the manufacturer.
+  status: unconfigured
+- id: bluerobotics_ping360.supply_voltage
+  component: bluerobotics_ping360
+  quantity: supply_voltage
+  unit: V
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-PING360
+  location:
+    section: Technical Details
+  conditions: {}
+  value_min: 11
+  value_max: 25
+  snippet: Supply Voltage 11–25 V
+  notes: Same page's quick start says 11-18 VDC (conflicting statement retained).
+- id: bluerobotics_ping360.power_max
+  component: bluerobotics_ping360
+  quantity: electrical_power
+  unit: W
+  value: 5
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-PING360
+  location:
+    section: Technical Details
+  conditions:
+    state: ACTIVE
+  snippet: Maximum Power Consumption 5 W
+  notes: Maximum only; no typical/mean value published.
+- id: bluerobotics_ping_sonar.power_typical
+  component: bluerobotics_ping_sonar
+  quantity: electrical_power
+  unit: W
+  value: 0.5
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-PING-SONAR
+  location:
+    section: Technical Details - Electrical
+  conditions:
+    state: ACTIVE
+    supply_V: 5
+  value_max: 0.55
+  derivation: 100 mA typical x 5 V nominal (supply 4.5-5.5 V gives 0.45-0.55 W)
+  snippet: Current Draw 100 mA (typical)
+- id: bluerobotics_ping_sonar.power_peak
+  component: bluerobotics_ping_sonar
+  quantity: peak_electrical_power
+  unit: W
+  value: 4.5
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-PING-SONAR
+  location:
+    section: Technical Details - Electrical
+  conditions: {}
+  derivation: 900 mA peak x 5 V nominal
+  snippet: 900 mA (peak)
+  notes: Peak duration not published.
+- id: bluerobotics_lowlight_usb_camera.power_max
+  component: bluerobotics_lowlight_usb_camera
+  quantity: electrical_power
+  unit: W
+  value: 1.1
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-LOWLIGHT-CAM
+  location:
+    section: Technical Details
+  conditions:
+    state: ACTIVE
+  derivation: 220 mA maximum draw x 5 V supply
+  snippet: Max Power Draw 220 mA
+- id: bluerobotics_4k_camera.power_max
+  component: bluerobotics_4k_camera
+  quantity: electrical_power
+  unit: W
+  value: 5
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-4K-CAM
+  location:
+    section: Technical Details - Electrical
+  conditions:
+    state: ACTIVE
+  snippet: Max Power 5 W
+- id: bluerobotics_lumen.power_full
+  component: bluerobotics_lumen
+  quantity: electrical_power
+  unit: W
+  value: 15
+  bound: nominal
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-LUMEN
+  location:
+    section: Technical Details; product description
+  conditions:
+    state: ACTIVE
+    note: full brightness; page describes R4 hardware
+  snippet: the light outputs over 1500 lumens at 15 Watts
+  notes: Dimmed-state power is not published; only OFF and full output are configured.
+- id: blueprint_oculus_m750d.power_range
+  component: blueprint_oculus_m750d
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: representative
+  grade: B
+  sources:
+  - DS-BP-OCULUS
+  location:
+    page: 4
+    section: Electrical (M & MT-Series column; M750d listed under Performance)
+  conditions:
+    state: ACTIVE
+    note: M/MT/MD family, model and range dependent
+  value_min: 10
+  value_max: 35
+  snippet: Power Consumption 10W to 35W (Model and Range Dependant*)
+  notes: No M750d-specific figure published; family range only.
+- id: tritech_gemini_720is.power_range
+  component: tritech_gemini_720is
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: range
+  relation: exact
+  grade: A
+  sources:
+  - DS-TT-GEMINI720IS
+  location:
+    page: 2
+    section: Specifications (electrical rows)
+  conditions:
+    state: ACTIVE
+    note: range dependent; standalone unit, cable losses excluded
+  value_min: 16
+  value_max: 27
+  snippet: Power requirement 16 - 27 W (range dependent)
+- id: cerulean_surveyor_240_16.power_idle
+  component: cerulean_surveyor_240_16
+  quantity: electrical_power
+  unit: W
+  value: 5
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-CS-SURVEYOR240
+  location:
+    section: Specifications - Power Supply
+  conditions:
+    state: IDLE
+  snippet: 5W typical at idle
+- id: cerulean_surveyor_240_16.power_pinging_max
+  component: cerulean_surveyor_240_16
+  quantity: electrical_power
+  unit: W
+  value: 15
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-CS-SURVEYOR240
+  location:
+    section: Specifications - Power Supply
+  conditions:
+    state: PINGING
+  snippet: 15W typical max while pinging
+- id: kongsberg_m3_500m.power_average
+  component: kongsberg_m3_500m
+  quantity: electrical_power
+  unit: W
+  value: 22
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-KM-M3-500
+  location:
+    page: 2
+    section: Technical Specifications - Interface Specifications
+  conditions:
+    state: ACTIVE
+    variant: 500 m (P/N 922-20010000)
+    note: mode dependent
+  snippet: 'Input power: 22 W (avg.)'
+- id: kongsberg_m3_500m.power_peak
+  component: kongsberg_m3_500m
+  quantity: peak_electrical_power
+  unit: W
+  value: 60
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-KM-M3-500
+  location:
+    page: 2
+    section: Technical Specifications - Interface Specifications
+  conditions: {}
+  snippet: peak power < 60 W, mode dependant
+- id: tritech_micron.power_average
+  component: tritech_micron
+  quantity: electrical_power
+  unit: W
+  value: 4
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-TT-MICRON
+  location:
+    page: 2
+    section: Interface - Power requirement (also page 1 Key Specification)
+  conditions:
+    state: ACTIVE
+    supply_V: 12-48 DC
+  snippet: 12 - 48V DC at 4VA (average)
+  notes: Datasheet states 4 VA average on a DC supply (numerically W); archived manual says 4 W.
+- id: edgetech_2205.power
+  component: edgetech_2205
+  quantity: electrical_power
+  unit: W
+  value: null
+  bound: unknown
+  relation: unsupported
+  grade: D
+  sources:
+  - DS-ET-2205
+  location:
+    page: 2
+    section: Power Supplies
+  conditions: {}
+  snippet: Power consumption varies depending on the configuration
+  notes: 'Manufacturer: configuration dependent, contact EdgeTech. No default.'
+  status: unconfigured
+- id: vectornav_vn100_rugged.power
+  component: vectornav_vn100_rugged
+  quantity: electrical_power
+  unit: W
+  value: 0.22
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-VN-VN100
+  location:
+    section: Specifications - Electrical and Interface
+  conditions:
+    supply_V: 5
+  snippet: Power 220 mW
+- id: vectornav_vn100_smd.power
+  component: vectornav_vn100_smd
+  quantity: electrical_power
+  unit: W
+  value: 0.185
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-VN-VN100
+  location:
+    section: Specifications - Electrical and Interface
+  conditions:
+    supply_V: 3.3
+  value_min: 0.1485
+  value_max: 0.185
+  snippet: Power 185 mW
+  notes: 'Conflict on the page: 185 mW stated vs 45 mA x 3.3 V = 148.5 mW; range retained.'
+- id: ublox_zed_f9p.power_tracking_gps
+  component: ublox_zed_f9p
+  quantity: electrical_power
+  unit: W
+  value: 0.204
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-UB-ZEDF9P-01B
+  location:
+    page: 14
+    section: 4.3 Indicative power requirements (Table 13); 4.2 Operating conditions (p.13)
+  conditions:
+    state: ACTIVE
+    variant: ZED-F9P-01B
+  derivation: 68 mA (GPS-only tracking, 25 C) x 3.0 V typical VCC
+  snippet: Supply current Tracking 85 68 mA
+  notes: '-04B variant: 70 mA. HoloOcean GPS only has fixes near the surface.'
+- id: ublox_zed_f9p.power_tracking_multignss
+  component: ublox_zed_f9p
+  quantity: electrical_power
+  unit: W
+  value: 0.255
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-UB-ZEDF9P-01B
+  location:
+    page: 14
+    section: 4.3 Indicative power requirements (Table 13); 4.2 Operating conditions (p.13)
+  conditions:
+    state: ACTIVE
+  derivation: 85 mA (GPS+GLO+GAL+BDS tracking) x 3.0 V
+  snippet: Supply current Tracking 85 68 mA
+- id: ublox_zed_f9p.power_acquisition
+  component: ublox_zed_f9p
+  quantity: electrical_power
+  unit: W
+  value: 0.27
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-UB-ZEDF9P-01B
+  location:
+    page: 14
+    section: 4.3 Indicative power requirements (Table 13); 4.2 Operating conditions (p.13)
+  conditions:
+    state: STARTING
+  value_min: 0.225
+  value_max: 0.27
+  derivation: 75-90 mA acquisition x 3.0 V
+  snippet: VCC current Acquisition 90 75 mA
+- id: ublox_zed_f9p.power_backup
+  component: ublox_zed_f9p
+  quantity: electrical_power
+  unit: W
+  value: 0.000135
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-UB-ZEDF9P-01B
+  location:
+    page: 14
+    section: 4.3 Indicative power requirements (Table 13); 4.2 Operating conditions (p.13)
+  conditions:
+    state: SLEEP
+  derivation: 45 uA backup current x 3 V V_BCKP
+  snippet: Backup battery current I_BCKP 45 µA V_BCKP = 3 V
+- id: te_ms5837_30ba.power_1sps_osr8192
+  component: te_ms5837_30ba
+  quantity: electrical_power
+  unit: W
+  value: 6.027e-05
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-TE-MS5837-30BA
+  location:
+    page: 2
+    section: Performance specifications - Electrical characteristics; ADC
+  conditions:
+    sample_rate_Hz: 1
+    osr: 8192
+  derivation: 20.09 uA average at 1 sample/s, OSR 8192 x 3.0 V
+  snippet: OSR 8192 20.09
+  notes: Only 1 sample/s figures are published; other rates are not assumed.
+- id: bluerobotics_navigator.power_typical
+  component: bluerobotics_navigator
+  quantity: electrical_power
+  unit: W
+  value: 0.75
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-NAVIGATOR
+  location:
+    section: Specifications
+  conditions:
+    state: ACTIVE
+  value_max: 0.8025
+  derivation: 150 mA typical x 5 V (5.35 V upper supply gives 0.80 W)
+  snippet: 150 mA (Typical)
+  notes: 'Includes on-board IMUs, magnetometer, barometer: do not add separate IMU loads.'
+- id: bluerobotics_navigator.power_max
+  component: bluerobotics_navigator
+  quantity: electrical_power
+  unit: W
+  value: 1.07
+  bound: upper_bound
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-NAVIGATOR
+  location:
+    section: Specifications
+  conditions: {}
+  derivation: 200 mA max x 5.35 V upper supply
+  snippet: 200 mA (Max)
+- id: bluerobotics_navigator.power_idle
+  component: bluerobotics_navigator
+  quantity: electrical_power
+  unit: W
+  value: 0.025
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-NAVIGATOR
+  location:
+    section: Specifications
+  conditions:
+    state: IDLE
+  derivation: 5 mA idle x 5 V
+  snippet: Current Draw 5 mA (Idle)
+- id: sonardyne_sprint_nav_mini.power_nominal
+  component: sonardyne_sprint_nav_mini
+  quantity: electrical_power
+  unit: W
+  value: 10
+  bound: nominal
+  relation: exact
+  grade: A
+  sources:
+  - DS-SD-SPRINTNAV-MINI
+  location:
+    page: 2
+    section: Specifications - Power
+  conditions:
+    supply_V: 24
+    state: ACTIVE
+  snippet: 24 V dc, 10 W nominal
+  notes: 'Integrated DVL+INS+pressure: do not add a separate DVL/IMU/depth load.'
+- id: seabird_sbe49.power_sampling
+  component: seabird_sbe49
+  quantity: electrical_power
+  unit: W
+  value: 3.42
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-SB-SBE49
+  location:
+    page: 2
+    section: External Power Requirements
+  conditions:
+    state: ACTIVE
+    note: sampling and transmitting, pump included
+  value_min: 3.15
+  value_max: 3.42
+  derivation: 285 mA x 12 V = 3.42 W; 180 mA x 19 V = 3.42 W; 350 mA x 9 V = 3.15 W
+  snippet: 285 mA at 12 V
+- id: turner_cyclops7f_chlorophyll.power
+  component: turner_cyclops7f_chlorophyll
+  quantity: electrical_power
+  unit: W
+  value: 0.24
+  bound: typical
+  relation: exact
+  grade: A
+  sources:
+  - DS-TD-CYCLOPS7F
+  location:
+    page: 14
+    section: 'Appendix A: Specifications'
+  conditions:
+    supply_V: 12
+    channel: chlorophyll in vivo
+  snippet: Chlorophyll in vivo 240 Rhodamine Dye 175
+- id: bluerov2.runtime_normal_use
+  component: bluerov2_standard
+  quantity: runtime
+  unit: h
+  value: 2
+  bound: nominal
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-BLUEROV2
+  location:
+    section: Technical Details; Heavy Configuration Upgrade
+  conditions:
+    battery: Blue Robotics 15.6 Ah
+    note: '''normal use'' undefined'
+  snippet: ~2 hours (normal use)
+  notes: Manufacturer sanity check only; not a reproducible validation condition.
+- id: bluerov2.runtime_light_use
+  component: bluerov2_standard
+  quantity: runtime
+  unit: h
+  value: 4
+  bound: nominal
+  relation: exact
+  grade: A
+  sources:
+  - DS-BR-BLUEROV2
+  location:
+    section: Technical Details; Heavy Configuration Upgrade
+  conditions:
+    battery: Blue Robotics 15.6 Ah
+    note: '''light use'' undefined'
+  snippet: ~4 hours (light use)
