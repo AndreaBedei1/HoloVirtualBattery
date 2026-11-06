@@ -31,15 +31,33 @@ class ElectricalComponent(PayloadComponent):
                 "active_is_upper_bound",
                 "simulation_sensor",
                 "hardware_model",
+                "relation",
+                "status",
+                "device",
+                "includes",
+                "notes",
             },
             f"component {name}",
         )
+        from ..evidence import RELATION_MAX_GRADE, cap_grade, default_registry
+
+        self.relation = config.get("relation", "exact")
+        if self.relation not in RELATION_MAX_GRADE:
+            raise ConfigurationError(f"{name}: unknown relation {self.relation}")
+        self.status = config.get("status", "configured")
+        if self.status not in ("configured", "unconfigured"):
+            raise ConfigurationError(f"{name}: status must be configured or unconfigured")
+        self.device = config.get("device")
+        self.includes = list(config.get("includes", []))
+        self.state_evidence, self.state_grades, self.state_bounds = {}, {}, {}
         kind = config.get("model", config.get("type", "generic_load"))
         if kind != "generic_load":
             raise ConfigurationError(f"{name}: supported component model is generic_load")
         self.category = config.get("category", "sensors")
-        if self.category not in ("sensors", "compute", "auxiliaries"):
-            raise ConfigurationError("component.category must be sensors, compute or auxiliaries")
+        if self.category not in ("sensors", "compute", "auxiliaries", "communications"):
+            raise ConfigurationError(
+                "component.category must be sensors, compute, communications or auxiliaries"
+            )
         states = config.get("states", {})
         if not isinstance(states, dict):
             raise ConfigurationError("component.states must be a mapping")
@@ -47,9 +65,43 @@ class ElectricalComponent(PayloadComponent):
         for state, value in states.items():
             if not isinstance(state, str) or not state or state != state.upper():
                 raise ConfigurationError("Component states must be nonempty uppercase strings")
-            if isinstance(value, dict):
+            if isinstance(value, dict) and "evidence" in value:
+                keys(value, {"evidence", "use"}, f"{name}.{state}")
+                record = default_registry().get(value["evidence"])
+                use = value.get("use", "value")
+                if use not in ("value", "value_min", "value_max"):
+                    raise ConfigurationError(
+                        f"{name}.{state}: use must be value/value_min/value_max"
+                    )
+                if not record.configured or getattr(record, use) is None:
+                    if self.status != "unconfigured":
+                        raise ConfigurationError(
+                            f"{name}.{state}: evidence {record.id} has no {use}; declare the "
+                            "component status: unconfigured or supply a measured value"
+                        )
+                    continue
+                if record.quantity != "electrical_power":
+                    raise ConfigurationError(f"{record.id} is not an electrical power record")
+                self.state_evidence[state] = record.id
+                self.state_grades[state] = cap_grade(record.grade, self.relation)
+                self.state_bounds[state] = (
+                    record.bound
+                    if use == "value"
+                    else ("upper_bound" if use == "value_max" else "lower_bound")
+                )
+                value = record.si(use)
+            elif isinstance(value, dict):
                 keys(value, {"power_W"}, f"{name}.{state}")
                 value = required(value, "power_W")
+                self.state_grades[state] = "D"
+            elif value is not None:
+                self.state_grades[state] = "D"
+            if value is None:
+                if self.status != "unconfigured":
+                    raise ConfigurationError(
+                        f"{name}.{state}: null power requires status unconfigured"
+                    )
+                continue
             self.state_powers[state] = number(value, f"{name}.{state}.power_W", minimum=0)
         if "active_W" in config:
             if "ACTIVE" in self.state_powers:
@@ -57,6 +109,11 @@ class ElectricalComponent(PayloadComponent):
             self.state_powers["ACTIVE"] = number(config["active_W"], "active_W", minimum=0)
         # Derived OFF is physical rail gating, explicitly documented, not standby.
         self.state_powers.setdefault("OFF", 0.0)
+        self.state_grades.setdefault("OFF", "A")
+        if self.status == "unconfigured":
+            # Excluded from the electrical bus and reported as an incomplete configuration.
+            self.state_powers = {"OFF": 0.0}
+            config = {**config, "initial_state": "OFF"}
         self.variable = None
         model = config.get("power_model")
         if model is not None:
