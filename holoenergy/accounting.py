@@ -25,12 +25,14 @@ class EnergyRuntime:
                 "propulsion",
                 "sensors",
                 "compute",
+                "communications",
                 "auxiliaries",
                 "converters",
                 "battery_losses",
             )
         }
         self.devices = {}
+        self.device_states = {}
         self.phases = {}
         self.duration_s = 0.0
         self.history = deque()
@@ -56,6 +58,7 @@ class EnergyRuntime:
             "propulsion": row["power_propulsion_W"],
             "sensors": row["power_sensors_W"],
             "compute": row["power_compute_W"],
+            "communications": row.get("power_communications_W", 0.0),
             "auxiliaries": row["power_auxiliary_W"],
             "converters": row["power_conversion_loss_W"],
             "battery_losses": row["power_battery_loss_W"],
@@ -65,6 +68,13 @@ class EnergyRuntime:
         device_powers = {**row["actuator_power_W"], **row["component_power_W"]}
         for name, power in device_powers.items():
             self.devices[name] = self.devices.get(name, 0) + power * dt / 3600
+        for name, states in row.get("component_state_energy_J", {}).items():
+            target = self.device_states.setdefault(name, {})
+            for state, joules in states.items():
+                target[state] = target.get(state, 0.0) + joules / 3600
+        for name, power in row["actuator_power_W"].items():
+            target = self.device_states.setdefault(name, {})
+            target["THRUST"] = target.get("THRUST", 0.0) + power * dt / 3600
         phase = self.phases.setdefault(
             self.phase, {"duration_s": 0.0, "terminal_energy_Wh": 0.0, "battery_losses_Wh": 0.0}
         )
@@ -124,6 +134,7 @@ class EnergyRuntime:
                 k: 100 * v / total if total else 0 for k, v in self.categories.items()
             },
             "device_energy_Wh": dict(self.devices),
+            "device_state_energy_Wh": copy.deepcopy(self.device_states),
             "phases": copy.deepcopy(self.phases),
             "endurance_estimates": self.endurance(),
             "evidence_kind": "configured simulation; physical validation not implied",

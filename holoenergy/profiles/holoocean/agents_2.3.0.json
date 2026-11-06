@@ -1,0 +1,342 @@
+{
+  "holoocean_version": "2.3.0",
+  "source": "https://github.com/byu-holoocean/HoloOcean (v2.3.0 engine sources)",
+  "source_ref": "403ebb7",
+  "frame": "HoloOcean client body frame: x forward, y left, z up; metres; origin at agent CoM",
+  "generator": "tools/extract_holoocean_geometry.py",
+  "agents": {
+    "BlueROV2": {
+      "agent_type": "BlueROV2",
+      "control_scheme_thrusters": 0,
+      "actuator_count": 8,
+      "per_thruster_clamp_expression": "BR_MAX_LIN_ACCEL * 11.5 / 4",
+      "per_thruster_clamp_N": 28.75,
+      "mass_kg": 11.5,
+      "drag_coefficient": 0.8,
+      "drag_area_m2": 0.45,
+      "volume_rule": "Perfect: Volume = MassInKG / WaterDensity (neutral buoyancy)",
+      "centre_of_mass_rule": "Perfect: (loc[0]+loc[2])/2 with z = loc[7].z (UE units)",
+      "actuators": [
+        {
+          "backend_index": 0,
+          "role": "vertical",
+          "position_m": [
+            0.12,
+            -0.2181,
+            0.0809
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 1,
+          "role": "vertical",
+          "position_m": [
+            0.12,
+            0.2181,
+            0.0809
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 2,
+          "role": "vertical",
+          "position_m": [
+            -0.12,
+            0.2181,
+            0.0809
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 3,
+          "role": "vertical",
+          "position_m": [
+            -0.12,
+            -0.2181,
+            0.0809
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 4,
+          "role": "horizontal_vectored",
+          "position_m": [
+            0.1562,
+            -0.0988,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            0.707106781187,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 5,
+          "role": "horizontal_vectored",
+          "position_m": [
+            0.1562,
+            0.0988,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            -0.707106781187,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 6,
+          "role": "horizontal_vectored",
+          "position_m": [
+            -0.1562,
+            0.0988,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            0.707106781187,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 7,
+          "role": "horizontal_vectored",
+          "position_m": [
+            -0.1562,
+            -0.0988,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            -0.707106781187,
+            0.0
+          ]
+        }
+      ],
+      "files": {
+        "engine/Source/Holodeck/Agents/Public/BlueROV2.h": "c5e5a0a725bd2a55851a8523789b0ae47facf57b87046f345ad4cdc0d99547ca",
+        "engine/Source/Holodeck/Agents/Private/BlueROV2.cpp": "c3a7da116e5346ce19aefaf9be72312d2a1cbaf51604371f46969cf8086209ec"
+      }
+    },
+    "HoveringAUV": {
+      "agent_type": "HoveringAUV",
+      "control_scheme_thrusters": 0,
+      "actuator_count": 8,
+      "per_thruster_clamp_expression": "AUV_MAX_LIN_ACCEL * 31.02\n\t/ 4",
+      "per_thruster_clamp_N": 77.55,
+      "mass_kg": 31.02,
+      "drag_coefficient": 0.8,
+      "drag_area_m2": 0.5,
+      "volume_rule": "Perfect: Volume = MassInKG / WaterDensity (neutral buoyancy)",
+      "centre_of_mass_rule": "Perfect: (loc[0]+loc[2])/2 with z = loc[7].z (UE units)",
+      "actuators": [
+        {
+          "backend_index": 0,
+          "role": "vertical",
+          "position_m": [
+            0.24805,
+            -0.2214,
+            -0.0379
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 1,
+          "role": "vertical",
+          "position_m": [
+            0.24805,
+            0.2214,
+            -0.0379
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 2,
+          "role": "vertical",
+          "position_m": [
+            -0.24805,
+            0.2214,
+            -0.0379
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 3,
+          "role": "vertical",
+          "position_m": [
+            -0.24805,
+            -0.2214,
+            -0.0379
+          ],
+          "direction": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "backend_index": 4,
+          "role": "horizontal_vectored",
+          "position_m": [
+            0.14015,
+            -0.1823,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            0.707106781187,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 5,
+          "role": "horizontal_vectored",
+          "position_m": [
+            0.14015,
+            0.1823,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            -0.707106781187,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 6,
+          "role": "horizontal_vectored",
+          "position_m": [
+            -0.14015,
+            0.1823,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            0.707106781187,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 7,
+          "role": "horizontal_vectored",
+          "position_m": [
+            -0.14015,
+            -0.1823,
+            0.0
+          ],
+          "direction": [
+            0.707106781187,
+            -0.707106781187,
+            0.0
+          ]
+        }
+      ],
+      "files": {
+        "engine/Source/Holodeck/Agents/Public/HoveringAUV.h": "c42329d083653c552a79ebbaa525220d3ef3be0039e03e271a012449d99e55c6",
+        "engine/Source/Holodeck/Agents/Private/HoveringAUV.cpp": "db08f344efeaae9bab69ec748d5b646077f116ddc1ecd648726df529e27c895e"
+      }
+    },
+    "SurfaceVessel": {
+      "agent_type": "SurfaceVessel",
+      "control_scheme_thrusters": 0,
+      "actuator_count": 2,
+      "per_thruster_clamp_N": 1500.0,
+      "mass_kg": 200.0,
+      "actuators": [
+        {
+          "backend_index": 0,
+          "role": "stern_thruster",
+          "position_m": [
+            -2.5,
+            1.0,
+            0.0
+          ],
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "backend_index": 1,
+          "role": "stern_thruster",
+          "position_m": [
+            -2.5,
+            -1.0,
+            0.0
+          ],
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "files": {
+        "engine/Source/Holodeck/Agents/Public/SurfaceVessel.h": "97f89b5432c225e0d5ee6990dcd48fd6951b5c6ab780dd3131d83bee9f2cafe5",
+        "engine/Source/Holodeck/Agents/Private/SurfaceVessel.cpp": "1144c9082c14f3f7d3f63c7081caeb8fe70817d7de809053fffc358a71367bca"
+      }
+    },
+    "TorpedoAUV": {
+      "agent_type": "TorpedoAUV",
+      "control_scheme_thrusters": 0,
+      "actuator_count": 1,
+      "per_thruster_clamp_N": 100.0,
+      "fin_limit_deg": 45.0,
+      "mass_kg": 36.0,
+      "drag_coefficient": 0.05,
+      "drag_area_m2": 0.5,
+      "actuators": [
+        {
+          "backend_index": 0,
+          "role": "propeller",
+          "position_m": [
+            -1.2,
+            -0.0,
+            0.0
+          ],
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "notes": "Fins are control surfaces without an electrical model in this extraction.",
+      "files": {
+        "engine/Source/Holodeck/Agents/Public/TorpedoAUV.h": "938f2165cd124b00ce9a887185a1f85d1fb44777bd63e89fbaf712371022b1a7",
+        "engine/Source/Holodeck/Agents/Private/TorpedoAUV.cpp": "33b832d1d92d0254c834453c79e9dbb66a171987a7cac368d9747dba1526302a"
+      }
+    }
+  },
+  "scope": "Simulator-exact geometry and clamps of the HoloOcean agents. They are not measured geometries of the physical vehicles the agents resemble."
+}

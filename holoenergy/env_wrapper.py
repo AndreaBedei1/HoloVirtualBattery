@@ -6,6 +6,7 @@ from math import isclose
 
 from ._validation import ConfigurationError, keys, number
 from .accounting import EnergyRuntime
+from .actuation import WRENCH_TOLERANCE, ActuationLayer
 from .config import load_config, model_warnings
 from .logging import EnergyLogger
 from .models.battery import make_battery
@@ -41,6 +42,7 @@ class EnergyAwareEnv:
         thermal_type = IdealThermalModel if self.config["fidelity_level"] == "L0" else ThermalModel
         self.thermal = thermal_type(self.config["thermal"])
         self.propulsion = PropulsionModel(self.config["propulsion"])
+        self.actuation = ActuationLayer(self.propulsion, self.config.get("actuation"))
         if not self.propulsion.min_voltage <= self.battery.nominal_V <= self.propulsion.max_voltage:
             raise ConfigurationError(
                 "Battery nominal_voltage_V is incompatible with the actuator voltage domain"
@@ -106,6 +108,7 @@ class EnergyAwareEnv:
         self.step_index = 0
         self._faulted = False
         self._closed = False
+        self.load_sources = []
         self.energy = EnergyRuntime(self)
         self.telemetry = telemetry
         if telemetry is None and self.config.get("telemetry", {}).get("enabled", False):
@@ -142,7 +145,7 @@ class EnergyAwareEnv:
                 raise ConfigurationError("Runtime HoloOcean agent type does not match the contract")
         checks = {
             "action_units": self.propulsion.units,
-            "thruster_count": self.propulsion.count,
+            "thruster_count": self.actuation.backend_count,
         }
         if "expected_agent_type" in expected:
             checks["agent_type"] = expected["expected_agent_type"]
@@ -161,9 +164,10 @@ class EnergyAwareEnv:
     def _backend_action_limit(self, action):
         """Respect public simulator bounds before estimating applied thruster loads."""
         space = getattr(self.env, "action_space", None)
-        if space is None:
+        if space is None or self.actuation.mapping != "direct":
+            # Virtual layouts: the native clamp is enforced by the native re-allocation.
             return 1.0
-        if tuple(space.shape) != (self.propulsion.count,):
+        if tuple(space.shape) != (self.actuation.backend_count,):
             raise ConfigurationError(
                 "Runtime action space is not the configured direct thruster vector"
             )
@@ -176,6 +180,9 @@ class EnergyAwareEnv:
             high = [high] * self.propulsion.count
         if len(low) != self.propulsion.count or len(high) != self.propulsion.count:
             raise ConfigurationError("Simulator action bounds must match the thruster count")
+        order = self.actuation.backend_index
+        low = [low[i] for i in order]
+        high = [high[i] for i in order]
         factor = 1.0
         for a, lo, hi in zip(action, low, high, strict=True):
             lo = number(float(lo), "simulator action lower bound", maximum=0)
@@ -189,11 +196,50 @@ class EnergyAwareEnv:
     @staticmethod
     def _action_like(original, values):
         if hasattr(original, "dtype") and hasattr(original, "copy"):
+            if len(original) != len(values):
+                import numpy as np
+
+                return np.asarray(values, dtype=float)
             # Keep floating precision even if caller passed an integer numpy array.
             return original.astype(float, copy=True) * 0 + values
         if isinstance(original, tuple):
             return tuple(values)
         return list(values)
+
+    LOAD_CATEGORIES = ("communications", "sensors", "compute", "auxiliaries")
+
+    def attach(self, source):
+        """Attach an event-driven electrical load (e.g. a communication energy adapter).
+
+        ``source.consume(t_end_s)`` must return ``{device: {state: energy_J}}`` accrued
+        since its previous call; ``source.category`` selects the energy category.  The
+        source only *observes* its own simulator; HoloEnergy does not feed back into it.
+        """
+        consume = getattr(source, "consume", None)
+        category = getattr(source, "category", None)
+        if not callable(consume) or category not in self.LOAD_CATEGORIES:
+            raise ConfigurationError(
+                "Load source needs consume(t_end_s) and a category in " + str(self.LOAD_CATEGORIES)
+            )
+        if any(s is source for s in self.load_sources):
+            raise ConfigurationError("Load source already attached")
+        self.load_sources.append(source)
+        return source
+
+    def _external_loads(self, dt):
+        energies, categories = {}, {}
+        for source in self.load_sources:
+            for device, states in source.consume(self.time_s + dt).items():
+                if device in energies or device in self.payload.components:
+                    raise ConfigurationError(f"Duplicate electrical device name {device}")
+                clean = {}
+                for state, joules in states.items():
+                    if joules < -1e-9:
+                        raise ConfigurationError(f"{device}: negative energy from load source")
+                    clean[state] = max(0.0, float(joules))
+                energies[device] = clean
+                categories[device] = source.category
+        return energies, categories
 
     def set_payload_state(self, name, state):
         self.payload.set_state(name, state)
@@ -300,8 +346,16 @@ class EnergyAwareEnv:
     def _one_tick(self, action, original, kwargs):
         self._validate_contract()
         dt, t = self.dt_s, self.thermal.temperature_C
+        allocation = None
+        if self.actuation.mode == "wrench":
+            requested_wrench = list(action)
+            allocation = self.actuation.allocate(requested_wrench, self.battery.ocv(t))
+            action = list(allocation.forces_N)
         sensor_requested = self.payload.preview(dt)
         sensor_demand = dict(sensor_requested)
+        external_J, external_category = self._external_loads(dt)
+        external_W = {d: sum(v.values()) / dt for d, v in external_J.items()}
+        external_total_W = sum(external_W.values())
         disconnected = {
             name for name, item in self.payload.components.items() if not item.power_ready
         }
@@ -309,7 +363,7 @@ class EnergyAwareEnv:
             sensor_requested[name] = 0.0
         plan = self.power_manager.plan(
             action,
-            sum(sensor_requested.values()),
+            sum(sensor_requested.values()) + external_total_W,
             self.hotel.power_W,
             dt,
             action_factor_limit=self._backend_action_limit(action),
@@ -329,12 +383,22 @@ class EnergyAwareEnv:
                 sensor_requested[name] = 0.0
             plan = self.power_manager.plan(
                 action,
-                sum(sensor_requested.values()),
+                sum(sensor_requested.values()) + external_total_W,
                 self.hotel.power_W,
                 dt,
                 action_factor_limit=self._backend_action_limit(action),
             )
-        outgoing = self._action_like(original, plan.action) if self.apply_derating else original
+        forces_out = plan.action if self.apply_derating else action
+        backend_residual, backend_info = 0.0, {}
+        if self.actuation.mode == "wrench" or self.actuation.backend_index != list(
+            range(self.propulsion.count)
+        ):
+            backend_vector, backend_residual, backend_info = self.actuation.backend_action(
+                forces_out
+            )
+            outgoing = self._action_like(original, backend_vector)
+        else:
+            outgoing = self._action_like(original, plan.action) if self.apply_derating else original
         try:
             state = self.env.step(outgoing, **kwargs)
         except Exception:
@@ -439,8 +503,13 @@ class EnergyAwareEnv:
             else False,
             "applied_action": applied,
             "actions_derated": self.apply_derating,
-            "dynamics_energy_consistent": self.apply_derating
-            or all(isclose(a, b, abs_tol=1e-9) for a, b in zip(action, plan.action, strict=True)),
+            "dynamics_energy_consistent": (
+                self.apply_derating
+                or all(
+                    isclose(a, b, abs_tol=1e-9) for a, b in zip(action, plan.action, strict=True)
+                )
+            )
+            and backend_residual <= WRENCH_TOLERANCE,
             "temperature_outside_calibration": self.battery.temperature_outside_calibration(t),
             "model_warnings": self.warnings,
             "step_completed": True,
@@ -454,18 +523,38 @@ class EnergyAwareEnv:
         component_powers.update(
             {n: p * plan.auxiliary_service_factor for n, p in self.hotel.components.items()}
         )
+        served_external = {d: p * plan.auxiliary_service_factor for d, p in external_W.items()}
+        component_powers.update(served_external)
         category_power = {
             k: sum(served_sensors[n] for n, c in self.payload.components.items() if c.category == k)
-            for k in ("sensors", "compute", "auxiliaries")
+            + sum(p for d, p in served_external.items() if external_category[d] == k)
+            for k in ("sensors", "compute", "auxiliaries", "communications")
         }
+        state_energy = {
+            name: {item.state.value: served_sensors[name] * dt}
+            for name, item in self.payload.components.items()
+        }
+        state_energy.update(
+            {
+                d: {s: j * plan.auxiliary_service_factor for s, j in v.items()}
+                for d, v in external_J.items()
+            }
+        )
         row.update(
             power_sensors_W=category_power["sensors"],
             power_compute_W=category_power["compute"],
+            power_communications_W=category_power["communications"],
+            power_external_requested_W=external_total_W,
             power_auxiliary_W=category_power["auxiliaries"] + plan.hotel_power_W,
+            component_state_energy_J=state_energy,
             component_power_W=component_powers,
             component_states={
                 **row["sensor_states"],
-                **{n: "ACTIVE" for n in component_powers if n not in served_sensors},
+                **{
+                    n: "EVENT_DRIVEN" if n in served_external else "ACTIVE"
+                    for n in component_powers
+                    if n not in served_sensors
+                },
             },
             component_power_status=dict(row["sensor_power_status"]),
             actuator_power_W=dict(zip(self.propulsion.ids, plan.thruster_power_W, strict=True)),
@@ -499,6 +588,24 @@ class EnergyAwareEnv:
             vehicle_dynamics_status=self.dynamics_status,
             **self._vehicle_observation(state),
         )
+        if self.actuation.allocator is not None:
+            applied_wrench = self.actuation.allocator.wrench(applied)
+            row["actuation"] = {
+                "action_mode": self.actuation.mode,
+                "mapping": self.actuation.mapping,
+                "requested_wrench": requested_wrench if allocation is not None else None,
+                "allocated_wrench": None
+                if allocation is None
+                else list(allocation.achieved_wrench),
+                "allocation_residual_norm": None
+                if allocation is None
+                else allocation.residual_norm,
+                "allocation_saturated": [] if allocation is None else list(allocation.saturated),
+                "applied_wrench": list(applied_wrench),
+                "backend_action": [float(v) for v in outgoing],
+                "backend_residual_norm": backend_residual,
+                **backend_info,
+            }
         self.energy.record(row)
         row["endurance_estimates"] = self.energy.endurance()
         if self.telemetry is not None:
@@ -524,6 +631,8 @@ class EnergyAwareEnv:
             "unmet_power_W",
             "power_sensors_W",
             "power_compute_W",
+            "power_communications_W",
+            "power_external_requested_W",
             "power_auxiliary_W",
         ):
             row[key] = sum(r[key] for r in rows) / count
@@ -544,6 +653,13 @@ class EnergyAwareEnv:
         }
         for key in ("component_power_W", "actuator_power_W"):
             row[key] = {name: sum(r[key][name] for r in rows) / count for name in row[key]}
+        merged = {}
+        for r in rows:
+            for device, states in r["component_state_energy_J"].items():
+                target = merged.setdefault(device, {})
+                for state, joules in states.items():
+                    target[state] = target.get(state, 0.0) + joules
+        row["component_state_energy_J"] = merged
         row["actuators"] = {
             name: {**item, "power_W": row["actuator_power_W"][name]}
             for name, item in row["actuators"].items()
@@ -563,7 +679,11 @@ class EnergyAwareEnv:
             raise RuntimeError("Environment advancement failed; reset before stepping again")
         if isinstance(ticks, bool) or not isinstance(ticks, int) or ticks <= 0:
             raise ValueError("ticks must be a positive integer")
-        values = self.propulsion.validate_action(action)
+        values = (
+            self.actuation.validate_wrench(action)
+            if self.actuation.mode == "wrench"
+            else self.propulsion.validate_action(action)
+        )
         self.step_index += 1
         rows = []
         try:

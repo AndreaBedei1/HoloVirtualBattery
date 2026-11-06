@@ -116,7 +116,7 @@ def _normalize_generic(config):
         raw = config.pop("actuators")
         if not isinstance(raw, list) or not raw:
             raise ConfigurationError("actuators must be a nonempty list")
-        models, identities, units = [], [], set()
+        models, identities, units, geometry, backend_index = [], [], set(), [], []
         for item in raw:
             if not isinstance(item, dict):
                 raise ConfigurationError("Each actuator must be a model/profile mapping")
@@ -126,6 +126,16 @@ def _normalize_generic(config):
             identity = item.pop("id", None)
             unit = item.pop("action_units", "force_N")
             units.add(unit)
+            # Mounting geometry is per physical actuator: one id, one position, one direction.
+            mount = {
+                k: item.pop(k) for k in ("position_m", "direction", "direction_deg") if k in item
+            }
+            index = item.pop("backend_index", None)
+            item.pop("role", None)
+            if (mount or index is not None) and (count != 1 or not identity):
+                raise ConfigurationError(
+                    "Actuator geometry/backend_index require count 1 and an id"
+                )
             for i in range(count):
                 identities.append(
                     f"{identity}_{i + 1}"
@@ -133,6 +143,22 @@ def _normalize_generic(config):
                     else identity or f"T{len(identities) + 1}"
                 )
                 models.append(copy.deepcopy(item))
+                geometry.append({"id": identities[-1], **mount} if mount else None)
+                backend_index.append(index)
+        if any(g is not None for g in geometry):
+            if any(g is None for g in geometry):
+                raise ConfigurationError("Either every actuator declares geometry or none does")
+            actuation = config.setdefault("actuation", {})
+            if "geometry" in actuation:
+                raise ConfigurationError("Declare geometry on actuators or in actuation, not both")
+            actuation["geometry"] = geometry
+        if any(i is not None for i in backend_index):
+            if any(i is None for i in backend_index):
+                raise ConfigurationError(
+                    "Either every actuator declares backend_index or none does"
+                )
+            backend = config.setdefault("actuation", {}).setdefault("backend", {})
+            backend["backend_index"] = backend_index
         if len(units) != 1:
             raise ConfigurationError("Direct action vectors require common actuator action_units")
         config["propulsion"] = {
@@ -203,6 +229,9 @@ def load_config(path=None, *, data=None):
             "environment",
             "payload",
             "telemetry",
+            "actuation",
+            "communications",
+            "evidence",
         },
         "configuration",
     )
