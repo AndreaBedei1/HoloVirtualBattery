@@ -228,3 +228,33 @@ parameters:
   location:
     section: HolodeckCore/Public/HolodeckBuoyantAgent.h
     line: 26 WaterDensity = 997
+- id: holoocean_bluerov2.mass
+  component: holoocean_bluerov2
+  quantity: mass
+  unit: kg
+  value: 11.5
+  bound: exact
+  relation: exact
+  grade: A
+  sources:
+  - HO-SRC-2.3.0
+  location:
+    section: Agents/Private/BlueROV2.cpp
+    line: 16 MassInKG = 11.5
+  notes: Simulator literal used by the chain-closure check (momentum balance); not the mass of a physical BlueROV2 Heavy.
+- id: holoocean_bluerov2.linear_damping
+  component: holoocean_bluerov2
+  quantity: linear_damping_rate
+  unit: 1/s
+  value: 1.0
+  bound: exact
+  relation: exact
+  grade: A
+  sources:
+  - HO-SRC-2.3.0
+  location:
+    section: Agents/Private/BlueROV2.cpp
+    line: 73 RootMesh->SetLinearDamping(1.0)
+  notes: >-
+    Unreal linear damping applied to the body's world-frame velocity (v <- v / (1 + c dt)); acts in
+    addition to the quadratic drag and is zero for a body held still in a current.

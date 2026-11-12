@@ -40,6 +40,8 @@ _LINEAR = {
     "angle": {"rad": 1.0, "deg": 3.141592653589793 / 180},
     "pressure": {"Pa": 1.0, "kPa": 1e3, "MPa": 1e6, "bar": 1e5},
     "density": {"kg/m3": 1.0},
+    # Rate constants (e.g. a linear damping coefficient per unit mass), not frequencies.
+    "rate": {"1/s": 1.0},
 }
 _SI = {
     "power": "W",
@@ -57,6 +59,7 @@ _SI = {
     "angular_speed": "rad/s",
     "resistance": "ohm",
     "frequency": "Hz",
+    "rate": "1/s",
     "bitrate": "bit/s",
     "data": "bit",
     "thermal_capacity": "J/K",
