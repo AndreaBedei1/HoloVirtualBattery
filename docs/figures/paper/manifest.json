@@ -1,0 +1,49 @@
+{
+  "figures": {
+    "F01_architecture": {
+      "caption": "HoloEnergy closed loop: controller wrench -> allocation over the configured actuator layout -> electrical models -> bus -> battery -> available power/derating -> applied forces -> HoloOcean dynamics; DESERT activity is observed, never driven.",
+      "data": null
+    },
+    "F02_evidence_flow": {
+      "caption": "Evidence and provenance flow; grade coverage is provenance, not a confidence interval.",
+      "data": null
+    },
+    "F03_t200_model": {
+      "caption": "T200 electrical model = Blue Robotics static (bollard) force/power tables, interpolated; points are table entries. No published advance-speed data: inflow effects are not modelled.",
+      "data": "F03_t200_model.csv"
+    },
+    "F04_backend_verification": {
+      "caption": "Implementation verification at 100 Hz: the official binary and its unpatched control rebuild apply 0.01x the SI drag; the patched build applies 1.000000x. Verification of the drag equation, not validation of BlueROV2 hydrodynamics.",
+      "data": "F04_backend_verification.csv"
+    },
+    "F06_layouts_station_keeping": {
+      "caption": "Native closed-loop station keeping on the BlueROV2 body (L8-HV simulator-exact; others virtual layouts via wrench-equivalent actuation; separate y-scales). Hatched 'not met': requested wrench not achieved (allocation residual or native clamp) - not comparable.",
+      "data": "F06_layouts_station_keeping.csv"
+    },
+    "F07_orientation_tradeoff": {
+      "caption": "Horizontal thruster angle trades surge against sway cost (0.5 m/s current, native closed loop).",
+      "data": "F07_orientation_tradeoff.csv"
+    },
+    "F08_station_keeping_current": {
+      "caption": "Station keeping: speed-only baselines fitted on the calm-water transit cannot see current-induced effort.",
+      "data": "F08_station_keeping_current.csv"
+    },
+    "F09_payload_breakdown": {
+      "caption": "Mission energy by category for three sensor/compute suites (same native transit).",
+      "data": "F09_payload_breakdown.csv"
+    },
+    "F10_communication_policies": {
+      "caption": "Native DESERT: communication energy of identical traffic under different network strategies (labels: delivered/generated). LISTEN dominates.",
+      "data": "F10_communication_policies.csv"
+    },
+    "F11_mission_with_without_comms": {
+      "caption": "Same native mission with different network strategies: communication energy enters the battery through the observe-only adapter.",
+      "data": "F11_mission_with_without_comms.csv"
+    },
+    "F13_uncertainty_intervals": {
+      "caption": "Interval propagation of published component ranges; sides without published bounds stay open.",
+      "data": "F13_uncertainty_intervals.csv"
+    }
+  },
+  "skipped": {}
+}

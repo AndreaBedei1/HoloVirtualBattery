@@ -1,0 +1,16 @@
+suite,category,Wh
+S0-propulsion-only,propulsion,1.5197773961545478
+S0-propulsion-only,sensors,0.0
+S0-propulsion-only,compute,0.0
+S0-propulsion-only,auxiliaries,0.0
+S0-propulsion-only,battery_losses,0.01644450663610633
+S5-inspection,propulsion,1.514364166885422
+S5-inspection,sensors,0.6699999999999425
+S5-inspection,compute,0.08654166666667376
+S5-inspection,auxiliaries,0.5583333333332885
+S5-inspection,battery_losses,0.03134271311683846
+S6-ai-vision,propulsion,1.5183596943473288
+S6-ai-vision,sensors,0.02047222222221906
+S6-ai-vision,compute,0.32504305555551954
+S6-ai-vision,auxiliaries,0.0
+S6-ai-vision,battery_losses,0.019483722731654517
