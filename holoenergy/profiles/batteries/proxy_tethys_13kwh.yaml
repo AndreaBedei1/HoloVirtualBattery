@@ -1,0 +1,20 @@
+# Tethys primary battery as a literature proxy (L0 ideal bucket). Capacity: P025 (Hobson et al.
+# 2012) Fig. 2 caption, 13 kWh primary battery used for the range estimates. Chemistry, pack
+# voltage and power limit are not reported: the voltage is a flagged placeholder label and the
+# limit stays null (none enforced).
+model: energy_bucket
+chemistry: primary (chemistry not reported)
+capacity_Wh: 13000.0
+nominal_voltage_V: 24.0
+initial_soc: 1.0
+max_power_W: null
+metadata:
+  status: LITERATURE-PROXY
+  evidence:
+    capacity_Wh: tethys.battery_energy_primary
+    nominal_voltage_V: tethys.bus_voltage
+    max_power_W: tethys.battery_power_limit
+  placeholders: [nominal_voltage_V]
+  notes: >-
+    L0 energy accounting is independent of the voltage label when no current limit is set; only
+    reported currents depend on it. Recoverable energy versus load and temperature is not reported.

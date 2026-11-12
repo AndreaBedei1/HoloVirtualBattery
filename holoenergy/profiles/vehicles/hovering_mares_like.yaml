@@ -1,0 +1,81 @@
+# A MARES-derived energy profile applied to the generic HoloOcean 2.3.0 HoveringAUV dynamic class as
+# a literature proxy. It is not a MARES model and not a validated HoloOcean vehicle: geometry, clamp,
+# mass and drag are HoloOcean's (simulator-owned, unchanged); only the electrical models are proxies.
+schema_version: 1
+allow_placeholders: true
+simulation:
+  dt_s: 0.01
+  expected_agent_type: HoveringAUV
+  control_scheme: 0
+vehicle:
+  name: MARES-like literature proxy on HoloOcean HoveringAUV (2.3.0)
+  kind: AUV
+  dynamics_source: HoloOcean native HoveringAUV agent (mass 31.02 kg, Cd 0.8, A 0.5 m2 literals), unchanged
+  dynamics_mode: descriptive
+battery:
+  profile: package:batteries/proxy_mares_600wh.yaml
+environment:
+  water_temperature_C: 15.0
+  metadata: {note: scenario setting (L0 reference temperature), not vehicle evidence}
+actuators:
+  - {id: V1, role: vertical, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [0.24805, -0.2214, -0.0379], direction: [0, 0, 1], backend_index: 0}
+  - {id: V2, role: vertical, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [0.24805, 0.2214, -0.0379], direction: [0, 0, 1], backend_index: 1}
+  - {id: V3, role: vertical, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [-0.24805, 0.2214, -0.0379], direction: [0, 0, 1], backend_index: 2}
+  - {id: V4, role: vertical, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [-0.24805, -0.2214, -0.0379], direction: [0, 0, 1], backend_index: 3}
+  - {id: H1, role: horizontal_vectored, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [0.14015, -0.1823, 0.0], direction: [0.707106781187, 0.707106781187, 0.0], backend_index: 4}
+  - {id: H2, role: horizontal_vectored, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [0.14015, 0.1823, 0.0], direction: [0.707106781187, -0.707106781187, 0.0], backend_index: 5}
+  - {id: H3, role: horizontal_vectored, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [-0.14015, 0.1823, 0.0], direction: [0.707106781187, 0.707106781187, 0.0], backend_index: 6}
+  - {id: H4, role: horizontal_vectored, profile: package:actuators/proxy_mares_thruster.yaml, position_m: [-0.14015, -0.1823, 0.0], direction: [0.707106781187, -0.707106781187, 0.0], backend_index: 7}
+actuation:
+  action_mode: thrusters
+  allocation: {method: redistributed}
+  backend: {mapping: direct, native_clamp_N: 77.55, agent_type: HoveringAUV}
+components:
+  - name: vehicle_hotel
+    device: mares_auv_hotel_load
+    category: auxiliaries
+    relation: proxy
+    states: {ACTIVE: {evidence: mares.hotel_load}}
+    initial_state: ACTIVE
+    notes: Aggregate MARES hotel load (P017 Table I); composition not itemised by the source.
+hotel_load: {constant_W: 0}
+converters:
+  propulsion_efficiency: 1.0
+  payload_efficiency: 1.0
+  hotel_efficiency: 1.0
+  metadata:
+    notes: Source powers are battery-side electrical powers; no separate converter losses are added.
+evidence:
+  propulsion: {record: mares.thruster_force_power_linear, relation: proxy}
+  geometry: {record: holoocean_hoveringauv.actuator_geometry, relation: exact}
+  vehicle_relation: proxy
+power_manager: {apply_derating_to_actions: true}
+metadata:
+  profile_id: hovering-mares-like
+  profile_version: 0.1.0
+  status: literature proxy (grade C electrical models), not a validated HoloOcean vehicle
+  proxy_statement: >-
+    A MARES-derived energy profile was applied to the generic HoloOcean HoveringAUV dynamic class
+    as a literature proxy.
+  relation_to_holoocean_agent: >-
+    proxy. HoloOcean HoveringAUV (8 thrusters: 4 vertical, 4 horizontal vectored; 77.55 N clamp)
+    keeps its simulator-exact geometry, mass and drag. MARES (about 35 kg, 1.7 m) has 4 thrusters
+    (2 stern, 2 through-hull vertical); its per-thruster electrical law is applied to all 8.
+  exact_or_proxy: proxy for every electrical quantity; geometry and backend mapping simulator-exact
+  propulsion_electrical_model: >-
+    Static linear P = kT F per thruster, kT ~ 5 W/N (P017 Eq. 13, estimated by the source from
+    experiments), forward = reverse as assumed by the source; force domain 8 N per thruster.
+  battery: 600 Wh total energy (P017), L0 ideal bucket; voltage placeholder; power limit unreported.
+  hotel_load: 15 W aggregate (P017 Table I).
+  evidence_sources: [P017, P018]
+  validity_range: >-
+    |F| <= 8 N per thruster (derived from P017 Kdu = 4 kg/m and the ~2 m/s surge limit). For the
+    horizontal thrusters the static law equals the source's own surge model only near 0.75 m/s.
+  known_gaps:
+    - kT is an approximation without a published thrust range or forward/reverse asymmetry.
+    - P018 vertical measurements (19.8 W holding about 7 N; 38 W descending at 0.2 m/s) imply
+      about 2.6-2.9 W/N, so kT = 5 W/N may over-predict vertical propulsion power by up to ~1.9x.
+    - P017 surge model (eta = 0.15) gives 2.7x the kT power at 2 m/s; speed dependence is not modelled.
+    - MARES bus voltage and battery power limit are not reported (placeholder label, no limit).
+    - The HoloOcean clamp (77.55 N) far exceeds the 8 N evidence domain; larger demands are limited to it.
+    - No ESC/driver standby power and no thermal model (L0 temperature reference only).

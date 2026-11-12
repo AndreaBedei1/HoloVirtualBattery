@@ -1,0 +1,25 @@
+# REMUS-derived steady-cruise propulsor proxy (literature, grade C). Evidence: proxy_vehicles.yaml
+# record remus.propulsion_steady_cruise_force_power. Electrical propulsion power of the 2000
+# REMUS design (Allen et al., P022, Sec. V-B): 15 W at 3 kn and 110 W at 5.6 kn. Thrust at those
+# speeds = drag, scaled quadratically from the propeller design thrust 3.60 lbf at 4.5 kn
+# (P022 Table 5): 7.117 N and 24.80 N. Forward only: no reverse-thrust evidence exists.
+model: proxy_remus_steady_cruise
+force_power_tables:
+  - voltage_V: 24.0
+    forward: [[0, 0], [7.117, 15.0], [24.80, 110.0]]
+    reverse: null
+metadata:
+  manufacturer: none (WHOI REMUS in-house brushless propulsion; 2000 design)
+  model: REMUS-like steady-cruise propulsor proxy
+  source: P022 (doi:10.1109/oceans.2000.882209) Sec. V-B and Table 5
+  status: LITERATURE-PROXY
+  calibrated: false
+  values_extracted: [propulsion_power_3kn, propulsion_power_5p6kn, design_thrust_4p5kn]
+  assumptions: >-
+    Steady level cruise of the source vehicle (thrust = drag, drag proportional to speed squared).
+    A thrust demand is mapped to the power the REMUS propulsor drew at the speed where its own drag
+    equals that thrust; the advance speed of the simulated body is not used.
+  operational_domain: >-
+    Forward thrust 7.1-24.8 N (3-5.6 kn steady cruise of the source vehicle); 0-7.1 N is a linear
+    interpolation to the origin, not data. Reverse thrust is outside the evidence domain. The
+    24 V label is the 1997 REMUS bus voltage (P029); the 2000 Li-ion pack voltage is not reported.

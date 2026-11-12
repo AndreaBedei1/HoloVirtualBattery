@@ -1,0 +1,77 @@
+# A Tethys-derived energy profile applied to the generic HoloOcean 2.3.0 TorpedoAUV dynamic class as a
+# literature proxy. It is not a Tethys model and not a validated HoloOcean vehicle: geometry, clamp,
+# mass and drag are HoloOcean's (simulator-owned, unchanged); only the electrical models are proxies.
+schema_version: 1
+allow_placeholders: true
+simulation:
+  dt_s: 0.01
+  expected_agent_type: TorpedoAUV
+  control_scheme: 0
+vehicle:
+  name: Tethys-like literature proxy on HoloOcean TorpedoAUV (2.3.0)
+  kind: AUV
+  dynamics_source: HoloOcean native TorpedoAUV agent (mass 36 kg, Cd 0.05, A 0.5 m2 literals), unchanged
+  dynamics_mode: descriptive
+battery:
+  profile: package:batteries/proxy_tethys_13kwh.yaml
+environment:
+  water_temperature_C: 15.0
+  metadata: {note: scenario setting (L0 reference temperature), not vehicle evidence}
+actuators:
+  - {id: P1, role: propeller, profile: package:actuators/proxy_tethys_propulsor.yaml, position_m: [-1.2, 0.0, 0.0], direction: [1, 0, 0], backend_index: 0}
+actuation:
+  action_mode: thrusters
+  backend: {mapping: direct, native_clamp_N: 100, agent_type: TorpedoAUV}
+components:
+  - name: vehicle_hotel
+    device: tethys_lrauv_hotel_load
+    category: auxiliaries
+    relation: proxy
+    includes: [mission_computer, dvl]
+    states: {ACTIVE: {evidence: tethys.hotel_load}}
+    initial_state: ACTIVE
+    notes: >-
+      7 W sea-trial average (5-8 W steady state with the higher-power science instruments off;
+      P025). Higher-power science payloads must be added as separate components.
+hotel_load: {constant_W: 0}
+converters:
+  propulsion_efficiency: 1.0
+  payload_efficiency: 1.0
+  hotel_efficiency: 1.0
+  metadata:
+    notes: Source powers are battery-side electrical powers; no separate converter losses are added.
+evidence:
+  propulsion: {record: tethys.propulsion_force_power_cruise, relation: proxy}
+  geometry: {record: holoocean_torpedoauv.actuator_geometry, relation: exact}
+  vehicle_relation: proxy
+power_manager: {apply_derating_to_actions: true}
+metadata:
+  profile_id: torpedo-tethys-like
+  profile_version: 0.1.0
+  status: literature proxy (grade C electrical models), not a validated HoloOcean vehicle
+  proxy_statement: >-
+    A Tethys-derived energy profile was applied to the generic HoloOcean TorpedoAUV dynamic class
+    as a literature proxy.
+  relation_to_holoocean_agent: >-
+    proxy. HoloOcean TorpedoAUV (1 propeller, 4 fins, 100 N clamp, 36 kg) keeps its
+    simulator-exact geometry, mass and drag. Tethys (105-110 kg, 0.3 m diameter) propulsion and
+    hotel electrical data are attached to its single propeller.
+  exact_or_proxy: proxy for every electrical quantity; propeller geometry simulator-exact
+  propulsion_electrical_model: >-
+    Forward-only table through one measured level-flight point (P032 Sec. III-C): about 12 W for
+    7 N thrust (drag) at 0.96 m/s and 300 rpm (measured propulsive efficiency 0.49).
+  battery: 13 kWh primary battery (P025), L0 ideal bucket; voltage placeholder; power limit unreported.
+  hotel_load: 7 W (range 5-8 W) steady-state hotel with higher-power science instruments off (P025).
+  evidence_sources: [P032, P025]
+  validity_range: >-
+    Forward thrust <= 7 N; only the 7 N point (0.96 m/s level flight) is measured, 0-7 N is
+    interpolated to the origin; reverse thrust is outside the evidence domain (limited to 0).
+  known_gaps:
+    - Single operating point; no measured power at the 0.5 m/s, 2 N design point.
+    - Thrust at fixed rpm depends on advance speed (bollard 18.2 N vs 7 N in flight at 300 rpm);
+      the table is a cruise mapping and advance-speed dependence is not modelled.
+    - The preliminary test used an inefficient motor controller (source); later Tethys propulsion may differ.
+    - Propulsion power traces at 0.6-1.0 m/s exist only as a figure (P025 Fig. 3) and were not digitised.
+    - Fin, buoyancy-engine and mass-shifter power are not modelled; the native TorpedoAUV command
+      is [4 fin angles, thrust] and needs an adapter that inserts the fin angles.
+    - Tethys bus voltage and battery power limit are not reported (placeholder label, no limit).

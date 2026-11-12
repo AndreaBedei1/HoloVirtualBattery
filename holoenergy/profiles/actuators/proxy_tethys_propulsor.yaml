@@ -1,0 +1,23 @@
+# Tethys-derived propulsor proxy (literature, grade C). Evidence: proxy_vehicles.yaml record
+# tethys.propulsion_force_power_cruise. One measured level-flight point (Bellingham et al. 2010,
+# P032, Sec. III-C): about 12 W electrical propulsion power for 7 N thrust (drag) at 0.96 m/s,
+# 300 rpm. Forward only: no reverse-thrust evidence exists.
+model: proxy_tethys_level_flight
+force_power_tables:
+  - voltage_V: 24.0
+    forward: [[0, 0], [7.0, 12.0]]
+    reverse: null
+metadata:
+  manufacturer: none (MBARI direct-drive brushless motor and 2-blade propeller)
+  model: Tethys-like single-point propulsor proxy
+  source: P032 (doi:10.1109/auv.2010.5779645) Sec. III-C
+  status: LITERATURE-PROXY
+  calibrated: false
+  values_extracted: [propulsion_power_level_flight, thrust_drag_level_flight]
+  placeholders: [force_power_tables.0.voltage_V]
+  assumptions: >-
+    Single operating point; the segment from the origin to 7 N is a linear interpolation, which
+    over-predicts power below 7 N if power grows faster than linearly with thrust.
+  operational_domain: >-
+    Forward thrust <= 7 N (level flight at 0.96 m/s). Reverse thrust is outside the evidence
+    domain. The voltage label is a placeholder: the Tethys bus voltage is not reported.

@@ -1,0 +1,628 @@
+# Literature-proxy evidence for the non-BlueROV2 HoloOcean 2.3.0 agent classes.
+#
+# Each record is the value of a REAL source vehicle (MARES, REMUS, Tethys, Autosub Long Range 6000)
+# used as a proxy for a GENERIC HoloOcean dynamic class (HoveringAUV, TorpedoAUV). The relation is
+# therefore `proxy` (grade C at best) even where the number is exact for the source vehicle; an
+# unreported quantity stays `value: null` / `unconfigured` (grade D). Vehicle hydrodynamics, mass
+# and clamps remain HoloOcean's (simulator-owned) and are not changed by these records.
+# Pages are PDF pages of the local copy named in literature.yaml (printed journal pages in `note`).
+# Only numbers and locators are recorded; no source text is reproduced.
+parameters:
+  # --- HoloOcean 2.3.0 TorpedoAUV geometry (simulator-exact; complements actuators.yaml) ---------
+  - id: holoocean_torpedoauv.actuator_geometry
+    component: holoocean_torpedoauv
+    quantity: actuator_geometry
+    unit: null
+    dataset: {path: profiles/holoocean/agents_2.3.0.json, description: "agents.TorpedoAUV.actuators"}
+    bound: exact
+    relation: exact
+    grade: A
+    sources: [HO-SRC-2.3.0]
+    location: {section: "Agents/Public/TorpedoAUV.h thruster; Agents/Private/TorpedoAUV.cpp"}
+    notes: >-
+      One propeller at x = -1.2 m along +x. The native control scheme 0 command is
+      [4 fin angles, thrust]; fins have no electrical model in this extraction.
+
+  # --- MARES (INESC TEC) -> HoloOcean HoveringAUV ---------------------------------------------
+  - id: mares.thruster_force_power_linear
+    component: mares_auv
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    dataset:
+      path: profiles/actuators/proxy_mares_thruster.yaml
+      description: P = kT * F per thruster, kT ~ 5 W/N, sampled at 0 and 8 N, forward = reverse.
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P017]
+    location: {page: 5, section: "V", equation: "13"}
+    conditions:
+      kT_W_per_N: 5
+      scope: per thruster, electrical input power
+      advance_speed: not stated (static approximation)
+      symmetry: forward/reverse equality assumed by the source itself
+    derivation: >-
+      Linear law P_T ~ kT F_T with kT ~ 5 estimated by the source from experimental results;
+      tabulated at F = 8 N (record mares.thruster_force_domain) -> 40 W.
+    notes: >-
+      Cross-checks: (i) P017 Table I surge model P = Kdu u^3 / eta (eta = 0.15) equals the kT law
+      only at u ~ 0.75 m/s (1.1 N per stern thruster) and gives 2.7x the kT power at 2 m/s;
+      (ii) P018 vertical measurements (records mares.vertical_hold_power,
+      mares.vertical_descent_power) imply about 2.6-2.9 W/N if they are pure vertical-thruster
+      power, below kT = 5.
+  - id: mares.thruster_force_domain
+    component: mares_auv
+    quantity: max_thrust_per_actuator
+    unit: N
+    value: 8.0
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P017]
+    location: {page: 3, table: "I", section: "V", note: "Kdu = 4 kg/m in Table I (page 3); surge limited to ~2 m/s by stern-thruster power (page 6)"}
+    derivation: Kdu * u_max^2 / 2 stern thrusters = 4 kg/m * (2 m/s)^2 / 2 = 8 N per thruster.
+    notes: >-
+      Capability-based domain bound; the source gives no rated thrust. P018 measured operating
+      points span only about 3.5-7.3 N per vertical thruster.
+  - id: mares.hotel_load
+    component: mares_auv
+    quantity: electrical_power
+    unit: W
+    value: 15.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P017]
+    location: {page: 3, table: "I"}
+    conditions: {state: ACTIVE}
+    notes: Aggregate hotel load used in the source's range analysis; composition is not itemised.
+  - id: mares.battery_energy
+    component: mares_auv
+    quantity: energy
+    unit: Wh
+    value: 600.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P017]
+    location: {page: 2, section: "II", table: "I", note: "Table I lists E_t = 2.16e6 J"}
+    notes: Total onboard energy; chemistry, pack voltage and usable fraction are not reported.
+  - id: mares.bus_voltage
+    component: mares_auv
+    quantity: supply_voltage
+    unit: V
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Not reported in P017/P018; the profile uses a flagged placeholder voltage label.
+  - id: mares.battery_power_limit
+    component: mares_auv
+    quantity: battery_max_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Not reported; no battery power limit is enforced by the proxy profile.
+  - id: mares.propulsion_efficiency_surge_model
+    component: mares_auv
+    quantity: propulsion_efficiency
+    unit: "1"
+    value: 0.15
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P017]
+    location: {page: 3, table: "I"}
+    notes: >-
+      Overall efficiency in the speed-dependent surge model P = Kdu u^3 / eta. Not used by the
+      static force->power profile (the framework does not feed advance speed).
+  - id: mares.vertical_hold_power
+    component: mares_auv
+    quantity: vehicle_vertical_thrust_power
+    unit: W
+    value: 19.8
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P018]
+    location: {page: 6, section: "II-A", note: "kp1"}
+    conditions:
+      trim: +700 cm3 positive buoyancy (6.9-7.0 N with 1000-1025 kg/m3)
+      vertical_speed_m_s: 0
+    notes: >-
+      Experimentally determined power to hold depth. Whether the hotel load is included is not
+      stated; cross-check only, not used by the profile.
+  - id: mares.vertical_descent_power
+    component: mares_auv
+    quantity: vehicle_vertical_thrust_power
+    unit: W
+    value: 38.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P018]
+    location: {page: 6, section: "II-A", note: "kp2"}
+    conditions:
+      trim: +700 cm3 positive buoyancy
+      descent_speed_m_s: 0.2
+      drag_at_0p2_m_s_N: 7.5
+    notes: Cross-check only (see mares.vertical_hold_power).
+
+  # --- AMOUR V (MIT): extracted, profile dropped ------------------------------------------------
+  - id: amour_v.thruster_force_power
+    component: amour_v
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    value: null
+    relation: unsupported
+    grade: D
+    sources: [P019]
+    location: {page: 12, section: "3.3", note: "Kp; Fig. 10 caption on page 13; battery page 5"}
+    notes: >-
+      No per-thruster force->power relation is published. The only propulsion-energy figure is an
+      aggregate payload-holding constant E = Kp m^2 t with Kp ~ 20 W/kg^2 in the text (page 12),
+      while the Fig. 10 simulation uses Kp = 40 W/kg^2 (page 13): an internal factor-2
+      inconsistency. Mapping it to eight HoloOcean thrusters would need an unsupported
+      load-sharing assumption, and no hotel load is reported. Other extracted values: five
+      custom thrusters on Himax HB3630-1000 motors rated 600 W; 4S 18650 pack, 14.8 V nominal,
+      36 Ah, over 500 Wh (page 5); maximum pool speed 1.33 m/s (page 19). The
+      hovering-amour-like profile was therefore not built.
+
+  # --- REMUS (WHOI) -> HoloOcean TorpedoAUV ----------------------------------------------------
+  - id: remus.propulsion_steady_cruise_force_power
+    component: remus_auv
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    dataset:
+      path: profiles/actuators/proxy_remus_propulsor.yaml
+      description: Forward-only (thrust, power) pairs (7.117 N, 15 W) and (24.80 N, 110 W).
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P022]
+    location: {page: 5, section: "V-B", table: "5", figure: "7", note: "Table 5 on page 4"}
+    conditions:
+      characterization: steady level cruise, 3 and 5.6 kn
+      vehicle: 2000 REMUS design (brushless magnetic-coupled drive, new propeller)
+    derivation: >-
+      Thrust = drag at steady cruise, drag scaled with speed squared from the propeller design
+      thrust 3.60 lbf (16.01 N) at 4.5 kn (Table 5): 16.01 (3/4.5)^2 = 7.117 N at 3 kn and
+      16.01 (5.6/4.5)^2 = 24.80 N at 5.6 kn; paired with the stated propulsion power at those speeds.
+    notes: >-
+      Implied overall efficiency F v / P is 0.73 (3 kn) and 0.65 (5.6 kn), high relative to
+      Tethys (0.49) and ALR6000 (0.26-0.38); the source notes that the origin of the gains was not
+      yet measured on a dynamometer. The design thrust implies C_D ~ 0.21 on 0.029 m2 frontal area
+      (source estimate 0.20 for the modified sidescan vehicle; 0.267 measured on the earlier vehicle).
+  - id: remus.propulsion_power_3kn
+    component: remus_auv
+    quantity: propulsion_electrical_power
+    unit: W
+    value: 15.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P022]
+    location: {page: 5, section: "V-B"}
+    conditions: {speed_kn: 3, vehicle: 2000 design}
+    notes: The previous design drew about 65 W at 3.2 kn (same section).
+  - id: remus.propulsion_power_5p6kn
+    component: remus_auv
+    quantity: propulsion_electrical_power
+    unit: W
+    value: 110.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P022]
+    location: {page: 5, section: "V-B"}
+    conditions: {speed_kn: 5.6, regime: top speed of the 2000 design}
+  - id: remus.propeller_design_thrust_4p5kn
+    component: remus_auv
+    quantity: propeller_thrust
+    unit: lbf
+    value: 3.60
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P022]
+    location: {page: 4, table: "5"}
+    conditions: {vehicle_speed_kn: 4.5, propeller_rpm: 1525, developed_power_W: 45.7, QPC: 0.811}
+    notes: Lifting-line design prediction (not a thrust measurement).
+  - id: remus.hotel_load_1997
+    component: remus_auv
+    quantity: electrical_power
+    unit: W
+    value: 19.4
+    bound: budget
+    relation: proxy
+    grade: C
+    sources: [P029]
+    location: {page: 6, section: "III-A", note: "itemised table"}
+    conditions:
+      state: BASELINE
+      controller: PC-104 486SX
+      items_W: {mother_board: 3, cpu_486sx: 5, flash_disk: 0.25, dsp_board: 2.15, motor_driver_boards_x3: 7, motors_x3: 2}
+    notes: >-
+      1997 vehicle without the later sensor suite; the three motors include the fin actuators.
+      The same section reports 20 W main-thruster power at 1.5 m/s for that earlier vehicle.
+  - id: remus100.hotel_power_nominal
+    component: remus100_auv
+    quantity: electrical_power
+    unit: W
+    value: 60.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P023]
+    location: {page: 3, section: "IV"}
+    conditions: {state: SURVEY_NOMINAL, model: "J = 0.53, Cp = 0.12, d = 0.14 m"}
+    notes: >-
+      Nominal hotel power of the REMUS 100 power model (vehicle with INS, DVL and ADCP). Do not
+      add separate INS/DVL/ADCP components when this state is used.
+  - id: remus100.scripps_lap1_energy
+    component: remus100_auv
+    quantity: energy
+    unit: Wh
+    value: 46.6
+    bound: measured_mean
+    relation: proxy
+    grade: C
+    sources: [P023]
+    location: {page: 5, table: "I"}
+    conditions: {distance_m: 2051, elapsed_s: 1105, mean_rpm: 1381, scope: total vehicle energy}
+    notes: Derived mean total power 151.8 W at 1.86 m/s. Cross-check only.
+  - id: remus100.scripps_lap3_energy
+    component: remus100_auv
+    quantity: energy
+    unit: Wh
+    value: 40.2
+    bound: measured_mean
+    relation: proxy
+    grade: C
+    sources: [P023]
+    location: {page: 5, table: "I"}
+    conditions: {distance_m: 1976, elapsed_s: 1550, mean_rpm: 962, scope: total vehicle energy}
+    notes: >-
+      Derived mean total power 93.4 W at 1.27 m/s. With the 60 W nominal hotel, propulsion would
+      be about 33 W (1.27 m/s) and 92 W (1.86 m/s); a power-law interpolation of the 2000-design
+      points (15 W at 1.54 m/s, 110 W at 2.88 m/s) gives about 8 W and 27 W at the same speeds:
+      the REMUS lineage does not share one propulsion characteristic.
+  - id: remus.battery_energy_2000
+    component: remus_auv
+    quantity: energy
+    unit: Wh
+    value: 1000.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P022]
+    location: {page: 5, section: "V-B"}
+    notes: Lithium-ion pack replacing a 300 Wh lead-acid pack; voltage and cells not reported.
+  - id: remus.bus_voltage_1997
+    component: remus_auv
+    quantity: supply_voltage
+    unit: V
+    value: 24.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P029]
+    location: {page: 2, section: "II-C"}
+    conditions: {pack: 48 x 2 V 5 Ah sealed lead-acid cells in four 12-cell packs, rated 480 Wh}
+    notes: Bus of the 1997 vehicle; used as the voltage label of the 2000-design proxy.
+  - id: remus.battery_power_limit
+    component: remus_auv
+    quantity: battery_max_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Not reported; no battery power limit is enforced by the proxy profile.
+
+  # --- Tethys LRAUV (MBARI) -> HoloOcean TorpedoAUV --------------------------------------------
+  - id: tethys.propulsion_force_power_cruise
+    component: tethys_lrauv
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    dataset:
+      path: profiles/actuators/proxy_tethys_propulsor.yaml
+      description: Forward-only single measured point (7 N, 12 W) plus the origin.
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P032]
+    location: {page: 6, section: "III-C"}
+    conditions: {speed_m_s: 0.96, propeller_rpm: 300, taylor_wake_factor_1_minus_w: 0.87}
+    derivation: Measured propulsion power (about 12 W) paired with the stated 7 N thrust (drag).
+    notes: >-
+      Only one operating point is measured. The 0.5 m/s design point (2 N, record
+      tethys.low_speed_design_thrust) has no measured power. Bollard pull at the same 300 rpm is
+      18.2 N (record tethys.bollard_thrust_300rpm), so thrust at fixed rpm depends strongly on
+      advance speed: the table is a cruise mapping, not a propeller map.
+  - id: tethys.propulsion_power_level_flight
+    component: tethys_lrauv
+    quantity: propulsion_electrical_power
+    unit: W
+    value: 12.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P032]
+    location: {page: 6, section: "III-C"}
+    conditions: {speed_m_s: 0.96, propeller_rpm: 300, thrust_drag_N: 7}
+    notes: Motor system plus propeller; preliminary test with an inefficient motor controller.
+  - id: tethys.propulsive_efficiency_measured
+    component: tethys_lrauv
+    quantity: propulsion_efficiency
+    unit: "1"
+    value: 0.49
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P032]
+    location: {page: 6, section: "III-C"}
+    derivation: 7 N x 0.96 m/s x 0.87 / 12 W (computed by the source).
+    notes: Expected 0.53 = motor system 0.66 (dynamometer) x propeller 0.8.
+  - id: tethys.bollard_thrust_300rpm
+    component: tethys_lrauv
+    quantity: propeller_thrust
+    unit: N
+    value: 18.2
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P032]
+    location: {page: 6, table: "I"}
+    conditions: {advance_speed_m_s: 0, propeller_rpm: 300}
+    notes: Predicted 16.0 N; at 150 rpm measured 4.4 N (predicted 4.0 N). No power reported.
+  - id: tethys.low_speed_design_thrust
+    component: tethys_lrauv
+    quantity: propeller_thrust
+    unit: N
+    value: 2.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P032]
+    location: {page: 5, section: "II-C"}
+    conditions: {speed_m_s: 0.5, motor_torque_Nm: 0.07}
+    notes: Design requirement; no measured power at this operating point.
+  - id: tethys.hotel_load
+    component: tethys_lrauv
+    quantity: electrical_power
+    unit: W
+    value: 7.0
+    value_min: 5.0
+    value_max: 8.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P025]
+    location: {page: 2, section: "I-B 3) and 4)", note: "5-8 W steady state on page 2; 7 W sea-trial average on page 3"}
+    conditions: {state: ACTIVE, payload: higher-power science instruments off}
+    notes: P032 (page 2, Sec. I-A) estimated 8 W as achievable at design time.
+  - id: tethys.battery_energy_primary
+    component: tethys_lrauv
+    quantity: energy
+    unit: kWh
+    value: 13.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P025]
+    location: {page: 3, figure: "2"}
+    notes: >-
+      Primary battery energy assumed in the source's range estimates; 1800 km at 1 m/s was
+      demonstrated with a primary battery (page 2). Chemistry and voltage are not reported.
+  - id: tethys.bus_voltage
+    component: tethys_lrauv
+    quantity: supply_voltage
+    unit: V
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Not reported in P025/P032; the profile uses a flagged placeholder voltage label.
+  - id: tethys.battery_power_limit
+    component: tethys_lrauv
+    quantity: battery_max_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: Not reported; no battery power limit is enforced by the proxy profile.
+
+  # --- Autosub Long Range 6000 (NOC) -> HoloOcean TorpedoAUV ----------------------------------
+  - id: alr6000.propulsion_force_power_cruise
+    component: autosub_lr6000
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    dataset:
+      path: profiles/actuators/proxy_alr6000_propulsor.yaml
+      description: Forward-only (D(U), P(U)) at U = 0.4-0.8 m/s from Eq. 7 and Eq. 12.
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 8, equation: "12", figure: "12", note: "Eq. 7 and C_DV on page 5; Table I on page 2"}
+    conditions: {net_buoyancy_N: 25, measurement: propulsion current x battery voltage vs mean advance speed}
+    derivation: >-
+      D(U) = 0.5 * 1025 * 0.049 * 1.3^(2/3) * U^2 = 29.912 U^2 N (Eq. 7, rho assumed by the
+      source); P(U) = 70.145 U^2.4333 W (Eq. 12); rows at U = 0.4, 0.5, 0.6, 0.7, 0.8 m/s. The
+      implied D U / P (0.25 at 0.4 m/s, 0.38 at 0.8 m/s) reproduces the source's 26-38 %.
+  - id: alr6000.propulsion_power_fit
+    component: autosub_lr6000
+    quantity: propulsion_electrical_power
+    unit: W
+    value: 70.145
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 8, equation: "12", figure: "12"}
+    conditions: {form: "P = a U^b with U in m/s", b: 2.4333}
+    derivation: Coefficient a of the source's first-order best fit (power at U = 1 m/s by the fit).
+    notes: Measured points lie between about 0.5 and 0.73 m/s (read from Fig. 12 axes).
+  - id: alr6000.volumetric_drag_coefficient
+    component: autosub_lr6000
+    quantity: drag_coefficient
+    unit: "1"
+    value: 0.049
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 5, section: "IV-C"}
+    conditions: {method: full-scale wind tunnel, reynolds_range: "1.3e6-3.2e6"}
+  - id: alr6000.hydrodynamic_displacement
+    component: autosub_lr6000
+    quantity: volume
+    unit: m3
+    value: 1.3
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 2, table: "I"}
+  - id: alr6000.holistic_propulsion_efficiency
+    component: autosub_lr6000
+    quantity: propulsion_efficiency
+    unit: "1"
+    value_min: 0.26
+    value_max: 0.38
+    bound: range
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 8, section: "IV-E"}
+    conditions: {speed_range_m_s: "0.4-0.8"}
+  - id: alr6000.hotel_load_minimal_payload
+    component: autosub_lr6000
+    quantity: electrical_power
+    unit: W
+    value: 15.0
+    value_min: 15.0
+    value_max: 20.0
+    bound: measured_mean
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 8, section: "IV-E and V", figure: "10"}
+    conditions: {state: ACTIVE, payload: minimal sensor payload (CTD, ADCP/DVL)}
+    notes: >-
+      Mean nonpropulsive load used for the range prediction; 15-20 W during trials (surface
+      communications). Excludes control-plane actuation. Includes the ~10 W computer and
+      navigation load (record alr6000.computer_navigation_load).
+  - id: alr6000.computer_navigation_load
+    component: autosub_lr6000
+    quantity: electrical_power
+    unit: W
+    value: 10.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 5, section: "IV-B"}
+    notes: Part of alr6000.hotel_load_minimal_payload; never add both.
+  - id: alr6000.control_plane_actuation_power
+    component: autosub_lr6000
+    quantity: electrical_power
+    unit: W
+    value: 1.2
+    bound: measured_mean
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 8, section: "IV-E", figure: "11"}
+    conditions: {state: ACTIVE, speed_range_m_s: "0.4-0.8"}
+    notes: Average over the speed range; roughly constant with speed.
+  - id: alr6000.battery_installed_energy
+    component: autosub_lr6000
+    quantity: energy
+    unit: kWh
+    value: 38.0
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 5, section: "IV-A", note: "also Table I on page 2"}
+    conditions: {cells: 560 Tadiran SL2780 Li-SOCl2, configuration: 10 blocks of 7s8p}
+  - id: alr6000.battery_recoverable_energy_25W
+    component: autosub_lr6000
+    quantity: energy
+    unit: kWh
+    value: 27.0
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 5, section: "IV-A"}
+    conditions: {total_power_W: 25, temperature: typical operating temperatures}
+    notes: Below 22 kWh at a 50 W total demand. Not represented by the L0 bucket.
+  - id: alr6000.battery_nominal_voltage
+    component: autosub_lr6000
+    quantity: supply_voltage
+    unit: V
+    value: 25.2
+    bound: nominal
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 5, section: "IV-A"}
+  - id: alr6000.battery_characterized_load_domain
+    component: autosub_lr6000
+    quantity: battery_max_power
+    unit: W
+    value_min: 8.4
+    value_max: 134.4
+    bound: derived
+    relation: proxy
+    grade: C
+    sources: [P024]
+    location: {page: 4, section: "IV-A", equation: "4"}
+    derivation: >-
+      15-240 mW per cell (range over which the capacity fit Eq. 4 was characterised at 5 degC)
+      x 560 cells, assuming equal load sharing, which the source states parallel LTC cells do
+      not achieve.
+    notes: Evidence domain of the cell model, not a rated pack limit; not enforced.
+  - id: alr6000.battery_power_limit
+    component: autosub_lr6000
+    quantity: battery_max_power
+    unit: W
+    value: null
+    relation: unsupported
+    grade: D
+    notes: >-
+      No rated pack power/current limit is reported; no limit is enforced (see
+      alr6000.battery_characterized_load_domain for the characterised cell-load range).
+
+  # --- Surface vessels: extracted, profiles dropped ----------------------------------------------
+  - id: silver_frog.thruster_force_power
+    component: silver_frog_asv
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    value: null
+    relation: unsupported
+    grade: D
+    sources: [P051]
+    location: {page: 4, table: "I", note: "vehicle data on page 2 (printed 192)"}
+    notes: >-
+      Measured data are battery charge per nautical mile of the whole vessel at 2, 4 and 6 kn
+      (1.64, 3.20, 4.90 Ah/nmi; model 1.43, 2.58, 3.81 Ah/nmi). Thrust or resistance appears
+      only as a simulated curve (Fig. 2d), the pack voltage is not stated (twin DC motors rated
+      24 V / 600 W, 60 Ah polymer Li-ion pack, 120 kg catamaran) and the source's own trials show
+      its model under-predicting consumption by 13-29 %. No force->power table can be built
+      without digitising a simulated figure, so surface-silver-frog-like was not built.
+  - id: dual_electric_usv.thruster_force_power
+    component: dual_electric_usv
+    quantity: thrust_to_electrical_power_curve
+    unit: null
+    value: null
+    relation: unsupported
+    grade: D
+    sources: [P052, P053, P054]
+    notes: >-
+      None of the surface-vessel sources gives a thruster force->electrical power relation.
+      P054: design/simulation of a 154 kg monohull with 2 x 600 W rated motors, 48 V DC bus and a
+      32 Ah pack, test speed 1.3 m/s (Tables I-II). P052: kW-scale microgrid simulation. P053:
+      simulated mechanical power F u, stated by the source to be meaningful only in a relative
+      sense. surface-dual-electric was therefore not built.

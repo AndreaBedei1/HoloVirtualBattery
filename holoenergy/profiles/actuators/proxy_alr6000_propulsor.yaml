@@ -1,0 +1,26 @@
+# Autosub Long Range 6000-derived propulsor proxy (literature, grade C). Evidence:
+# proxy_vehicles.yaml record alr6000.propulsion_force_power_cruise. Roper et al. 2021 (P024):
+# measured propulsion demand fit P = 70.145 U^2.4333 (Eq. 12, Fig. 12) and level-flight drag
+# D = 0.5 rho C_DV Vol^(2/3) U^2 (Eq. 7) with C_DV = 0.049, Vol = 1.3 m3, rho = 1025 kg/m3, i.e.
+# D = 29.912 U^2. Rows are (D(U), P(U)) at U = 0.4, 0.5, 0.6, 0.7, 0.8 m/s. Forward only.
+model: proxy_alr6000_cruise_fit
+force_power_tables:
+  - voltage_V: 25.2
+    forward: [[0, 0], [4.786, 7.546], [7.478, 12.987], [10.768, 20.238], [14.657, 29.449], [19.144, 40.755]]
+    reverse: null
+metadata:
+  manufacturer: none (NOC propulsion unit, brushless DC motor and planetary gearbox)
+  model: ALR6000-like steady-cruise propulsor proxy
+  source: P024 (doi:10.1109/joe.2021.3058416) Eq. 7, Eq. 12, Fig. 12, Table I
+  status: LITERATURE-PROXY
+  calibrated: false
+  values_extracted: [propulsion_power_fit, volumetric_drag_coefficient, hydrodynamic_displacement]
+  assumptions: >-
+    Steady level flight (thrust = profile drag of Eq. 7). The fit was measured with about 25 N
+    net buoyancy, so buoyancy-induced drag is folded into the power; the implied holistic
+    efficiency D*U/P is 0.25 at 0.4 m/s and 0.38 at 0.8 m/s, as stated by the source.
+  operational_domain: >-
+    Forward thrust 4.8-19.1 N (0.4-0.8 m/s, the range over which the source quotes the fit;
+    the measured points of Fig. 12 lie between about 0.5 and 0.73 m/s). 0-4.8 N is a linear
+    interpolation to the origin. Reverse thrust is outside the evidence domain. 25.2 V is the
+    reported nominal pack voltage; the power data are not voltage-resolved.

@@ -185,6 +185,25 @@ def custom_battery():
     return run(env, [0, 0, 0, 0, 10, 10, 10, 10])
 
 
+def proxy_auv_profile():
+    """Literature proxy on a generic HoloOcean class (grade C electrical model, not validated).
+
+    A REMUS-derived energy profile applied to the HoloOcean TorpedoAUV dynamic class; the
+    propulsor table is valid for 7.1-24.8 N forward thrust only (see the profile metadata).
+    """
+    contract = {
+        "agent_type": "TorpedoAUV",
+        "control_scheme": 0,
+        "action_units": "force_N",
+        "thruster_count": 1,
+        "dt_s": DT,
+    }
+    env = EnergyAwareEnv(
+        NullBackend(), vehicle_profile="torpedo-remus-like", control_contract=contract
+    )
+    return run(env, [15.0])
+
+
 EXAMPLES = [
     bluerov2_heavy,
     standard_6t_virtual_layout,
@@ -193,6 +212,7 @@ EXAMPLES = [
     compute_workload,
     desert_integration,
     custom_battery,
+    proxy_auv_profile,
 ]
 
 

@@ -9,6 +9,15 @@ from bisect import bisect_left
 from .._validation import ConfigurationError, curve, interpolate, keys, number, required
 from .actuator import make_actuator
 
+# An explicit ``reverse: null`` declares forward-only evidence (e.g. cruise data of a
+# single-propeller AUV): the reverse domain is empty, so any reverse demand is outside it.
+_NO_DATA = {
+    "command_power": ((0.0, 0.0),),
+    "command_force": ((0.0, 0.0),),
+    "force_power": ((0.0, 0.0),),
+    "max_force": 0.0,
+}
+
 
 class ThrusterModel:
     def __init__(self, config):
@@ -23,6 +32,9 @@ class ThrusterModel:
                 raise ConfigurationError("Thruster voltages must be strictly increasing")
             directions = {}
             for direction in ("forward", "reverse"):
+                if direction == "reverse" and "reverse" in table and table["reverse"] is None:
+                    directions[direction] = _NO_DATA
+                    continue
                 rows = required(table, direction)
                 for row in rows:
                     keys(row, {"command", "force_N", "power_W"}, f"thruster {direction}")
@@ -85,7 +97,9 @@ class ThrusterModel:
             return 0.0
         self._voltage_check(voltage)
         direction = "forward" if action > 0 else "reverse"
-        maximum = self.max_force(voltage, direction) if units == "force_N" else 1.0
+        maximum = self.max_force(voltage, direction)
+        if units == "normalized_command":
+            maximum = 1.0 if maximum > 0 else 0.0
         if abs(action) > maximum + 1e-8:
             raise ValueError("Thruster action exceeds the measured force/command domain")
         key = "force_power" if units == "force_N" else "command_power"

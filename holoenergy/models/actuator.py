@@ -71,6 +71,9 @@ def make_actuator(config):
         keys(table, {"voltage_V", "forward", "reverse"}, "force-power voltage table")
         branches = {}
         for direction in ("forward", "reverse"):
+            if direction == "reverse" and "reverse" in table and table["reverse"] is None:
+                branches[direction] = None  # forward-only evidence: no reverse domain
+                continue
             points = curve(required(table, direction), "force-power curve", y_min=0)
             if points[0] != (0, 0) or points[-1][0] <= 0:
                 raise ConfigurationError(

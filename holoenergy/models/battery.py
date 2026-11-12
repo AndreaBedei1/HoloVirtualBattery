@@ -316,13 +316,18 @@ class EnergyBucketBattery:
             required(config, "initial_soc"), "initial_soc", minimum=0, maximum=1
         )
         p = config.get("max_power_W")
-        if "max_current_A" not in config and p is None:
+        # An explicit ``max_power_W: null`` without max_current_A declares an unpublished
+        # limit: none is enforced and the gap is reported (config.model_warnings).
+        self.limit_unconfigured = "max_power_W" in config and p is None
+        if "max_current_A" not in config and p is None and not self.limit_unconfigured:
             raise ConfigurationError("L0 requires max_current_A and/or max_power_W")
-        self.max_current_A = (
-            number(config["max_current_A"], "max_current_A", positive=True)
-            if "max_current_A" in config
-            else number(p, "max_power_W", positive=True) / self.nominal_V
-        )
+        if "max_current_A" in config:
+            self.max_current_A = number(config["max_current_A"], "max_current_A", positive=True)
+            self.limit_unconfigured = False
+        elif p is not None:
+            self.max_current_A = number(p, "max_power_W", positive=True) / self.nominal_V
+        else:
+            self.max_current_A = float("inf")
         self.max_power_W = float("inf") if p is None else number(p, "max_power_W", positive=True)
         self.low_soc_threshold = number(
             config.get("low_soc_threshold", 0.2), "low_soc_threshold", minimum=0, maximum=1

@@ -1,0 +1,23 @@
+# MARES-derived per-thruster electrical proxy (literature, grade C). Evidence: proxy_vehicles.yaml
+# record mares.thruster_force_power_linear. P = kT * F with kT ~ 5 W/N (Cruz 2019, P017, Eq. 13),
+# sampled at the derived 8 N per-thruster domain bound (record mares.thruster_force_domain).
+model: proxy_mares_linear_kT
+force_power_tables:
+  - voltage_V: 24.0
+    forward: [[0, 0], [8.0, 40.0]]
+    reverse: [[0, 0], [8.0, 40.0]]
+metadata:
+  manufacturer: none (MARES uses in-house thrusters; not identified in the cited sources)
+  model: MARES-like linear thruster proxy
+  source: P017 (doi:10.1109/ut.2019.8734437) Eq. 13 and Table I
+  status: LITERATURE-PROXY
+  calibrated: false
+  values_extracted: [kT_W_per_N, surge_drag_constant_Kdu, max_surge_speed]
+  placeholders: [force_power_tables.0.voltage_V]
+  assumptions: >-
+    Static linear law stated by the source; forward = reverse because the source itself assumes
+    symmetric thrusters (it notes this is not entirely accurate). No advance-speed dependence.
+  operational_domain: >-
+    |F| <= 8 N per thruster (derived capability bound). The voltage label is a placeholder: the
+    MARES bus voltage is not reported, and the power values are electrical input power at the
+    source vehicle's own bus.

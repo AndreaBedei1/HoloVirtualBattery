@@ -1,0 +1,90 @@
+# An Autosub Long Range 6000-derived energy profile applied to the generic HoloOcean 2.3.0 TorpedoAUV
+# dynamic class as a literature proxy. It is not an Autosub model and not a validated HoloOcean
+# vehicle: geometry, clamp, mass and drag are HoloOcean's (simulator-owned, unchanged); only the
+# electrical models are proxies.
+schema_version: 1
+allow_placeholders: true
+simulation:
+  dt_s: 0.01
+  expected_agent_type: TorpedoAUV
+  control_scheme: 0
+vehicle:
+  name: Autosub-LR-like literature proxy on HoloOcean TorpedoAUV (2.3.0)
+  kind: AUV
+  dynamics_source: HoloOcean native TorpedoAUV agent (mass 36 kg, Cd 0.05, A 0.5 m2 literals), unchanged
+  dynamics_mode: descriptive
+battery:
+  profile: package:batteries/proxy_alr6000_38kwh.yaml
+environment:
+  water_temperature_C: 15.0
+  metadata: {note: scenario setting (L0 reference temperature), not vehicle evidence}
+actuators:
+  - {id: P1, role: propeller, profile: package:actuators/proxy_alr6000_propulsor.yaml, position_m: [-1.2, 0.0, 0.0], direction: [1, 0, 0], backend_index: 0}
+actuation:
+  action_mode: thrusters
+  backend: {mapping: direct, native_clamp_N: 100, agent_type: TorpedoAUV}
+components:
+  - name: vehicle_hotel
+    device: autosub_lr6000_nonpropulsive_load
+    category: auxiliaries
+    relation: proxy
+    includes: [mission_computer, gps, compass, ctd, adcp_dvl]
+    states: {ACTIVE: {evidence: alr6000.hotel_load_minimal_payload}}
+    initial_state: ACTIVE
+    notes: >-
+      15 W mean nonpropulsive load with the minimal sensor payload (CTD, ADCP/DVL; P024); trials
+      ranged 15-20 W. Excludes control-plane actuation (separate component).
+  - name: control_planes
+    device: autosub_lr6000_control_plane_actuators
+    category: auxiliaries
+    relation: proxy
+    states: {ACTIVE: {evidence: alr6000.control_plane_actuation_power}}
+    initial_state: ACTIVE
+    notes: 1.2 W average control-plane actuation over 0.4-0.8 m/s (P024 Fig. 11).
+hotel_load: {constant_W: 0}
+converters:
+  propulsion_efficiency: 1.0
+  payload_efficiency: 1.0
+  hotel_efficiency: 1.0
+  metadata:
+    notes: Source powers are battery-side electrical powers; no separate converter losses are added.
+evidence:
+  propulsion: {record: alr6000.propulsion_force_power_cruise, relation: proxy}
+  geometry: {record: holoocean_torpedoauv.actuator_geometry, relation: exact}
+  vehicle_relation: proxy
+power_manager: {apply_derating_to_actions: true}
+metadata:
+  profile_id: torpedo-autosub-like
+  profile_version: 0.1.0
+  status: literature proxy (grade C electrical models), not a validated HoloOcean vehicle
+  proxy_statement: >-
+    An Autosub Long Range 6000-derived energy profile was applied to the generic HoloOcean
+    TorpedoAUV dynamic class as a literature proxy.
+  relation_to_holoocean_agent: >-
+    proxy. HoloOcean TorpedoAUV (1 propeller, 4 fins, 100 N clamp, 36 kg) keeps its
+    simulator-exact geometry, mass and drag. ALR6000 (3.5 m, 750 kg dry, 1.3 m3) is a much larger
+    vehicle; its propulsion, hotel and battery electrical data are attached to the single propeller.
+  exact_or_proxy: proxy for every electrical quantity; propeller geometry simulator-exact
+  propulsion_electrical_model: >-
+    Forward-only steady-cruise table from the measured fit P = 70.145 U^2.4333 W (P024 Eq. 12)
+    and the level-flight drag D = 29.912 U^2 N (Eq. 7, C_DV = 0.049, 1.3 m3, 1025 kg/m3),
+    sampled at U = 0.4-0.8 m/s (4.8-19.1 N, 7.5-40.8 W).
+  battery: >-
+    560 Li-SOCl2 primary cells, 25.2 V nominal, 38 kWh installed (P024), L0 ideal bucket at the
+    installed value; power limit unreported.
+  hotel_load: 15 W nonpropulsive (minimal payload) plus 1.2 W control-plane actuation (P024).
+  evidence_sources: [P024, P030]
+  validity_range: >-
+    Forward thrust 4.8-19.1 N (0.4-0.8 m/s steady flight of the source vehicle; measured points
+    about 0.5-0.73 m/s); 0-4.8 N interpolated to the origin; reverse thrust outside the evidence
+    domain (limited to 0). Battery cell model characterised for 8.4-134.4 W pack load (derived).
+  known_gaps:
+    - The fit includes buoyancy-induced drag at about 25 N net buoyancy; thrust is profile drag only.
+    - The table maps thrust to the power ALR6000 drew at its own cruise speed; the simulated
+      TorpedoAUV reaches a different speed for the same thrust, and advance-speed dependence is not modelled.
+    - The L0 bucket uses the 38 kWh installed energy; recoverable energy is about 27 kWh at 25 W
+      and below 22 kWh at 50 W (rate- and temperature-dependent, Eq. 4), so endurance is over-stated.
+    - Battery power/current limit is not reported (no limit enforced).
+    - Fin commands are not modelled; the native TorpedoAUV command is [4 fin angles, thrust] and
+      needs an adapter that inserts the fin angles. P030 (2012 design study) is superseded by
+      P024 measurements and is not used numerically.

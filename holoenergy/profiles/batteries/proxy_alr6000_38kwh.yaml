@@ -1,0 +1,23 @@
+# Autosub Long Range 6000 lithium primary pack as a literature proxy (L0 ideal bucket).
+# P024 (Roper et al. 2021) Sec. IV-A: 560 Tadiran SL2780 Li-SOCl2 bobbin cells, 10 blocks of 7s8p,
+# nominal 25.2 V, about 38 kWh installed. Recoverable energy is load dependent (about 27 kWh at a
+# 25 W total demand, below 22 kWh at 50 W): the ideal bucket uses the installed nominal value and
+# therefore over-states endurance. The pack power/current limit is not reported (null).
+model: energy_bucket
+chemistry: Li-SOCl2 primary (Tadiran SL2780 bobbin cells)
+cells: {series: 7, parallel: 80, cell_model: Tadiran SL2780 (10 blocks of 7s8p)}
+capacity_Wh: 38000.0
+nominal_voltage_V: 25.2
+initial_soc: 1.0
+max_power_W: null
+metadata:
+  status: LITERATURE-PROXY
+  evidence:
+    capacity_Wh: alr6000.battery_installed_energy
+    nominal_voltage_V: alr6000.battery_nominal_voltage
+    max_power_W: alr6000.battery_power_limit
+  recoverable_energy_evidence: [alr6000.battery_recoverable_energy_25W, alr6000.battery_characterized_load_domain]
+  notes: >-
+    The rate- and temperature-dependent cell capacity of the source (Eq. 4) is not represented by
+    the L0 bucket; at 25 W total demand the installed value over-states recoverable energy by
+    about 40 % (38 vs 27 kWh).

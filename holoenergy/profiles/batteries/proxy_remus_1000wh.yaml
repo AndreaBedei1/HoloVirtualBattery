@@ -1,0 +1,19 @@
+# REMUS lithium-ion pack of the 2000 design as a literature proxy (L0 ideal bucket).
+# Capacity: P022 (Allen et al. 2000) Sec. V-B, 1000 Wh lithium-ion (replacing a 300 Wh lead-acid
+# pack). Voltage: 24 V REMUS bus of the 1997 lead-acid vehicle (P029 Sec. II-C); the voltage of the
+# 2000 Li-ion pack is not reported. The power/current limit is not reported (null, none enforced).
+model: energy_bucket
+chemistry: Li-ion (cell type not reported)
+capacity_Wh: 1000.0
+nominal_voltage_V: 24.0
+initial_soc: 1.0
+max_power_W: null
+metadata:
+  status: LITERATURE-PROXY
+  evidence:
+    capacity_Wh: remus.battery_energy_2000
+    nominal_voltage_V: remus.bus_voltage_1997
+    max_power_W: remus.battery_power_limit
+  notes: >-
+    Nominal rated energy; usable energy at temperature and discharge rate is not reported for the
+    Li-ion pack (the 1997 lead-acid pack delivered 85 % of rating at 1.7 A and 20 degC, P029).

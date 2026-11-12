@@ -1,0 +1,19 @@
+# MARES total onboard energy as a literature proxy (L0 ideal bucket). Capacity: P017 (Cruz 2019),
+# Sec. II and Table I (E_t = 2.16e6 J = 600 Wh). Chemistry, pack voltage and power limit are not
+# reported: the voltage is a flagged placeholder label and the limit stays null (none enforced).
+model: energy_bucket
+chemistry: not reported
+capacity_Wh: 600.0
+nominal_voltage_V: 24.0
+initial_soc: 1.0
+max_power_W: null
+metadata:
+  status: LITERATURE-PROXY
+  evidence:
+    capacity_Wh: mares.battery_energy
+    nominal_voltage_V: mares.bus_voltage
+    max_power_W: mares.battery_power_limit
+  placeholders: [nominal_voltage_V]
+  notes: >-
+    L0 energy accounting is independent of the voltage label when no current limit is set; only
+    reported currents depend on it. Usable (recoverable) energy is not reported.

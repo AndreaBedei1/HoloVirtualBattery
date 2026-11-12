@@ -41,6 +41,31 @@ VEHICLES = {
         "relation": "user",
         "summary": "demonstration configuration (user-supplied numbers)",
     },
+    # Literature proxies: a real vehicle's electrical data on a generic HoloOcean dynamic class.
+    "hovering-mares-like": {
+        "file": "vehicles/hovering_mares_like.yaml",
+        "relation": "proxy",
+        "summary": "MARES-derived energy profile on the generic HoloOcean HoveringAUV "
+        "(literature proxy, grade C)",
+    },
+    "torpedo-remus-like": {
+        "file": "vehicles/torpedo_remus_like.yaml",
+        "relation": "proxy",
+        "summary": "REMUS-derived energy profile on the generic HoloOcean TorpedoAUV "
+        "(literature proxy, grade C)",
+    },
+    "torpedo-tethys-like": {
+        "file": "vehicles/torpedo_tethys_like.yaml",
+        "relation": "proxy",
+        "summary": "Tethys-derived energy profile on the generic HoloOcean TorpedoAUV "
+        "(literature proxy, grade C)",
+    },
+    "torpedo-autosub-like": {
+        "file": "vehicles/torpedo_autosub_like.yaml",
+        "relation": "proxy",
+        "summary": "Autosub Long Range 6000-derived energy profile on the generic HoloOcean "
+        "TorpedoAUV (literature proxy, grade C)",
+    },
 }
 BATTERIES = {
     "bluerobotics-4s-18ah": "batteries/bluerobotics_4s18ah_v2.yaml",

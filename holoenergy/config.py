@@ -271,6 +271,16 @@ def model_warnings(config):
     metadata = config.get("battery", {}).get("metadata", {})
     if config.get("fidelity_level") == "L0":
         result.append("L0 temperature is a fixed reference, not a thermal prediction")
+        battery = config.get("battery", {})
+        if (
+            "max_power_W" in battery
+            and battery["max_power_W"] is None
+            and "max_current_A" not in battery
+        ):
+            result.append(
+                "incomplete configuration: battery power/current limit is unpublished "
+                "(max_power_W: null); no battery limit is enforced"
+            )
     elif not metadata.get("temperature_characterized", False):
         result.append("Battery temperature tables are not characterized for this pack")
     return result
