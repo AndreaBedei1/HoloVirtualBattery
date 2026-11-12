@@ -63,7 +63,9 @@ converters:
     evidence: {payload_efficiency: bluerov2.bec_5v_efficiency}
     notes: T200 data already include ESC losses; 5 V supply losses are an unconfigured gap.
 evidence:
-  propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: exact}
+  # Static (bollard) manufacturer curves applied with inflow (current, vehicle motion): the
+  # record is exact for the thruster but only representative of its installed operation.
+  propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: representative}
   battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: exact}
   geometry: {record: holoocean_bluerov2.actuator_geometry, relation: exact}
   vehicle_relation: representative

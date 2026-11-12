@@ -34,7 +34,9 @@ actuation:
       - {id: H3, position_m: [-0.1562, 0.0988, 0.0], direction: [0.7071067811865476, 0.7071067811865476, 0.0]}
       - {id: H4, position_m: [-0.1562, -0.0988, 0.0], direction: [0.7071067811865476, -0.7071067811865476, 0.0]}
 evidence:
-  propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: exact}
+  # Static (bollard) manufacturer curves applied with inflow (current, vehicle motion): the
+  # record is exact for the thruster but only representative of its installed operation.
+  propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: representative}
   battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: exact}
   geometry: {record: null, relation: proxy}
   vehicle_relation: proxy

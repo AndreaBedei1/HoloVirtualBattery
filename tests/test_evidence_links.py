@@ -39,7 +39,7 @@ def test_unmodified_profile_keeps_its_links():
     env = make()
     assert stale(env) == []
     assert env.evidence_map.battery_loss_grade == "C"
-    assert env.evidence_map.propulsion_grade == "A"
+    assert env.evidence_map.propulsion_grade == "B"  # static curves, installed in flow
     env.close()
 
 

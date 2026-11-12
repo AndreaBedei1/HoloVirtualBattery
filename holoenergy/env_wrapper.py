@@ -2,7 +2,7 @@
 
 from collections.abc import Mapping
 from contextlib import ExitStack
-from math import isclose
+from math import isclose, isfinite
 
 from ._validation import ConfigurationError, keys, number
 from .accounting import EnergyRuntime
@@ -143,6 +143,7 @@ class EnergyAwareEnv:
         self._faulted = False
         self._closed = False
         self.load_sources = []
+        self._external_cumulative_J = {}
         self.energy = EnergyRuntime(self)
         self.telemetry = telemetry
         if telemetry is None and self.config.get("telemetry", {}).get("enabled", False):
@@ -259,13 +260,17 @@ class EnergyAwareEnv:
             raise ConfigurationError("Load source already attached")
         grades = getattr(source, "grades", None)
         capabilities = getattr(source, "capabilities", None)
+        relations = getattr(source, "relations", None)
+        bounds = getattr(source, "bounds", None)
         # Registered before the source is accepted: with evidence.double_counting: error a
-        # conflicting source raises and is not attached.
+        # conflicting source raises, is not attached and leaves no evidence state behind.
         self.warnings.extend(
             self.evidence_map.add_external(
                 grades() if callable(grades) else {},
                 capabilities() if callable(capabilities) else (),
                 owner=getattr(source, "name", None),
+                relations=relations() if callable(relations) else None,
+                bounds=bounds() if callable(bounds) else None,
             )
         )
         self.load_sources.append(source)
@@ -273,16 +278,38 @@ class EnergyAwareEnv:
 
     def _external_loads(self, dt):
         energies, categories = {}, {}
+        reserved = set(self.propulsion.ids) | {"hotel_constant"} | set(self.hotel.components)
         for source in self.load_sources:
             for device, states in source.consume(self.time_s + dt).items():
-                if device in energies or device in self.payload.components:
-                    raise ConfigurationError(f"Duplicate electrical device name {device}")
+                if device in energies or device in self.payload.components or device in reserved:
+                    raise ConfigurationError(
+                        f"Duplicate or reserved electrical device name {device}"
+                    )
                 # A late event may move already-charged time between states (e.g. LISTEN ->
-                # TX): one state's window value is then a negative correction. The device's
-                # window energy must stay non-negative; per-state cumulative values stay exact.
-                clean = {state: float(joules) for state, joules in states.items()}
+                # TX): one state's window value is then a negative correction. Each state's
+                # cumulative energy, and the device's window energy, must stay non-negative.
+                clean = {}
+                for state, joules in states.items():
+                    value = float(joules)
+                    if not isfinite(value):
+                        raise ConfigurationError(
+                            f"{device}.{state}: non-finite energy from load source"
+                        )
+                    key = (device, state)
+                    total = self._external_cumulative_J.get(key, 0.0) + value
+                    if total < -1e-9:
+                        raise ConfigurationError(
+                            f"{device}.{state}: cumulative energy from load source became negative"
+                        )
+                    self._external_cumulative_J[key] = total
+                    clean[state] = value
                 if sum(clean.values()) < -1e-9:
                     raise ConfigurationError(f"{device}: negative energy from load source")
+                if device not in self.evidence_map.devices:  # created after attach()
+                    get = {n: getattr(source, n, None) for n in ("grades", "relations", "bounds")}
+                    self.evidence_map.update_grades(
+                        *(get[n]() if callable(get[n]) else None for n in get)
+                    )
                 energies[device] = clean
                 categories[device] = source.category
         return energies, categories
@@ -586,6 +613,11 @@ class EnergyAwareEnv:
                 for d, v in external_J.items()
             }
         )
+        # Constant hotel load and legacy hotel components are energy too: graded by the hotel
+        # evidence link (hotel_constant) or D, never silently left out of the coverage.
+        for name in ("hotel_constant", *self.hotel.components):
+            if name in component_powers:
+                state_energy[name] = {"ACTIVE": component_powers[name] * dt}
         row.update(
             power_sensors_W=category_power["sensors"],
             power_compute_W=category_power["compute"],
@@ -765,6 +797,7 @@ class EnergyAwareEnv:
         self.hotel.reset()
         self.time_s = 0.0
         self.step_index = 0
+        self._external_cumulative_J = {}
         self.episode += 1
         self._faulted = False
         self.energy.reset()

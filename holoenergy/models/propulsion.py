@@ -208,8 +208,11 @@ class PropulsionModel:
         factor = 1.0
         for thruster, a in zip(self.thrusters, action, strict=True):
             if a:
+                direction = "forward" if a > 0 else "reverse"
                 limit = (
-                    1.0
+                    # Normalized commands span [-1, 1] only where the direction has data
+                    # (``reverse: null`` declares none).
+                    (1.0 if thruster.max_force(voltage, direction) > 0 else 0.0)
                     if self.units == "normalized_command"
                     else min(
                         thruster.max_force(v, "forward" if a > 0 else "reverse")

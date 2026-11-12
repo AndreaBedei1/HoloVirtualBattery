@@ -40,6 +40,9 @@ class ModemPowerProfile:
     # DSP/protocol processor). A separate compute load declaring the same capability is a
     # double count (see docs/double_counting_policy.md).
     includes: tuple = ("modem_signal_processing",)
+    relation: str = "exact"
+    # States whose power is a published maximum/upper bound (energy biased upward).
+    upper_bound_states: tuple = ()
 
     def __post_init__(self):
         self.includes = tuple(str(c) for c in self.includes)
@@ -78,7 +81,7 @@ class ModemPowerProfile:
         if relation not in RELATION_MAX_GRADE:
             raise ConfigurationError(f"Unknown modem profile relation {relation}")
         states = data.get("states", {})
-        powers, evidence, grades = {}, {}, {}
+        powers, evidence, grades, bounded = {}, {}, {}, []
         for state, value in states.items():
             if isinstance(value, dict) and "evidence" in value:
                 if registry is None:
@@ -91,6 +94,8 @@ class ModemPowerProfile:
                 use = value.get("use", "value")
                 if use not in ("value", "value_min", "value_max"):
                     raise ConfigurationError(f"{record.id}: use must be value/value_min/value_max")
+                if use == "value_max" or record.bound == "upper_bound":
+                    bounded.append(state)
                 if not record.configured:
                     powers[state] = None
                 elif getattr(record, use) is not None:
@@ -109,6 +114,8 @@ class ModemPowerProfile:
             data.get("medium"),
             data.get("notes"),
             tuple(data.get("includes", ("modem_signal_processing",))),
+            relation,
+            tuple(bounded),
         )
 
 
@@ -257,6 +264,22 @@ class CommunicationEnergyAdapter:
 
     def grades(self):
         return {self.device_name(k): dict(led.profile.grades) for k, led in self.ledgers.items()}
+
+    def _profiles(self):
+        return getattr(self, "interface_profiles", None) or {
+            k: led.profile for k, led in self.ledgers.items()
+        }
+
+    def relations(self):
+        """Relation of each ledger's electrical profile to the real device (for proxy shares)."""
+        return {self.device_name(k): led.profile.relation for k, led in self.ledgers.items()}
+
+    def bounds(self):
+        """Per device, the states whose power is an upper bound."""
+        return {
+            self.device_name(k): {s: "upper_bound" for s in led.profile.upper_bound_states}
+            for k, led in self.ledgers.items()
+        }
 
     def capabilities(self):
         """Functions covered by the attached interfaces' electrical figures."""

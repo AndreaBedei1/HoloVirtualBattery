@@ -82,6 +82,9 @@ class DesertEnergyAdapter(CommunicationEnergyAdapter):
         if mapping and all(isinstance(v, int) for v in mapping.values()):
             mapping = {v: k for k, v in mapping.items()}
         self.node_map = {int(k): str(v) for k, v in mapping.items()}
+        # A numeric DESERT node id is tracked by its scenario name (events carry names).
+        if self.node is not None and str(self.node).isdigit() and int(self.node) in self.node_map:
+            self.node = self.node_map[int(self.node)]
         self.rx_outcomes = frozenset(rx_outcomes)
         self.include_control = bool(include_control)
         self.start_time_s = start_time_s

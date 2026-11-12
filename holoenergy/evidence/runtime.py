@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 
+from .._validation import ConfigurationError
 from . import GRADES, cap_grade, coverage, default_registry
 
 
@@ -25,17 +26,26 @@ def _matches(record, actual):
 
 
 def _dataset_tables(record):
+    """(key, tables) of an actuator dataset: JSON voltage_tables or YAML force_power_tables."""
     import importlib.resources
     import json
 
+    import yaml
+
     path = (record.dataset or {}).get("path")
-    if not path or not path.endswith(".json"):
+    if not path or not path.endswith((".json", ".yaml", ".yml")):
         return None
     try:
-        data = json.loads(importlib.resources.files("holoenergy").joinpath(path).read_text())
-    except (FileNotFoundError, OSError, ValueError):
+        text = importlib.resources.files("holoenergy").joinpath(path).read_text(encoding="utf-8")
+        data = json.loads(text) if path.endswith(".json") else yaml.safe_load(text)
+    except (FileNotFoundError, OSError, ValueError, yaml.YAMLError):
         return None
-    return data.get("voltage_tables")
+    if not isinstance(data, dict):
+        return None
+    for key in ("voltage_tables", "force_power_tables"):
+        if key in data:
+            return key, data[key]
+    return None
 
 
 def _graded(registry, entry):
@@ -63,8 +73,9 @@ class EvidenceMap:
             self.registry, evidence.get("converters")
         )
         self.hotel_grade, self.hotel_record = _graded(self.registry, evidence.get("hotel_constant"))
-        self.stale_links = self._check_links(config)
         self.vehicle_relation = evidence.get("vehicle_relation")
+        self.propulsion_relation = (evidence.get("propulsion") or {}).get("relation")
+        self.stale_links = self._check_links(config)
         self.double_counting_policy = evidence.get("double_counting", "warn")
         if self.double_counting_policy not in ("warn", "error"):
             from .._validation import ConfigurationError
@@ -72,7 +83,6 @@ class EvidenceMap:
             raise ConfigurationError("evidence.double_counting must be warn or error")
         self.actuators = list(propulsion.ids)
         self.devices, self.bounds, self.records, self.relations = {}, {}, {}, {}
-        self.propulsion_relation = (evidence.get("propulsion") or {}).get("relation")
         self.unconfigured, self.legacy_unlinked = [], []
         capabilities = {}
         for name, item in payload.components.items():
@@ -119,6 +129,8 @@ class EvidenceMap:
         def drop(kind, record_id, why):
             setattr(self, f"{kind}_grade", "D")
             setattr(self, f"{kind}_record", None)
+            if kind == "propulsion":
+                self.propulsion_relation = "user"
             stale.append(f"stale evidence link: {kind} -> {record_id} ({why}); graded D")
 
         if self.battery_loss_record:
@@ -139,24 +151,54 @@ class EvidenceMap:
                     break
         if self.propulsion_record:
             record = self.registry.get(self.propulsion_record)
-            tables = _dataset_tables(record)
+            found = _dataset_tables(record)
             propulsion = config.get("propulsion") or {}
             models = propulsion.get("thrusters") or [propulsion.get("thruster")]
-            if tables is not None and any(
-                not isinstance(m, dict) or m.get("voltage_tables") != tables for m in models
-            ):
-                drop("propulsion", record.id, "actuator tables differ from the record's dataset")
+            if found is not None:
+                key, tables = found
+                if any(not isinstance(m, dict) or m.get(key) != tables for m in models):
+                    drop(
+                        "propulsion", record.id, "actuator tables differ from the record's dataset"
+                    )
         return stale
 
-    def add_external(self, grades, capabilities=(), owner=None):
-        """Register an attached load source; returns new double-counting warnings."""
+    def update_grades(self, grades, relations=None, bounds=None):
+        """Grades/relations/bounds of devices an attached source created after attach()."""
         for device, states in (grades or {}).items():
             self.devices[device] = dict(states)
+        for device, relation in (relations or {}).items():
+            self.relations[device] = relation
+        for device, states in (bounds or {}).items():
+            self.bounds[device] = dict(states)
+
+    def add_external(self, grades, capabilities=(), owner=None, relations=None, bounds=None):
+        """Register an attached load source; returns new double-counting warnings.
+
+        A source rejected by ``double_counting: error`` leaves no trace (state rolled back).
+        """
+        saved = (
+            {k: dict(v) for k, v in self.devices.items()},
+            {k: list(v) for k, v in self.capabilities.items()},
+            dict(self.relations),
+            {k: dict(v) for k, v in self.bounds.items()},
+            dict(self.double_counting),
+        )
         before = dict(self.double_counting)
-        owner = owner or ", ".join(sorted(grades or {})) or "external source"
-        for capability in capabilities or ():
-            self.capabilities.setdefault(capability, []).append(owner)
-        self._update_double_counting()
+        try:
+            self.update_grades(grades, relations, bounds)
+            owner = owner or ", ".join(sorted(grades or {})) or "external source"
+            for capability in capabilities or ():
+                self.capabilities.setdefault(capability, []).append(owner)
+            self._update_double_counting()
+        except ConfigurationError:
+            (
+                self.devices,
+                self.capabilities,
+                self.relations,
+                self.bounds,
+                self.double_counting,
+            ) = saved
+            raise
         return [
             f"possible double counting: '{cap}' provided by {', '.join(names)}"
             for cap, names in self.double_counting.items()
