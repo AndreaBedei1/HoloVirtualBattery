@@ -37,14 +37,40 @@ def test_package_layout_is_resolved_from_the_executable(tmp_path):
 def test_build_command_pins_the_official_toolchain(tmp_path):
     from types import SimpleNamespace
 
-    args = SimpleNamespace(work_root=tmp_path, engine_root=Path("C:/UE532"), max_parallel_actions=4)
+    args = SimpleNamespace(
+        work_root=tmp_path,
+        engine_root=Path("C:/UE532"),
+        engine_kind="source",
+        windows_sdk=build.WINDOWS_SDK,
+        max_parallel_actions=4,
+    )
     command = [str(c) for c in build.ubt_command(args, "after")]
     assert "-CompilerVersion=14.44.35207" in command
     assert "-WindowsSDKVersion=10.0.22621.0" in command
     assert "-DisableAdaptiveUnity" in command
     assert "-EnablePlugin=EOSShared" in command
+    assert not any(c.startswith("-Define:") for c in command)
     assert command[1:4] == ["Holodeck", "Win64", "Development"]
     assert all(name in build.GITDEPS_EXCLUDES for name in ("Content", "Android", "Linux", "Mac"))
+
+
+def test_launcher_engine_build_reproduces_the_official_configuration(tmp_path):
+    """Launcher engine: shared build environment, no plugin switch, ASAN include disabled."""
+    from types import SimpleNamespace
+
+    args = SimpleNamespace(
+        work_root=tmp_path,
+        engine_root=Path("C:/Program Files/Epic Games/UE_5.3"),
+        engine_kind="launcher",
+        windows_sdk="10.0.19041.0",
+        max_parallel_actions=4,
+    )
+    command = [str(c) for c in build.ubt_command(args, "before")]
+    assert "-EnablePlugin=EOSShared" not in command
+    assert "-Define:PLATFORM_HAS_ASAN_INCLUDE=0" in command
+    assert "-WindowsSDKVersion=10.0.19041.0" in command
+    assert "-CompilerVersion=14.44.35207" in command
+    assert Path("Windows/Holodeck/Octrees") in build.SKIPPED
 
 
 def test_engine_compatibility_fixes_are_hash_guarded_and_syntax_only():
