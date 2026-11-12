@@ -306,6 +306,10 @@ def run(spec, binary, parameters, tables):
         "spec": spec,
         "layout": meta | describe,
         "config_sha256": config_hash(config),
+        "battery": {
+            "model": config["battery"].get("model"),
+            "internal_resistance_ohm": config["battery"].get("internal_resistance_ohm"),
+        },
         "metrics": m,
         "chain": close_chain(ticks, parameters, tables, spec["mapping"]),
         "evidence": summary.get("evidence"),
