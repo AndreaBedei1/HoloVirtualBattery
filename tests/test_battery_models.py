@@ -116,9 +116,14 @@ def test_entropic_heat_sign(battery_config):
     assert p.heat_W == pytest.approx(p.resistive_loss_W - p.current_A * 298.15 * 0.001)
 
 
-def test_loaded_end_voltage_cutoff_even_when_ocv_remains_above_limit(battery_config):
+def test_voltage_limited_operation_does_not_latch_while_ocv_remains_above_limit(battery_config):
+    """Review C-01: the voltage limit holds U - I R at the cutoff; the pack keeps delivering
+    reduced power and is latched off only when its open-circuit voltage reaches the cutoff."""
     battery_config["internal_resistance_ohm"] = 1
     b = RintBattery(battery_config)
-    b.step(1000, 1)
+    point = b.step(1000, 1)
     assert b.ocv(25) > b.cutoff_V
-    assert b.cutoff and b.cutoff_reason == "voltage"
+    assert not b.cutoff
+    assert point.voltage_V >= b.cutoff_V - 1e-9 and point.power_W < 1000
+    second = b.step(1000, 1)
+    assert second.power_W > 0 and not b.cutoff

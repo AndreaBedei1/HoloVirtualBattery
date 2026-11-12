@@ -74,6 +74,18 @@ class EvidenceMap:
         )
         self.hotel_grade, self.hotel_record = _graded(self.registry, evidence.get("hotel_constant"))
         self.vehicle_relation = evidence.get("vehicle_relation")
+        battery = config.get("battery") or {}
+        ocv_record = ((battery.get("metadata") or {}).get("evidence") or {}).get("ocv_curve")
+        self.bus_voltage_model = battery.get("model")
+        self.ocv_record = ocv_record
+        if battery.get("model") == "rint":
+            self.ocv_grade = (
+                _graded(self.registry, {"record": ocv_record, "relation": "exact"})[0]
+                if ocv_record
+                else "D"
+            )
+        else:
+            self.ocv_grade = None  # L0: nominal voltage, no OCV curve
         self.propulsion_relation = (evidence.get("propulsion") or {}).get("relation")
         self.stale_links = self._check_links(config)
         self.double_counting_policy = evidence.get("double_counting", "warn")
@@ -135,8 +147,14 @@ class EvidenceMap:
 
         if self.battery_loss_record:
             record = self.registry.get(self.battery_loss_record)
-            actual = (config.get("battery") or {}).get("internal_resistance_ohm")
-            if not _matches(record, actual):
+            battery = config.get("battery") or {}
+            actual = battery.get("internal_resistance_ohm")
+            curve = battery.get("resistance_temperature_curve") or []
+            if battery.get("resistance_soc_temperature_curves"):
+                drop("battery_loss", record.id, "resistance SOC/temperature map not in the record")
+            elif any(abs(float(p[1]) - 1.0) > 1e-12 for p in curve):
+                drop("battery_loss", record.id, "resistance temperature factors not in the record")
+            elif not _matches(record, actual):
                 drop("battery_loss", record.id, f"internal_resistance_ohm={actual}")
         if self.hotel_record:
             record = self.registry.get(self.hotel_record)
@@ -225,6 +243,34 @@ class EvidenceMap:
             return self.hotel_grade
         return self.devices.get(device, {}).get(state, "D")
 
+    def _voltage_dependence(self, device_state_energy_Wh, category_energy_Wh):
+        """Energy whose value depends on the bus voltage and therefore on the OCV curve.
+
+        Thruster power tables are voltage dependent and battery losses depend on the pack
+        voltage; with a placeholder (grade D) OCV curve this energy inherits that weakness,
+        which the per-parameter grade of the thruster record does not show.
+        """
+        if self.ocv_grade is None:
+            return {"bus_voltage": "nominal (L0)", "voltage_dependent_energy_Wh": 0.0}
+        propulsion = sum(
+            sum(states.values())
+            for device, states in device_state_energy_Wh.items()
+            if device in self.actuators
+        )
+        losses = category_energy_Wh.get("battery_losses", 0.0)
+        return {
+            "bus_voltage": "L1 OCV(SOC) - I R",
+            "ocv_record": self.ocv_record,
+            "ocv_grade": self.ocv_grade,
+            "voltage_dependent_energy_Wh": propulsion + losses,
+            "note": "propulsion and battery-loss energy depend on the bus voltage; "
+            + (
+                "the OCV curve is a placeholder (grade D)"
+                if self.ocv_grade == "D"
+                else f"OCV curve grade {self.ocv_grade}"
+            ),
+        }
+
     def summarize(self, device_state_energy_Wh, category_energy_Wh):
         by_grade = {g: 0.0 for g in GRADES}
         upper_bound_Wh = proxy_Wh = 0.0
@@ -246,6 +292,7 @@ class EvidenceMap:
             upper_bound_energy_Wh=upper_bound_Wh,
             upper_bound_share_percent=100 * upper_bound_Wh / total if total else 0.0,
             proxy_energy_Wh=proxy_Wh,
+            voltage_dependence=self._voltage_dependence(device_state_energy_Wh, category_energy_Wh),
             proxy_share_percent=100 * proxy_Wh / total if total else 0.0,
             stale_evidence_links=list(self.stale_links),
             upper_bound_meaning=(

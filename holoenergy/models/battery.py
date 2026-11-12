@@ -268,10 +268,13 @@ class RintBattery:
         self.energy_used_Wh += power * dt / 3600
         self.internal_loss_Wh += loss * dt / 3600
         self.chemical_energy_Wh += u * i * dt / 3600
-        # Terminal voltage is a start-of-interval point; test end state separately.
+        # Terminal voltage is a start-of-interval point; test the end state separately.
+        # The voltage limit of current_limit() keeps U - I R >= V_cut tick by tick
+        # (voltage-limited operation); the pack is latched off only when it can no longer
+        # hold the cutoff voltage even at zero current.
         if self.available_charge_Ah(temperature_C) <= 1e-12:
             self.mark_cutoff("available_charge")
-        elif self.ocv(temperature_C) - i * self.resistance(temperature_C) <= self.cutoff_V + 1e-10:
+        elif self.ocv(temperature_C) <= self.cutoff_V + 1e-10:
             self.mark_cutoff("voltage")
         return BatteryPoint(v, i, power, heat, loss, u * i, requested)
 

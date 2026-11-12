@@ -66,3 +66,22 @@ def test_replaced_actuator_tables_drop_the_t200_link():
     assert env.evidence_map.propulsion_grade == "D"
     assert any("propulsion" in w for w in stale(env))
     env.close()
+
+
+def test_resistance_temperature_factors_make_the_battery_loss_link_stale():
+    """Review C-03: a resistance curve not in the record must not keep its grade."""
+    env = make(overrides={"battery": {"resistance_temperature_curve": [[0.0, 3.0], [40.0, 1.0]]}})
+    assert env.evidence_map.battery_loss_grade == "D"
+    assert any("resistance temperature factors" in w for w in stale(env))
+    env.close()
+
+
+def test_placeholder_ocv_dependence_is_reported():
+    """Review C-04: energy that depends on the bus voltage inherits the placeholder OCV."""
+    env = make()
+    for _ in range(20):
+        env.step([0, 0, 0, 0, 10, 10, 10, 10])
+    dep = env.energy.summary()["evidence"]["voltage_dependence"]
+    assert dep["ocv_grade"] == "D"
+    assert dep["voltage_dependent_energy_Wh"] > 0
+    env.close()
