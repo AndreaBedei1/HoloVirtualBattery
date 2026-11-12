@@ -1,0 +1,319 @@
+{
+  "runs": 42,
+  "chain_status": {
+    "PASS": [
+      "N1-L4-2H2V-we-c0.2",
+      "N1-L4-2H2V-we-c0.5",
+      "N1-L4-2H2V-we-c0.8",
+      "N1-L4-2H2V-we-c0",
+      "N1-L4-H45-we-c0.2",
+      "N1-L4-H45-we-c0.5",
+      "N1-L4-H45-we-c0",
+      "N1-L6-STD-we-c0.2",
+      "N1-L6-STD-we-c0.5",
+      "N1-L6-STD-we-c0",
+      "N1-L8-HV-direct-c0.2",
+      "N1-L8-HV-direct-c0.5",
+      "N1-L8-HV-direct-c0.8",
+      "N1-L8-HV-direct-c0",
+      "N1-L8-HV-we-c0.2",
+      "N1-L8-HV-we-c0.5",
+      "N1-L8-HV-we-c0",
+      "N1-L8-VEC30-we-c0.2",
+      "N1-L8-VEC30-we-c0.5",
+      "N1-L8-VEC30-we-c0",
+      "N2-L4-2H2V-sway-c0.5",
+      "N2-L8-HV-a30-surge-c0.5",
+      "N2-L8-HV-a30-sway-c0.5",
+      "N2-L8-HV-a60-surge-c0.5",
+      "N2-L8-HV-a60-sway-c0.5",
+      "N2-L8-HV-sway-c0.5",
+      "N3-L4-H45-heave",
+      "N3-L6-STD-heave",
+      "N3-L8-HV-heave",
+      "N4-L6-STD-transit-c0.2",
+      "N4-L8-HV-transit-c0.2",
+      "N4-L8-HV-transit-c0.4",
+      "N4-L8-HV-transit-c0",
+      "N5-S0-propulsion-only-transit-c0.2",
+      "N5-S5-inspection-transit-c0.2",
+      "N5-S6-ai-vision-transit-c0.2",
+      "N6-L8-HV-L0-transit-c0.2",
+      "N6-L8-HV-lowsoc-c0.5"
+    ],
+    "PASS_WITH_INCONSISTENT_TICKS": [
+      "N1-L4-H45-we-c0.8",
+      "N1-L6-STD-we-c0.8",
+      "N1-L8-HV-we-c0.8",
+      "N1-L8-VEC30-we-c0.8"
+    ]
+  },
+  "wrench_equivalence_identity": [
+    {
+      "current_m_s": 0.0,
+      "direct_propulsion_Wh": 0.0,
+      "wrench_equivalent_propulsion_Wh": 0.0,
+      "relative_difference": 0.0,
+      "final_position_difference_m": null
+    },
+    {
+      "current_m_s": 0.2,
+      "direct_propulsion_Wh": 0.15782234071065712,
+      "wrench_equivalent_propulsion_Wh": 0.15782234071065712,
+      "relative_difference": 0.0,
+      "final_position_difference_m": null
+    },
+    {
+      "current_m_s": 0.5,
+      "direct_propulsion_Wh": 3.181308179119977,
+      "wrench_equivalent_propulsion_Wh": 3.181308179119977,
+      "relative_difference": 0.0,
+      "final_position_difference_m": null
+    },
+    {
+      "current_m_s": 0.8,
+      "direct_propulsion_Wh": 6.281280131667852,
+      "wrench_equivalent_propulsion_Wh": 6.828150573868403,
+      "relative_difference": 0.08706353334624195,
+      "final_position_difference_m": null
+    }
+  ],
+  "baselines": {
+    "calibration_run": "N4-L8-HV-transit-c0",
+    "parameters": {
+      "speed_cubic": {
+        "a_W": 1.9339607007376465,
+        "b_W_per_m3s3": 2338.7922825906976
+      },
+      "constant": {
+        "P_W": 27.775920522480437
+      }
+    },
+    "rows": [
+      {
+        "run": "N4-L8-HV-transit-c0",
+        "role": "calibration (fit)",
+        "plan": "transit",
+        "current_m_s": 0.0,
+        "holoenergy_propulsion_Wh": 0.517660547283154,
+        "speed_cubic_Wh": 0.5177122964051215,
+        "constant_Wh": 0.5177122964051215,
+        "speed_cubic_relative_error": null,
+        "constant_relative_error": null,
+        "trace_vs_summary_relative": 9.996728983718839e-05
+      },
+      {
+        "run": "N1-L8-HV-direct-c0.2",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.2,
+        "holoenergy_propulsion_Wh": 0.15782234071065712,
+        "speed_cubic_Wh": 0.016632877361348664,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.8946101211878331,
+        "constant_relative_error": 0.47151256695414245,
+        "trace_vs_summary_relative": 0.0014791691662017215
+      },
+      {
+        "run": "N1-L8-HV-direct-c0.5",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.5,
+        "holoenergy_propulsion_Wh": 3.181308179119977,
+        "speed_cubic_Wh": 0.042061263178676166,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.9867786266496472,
+        "constant_relative_error": -0.9269993522708345,
+        "trace_vs_summary_relative": 0.0018290545377810385
+      },
+      {
+        "run": "N1-L8-HV-direct-c0.8",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.8,
+        "holoenergy_propulsion_Wh": 6.281280131667852,
+        "speed_cubic_Wh": 0.2124683812915946,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.9661743503174761,
+        "constant_relative_error": -0.9630270338476076,
+        "trace_vs_summary_relative": 0.002090119744670327
+      },
+      {
+        "run": "N1-L8-HV-direct-c0",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.0,
+        "holoenergy_propulsion_Wh": 0.0,
+        "speed_cubic_Wh": 0.016170060303389768,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": null,
+        "constant_relative_error": null,
+        "trace_vs_summary_relative": null
+      },
+      {
+        "run": "N1-L8-HV-we-c0.2",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.2,
+        "holoenergy_propulsion_Wh": 0.15782234071065712,
+        "speed_cubic_Wh": 0.016632877361348664,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.8946101211878331,
+        "constant_relative_error": 0.47151256695414245,
+        "trace_vs_summary_relative": 0.0014791691662017215
+      },
+      {
+        "run": "N1-L8-HV-we-c0.5",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.5,
+        "holoenergy_propulsion_Wh": 3.181308179119977,
+        "speed_cubic_Wh": 0.042061263178676166,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.9867786266496472,
+        "constant_relative_error": -0.9269993522708345,
+        "trace_vs_summary_relative": 0.0018290545377810385
+      },
+      {
+        "run": "N1-L8-HV-we-c0.8",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.8,
+        "holoenergy_propulsion_Wh": 6.828150573868403,
+        "speed_cubic_Wh": 0.2124683812915946,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.9688834657359902,
+        "constant_relative_error": -0.9659882196226556,
+        "trace_vs_summary_relative": 0.00210182613882659
+      },
+      {
+        "run": "N1-L8-HV-we-c0",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.0,
+        "holoenergy_propulsion_Wh": 0.0,
+        "speed_cubic_Wh": 0.016170060303389768,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": null,
+        "constant_relative_error": null,
+        "trace_vs_summary_relative": null
+      },
+      {
+        "run": "N2-L8-HV-sway-c0.5",
+        "role": "validation",
+        "plan": "station30",
+        "current_m_s": 0.5,
+        "holoenergy_propulsion_Wh": 2.7308937542347613,
+        "speed_cubic_Wh": 0.042061263178676166,
+        "constant_Wh": 0.2322375577018503,
+        "speed_cubic_relative_error": -0.9845979862404195,
+        "constant_relative_error": -0.9149591384352751,
+        "trace_vs_summary_relative": 0.001838291121907698
+      },
+      {
+        "run": "N3-L8-HV-heave",
+        "role": "validation",
+        "plan": "heave",
+        "current_m_s": 0.0,
+        "holoenergy_propulsion_Wh": 0.0436446763828419,
+        "speed_cubic_Wh": 0.07346595752685603,
+        "constant_Wh": 0.15508222291718246,
+        "speed_cubic_relative_error": 0.683274195515351,
+        "constant_relative_error": 2.553290705075549,
+        "trace_vs_summary_relative": 0.0007756584523410659
+      },
+      {
+        "run": "N4-L8-HV-transit-c0.2",
+        "role": "validation",
+        "plan": "transit",
+        "current_m_s": 0.2,
+        "holoenergy_propulsion_Wh": 1.5193386612688857,
+        "speed_cubic_Wh": 0.5244173223058128,
+        "constant_Wh": 0.5177122964051215,
+        "speed_cubic_relative_error": -0.6548384269588439,
+        "constant_relative_error": -0.6592515483198784,
+        "trace_vs_summary_relative": 0.00042157027687750315
+      },
+      {
+        "run": "N4-L8-HV-transit-c0.4",
+        "role": "validation",
+        "plan": "transit",
+        "current_m_s": 0.4,
+        "holoenergy_propulsion_Wh": 3.926642714405313,
+        "speed_cubic_Wh": 0.37099236097026156,
+        "constant_Wh": 0.5177122964051215,
+        "speed_cubic_relative_error": -0.9055191959255076,
+        "constant_relative_error": -0.8681539589772611,
+        "trace_vs_summary_relative": 0.0012755790040830384
+      }
+    ]
+  },
+  "ablation": {
+    "reference_run": "N4-L8-HV-transit-c0.2",
+    "reference_min_derating_factor": 1.0,
+    "layers": [
+      {
+        "layer": "propulsion only",
+        "category": "propulsion",
+        "category_Wh": 1.5193386612688857,
+        "cumulative_Wh": 1.5193386612688857
+      },
+      {
+        "layer": "+ sensors",
+        "category": "sensors",
+        "category_Wh": 0.02047222222221906,
+        "cumulative_Wh": 1.5398108834911048
+      },
+      {
+        "layer": "+ compute",
+        "category": "compute",
+        "category_Wh": 0.08654166666667376,
+        "cumulative_Wh": 1.6263525501577787
+      },
+      {
+        "layer": "+ auxiliaries",
+        "category": "auxiliaries",
+        "category_Wh": 0.0,
+        "cumulative_Wh": 1.6263525501577787
+      },
+      {
+        "layer": "+ communications",
+        "category": "communications",
+        "category_Wh": 0.0,
+        "cumulative_Wh": 1.6263525501577787
+      },
+      {
+        "layer": "+ battery internal losses",
+        "category": "battery_losses",
+        "category_Wh": 0.01731960427708038,
+        "cumulative_Wh": 1.6436721544348591
+      }
+    ],
+    "switches": [
+      {
+        "variant": "L0 battery (bucket) instead of L1",
+        "run": "N6-L8-HV-L0-transit-c0.2",
+        "terminal_Wh": 1.564931177983452,
+        "battery_losses_Wh": 0.0,
+        "propulsion_Wh": 1.457917289094559,
+        "relative_to_reference_terminal": -0.03776633311662214
+      },
+      {
+        "variant": "without environmental current",
+        "run": "N4-L8-HV-transit-c0",
+        "terminal_Wh": 0.6246744361720468,
+        "battery_losses_Wh": 0.0014893546400515227,
+        "propulsion_Wh": 0.517660547283154,
+        "relative_to_reference_terminal": -0.6159046597175719
+      },
+      {
+        "variant": "no payload/avionics components (native run)",
+        "run": "N5-S0-propulsion-only-transit-c0.2",
+        "terminal_Wh": 1.5197773961545478,
+        "battery_losses_Wh": 0.01644450663610633,
+        "propulsion_Wh": 1.5197773961545478,
+        "relative_to_reference_terminal": -0.06553016687119384
+      }
+    ]
+  }
+}

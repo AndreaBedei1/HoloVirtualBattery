@@ -1,0 +1,606 @@
+{
+  "spec": {
+    "label": "N4-L8-HV-transit-c0",
+    "group": "N4_mission",
+    "layout": "L8-HV",
+    "mapping": "direct",
+    "current_m_s": [
+      0.0,
+      0,
+      0
+    ],
+    "plan": "transit"
+  },
+  "layout": {
+    "layout": "L8-HV",
+    "description": "BlueROV2 Heavy, HoloOcean 2.3.0 geometry (exact for the simulator)",
+    "geometry_grade": "A",
+    "action_mode": "wrench",
+    "mapping": "direct",
+    "configured_actuators": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "V1",
+      "V2",
+      "V3",
+      "V4"
+    ],
+    "backend_actuator_count": 8,
+    "allocation_method": "redistributed",
+    "layout_rank": 6,
+    "native_clamp_N": 28.75,
+    "agent_type": "BlueROV2"
+  },
+  "metrics": {
+    "duration_s": 67.0,
+    "mean_tracking_error_m": 0.19583537877227855,
+    "max_tracking_error_m": 0.5374872088900756,
+    "final_tracking_error_m": 0.47483235607875507,
+    "mean_tail_tracking_error_m": 0.23452985515677324,
+    "max_abs_roll_pitch_deg": 0.0005723003414459527,
+    "mean_allocation_residual_norm": 4.91032051525539e-16,
+    "max_allocation_residual_norm": 4.454252868160342e-15,
+    "allocation_saturated_fraction": 0.0,
+    "native_saturated_fraction": 0.0,
+    "max_backend_residual_norm": 0.0,
+    "peak_actuator_force_N": 6.663499733194748,
+    "mean_tail_actuator_force_N": [
+      3.56820544158876,
+      3.5683985419608057,
+      3.568205393381357,
+      3.5683985901682282,
+      6.728031645383036e-06,
+      4.8738035852206856e-06,
+      7.703299855682321e-06,
+      5.801748836386305e-06
+    ],
+    "peak_total_power_W": 66.69075307258456,
+    "mean_total_power_W": 33.564596570438106,
+    "mean_tail_propulsion_W": 28.465539019214635,
+    "propulsion_Wh": 0.517660547283154,
+    "sensors_Wh": 0.02047222222221906,
+    "compute_Wh": 0.08654166666667376,
+    "auxiliaries_Wh": 0.0,
+    "communications_Wh": 0.0,
+    "battery_losses_Wh": 0.0014893546400515227,
+    "category_energy_Wh": {
+      "propulsion": 0.517660547283154,
+      "sensors": 0.02047222222221906,
+      "compute": 0.08654166666667376,
+      "communications": 0.0,
+      "auxiliaries": 0.0,
+      "converters": 3.0592812234115413e-19,
+      "battery_losses": 0.0014893546400515227
+    },
+    "terminal_Wh": 0.6246744361720468,
+    "phase_energy_Wh": {
+      "hold_start": {
+        "duration_s": 2.99999999999998,
+        "terminal_energy_Wh": 0.0047916666666666585,
+        "battery_losses_Wh": 1.2980714004954973e-06
+      },
+      "accelerate": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.011988762896712522,
+        "battery_losses_Wh": 7.068459578698127e-06
+      },
+      "transit_out": {
+        "duration_s": 15.999999999999703,
+        "terminal_energy_Wh": 0.2415791576021419,
+        "battery_losses_Wh": 0.000658049917005091
+      },
+      "stop": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.03862329890573157,
+        "battery_losses_Wh": 7.440496721399058e-05
+      },
+      "hold_turn": {
+        "duration_s": 2.99999999999998,
+        "terminal_energy_Wh": 0.007205010159695736,
+        "battery_losses_Wh": 2.9855896557662833e-06
+      },
+      "yaw": {
+        "duration_s": 9.999999999999831,
+        "terminal_energy_Wh": 0.022529375574364918,
+        "battery_losses_Wh": 8.943179129727694e-06
+      },
+      "return_accelerate": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.011831104730267916,
+        "battery_losses_Wh": 6.8840926431856006e-06
+      },
+      "return_transit": {
+        "duration_s": 15.999999999999703,
+        "terminal_energy_Wh": 0.2401671135885682,
+        "battery_losses_Wh": 0.0006517940475312361
+      },
+      "return_stop": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.038748392818085654,
+        "battery_losses_Wh": 7.493285011606639e-05
+      },
+      "hold_end": {
+        "duration_s": 2.99999999999998,
+        "terminal_energy_Wh": 0.007210553229807908,
+        "battery_losses_Wh": 2.9934657772621267e-06
+      }
+    },
+    "initial_soc": 0.9999999471674964,
+    "final_soc": 0.9979285865091351,
+    "soc_loss": 0.002071360658361332,
+    "peak_current_A": 3.9829485827374795,
+    "min_voltage_V": 16.737848745519912,
+    "min_derating_factor": 1.0,
+    "derated_tick_fraction": 0.0,
+    "battery_states": [
+      "NORMAL"
+    ],
+    "peak_battery_temperature_C": 19.999916680341638
+  },
+  "chain": {
+    "force_steps": 6699,
+    "max_abs_force_residual_N": [
+      3.364375182668411e-05,
+      2.854143791970542e-06,
+      1.0284069239469284e-11
+    ],
+    "rms_force_residual_N": [
+      9.29401868792622e-06,
+      7.82475718783088e-07,
+      8.732568738598866e-13
+    ],
+    "max_abs_thruster_power_residual_W": 4.2099657093785936e-13,
+    "wrench_equivalence": {
+      "mapping": "direct",
+      "max_residual_norm": 1.20579102258489e-11,
+      "mean_residual_norm": 6.1792012539000945e-12,
+      "ticks_above_1e-6": 0,
+      "fraction_above_1e-6": 0.0
+    },
+    "status": "PASS"
+  },
+  "evidence": {
+    "energy_Wh": {
+      "A": 0.5520911028387058,
+      "B": 0.07258333333334147,
+      "C": 0.0014893546400515227,
+      "D": 3.0592812234115413e-19
+    },
+    "share_percent": {
+      "A": 88.17039741673263,
+      "B": 11.591748740246546,
+      "C": 0.2378538430208356,
+      "D": 4.885752367513663e-17
+    },
+    "total_Wh": 0.6261637908120987,
+    "definition": "Share of predicted energy whose electrical power model parameters carry each evidence grade; vehicle hydrodynamics are simulator-owned and excluded.",
+    "upper_bound_energy_Wh": 0.02047222222221906,
+    "upper_bound_share_percent": 3.269467593402001,
+    "upper_bound_meaning": "energy computed from published maxima/upper bounds: the true value is expected to be lower, so these shares bias the prediction upward",
+    "propulsion_record": "bluerobotics_t200.static_force_power_curve",
+    "battery_loss_record": "bluerobotics_4s_18ah.dc_resistance_cell_derived",
+    "vehicle_relation": "representative",
+    "unconfigured_components": [
+      {
+        "component": "tether_interface",
+        "device": "bluerobotics_fathom_x_tether_interface"
+      },
+      {
+        "component": "esc_standby",
+        "device": "bluerobotics_basic_esc"
+      }
+    ],
+    "legacy_components_without_evidence": [],
+    "double_counting_warnings": [],
+    "excluded_from_coverage": "vehicle hydrodynamics (simulator-owned, not validated) and unconfigured loads"
+  },
+  "energy_report": {
+    "run_id": "97ce9518-15ec-4ba0-ad24-4fed37af6d3e",
+    "profile": {
+      "profile_id": "bluerov2-heavy",
+      "profile_version": "0.2.0",
+      "vehicle": "BlueROV2 Heavy (HoloOcean 2.3.0)"
+    },
+    "duration_s": 66.99999999999737,
+    "terminal_energy_Wh": 0.6246744361720468,
+    "total_ocv_work_Wh": 0.6261637908120983,
+    "soc_initial": 1.0,
+    "soc_final": 0.9979285865091351,
+    "peak_current_A": 3.9829485827374795,
+    "minimum_voltage_V": 16.737848745519912,
+    "category_energy_Wh": {
+      "propulsion": 0.517660547283154,
+      "sensors": 0.02047222222221906,
+      "compute": 0.08654166666667376,
+      "communications": 0.0,
+      "auxiliaries": 0.0,
+      "converters": 3.0592812234115413e-19,
+      "battery_losses": 0.0014893546400515227
+    },
+    "device_energy_Wh": {
+      "H1": 0.12926790779974578,
+      "H2": 0.13019022239587488,
+      "H3": 0.12902700673046105,
+      "H4": 0.12917433200025646,
+      "V1": 3.0487235647870313e-07,
+      "V2": 2.3090179860639758e-07,
+      "V3": 3.06325310436076e-07,
+      "V4": 2.3625735062930993e-07,
+      "navigator": 0.013958333333332407,
+      "companion_computer": 0.07258333333334147,
+      "camera": 0.02047222222221906,
+      "light_1": 0.0,
+      "light_2": 0.0,
+      "tether_interface": 0.0,
+      "esc_standby": 0.0
+    },
+    "device_state_energy_Wh": {
+      "navigator": {
+        "ACTIVE": 0.013958333333332407
+      },
+      "companion_computer": {
+        "VIDEO": 0.07258333333334147
+      },
+      "camera": {
+        "ACTIVE": 0.02047222222221906
+      },
+      "light_1": {
+        "OFF": 0.0
+      },
+      "light_2": {
+        "OFF": 0.0
+      },
+      "tether_interface": {
+        "OFF": 0.0
+      },
+      "esc_standby": {
+        "OFF": 0.0
+      },
+      "H1": {
+        "THRUST": 0.12926790779974578
+      },
+      "H2": {
+        "THRUST": 0.13019022239587488
+      },
+      "H3": {
+        "THRUST": 0.12902700673046105
+      },
+      "H4": {
+        "THRUST": 0.12917433200025646
+      },
+      "V1": {
+        "THRUST": 3.0487235647870313e-07
+      },
+      "V2": {
+        "THRUST": 2.3090179860639758e-07
+      },
+      "V3": {
+        "THRUST": 3.06325310436076e-07
+      },
+      "V4": {
+        "THRUST": 2.3625735062930993e-07
+      }
+    },
+    "phases": {
+      "hold_start": {
+        "duration_s": 2.99999999999998,
+        "terminal_energy_Wh": 0.0047916666666666585,
+        "battery_losses_Wh": 1.2980714004954973e-06
+      },
+      "accelerate": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.011988762896712522,
+        "battery_losses_Wh": 7.068459578698127e-06
+      },
+      "transit_out": {
+        "duration_s": 15.999999999999703,
+        "terminal_energy_Wh": 0.2415791576021419,
+        "battery_losses_Wh": 0.000658049917005091
+      },
+      "stop": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.03862329890573157,
+        "battery_losses_Wh": 7.440496721399058e-05
+      },
+      "hold_turn": {
+        "duration_s": 2.99999999999998,
+        "terminal_energy_Wh": 0.007205010159695736,
+        "battery_losses_Wh": 2.9855896557662833e-06
+      },
+      "yaw": {
+        "duration_s": 9.999999999999831,
+        "terminal_energy_Wh": 0.022529375574364918,
+        "battery_losses_Wh": 8.943179129727694e-06
+      },
+      "return_accelerate": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.011831104730267916,
+        "battery_losses_Wh": 6.8840926431856006e-06
+      },
+      "return_transit": {
+        "duration_s": 15.999999999999703,
+        "terminal_energy_Wh": 0.2401671135885682,
+        "battery_losses_Wh": 0.0006517940475312361
+      },
+      "return_stop": {
+        "duration_s": 3.9999999999999587,
+        "terminal_energy_Wh": 0.038748392818085654,
+        "battery_losses_Wh": 7.493285011606639e-05
+      },
+      "hold_end": {
+        "duration_s": 2.99999999999998,
+        "terminal_energy_Wh": 0.007210553229807908,
+        "battery_losses_Wh": 2.9934657772621267e-06
+      }
+    },
+    "evidence": {
+      "energy_Wh": {
+        "A": 0.5520911028387058,
+        "B": 0.07258333333334147,
+        "C": 0.0014893546400515227,
+        "D": 3.0592812234115413e-19
+      },
+      "share_percent": {
+        "A": 88.17039741673263,
+        "B": 11.591748740246546,
+        "C": 0.2378538430208356,
+        "D": 4.885752367513663e-17
+      },
+      "total_Wh": 0.6261637908120987,
+      "definition": "Share of predicted energy whose electrical power model parameters carry each evidence grade; vehicle hydrodynamics are simulator-owned and excluded.",
+      "upper_bound_energy_Wh": 0.02047222222221906,
+      "upper_bound_share_percent": 3.269467593402001,
+      "upper_bound_meaning": "energy computed from published maxima/upper bounds: the true value is expected to be lower, so these shares bias the prediction upward",
+      "propulsion_record": "bluerobotics_t200.static_force_power_curve",
+      "battery_loss_record": "bluerobotics_4s_18ah.dc_resistance_cell_derived",
+      "vehicle_relation": "representative",
+      "unconfigured_components": [
+        {
+          "component": "tether_interface",
+          "device": "bluerobotics_fathom_x_tether_interface"
+        },
+        {
+          "component": "esc_standby",
+          "device": "bluerobotics_basic_esc"
+        }
+      ],
+      "legacy_components_without_evidence": [],
+      "double_counting_warnings": [],
+      "excluded_from_coverage": "vehicle hydrodynamics (simulator-owned, not validated) and unconfigured loads"
+    },
+    "intervals": {
+      "method": "Propagate published parameter ranges to mission energy (deterministic interval analysis).",
+      "terminal_energy_Wh": {
+        "nominal": 0.6246744361720468,
+        "low": 0.6246744361720468,
+        "high": 0.6321654083942697,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "total_ocv_work_Wh_nominal": 0.6261637908120983,
+      "battery_losses": {
+        "record": "bluerobotics_4s_18ah.dc_resistance_cell_derived",
+        "interval_Wh": [
+          0.001340307110234478,
+          0.0016395228279874926
+        ],
+        "open_upper": true,
+        "note": "first-order: resistive loss scaled with resistance at fixed current"
+      },
+      "contributions": [
+        {
+          "device": "navigator",
+          "state": "ACTIVE",
+          "energy_Wh": 0.013958333333332407,
+          "record": "bluerobotics_navigator.power_typical",
+          "ratio": [
+            null,
+            1.07
+          ]
+        },
+        {
+          "device": "companion_computer",
+          "state": "VIDEO",
+          "energy_Wh": 0.07258333333334147,
+          "record": "rpi4b.video",
+          "ratio": [
+            null,
+            1.0897435897435899
+          ]
+        },
+        {
+          "device": "camera",
+          "state": "ACTIVE",
+          "energy_Wh": 0.02047222222221906,
+          "record": "bluerobotics_lowlight_usb_camera.power_max",
+          "ratio": [
+            null,
+            1.0
+          ]
+        }
+      ],
+      "excluded": "propulsion (manufacturer curve without published measurement uncertainty) and dynamics (simulator-owned); unconfigured loads are absent, not bounded"
+    },
+    "incomplete": [
+      {
+        "component": "tether_interface",
+        "device": "bluerobotics_fathom_x_tether_interface"
+      },
+      {
+        "component": "esc_standby",
+        "device": "bluerobotics_basic_esc"
+      }
+    ],
+    "warnings": [
+      "placeholder: battery.capacity_temperature_curve",
+      "placeholder: battery.max_current_temperature_curve",
+      "placeholder: battery.ocv_curve",
+      "placeholder: battery.resistance_temperature_curve",
+      "placeholder: thermal.cooling_coeff_W_per_C",
+      "placeholder: thermal.derating_temperature_C",
+      "placeholder: thermal.thermal_capacity_J_per_C",
+      "Battery temperature tables are not characterized for this pack",
+      "incomplete configuration: tether_interface (bluerobotics_fathom_x_tether_interface) has no defensible power and is excluded from the electrical bus",
+      "incomplete configuration: esc_standby (bluerobotics_basic_esc) has no defensible power and is excluded from the electrical bus",
+      "camera.ACTIVE uses a datasheet maximum, not a mean"
+    ],
+    "provenance": {
+      "holoenergy_version": "0.1.0",
+      "git": {
+        "commit": "c6976332ecaace3c0aefdc0fc8205e4943c0d2e1",
+        "dirty": true,
+        "working_tree_status": "M experiments/run_offline_campaign.py\n M holoenergy/integrations/desert.py\n M tests/test_communication_energy.py\n M tools/check_desert_noninterference.py\n?? experiments/results/native/N1_layouts/\n?? experiments/results/native/N2_orientation/\n?? experiments/results/native/N3_heave/\n?? experiments/results/native/desert/\n?? experiments/run_comm_matrix.py\n?? experiments/run_native_campaign.py"
+      },
+      "holoocean_version": "2.3.0",
+      "resolved_config_sha256": "5b5d06e1911449b4e60e40e3f9099426d2e43d2f2653eb7d3ccc89c03b9232db",
+      "random_seed": null,
+      "scenario": null,
+      "python_version": "3.10.20",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "evidence_registry_version": "0.2.0-dev",
+      "actuation": {
+        "action_mode": "wrench",
+        "mapping": "direct",
+        "configured_actuators": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "V1",
+          "V2",
+          "V3",
+          "V4"
+        ],
+        "backend_actuator_count": 8,
+        "allocation_method": "redistributed",
+        "layout_rank": 6,
+        "native_clamp_N": 28.75,
+        "agent_type": "BlueROV2"
+      },
+      "fidelity_level": "L1",
+      "dt_s": 0.01
+    },
+    "notes": [
+      "Simulation output; physical validation is not implied.",
+      "Terminal energy = propulsion + sensors + compute + communications + auxiliaries + converter losses; total OCV work adds battery losses."
+    ],
+    "soc_loss": 0.002071413490864926
+  },
+  "timing": {
+    "wall_s": 199.10682429978624,
+    "env_step_wall_s": 183.8539498122409,
+    "ticks": 6700,
+    "simulated_s": 67.0,
+    "real_time_factor": 0.3644196932860192
+  },
+  "provenance": {
+    "holoenergy_version": "0.1.0",
+    "git": {
+      "commit": "c6976332ecaace3c0aefdc0fc8205e4943c0d2e1",
+      "dirty": true,
+      "working_tree_status": "M experiments/run_offline_campaign.py\n?? experiments/results/native/N1_layouts/\n?? experiments/run_native_campaign.py"
+    },
+    "backend": {
+      "binary_path": "C:\\HOB\\packages\\patched-after\\Ocean\\Windows\\Holodeck\\Binaries\\Win64\\Holodeck.exe",
+      "binary_sha256": "9575fb022403130844a5758bb72168402cb872e61ddf8146995510a97b064120",
+      "binary_size_bytes": 255722496,
+      "pdb_sha256": "5b550ef34763ed0a1ac19701a48ec11e371c243731a1fe83ecdd70a5c156bf7e",
+      "package_root": "C:\\HOB\\packages\\patched-after\\Ocean",
+      "package_config_path": "C:\\HOB\\packages\\patched-after\\Ocean\\config.json",
+      "package_config_sha256": "f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd",
+      "build_manifest_path": "C:\\HOB\\packages\\patched-after\\Ocean\\holoenergy_build_manifest.json",
+      "build_manifest_sha256": "219b74d4925a5fa1a4e9ad58e2a2031d60d47e6a2730d6b2715976b815dc234a",
+      "build_variant": "patched-after",
+      "build_source_commit": "49e70552dfd97273b7dfbe755fbe65d7738b24b7",
+      "build_patch_sha256": "00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa"
+    },
+    "source_parameters": {
+      "mass_kg": 11.5,
+      "drag_coefficient": 0.8,
+      "area_m2": 0.45,
+      "density_kg_m3": 997.0,
+      "ue_units_per_m": 100.0,
+      "linear_damping_per_s": 1.0,
+      "source_drag_scale_to_SI": 1.0,
+      "explicit_drag_unit_conversion": true,
+      "fully_submerged_ratio": 1.0,
+      "neutral_volume_m3": 0.011534603811434303,
+      "parameter_origin": "official/local C++ literals; no runtime fit"
+    },
+    "physics_rate_hz": 100,
+    "instance_isolation": "random UUID per process (shared memory/semaphores); no TCP port",
+    "scenario": {
+      "name": "HoloEnergy-native-campaign",
+      "package_name": "Ocean",
+      "world": "SimpleUnderwater",
+      "main_agent": "rov0",
+      "ticks_per_sec": 100,
+      "frames_per_sec": false,
+      "agents": [
+        {
+          "agent_name": "rov0",
+          "agent_type": "BlueROV2",
+          "control_scheme": 0,
+          "location": [
+            0,
+            0,
+            -5
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "sensors": [
+            {
+              "sensor_type": "PoseSensor"
+            },
+            {
+              "sensor_type": "VelocitySensor"
+            },
+            {
+              "sensor_type": "DynamicsSensor",
+              "configuration": {
+                "UseCOM": true,
+                "UseRPY": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "controller": {
+      "position_P_N_per_m": 20.0,
+      "velocity_D_Ns_per_m": 15.0,
+      "position_I_N_per_m_s": 5.0,
+      "integral_clip_m_s": 10.0,
+      "attitude_P_Nm_per_rad": 5.0,
+      "angular_D_Nms_per_rad": 2.0,
+      "origin": "user-selected demonstration gains, not calibrated; unchanged from examples/native_station_keeping.py"
+    },
+    "transit_speed_m_s": 0.25,
+    "evidence_registry": {
+      "version": "0.2.0-dev",
+      "records": 124,
+      "sources": 141
+    },
+    "random_seed": "none (deterministic plan and controller)",
+    "started_utc": "2026-11-12T18:24:56.353032+00:00"
+  },
+  "traces": {
+    "full_per_tick": {
+      "path": "F:\\Andrea\\HoloVirtualBattery\\logs\\native_campaign\\N4-L8-HV-transit-c0.trace.jsonl.gz",
+      "sha256": "0eb1255b05ed7211ab8e2e4a82ffaab10806d2ca0b98488c1aba7ffa1e932600"
+    },
+    "downsampled_0.1s": {
+      "path": "N4-L8-HV-transit-c0.trace10.jsonl.gz",
+      "sha256": "ef7b18881e21cf31684df2eeace03ff63811d27ba5feefb3dcdd08b198c8b179"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+layer,category,category_Wh,cumulative_Wh
+propulsion only,propulsion,1.5193386612688857,1.5193386612688857
++ sensors,sensors,0.02047222222221906,1.5398108834911048
++ compute,compute,0.08654166666667376,1.6263525501577787
++ auxiliaries,auxiliaries,0.0,1.6263525501577787
++ communications,communications,0.0,1.6263525501577787
++ battery internal losses,battery_losses,0.01731960427708038,1.6436721544348591

@@ -1,0 +1,4 @@
+variant,run,terminal_Wh,battery_losses_Wh,propulsion_Wh,relative_to_reference_terminal
+L0 battery (bucket) instead of L1,N6-L8-HV-L0-transit-c0.2,1.564931177983452,0.0,1.457917289094559,-0.03776633311662214
+without environmental current,N4-L8-HV-transit-c0,0.6246744361720468,0.0014893546400515227,0.517660547283154,-0.6159046597175719
+no payload/avionics components (native run),N5-S0-propulsion-only-transit-c0.2,1.5197773961545478,0.01644450663610633,1.5197773961545478,-0.06553016687119384
