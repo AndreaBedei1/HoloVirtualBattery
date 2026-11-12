@@ -1,6 +1,6 @@
 # HoloOcean upstream contribution — prepared, not posted
 
-Updated 2026-10-08. **Nothing has been posted.** Publishing is an outward-facing
+Updated 2026-10-08; reproduction added 2026-11-12. **Nothing has been posted.** Publishing is an outward-facing
 action that needs the author's explicit go-ahead; this file holds the exact text.
 
 | Item | Status |
@@ -210,6 +210,23 @@ PR; build and run `develop` with the patch (this project ran only 2.3.0).
 >
 > Not addressed here: hydrodynamic coefficients; the physics-step cap below 30 Hz
 > (separate note in #368).
+
+## 2b. Independent reproduction on a second machine (2026-11-12)
+
+Rebuilt from tag `v2.3.0` (`49e70552`) against the installed Epic Launcher UE 5.3.2
+(CL 29314046, only the Holodeck module compiled; MSVC 14.44.35207, Windows SDK
+10.0.19041.0, `PLATFORM_HAS_ASAN_INCLUDE=0`), official cooked content reused unchanged
+([holoocean_patched_build.md](holoocean_patched_build.md#launcher-engine-rebuild-2026-11-12)).
+`tools/check_holoocean_backend.py` at 100 Hz:
+
+| Build | Holodeck.exe SHA256 | applied/expected drag (current, still water) |
+| --- | --- | --- |
+| unpatched control | `51e0de81476a0b8c24a0e22501c6d0774bc1e8cfc8ac5465fcc19d5c33a32c2e` | 0.0099999995, 0.0100003658 |
+| patched (`DragForce *= UEUnitsPerMeter`) | `9575fb022403130844a5758bb72168402cb872e61ddf8146995510a97b064120` | 1.0000000097, 1.0000002332 |
+
+Both rows equal the 2026-10-07 results of the source-engine builds to all printed
+digits, so the one-line fix behaves identically with a different engine build and SDK.
+If the comment is posted, this table can be appended as a second reproduction.
 
 ## 3. Publication checklist (requires the author's explicit authorization)
 

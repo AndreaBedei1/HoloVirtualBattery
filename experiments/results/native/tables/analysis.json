@@ -112,7 +112,8 @@
         "constant_Wh": 0.2322375577018503,
         "speed_cubic_relative_error": -0.8946101211878331,
         "constant_relative_error": 0.47151256695414245,
-        "trace_vs_summary_relative": 0.0014791691662017215
+        "trace_vs_summary_relative": 0.0014791691662017215,
+        "request_met": true
       },
       {
         "run": "N1-L8-HV-direct-c0.5",
@@ -124,7 +125,8 @@
         "constant_Wh": 0.2322375577018503,
         "speed_cubic_relative_error": -0.9867786266496472,
         "constant_relative_error": -0.9269993522708345,
-        "trace_vs_summary_relative": 0.0018290545377810385
+        "trace_vs_summary_relative": 0.0018290545377810385,
+        "request_met": true
       },
       {
         "run": "N1-L8-HV-direct-c0.8",
@@ -136,7 +138,8 @@
         "constant_Wh": 0.2322375577018503,
         "speed_cubic_relative_error": -0.9661743503174761,
         "constant_relative_error": -0.9630270338476076,
-        "trace_vs_summary_relative": 0.002090119744670327
+        "trace_vs_summary_relative": 0.002090119744670327,
+        "request_met": false
       },
       {
         "run": "N1-L8-HV-direct-c0",
@@ -148,55 +151,8 @@
         "constant_Wh": 0.2322375577018503,
         "speed_cubic_relative_error": null,
         "constant_relative_error": null,
-        "trace_vs_summary_relative": null
-      },
-      {
-        "run": "N1-L8-HV-we-c0.2",
-        "role": "validation",
-        "plan": "station30",
-        "current_m_s": 0.2,
-        "holoenergy_propulsion_Wh": 0.15782234071065712,
-        "speed_cubic_Wh": 0.016632877361348664,
-        "constant_Wh": 0.2322375577018503,
-        "speed_cubic_relative_error": -0.8946101211878331,
-        "constant_relative_error": 0.47151256695414245,
-        "trace_vs_summary_relative": 0.0014791691662017215
-      },
-      {
-        "run": "N1-L8-HV-we-c0.5",
-        "role": "validation",
-        "plan": "station30",
-        "current_m_s": 0.5,
-        "holoenergy_propulsion_Wh": 3.181308179119977,
-        "speed_cubic_Wh": 0.042061263178676166,
-        "constant_Wh": 0.2322375577018503,
-        "speed_cubic_relative_error": -0.9867786266496472,
-        "constant_relative_error": -0.9269993522708345,
-        "trace_vs_summary_relative": 0.0018290545377810385
-      },
-      {
-        "run": "N1-L8-HV-we-c0.8",
-        "role": "validation",
-        "plan": "station30",
-        "current_m_s": 0.8,
-        "holoenergy_propulsion_Wh": 6.828150573868403,
-        "speed_cubic_Wh": 0.2124683812915946,
-        "constant_Wh": 0.2322375577018503,
-        "speed_cubic_relative_error": -0.9688834657359902,
-        "constant_relative_error": -0.9659882196226556,
-        "trace_vs_summary_relative": 0.00210182613882659
-      },
-      {
-        "run": "N1-L8-HV-we-c0",
-        "role": "validation",
-        "plan": "station30",
-        "current_m_s": 0.0,
-        "holoenergy_propulsion_Wh": 0.0,
-        "speed_cubic_Wh": 0.016170060303389768,
-        "constant_Wh": 0.2322375577018503,
-        "speed_cubic_relative_error": null,
-        "constant_relative_error": null,
-        "trace_vs_summary_relative": null
+        "trace_vs_summary_relative": null,
+        "request_met": true
       },
       {
         "run": "N2-L8-HV-sway-c0.5",
@@ -208,7 +164,8 @@
         "constant_Wh": 0.2322375577018503,
         "speed_cubic_relative_error": -0.9845979862404195,
         "constant_relative_error": -0.9149591384352751,
-        "trace_vs_summary_relative": 0.001838291121907698
+        "trace_vs_summary_relative": 0.001838291121907698,
+        "request_met": true
       },
       {
         "run": "N3-L8-HV-heave",
@@ -220,7 +177,8 @@
         "constant_Wh": 0.15508222291718246,
         "speed_cubic_relative_error": 0.683274195515351,
         "constant_relative_error": 2.553290705075549,
-        "trace_vs_summary_relative": 0.0007756584523410659
+        "trace_vs_summary_relative": 0.0007756584523410659,
+        "request_met": true
       },
       {
         "run": "N4-L8-HV-transit-c0.2",
@@ -232,7 +190,8 @@
         "constant_Wh": 0.5177122964051215,
         "speed_cubic_relative_error": -0.6548384269588439,
         "constant_relative_error": -0.6592515483198784,
-        "trace_vs_summary_relative": 0.00042157027687750315
+        "trace_vs_summary_relative": 0.00042157027687750315,
+        "request_met": true
       },
       {
         "run": "N4-L8-HV-transit-c0.4",
@@ -244,7 +203,8 @@
         "constant_Wh": 0.5177122964051215,
         "speed_cubic_relative_error": -0.9055191959255076,
         "constant_relative_error": -0.8681539589772611,
-        "trace_vs_summary_relative": 0.0012755790040830384
+        "trace_vs_summary_relative": 0.0012755790040830384,
+        "request_met": true
       }
     ]
   },

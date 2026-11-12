@@ -166,6 +166,8 @@ def main():
                 continue
             if run["spec"].get("fidelity") or run["spec"].get("battery"):
                 continue
+            if run["spec"]["mapping"] != "direct":  # same runs through the virtual mapping
+                continue
             t = trace(run)
             e = baseline_energy(t, params)
             ref = run["metrics"]["propulsion_Wh"]
@@ -183,6 +185,7 @@ def main():
                     "trace_vs_summary_relative": e["trace_propulsion_Wh"] / ref - 1
                     if ref
                     else None,
+                    "request_met": requested_feasible(run),
                 }
             )
         e = baseline_energy(cal, params)
