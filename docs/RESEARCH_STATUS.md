@@ -63,6 +63,8 @@ clamp cannot reproduce the virtual wrench (their energy is not comparable).
   configurations (direct, MAC ACK, multi-hop static/ACK/flooding, 4-node static vs
   flooding, optical, hybrid). Flooding on 4 nodes sends 3x the frames for +7 % energy;
   MAC ACK on the 500 m multi-hop line delivers 3/10 messages.
+* 72-95 % of the acoustic communication energy rests on published upper bounds (RX/listen
+  at most 0.8 W), so these energies are upper-bound-dominated estimates.
 * Cross-layer (same native transit): the vehicle's acoustic modem adds 1.37 % of mission
   energy (optical 0.57 %), nearly independent of the strategy because listening
   dominates; network-wide energy and delivery differ (multi-hop 27/34, flooding 33/34);
