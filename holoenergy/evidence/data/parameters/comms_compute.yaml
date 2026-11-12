@@ -134,6 +134,10 @@ parameters:
     state: RX
     interface: RS-232
   snippet: less than 0.8 W
+  notes: >-
+    Without the Wake-Up module the modem has no separate listen mode (EvoLogics Product Information
+    Guide 2024, p. 4, footnote 2), so the profile charges LISTEN at this receive upper bound; the
+    Wake-Up module adds 300 mW to RX/TX and enables a lower listen power.
 - id: evologics_s2cm_18_34.listen_wakeup
   component: evologics_s2cm_18_34
   quantity: electrical_power
@@ -833,8 +837,8 @@ parameters:
   unit: W
   value: 12.815
   bound: measured_mean
-  relation: exact
-  grade: A
+  relation: representative
+  grade: B
   sources:
   - REY2025
   location:

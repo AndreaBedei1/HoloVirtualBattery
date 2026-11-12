@@ -154,10 +154,10 @@ def layouts():
         "L6-STD": (
             horizontals(45)
             + [
-                ActuatorGeometry("V1", (0, -0.11, 0.0809), (0, 0, 1)),
-                ActuatorGeometry("V2", (0, 0.11, 0.0809), (0, 0, 1)),
+                ActuatorGeometry("V1", (0, -0.1105, 0.0809), (0, 0, 1)),
+                ActuatorGeometry("V2", (0, 0.1105, 0.0809), (0, 0, 1)),
             ],
-            "BlueROV2 Standard: role-exact, vertical positions proxy",
+            "BlueROV2 Standard: role-exact, vertical y from the 2D drawing, x proxy",
             "C",
         ),
         "L4-H45": (

@@ -83,6 +83,7 @@ def network_scenario(strategy):
     elif strategy == "optical":
         nodes.append({"id": SINK, "position": (8.0, 0.0, -5.0)})
         network["medium"] = "optical"
+        network["optical"] = {"bitrate_bps": 250_000}  # hydromea_luma250lp.bitrate
     elif strategy in RELAY_STRATEGIES:
         nodes += [
             {"id": SOURCE, "position": (-500.0, 0.0, -5.0)},

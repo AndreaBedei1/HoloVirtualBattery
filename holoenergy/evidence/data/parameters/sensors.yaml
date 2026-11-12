@@ -166,7 +166,7 @@ parameters:
   quantity: electrical_power
   unit: W
   value: 15
-  bound: nominal
+  bound: upper_bound
   relation: exact
   grade: A
   sources:

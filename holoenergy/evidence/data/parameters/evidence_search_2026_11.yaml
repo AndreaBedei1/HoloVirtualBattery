@@ -1,0 +1,64 @@
+# Evidence added from the focused searches of the scientific-hardening phase (2026-11-13;
+# docs/reviews/evidence_search_report.md). Only primary manufacturer documents; values as stated.
+sources:
+- id: DS-BR-BROV2-2D-2018
+  type: manufacturer_datasheet
+  title: BlueROV2 2D drawing (2018), top view
+  publisher: Blue Robotics
+  url: https://docs.bluerobotics.com/brov2/cad/2d-drawing-brov2-2018.png
+  accessed: '2026-11-13'
+  notes: Linked from the BlueROV2 product page (Technical Details); dimensioned drawing of the standard 6-thruster frame.
+- id: DS-BR-UN383-4S18AH
+  type: manufacturer_datasheet
+  title: UN38.3 test report TCT231027B027 V3.0, BATTERY-LI-4S-18AH-R1
+  publisher: Shenzhen TCT Testing Technology (hosted by Blue Robotics)
+  url: https://bluerobotics.com/wp-content/uploads/2019/07/14.8V-4S-18Ah-UN38.3-PUBLIC-2024.pdf
+  revision: V3.0, issued 2023-11-15
+  accessed: '2026-11-13'
+  notes: Sample description lists the cell model and count of the R1 pack; the current R3 product page does not name its cells.
+
+parameters:
+- id: bluerov2_standard.vertical_thruster_lateral_spacing
+  component: bluerov2_standard
+  quantity: vertical_thruster_centre_spacing
+  unit: mm
+  value: 221.0
+  bound: exact
+  relation: exact
+  grade: A
+  sources: [DS-BR-BROV2-2D-2018]
+  location: {figure: top view, section: "dimension 221.0 MM [8.70 IN] between the vertical-thruster centres"}
+  conditions: {vehicle: BlueROV2 standard (6 thrusters), axis: body y}
+  notes: >-
+    Gives y = +/-0.1105 m for the two vertical thrusters (the profile used +/-0.11 m from the 2017
+    Gazebo developer model). The fore-aft position x is not dimensioned on the drawing and stays a
+    proxy (x = 0, consistent with ArduSub's zero pitch factor for motors 5/6), so the 6T layout as a
+    whole remains a proxy geometry.
+- id: bluerobotics_4s_18ah.cell_identity
+  component: bluerobotics_4s_18ah
+  quantity: cell_model_and_count
+  unit: null
+  dataset: {path: profiles/batteries/bluerobotics_4s18ah_v2.yaml, description: "cells: Samsung INR18650-30Q, 24 cells (4S6P)"}
+  bound: exact
+  relation: representative
+  grade: B
+  sources: [DS-BR-UN383-4S18AH]
+  location: {page: 2, section: Sample Description}
+  conditions: {pack_revision: R1}
+  notes: >-
+    Confirms the cell identity assumed by the cell-derived resistance proxy for the R1 pack
+    (representative for the current R3 pack, whose page does not name the cells). The pack
+    resistance remains a cell-derived lower bound (interconnects and wiring excluded).
+- id: hydromea_luma250lp.bitrate
+  component: hydromea_luma250lp
+  quantity: bitrate
+  unit: kbit/s
+  value: 250
+  value_max: 600
+  bound: nominal
+  relation: exact
+  grade: A
+  sources: [DS-HM-LUMA250LP]
+  location: {page: 1, section: System Specifications}
+  conditions: {range: "nominal at the maximum range of 7 m; up to 600 kbit/s at reduced range"}
+  notes: Used as the DESERT optical PHY bitrate of the communication experiments so that airtime matches the modem whose power is charged.

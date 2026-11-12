@@ -43,6 +43,8 @@ from holoenergy.integrations import ModemPowerProfile  # noqa: E402
 from holoenergy.integrations.desert import DesertEnergyAdapter  # noqa: E402
 from holoenergy.provenance import git_state  # noqa: E402
 
+# DESERT optical PHY at the bitrate of the modem whose power is charged (hydromea_luma250lp.bitrate).
+LUMA_BITRATE_BPS = 250_000
 PROFILES = {
     "acoustic": "evologics-s2cm-18-34-1000m",
     "optical": "hydromea-luma250lp-max",
@@ -59,7 +61,7 @@ HYBRID = {
                     "tx_power_db": 150,
                 },
             },
-            {"id": "optical", "medium": "optical", "optical": {"bitrate_bps": 1000000}},
+            {"id": "optical", "medium": "optical", "optical": {"bitrate_bps": LUMA_BITRATE_BPS}},
         ],
         "initial_interface": "acoustic",
         "policy": "received_power",
@@ -108,6 +110,7 @@ def scenario_for(name):
         s = h.load_scenario("e01_chat")
         data = s.model_dump()
         data["network"]["medium"] = "optical"
+        data["network"]["optical"]["bitrate_bps"] = LUMA_BITRATE_BPS
         data["nodes"][0]["position"] = (0.0, 0.0, -10.0)
         data["nodes"][1]["position"] = (8.0, 0.0, -10.0)
     elif name == "F":

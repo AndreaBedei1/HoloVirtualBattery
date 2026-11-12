@@ -1,5 +1,6 @@
 # BlueROV2 Standard (6 x T200: 4 vectored horizontal + 2 vertical), HoloEnergy profile v0.2.
 # Thruster count/roles: Blue Robotics product page and ArduSub SUB_FRAME_VECTORED (exact).
+# Vertical y = +/-0.1105 m from the Blue Robotics 2D drawing (221.0 mm spacing, grade A for y).
 # Horizontal thrusters: the same vectored set as the HoloOcean Heavy (the Heavy retrofit only
 # adds/moves vertical thrusters). Vertical x,y: Blue Robotics 2017 developer Gazebo model
 # (0, +/-0.11 m) -> proxy (C); vertical z does not change a vertical thruster's wrench.
@@ -15,8 +16,8 @@ actuators:
   - {id: H2, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.1562, 0.0988, 0.0], direction: [0.7071067811865476, -0.7071067811865476, 0.0]}
   - {id: H3, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [-0.1562, 0.0988, 0.0], direction: [0.7071067811865476, 0.7071067811865476, 0.0]}
   - {id: H4, role: horizontal_vectored, profile: package:actuators/bluerobotics_t200.yaml, position_m: [-0.1562, -0.0988, 0.0], direction: [0.7071067811865476, -0.7071067811865476, 0.0]}
-  - {id: V1, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.0, -0.11, 0.0809], direction: [0, 0, 1]}
-  - {id: V2, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.0, 0.11, 0.0809], direction: [0, 0, 1]}
+  - {id: V1, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.0, -0.1105, 0.0809], direction: [0, 0, 1]}
+  - {id: V2, role: vertical, profile: package:actuators/bluerobotics_t200.yaml, position_m: [0.0, 0.1105, 0.0809], direction: [0, 0, 1]}
 actuation:
   action_mode: wrench
   allocation: {method: redistributed}
@@ -38,7 +39,8 @@ evidence:
   # record is exact for the thruster but only representative of its installed operation.
   propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: representative}
   battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: exact}
-  geometry: {record: null, relation: proxy}
+  # y from the Blue Robotics 2D drawing (A); x undimensioned -> the layout stays a proxy.
+  geometry: {record: bluerov2_standard.vertical_thruster_lateral_spacing, relation: proxy}
   vehicle_relation: proxy
 metadata:
   profile_id: bluerov2-standard
