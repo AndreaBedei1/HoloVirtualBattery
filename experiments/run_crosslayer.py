@@ -12,7 +12,7 @@ sink); only the network configuration differs:
   ack         as direct with the native ALOHA MAC ACK
   multihop    acoustic, sink 1000 m away through a static relay at 500 m
   flooding    multihop geometry with flooding routing
-  optical     optical, sink 8 m away (inside the pinned optical noise-table depth range)
+  optical     optical, sink 5 m away (LUMA 250LP rated 7 m; same depth as the other cases)
 
 Observe-only: DESERT advances one physics tick after HoloOcean on the same timeline; its
 events are only read. The vehicle's own modem energy enters the HoloEnergy bus through
