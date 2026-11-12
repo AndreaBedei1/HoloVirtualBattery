@@ -1,0 +1,4842 @@
+{
+  "created_utc": "2026-11-12T18:24:10.089735+00:00",
+  "git": {
+    "commit": "c6976332ecaace3c0aefdc0fc8205e4943c0d2e1",
+    "dirty": true,
+    "working_tree_status": "M experiments/run_offline_campaign.py\n M holoenergy/integrations/desert.py\n M tests/test_communication_energy.py\n M tools/check_desert_noninterference.py\n?? experiments/results/native/N1_layouts/\n?? experiments/results/native/N2_orientation/\n?? experiments/results/native/N3_heave/\n?? experiments/results/native/desert/\n?? experiments/run_comm_matrix.py\n?? experiments/run_native_campaign.py"
+  },
+  "holo_desert_version": "1.1.0",
+  "port": 5571,
+  "traffic": {
+    "messages": 10,
+    "payload_pad_chars": 32,
+    "interval_s": 5.0,
+    "drain_s": 20.0
+  },
+  "profiles": {
+    "acoustic": "evologics-s2cm-18-34-1000m",
+    "optical": "hydromea-luma250lp-max"
+  },
+  "scope": "observe-only communication energy on the native DESERT engine",
+  "results": {
+    "A": {
+      "configuration": "A",
+      "scenario": {
+        "name": "holoenergy_comm_A",
+        "description": "Two stationary HoloOcean AUVs exchange a request and reply through DESERT.",
+        "duration": 16.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              0.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              30.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 135.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_02",
+            "start": 1.0,
+            "stop": 2.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 12.0,
+            "reply": true,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 0.7633484227048453,
+      "tx_frames": 10,
+      "control_tx_frames": 0,
+      "rx_frames": 10,
+      "control_rx_frames": 0,
+      "relay_forwards": 0,
+      "data_tx_frames_per_generated_message": 1.0,
+      "airtime_s": 4.096666666666657,
+      "communication_Wh": 0.03338703703703703,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.9045648677131292,
+      "energy_per_delivered_message_J": 12.01933333333333,
+      "energy_per_delivered_payload_byte_J": 0.2403866666666666,
+      "energy_check": {
+        "adapter_J": 120.1933333333333,
+        "recomputed_J": 120.1933333333333,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.1933333333333,
+          "comms.auv_02/acoustic": 55.99999999999999
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.096666666666657,
+            "RX_s": 0.0,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 64.1933333333333
+          },
+          "auv_02/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 4.096666666666657,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 55.99999999999999
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 4550,
+        "event_counts": {
+          "position_applied": 4200,
+          "app_tx": 10,
+          "forward": 10,
+          "mac_specific_stats": 140,
+          "stats": 140,
+          "phy_tx_start": 10,
+          "phy_rx_start": 10,
+          "phy_tx_end": 10,
+          "rx": 10,
+          "phy_rx_end": 10
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 10
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.03338703703703703,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.096666666666657,
+              "RX": 0.0,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.003186296296296288,
+              "RX": 0.0,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.017831481481481472,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 0,
+            "rx_bits": 0,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 4.096666666666657,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0009103703703703684,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.015555555555555553,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507721.4183242
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507721.4183242
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507721.4183242,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507721.4183242,
+          "node_id": "auv_02"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 10,
+        "control_tx_frames": 0,
+        "data_tx_bits": 19664,
+        "control_tx_bits": 0,
+        "data_airtime_s": 4.096666666666667,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 4200,
+        "app_tx": 10,
+        "forward": 10,
+        "mac_specific_stats": 140,
+        "stats": 140,
+        "phy_tx_start": 10,
+        "phy_rx_start": 10,
+        "phy_tx_end": 10,
+        "rx": 10,
+        "phy_rx_end": 10
+      }
+    },
+    "A2": {
+      "configuration": "A2",
+      "scenario": {
+        "name": "holoenergy_comm_A2",
+        "description": "Two stationary HoloOcean AUVs exchange a request and reply through DESERT.",
+        "duration": 16.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              0.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              30.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 135.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": true,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_02",
+            "start": 1.0,
+            "stop": 2.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 12.0,
+            "reply": true,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 0.7808785546493541,
+      "tx_frames": 10,
+      "control_tx_frames": 10,
+      "rx_frames": 10,
+      "control_rx_frames": 10,
+      "relay_forwards": 0,
+      "data_tx_frames_per_generated_message": 1.0,
+      "airtime_s": 4.263333333333319,
+      "communication_Wh": 0.03347962962962962,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.9009569113335917,
+      "energy_per_delivered_message_J": 12.052666666666664,
+      "energy_per_delivered_payload_byte_J": 0.2410533333333333,
+      "energy_check": {
+        "adapter_J": 120.52666666666664,
+        "recomputed_J": 120.52666666666664,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.19333333333331,
+          "comms.auv_02/acoustic": 56.33333333333333
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.096666666666657,
+            "RX_s": 0.16666666666666252,
+            "LISTEN_s": 65.73666666666668,
+            "energy_J": 64.19333333333331
+          },
+          "auv_02/acoustic": {
+            "TX_s": 0.16666666666666263,
+            "RX_s": 4.096666666666555,
+            "LISTEN_s": 65.73666666666678,
+            "energy_J": 56.33333333333333
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 4590,
+        "event_counts": {
+          "position_applied": 4200,
+          "app_tx": 10,
+          "forward": 10,
+          "mac_specific_stats": 140,
+          "stats": 140,
+          "phy_tx_start": 10,
+          "phy_rx_start": 10,
+          "phy_tx_end": 10,
+          "rx": 10,
+          "phy_rx_end": 10,
+          "phy_control_tx_start": 10,
+          "phy_control_tx_end": 10,
+          "phy_control_rx_start": 10,
+          "phy_control_rx_end": 10
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 20
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.03347962962962962,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.096666666666657,
+              "RX": 0.16666666666666263,
+              "LISTEN": 65.73666666666668
+            },
+            "state_energy_Wh": {
+              "TX": 0.003186296296296288,
+              "RX": 3.703703703703614e-05,
+              "LISTEN": 0.014608148148148151
+            },
+            "energy_Wh": 0.017831481481481476,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 10,
+            "rx_bits": 800,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.16666666666666263,
+              "RX": 4.096666666666555,
+              "LISTEN": 65.73666666666679
+            },
+            "state_energy_Wh": {
+              "TX": 0.0001296296296296265,
+              "RX": 0.0009103703703703456,
+              "LISTEN": 0.014608148148148176
+            },
+            "energy_Wh": 0.015648148148148147,
+            "tx_frames": 10,
+            "tx_bits": 800,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507739.0538237
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507739.0538237
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507739.0538237,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507739.0538237,
+          "node_id": "auv_02"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 10,
+        "control_tx_frames": 10,
+        "data_tx_bits": 19664,
+        "control_tx_bits": 800,
+        "data_airtime_s": 4.096666666666667,
+        "control_airtime_s": 0.166666666666667,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 4200,
+        "app_tx": 10,
+        "forward": 10,
+        "mac_specific_stats": 140,
+        "stats": 140,
+        "phy_tx_start": 10,
+        "phy_rx_start": 10,
+        "phy_tx_end": 10,
+        "rx": 10,
+        "phy_rx_end": 10,
+        "phy_control_tx_start": 10,
+        "phy_control_tx_end": 10,
+        "phy_control_rx_start": 10,
+        "phy_control_rx_end": 10
+      }
+    },
+    "B": {
+      "configuration": "B",
+      "scenario": {
+        "name": "holoenergy_comm_B",
+        "description": "Static routing A-B-C at 132 dB SPL. The 500 m relay links work while the 1000 m direct path fails in the controlled DESERT experiment.",
+        "duration": 30.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              -500.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              0.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_03",
+            "position": [
+              500.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 132.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {
+            "auv_01": {
+              "auv_03": "auv_02"
+            },
+            "auv_03": {
+              "auv_01": "auv_02"
+            }
+          }
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_03",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 16.0,
+            "reply": false,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 2.1749274382374475,
+      "tx_frames": 20,
+      "control_tx_frames": 0,
+      "rx_frames": 40,
+      "control_rx_frames": 0,
+      "relay_forwards": 10,
+      "data_tx_frames_per_generated_message": 2.0,
+      "airtime_s": 8.193333333333314,
+      "communication_Wh": 0.05121851851851851,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.8755803022633598,
+      "energy_per_delivered_message_J": 18.438666666666663,
+      "energy_per_delivered_payload_byte_J": 0.36877333333333323,
+      "energy_check": {
+        "adapter_J": 184.38666666666663,
+        "recomputed_J": 184.38666666666663,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.19333333333331,
+          "comms.auv_02/acoustic": 64.19333333333331,
+          "comms.auv_03/acoustic": 56.0
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.096666666666657,
+            "RX_s": 4.096666666666653,
+            "LISTEN_s": 61.806666666666686,
+            "energy_J": 64.19333333333331
+          },
+          "auv_02/acoustic": {
+            "TX_s": 4.096666666666657,
+            "RX_s": 4.096666666666657,
+            "LISTEN_s": 61.806666666666686,
+            "energy_J": 64.19333333333331
+          },
+          "auv_03/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 8.19333333333331,
+            "LISTEN_s": 61.806666666666686,
+            "energy_J": 56.0
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 6880,
+        "event_counts": {
+          "position_applied": 6300,
+          "app_tx": 10,
+          "forward": 20,
+          "mac_specific_stats": 210,
+          "stats": 210,
+          "phy_tx_start": 20,
+          "phy_rx_start": 40,
+          "phy_tx_end": 20,
+          "phy_rx_end": 40,
+          "rx": 10
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 40
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10,
+          "auv_02": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.05121851851851851,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.096666666666657,
+              "RX": 4.096666666666653,
+              "LISTEN": 61.806666666666686
+            },
+            "state_energy_Wh": {
+              "TX": 0.003186296296296288,
+              "RX": 0.0009103703703703675,
+              "LISTEN": 0.01373481481481482
+            },
+            "energy_Wh": 0.017831481481481476,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.096666666666657,
+              "RX": 4.096666666666657,
+              "LISTEN": 61.80666666666668
+            },
+            "state_energy_Wh": {
+              "TX": 0.003186296296296288,
+              "RX": 0.0009103703703703684,
+              "LISTEN": 0.013734814814814818
+            },
+            "energy_Wh": 0.017831481481481476,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_03/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 8.19333333333331,
+              "LISTEN": 61.806666666666686
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0018207407407407356,
+              "LISTEN": 0.01373481481481482
+            },
+            "energy_Wh": 0.015555555555555555,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 20,
+            "rx_bits": 39328,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507756.437078
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507756.437078
+          },
+          "auv_03": {
+            "time": 69,
+            "node": 3,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 10,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 10,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507756.437078
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507756.437078,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507756.437078,
+          "node_id": "auv_02"
+        },
+        "auv_03": {
+          "event": "stats",
+          "time": 69,
+          "node": 3,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 10,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 10,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507756.437078,
+          "node_id": "auv_03"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 20,
+        "control_tx_frames": 0,
+        "data_tx_bits": 39328,
+        "control_tx_bits": 0,
+        "data_airtime_s": 8.193333333333333,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 6300,
+        "app_tx": 10,
+        "forward": 20,
+        "mac_specific_stats": 210,
+        "stats": 210,
+        "phy_tx_start": 20,
+        "phy_rx_start": 40,
+        "phy_tx_end": 20,
+        "phy_rx_end": 40,
+        "rx": 10
+      }
+    },
+    "B2": {
+      "configuration": "B2",
+      "scenario": {
+        "name": "holoenergy_comm_B2",
+        "description": "Static routing A-B-C at 132 dB SPL. The 500 m relay links work while the 1000 m direct path fails in the controlled DESERT experiment.",
+        "duration": 30.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              -500.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              0.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_03",
+            "position": [
+              500.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 132.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": true,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {
+            "auv_01": {
+              "auv_03": "auv_02"
+            },
+            "auv_03": {
+              "auv_01": "auv_02"
+            }
+          }
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_03",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 16.0,
+            "reply": false,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 3,
+      "delivery_ratio": 0.3,
+      "mean_latency_s": 5.810770248467057,
+      "tx_frames": 51,
+      "control_tx_frames": 36,
+      "rx_frames": 100,
+      "control_rx_frames": 72,
+      "relay_forwards": 19,
+      "data_tx_frames_per_generated_message": 5.1,
+      "airtime_s": 21.29836285215005,
+      "communication_Wh": 0.05849909047341669,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.71682648062746,
+      "energy_per_delivered_message_J": 70.19890856810004,
+      "energy_per_delivered_payload_byte_J": 1.4039781713620008,
+      "energy_check": {
+        "adapter_J": 210.5967257043001,
+        "recomputed_J": 210.5967257043001,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 78.94666666666656,
+          "comms.auv_02/acoustic": 75.08339237096689,
+          "comms.auv_03/acoustic": 56.56666666666664
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 11.473333333333283,
+            "RX_s": 7.034999999999947,
+            "LISTEN_s": 51.491666666666774,
+            "energy_J": 78.94666666666657
+          },
+          "auv_02/acoustic": {
+            "TX_s": 9.54169618548344,
+            "RX_s": 9.708333333333238,
+            "LISTEN_s": 50.749970481183325,
+            "energy_J": 75.08339237096689
+          },
+          "auv_03/acoustic": {
+            "TX_s": 0.28333333333332256,
+            "RX_s": 18.2066666666665,
+            "LISTEN_s": 51.510000000000176,
+            "energy_J": 56.56666666666664
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 7293,
+        "event_counts": {
+          "position_applied": 6300,
+          "app_tx": 10,
+          "forward": 29,
+          "mac_specific_stats": 210,
+          "stats": 210,
+          "phy_tx_start": 51,
+          "phy_rx_start": 100,
+          "phy_tx_end": 50,
+          "phy_rx_end": 100,
+          "phy_control_tx_start": 36,
+          "phy_control_tx_end": 36,
+          "phy_control_rx_start": 72,
+          "phy_control_rx_end": 72,
+          "rx": 17
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 140,
+          "acoustic:receiver_busy_overlap": 13,
+          "acoustic:transmitter_busy": 19
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10,
+          "auv_02": 19
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.0584990904734167,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 11.473333333333283,
+              "RX": 7.034999999999946,
+              "LISTEN": 51.49166666666677
+            },
+            "state_energy_Wh": {
+              "TX": 0.008923703703703663,
+              "RX": 0.0015633333333333215,
+              "LISTEN": 0.011442592592592615
+            },
+            "energy_Wh": 0.0219296296296296,
+            "tx_frames": 28,
+            "tx_bits": 55072,
+            "rx_frames": 45,
+            "rx_bits": 33768,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 9.54169618548344,
+              "RX": 9.708333333333238,
+              "LISTEN": 50.749970481183325
+            },
+            "state_energy_Wh": {
+              "TX": 0.0074213192553760085,
+              "RX": 0.0021574074074073865,
+              "LISTEN": 0.01127777121804074
+            },
+            "energy_Wh": 0.020856497880824137,
+            "tx_frames": 42,
+            "tx_bits": 46728,
+            "rx_frames": 40,
+            "rx_bits": 46600,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_03/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.28333333333332256,
+              "RX": 18.206666666666504,
+              "LISTEN": 51.510000000000176
+            },
+            "state_energy_Wh": {
+              "TX": 0.000220370370370362,
+              "RX": 0.0040459259259258895,
+              "LISTEN": 0.011446666666666706
+            },
+            "energy_Wh": 0.015712962962962956,
+            "tx_frames": 17,
+            "tx_bits": 1360,
+            "rx_frames": 55,
+            "rx_bits": 87392,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 28,
+            "mac_data_rx": 0,
+            "mac_error_rx": 8,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 4,
+            "phy_interference_errors": 4,
+            "observed_wall_time": 1794507771.2969368
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 12,
+            "mac_data_tx": 22,
+            "mac_data_rx": 19,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507771.2969368
+          },
+          "auv_03": {
+            "time": 69,
+            "node": 3,
+            "app_sent": 0,
+            "app_received": 17,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 17,
+            "mac_error_rx": 27,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 22,
+            "phy_interference_errors": 5,
+            "observed_wall_time": 1794507771.2969368
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 28,
+          "mac_data_rx": 0,
+          "mac_error_rx": 8,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 4,
+          "phy_interference_errors": 4,
+          "observed_wall_time": 1794507771.2969368,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 12,
+          "mac_data_tx": 22,
+          "mac_data_rx": 19,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507771.2969368,
+          "node_id": "auv_02"
+        },
+        "auv_03": {
+          "event": "stats",
+          "time": 69,
+          "node": 3,
+          "app_sent": 0,
+          "app_received": 17,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 17,
+          "mac_error_rx": 27,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 22,
+          "phy_interference_errors": 5,
+          "observed_wall_time": 1794507771.2969368,
+          "node_id": "auv_03"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 51,
+        "control_tx_frames": 36,
+        "data_tx_bits": 100280,
+        "control_tx_bits": 2880,
+        "data_airtime_s": 20.89166666666667,
+        "control_airtime_s": 0.6000000000000015,
+        "late_received": 9
+      },
+      "event_counts": {
+        "position_applied": 6300,
+        "app_tx": 10,
+        "forward": 29,
+        "mac_specific_stats": 210,
+        "stats": 210,
+        "phy_tx_start": 51,
+        "phy_rx_start": 100,
+        "phy_tx_end": 50,
+        "phy_rx_end": 100,
+        "phy_control_tx_start": 36,
+        "phy_control_tx_end": 36,
+        "phy_control_rx_start": 72,
+        "phy_control_rx_end": 72,
+        "rx": 17
+      }
+    },
+    "C": {
+      "configuration": "C",
+      "scenario": {
+        "name": "holoenergy_comm_C",
+        "description": "Static routing A-B-C at 132 dB SPL. The 500 m relay links work while the 1000 m direct path fails in the controlled DESERT experiment.",
+        "duration": 30.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              -500.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              0.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_03",
+            "position": [
+              500.0,
+              0.0,
+              -100.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 132.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "flooding",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_03",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 16.0,
+            "reply": false,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 2.1782607715707822,
+      "tx_frames": 20,
+      "control_tx_frames": 0,
+      "rx_frames": 40,
+      "control_rx_frames": 0,
+      "relay_forwards": 10,
+      "data_tx_frames_per_generated_message": 2.0,
+      "airtime_s": 8.226666666666672,
+      "communication_Wh": 0.05123703703703704,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.8751192713604161,
+      "energy_per_delivered_message_J": 18.445333333333334,
+      "energy_per_delivered_payload_byte_J": 0.3689066666666667,
+      "energy_check": {
+        "adapter_J": 184.45333333333335,
+        "recomputed_J": 184.45333333333338,
+        "relative_difference": -1.1102230246251565e-16,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.22666666666667,
+          "comms.auv_02/acoustic": 64.22666666666667,
+          "comms.auv_03/acoustic": 56.00000000000001
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.113333333333337,
+            "RX_s": 4.113333333333339,
+            "LISTEN_s": 61.773333333333326,
+            "energy_J": 64.22666666666669
+          },
+          "auv_02/acoustic": {
+            "TX_s": 4.113333333333335,
+            "RX_s": 4.113333333333337,
+            "LISTEN_s": 61.773333333333326,
+            "energy_J": 64.22666666666667
+          },
+          "auv_03/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 8.226666666666674,
+            "LISTEN_s": 61.773333333333326,
+            "energy_J": 56.00000000000001
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 6880,
+        "event_counts": {
+          "position_applied": 6300,
+          "app_tx": 10,
+          "forward": 20,
+          "mac_specific_stats": 210,
+          "stats": 210,
+          "phy_tx_start": 20,
+          "phy_rx_start": 40,
+          "phy_tx_end": 20,
+          "phy_rx_end": 40,
+          "rx": 10
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 40
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10,
+          "auv_02": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.051237037037037046,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.113333333333337,
+              "RX": 4.113333333333339,
+              "LISTEN": 61.77333333333332
+            },
+            "state_energy_Wh": {
+              "TX": 0.0031992592592592615,
+              "RX": 0.0009140740740740753,
+              "LISTEN": 0.013727407407407405
+            },
+            "energy_Wh": 0.017840740740740744,
+            "tx_frames": 10,
+            "tx_bits": 19744,
+            "rx_frames": 10,
+            "rx_bits": 19744,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.113333333333335,
+              "RX": 4.113333333333337,
+              "LISTEN": 61.77333333333333
+            },
+            "state_energy_Wh": {
+              "TX": 0.00319925925925926,
+              "RX": 0.000914074074074075,
+              "LISTEN": 0.013727407407407407
+            },
+            "energy_Wh": 0.017840740740740744,
+            "tx_frames": 10,
+            "tx_bits": 19744,
+            "rx_frames": 10,
+            "rx_bits": 19744,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_03/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 8.226666666666674,
+              "LISTEN": 61.773333333333326
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.00182814814814815,
+              "LISTEN": 0.013727407407407407
+            },
+            "energy_Wh": 0.015555555555555557,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 20,
+            "rx_bits": 39488,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507788.1653745
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507788.1653745
+          },
+          "auv_03": {
+            "time": 69,
+            "node": 3,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 10,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 10,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507788.1660333
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507788.1653745,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507788.1653745,
+          "node_id": "auv_02"
+        },
+        "auv_03": {
+          "event": "stats",
+          "time": 69,
+          "node": 3,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 10,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 10,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507788.1660333,
+          "node_id": "auv_03"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 20,
+        "control_tx_frames": 0,
+        "data_tx_bits": 39488,
+        "control_tx_bits": 0,
+        "data_airtime_s": 8.226666666666672,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 6300,
+        "app_tx": 10,
+        "forward": 20,
+        "mac_specific_stats": 210,
+        "stats": 210,
+        "phy_tx_start": 20,
+        "phy_rx_start": 40,
+        "phy_tx_end": 20,
+        "phy_rx_end": 40,
+        "rx": 10
+      }
+    },
+    "C4S": {
+      "configuration": "C4S",
+      "scenario": {
+        "name": "holoenergy_comm_C4S",
+        "description": "Four AUVs generate simultaneous acoustic traffic. Delivery is observed; collisions are not inferred from absence.",
+        "duration": 25.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              0.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              40.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_03",
+            "position": [
+              40.0,
+              40.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_04",
+            "position": [
+              0.0,
+              40.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 135.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_02",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          },
+          {
+            "source": "auv_02",
+            "destination": "auv_03",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          },
+          {
+            "source": "auv_03",
+            "destination": "auv_04",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          },
+          {
+            "source": "auv_04",
+            "destination": "auv_01",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 0.8039406656190323,
+      "tx_frames": 10,
+      "control_tx_frames": 0,
+      "rx_frames": 30,
+      "control_rx_frames": 0,
+      "relay_forwards": 0,
+      "data_tx_frames_per_generated_message": 1.0,
+      "airtime_s": 4.096666666666657,
+      "communication_Wh": 0.06449814814814814,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.950598639065147,
+      "energy_per_delivered_message_J": 23.21933333333333,
+      "energy_per_delivered_payload_byte_J": 0.4643866666666666,
+      "energy_check": {
+        "adapter_J": 232.1933333333333,
+        "recomputed_J": 232.1933333333333,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.1933333333333,
+          "comms.auv_02/acoustic": 55.99999999999999,
+          "comms.auv_03/acoustic": 55.99999999999999,
+          "comms.auv_04/acoustic": 55.99999999999999
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.096666666666657,
+            "RX_s": 0.0,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 64.1933333333333
+          },
+          "auv_02/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 4.096666666666657,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 55.99999999999999
+          },
+          "auv_03/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 4.096666666666657,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 55.99999999999999
+          },
+          "auv_04/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 4.096666666666657,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 55.99999999999999
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 9070,
+        "event_counts": {
+          "position_applied": 8400,
+          "app_tx": 10,
+          "forward": 10,
+          "mac_specific_stats": 280,
+          "stats": 280,
+          "phy_tx_start": 10,
+          "phy_rx_start": 30,
+          "phy_tx_end": 10,
+          "phy_rx_end": 30,
+          "rx": 10
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 30
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.06449814814814814,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.096666666666657,
+              "RX": 0.0,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.003186296296296288,
+              "RX": 0.0,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.017831481481481472,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 0,
+            "rx_bits": 0,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 4.096666666666657,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0009103703703703684,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.015555555555555553,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_03/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 4.096666666666657,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0009103703703703684,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.015555555555555553,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_04/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 4.096666666666657,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0009103703703703684,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.015555555555555553,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507804.7228312
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507804.7244046
+          },
+          "auv_03": {
+            "time": 69,
+            "node": 3,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507804.7247186
+          },
+          "auv_04": {
+            "time": 69,
+            "node": 4,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507804.7252986
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507804.7228312,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507804.7244046,
+          "node_id": "auv_02"
+        },
+        "auv_03": {
+          "event": "stats",
+          "time": 69,
+          "node": 3,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507804.7247186,
+          "node_id": "auv_03"
+        },
+        "auv_04": {
+          "event": "stats",
+          "time": 69,
+          "node": 4,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507804.7252986,
+          "node_id": "auv_04"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 10,
+        "control_tx_frames": 0,
+        "data_tx_bits": 19664,
+        "control_tx_bits": 0,
+        "data_airtime_s": 4.096666666666667,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 8400,
+        "app_tx": 10,
+        "forward": 10,
+        "mac_specific_stats": 280,
+        "stats": 280,
+        "phy_tx_start": 10,
+        "phy_rx_start": 30,
+        "phy_tx_end": 10,
+        "phy_rx_end": 30,
+        "rx": 10
+      }
+    },
+    "C4F": {
+      "configuration": "C4F",
+      "scenario": {
+        "name": "holoenergy_comm_C4F",
+        "description": "Four AUVs generate simultaneous acoustic traffic. Delivery is observed; collisions are not inferred from absence.",
+        "duration": 25.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              0.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              40.0,
+              0.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_03",
+            "position": [
+              40.0,
+              40.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_04",
+            "position": [
+              0.0,
+              40.0,
+              -20.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 135.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "flooding",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_02",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          },
+          {
+            "source": "auv_02",
+            "destination": "auv_03",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          },
+          {
+            "source": "auv_03",
+            "destination": "auv_04",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          },
+          {
+            "source": "auv_04",
+            "destination": "auv_01",
+            "start": 1.0,
+            "stop": 12.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 2.0,
+            "final_interval": null,
+            "payload_bytes": 64,
+            "ttl": 10.0,
+            "reply": false,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 0.8347739692664465,
+      "tx_frames": 30,
+      "control_tx_frames": 0,
+      "rx_frames": 90,
+      "control_rx_frames": 0,
+      "relay_forwards": 20,
+      "data_tx_frames_per_generated_message": 3.0,
+      "airtime_s": 12.34000000000001,
+      "communication_Wh": 0.0690777777777778,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        }
+      },
+      "upper_bound_energy_share": 0.861058388290172,
+      "energy_per_delivered_message_J": 24.868000000000006,
+      "energy_per_delivered_payload_byte_J": 0.49736000000000014,
+      "energy_check": {
+        "adapter_J": 248.68000000000006,
+        "recomputed_J": 248.68000000000004,
+        "relative_difference": 2.220446049250313e-16,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.22666666666667,
+          "comms.auv_02/acoustic": 64.22666666666669,
+          "comms.auv_03/acoustic": 56.00000000000001,
+          "comms.auv_04/acoustic": 64.22666666666667
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.113333333333337,
+            "RX_s": 7.815000000000005,
+            "LISTEN_s": 58.07166666666666,
+            "energy_J": 64.22666666666667
+          },
+          "auv_02/acoustic": {
+            "TX_s": 4.113333333333335,
+            "RX_s": 7.815000000000007,
+            "LISTEN_s": 58.07166666666666,
+            "energy_J": 64.22666666666667
+          },
+          "auv_03/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 11.928333333333342,
+            "LISTEN_s": 58.07166666666666,
+            "energy_J": 56.00000000000001
+          },
+          "auv_04/acoustic": {
+            "TX_s": 4.113333333333339,
+            "RX_s": 7.815000000000003,
+            "LISTEN_s": 58.07166666666666,
+            "energy_J": 64.22666666666669
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 9268,
+        "event_counts": {
+          "position_applied": 8400,
+          "app_tx": 10,
+          "forward": 30,
+          "mac_specific_stats": 280,
+          "stats": 280,
+          "phy_tx_start": 30,
+          "phy_rx_start": 90,
+          "phy_tx_end": 30,
+          "phy_rx_end": 90,
+          "rx": 28
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 86,
+          "acoustic:transmitter_busy": 2,
+          "acoustic:receiver_busy_overlap": 2
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10,
+          "auv_02": 10,
+          "auv_04": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.0690777777777778,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.113333333333337,
+              "RX": 7.815000000000005,
+              "LISTEN": 58.07166666666665
+            },
+            "state_energy_Wh": {
+              "TX": 0.0031992592592592615,
+              "RX": 0.0017366666666666678,
+              "LISTEN": 0.012904814814814812
+            },
+            "energy_Wh": 0.017840740740740744,
+            "tx_frames": 10,
+            "tx_bits": 19744,
+            "rx_frames": 19,
+            "rx_bits": 37512,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.113333333333335,
+              "RX": 7.815000000000007,
+              "LISTEN": 58.071666666666665
+            },
+            "state_energy_Wh": {
+              "TX": 0.00319925925925926,
+              "RX": 0.0017366666666666683,
+              "LISTEN": 0.012904814814814817
+            },
+            "energy_Wh": 0.017840740740740747,
+            "tx_frames": 10,
+            "tx_bits": 19744,
+            "rx_frames": 19,
+            "rx_bits": 37512,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_03/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 11.928333333333342,
+              "LISTEN": 58.07166666666666
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.002650740740740743,
+              "LISTEN": 0.012904814814814813
+            },
+            "energy_Wh": 0.015555555555555557,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 29,
+            "rx_bits": 57256,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_04/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.113333333333339,
+              "RX": 7.815000000000003,
+              "LISTEN": 58.07166666666665
+            },
+            "state_energy_Wh": {
+              "TX": 0.0031992592592592632,
+              "RX": 0.0017366666666666674,
+              "LISTEN": 0.012904814814814812
+            },
+            "energy_Wh": 0.017840740740740744,
+            "tx_frames": 10,
+            "tx_bits": 19744,
+            "rx_frames": 19,
+            "rx_bits": 37512,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 18,
+            "mac_error_rx": 1,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 1,
+            "observed_wall_time": 1794507821.0395482
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 19,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507821.0410504
+          },
+          "auv_03": {
+            "time": 69,
+            "node": 3,
+            "app_sent": 0,
+            "app_received": 28,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 28,
+            "mac_error_rx": 1,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 1,
+            "observed_wall_time": 1794507821.0410504
+          },
+          "auv_04": {
+            "time": 69,
+            "node": 4,
+            "app_sent": 0,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 19,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507821.0410504
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 18,
+          "mac_error_rx": 1,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 1,
+          "observed_wall_time": 1794507821.0395482,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 19,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507821.0410504,
+          "node_id": "auv_02"
+        },
+        "auv_03": {
+          "event": "stats",
+          "time": 69,
+          "node": 3,
+          "app_sent": 0,
+          "app_received": 28,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 28,
+          "mac_error_rx": 1,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 1,
+          "observed_wall_time": 1794507821.0410504,
+          "node_id": "auv_03"
+        },
+        "auv_04": {
+          "event": "stats",
+          "time": 69,
+          "node": 4,
+          "app_sent": 0,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 19,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507821.0410504,
+          "node_id": "auv_04"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 30,
+        "control_tx_frames": 0,
+        "data_tx_bits": 59232,
+        "control_tx_bits": 0,
+        "data_airtime_s": 12.340000000000009,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 8400,
+        "app_tx": 10,
+        "forward": 30,
+        "mac_specific_stats": 280,
+        "stats": 280,
+        "phy_tx_start": 30,
+        "phy_rx_start": 90,
+        "phy_tx_end": 30,
+        "phy_rx_end": 90,
+        "rx": 28
+      }
+    },
+    "E": {
+      "configuration": "E",
+      "scenario": {
+        "name": "holoenergy_comm_E",
+        "description": "Two stationary HoloOcean AUVs exchange a request and reply through DESERT.",
+        "duration": 16.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              0.0,
+              0.0,
+              -10.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              8.0,
+              0.0,
+              -10.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "optical",
+          "multiphy": null,
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 135.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_02",
+            "start": 1.0,
+            "stop": 2.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 12.0,
+            "reply": true,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 0.3883191597020155,
+      "tx_frames": 10,
+      "control_tx_frames": 0,
+      "rx_frames": 10,
+      "control_rx_frames": 0,
+      "relay_forwards": 0,
+      "data_tx_frames_per_generated_message": 1.0,
+      "airtime_s": 0.01966399999999835,
+      "communication_Wh": 0.019469024444444444,
+      "upper_bound_states": {
+        "optical": {
+          "TX": "hydromea_luma250lp.tx",
+          "SLEEP": "hydromea_luma250lp.sleep"
+        }
+      },
+      "upper_bound_energy_share": 0.0014027981314134177,
+      "energy_per_delivered_message_J": 7.0088488,
+      "energy_per_delivered_payload_byte_J": 0.140176976,
+      "energy_check": {
+        "adapter_J": 70.088488,
+        "recomputed_J": 70.088488,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/optical": 35.088488,
+          "comms.auv_02/optical": 35.0
+        },
+        "per_interface_recomputed": {
+          "auv_01/optical": {
+            "TX_s": 0.01966399999999835,
+            "RX_s": 0.0,
+            "LISTEN_s": 69.98033600000001,
+            "energy_J": 35.088488
+          },
+          "auv_02/optical": {
+            "TX_s": 0.0,
+            "RX_s": 0.01966399999999835,
+            "LISTEN_s": 69.98033600000001,
+            "energy_J": 35.0
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 4550,
+        "event_counts": {
+          "position_applied": 4200,
+          "app_tx": 10,
+          "forward": 10,
+          "mac_specific_stats": 140,
+          "stats": 140,
+          "phy_tx_start": 10,
+          "phy_rx_start": 10,
+          "phy_tx_end": 10,
+          "phy_rx_end": 10,
+          "rx": 10
+        },
+        "rx_outcomes": {
+          "optical:synchronized": 10
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.019469024444444444,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/optical": {
+            "profile": "hydromea_luma250lp_max",
+            "medium": "optical",
+            "state_duration_s": {
+              "TX": 0.01966399999999835,
+              "RX": 0.0,
+              "LISTEN": 69.98033600000001
+            },
+            "state_energy_Wh": {
+              "TX": 2.731111111110882e-05,
+              "RX": 0.0,
+              "LISTEN": 0.009719491111111112
+            },
+            "energy_Wh": 0.009746802222222222,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 0,
+            "rx_bits": 0,
+            "evidence": {
+              "TX": "hydromea_luma250lp.tx",
+              "RX": "hydromea_luma250lp.rx",
+              "LISTEN": "hydromea_luma250lp.rx",
+              "SLEEP": "hydromea_luma250lp.sleep"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/optical": {
+            "profile": "hydromea_luma250lp_max",
+            "medium": "optical",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 0.01966399999999835,
+              "LISTEN": 69.98033600000001
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 2.731111111110882e-06,
+              "LISTEN": 0.009719491111111112
+            },
+            "energy_Wh": 0.009722222222222222,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "hydromea_luma250lp.tx",
+              "RX": "hydromea_luma250lp.rx",
+              "LISTEN": "hydromea_luma250lp.rx",
+              "SLEEP": "hydromea_luma250lp.sleep"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507834.2893488
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507834.2893488
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507834.2893488,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507834.2893488,
+          "node_id": "auv_02"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 10,
+        "control_tx_frames": 0,
+        "data_tx_bits": 19664,
+        "control_tx_bits": 0,
+        "data_airtime_s": 0.019664000000000004,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 4200,
+        "app_tx": 10,
+        "forward": 10,
+        "mac_specific_stats": 140,
+        "stats": 140,
+        "phy_tx_start": 10,
+        "phy_rx_start": 10,
+        "phy_tx_end": 10,
+        "phy_rx_end": 10,
+        "rx": 10
+      }
+    },
+    "F": {
+      "configuration": "F",
+      "scenario": {
+        "name": "holoenergy_comm_F",
+        "description": "Two stationary HoloOcean AUVs exchange a request and reply through DESERT.",
+        "duration": 16.0,
+        "physics_hz": 30,
+        "realtime": true,
+        "world": "OpenWater",
+        "nodes": [
+          {
+            "id": "auv_01",
+            "position": [
+              0.0,
+              0.0,
+              -10.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          },
+          {
+            "id": "auv_02",
+            "position": [
+              8.0,
+              0.0,
+              -10.0
+            ],
+            "communication": null,
+            "yaw": 0.0,
+            "vehicle": "HoveringAUV",
+            "waypoints": []
+          }
+        ],
+        "network": {
+          "profile_id": null,
+          "backend": "desert",
+          "medium": "acoustic",
+          "multiphy": {
+            "interfaces": [
+              {
+                "id": "acoustic",
+                "medium": "acoustic",
+                "acoustic": {
+                  "bitrate_bps": 4800.0,
+                  "tx_power_db": 150.0,
+                  "frequency_hz": 25000.0,
+                  "bandwidth_hz": 5000.0,
+                  "phy": null,
+                  "spreading": null,
+                  "shipping": null,
+                  "wind_speed_mps": null,
+                  "rx_snr_penalty_db": null,
+                  "acquisition_threshold_db": null
+                },
+                "optical": {
+                  "tx_power_w": null,
+                  "bitrate_bps": null,
+                  "frequency_hz": null,
+                  "bandwidth_hz": null,
+                  "attenuation_per_m": null,
+                  "acquisition_threshold_db": null
+                }
+              },
+              {
+                "id": "optical",
+                "medium": "optical",
+                "acoustic": {
+                  "bitrate_bps": null,
+                  "tx_power_db": null,
+                  "frequency_hz": null,
+                  "bandwidth_hz": null,
+                  "phy": null,
+                  "spreading": null,
+                  "shipping": null,
+                  "wind_speed_mps": null,
+                  "rx_snr_penalty_db": null,
+                  "acquisition_threshold_db": null
+                },
+                "optical": {
+                  "tx_power_w": null,
+                  "bitrate_bps": 1000000.0,
+                  "frequency_hz": null,
+                  "bandwidth_hz": null,
+                  "attenuation_per_m": null,
+                  "acquisition_threshold_db": null
+                }
+              }
+            ],
+            "policy": "received_power",
+            "initial_interface": "acoustic",
+            "master": "auv_01",
+            "thresholds": [
+              {
+                "from_interface": "acoustic",
+                "to_interface": "optical",
+                "power_linear": 10000000000000.0
+              },
+              {
+                "from_interface": "optical",
+                "to_interface": "acoustic",
+                "power_linear": 3e-08
+              }
+            ],
+            "alpha": 0.5
+          },
+          "optical": {
+            "tx_power_w": 50.0,
+            "bitrate_bps": 1000000.0,
+            "frequency_hz": 10000000.0,
+            "bandwidth_hz": 100000.0,
+            "attenuation_per_m": 0.043,
+            "temperature_k": 293.15,
+            "receiver_area_m2": 1.1e-06,
+            "transmitter_area_m2": 1e-05,
+            "beam_angle_rad": 1.0,
+            "dark_current_a": 1e-09,
+            "shunt_resistance_ohm": 1490000000.0,
+            "responsivity_a_w": 0.26,
+            "acquisition_threshold_db": 10.0,
+            "directional": false,
+            "mount_yaw_deg": 0.0,
+            "mount_pitch_deg": 0.0,
+            "mount_roll_deg": 0.0,
+            "offset_x_m": 0.0,
+            "offset_y_m": 0.0,
+            "offset_z_m": 0.0
+          },
+          "em": {
+            "tx_power_dbm": 14.0,
+            "bitrate_bps": 27000.0,
+            "frequency_hz": 868000000.0,
+            "bandwidth_hz": 125000.0,
+            "temperature_c": 20.0,
+            "salinity_ppt": 0.0,
+            "antenna_gain_db": 2.0
+          },
+          "acoustic": {
+            "bitrate_bps": 4800.0,
+            "tx_power_db": 135.0,
+            "frequency_hz": 25000.0,
+            "bandwidth_hz": 5000.0,
+            "propagation": "underwater",
+            "interference": "miv",
+            "phy": "bpsk_upstream",
+            "spreading": 1.75,
+            "shipping": 0.5,
+            "wind_speed_mps": 0.0,
+            "sound_speed_mps": 1500.0,
+            "rx_snr_penalty_db": -10.0,
+            "acquisition_threshold_db": 0.0
+          },
+          "woss": {
+            "origin_latitude_deg": 42.59,
+            "origin_longitude_deg": 10.125,
+            "x_bearing_deg": 90.0,
+            "water_depth_m": 100.0,
+            "ssp": [
+              {
+                "depth_m": 0.0,
+                "speed_mps": 1500.0
+              },
+              {
+                "depth_m": 100.0,
+                "speed_mps": 1500.0
+              }
+            ],
+            "sediment_speed_mps": 1560.0,
+            "sediment_density_g_cm3": 1.5,
+            "sediment_attenuation_db_lambda": 0.9
+          },
+          "mac": {
+            "protocol": "csma_aloha",
+            "ack": false,
+            "max_tx_tries": 3,
+            "buffer_packets": 100,
+            "queue_mode": "legacy",
+            "tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 1,
+              "slot_assignment": {}
+            },
+            "csma_ca": {
+              "queue_size": 10,
+              "backoff_delta_s": 1,
+              "backoff_max": 20,
+              "cts_wait_s": 10,
+              "data_wait_s": 10,
+              "ack_wait_s": 10
+            },
+            "dacap": {
+              "max_prop_delay_s": 2.0,
+              "wait_costant_s": 0.2,
+              "delta_d": 1500.0,
+              "t_min": 2.0,
+              "tw_min": 0.0
+            },
+            "csburst": {
+              "max_packets_per_burst": 3,
+              "fixed_sensing_s": 0.1,
+              "random_sensing_s": 0.1
+            },
+            "tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tokenbus": {
+              "slot_time_s": 10.0,
+              "min_token_hold_s": 0.1,
+              "max_token_hold_s": 10.0
+            },
+            "ranging_tdma": {
+              "frame_duration_s": 3.0,
+              "guard_time_s": 0.1,
+              "max_packets_per_slot": 2
+            }
+          },
+          "routing": "static",
+          "sun": {
+            "sink": "auv_02",
+            "probe_interval_s": 2.0,
+            "buffer_interval_s": 1.0,
+            "data_interval_s": 1.0,
+            "status_interval_s": 1.0,
+            "poisson_timing": true,
+            "max_ack_errors": 3,
+            "max_retransmissions": 3,
+            "buffer_packets": 5,
+            "probe_min_snr_db": 0.0
+          },
+          "position_based": {
+            "anchor_range_m": 3000.0,
+            "vehicle_range_m": 3000.0,
+            "anchors": {}
+          },
+          "flooding": {
+            "ttl": 10,
+            "maximum_cache_time_s": 60.0,
+            "optimize": true
+          },
+          "max_wire_bytes": 4096,
+          "seed": 1,
+          "routes": {}
+        },
+        "flows": [
+          {
+            "source": "auv_01",
+            "destination": "auv_02",
+            "start": 1.0,
+            "stop": 2.0,
+            "pattern": "periodic",
+            "generator": "python",
+            "native_packet_bytes": 125,
+            "native_period2_s": 2.0,
+            "native_duration1_s": 5.0,
+            "native_duration2_s": 5.0,
+            "interface": "inherit",
+            "burst_count": 3,
+            "burst_interval_s": 0.25,
+            "burst_period_s": 5.0,
+            "events": [],
+            "interval": 5.0,
+            "final_interval": null,
+            "payload_bytes": 16,
+            "ttl": 12.0,
+            "reply": true,
+            "message_type": "data"
+          }
+        ],
+        "power_events": [],
+        "coordination": false
+      },
+      "duration_s": 70.0,
+      "generated": 10,
+      "delivered": 10,
+      "delivery_ratio": 1.0,
+      "mean_latency_s": 0.7486817560381619,
+      "tx_frames": 10,
+      "control_tx_frames": 0,
+      "rx_frames": 10,
+      "control_rx_frames": 0,
+      "relay_forwards": 0,
+      "data_tx_frames_per_generated_message": 1.0,
+      "airtime_s": 4.096666666666657,
+      "communication_Wh": 0.05283148148148147,
+      "upper_bound_states": {
+        "acoustic": {
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx"
+        },
+        "optical": {
+          "TX": "hydromea_luma250lp.tx",
+          "SLEEP": "hydromea_luma250lp.sleep"
+        }
+      },
+      "upper_bound_energy_share": 0.5716428896911915,
+      "energy_per_delivered_message_J": 19.01933333333333,
+      "energy_per_delivered_payload_byte_J": 0.3803866666666666,
+      "energy_check": {
+        "adapter_J": 190.1933333333333,
+        "recomputed_J": 190.1933333333333,
+        "relative_difference": 0.0,
+        "per_interface_adapter_J": {
+          "comms.auv_01/acoustic": 64.1933333333333,
+          "comms.auv_02/acoustic": 55.99999999999999,
+          "comms.auv_01/optical": 35.0,
+          "comms.auv_02/optical": 35.0
+        },
+        "per_interface_recomputed": {
+          "auv_01/acoustic": {
+            "TX_s": 4.096666666666657,
+            "RX_s": 0.0,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 64.1933333333333
+          },
+          "auv_01/optical": {
+            "TX_s": 0.0,
+            "RX_s": 0.0,
+            "LISTEN_s": 70.0,
+            "energy_J": 35.0
+          },
+          "auv_02/acoustic": {
+            "TX_s": 0.0,
+            "RX_s": 4.096666666666657,
+            "LISTEN_s": 65.90333333333334,
+            "energy_J": 55.99999999999999
+          },
+          "auv_02/optical": {
+            "TX_s": 0.0,
+            "RX_s": 0.0,
+            "LISTEN_s": 70.0,
+            "energy_J": 35.0
+          }
+        }
+      },
+      "adapter_metrics": {
+        "observed_events": 4690,
+        "event_counts": {
+          "position_applied": 4200,
+          "app_tx": 10,
+          "forward": 10,
+          "interface_state": 140,
+          "mac_specific_stats": 140,
+          "stats": 140,
+          "phy_tx_start": 10,
+          "phy_rx_start": 10,
+          "phy_tx_end": 10,
+          "rx": 10,
+          "phy_rx_end": 10
+        },
+        "rx_outcomes": {
+          "acoustic:synchronized": 10
+        },
+        "unmapped_interfaces": {},
+        "generated_messages": 0,
+        "deliveries": 0,
+        "delivery_ratio": null,
+        "mean_latency_s": null,
+        "delivered_bytes": 0,
+        "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+        "forwards": {
+          "auv_01": 10
+        },
+        "retransmissions": null,
+        "retransmissions_basis": null,
+        "communication_energy_Wh": 0.05283148148148147,
+        "energy_per_delivered_byte_J": null,
+        "energy_per_delivered_message_J": null,
+        "scope": "all observed nodes",
+        "interfaces": {
+          "comms.auv_01/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 4.096666666666657,
+              "RX": 0.0,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.003186296296296288,
+              "RX": 0.0,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.017831481481481472,
+            "tx_frames": 10,
+            "tx_bits": 19664,
+            "rx_frames": 0,
+            "rx_bits": 0,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/acoustic": {
+            "profile": "evologics_s2cm_18_34_1000m",
+            "medium": "acoustic",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 4.096666666666657,
+              "LISTEN": 65.90333333333334
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0009103703703703684,
+              "LISTEN": 0.014645185185185186
+            },
+            "energy_Wh": 0.015555555555555553,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 10,
+            "rx_bits": 19664,
+            "evidence": {
+              "TX": "evologics_s2cm_18_34.tx_1000m",
+              "RX": "evologics_s2cm_18_34.rx",
+              "LISTEN": "evologics_s2cm_18_34.rx",
+              "SLEEP": "evologics_s2cm_18_34.standby"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_01/optical": {
+            "profile": "hydromea_luma250lp_max",
+            "medium": "optical",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 0.0,
+              "LISTEN": 70.0
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0,
+              "LISTEN": 0.009722222222222222
+            },
+            "energy_Wh": 0.009722222222222222,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 0,
+            "rx_bits": 0,
+            "evidence": {
+              "TX": "hydromea_luma250lp.tx",
+              "RX": "hydromea_luma250lp.rx",
+              "LISTEN": "hydromea_luma250lp.rx",
+              "SLEEP": "hydromea_luma250lp.sleep"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          },
+          "comms.auv_02/optical": {
+            "profile": "hydromea_luma250lp_max",
+            "medium": "optical",
+            "state_duration_s": {
+              "TX": 0.0,
+              "RX": 0.0,
+              "LISTEN": 70.0
+            },
+            "state_energy_Wh": {
+              "TX": 0.0,
+              "RX": 0.0,
+              "LISTEN": 0.009722222222222222
+            },
+            "energy_Wh": 0.009722222222222222,
+            "tx_frames": 0,
+            "tx_bits": 0,
+            "rx_frames": 0,
+            "rx_bits": 0,
+            "evidence": {
+              "TX": "hydromea_luma250lp.tx",
+              "RX": "hydromea_luma250lp.rx",
+              "LISTEN": "hydromea_luma250lp.rx",
+              "SLEEP": "hydromea_luma250lp.sleep"
+            },
+            "grades": {
+              "TX": "B",
+              "RX": "B",
+              "LISTEN": "B",
+              "SLEEP": "B"
+            }
+          }
+        },
+        "last_stats": {
+          "auv_01": {
+            "time": 69,
+            "node": 1,
+            "app_sent": 10,
+            "app_received": 0,
+            "mac_queue": 0,
+            "mac_data_tx": 10,
+            "mac_data_rx": 0,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507849.9086077
+          },
+          "auv_02": {
+            "time": 69,
+            "node": 2,
+            "app_sent": 0,
+            "app_received": 10,
+            "mac_queue": 0,
+            "mac_data_tx": 0,
+            "mac_data_rx": 10,
+            "mac_error_rx": 0,
+            "mac_discarded_tx": 0,
+            "phy_noise_errors": 0,
+            "phy_interference_errors": 0,
+            "observed_wall_time": 1794507849.9093828
+          }
+        }
+      },
+      "mac_stats": {
+        "auv_01": {
+          "event": "stats",
+          "time": 69,
+          "node": 1,
+          "app_sent": 10,
+          "app_received": 0,
+          "mac_queue": 0,
+          "mac_data_tx": 10,
+          "mac_data_rx": 0,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507849.9086077,
+          "node_id": "auv_01"
+        },
+        "auv_02": {
+          "event": "stats",
+          "time": 69,
+          "node": 2,
+          "app_sent": 0,
+          "app_received": 10,
+          "mac_queue": 0,
+          "mac_data_tx": 0,
+          "mac_data_rx": 10,
+          "mac_error_rx": 0,
+          "mac_discarded_tx": 0,
+          "phy_noise_errors": 0,
+          "phy_interference_errors": 0,
+          "observed_wall_time": 1794507849.9093828,
+          "node_id": "auv_02"
+        }
+      },
+      "network_metrics": {
+        "data_tx_frames": 10,
+        "control_tx_frames": 0,
+        "data_tx_bits": 19664,
+        "control_tx_bits": 0,
+        "data_airtime_s": 4.096666666666667,
+        "control_airtime_s": 0,
+        "late_received": 0
+      },
+      "event_counts": {
+        "position_applied": 4200,
+        "app_tx": 10,
+        "forward": 10,
+        "interface_state": 140,
+        "mac_specific_stats": 140,
+        "stats": 140,
+        "phy_tx_start": 10,
+        "phy_rx_start": 10,
+        "phy_tx_end": 10,
+        "rx": 10,
+        "phy_rx_end": 10
+      }
+    }
+  }
+}
