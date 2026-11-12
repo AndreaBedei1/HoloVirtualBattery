@@ -71,7 +71,8 @@ class EvidenceMap:
 
             raise ConfigurationError("evidence.double_counting must be warn or error")
         self.actuators = list(propulsion.ids)
-        self.devices, self.bounds, self.records = {}, {}, {}
+        self.devices, self.bounds, self.records, self.relations = {}, {}, {}, {}
+        self.propulsion_relation = (evidence.get("propulsion") or {}).get("relation")
         self.unconfigured, self.legacy_unlinked = [], []
         capabilities = {}
         for name, item in payload.components.items():
@@ -80,6 +81,7 @@ class EvidenceMap:
                 self.legacy_unlinked.append(name)
                 grades = {}
             self.devices[name] = dict(grades)
+            self.relations[name] = getattr(item, "relation", "exact")
             self.bounds[name] = dict(getattr(item, "state_bounds", {}))
             self.records[name] = dict(getattr(item, "state_evidence", {}))
             if getattr(item, "status", "configured") == "unconfigured":
@@ -183,12 +185,17 @@ class EvidenceMap:
 
     def summarize(self, device_state_energy_Wh, category_energy_Wh):
         by_grade = {g: 0.0 for g in GRADES}
-        upper_bound_Wh = 0.0
+        upper_bound_Wh = proxy_Wh = 0.0
         for device, states in device_state_energy_Wh.items():
+            relation = (
+                self.propulsion_relation if device in self.actuators else self.relations.get(device)
+            )
             for state, wh in states.items():
                 by_grade[self.grade(device, state)] += wh
                 if self.bounds.get(device, {}).get(state) == "upper_bound":
                     upper_bound_Wh += wh
+                if relation == "proxy":
+                    proxy_Wh += wh
         by_grade[self.converter_grade] += category_energy_Wh.get("converters", 0.0)
         by_grade[self.battery_loss_grade] += category_energy_Wh.get("battery_losses", 0.0)
         result = coverage(by_grade)
@@ -196,6 +203,9 @@ class EvidenceMap:
         result.update(
             upper_bound_energy_Wh=upper_bound_Wh,
             upper_bound_share_percent=100 * upper_bound_Wh / total if total else 0.0,
+            proxy_energy_Wh=proxy_Wh,
+            proxy_share_percent=100 * proxy_Wh / total if total else 0.0,
+            stale_evidence_links=list(self.stale_links),
             upper_bound_meaning=(
                 "energy computed from published maxima/upper bounds: the true value is "
                 "expected to be lower, so these shares bias the prediction upward"
