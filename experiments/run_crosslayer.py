@@ -55,6 +55,11 @@ from tools.holoocean_backend import make_env, package_identity  # noqa: E402
 VEHICLE_NODE = "auv_01"
 SINK = "auv_02"  # holo_desert node ids must match auv_NN
 RELAY = "auv_03"
+# Relay experiment: a source and a sink 500 m either side of the vehicle (the spacing of
+# holo_desert's bundled e05_multihop scenario) and a fixed relay 30 m beside the vehicle's
+# mid-span position. Traffic originates at the source; the vehicle sends nothing itself.
+SOURCE, FAR_SINK, FIXED_RELAY = "auv_02", "auv_03", "auv_04"
+RELAY_STRATEGIES = ("relay-vehicle", "relay-fixed")
 PROFILES = {"acoustic": "evologics-s2cm-18-34-1000m", "optical": "hydromea-luma250lp-max"}
 START = (0.0, 0.0, -5.0)  # SCENARIO agent location
 
@@ -78,6 +83,14 @@ def network_scenario(strategy):
     elif strategy == "optical":
         nodes.append({"id": SINK, "position": (8.0, 0.0, -5.0)})
         network["medium"] = "optical"
+    elif strategy in RELAY_STRATEGIES:
+        nodes += [
+            {"id": SOURCE, "position": (-500.0, 0.0, -5.0)},
+            {"id": FAR_SINK, "position": (500.0, 0.0, -5.0)},
+            {"id": FIXED_RELAY, "position": (0.0, 30.0, -5.0)},
+        ]
+        via = VEHICLE_NODE if strategy == "relay-vehicle" else FIXED_RELAY
+        network["routes"] = {SOURCE: {FAR_SINK: via}, FAR_SINK: {SOURCE: via}}
     else:
         raise ValueError(strategy)
     return h.Scenario.model_validate(
@@ -130,8 +143,11 @@ def run(strategy, args):
                     phase = item["phase"]
                     env.energy.mark_phase(phase)
                 if session is not None and session.time >= next_send - 1e-9:
-                    session.node(VEHICLE_NODE).send(
-                        SINK, {"t": round(session.time, 2), "pad": "x" * args.payload}
+                    sender, receiver = (
+                        (SOURCE, FAR_SINK) if strategy in RELAY_STRATEGIES else (VEHICLE_NODE, SINK)
+                    )
+                    session.node(sender).send(
+                        receiver, {"t": round(session.time, 2), "pad": "x" * args.payload}
                     )
                     next_send += args.period_s
                 velocity_ref = np.array(item["velocity"])
@@ -202,7 +218,7 @@ def main(argv=None):
     parser.add_argument(
         "--strategies",
         nargs="+",
-        default=["none", "direct", "ack", "multihop", "flooding", "optical"],
+        default=["none", "direct", "ack", "multihop", "flooding", "optical", *RELAY_STRATEGIES],
     )
     parser.add_argument("--current", type=float, default=0.2)
     parser.add_argument("--period-s", type=float, default=2.0)
