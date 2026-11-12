@@ -34,10 +34,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "experiments"))
 
+from run_final_experiments import HEAD_ON, transit_settled  # noqa: E402
 from run_native_campaign import (  # noqa: E402
     CONTRACT,
     DT,
-    PLANS,
     SCENARIO,
     WrenchController,
     layout_config,
@@ -110,8 +110,9 @@ def run(strategy, args):
     import numpy as np
 
     config, meta = layout_config("L8-HV", "direct")
-    current = [args.current, 0.0, 0.0]
-    plan = PLANS["transit"]()
+    # Same mission as the EXP5/EXP6 transits: head-on current, settled end hold.
+    current = [HEAD_ON * args.current, 0.0, 0.0]
+    plan = transit_settled()
     session = vehicle = everyone = link = None
     medium = None
     if strategy != "none":
@@ -225,9 +226,13 @@ def main(argv=None):
     parser.add_argument("--period-s", type=float, default=2.0)
     parser.add_argument("--payload", type=int, default=32)
     parser.add_argument(
-        "--output", type=Path, default=ROOT / "experiments/results/native/crosslayer.json"
+        "--output", type=Path, default=ROOT / "experiments/results/final/crosslayer.json"
     )
+    parser.add_argument("--allow-dirty", action="store_true", help="not for paper-critical runs")
     args = parser.parse_args(argv)
+    git = git_state()
+    if git.get("dirty") and not args.allow_dirty:
+        raise SystemExit(f"Working tree is dirty ({git.get('working_tree_status')}); commit first")
     if args.port == 5555:
         raise SystemExit("Use a non-default DESERT port")
     import holo_desert
@@ -244,7 +249,10 @@ def main(argv=None):
         "results": {},
     }
     if args.output.exists():
-        out["results"] = json.loads(args.output.read_text(encoding="utf-8")).get("results", {})
+        previous = json.loads(args.output.read_text(encoding="utf-8"))
+        # Resume only results produced by the same commit; never mix code versions.
+        if previous.get("git", {}).get("commit") == out["git"].get("commit"):
+            out["results"] = previous.get("results", {})
     for strategy in args.strategies:
         print(f"== {strategy}", flush=True)
         try:

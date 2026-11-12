@@ -340,6 +340,7 @@ def main(argv=None):
         default=[1],
         help="DESERT RNG seeds; the same set is used for every configuration",
     )
+    parser.add_argument("--allow-dirty", action="store_true", help="not for paper-critical runs")
     parser.add_argument(
         "--output", type=Path, default=ROOT / "experiments/results/native/desert/comm_matrix.json"
     )
@@ -348,6 +349,9 @@ def main(argv=None):
         raise SystemExit("Use a non-default DESERT port")
     import holo_desert
 
+    git = git_state()
+    if git.get("dirty") and not args.allow_dirty:
+        raise SystemExit(f"Working tree is dirty ({git.get('working_tree_status')}); commit first")
     results = {}
     for name in args.configs:
         print(f"== {name}", flush=True)
