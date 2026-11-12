@@ -9,8 +9,9 @@ Reuses the verified closed-loop components of experiments/run_native_campaign.py
   experiments/verify_final_energy.py can recompute E = sum P dt independently;
 * mission-phase component scheduling (devices switched on only in the phases where the
   mission uses them; the switch is rail gating, 0 W when OFF);
-* station keeping over 60 s with a steady-state window (last 30 s) reported separately
-  from the transient.
+* station keeping over 90 s with a steady-state window (last 30 s) reported separately
+  from the transient; currents head-on (and oblique 45 deg) so that horizontal thrusters
+  work on the forward T200 branch; transits end with a 10 s hold at the start point.
 
 Outputs go to --output-dir (default logs/final, ignored by git); copy the summaries and
 0.1 s traces to experiments/results/final after the run. See docs/paper/FINAL_EXPERIMENTS.md.

@@ -14,7 +14,7 @@ Configurations (bundled holo_desert scenarios, changed only where stated):
   C  multi-hop acoustic, flooding   B with ``routing = flooding`` (routes removed)
   C4S 4 nodes, static (direct)      e02_multi_node (40 m square, all in range), diagonal unicast
   C4F 4 nodes, flooding             C4S with ``routing = flooding``: neighbours rebroadcast
-  E  direct optical                 2 nodes 8 m apart at 10 m depth, ``medium = optical``
+  E  direct optical                 2 nodes 5 m apart at 10 m depth (LUMA rated 7 m), ``medium = optical``
   F  hybrid acoustic/optical        holo_desert's multi-PHY example (received-power switch)
 
 EM is omitted: the only electrical evidence is a chip-level proxy (SX1276, grade C).
