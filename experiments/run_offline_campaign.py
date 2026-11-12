@@ -425,6 +425,18 @@ def suite_components(suite):
             entry["initial_state"] = "ACTIVE" if spec.get("lights_on") else "OFF"
             entry.setdefault("name", "light_1")
         comps.append(entry)
+        if key == "tritech-gemini-720is":
+            # Review A-04: 19-74 V supply vs the 12-16.8 V bus. The step-up converter is a
+            # declared gap (unconfigured, excluded from the bus), not an assumed efficiency.
+            comps.append(
+                {
+                    "name": "imaging_sonar_step_up_converter",
+                    "category": "auxiliaries",
+                    "status": "unconfigured",
+                    "states": {"ACTIVE": None},
+                    "notes": "Gemini 720is needs 19-74 Vdc; converter efficiency unpublished",
+                }
+            )
     return comps
 
 

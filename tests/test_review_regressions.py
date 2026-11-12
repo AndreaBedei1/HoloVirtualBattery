@@ -310,3 +310,18 @@ def test_lumen_peak_power_is_an_upper_bound():
     """Review D-05: the Lumen 15 W is a published peak, reported as an upper bound."""
     record = load_registry_record("bluerobotics_lumen.power_full")
     assert record.bound == "upper_bound"
+
+
+def test_power_irls_allocation_runs_in_the_env():
+    """Review E-09: allocation.method power_irls must step, using the T200 tables."""
+    rows = {}
+    for method in ("redistributed", "power_irls"):
+        env = make(
+            overrides={"actuation": {"action_mode": "wrench", "allocation": {"method": method}}}
+        )
+        rows[method] = env.step([30.0, 10.0, 15.0, 0.0, 0.0, 2.0])["Energy"]
+        env.close()
+    irls = rows["power_irls"]
+    assert irls["actuation"]["allocation_residual_norm"] < 1e-6
+    assert math.isfinite(irls["power_propulsion_W"]) and irls["power_propulsion_W"] > 0
+    assert irls["power_propulsion_W"] <= rows["redistributed"]["power_propulsion_W"] * 1.001

@@ -63,9 +63,15 @@ STATIC = {
     "holoocean_bluerov2.linear_damping": ["EXP1", "EXP9"],
     "holoocean_bluerov2.thruster_clamp": ["EXP3", "EXP4", "EXP5"],
     "holoocean_bluerov2.actuator_geometry": ["EXP3", "EXP4", "EXP5"],
-    "bluerov2_standard.restrained_inline_load_head_on": ["EXP9"],
+    "bluerov2_standard.restrained_inline_load_head_on": ["EXP9", "EXP10"],
     "bluerov2_standard.restrained_equivalent_drag_area": ["EXP9"],
-    "bluerov2_heavy.translational_damping_identified": ["EXP9"],
+    "bluerov2_heavy.translational_damping_identified": ["EXP9", "EXP10"],
+    # EXP10 part 2: acoustic modem settings and interface variant (sensitivity only).
+    "evologics_s2cm_18_34.tx_2000m": ["EXP10"],
+    "evologics_s2cm_18_34.tx_3500m": ["EXP10"],
+    "evologics_s2cm_18_34.tx_max": ["EXP10"],
+    "evologics_s2cm_18_34.ethernet_interface_adder": ["EXP10"],
+    "evologics_s2cm_18_34.bitrate": ["EXP10"],
     "bluerov2_heavy.translational_damping_wu2018": ["EXP9"],
 }
 # Records whose value enters through interpolation of a table/curve.
@@ -155,7 +161,9 @@ def worst(relations):
 
 def record_row(registry, record_id, used_in, used_as, applied=("exact",)):
     r = registry.get(record_id)
-    relation = worst(set(applied))
+    # Review A-03: the printed relation is the stricter of the record's own relation and the
+    # relation of every link through which it is applied.
+    relation = worst(set(applied) | {r.relation})
     sid, names, links = source_fields(registry, r)
     loc = r.location or {}
     unc = r.uncertainty if r.uncertainty else ""

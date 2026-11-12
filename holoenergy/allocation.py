@@ -191,10 +191,11 @@ class ThrustAllocator:
             f = self._solve(tau, free, f, weights)
             for step in range(1, 31):
                 iterations = step
-                # Local quadratic model P_i(f) ~ w_i f^2 matched at the current point.
+                # Local quadratic model P_i(f) ~ w_i f^2 matched at the current point; the
+                # signed force selects the forward or reverse branch of the actuator model.
                 new = np.array(
                     [
-                        max(p(abs(x)) / max(x * x, 1e-6), 1e-9) if abs(x) > 1e-6 else weights[i]
+                        max(p(x) / max(x * x, 1e-6), 1e-9) if abs(x) > 1e-6 else weights[i]
                         for i, (p, x) in enumerate(zip(power_functions, f, strict=True))
                     ]
                 )

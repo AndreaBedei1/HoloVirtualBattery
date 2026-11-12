@@ -120,6 +120,17 @@ class ActuationLayer:
 
     def allocate(self, wrench, voltage, power_functions=None):
         lo, hi = self.bounds(voltage)
+        if power_functions is None and self.allocator.method == "power_irls":
+            # Review E-09: power-weighted allocation uses the electrical thruster model at the
+            # allocation voltage (force clamped to the table domain of each branch).
+            power_functions = [
+                (
+                    lambda f, th=thruster, a=low, b=high: th.power(
+                        min(max(f, a), b), voltage, "force_N"
+                    )
+                )
+                for thruster, low, high in zip(self.propulsion.thrusters, lo, hi, strict=True)
+            ]
         return self.allocator.allocate(wrench, lower=lo, upper=hi, power_functions=power_functions)
 
     def limit_to_native(self, forces, voltage):

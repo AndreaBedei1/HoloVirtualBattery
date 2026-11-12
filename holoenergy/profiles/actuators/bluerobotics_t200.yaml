@@ -7,7 +7,9 @@ metadata:
   datasheet_url: https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/
   doi: null
   date_accessed: '2026-10-06'
-  status: MEASURED
+  # Review A-01: manufacturer tank data for one thruster/ESC; model input, not an independent
+  # measurement and not a validation of the electrical model.
+  status: DATASHEET
   calibrated: false
   values_extracted: [command, force_N, power_W, voltage_V]
   assumptions: Static bollard data; installed inflow and ESC mapping require calibration.

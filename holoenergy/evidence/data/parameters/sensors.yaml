@@ -214,8 +214,13 @@ parameters:
   conditions:
     state: ACTIVE
     note: range dependent; standalone unit, cable losses excluded
+    supply_V: 19-74 Vdc
   value_min: 16
   value_max: 27
+  notes: >-
+    Review A-04: the 19-74 V supply range does not cover the BlueROV2 4S bus (12-16.8 V). A suite
+    that powers this sonar from the bus needs a step-up converter whose efficiency is not
+    published here; the gap is declared, not filled.
   snippet: Power requirement 16 - 27 W (range dependent)
 - id: cerulean_surveyor_240_16.power_idle
   component: cerulean_surveyor_240_16

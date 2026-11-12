@@ -38,7 +38,8 @@ evidence:
   # Static (bollard) manufacturer curves applied with inflow (current, vehicle motion): the
   # record is exact for the thruster but only representative of its installed operation.
   propulsion: {record: bluerobotics_t200.static_force_power_curve, relation: representative}
-  battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: exact}
+  # Review A-03: cell DC-IR (typical, fresh 30Q cell) scaled by 4S/6P, interconnects excluded.
+  battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: proxy}
   # y from the Blue Robotics 2D drawing (A); x undimensioned -> the layout stays a proxy.
   geometry: {record: bluerov2_standard.vertical_thruster_lateral_spacing, relation: proxy}
   vehicle_relation: proxy

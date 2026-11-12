@@ -62,3 +62,18 @@ parameters:
   location: {page: 1, section: System Specifications}
   conditions: {range: "nominal at the maximum range of 7 m; up to 600 kbit/s at reduced range"}
   notes: Used as the DESERT optical PHY bitrate of the communication experiments so that airtime matches the modem whose power is charged.
+- id: evologics_s2cm_18_34.ethernet_interface_adder
+  component: evologics_s2cm_18_34
+  quantity: electrical_power
+  unit: W
+  value: 0.5
+  bound: exact
+  relation: exact
+  grade: A
+  sources: [DS-EL-S2CM-2017]
+  location: {page: 1, section: "Technical specifications - Power consumption, footnote 2"}
+  conditions: {interface: Ethernet, applies_to: "RX and TX figures stated for the RS-232 interface"}
+  snippet: Add 500 mW for the Ethernet interface
+  notes: >-
+    Used only in the EXP10 sensitivity (communication interface variant). The modem profiles use
+    the RS-232 figures; an Ethernet modem adds this power to every powered state.

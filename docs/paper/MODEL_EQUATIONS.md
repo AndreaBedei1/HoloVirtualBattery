@@ -161,7 +161,7 @@ derating caused by the varied load are not propagated. Code: `holoenergy/uncerta
 
 HoloOcean 2.3.0 (patched) applies $F_D = -\tfrac12\rho C_D A\,|v_r|\,v_r$ with $v_r = v - v_c$
 (relative to the current), at the centre of mass, isotropic, plus Unreal linear damping
-$v \leftarrow v/(1 + c\,\Delta t)$ on the world-frame velocity. The chain-closure check infers
+$v \leftarrow v\,(1 - c\,\Delta t)$ on the world-frame velocity (PhysX explicit damping factor; a 1-DOF point mass with this update reproduces the native traces to $5\times10^{-8}$ m, review B-03). The chain-closure check infers
 the net force from the measured centre-of-mass velocity change,
 $F = m\big(v_{k+1}/(1 - c\Delta t) - v_k\big)/\Delta t$, and compares it with thrust plus drag.
 External comparison: restrained load (Gabl et al. 2021) vs $\tfrac12\rho C_D A U^2$; identified

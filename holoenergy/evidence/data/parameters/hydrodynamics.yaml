@@ -256,5 +256,5 @@ parameters:
     section: Agents/Private/BlueROV2.cpp
     line: 73 RootMesh->SetLinearDamping(1.0)
   notes: >-
-    Unreal linear damping applied to the body's world-frame velocity (v <- v / (1 + c dt)); acts in
+    Unreal linear damping applied to the body's world-frame velocity (v <- v (1 - c dt), the PhysX damping factor); acts in
     addition to the quadratic drag and is zero for a body held still in a current.
