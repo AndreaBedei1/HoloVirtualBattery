@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "holoenergy"
-version = "0.1.0"
+version = "0.2.0"
 description = "Configurable electro-thermal energy wrapper for HoloOcean marine robots"
 readme = "README.md"
 license = "MIT"

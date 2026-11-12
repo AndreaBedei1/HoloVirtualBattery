@@ -1,8 +1,9 @@
 # HoloEnergy research status (v0.2 development, updated 2026-11-12)
 
 Branch `feature/provenance-aware-energy-framework` (pushed to `origin`), created from
-`fix/verified-holoocean-drag-backend` (6965411). Tag `v0.1.0` (fdcd7ee) unchanged; no
-`v0.2.0` tag; nothing merged to `main`. Phase start: 04f3325. Final commit and CI run of
+`fix/verified-holoocean-drag-backend` (6965411). Tag `v0.1.0` (fdcd7ee) unchanged;
+`v0.2.0` tagged on the release commit (version 0.2.0) with the author's approval on
+2026-11-12; nothing merged to `main`. Phase start: 04f3325. Final commit and CI run of
 this phase: [final report](PROVENANCE_FRAMEWORK_FINAL_REPORT.md).
 
 ## Software verification

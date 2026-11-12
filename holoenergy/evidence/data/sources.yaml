@@ -2,7 +2,7 @@
 # literature.yaml (generated from the evidence workbook by tools/build_literature_registry.py)
 # supplies the papers P001-P060 and manufacturer sources D001-D027; they are loaded as
 # sources with the same ids.  Each source is defined in exactly one of the two files.
-registry_version: "0.2.0-dev"
+registry_version: "0.2.0"
 sources:
   - id: S1
     type: journal_article

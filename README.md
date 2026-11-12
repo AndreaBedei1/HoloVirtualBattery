@@ -464,8 +464,8 @@ Profili sintetici, OCV/R BlueROV2, scambio termico, hotel e conversioni richiedo
 dati sperimentali. Multi-pack, aging, L2, planner, CFD e BMS completo restano
 estensioni future. Licenza MIT; [NOTICE](NOTICE) distingue i dati del produttore.
 [CITATION.cff](CITATION.cff) e [CONTRIBUTING.md](CONTRIBUTING.md) restano validi.
-Il tag stabile `v0.1.0` rimane invariato; questa fase non crea una nuova release
-(proposta `v0.2.0` nel [report](docs/verified_backend_report.md)).
+Il tag stabile `v0.1.0` rimane invariato. Release `v0.2.0` (2026-11-12): framework
+provenance-aware, vedi il [report finale](docs/PROVENANCE_FRAMEWORK_FINAL_REPORT.md).
 
 [^agents]: [HoloOcean 2.3 agent API](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/holoocean/agents.html).
 [^currents]: [HoloOcean 2.3 ocean currents](https://byu-holoocean.github.io/holoocean-docs/v2.3.0/agents/docs/currents.html).

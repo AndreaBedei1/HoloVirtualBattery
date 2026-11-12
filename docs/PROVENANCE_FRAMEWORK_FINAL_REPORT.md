@@ -7,7 +7,7 @@
 | Branch | `feature/provenance-aware-energy-framework` (pushed; normal pushes only) |
 | Starting commit | `04f3325` (8 provenance-aware commits on `fix/verified-holoocean-drag-backend`) |
 | Final commit and CI | see the last section |
-| Tags | `v0.1.0` unchanged (`fdcd7ee`); no `v0.2.0` created |
+| Tags | `v0.1.0` unchanged (`fdcd7ee`); `v0.2.0` created on the release commit after the author's approval (2026-11-12) |
 | `main` | not merged |
 | Author | Andrea Bedei (repository configuration); no co-author lines |
 
@@ -207,7 +207,7 @@ The draft in [holoocean_drag_issue_draft.md](holoocean_drag_issue_draft.md) was 
 
 ## Release and merge recommendation
 
-* **Release:** a `v0.2.0` tag is justified after the final CI run is green. Native HoloOcean and DESERT matrices are complete, the documentation is updated, and the reviews are resolved. The tag is the author's decision, so it is not created here.
+* **Release:** a `v0.2.0` tag is justified after the final CI run is green. Native HoloOcean and DESERT matrices are complete, the documentation is updated, and the reviews are resolved. The author approved it; `v0.2.0` tags the release commit that sets the package version to 0.2.0 on top of `2d0512a`.
 * **Merge:** merge into `main` only after the author reviews the corrected claims and decides the upstream contribution. No merge was performed.
 
 ## Remaining blockers
