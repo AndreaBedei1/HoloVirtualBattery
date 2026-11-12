@@ -35,6 +35,16 @@ def main():
     assert len(registry.records) > 0 and len(registry.sources) > 0
     profiles = list_profiles()
     assert profiles and VEHICLES and BATTERIES
+    # Data added in v0.2 must ship with the wheel (registry records with packaged datasets).
+    for record_id in (
+        "bluerov2_standard.restrained_inline_load_head_on",
+        "holoocean_bluerov2.drag_area",
+        "bluerobotics_t200.static_force_power_curve",
+    ):
+        record = registry.get(record_id)
+        if record.dataset:
+            assert package.joinpath(record.dataset["path"]).is_file(), record.dataset["path"]
+    assert "torpedo-remus-like" in VEHICLES and "bluerov2-standard" in VEHICLES
     for name in VEHICLES:
         config = load_config(data=vehicle_config(name))
         assert config["propulsion"]["thruster_count"] > 0, name

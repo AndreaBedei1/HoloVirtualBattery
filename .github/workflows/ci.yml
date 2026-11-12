@@ -41,8 +41,10 @@ jobs:
           # Runtime dependencies (NumPy, PyYAML) at the locked versions, without the project itself.
           uv export --locked --no-dev --no-emit-project --no-hashes --format requirements-txt -o runtime-requirements.txt
           uv pip install --python wheel-check -r runtime-requirements.txt
-          # The package itself may only come from the freshly built wheel.
-          uv pip install --python wheel-check holoenergy --find-links dist --no-index
+          # The package itself may only come from the freshly built wheel file (never an index
+          # or a cached wheel of the same version).
+          WHEEL=$(ls dist/holoenergy-*.whl)
+          uv pip install --python wheel-check --no-index --reinstall-package holoenergy "$WHEEL"
           if [ -f wheel-check/Scripts/python.exe ]; then
             WHEEL_BIN=wheel-check/Scripts
           else
@@ -52,3 +54,6 @@ jobs:
           "$WHEEL_BIN/holoenergy" profiles
           "$WHEEL_BIN/holoenergy" validate bluerov2-heavy > /dev/null
           "$WHEEL_BIN/holoenergy" evidence bluerov2-heavy > /dev/null
+          "$WHEEL_BIN/holoenergy" evidence bluerov2_standard.restrained_inline_load_head_on > /dev/null
+          "$WHEEL_BIN/holoenergy" validate torpedo-remus-like > /dev/null
+          "$WHEEL_BIN/holoenergy" audit-sensors PoseSensor RGBCamera > /dev/null
