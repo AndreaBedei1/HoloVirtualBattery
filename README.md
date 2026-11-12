@@ -1,5 +1,5 @@
 # HoloEnergy
-dahsvdjavd
+
 HoloEnergy is a generic, configurable energy-aware simulation framework for marine
 robots that couples vehicle dynamics, actuator effort, electrical loads,
 electro-thermal battery behaviour and available vehicle performance. It runs with
