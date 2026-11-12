@@ -11,6 +11,7 @@ this phase: [final report](PROVENANCE_FRAMEWORK_FINAL_REPORT.md).
 | --- | --- |
 | CI wheel-verification fix (runtime deps from `uv.lock`, package only from the built wheel file; NumPy kept) | run [43272502605](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/43272502605): 8/8 jobs green (Ubuntu + Windows, Python 3.10-3.13) |
 | Later push (3f6e57e) | run [43286942485](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/43286942485): 8/8 green |
+| Final code commit (52868b7) | run [43293424867](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/43293424867): 8/8 green |
 | Local unit tests | 317 passed (257 at the start of the phase) |
 | Lint / format | `ruff check` and `ruff format --check` clean on holoenergy, examples, tools, tests, experiments |
 | Installed wheel | resources, registry datasets, allocation, proxy profiles and the `holoenergy` CLI run from an isolated environment |
