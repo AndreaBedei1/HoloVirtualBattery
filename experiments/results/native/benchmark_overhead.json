@@ -1,0 +1,53 @@
+{
+  "run": "N4-L8-HV-transit-c0.2",
+  "native_step_us_per_tick_holoocean_plus_holoenergy": 26351.22525477921,
+  "native_real_time_factor": 0.37948899541915393,
+  "machine_note": "measured while other HoloOcean instances were running (shared CPU/GPU)",
+  "modes": [
+    {
+      "mode": "thrusters",
+      "ticks": 6700,
+      "repeats": 3,
+      "median_us_per_tick": 3392.057253756741,
+      "min_us_per_tick": 3371.234268658975,
+      "max_us_per_tick": 3428.8715820676134,
+      "dashboard_polls": 0,
+      "share_of_native_step": 0.12872483996323997,
+      "max_real_time_factor_energy_only_at_100Hz": 2.9480634470202087
+    },
+    {
+      "mode": "wrench_direct",
+      "ticks": 6700,
+      "repeats": 3,
+      "median_us_per_tick": 4062.516955213983,
+      "min_us_per_tick": 4008.806626826747,
+      "max_us_per_tick": 4322.459656717395,
+      "dashboard_polls": 0,
+      "share_of_native_step": 0.15416804782074342,
+      "max_real_time_factor_energy_only_at_100Hz": 2.461528188126239
+    },
+    {
+      "mode": "wrench_equivalent",
+      "ticks": 6700,
+      "repeats": 3,
+      "median_us_per_tick": 3901.618328362481,
+      "min_us_per_tick": 3886.121820880851,
+      "max_us_per_tick": 3923.9398358083927,
+      "dashboard_polls": 0,
+      "share_of_native_step": 0.14806212199392366,
+      "max_real_time_factor_energy_only_at_100Hz": 2.5630390157094185
+    },
+    {
+      "mode": "dashboard",
+      "ticks": 6700,
+      "repeats": 3,
+      "median_us_per_tick": 4232.894552232169,
+      "min_us_per_tick": 4222.73101493605,
+      "max_us_per_tick": 4489.643104485612,
+      "dashboard_polls": 243,
+      "share_of_native_step": 0.16063369013417952,
+      "max_real_time_factor_energy_only_at_100Hz": 2.3624495901336857
+    }
+  ],
+  "timing_effect": "the dashboard is a client of the same telemetry; simulation time is fixed-step and is not affected by wall-clock overhead"
+}
