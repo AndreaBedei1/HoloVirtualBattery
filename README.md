@@ -1,11 +1,84 @@
 # HoloEnergy
 
-HoloEnergy is a generic, configurable energy-aware simulation framework for marine
-robots that couples vehicle dynamics, actuator effort, electrical loads,
-electro-thermal battery behaviour and available vehicle performance. It runs with
-HoloOcean or any backend that executes the efforts it submits. BlueROV2 Heavy is the
-first reference hardware profile and the planned experimentally calibrated and
-validated reference platform (no physical validation has been performed yet).
+HoloEnergy is a provenance-aware energy simulation layer for marine robots in
+HoloOcean. It couples vehicle dynamics, arbitrary actuator layouts, electrical models
+of real components (thrusters, sensors, computers, modems, converters), underwater
+communication activity and battery behaviour, and estimates mission energy and the
+performance that remains available, stating for every predicted watt where its
+parameters come from and how good that evidence is. It is a Python API first; the
+dashboard is an optional client of the same data. BlueROV2 is the reference case, not
+a requirement: other vehicles, batteries and backends use the same API.
+
+**Validation status.** No real vehicle has been validated. The HoloOcean backend is
+*verified* (it applies its own SI drag equation at 100 Hz after a one-line patch);
+that does not make HoloOcean's BlueROV2 hydrodynamics a validated model of the real
+vehicle (see [external comparison](docs/bluerov2_hydrodynamic_external_comparison.md)).
+
+## Why actuator effort
+
+Propulsion power follows the effort the controller commands against the simulated
+environment, not the vehicle's speed. A vehicle holding station in a current moves
+at ~0 m/s and still spends most of its energy: on the verified backend a speed-cubic
+model fitted on a calm-water transit underestimates station-keeping propulsion
+energy by 89 % at 0.2 m/s and 98.7 % at 0.5 m/s
+([baselines](experiments/results/native/tables/baselines.csv)).
+
+## What is in v0.2 (branch `feature/provenance-aware-energy-framework`)
+
+| Area | What it does | Where |
+| --- | --- | --- |
+| Evidence registry | 177 records / 144 sources; grades A-D capped by the relation of a value to the simulated hardware (exact A, representative B, proxy C, user D); unknown values stay `null`/unconfigured and are reported | [`holoenergy/evidence`](holoenergy/evidence), [gaps](docs/EVIDENCE_GAPS.md) |
+| Per-run evidence audit | energy share per grade, upper-bound share, proxy share, unconfigured loads, stale links (a user override of a linked value is graded D), double counting ([policy](docs/double_counting_policy.md)) | `env.energy.summary()["evidence"]`, `EnergyReport` |
+| Units | explicit SI conversion; dB re 1 µPa and dBm are refused as electrical power | `holoenergy/units.py` |
+| Actuator layouts | any count/orientation; 6×n configuration matrix; redistributed / pseudo-inverse / power-IRLS allocation within voltage-dependent bounds; `action_mode: wrench` | `holoenergy/allocation.py`, `actuation.py` |
+| Wrench-equivalent actuation | a virtual layout (e.g. BlueROV2 Standard 6T) evaluated on HoloOcean's 8-thruster body; ticks the native clamp cannot reproduce are flagged | `actuation.backend.mapping: wrench_equivalent` |
+| Profiles | `bluerov2-heavy` (simulator-exact geometry), `bluerov2-standard` (6T, proxy verticals), literature proxies `hovering-mares-like`, `torpedo-remus-like`, `torpedo-tethys-like`, `torpedo-autosub-like` (grade C, not validated vehicles), 19 components, 13 modems | `holoenergy profiles` |
+| Communications | observe-only energy of DESERT activity (TX/RX/listen intervals from `holo_desert` PHY events), attached to the battery bus; verified not to change network behaviour | `holoenergy.integrations.desert`, [native runs](docs/native_runs.md) |
+| Reports and CLI | `EnergyReport`, interval propagation (open sides stay open), `compare_runs`; `holoenergy profiles|evidence|validate|run|compare|audit-sensors|check-backend` | `holoenergy/report.py`, `cli.py` |
+| Dashboard | mission, battery, power, actuation, communications, evidence, compare runs | [dashboard](docs/dashboard.md) |
+
+```python
+from holoenergy import EnergyAwareEnv
+
+# base_env: a reset HoloOcean environment (BlueROV2, control scheme 0, 100 Hz)
+contract = {"agent_type": "BlueROV2", "agent_name": "rov0", "control_scheme": 0,
+            "action_units": "force_N", "thruster_count": 8, "dt_s": 0.01}
+with EnergyAwareEnv(base_env, vehicle_profile="bluerov2-standard", control_contract=contract) as env:
+    state = env.step([20.0, 0, 0, 0, 0, 0])      # body wrench [Fx, Fy, Fz, Mx, My, Mz]
+    report = env.energy.report()                 # energy, SOC, evidence, intervals, gaps
+```
+
+More examples (Heavy, 6T, custom 4T layout, sensor suite, compute, DESERT, custom
+battery, proxy AUV) run without a simulator: `python examples/api_examples.py`.
+
+## Native results (verified backend, 100 Hz)
+
+The drag-patched HoloOcean 2.3.0 package was rebuilt and verified on this machine
+(observed/expected drag 1.0000000, control rebuild 0.0100 like the official binary;
+[build](docs/holoocean_patched_build.md)). 42 closed-loop runs close the chain
+dynamics -> requested wrench -> allocation -> actuator force -> electrical power ->
+battery -> derating -> applied thrust tick by tick (force residual < 1e-4 N)
+([campaign](experiments/run_native_campaign.py), [tables](experiments/results/native/tables),
+[figures](docs/figures/paper)). Selected results:
+
+* Layouts sharing the four vectored horizontals cost the same in surge current;
+  2 verticals need 42 % more heave energy than 4; 4 horizontals cannot heave; no
+  layout holds station at 0.8 m/s (native 28.75 N clamp, 4.2-5.2 m drift).
+* Horizontal angle: 30 deg costs 2.32 / 4.67 Wh (surge / sway current, 0.5 m/s,
+  30 s), 60 deg 5.47 / 1.99 Wh, the latter at the 60 A pack limit.
+* An inspection payload adds 86 % to propulsion-only energy on a transit in
+  0.2 m/s current; an acoustic modem adds 1.37 %, an optical one 0.57 %
+  ([cross-layer](experiments/results/native/crosslayer.json)).
+* HoloOcean's BlueROV2 drag is 3.8-4.5x the restrained load measured on a standard
+  BlueROV2 (Gabl et al. 2021) and 0.86-1.16x the damping identified on a Heavy
+  (von Benzon et al. 2022): the external references disagree with each other.
+
+How to run native HoloOcean and DESERT next to other simulations:
+[docs/native_runs.md](docs/native_runs.md). Research status and open gaps:
+[RESEARCH_STATUS](docs/RESEARCH_STATUS.md), [EVIDENCE_GAPS](docs/EVIDENCE_GAPS.md),
+[paper outline](docs/paper_outline_smpat.md), [final report](docs/PROVENANCE_FRAMEWORK_FINAL_REPORT.md).
+
+## Documentation (Italian sections below describe the v0.1 core)
 
 Il framework collega sforzo degli attuatori, carichi elettrici, batteria,
 temperatura e potenza disponibile. ROV, AUV e veicoli custom usano la stessa API;
@@ -346,6 +419,25 @@ L0 è accounting ideale; L1 è un equivalente Rint medio del pack con bilancio
 termico a un nodo. Nessuna nuova fisica hydrodinamica è aggiunta al layer energia.
 
 ## Known limitations
+
+v0.2 limitations, in English (details in [RESEARCH_STATUS](docs/RESEARCH_STATUS.md)):
+
+* No physical validation of any vehicle. HoloOcean's BlueROV2 hydrodynamics are
+  verified as implemented, not validated; the available external references disagree
+  by a factor of 3-4.
+* T200 power comes from static (bollard) manufacturer tables; no published data cover
+  thrust/power at advance speed, so inflow effects are not modelled.
+* BlueROV2 pack OCV-SOC curve and thermal parameters are placeholders (grade D); the
+  pack resistance is a cell-derived proxy (C). No universal temperature or pressure
+  correction is applied.
+* DESERT source levels (dB re 1 µPa) are network parameters and are not mapped to modem
+  electrical power; modem energy uses per-state datasheet power, often maxima.
+* Proxy vehicle profiles apply literature energy models to generic HoloOcean bodies;
+  they are not models of the named vehicles.
+* Wrench-equivalent layouts keep the native body's mass and drag; ticks where the native
+  clamp cannot reproduce the virtual wrench are flagged and their energy is not
+  comparable.
+
 
 Un agente, un pack, scarica unidirezionale e controllo diretto degli attuatori.
 Un controller di alto livello/Fossen deve fornire un adapter esplicito. Il
