@@ -17,6 +17,11 @@ Steps (idempotent, each verifies its inputs; run on Windows):
             the official package, NTFS hard links to the official cooked containers
   manifest  write holoenergy_build_manifest.json (commands, versions, hashes)
 
+--engine-kind launcher builds against an installed Epic Launcher engine instead
+(e.g. C:/Program Files/Epic Games/UE_5.3, the engine family recorded in the official
+PDB). Only the Holodeck module is compiled; the installed engine is only read (no
+compatibility fixes, no dependency download), and the 'engine' step is skipped.
+
 One build tree is used because the project's legacy build settings force a unique
 build environment: UBT compiles the whole engine into the project's Intermediate
 directory (~20 GB, ~1.5 h on 14 cores), so a second tree would double both.
@@ -73,7 +78,13 @@ VARIANTS = {
 }
 PACKAGE_EXE = Path("Windows/Holodeck/Binaries/Win64/Holodeck.exe")
 PAKS = Path("Windows/Holodeck/Content/Paks")
-SKIPPED = {Path("Windows/Holodeck/Saved"), Path("Windows/Engine/Saved")}
+# Saved/: logs and crash state of earlier runs. Octrees/: sonar octree cache (~26 GB) that
+# HoloOcean regenerates on demand; never copied (and never linked, since the runtime writes it).
+SKIPPED = {
+    Path("Windows/Holodeck/Saved"),
+    Path("Windows/Engine/Saved"),
+    Path("Windows/Holodeck/Octrees"),
+}
 DOTNET_ENV = {
     "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
     "DOTNET_NOLOGO": "1",
@@ -173,6 +184,12 @@ def apply_engine_compat_fix(engine, dry_run):
 
 
 def step_engine(args):
+    if args.engine_kind == "launcher":
+        version = json.loads(
+            (args.engine_root / "Engine/Build/Build.version").read_text(encoding="utf-8")
+        )
+        print(f"launcher engine {args.engine_root}: {version}; nothing to prepare", flush=True)
+        return
     engine = args.engine_root
     if not (engine / ".git").is_dir():
         run(
@@ -286,6 +303,18 @@ def step_source(args):
 
 def ubt_command(args, key):
     project = args.work_root / "src" / BUILD_TREE / "engine/Holodeck.uproject"
+    # The official cooked plugin manifest mounts EOSShared (enabled in Epic's Launcher
+    # build); a source-engine build must enable it explicitly or the packaged game exits at
+    # startup. The Launcher engine already has it, and UBT refuses per-target plugin
+    # switches in its shared build environment.
+    plugins = ["-EnablePlugin=EOSShared"] if args.engine_kind == "source" else []
+    # Launcher engine headers are compiled with the project and cannot be edited: Platform.h
+    # sets PLATFORM_HAS_ASAN_INCLUDE from __has_include(<sanitizer/asan_interface.h>), and with
+    # the optional MSVC AddressSanitizer headers installed ConcurrentLinearAllocator.h reaches
+    # __has_feature (undefined in MSVC; C4668 is an error). Without the headers (as on the
+    # official build machine) the macro is 0; defining it reproduces that configuration.
+    if args.engine_kind == "launcher":
+        plugins.append("-Define:PLATFORM_HAS_ASAN_INCLUDE=0")
     return [
         args.engine_root / "Engine/Build/BatchFiles/Build.bat",
         "Holodeck",
@@ -296,10 +325,8 @@ def ubt_command(args, key):
         "-NoHotReload",
         "-DisableAdaptiveUnity",
         f"-CompilerVersion={MSVC_TOOLSET}",
-        f"-WindowsSDKVersion={WINDOWS_SDK}",
-        # The official cooked plugin manifest mounts EOSShared (enabled in Epic's Launcher
-        # build); without its module the packaged game exits at startup. Same plugin set.
-        "-EnablePlugin=EOSShared",
+        f"-WindowsSDKVersion={args.windows_sdk}",
+        *plugins,
         f"-MaxParallelActions={args.max_parallel_actions}",
         f"-Log={args.work_root / 'logs' / f'ubt_{key}.log'}",
     ]
@@ -311,7 +338,8 @@ def output_dir(args, key):
 
 def step_build(args):
     (args.work_root / "logs").mkdir(parents=True, exist_ok=True)
-    apply_engine_compat_fix(args.engine_root, args.dry_run)
+    if args.engine_kind == "source":
+        apply_engine_compat_fix(args.engine_root, args.dry_run)
     tree = args.work_root / "src" / BUILD_TREE
     reference = args.work_root / "src" / REFERENCE_TREE
     built = tree / "engine/Binaries/Win64/Holodeck.exe"
@@ -392,12 +420,16 @@ def toolchain_versions(args):
         (args.engine_root / "Engine/Build/Build.version").read_text(encoding="utf-8")
     )
     dotnet = sorted((args.engine_root / "Engine/Binaries/ThirdParty/DotNet").glob("*/"))
-    return {
-        "msvc_toolset": MSVC_TOOLSET,
-        "cl_banner": banner,
-        "cl_path": str(cl),
-        "windows_sdk": WINDOWS_SDK,
-        "unreal_engine": {
+    if args.engine_kind == "launcher":
+        engine = {
+            "kind": "installed Epic Launcher engine (precompiled, only read)",
+            "root": str(args.engine_root),
+            "build_version": build_version,
+            "local_modifications": {},
+        }
+    else:
+        engine = {
+            "kind": "GitHub source build",
             "repository": UE_REPOSITORY,
             "tag": UE_TAG,
             "commit": git_head(args.engine_root),
@@ -411,7 +443,14 @@ def toolchain_versions(args):
                 }
                 for fix in COMPAT_FIXES
             },
-        },
+        }
+    return {
+        "msvc_toolset": MSVC_TOOLSET,
+        "cl_banner": banner,
+        "cl_path": str(cl),
+        "windows_sdk": args.windows_sdk,
+        "official_windows_sdk": WINDOWS_SDK,
+        "unreal_engine": engine,
         "bundled_dotnet_sdk": [p.name for p in dotnet if p.is_dir()],
         "host": platform.platform(),
         "python": platform.python_version(),
@@ -473,8 +512,13 @@ def step_manifest(args):
             "reused_official_cooked_content": shared,
             "limitations": [
                 "Ocean worlds are not public; official cooked content reused unchanged",
-                "engine built from GitHub source (Build.version Changelist 0), official binary from "
-                "the Launcher build of the same 5.3.2 release (CL 29314046)",
+                (
+                    "built against the installed Launcher engine; only the Holodeck module compiled"
+                    if args.engine_kind == "launcher"
+                    else "engine built from GitHub source (Build.version Changelist 0), official "
+                    "binary from the Launcher build of the same 5.3.2 release (CL 29314046)"
+                ),
+                f"Windows SDK {args.windows_sdk} (official binary: {WINDOWS_SDK})",
                 "behavioural equivalence with the official binary is tested, not assumed",
             ],
         }
@@ -501,6 +545,13 @@ def main():
     )
     parser.add_argument("--work-root", type=Path, default=Path("C:/HOB"))
     parser.add_argument("--engine-root", type=Path, default=Path("C:/UE532"))
+    parser.add_argument(
+        "--engine-kind",
+        choices=("source", "launcher"),
+        default="source",
+        help="GitHub source engine (documented 2026-10-07 build) or installed Launcher engine",
+    )
+    parser.add_argument("--windows-sdk", default=WINDOWS_SDK)
     parser.add_argument(
         "--original-package",
         type=Path,

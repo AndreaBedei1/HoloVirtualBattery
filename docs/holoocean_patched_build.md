@@ -164,6 +164,49 @@ C:/HOB/packages/<variant>/Ocean/
 Hard links share the official bytes without a second 5.4 GB copy; the runtime only
 reads them, and their SHA256 is checked against the archived original values.
 
+## Launcher-engine rebuild (2026-11-12)
+
+The 2026-10-07 packages were built on another machine and are not available here, so
+both variants were rebuilt with `--engine-kind launcher` against the installed Epic
+Launcher engine (`C:/Program Files/Epic Games/UE_5.3`, Build.version CL 29314046, the
+engine family recorded in the official PDB). Only the Holodeck module is compiled; the
+installed engine is only read and the `engine` step does nothing.
+
+```powershell
+python tools/build_patched_holoocean.py --engine-kind launcher `
+  --engine-root 'C:/Program Files/Epic Games/UE_5.3' --windows-sdk 10.0.19041.0 `
+  --steps source build assemble manifest
+```
+
+Differences from the official build, all recorded in the package manifests:
+
+* Windows SDK 10.0.19041.0 (10.0.22621.0 is not installed on this machine).
+* `-Define:PLATFORM_HAS_ASAN_INCLUDE=0`. The engine headers are compiled with the
+  project; when the optional MSVC AddressSanitizer headers are installed,
+  `ConcurrentLinearAllocator.h` reaches `__has_feature`, which MSVC does not define
+  (C4668 is an error). The official build machine evidently had no such headers, so the
+  macro evaluated to 0 there; the definition reproduces that configuration without
+  editing the installed engine. `-EnablePlugin=EOSShared` is not passed: the Launcher
+  engine already provides it, and UBT refuses per-target plugin switches in its shared
+  build environment.
+* The sonar octree cache (`Windows/Holodeck/Octrees`, ~26 GB) is not copied into the
+  separate packages; HoloOcean regenerates it on demand.
+
+Result at 100 Hz (`tools/check_holoocean_backend.py`; JSON in
+[`experiments/results/native/backend`](../experiments/results/native/backend)):
+
+| Package | Holodeck.exe SHA256 | drag ratio (current / still water) | physics/client step | Verdict |
+| --- | --- | --- | --- | --- |
+| official 2.3.0 (archived 2026-10-07 check) | `8c206c9c…` | 0.0099999995 / 0.0100003658 | 0.9999999203 | FAIL (0.01× signature) |
+| control `rebuilt-before` | `51e0de81…` | 0.0099999995 / 0.0100003658 | 0.9999999203 | FAIL (0.01× signature) |
+| `patched-after` | `9575fb02…` | 1.0000000097 / 1.0000002332 | 0.9999999822 | PASS |
+
+The control reproduces the archived official values, and the patched build reproduces
+the archived patched values of the 2026-10-07 build (`4d6c2d46…`), to all printed digits.
+This verifies the drag implementation and the physics step. It says nothing about
+whether HoloOcean's BlueROV2 coefficients describe the real vehicle (see
+[the external comparison](bluerov2_hydrodynamic_external_comparison.md)).
+
 ## Using a separate build
 
 Every native tool accepts the package executable:
