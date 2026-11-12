@@ -106,3 +106,25 @@ inferiore a questo rumore. Rendering del browser, eseguito in un altro processo,
 non è incluso nel timer step. La dashboard ha un costo misurabile; non modifica
 dt, comandi o modelli. Dati in `sources/generic_verification.json`, riproduzione
 con `tools/benchmark_energy.py`. Nessuna promessa di overhead zero.
+
+
+## Evidence, actuation, communications and run comparison (v0.2)
+
+The page is a read-only client of the same telemetry rows the Python API produces:
+
+* **Power**: categories now include communications (energy attached with `env.attach`).
+* **Actuation & allocation**: requested, allocated and applied body wrench, allocation and
+  native (wrench-equivalent) residuals, saturated actuators.
+* **Communications**: present communication power and energy, and the power of each modem
+  state (TX, RX, listen) from the observe-only DESERT adapter.
+* **Evidence & provenance**: energy share per evidence grade, upper-bound and proxy shares,
+  vehicle relation, unconfigured loads and the run's warnings (stale links, double counting).
+  The summary is computed by the publisher only when a sample is sent (10 Hz wall clock),
+  never per physics tick.
+* **Compare runs**: `holoenergy-dashboard --reports DIR` lists saved `EnergyReport` JSON files
+  side by side (duration, energy, SOC loss, peak current, grade-A share).
+
+Measured overhead (`experiments/benchmark_overhead.py`, replay of a native transit on a null
+backend, machine shared with other HoloOcean instances): 4.3 ms per tick for the energy layer
+in wrench mode and 4.9 ms with the telemetry publisher, evidence snapshots and a polled
+dashboard; simulation time is fixed-step, so the dashboard cannot change simulated results.

@@ -655,8 +655,13 @@ class EnergyAwareEnv:
         self.energy.record(row)
         row["endurance_estimates"] = self.energy.endurance()
         if self.telemetry is not None:
-            self.telemetry.publish(row)
+            self.telemetry.publish(row, extra=self._telemetry_extra)
         return dict(state), row
+
+    def _telemetry_extra(self):
+        """Evidence snapshot for the dashboard (computed only when a sample is sent)."""
+        summary = self.energy.summary()
+        return {"evidence": summary.get("evidence"), "warnings": list(self.warnings)[:20]}
 
     @staticmethod
     def _aggregate(rows, completed=True):

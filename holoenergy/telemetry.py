@@ -40,12 +40,23 @@ class TelemetryPublisher:
         except (OSError, ValueError, TypeError):
             self.dropped += 1
 
-    def publish(self, row):
+    def publish(self, row, extra=None):
+        """Send ``row`` if the wall-clock interval has elapsed.
+
+        ``extra`` is an optional callable returning additional fields (e.g. the evidence
+        summary); it is evaluated only when a sample is actually sent, never per tick.
+        """
         now = monotonic()
         if now - self.last < self.interval or self.closed:
             return
         self.last = now
-        self._send({"event": "sample", "energy": row})
+        message = {"event": "sample", "energy": row}
+        if extra is not None:
+            try:
+                message.update(extra())
+            except Exception:  # noqa: BLE001 - telemetry is best effort
+                self.dropped += 1
+        self._send(message)
 
     def event(self, name, **values):
         self._send({"event": name, **values})

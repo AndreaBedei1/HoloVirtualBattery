@@ -105,3 +105,42 @@ def test_oversized_telemetry_is_dropped_without_blocking():
     with TelemetryPublisher(8766) as publisher:
         publisher.publish({"time_s": 0, "data": "x" * 65000})
         assert publisher.dropped == 1 and publisher.sent == 0
+
+
+def test_store_keeps_evidence_and_warnings_from_samples():
+    store = DashboardStore()
+    evidence = {"share_percent": {"A": 90.0, "B": 10.0, "C": 0.0, "D": 0.0}}
+    store.accept(
+        {
+            "schema_version": 1,
+            "event": "sample",
+            "energy": {"time_s": 0.1, "power_communications_W": 0.8},
+            "evidence": evidence,
+            "warnings": ["stale evidence link: x"],
+        }
+    )
+    state = store.snapshot()
+    assert state["evidence"] == evidence
+    assert state["warnings"] == ["stale evidence link: x"]
+    assert state["history"][-1]["power_communications_W"] == 0.8
+
+
+def test_evidence_is_computed_only_when_a_sample_is_sent():
+    calls = []
+    publisher = TelemetryPublisher(9, publish_hz=1)
+    publisher.publish({"time_s": 0.0}, extra=lambda: calls.append(1) or {})
+    for _ in range(50):
+        publisher.publish({"time_s": 0.0}, extra=lambda: calls.append(1) or {})
+    publisher.close()
+    assert len(calls) == 1
+
+
+def test_compare_runs_endpoint_reads_saved_reports(tmp_path):
+    report = {"run_id": "r1", "duration_s": 2.0, "terminal_energy_Wh": 0.5, "evidence": {}}
+    (tmp_path / "r1.json").write_text(json.dumps(report), encoding="utf-8")
+    (tmp_path / "noise.json").write_text("[]", encoding="utf-8")
+    with DashboardServer(0, 0, reports_dir=tmp_path) as server:
+        with urllib.request.urlopen(server.url + "api/reports", timeout=2) as response:
+            runs = json.load(response)["runs"]
+    assert [r["file"] for r in runs] == ["r1.json"]
+    assert runs[0]["terminal_energy_Wh"] == 0.5

@@ -8,7 +8,38 @@ import webbrowser
 from collections import deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
+from pathlib import Path
 from time import monotonic
+
+
+def compare_reports(directory):
+    """Side-by-side rows of saved EnergyReport JSON files (read-only, for 'Compare runs')."""
+    if directory is None or not Path(directory).is_dir():
+        return {"directory": None if directory is None else str(directory), "runs": []}
+    runs = []
+    for path in sorted(Path(directory).glob("*.json"))[:50]:
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(report, dict) or "terminal_energy_Wh" not in report:
+            continue
+        evidence = report.get("evidence") or {}
+        runs.append(
+            {
+                "file": path.name,
+                "run_id": report.get("run_id"),
+                "duration_s": report.get("duration_s"),
+                "terminal_energy_Wh": report.get("terminal_energy_Wh"),
+                "soc_loss": report.get("soc_loss"),
+                "peak_current_A": report.get("peak_current_A"),
+                "minimum_voltage_V": report.get("minimum_voltage_V"),
+                "category_energy_Wh": report.get("category_energy_Wh"),
+                "evidence_share_percent": evidence.get("share_percent"),
+                "upper_bound_share_percent": evidence.get("upper_bound_share_percent"),
+            }
+        )
+    return {"directory": str(directory), "runs": runs}
 
 
 class DashboardStore:
@@ -26,6 +57,7 @@ class DashboardStore:
                 "power_propulsion_W",
                 "power_payload_W",
                 "actuator_power_W",
+                "power_communications_W",
             )
         }
 
@@ -41,6 +73,8 @@ class DashboardStore:
         self.last_received = None
         self.status = "waiting"
         self.summary = None
+        self.evidence = None
+        self.warnings = []
         self.lock = threading.Lock()
 
     def accept(self, message):
@@ -59,6 +93,10 @@ class DashboardStore:
                 ):
                     self.history.clear()
                 self.latest = row
+                if isinstance(message.get("evidence"), dict):
+                    self.evidence = message["evidence"]
+                if isinstance(message.get("warnings"), list):
+                    self.warnings = [str(w) for w in message["warnings"]]
                 self.history.append(self._plot_row(row))
                 while self.history and self.history[0]["time_s"] < time - self.history_s:
                     self.history.popleft()
@@ -77,6 +115,10 @@ class DashboardStore:
                     ):
                         self.history.append(self._plot_row(self.latest))
                 self.summary = message.get("summary")
+                if isinstance(self.summary, dict) and isinstance(
+                    self.summary.get("evidence"), dict
+                ):
+                    self.evidence = self.summary["evidence"]
                 self.status = "ended"
             else:
                 return
@@ -94,13 +136,17 @@ class DashboardStore:
                 "latest": self.latest,
                 "history": list(self.history),
                 "summary": self.summary,
+                "evidence": self.evidence,
+                "warnings": list(self.warnings),
                 "history_s": self.history_s,
             }
 
 
 class DashboardServer:
-    def __init__(self, http_port=8765, telemetry_port=8766, *, history_s=120):
+    def __init__(self, http_port=8765, telemetry_port=8766, *, history_s=120, reports_dir=None):
         self.store = DashboardStore(history_s)
+        self.reports_dir = None if reports_dir is None else Path(reports_dir)
+        reports_dir_ = self.reports_dir
         self.stop = threading.Event()
         self.udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.http = None
@@ -118,6 +164,11 @@ class DashboardServer:
                     elif self.path == "/api/state":
                         content, kind = (
                             json.dumps(store.snapshot(), allow_nan=False).encode(),
+                            "application/json",
+                        )
+                    elif self.path == "/api/reports":
+                        content, kind = (
+                            json.dumps(compare_reports(reports_dir_), default=str).encode(),
                             "application/json",
                         )
                     else:
@@ -194,10 +245,15 @@ def main():
     parser.add_argument("--telemetry-port", type=int, default=8766)
     parser.add_argument("--history-seconds", type=float, default=120)
     parser.add_argument(
+        "--reports", type=Path, help="Directory of EnergyReport JSON files for 'Compare runs'"
+    )
+    parser.add_argument(
         "--open", action="store_true", help="Open the local dashboard in your browser"
     )
     args = parser.parse_args()
-    with DashboardServer(args.port, args.telemetry_port, history_s=args.history_seconds) as server:
+    with DashboardServer(
+        args.port, args.telemetry_port, history_s=args.history_seconds, reports_dir=args.reports
+    ) as server:
         print(
             f"HoloEnergy dashboard: {server.url}; telemetry UDP {server.telemetry_port}", flush=True
         )

@@ -8,45 +8,45 @@
       "mode": "thrusters",
       "ticks": 6700,
       "repeats": 3,
-      "median_us_per_tick": 3392.057253756741,
-      "min_us_per_tick": 3371.234268658975,
-      "max_us_per_tick": 3428.8715820676134,
+      "median_us_per_tick": 3258.0031492789067,
+      "min_us_per_tick": 3220.8451940052546,
+      "max_us_per_tick": 3362.9366865993215,
       "dashboard_polls": 0,
-      "share_of_native_step": 0.12872483996323997,
-      "max_real_time_factor_energy_only_at_100Hz": 2.9480634470202087
+      "share_of_native_step": 0.1236376342192292,
+      "max_real_time_factor_energy_only_at_100Hz": 3.069364743313185
     },
     {
       "mode": "wrench_direct",
       "ticks": 6700,
       "repeats": 3,
-      "median_us_per_tick": 4062.516955213983,
-      "min_us_per_tick": 4008.806626826747,
-      "max_us_per_tick": 4322.459656717395,
+      "median_us_per_tick": 4298.182313413873,
+      "min_us_per_tick": 3823.446343277595,
+      "max_us_per_tick": 4478.637925349176,
       "dashboard_polls": 0,
-      "share_of_native_step": 0.15416804782074342,
-      "max_real_time_factor_energy_only_at_100Hz": 2.461528188126239
+      "share_of_native_step": 0.16311128882458056,
+      "max_real_time_factor_energy_only_at_100Hz": 2.326564875759633
     },
     {
       "mode": "wrench_equivalent",
       "ticks": 6700,
       "repeats": 3,
-      "median_us_per_tick": 3901.618328362481,
-      "min_us_per_tick": 3886.121820880851,
-      "max_us_per_tick": 3923.9398358083927,
+      "median_us_per_tick": 4118.549671621799,
+      "min_us_per_tick": 3989.311119388622,
+      "max_us_per_tick": 4422.155179069447,
       "dashboard_polls": 0,
-      "share_of_native_step": 0.14806212199392366,
-      "max_real_time_factor_energy_only_at_100Hz": 2.5630390157094185
+      "share_of_native_step": 0.15629442774676425,
+      "max_real_time_factor_energy_only_at_100Hz": 2.428039187897474
     },
     {
       "mode": "dashboard",
       "ticks": 6700,
       "repeats": 3,
-      "median_us_per_tick": 4232.894552232169,
-      "min_us_per_tick": 4222.73101493605,
-      "max_us_per_tick": 4489.643104485612,
-      "dashboard_polls": 243,
-      "share_of_native_step": 0.16063369013417952,
-      "max_real_time_factor_energy_only_at_100Hz": 2.3624495901336857
+      "median_us_per_tick": 4886.21635821217,
+      "min_us_per_tick": 4530.716268623721,
+      "max_us_per_tick": 5229.755447788248,
+      "dashboard_polls": 284,
+      "share_of_native_step": 0.1854265337178573,
+      "max_real_time_factor_energy_only_at_100Hz": 2.046573312946569
     }
   ],
   "timing_effect": "the dashboard is a client of the same telemetry; simulation time is fixed-step and is not affected by wall-clock overhead"
