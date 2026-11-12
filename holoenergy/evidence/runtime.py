@@ -2,7 +2,40 @@
 
 from __future__ import annotations
 
+import math
+
 from . import GRADES, cap_grade, coverage, default_registry
+
+
+def _matches(record, actual):
+    """Does a configured number still equal (or lie inside) the linked record?"""
+    if actual is None:
+        return True
+    try:
+        actual = float(actual)
+    except (TypeError, ValueError):
+        return False
+    point = record.si("value")
+    if point is not None:
+        return math.isclose(actual, point, rel_tol=1e-9, abs_tol=1e-12)
+    low, high = record.si("value_min"), record.si("value_max")
+    if low is None and high is None:
+        return True  # dataset-backed record: checked by the caller
+    return (low is None or actual >= low - 1e-12) and (high is None or actual <= high + 1e-12)
+
+
+def _dataset_tables(record):
+    import importlib.resources
+    import json
+
+    path = (record.dataset or {}).get("path")
+    if not path or not path.endswith(".json"):
+        return None
+    try:
+        data = json.loads(importlib.resources.files("holoenergy").joinpath(path).read_text())
+    except (FileNotFoundError, OSError, ValueError):
+        return None
+    return data.get("voltage_tables")
 
 
 def _graded(registry, entry):
@@ -30,6 +63,7 @@ class EvidenceMap:
             self.registry, evidence.get("converters")
         )
         self.hotel_grade, self.hotel_record = _graded(self.registry, evidence.get("hotel_constant"))
+        self.stale_links = self._check_links(config)
         self.vehicle_relation = evidence.get("vehicle_relation")
         self.double_counting_policy = evidence.get("double_counting", "warn")
         if self.double_counting_policy not in ("warn", "error"):
@@ -70,6 +104,48 @@ class EvidenceMap:
                 + "; ".join(f"'{c}' by {', '.join(n)}" for c, n in self.double_counting.items())
             )
 
+    def _check_links(self, config):
+        """Drop evidence links whose record no longer describes the configured value.
+
+        A profile links e.g. battery losses to a resistance record; a user override of
+        ``battery.internal_resistance_ohm`` (or of the actuator tables, hotel load or
+        converter efficiencies) makes that link stale. The energy is then graded D (user)
+        and a warning names the link, instead of crediting the record's grade.
+        """
+        stale = []
+
+        def drop(kind, record_id, why):
+            setattr(self, f"{kind}_grade", "D")
+            setattr(self, f"{kind}_record", None)
+            stale.append(f"stale evidence link: {kind} -> {record_id} ({why}); graded D")
+
+        if self.battery_loss_record:
+            record = self.registry.get(self.battery_loss_record)
+            actual = (config.get("battery") or {}).get("internal_resistance_ohm")
+            if not _matches(record, actual):
+                drop("battery_loss", record.id, f"internal_resistance_ohm={actual}")
+        if self.hotel_record:
+            record = self.registry.get(self.hotel_record)
+            actual = (config.get("hotel_load") or {}).get("constant_W")
+            if not _matches(record, actual):
+                drop("hotel", record.id, f"hotel_load.constant_W={actual}")
+        if self.converter_record:
+            record = self.registry.get(self.converter_record)
+            for key, actual in (config.get("converters") or {}).items():
+                if key.endswith("_efficiency") and not _matches(record, actual):
+                    drop("converter", record.id, f"converters.{key}={actual}")
+                    break
+        if self.propulsion_record:
+            record = self.registry.get(self.propulsion_record)
+            tables = _dataset_tables(record)
+            propulsion = config.get("propulsion") or {}
+            models = propulsion.get("thrusters") or [propulsion.get("thruster")]
+            if tables is not None and any(
+                not isinstance(m, dict) or m.get("voltage_tables") != tables for m in models
+            ):
+                drop("propulsion", record.id, "actuator tables differ from the record's dataset")
+        return stale
+
     def add_external(self, grades, capabilities=(), owner=None):
         """Register an attached load source; returns new double-counting warnings."""
         for device, states in (grades or {}).items():
@@ -95,6 +171,7 @@ class EvidenceMap:
             "power and is excluded from the electrical bus"
             for u in self.unconfigured
         ]
+        result += list(self.stale_links)
         return result
 
     def grade(self, device, state):
