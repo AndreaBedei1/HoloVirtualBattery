@@ -223,5 +223,5 @@ The draft in [holoocean_drag_issue_draft.md](holoocean_drag_issue_draft.md) was 
 | --- | --- |
 | Final code and results commit | `52868b714e6730d96b50ac7a99756bff3bd19633` (remote HEAD equal to local HEAD at push) |
 | CI on that commit | run [43293424867](https://github.com/AndreaBedei1/HoloVirtualBattery/actions/runs/43293424867): 8/8 jobs green (Ubuntu + Windows, Python 3.10-3.13) |
-| Commits in this phase | 35 on top of `04f3325` (this report's own commit follows) |
+| Commits in this phase | 25 on top of `04f3325` up to the final code commit (documentation commits follow) |
 | Cleanup | own DESERT container removed; no own HoloOcean process left; separate packages kept in `C:/HOB` for reproduction; Docker Desktop left running |
