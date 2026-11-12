@@ -1,4 +1,6 @@
-# Do not combine with a Navigator or SPRINT-Nav profile that already includes an IMU.
+# Declares imu/magnetometer: combined with a Navigator or SPRINT-Nav the run reports a shared
+# function. That is a double count only if both entries describe the same physical IMU; a
+# separate external IMU is a real additional load and both stay on the bus.
 name: imu_ahrs
 device: vectornav_vn100_rugged
 category: sensors

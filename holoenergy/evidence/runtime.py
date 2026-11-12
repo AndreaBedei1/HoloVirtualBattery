@@ -95,6 +95,13 @@ class EvidenceMap:
             raise ConfigurationError("evidence.double_counting must be warn or error")
         self.actuators = list(propulsion.ids)
         self.devices, self.bounds, self.records, self.relations = {}, {}, {}, {}
+        self.used_powers = {}
+        converters = config.get("converters") or {}
+        self.efficiencies = {
+            "propulsion": float(converters.get("propulsion_efficiency", 1.0)),
+            "payload": float(converters.get("payload_efficiency", 1.0)),
+            "hotel": float(converters.get("hotel_efficiency", 1.0)),
+        }
         self.unconfigured, self.legacy_unlinked = [], []
         capabilities = {}
         for name, item in payload.components.items():
@@ -104,6 +111,7 @@ class EvidenceMap:
                 grades = {}
             self.devices[name] = dict(grades)
             self.relations[name] = getattr(item, "relation", "exact")
+            self.used_powers[name] = dict(getattr(item, "state_powers", {}) or {})
             self.bounds[name] = dict(getattr(item, "state_bounds", {}))
             self.records[name] = dict(getattr(item, "state_evidence", {}))
             if getattr(item, "status", "configured") == "unconfigured":
@@ -180,6 +188,14 @@ class EvidenceMap:
                     )
         return stale
 
+    def efficiency_for(self, device):
+        """Converter efficiency of the rail that serves ``device``."""
+        if device in self.actuators:
+            return self.efficiencies["propulsion"] or 1.0
+        if device == "hotel_constant":
+            return self.efficiencies["hotel"] or 1.0
+        return self.efficiencies["payload"] or 1.0
+
     def update_grades(self, grades, relations=None, bounds=None):
         """Grades/relations/bounds of devices an attached source created after attach()."""
         for device, states in (grades or {}).items():
@@ -218,14 +234,14 @@ class EvidenceMap:
             ) = saved
             raise
         return [
-            f"possible double counting: '{cap}' provided by {', '.join(names)}"
+            f"possible double counting: '{cap}' provided by {', '.join(names)} (a double count if these entries describe the same physical device; two real loads if they are separate devices)"
             for cap, names in self.double_counting.items()
             if before.get(cap) != names
         ]
 
     def warnings(self):
         result = [
-            f"possible double counting: '{cap}' provided by {', '.join(names)}"
+            f"possible double counting: '{cap}' provided by {', '.join(names)} (a double count if these entries describe the same physical device; two real loads if they are separate devices)"
             for cap, names in self.double_counting.items()
         ]
         result += [
@@ -251,7 +267,16 @@ class EvidenceMap:
         which the per-parameter grade of the thruster record does not show.
         """
         if self.ocv_grade is None:
-            return {"bus_voltage": "nominal (L0)", "voltage_dependent_energy_Wh": 0.0}
+            propulsion = sum(
+                sum(states.values())
+                for device, states in device_state_energy_Wh.items()
+                if device in self.actuators
+            )
+            return {
+                "bus_voltage": "nominal (L0)",
+                "voltage_dependent_energy_Wh": propulsion,
+                "note": "thruster power evaluated at the pack's nominal voltage (no OCV curve)",
+            }
         propulsion = sum(
             sum(states.values())
             for device, states in device_state_energy_Wh.items()

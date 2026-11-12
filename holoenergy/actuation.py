@@ -122,6 +122,26 @@ class ActuationLayer:
         lo, hi = self.bounds(voltage)
         return self.allocator.allocate(wrench, lower=lo, upper=hi, power_functions=power_functions)
 
+    def limit_to_native(self, forces, voltage):
+        """Re-allocate a virtual layout to the wrench the native body can apply.
+
+        If the native layout cannot reproduce the virtual wrench within its clamp, the
+        virtual actuators are re-allocated to the native achievable wrench, so that the
+        electrical energy is computed for thrust the dynamics actually receive.
+        """
+        tau = self.allocator.wrench(forces)
+        clamp = np.full(self.backend_count, self.native_clamp)
+        native = self.native.allocate(tau, lower=-clamp, upper=clamp)
+        if native.residual_norm <= WRENCH_TOLERANCE:
+            return list(forces), {"native_limited": False}
+        achievable = self.native.wrench(native.forces_N)
+        lo, hi = self.bounds(voltage)
+        limited = self.allocator.allocate(achievable, lower=lo, upper=hi)
+        return list(limited.forces_N), {
+            "native_limited": True,
+            "native_unmet_wrench_norm": native.residual_norm,
+        }
+
     # -- backend side -----------------------------------------------------------------
     def backend_action(self, forces):
         """Return (backend vector, native wrench residual norm, info)."""

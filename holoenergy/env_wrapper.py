@@ -276,6 +276,21 @@ class EnergyAwareEnv:
         self.load_sources.append(source)
         return source
 
+    def _allocation_voltage(self, temperature_C):
+        """Voltage at which actuator force limits are evaluated for allocation.
+
+        The power manager accepts a force only inside the thruster tables at the voltage the
+        pack would have at its current limit; allocating against the same (lower) voltage
+        turns an unachievable request into an allocation residual instead of a spurious
+        power-limit derating.
+        """
+        u = self.battery.ocv(temperature_C)
+        r = self.battery.resistance(temperature_C)
+        rated = getattr(self.battery, "max_current_A", 0.0)
+        if not r or not rated or rated == float("inf"):
+            return u
+        return max(self.propulsion.min_voltage, u - rated * r)
+
     def _external_loads(self, dt):
         energies, categories = {}, {}
         reserved = set(self.propulsion.ids) | {"hotel_constant"} | set(self.hotel.components)
@@ -420,10 +435,15 @@ class EnergyAwareEnv:
         self._validate_contract()
         dt, t = self.dt_s, self.thermal.temperature_C
         allocation = None
+        native_info = {}
         if self.actuation.mode == "wrench":
             requested_wrench = list(action)
-            allocation = self.actuation.allocate(requested_wrench, self.battery.ocv(t))
+            allocation = self.actuation.allocate(requested_wrench, self._allocation_voltage(t))
             action = list(allocation.forces_N)
+            if self.actuation.mapping == "wrench_equivalent":
+                action, native_info = self.actuation.limit_to_native(
+                    action, self._allocation_voltage(t)
+                )
         sensor_requested = self.payload.preview(dt)
         sensor_demand = dict(sensor_requested)
         external_J, external_category = self._external_loads(dt)
@@ -499,12 +519,13 @@ class EnergyAwareEnv:
             item.commit_service(dt, name in disconnected)
         if self.thermal.critical:
             self.battery.mark_cutoff("temperature")
-        if hasattr(self.battery, "cutoff_V") and point.current_A > 0:
-            end_voltage = self.battery.ocv(self.thermal.temperature_C) - (
-                point.current_A * self.battery.resistance(self.thermal.temperature_C)
-            )
-            if end_voltage <= self.battery.cutoff_V + 1e-10:
-                self.battery.mark_cutoff("voltage")
+        # Voltage-limited operation keeps U - I R >= V_cut through current_limit(); the pack
+        # is latched off only when it cannot hold the cutoff voltage at zero current.
+        if (
+            hasattr(self.battery, "cutoff_V")
+            and self.battery.ocv(self.thermal.temperature_C) <= self.battery.cutoff_V + 1e-10
+        ):
+            self.battery.mark_cutoff("voltage")
         self.time_s += dt
         served_sensors = {
             name: power * plan.auxiliary_service_factor for name, power in sensor_requested.items()
@@ -682,6 +703,7 @@ class EnergyAwareEnv:
                 "applied_wrench": list(applied_wrench),
                 "backend_action": [float(v) for v in outgoing],
                 "backend_residual_norm": backend_residual,
+                **native_info,
                 **backend_info,
             }
         self.energy.record(row)
@@ -730,12 +752,9 @@ class EnergyAwareEnv:
             sum(r["thruster_power_W"][i] for r in rows) / count
             for i in range(len(row["thruster_power_W"]))
         ]
-        row["sensor_power_W"] = {
-            name: sum(r["sensor_power_W"][name] for r in rows) / count
-            for name in row["sensor_power_W"]
-        }
-        for key in ("component_power_W", "actuator_power_W"):
-            row[key] = {name: sum(r[key][name] for r in rows) / count for name in row[key]}
+        for key in ("sensor_power_W", "component_power_W", "actuator_power_W"):
+            names = dict.fromkeys(name for r in rows for name in r[key])
+            row[key] = {name: sum(r[key].get(name, 0.0) for r in rows) / count for name in names}
         merged = {}
         for r in rows:
             for device, states in r["component_state_energy_J"].items():

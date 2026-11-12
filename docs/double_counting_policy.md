@@ -1,6 +1,10 @@
 # Double-counting policy
 
-Every electrical function is counted once. A component profile lists, under `includes`,
+Every electrical function is counted once. The check is declarative: two entries that declare
+the same function are flagged, and the flag means a double count only if both entries
+describe the same physical device (e.g. a separate IMU entry that is really the Navigator's
+internal IMU). Two physically separate devices with the same function are two real loads and
+both stay on the bus; the warning text says so (review D-06). A component profile lists, under `includes`,
 the functions whose power is already inside its published electrical figure. When two
 loads declare the same function, the run reports
 `possible double counting: '<function>' provided by <a>, <b>` (in `env.warnings`, the

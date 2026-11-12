@@ -226,8 +226,19 @@ class ElectricalComponent(PayloadComponent):
 class ComponentModel(PayloadModel):
     def __init__(self, legacy=None, components=None):
         super().__init__(legacy or {})
-        for item in self.components.values():
+        from ..sensor_policy import REGISTRY, check_component_mapping
+
+        for name, item in self.components.items():
             item.category = "sensors"
+            # Legacy `sensors:` entries obey the same policy as components (review D-07): no
+            # power on ground-truth sensors or derived outputs, by simulation_sensor or name.
+            sensor = getattr(item, "simulation_sensor", None) or (
+                name if name in REGISTRY else None
+            )
+            if sensor is not None:
+                powers = getattr(item, "state_powers", None) or getattr(item, "states", None) or {}
+                values = [v for v in powers.values() if isinstance(v, (int, float))]
+                check_component_mapping(name, sensor, any(v > 0 for v in values))
         if components is not None and not isinstance(components, list):
             raise ConfigurationError("components must be a list of named loads")
         for config in components or []:

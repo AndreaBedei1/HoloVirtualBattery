@@ -24,7 +24,9 @@ def _ratio_interval(record, used_value):
     if record.bound == "upper_bound":
         hi = hi if hi is not None else record.si("value")
     if record.bound == "lower_bound":
+        # The quantity is at least this large: no published upper side (review E-03).
         lo = lo if lo is not None else record.si("value")
+        hi = None
     if lo is None and hi is None:
         return (1.0, 1.0) if record.bound in ("exact", "measured_mean") else None
     return (None if lo is None else lo / used_value, None if hi is None else hi / used_value)
@@ -54,6 +56,8 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 continue
             record = registry.get(record_id)
             used = (used_values or {}).get((device, state))
+            if used is None:  # the value the component actually used (e.g. use: value_max)
+                used = evidence_map.used_powers.get(device, {}).get(state)
             if used is None:
                 used = record.si("value")
                 if used is None:
@@ -73,14 +77,16 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 open_high.append(f"{device}.{state}")
                 continue
             lo, hi = ratio
+            # Converter losses scale with the load they serve (review E-01).
+            scale = 1.0 / evidence_map.efficiency_for(device)
             if lo is None:
                 open_low.append(f"{device}.{state}")
             else:
-                low_delta += wh * (lo - 1)
+                low_delta += wh * (lo - 1) * scale
             if hi is None:
                 open_high.append(f"{device}.{state}")
             else:
-                high_delta += wh * (hi - 1)
+                high_delta += wh * (hi - 1) * scale
     battery = {"record": evidence_map.battery_loss_record, "interval_Wh": None}
     loss = summary["category_energy_Wh"].get("battery_losses", 0.0)
     if evidence_map.battery_loss_record and loss:

@@ -208,3 +208,105 @@ def test_ledgers_created_after_attach_keep_their_grade():
     assert devices["comms.auv_01/acoustic"]["TX"] != "D"
     assert not math.isnan(env.energy.summary()["evidence"]["total_Wh"])
     env.close()
+
+
+def test_env_low_soc_operates_voltage_limited_instead_of_latching():
+    """Review C-01/E-05: at SOC 0.03 the env must deliver reduced thrust, not latch off."""
+    env = make(overrides={"battery": {"initial_soc": 0.03}})
+    rows = [env.step([0, 0, 0, 0, 28.0, 28.0, 28.0, 28.0])["Energy"] for _ in range(200)]
+    assert all(r["battery_state"] != "CUTOFF" for r in rows)
+    assert min(r["voltage_V"] for r in rows) >= 12.0 - 1e-6
+    assert sum(r["power_propulsion_W"] for r in rows[100:]) > 0
+    env.close()
+
+
+def test_virtual_layout_is_charged_only_for_thrust_the_native_body_applies():
+    """Review E-06: a surge request beyond the native clamp capacity is re-allocated."""
+    env = make("bluerov2-standard")
+    row = env.step([150.0, 0, 0, 0, 0, 0])["Energy"]
+    act = row["actuation"]
+    assert act["native_limited"] is True
+    assert act["backend_residual_norm"] < 1e-6
+    env.close()
+
+
+def test_multi_tick_step_with_device_appearing_mid_step():
+    """Review E-08: a ledger created during a multi-tick step must not raise KeyError."""
+    adapter = DesertEnergyAdapter({"acoustic": acoustic()}, node=None, node_map={"auv_01": 1})
+    env = make()
+    env.attach(adapter)
+
+    class Late:
+        def __init__(self):
+            self.calls = 0
+
+        def step(self, action):
+            self.calls += 1
+            if self.calls == 2:
+                adapter.observe(
+                    [
+                        {
+                            "event": "phy_tx_start",
+                            "time": 0.0,
+                            "node": 1,
+                            "duration_s": 0.02,
+                            "phy_bits": 8,
+                        }
+                    ]
+                )
+            return {}
+
+        def close(self):
+            pass
+
+    env.env = Late()
+    row = env.step([0] * 8, ticks=5)["Energy"]
+    assert "comms.auv_01/acoustic" in row["component_power_W"]
+    env.close()
+
+
+def test_intervals_lower_bound_open_and_converter_scaling():
+    """Review E-01/E-03: lower-bound records leave the upper side open; widths scale by 1/eta."""
+    from holoenergy.uncertainty import _ratio_interval
+
+    record = load_registry_record("bluerobotics_4s_18ah.dc_resistance_cell_derived")
+    lo, hi = _ratio_interval(record, record.si("value"))
+    assert hi is None and lo is not None and lo < 1
+
+    def width(eta):
+        env = make(
+            components=["tritech-gemini-720is"],
+            overrides={"converters": {"payload_efficiency": eta}},
+        )
+        for _ in range(50):
+            env.step([0] * 8)
+        t = env.energy.report().intervals["terminal_energy_Wh"]
+        env.close()
+        return t["nominal"] - t["low"]
+
+    assert width(0.8) == pytest.approx(width(1.0) / 0.8, rel=1e-6)
+
+
+def load_registry_record(record_id):
+    from holoenergy.evidence import default_registry
+
+    return default_registry().get(record_id)
+
+
+def test_legacy_sensor_schema_obeys_the_sensor_policy():
+    """Review D-07: the legacy `sensors:` schema cannot put power on ground truth."""
+    from holoenergy.models.components import ComponentModel
+
+    with pytest.raises(ConfigurationError, match="0 W"):
+        ComponentModel({"VelocitySensor": {"states": {"active_W": 4}}})
+    with pytest.raises(ConfigurationError, match="derived semantic"):
+        ComponentModel(
+            {"seg": {"simulation_sensor": "SemanticSegmentationCamera", "states": {"active_W": 12}}}
+        )
+    ComponentModel({"cam": {"simulation_sensor": "RGBCamera", "states": {"active_W": 1}}})
+
+
+def test_lumen_peak_power_is_an_upper_bound():
+    """Review D-05: the Lumen 15 W is a published peak, reported as an upper bound."""
+    record = load_registry_record("bluerobotics_lumen.power_full")
+    assert record.bound == "upper_bound"
