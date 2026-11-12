@@ -93,6 +93,9 @@ GABL_ZERO_RESIDUAL_N = abs(
     next(r["force_N"] for r in _dataset(GABL_RECORD)["rows"] if r["speed_m_s"] == 0)
 )
 VON_BENZON = _dataset("bluerov2_heavy.translational_damping_identified")["coefficients"]
+VON_BENZON_MAX_SPEED = 0.72  # identified range (von Benzon et al. 2022, Table 4)
+HOLOOCEAN_MASS = _value("holoocean_bluerov2.mass")
+HOLOOCEAN_DAMPING = _value("holoocean_bluerov2.linear_damping")
 
 
 def t200():
@@ -534,6 +537,14 @@ def external_drag(out):
             "von_benzon_identified_surge_N": identified,
             "ratio_holoocean_to_identified": ho / identified,
             "ratio_identified_to_measured": identified / measured if measured else None,
+            # Like-for-like with a free-running, still-water identification: HoloOcean's
+            # quadratic drag plus Unreal linear damping m c u acting on the body velocity.
+            "holoocean_still_water_resistance_N": ho + HOLOOCEAN_MASS * HOLOOCEAN_DAMPING * u,
+            "ratio_holoocean_still_water_to_identified": (
+                ho + HOLOOCEAN_MASS * HOLOOCEAN_DAMPING * u
+            )
+            / identified,
+            "within_identified_range": u <= VON_BENZON_MAX_SPEED,
         }
         for label, alloc in (("std", std), ("heavy", heavy)):
             n = alloc.n

@@ -1,12 +1,12 @@
 {
-  "holoenergy_version": "0.1.0",
+  "holoenergy_version": "0.2.0",
   "git": {
-    "commit": "799b5daac56b2a6ef222c6351553a733250a016a",
+    "commit": "69bd3d7836bb8ea7e89b15a7587dc8552624dea2",
     "dirty": true,
-    "working_tree_status": "M experiments/results/offline/E1_layouts.csv\n M experiments/results/offline/E1b_directional.csv\n M experiments/results/offline/E4_external_drag.csv\n M experiments/run_offline_campaign.py\n M holoenergy/evidence/__init__.py\n M holoenergy/evidence/runtime.py\n?? docs/bluerov2_hydrodynamic_external_comparison.md\n?? docs/figures/paper/\n?? experiments/analyze_native_campaign.py\n?? experiments/make_paper_figures.py\n?? experiments/results/native/N1_layouts/\n?? experiments/results/native/N2_orientation/\n?? experiments/results/native/N3_heave/\n?? experiments/results/native/N4_mission/\n?? experiments/results/native/N5_suites/\n?? experiments/results/native/tables/\n?? experiments/run_crosslayer.py\n?? experiments/run_native_campaign.py\n?? holoenergy/evidence/data/parameters/hydrodynamics.yaml\n?? holoenergy/profiles/hydrodynamics/"
+    "working_tree_status": "M experiments/results/offline/E1_layouts.csv\n M experiments/results/offline/E1b_directional.csv\n M experiments/results/offline/E2_payload_suites.csv\n M experiments/results/offline/E4_external_drag.csv\n M experiments/run_offline_campaign.py\n?? docs/reviews/"
   },
-  "evidence_registry_version": "0.2.0-dev",
-  "numpy": "2.4.2",
+  "evidence_registry_version": "0.2.0",
+  "numpy": "2.5.4",
   "inputs": {
     "mission_0.2.trace.jsonl.gz": "9e7cc4b4d96d799c23cfe2ffdea3693dd4c3349fa7cdc3a6d881ff9307c100de",
     "mission_0.4.trace.jsonl.gz": "5c3c5c0da5646fffd021ee8a0556529bee64e12657601d4020f81d70986d6261",
