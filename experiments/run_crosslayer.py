@@ -81,7 +81,7 @@ def network_scenario(strategy):
         else:
             network["routing"] = "flooding"
     elif strategy == "optical":
-        nodes.append({"id": SINK, "position": (8.0, 0.0, -5.0)})
+        nodes.append({"id": SINK, "position": (5.0, 0.0, -5.0)})  # LUMA 250LP rated to 7 m
         network["medium"] = "optical"
         network["optical"] = {"bitrate_bps": 250_000}  # hydromea_luma250lp.bitrate
     elif strategy in RELAY_STRATEGIES:

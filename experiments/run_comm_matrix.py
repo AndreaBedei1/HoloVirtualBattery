@@ -86,7 +86,7 @@ def bounded_states(profile_key):
     return result
 
 
-def scenario_for(name):
+def scenario_for(name, seed=1):
     import holo_desert as h
 
     if name in ("A", "A2"):
@@ -112,15 +112,16 @@ def scenario_for(name):
         data["network"]["medium"] = "optical"
         data["network"]["optical"]["bitrate_bps"] = LUMA_BITRATE_BPS
         data["nodes"][0]["position"] = (0.0, 0.0, -10.0)
-        data["nodes"][1]["position"] = (8.0, 0.0, -10.0)
+        data["nodes"][1]["position"] = (5.0, 0.0, -10.0)  # LUMA 250LP rated to 7 m
     elif name == "F":
         s = h.load_scenario("e01_chat")
         data = s.model_dump()
         data["network"] = h.Network.model_validate(HYBRID).model_dump()
         data["nodes"][0]["position"] = (0.0, 0.0, -10.0)
-        data["nodes"][1]["position"] = (8.0, 0.0, -10.0)
+        data["nodes"][1]["position"] = (5.0, 0.0, -10.0)  # LUMA 250LP rated to 7 m
     else:
         raise ValueError(name)
+    data["network"]["seed"] = seed
     data["name"] = f"holoenergy_comm_{name}"
     return h.Scenario.model_validate(data)
 
@@ -194,10 +195,10 @@ def recompute(events, scenario, powers, t_end):
     return result
 
 
-def run(name, args):
+def run(name, args, seed=1):
     import holo_desert as h
 
-    scenario = scenario_for(name)
+    scenario = scenario_for(name, seed)
     profiles = {m: ModemPowerProfile.from_mapping(modem_profile(k)) for m, k in PROFILES.items()}
     media = sorted({m for ms in media_by_interface(scenario).values() for m in ms})
     adapter = DesertEnergyAdapter(
@@ -249,6 +250,7 @@ def run(name, args):
     comm_Wh = total_adapter_J / 3600
     return {
         "configuration": name,
+        "seed": seed,
         "scenario": scenario.model_dump(mode="json"),
         "duration_s": t_end,
         "generated": summary["generated"],
@@ -286,6 +288,41 @@ def run(name, args):
     }
 
 
+def wilson(successes, n, z=1.959964):
+    if n == 0:
+        return (None, None)
+    p = successes / n
+    centre = (p + z * z / (2 * n)) / (1 + z * z / n)
+    half = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / (1 + z * z / n)
+    return (centre - half, centre + half)
+
+
+def aggregate(rows):
+    """Across seeds: pooled delivery with a Wilson 95 % interval, energy mean/min/max."""
+    delivered = sum(r["delivered"] for r in rows)
+    generated = sum(r["generated"] for r in rows)
+    energy = [r["communication_Wh"] for r in rows]
+    latency = [r["mean_latency_s"] for r in rows if r["mean_latency_s"] is not None]
+    return {
+        "seeds": [r["seed"] for r in rows],
+        "delivered": delivered,
+        "generated": generated,
+        "delivery_ratio": delivered / generated if generated else None,
+        "delivery_ratio_wilson95": wilson(delivered, generated),
+        "communication_Wh_mean": sum(energy) / len(energy),
+        "communication_Wh_min": min(energy),
+        "communication_Wh_max": max(energy),
+        "mean_latency_s_mean": sum(latency) / len(latency) if latency else None,
+        "tx_frames_mean": sum(r["tx_frames"] for r in rows) / len(rows),
+        "control_tx_frames_mean": sum(r["control_tx_frames"] for r in rows) / len(rows),
+        "upper_bound_energy_share_mean": sum(r["upper_bound_energy_share"] for r in rows)
+        / len(rows),
+        "worst_energy_check": max(
+            abs(r["energy_check"]["relative_difference"] or 0.0) for r in rows
+        ),
+    }
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--port", type=int, required=True, help="own engine, non-default port")
@@ -297,6 +334,13 @@ def main(argv=None):
     parser.add_argument("--interval-s", type=float, default=5.0)
     parser.add_argument("--drain-s", type=float, default=20.0)
     parser.add_argument(
+        "--seeds",
+        type=int,
+        nargs="+",
+        default=[1],
+        help="DESERT RNG seeds; the same set is used for every configuration",
+    )
+    parser.add_argument(
         "--output", type=Path, default=ROOT / "experiments/results/native/desert/comm_matrix.json"
     )
     args = parser.parse_args(argv)
@@ -307,19 +351,31 @@ def main(argv=None):
     results = {}
     for name in args.configs:
         print(f"== {name}", flush=True)
-        try:
-            results[name] = run(name, args)
-        except Exception as exc:  # noqa: BLE001 - failures are recorded, not hidden
-            results[name] = {"configuration": name, "error": repr(exc)}
-            print(f"FAILED {name}: {exc!r}", flush=True)
-            continue
-        r = results[name]
-        print(
-            f"   delivered {r['delivered']}/{r['generated']} latency {r['mean_latency_s']} "
-            f"tx {r['tx_frames']}+{r['control_tx_frames']} relays {r['relay_forwards']} "
-            f"E {r['communication_Wh']:.5f} Wh, check {r['energy_check']['relative_difference']:.2e}",
-            flush=True,
-        )
+        per_seed = {}
+        for seed in args.seeds:
+            try:
+                per_seed[seed] = run(name, args, seed)
+            except Exception as exc:  # noqa: BLE001 - failures are recorded, not hidden
+                per_seed[seed] = {"configuration": name, "seed": seed, "error": repr(exc)}
+                print(f"FAILED {name} seed {seed}: {exc!r}", flush=True)
+        ok = [r for r in per_seed.values() if "error" not in r]
+        if len(args.seeds) == 1:
+            results[name] = per_seed[args.seeds[0]]
+        else:
+            results[name] = {
+                "configuration": name,
+                "per_seed": per_seed,
+                "aggregate": aggregate(ok),
+            }
+        if ok:
+            agg = aggregate(ok)
+            print(
+                f"   seeds {len(ok)} delivered {agg['delivered']}/{agg['generated']} "
+                f"(Wilson95 {agg['delivery_ratio_wilson95'][0]:.3f}-{agg['delivery_ratio_wilson95'][1]:.3f}) "
+                f"E {agg['communication_Wh_mean']:.5f} Wh [{agg['communication_Wh_min']:.5f}, "
+                f"{agg['communication_Wh_max']:.5f}] worst check {agg['worst_energy_check']:.1e}",
+                flush=True,
+            )
     out = {
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "git": git_state(),
@@ -337,7 +393,13 @@ def main(argv=None):
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(out, indent=2, default=str) + "\n", encoding="utf-8")
-    return 0 if all("error" not in r for r in results.values()) else 1
+    failed = [
+        r
+        for res in results.values()
+        for r in (res.get("per_seed", {}).values() if "per_seed" in res else [res])
+        if "error" in r
+    ]
+    return 0 if not failed else 1
 
 
 if __name__ == "__main__":

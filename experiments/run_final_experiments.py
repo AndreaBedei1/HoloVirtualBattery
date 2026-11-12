@@ -53,11 +53,27 @@ from tools.audit_holoocean_drag import source_parameters  # noqa: E402
 from tools.holoocean_backend import make_env, package_identity  # noqa: E402
 from tools.verify_energy_chain import T200Tables  # noqa: E402
 
-STATION_S = 60.0
+STATION_S = 90.0
 STEADY_S = 30.0
+END_HOLD_S = 10.0
+# Review B-01: the sign convention mapping HoloOcean's positive thruster force to the T200
+# forward branch is an assumption. Station-keeping currents therefore come from the bow
+# (current along -x with the vehicle facing +x), so the vehicle thrusts forward into the
+# current, as in the restrained-load tests of Gabl et al. (head-on).
+HEAD_ON = -1.0
+
+
+def transit_settled():
+    """Transit plan with a longer final hold so that every run ends settled (review B)."""
+    plan = transit_plan()
+    last = dict(plan[-1])
+    last["phase"] = "hold_end"
+    return plan + [last] * round(END_HOLD_S / DT)
+
+
 PLANS = {
-    "station60": lambda: station_plan(STATION_S),
-    "transit": transit_plan,
+    "station": lambda: station_plan(STATION_S),
+    "transit": transit_settled,
     "heave": heave_plan,
 }
 # Phases of the transit plan in which an inspection payload works (at the far point:
@@ -107,15 +123,35 @@ def final_matrix():
             **extra,
         }
 
+    def surge(c):
+        return [HEAD_ON * c, 0.0, 0.0]
+
+    def oblique(c):
+        s = c / 2**0.5
+        return [HEAD_ON * s, HEAD_ON * s, 0.0]
+
+    layouts = (
+        ("L8-HV", "direct"),
+        ("L6-STD", "wrench_equivalent"),
+        ("L4-H45", "wrench_equivalent"),
+        ("L4-2H2V", "wrench_equivalent"),
+        ("L8-VEC30", "wrench_equivalent"),
+    )
     for c in (0.2, 0.5):
-        add(f"EXP3-L8-HV-c{c:g}", "EXP3", "L8-HV", "direct", [c, 0, 0], "station60")
-        for layout in ("L6-STD", "L4-H45", "L4-2H2V", "L8-VEC30"):
-            add(
-                f"EXP3-{layout}-c{c:g}", "EXP3", layout, "wrench_equivalent", [c, 0, 0], "station60"
-            )
-    add("EXP3-L8-HV-c0.8", "EXP3", "L8-HV", "direct", [0.8, 0, 0], "station60")
-    add("EXP3-L8-HV-sway0.5", "EXP3", "L8-HV", "direct", [0, 0.5, 0], "station60")
-    add("EXP3-L4-2H2V-sway0.5", "EXP3", "L4-2H2V", "wrench_equivalent", [0, 0.5, 0], "station60")
+        for layout, mapping in layouts:
+            add(f"EXP3-{layout}-headon{c:g}", "EXP3", layout, mapping, surge(c), "station")
+    for layout, mapping in layouts:
+        add(f"EXP3-{layout}-oblique0.5", "EXP3", layout, mapping, oblique(0.5), "station")
+    add("EXP3-L8-HV-headon0.8", "EXP3", "L8-HV", "direct", surge(0.8), "station")
+    add("EXP3-L8-HV-sway0.5", "EXP3", "L8-HV", "direct", [0.0, HEAD_ON * 0.5, 0.0], "station")
+    add(
+        "EXP3-L4-2H2V-sway0.5",
+        "EXP3",
+        "L4-2H2V",
+        "wrench_equivalent",
+        [0.0, HEAD_ON * 0.5, 0.0],
+        "station",
+    )
     for layout, mapping in (
         ("L8-HV", "direct"),
         ("L6-STD", "wrench_equivalent"),
@@ -124,79 +160,41 @@ def final_matrix():
         add(f"EXP3-{layout}-heave", "EXP3", layout, mapping, [0, 0, 0], "heave")
     for alpha in (30, 60):
         add(
-            f"EXP4-a{alpha}-surge0.5",
+            f"EXP4-a{alpha}-headon0.5",
             "EXP4",
             f"L8-HV-a{alpha}",
             "wrench_equivalent",
-            [0.5, 0, 0],
-            "station60",
+            surge(0.5),
+            "station",
         )
         add(
             f"EXP4-a{alpha}-sway0.5",
             "EXP4",
             f"L8-HV-a{alpha}",
             "wrench_equivalent",
-            [0, 0.5, 0],
-            "station60",
+            [0.0, HEAD_ON * 0.5, 0.0],
+            "station",
         )
-    add("EXP5-station-c0", "EXP5", "L8-HV", "direct", [0, 0, 0], "station60")
+    add("EXP5-station-c0", "EXP5", "L8-HV", "direct", [0, 0, 0], "station")
     for c in (0.0, 0.2, 0.4):
-        add(f"EXP5-transit-c{c:g}", "EXP5", "L8-HV", "direct", [c, 0, 0], "transit")
+        add(f"EXP5-transit-c{c:g}", "EXP5", "L8-HV", "direct", surge(c), "transit")
+    for suite, schedule, tag in (
+        ("S0-propulsion-only", None, "S0-propulsion-only"),
+        ("S5-inspection", None, "S5-inspection-continuous"),
+        ("S5-inspection", "inspection-at-site", "S5-inspection-scheduled"),
+        ("S6-ai-vision", None, "S6-ai-continuous"),
+        ("S6-ai-vision", "ai-at-site", "S6-ai-scheduled"),
+    ):
+        extra = {"suite": suite} | ({"schedule": schedule} if schedule else {})
+        add(f"EXP6-{tag}", "EXP6", "L8-HV", "direct", surge(0.2), "transit", **extra)
+    add("EXP8-L0-transit-c0.2", "EXP8", "L8-HV", "direct", surge(0.2), "transit", fidelity="L0")
     add(
-        "EXP6-S0-propulsion-only",
-        "EXP6",
-        "L8-HV",
-        "direct",
-        [0.2, 0, 0],
-        "transit",
-        suite="S0-propulsion-only",
-    )
-    add(
-        "EXP6-S5-inspection-continuous",
-        "EXP6",
-        "L8-HV",
-        "direct",
-        [0.2, 0, 0],
-        "transit",
-        suite="S5-inspection",
-    )
-    add(
-        "EXP6-S5-inspection-scheduled",
-        "EXP6",
-        "L8-HV",
-        "direct",
-        [0.2, 0, 0],
-        "transit",
-        suite="S5-inspection",
-        schedule="inspection-at-site",
-    )
-    add(
-        "EXP6-S6-ai-continuous",
-        "EXP6",
-        "L8-HV",
-        "direct",
-        [0.2, 0, 0],
-        "transit",
-        suite="S6-ai-vision",
-    )
-    add(
-        "EXP6-S6-ai-scheduled",
-        "EXP6",
-        "L8-HV",
-        "direct",
-        [0.2, 0, 0],
-        "transit",
-        suite="S6-ai-vision",
-        schedule="ai-at-site",
-    )
-    add("EXP8-L0-transit-c0.2", "EXP8", "L8-HV", "direct", [0.2, 0, 0], "transit", fidelity="L0")
-    add(
-        "EXP8-lowsoc-c0.5",
+        "EXP8-lowsoc-headon0.5",
         "EXP8",
         "L8-HV",
         "direct",
-        [0.5, 0, 0],
-        "station60",
+        surge(0.5),
+        "station",
         battery={"initial_soc": 0.03},
     )
     return runs
@@ -293,7 +291,7 @@ def run(spec, binary, parameters, tables):
         if close is not None:
             close()
     m = metrics(ticks, summary)
-    if spec["plan"] == "station60":
+    if spec["plan"] == "station":
         steady = ticks[-round(STEADY_S / DT) :]
         m["steady_window_s"] = STEADY_S
         m["steady_mean_propulsion_W"] = float(np.mean([t["power_propulsion_W"] for t in steady]))
@@ -371,6 +369,8 @@ def main(argv=None):
         "physics_rate_hz": round(1 / DT),
         "controller": GAINS,
         "station_s": STATION_S,
+        "end_hold_s": END_HOLD_S,
+        "current_sign_convention": "head-on: station-keeping and transit currents along -x (vehicle faces +x)",
         "steady_window_s": STEADY_S,
         "schedules": SCHEDULES,
         "evidence_registry": {
