@@ -1,0 +1,19 @@
+Subsystem,Model/device,Source,Evidence,States/quantities,Use
+battery,bluerobotics_4s_18ah,Blue Robotics,A-D (gap),"capacity_Ah, cutoff_temperature_C, cutoff_voltage_V, internal_resistance_ohm, ma","EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+communications,evologics_s2cm_18_34,EvoLogics GmbH,B (upper bound),"LISTEN, SLEEP, TX","EXP2, EXP7"
+communications,hydromea_luma250lp,Hydromea,B (upper bound),"LISTEN, SLEEP, TX","EXP2, EXP7"
+compute,bluerobotics_navigator,Blue Robotics,A,"ACTIVE, IDLE","EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+compute,jetson_orin_nx_16gb,Rey et al. 2025,B,AI_INFERENCE,EXP6
+compute,raspberry_pi_4b,Raspberry Pi Ltd,B,"HIGH_LOAD, IDLE, VIDEO","EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+power conversion,bluerov2_5v_power_supply,none (unconfigured),D (gap),payload_efficiency,"EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+propulsion,bluerobotics_t200,Blue Robotics,B-D (gap),"ACTIVE, thrust_to_electrical_power_curve","EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+propulsion,holoocean_bluerov2,BYU FRoSt Lab,A,max_thrust_per_actuator,"EXP3, EXP4, EXP5"
+sensors,bluerobotics_4k_camera,Blue Robotics,A (upper bound),ACTIVE,"EXP6, EXP10"
+sensors,bluerobotics_fathom_x_tether_interface,none (unconfigured),D (gap),ACTIVE,"EXP3, EXP4, EXP5, EXP7, EXP8, EXP10"
+sensors,bluerobotics_lowlight_usb_camera,Blue Robotics,A (upper bound),ACTIVE,"EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+sensors,bluerobotics_lumen,Blue Robotics,A,ACTIVE,"EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP10"
+sensors,tritech_gemini_720is,Tritech International (Moog),A (upper bound),ACTIVE,"EXP6, EXP10"
+sensors,waterlinked_dvl_a50,Water Linked AS,A,ACTIVE,"EXP6, EXP10"
+vehicle/hydrodynamics,bluerov2_heavy,Benzon et al. 2022; Wu 2018,C-D,linear_and_quadratic_damping_coefficients,EXP9
+vehicle/hydrodynamics,bluerov2_standard,Gabl et al. 2021,B-C,"equivalent_drag_area, inline_restraint_force_vs_current_speed",EXP9
+vehicle/hydrodynamics,holoocean_bluerov2,BYU FRoSt Lab,A,"actuator_geometry, drag_coefficient, drag_reference_area, linear_damping_rate, m","EXP1, EXP3, EXP4, EXP5, EXP6, EXP7, EXP8, EXP9, EXP10"
