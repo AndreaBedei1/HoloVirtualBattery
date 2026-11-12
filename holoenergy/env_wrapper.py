@@ -277,11 +277,12 @@ class EnergyAwareEnv:
             for device, states in source.consume(self.time_s + dt).items():
                 if device in energies or device in self.payload.components:
                     raise ConfigurationError(f"Duplicate electrical device name {device}")
-                clean = {}
-                for state, joules in states.items():
-                    if joules < -1e-9:
-                        raise ConfigurationError(f"{device}: negative energy from load source")
-                    clean[state] = max(0.0, float(joules))
+                # A late event may move already-charged time between states (e.g. LISTEN ->
+                # TX): one state's window value is then a negative correction. The device's
+                # window energy must stay non-negative; per-state cumulative values stay exact.
+                clean = {state: float(joules) for state, joules in states.items()}
+                if sum(clean.values()) < -1e-9:
+                    raise ConfigurationError(f"{device}: negative energy from load source")
                 energies[device] = clean
                 categories[device] = source.category
         return energies, categories

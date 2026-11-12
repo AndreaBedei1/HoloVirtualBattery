@@ -101,6 +101,40 @@ def test_consume_charges_late_events_exactly():
     assert sum(total.values()) == pytest.approx(0.2 * 10 + 1.8 * 0.5)
 
 
+def test_late_tx_reclassifying_listen_is_charged_on_the_bus():
+    """A TX event reported one window late turns charged LISTEN time into TX: accepted,
+    cumulative per-state energy on the bus equals the adapter's."""
+    warnings.simplefilter("ignore", UserWarning)
+    adapter = DesertEnergyAdapter({"acoustic": PROFILE}, node="auv0")
+    adapter.ensure_interfaces(["acoustic"])
+    contract = {
+        "agent_type": "BlueROV2",
+        "control_scheme": 0,
+        "action_units": "force_N",
+        "thruster_count": 8,
+        "dt_s": 0.01,
+    }
+
+    class Backend:
+        def step(self, action):
+            return {}
+
+        def close(self):
+            pass
+
+    env = EnergyAwareEnv(Backend(), vehicle_profile="bluerov2-heavy", control_contract=contract)
+    env.attach(adapter)
+    env.step([0] * 8)
+    adapter.observe([tx(0.0, 0.05)])  # known only after its first window was charged
+    for _ in range(9):
+        env.step([0] * 8)
+    on_bus = env.energy.summary()["device_state_energy_Wh"]["comms.acoustic"]
+    expected = adapter.energy_J(0.1)["comms.acoustic"]
+    for state, joules in expected.items():
+        assert on_bus[state] * 3600 == pytest.approx(joules, abs=1e-9)
+    env.close()
+
+
 def test_metrics_from_host_events_and_file(tmp_path):
     events = [
         {
