@@ -17,10 +17,13 @@ vehicle (see [external comparison](docs/bluerov2_hydrodynamic_external_compariso
 ## Why actuator effort
 
 Propulsion power follows the effort the controller commands against the simulated
-environment, not the vehicle's speed. A vehicle holding station in a current moves
-at ~0 m/s and still spends most of its energy: on the verified backend a speed-cubic
-model fitted on a calm-water transit underestimates station-keeping propulsion
-energy by 89 % at 0.2 m/s and 98.7 % at 0.5 m/s
+environment, not the vehicle's speed over ground. A vehicle holding station in a current
+moves at ~0 m/s and still spends most of its energy: a cubic in over-ground speed, fitted
+on a calm-water transit, underestimates station-keeping propulsion energy by 89 % at
+0.2 m/s and 98.7 % at 0.5 m/s. Using speed through the water removes most of that error in
+surge and sway (-15 % to +13 % here, because HoloOcean's drag is an isotropic quadratic
+law), but a speed model still cannot represent which actuators work: it overestimates a
+heave mission by 68 % and cannot distinguish actuator layouts or orientations
 ([baselines](experiments/results/native/tables/baselines.csv)).
 
 ## What is in v0.2 (branch `feature/provenance-aware-energy-framework`)
@@ -61,17 +64,24 @@ battery -> derating -> applied thrust tick by tick (force residual < 1e-4 N)
 ([campaign](experiments/run_native_campaign.py), [tables](experiments/results/native/tables),
 [figures](docs/figures/paper)). Selected results:
 
-* Layouts sharing the four vectored horizontals cost the same in surge current;
-  2 verticals need 42 % more heave energy than 4; 4 horizontals cannot heave; no
-  layout holds station at 0.8 m/s (native 28.75 N clamp, 4.2-5.2 m drift).
+* Virtual layouts on the HoloOcean BlueROV2 Heavy body (wrench-equivalent actuation;
+  only L8-HV is simulator-exact): layouts sharing the four vectored horizontals cost the
+  same in surge current; 2 verticals need 42 % more heave energy than 4; 4 horizontals
+  cannot heave; no layout holds station at 0.8 m/s, where HoloOcean's drag exceeds the
+  clamp-limited thrust (4.2-5.2 m drift).
 * Horizontal angle: 30 deg costs 2.32 / 4.67 Wh (surge / sway current, 0.5 m/s,
   30 s), 60 deg 5.47 / 1.99 Wh, the latter at the 60 A pack limit.
 * An inspection payload adds 86 % to propulsion-only energy on a transit in
-  0.2 m/s current; an acoustic modem adds 1.37 %, an optical one 0.57 %
+  0.2 m/s current; in that transit an acoustic modem adds at most 1.37 % (upper-bound
+  receive/listen power), an optical one 0.57 %
   ([cross-layer](experiments/results/native/crosslayer.json)).
-* HoloOcean's BlueROV2 drag is 3.8-4.5x the restrained load measured on a standard
-  BlueROV2 (Gabl et al. 2021) and 0.86-1.16x the damping identified on a Heavy
-  (von Benzon et al. 2022): the external references disagree with each other.
+* At 0.4-1.0 m/s HoloOcean's BlueROV2 drag is 3.8-4.5x the mean restrained load
+  measured on a modified standard BlueROV2 (Gabl et al. 2021); its still-water resistance
+  is 1.13-1.21x the damping identified on a free-running Heavy at 0.2-0.6 m/s
+  (von Benzon et al. 2022): the external references disagree with each other by 3-4x.
+* Energy shares by evidence grade describe the electrical-model parameters only (not
+  geometry, dynamics or the placeholder-OCV bus voltage); T200 curves are static bollard
+  data applied with inflow and are graded B.
 
 How to run native HoloOcean and DESERT next to other simulations:
 [docs/native_runs.md](docs/native_runs.md). Research status and open gaps:

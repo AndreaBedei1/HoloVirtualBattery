@@ -567,15 +567,17 @@ def fig_uncertainty():
         hi = r["high_Wh"] if r["high_Wh"] is not None else r["nominal_Wh"]
         ax.plot([lo, hi], [i, i], color=C[0], lw=2, solid_capstyle="round")
         ax.scatter([r["nominal_Wh"]], [i], s=14, color=C[1], zorder=3, edgecolors=SURFACE)
-        if r["open_low"]:
-            ax.text(lo, i + 0.15, "open low", fontsize=5.5, color=MUTED)
+        sides = [s for s, key in (("low", "open_low"), ("high", "open_high")) if r[key]]
+        if sides:
+            label = "open " + " and ".join(sides)
+            ax.text(lo, i + 0.15, label, fontsize=5.5, color=MUTED)
     ax.set_yticks(range(len(rows)), [r["run"].replace("-transit", "") for r in rows], fontsize=6)
     ax.set_xlabel("Terminal energy (Wh): nominal and published-range interval")
     save(
         fig,
         "F13_uncertainty_intervals",
         rows,
-        "Interval propagation of published component ranges; sides without published bounds stay open.",
+        "Interval propagation of published component ranges (component loads only; propulsion and hydrodynamics are not bounded); sides without published bounds stay open.",
     )
 
 

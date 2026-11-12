@@ -152,7 +152,11 @@ is zero there. The claim should be refined and its interpretation weakened:
    configuration that the HoloOcean agent represents.
 3. Do not present the ratio as HoloOcean overestimating "real BlueROV2 drag". Surge damping identified
    on a free-running Heavy (von Benzon et al. 2022) is 3.3-4.4x the restrained load over the same
-   speeds, and HoloOcean's quadratic law is within 0.86-1.16x of it over 0.2-1.0 m/s.
+   speeds. The like-for-like counterpart of that free-running, still-water identification is
+   HoloOcean's still-water resistance (quadratic drag + UE linear damping, about 11.5 U N), which
+   is 1.13-1.21x the identified damping within its identified speed range (0.2-0.6 m/s; up to
+   0.72 m/s in Table 4); the quadratic term alone is 0.86-1.10x over the same range. Values
+   above 0.72 m/s extrapolate the identification.
 4. The power ratio holds only as a consequence of the force ratio and the static T200 curve; quote
    4.5-9.3x with the saturation caveat at 1.0 m/s, or omit it.
 
@@ -161,11 +165,17 @@ Defensible wording:
 > For a head-on current of 0.4-1.0 m/s, the drag that HoloOcean 2.3.0 applies to its BlueROV2 agent
 > (1/2 rho Cd A U^2 with Cd A = 0.36 m2) is 3.8-4.5 times the mean in-line restraint load measured on
 > a tethered standard BlueROV2 by Gabl et al. (2021, Table 1); at 0.2 m/s the measured load (1.0 N) is
-> of the order of the zero-flow residual. The same law is within 0.86-1.16 times the surge damping
-> identified for a free-running BlueROV2 Heavy by von Benzon et al. (2022), so the two external
+> of the order of the zero-flow residual. The comparison matches the loading condition only (a
+> modified standard 6-thruster frame, nominal tank speed, head-on). In still water, HoloOcean's
+> resistance (quadratic drag plus linear damping) is 1.13-1.21 times the surge damping identified
+> for a free-running BlueROV2 Heavy by von Benzon et al. (2022) at 0.2-0.6 m/s, so the two external
 > references differ from each other by a factor of 3-4. The verified backend is therefore not a
 > validated BlueROV2 hydrodynamic model, and the comparison does not establish the drag of the
 > Heavy configuration.
+
+Revision (scientific review, 2026-11-12): the von Benzon comparison now uses HoloOcean's
+still-water resistance within the identified speed range; the earlier 0.86-1.16x figure
+compared the quadratic term alone over 0.2-1.0 m/s.
 
 ## 9. Limitations
 

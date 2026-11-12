@@ -50,8 +50,14 @@ its own engine container on a non-default port and always passes `manage_engine=
 docker run -d --name holoenergy-desert-5571 --label owner=holoenergy-campaign --init --cpus=2 --memory=2g -p 127.0.0.1:5571:5555 holo-desert-engine:4.0.0-v2
 ```
 
-The engine fingerprint reported by the container must equal
-`holo_desert.resources.docker.stack_builder.engine_fingerprint()` (here `755d96a2c67be143`).
+The image `holo-desert-engine:4.0.0-v2` is the engine that `holo_desert` builds from
+`uwsignet/desert:4.0.0` (`holo-desert engine up` in HoloWithDesertCommunications, or the
+Dockerfile in `src/holo_desert/resources/docker`). The engine fingerprint reported by the
+container must equal the package's (here `755d96a2c67be143`):
+
+```powershell
+& $py -c "from holo_desert.desert_adapter.backend import DESERTAdapter as D; from holo_desert.resources.docker.stack_builder import engine_fingerprint as f; print(D(port=5571).health_info()['engine_fingerprint'], f())"
+```
 Stop and remove only this container afterwards (`docker rm -f holoenergy-desert-5571`).
 
 ```powershell
@@ -60,6 +66,13 @@ Stop and remove only this container afterwards (`docker rm -f holoenergy-desert-
 ```
 
 ## 4. Campaign commands
+
+Interpreters: `$py` (the HoloOcean 2.3.0 environment, which also has `holo_desert`) for every
+native and DESERT command; `uv run python` (the locked HoloEnergy environment) for the offline
+campaign and the analysis; any Python with matplotlib for the figures. To reproduce without
+overwriting committed results, pass a scratch location: `--output-dir` (native campaign,
+figures), `--full-trace-dir`, `--output` (DESERT scripts, offline campaign), `--native-dir` /
+`--tables-dir` (analysis).
 
 ```powershell
 & $py experiments/run_native_campaign.py --binary $after --source-dir C:/HOB/src/after --list

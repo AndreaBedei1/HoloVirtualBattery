@@ -41,7 +41,7 @@
       "data": "F11_mission_with_without_comms.csv"
     },
     "F13_uncertainty_intervals": {
-      "caption": "Interval propagation of published component ranges; sides without published bounds stay open.",
+      "caption": "Interval propagation of published component ranges (component loads only; propulsion and hydrodynamics are not bounded); sides without published bounds stay open.",
       "data": "F13_uncertainty_intervals.csv"
     }
   },
