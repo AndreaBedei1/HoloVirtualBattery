@@ -1,0 +1,56 @@
+{
+  "record": "bluerov2_standard.restrained_inline_load_head_on",
+  "description": "Mean sum of x-components of the eight tether forces over the capture time, current from 180 deg (onto the bow, body surge axis), no obstacle (Table 1 column d = infinity).",
+  "sources": [
+    "GABL2021-OE",
+    "P003"
+  ],
+  "location": {
+    "page": "9 (accepted manuscript)",
+    "table": "1 (columns flow speed and sum Fx for d = infinity)",
+    "section": "3.3-3.4; Gabl 2020 Sect. 2.1-2.4 and Table 6 for conditions",
+    "figure": "8 (means with standard-deviation error bars)"
+  },
+  "columns": {
+    "speed_m_s": "nominal current speed",
+    "force_N": "mean sum Fx",
+    "cases": "candidate runs (Gabl 2020 Table 6)"
+  },
+  "rows": [
+    {
+      "speed_m_s": 0.0,
+      "force_N": -0.6,
+      "cases": "still-water zero (correction residual)"
+    },
+    {
+      "speed_m_s": 0.2,
+      "force_N": 1.0,
+      "cases": "Curr03"
+    },
+    {
+      "speed_m_s": 0.4,
+      "force_N": 6.4,
+      "cases": "Curr04 or Curr10 (not stated)"
+    },
+    {
+      "speed_m_s": 0.6,
+      "force_N": 16.4,
+      "cases": "Curr05"
+    },
+    {
+      "speed_m_s": 0.8,
+      "force_N": 28.8,
+      "cases": "Curr06"
+    },
+    {
+      "speed_m_s": 1.0,
+      "force_N": 45.2,
+      "cases": "Curr07 or Curr08 (repeat, order not stated)"
+    },
+    {
+      "speed_m_s": 1.0,
+      "force_N": 46.9,
+      "cases": "Curr07 or Curr08 (repeat, order not stated)"
+    }
+  ]
+}

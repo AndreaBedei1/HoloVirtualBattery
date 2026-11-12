@@ -62,15 +62,37 @@ NATIVE = [
     for a in AGENTS["agents"]["BlueROV2"]["actuators"]
 ]
 NATIVE_B = ThrustAllocator(NATIVE).B
-HOLOOCEAN_DRAG = {"rho": 997.0, "cd": 0.8, "area": 0.45}  # BlueROV2 literals (HO-SRC-2.3.0)
-GABL_2021 = [  # restrained BlueROV2 (standard), head-on current, thrusters off; sum Fx (N)
-    (0.2, 1.0),
-    (0.4, 6.4),
-    (0.6, 16.4),
-    (0.8, 28.8),
-    (1.0, 45.2),
-    (1.0, 46.9),
+REGISTRY = default_registry()
+
+
+def _value(record_id):
+    return REGISTRY.get(record_id).si()
+
+
+def _dataset(record_id):
+    """Rows/coefficients of a dataset-backed registry record (packaged JSON)."""
+    from importlib.resources import files
+
+    path = REGISTRY.get(record_id).dataset["path"]
+    return json.loads(files("holoenergy").joinpath(path).read_text(encoding="utf-8"))
+
+
+# Every scientific constant comes from the evidence registry (single source of truth).
+HOLOOCEAN_DRAG = {
+    "rho": _value("holoocean_bluerov2.water_density"),
+    "cd": _value("holoocean_bluerov2.drag_coefficient"),
+    "area": _value("holoocean_bluerov2.drag_area"),
+}
+GABL_RECORD = "bluerov2_standard.restrained_inline_load_head_on"
+GABL_2021 = [
+    (row["speed_m_s"], row["force_N"])
+    for row in _dataset(GABL_RECORD)["rows"]
+    if row["speed_m_s"] > 0
 ]
+GABL_ZERO_RESIDUAL_N = abs(
+    next(r["force_N"] for r in _dataset(GABL_RECORD)["rows"] if r["speed_m_s"] == 0)
+)
+VON_BENZON = _dataset("bluerov2_heavy.translational_damping_identified")["coefficients"]
 
 
 def t200():
@@ -381,7 +403,8 @@ class ReplayBackend:
         pass
 
 
-def suite_config(suite, *, fidelity="L1", battery_r=None):
+def suite_components(suite):
+    """Component entries (pre-load configuration data) of a named sensor/compute suite."""
     base = load_config(data=vehicle_config("bluerov2-heavy"))
     spec = SUITES[suite]
     comps = [c for c in base["components"] if c["name"] in spec["keep"]]
@@ -399,9 +422,13 @@ def suite_config(suite, *, fidelity="L1", battery_r=None):
             entry["initial_state"] = "ACTIVE" if spec.get("lights_on") else "OFF"
             entry.setdefault("name", "light_1")
         comps.append(entry)
+    return comps
+
+
+def suite_config(suite, *, fidelity="L1", battery_r=None):
     data = {
         "profile": "package:vehicles/bluerov2_heavy_holoocean.yaml",
-        "components": comps,
+        "components": suite_components(suite),
         "simulation": {"dt_s": 0.1, "expected_agent_type": "BlueROV2", "control_scheme": 0},
         "power_manager": {"apply_derating_to_actions": False},
         "logging": {"enabled": False},
@@ -494,11 +521,19 @@ def external_drag(out):
     voltage = 15.5
     for u, measured in GABL_2021 + [(0.5, None)]:
         ho = 0.5 * HOLOOCEAN_DRAG["rho"] * HOLOOCEAN_DRAG["cd"] * HOLOOCEAN_DRAG["area"] * u * u
+        identified = VON_BENZON["X_u_N_s_per_m"] * u + VON_BENZON["X_uu_N_s2_per_m2"] * u * u
         row = {
             "current_m_s": u,
             "measured_surge_load_N": measured,
             "holoocean_drag_N": ho,
             "ratio_holoocean_to_measured": ho / measured if measured else None,
+            # A load of the order of the still-water zero residual cannot support a ratio.
+            "measured_above_zero_residual": None
+            if measured is None
+            else measured > 2 * GABL_ZERO_RESIDUAL_N,
+            "von_benzon_identified_surge_N": identified,
+            "ratio_holoocean_to_identified": ho / identified,
+            "ratio_identified_to_measured": identified / measured if measured else None,
         }
         for label, alloc in (("std", std), ("heavy", heavy)):
             n = alloc.n
@@ -523,7 +558,12 @@ def external_drag(out):
                 "scenario": name,
                 "current_m_s": u,
                 "mean_surge_wrench_N": fx,
-                "holoocean_equation_N": 0.5 * 997 * 0.8 * 0.45 * u * u,
+                "holoocean_equation_N": 0.5
+                * HOLOOCEAN_DRAG["rho"]
+                * HOLOOCEAN_DRAG["cd"]
+                * HOLOOCEAN_DRAG["area"]
+                * u
+                * u,
             }
         )
     write_csv(out / "E4_external_drag.csv", rows)

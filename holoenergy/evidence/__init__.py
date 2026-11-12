@@ -337,8 +337,10 @@ class EvidenceRegistry:
     @classmethod
     def from_mappings(cls, sources_doc, parameter_docs, version=None):
         registry = cls(version=version)
-        for source in sources_doc.get("sources", []):
-            registry.add_source(source)
+        # Sources first (the bibliography, then any a parameter file declares), then records.
+        for doc in [sources_doc, *parameter_docs]:
+            for source in doc.get("sources", []):
+                registry.add_source(source)
         for doc in parameter_docs:
             for record in doc.get("parameters", []):
                 registry.add_record(record)

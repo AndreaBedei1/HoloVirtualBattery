@@ -326,7 +326,7 @@
    "peak_propulsion_power_W": 26.684198320613277,
    "peak_thruster_force_N": 3.3128491663911563,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 8.386444599702541e-16
+   "mean_wrench_residual_N": 1.0920662459016107e-15
   },
   {
    "scenario": "station_0.2",
@@ -337,11 +337,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 0.1579020681738306,
+   "propulsion_energy_Wh": 0.15790206817383065,
    "peak_propulsion_power_W": 26.684198320613277,
-   "peak_thruster_force_N": 3.312849166391235,
+   "peak_thruster_force_N": 3.312849166391233,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.4776814957213294e-14
+   "mean_wrench_residual_N": 4.3628307035190367e-14
   },
   {
    "scenario": "station_0.2",
@@ -352,11 +352,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 0.1579020681738306,
+   "propulsion_energy_Wh": 0.15790206817383065,
    "peak_propulsion_power_W": 26.684198320613277,
-   "peak_thruster_force_N": 3.312849166391235,
+   "peak_thruster_force_N": 3.312849166391233,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.4776814957213294e-14
+   "mean_wrench_residual_N": 4.3628307035190367e-14
   },
   {
    "scenario": "station_0.2",
@@ -367,11 +367,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 0.15790206817383068,
+   "propulsion_energy_Wh": 0.1579020681738307,
    "peak_propulsion_power_W": 26.684198320613277,
-   "peak_thruster_force_N": 3.312849166391214,
+   "peak_thruster_force_N": 3.31284916639121,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.862094507670913e-14
+   "mean_wrench_residual_N": 1.9448257807376184e-14
   },
   {
    "scenario": "station_0.2",
@@ -382,11 +382,11 @@
    "actuators": 4,
    "rank": 3,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 0.1579020681738306,
+   "propulsion_energy_Wh": 0.15790206817383065,
    "peak_propulsion_power_W": 26.684198320613277,
-   "peak_thruster_force_N": 3.312849166391235,
+   "peak_thruster_force_N": 3.312849166391233,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.4776814957213294e-14
+   "mean_wrench_residual_N": 4.3628307035190367e-14
   },
   {
    "scenario": "station_0.2",
@@ -412,11 +412,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 0.20484286145814812,
-   "peak_propulsion_power_W": 34.707566931803676,
+   "propulsion_energy_Wh": 0.2048428614581481,
+   "peak_propulsion_power_W": 34.70756693180366,
    "peak_thruster_force_N": 4.129411249033212,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.1482251356723613e-15
+   "mean_wrench_residual_N": 6.628511736403075e-15
   },
   {
    "scenario": "station_0.2",
@@ -487,11 +487,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 0.21472455347272598,
-   "peak_propulsion_power_W": 36.22532893624612,
-   "peak_thruster_force_N": 4.084090562551778,
+   "propulsion_energy_Wh": 0.21472455347272595,
+   "peak_propulsion_power_W": 36.22532893624613,
+   "peak_thruster_force_N": 4.084090562551779,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 8.14163551391776e-17
+   "mean_wrench_residual_N": 1.481024433428521e-15
   },
   {
    "scenario": "station_0.2",
@@ -547,11 +547,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 3.1201321801908635,
+   "propulsion_energy_Wh": 3.120132180190863,
    "peak_propulsion_power_W": 568.6285868956536,
    "peak_thruster_force_N": 22.09682905627466,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 5.996552676756303e-15
+   "mean_wrench_residual_N": 6.958358416287627e-15
   },
   {
    "scenario": "station_0.5",
@@ -562,11 +562,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 3.120132180190861,
-   "peak_propulsion_power_W": 568.6285868956531,
-   "peak_thruster_force_N": 22.09682905627518,
+   "propulsion_energy_Wh": 3.1201321801908626,
+   "peak_propulsion_power_W": 568.6285868956533,
+   "peak_thruster_force_N": 22.096829056275173,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.8707358229302154e-13
+   "mean_wrench_residual_N": 2.7968502631957264e-13
   },
   {
    "scenario": "station_0.5",
@@ -577,11 +577,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 3.120132180190861,
-   "peak_propulsion_power_W": 568.6285868956531,
-   "peak_thruster_force_N": 22.09682905627518,
+   "propulsion_energy_Wh": 3.1201321801908626,
+   "peak_propulsion_power_W": 568.6285868956533,
+   "peak_thruster_force_N": 22.096829056275173,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.8707358229302154e-13
+   "mean_wrench_residual_N": 2.7968502631957264e-13
   },
   {
    "scenario": "station_0.5",
@@ -592,11 +592,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 3.1201321801908635,
-   "peak_propulsion_power_W": 568.6285868956537,
-   "peak_thruster_force_N": 22.096829056274817,
+   "propulsion_energy_Wh": 3.120132180190864,
+   "peak_propulsion_power_W": 568.6285868956536,
+   "peak_thruster_force_N": 22.096829056275137,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.3171897193495094e-13
+   "mean_wrench_residual_N": 1.3810522868099823e-13
   },
   {
    "scenario": "station_0.5",
@@ -607,11 +607,11 @@
    "actuators": 4,
    "rank": 3,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 3.120132180190861,
-   "peak_propulsion_power_W": 568.6285868956531,
-   "peak_thruster_force_N": 22.09682905627518,
+   "propulsion_energy_Wh": 3.1201321801908626,
+   "peak_propulsion_power_W": 568.6285868956533,
+   "peak_thruster_force_N": 22.096829056275173,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.8707358229302154e-13
+   "mean_wrench_residual_N": 2.7968502631957264e-13
   },
   {
    "scenario": "station_0.5",
@@ -637,11 +637,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 3.7958792483001513,
+   "propulsion_energy_Wh": 3.795879248300152,
    "peak_propulsion_power_W": 682.9364932394275,
    "peak_thruster_force_N": 27.543328986614885,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.333996520741962e-15
+   "mean_wrench_residual_N": 4.247621480282709e-14
   },
   {
    "scenario": "station_0.5",
@@ -714,9 +714,9 @@
    "duration_s": 30.00000000000189,
    "propulsion_energy_Wh": 4.3672184583732765,
    "peak_propulsion_power_W": 785.4424805653757,
-   "peak_thruster_force_N": 27.241038296156386,
+   "peak_thruster_force_N": 27.24103829615639,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.934393882654625e-16
+   "mean_wrench_residual_N": 8.881350888112646e-15
   },
   {
    "scenario": "station_0.5",
@@ -774,9 +774,9 @@
    "duration_s": 30.00000000000189,
    "propulsion_energy_Wh": 6.086687533645262,
    "peak_propulsion_power_W": 839.6596269627648,
-   "peak_thruster_force_N": 28.529236632421156,
+   "peak_thruster_force_N": 28.52923663242116,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.0212439199816674e-14
+   "mean_wrench_residual_N": 1.338234587327245e-14
   },
   {
    "scenario": "station_0.8",
@@ -787,11 +787,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 6.086687533645259,
-   "peak_propulsion_power_W": 839.659626962764,
-   "peak_thruster_force_N": 28.52923663242183,
+   "propulsion_energy_Wh": 6.086687533645261,
+   "peak_propulsion_power_W": 839.6596269627644,
+   "peak_thruster_force_N": 28.529236632421817,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.451675699480759e-13
+   "mean_wrench_residual_N": 4.335657888641303e-13
   },
   {
    "scenario": "station_0.8",
@@ -802,11 +802,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 6.086687533645259,
-   "peak_propulsion_power_W": 839.659626962764,
-   "peak_thruster_force_N": 28.52923663242183,
+   "propulsion_energy_Wh": 6.086687533645261,
+   "peak_propulsion_power_W": 839.6596269627644,
+   "peak_thruster_force_N": 28.529236632421817,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.451675699480759e-13
+   "mean_wrench_residual_N": 4.335657888641303e-13
   },
   {
    "scenario": "station_0.8",
@@ -818,10 +818,10 @@
    "rank": 5,
    "duration_s": 30.00000000000189,
    "propulsion_energy_Wh": 6.0866875336452635,
-   "peak_propulsion_power_W": 839.659626962765,
-   "peak_thruster_force_N": 28.529236632421934,
+   "peak_propulsion_power_W": 839.6596269627655,
+   "peak_thruster_force_N": 28.529236632421963,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.969465727765494e-13
+   "mean_wrench_residual_N": 1.8691756870551464e-13
   },
   {
    "scenario": "station_0.8",
@@ -832,11 +832,11 @@
    "actuators": 4,
    "rank": 3,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 6.086687533645259,
-   "peak_propulsion_power_W": 839.659626962764,
-   "peak_thruster_force_N": 28.52923663242183,
+   "propulsion_energy_Wh": 6.086687533645261,
+   "peak_propulsion_power_W": 839.6596269627644,
+   "peak_thruster_force_N": 28.529236632421817,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.451675699480759e-13
+   "mean_wrench_residual_N": 4.335657888641303e-13
   },
   {
    "scenario": "station_0.8",
@@ -862,11 +862,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 30.00000000000189,
-   "propulsion_energy_Wh": 7.266509956000863,
-   "peak_propulsion_power_W": 998.0635047262059,
+   "propulsion_energy_Wh": 7.26650995600086,
+   "peak_propulsion_power_W": 998.0635047262052,
    "peak_thruster_force_N": 34.488516791,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 0.559296412222775
+   "mean_wrench_residual_N": 0.5592964122227815
   },
   {
    "scenario": "station_0.8",
@@ -941,7 +941,7 @@
    "peak_propulsion_power_W": 1159.294851954875,
    "peak_thruster_force_N": 34.488516791,
    "infeasible_time_fraction": 0.7863333333333499,
-   "mean_wrench_residual_N": 1.0828592377968194
+   "mean_wrench_residual_N": 1.082859237796821
   },
   {
    "scenario": "station_0.8",
@@ -971,7 +971,7 @@
    "peak_propulsion_power_W": 60.23514293619422,
    "peak_thruster_force_N": 6.663420609234423,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.3112352197494326e-16
+   "mean_wrench_residual_N": 2.31709106743593e-16
   },
   {
    "scenario": "mission_0",
@@ -986,7 +986,7 @@
    "peak_propulsion_power_W": 60.23514293619422,
    "peak_thruster_force_N": 6.663420609234423,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.3112352197494326e-16
+   "mean_wrench_residual_N": 2.31709106743593e-16
   },
   {
    "scenario": "mission_0",
@@ -997,11 +997,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 0.5140261600730991,
-   "peak_propulsion_power_W": 60.2351429361942,
-   "peak_thruster_force_N": 6.663420609234422,
+   "propulsion_energy_Wh": 0.514026160073099,
+   "peak_propulsion_power_W": 60.23514293619421,
+   "peak_thruster_force_N": 6.663420609234423,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.0815733229291094e-15
+   "mean_wrench_residual_N": 2.2537696970653112e-15
   },
   {
    "scenario": "mission_0",
@@ -1012,11 +1012,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 0.5143086227614176,
-   "peak_propulsion_power_W": 60.23514293619415,
-   "peak_thruster_force_N": 6.663420609234581,
+   "propulsion_energy_Wh": 0.5143086227614179,
+   "peak_propulsion_power_W": 60.23514293619418,
+   "peak_thruster_force_N": 6.663420609234578,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.983083606712555e-07
+   "mean_wrench_residual_N": 7.98308359929336e-07
   },
   {
    "scenario": "mission_0",
@@ -1027,11 +1027,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 0.5143086227614176,
-   "peak_propulsion_power_W": 60.23514293619415,
-   "peak_thruster_force_N": 6.663420609234581,
+   "propulsion_energy_Wh": 0.5143086227614179,
+   "peak_propulsion_power_W": 60.23514293619418,
+   "peak_thruster_force_N": 6.663420609234578,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.983083606712555e-07
+   "mean_wrench_residual_N": 7.98308359929336e-07
   },
   {
    "scenario": "mission_0",
@@ -1043,10 +1043,10 @@
    "rank": 5,
    "duration_s": 66.99999999999737,
    "propulsion_energy_Wh": 0.5140270258459736,
-   "peak_propulsion_power_W": 60.23514293619424,
-   "peak_thruster_force_N": 6.663420609234446,
+   "peak_propulsion_power_W": 60.23514293619422,
+   "peak_thruster_force_N": 6.663420609234519,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.983083442717834e-07
+   "mean_wrench_residual_N": 7.98308344176321e-07
   },
   {
    "scenario": "mission_0",
@@ -1057,11 +1057,11 @@
    "actuators": 4,
    "rank": 3,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 0.5143066734702451,
-   "peak_propulsion_power_W": 60.23514293619415,
-   "peak_thruster_force_N": 6.663420609234581,
+   "propulsion_energy_Wh": 0.5143066734702452,
+   "peak_propulsion_power_W": 60.23514293619418,
+   "peak_thruster_force_N": 6.663420609234578,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 6.3420369629454095e-06
+   "mean_wrench_residual_N": 6.342036962203527e-06
   },
   {
    "scenario": "mission_0",
@@ -1087,11 +1087,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 0.6625032935284434,
-   "peak_propulsion_power_W": 77.06367226646452,
+   "propulsion_energy_Wh": 0.6625032935284432,
+   "peak_propulsion_power_W": 77.06367226646448,
    "peak_thruster_force_N": 8.30584268670066,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.5902356440083095e-15
+   "mean_wrench_residual_N": 8.849549482186325e-15
   },
   {
    "scenario": "mission_0",
@@ -1106,7 +1106,7 @@
    "peak_propulsion_power_W": 44.365235249151404,
    "peak_thruster_force_N": 5.440660144723251,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.7425919366644483e-16
+   "mean_wrench_residual_N": 2.8037354567297745e-16
   },
   {
    "scenario": "mission_0",
@@ -1121,7 +1121,7 @@
    "peak_propulsion_power_W": 49.37540188753797,
    "peak_thruster_force_N": 5.751984544917501,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 3.584704426088865e-16
+   "mean_wrench_residual_N": 3.5520796031057087e-16
   },
   {
    "scenario": "mission_0",
@@ -1136,7 +1136,7 @@
    "peak_propulsion_power_W": 53.15179547549195,
    "peak_thruster_force_N": 6.150752663257753,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 6.462748814447892e-16
+   "mean_wrench_residual_N": 6.436712064593864e-16
   },
   {
    "scenario": "mission_0",
@@ -1151,7 +1151,7 @@
    "peak_propulsion_power_W": 68.54559112970566,
    "peak_thruster_force_N": 7.3301815835958335,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.949024802788756e-15
+   "mean_wrench_residual_N": 1.9490248027908575e-15
   },
   {
    "scenario": "mission_0",
@@ -1163,10 +1163,10 @@
    "rank": 6,
    "duration_s": 66.99999999999737,
    "propulsion_energy_Wh": 0.7057914709778307,
-   "peak_propulsion_power_W": 83.45199219733149,
-   "peak_thruster_force_N": 8.214685262635378,
+   "peak_propulsion_power_W": 83.45199219733148,
+   "peak_thruster_force_N": 8.21468526263538,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 4.989498205952752e-16
+   "mean_wrench_residual_N": 1.9088564527194846e-15
   },
   {
    "scenario": "mission_0",
@@ -1181,7 +1181,7 @@
    "peak_propulsion_power_W": 102.7572369421973,
    "peak_thruster_force_N": 9.423499797375712,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 5.018885207519147e-16
+   "mean_wrench_residual_N": 5.017092976958365e-16
   },
   {
    "scenario": "mission_0.2",
@@ -1192,11 +1192,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4909010237881717,
+   "propulsion_energy_Wh": 1.4909010237881715,
    "peak_propulsion_power_W": 299.4695761602604,
    "peak_thruster_force_N": 18.332890996961716,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.039690998717865e-15
+   "mean_wrench_residual_N": 1.0441659959715342e-15
   },
   {
    "scenario": "mission_0.2",
@@ -1207,11 +1207,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4909010237881717,
+   "propulsion_energy_Wh": 1.4909010237881715,
    "peak_propulsion_power_W": 299.4695761602604,
    "peak_thruster_force_N": 18.332890996961716,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.039690998717865e-15
+   "mean_wrench_residual_N": 1.0441659959715342e-15
   },
   {
    "scenario": "mission_0.2",
@@ -1222,11 +1222,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4909921504031403,
-   "peak_propulsion_power_W": 299.4695768127305,
-   "peak_thruster_force_N": 18.332890996933237,
+   "propulsion_energy_Wh": 1.49099215040314,
+   "peak_propulsion_power_W": 299.4695768127302,
+   "peak_thruster_force_N": 18.332890996933212,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 5.5419861431082814e-15
+   "mean_wrench_residual_N": 5.970877688563582e-15
   },
   {
    "scenario": "mission_0.2",
@@ -1237,11 +1237,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4909019383747564,
-   "peak_propulsion_power_W": 299.4695961622051,
-   "peak_thruster_force_N": 18.332890996961257,
+   "propulsion_energy_Wh": 1.4909019383747568,
+   "peak_propulsion_power_W": 299.46959616220516,
+   "peak_thruster_force_N": 18.33289099696127,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.692116917337206e-07
+   "mean_wrench_residual_N": 7.69211691475707e-07
   },
   {
    "scenario": "mission_0.2",
@@ -1252,11 +1252,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4909019383747564,
-   "peak_propulsion_power_W": 299.4695961622051,
-   "peak_thruster_force_N": 18.332890996961257,
+   "propulsion_energy_Wh": 1.4909019383747568,
+   "peak_propulsion_power_W": 299.46959616220516,
+   "peak_thruster_force_N": 18.33289099696127,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.692116917337206e-07
+   "mean_wrench_residual_N": 7.69211691475707e-07
   },
   {
    "scenario": "mission_0.2",
@@ -1267,11 +1267,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4909930631595332,
-   "peak_propulsion_power_W": 299.4695961622051,
-   "peak_thruster_force_N": 18.33289099695569,
+   "propulsion_energy_Wh": 1.490993063159533,
+   "peak_propulsion_power_W": 299.46959616220516,
+   "peak_thruster_force_N": 18.3328909969557,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.692116860920849e-07
+   "mean_wrench_residual_N": 7.692116857711457e-07
   },
   {
    "scenario": "mission_0.2",
@@ -1282,11 +1282,11 @@
    "actuators": 4,
    "rank": 3,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.4908999208739053,
-   "peak_propulsion_power_W": 299.46955442282797,
-   "peak_thruster_force_N": 18.332890996961257,
+   "propulsion_energy_Wh": 1.490899920873906,
+   "peak_propulsion_power_W": 299.469554422828,
+   "peak_thruster_force_N": 18.33289099696127,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.1820872438771816e-05
+   "mean_wrench_residual_N": 1.1820872438514067e-05
   },
   {
    "scenario": "mission_0.2",
@@ -1312,11 +1312,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 1.8789765923524089,
-   "peak_propulsion_power_W": 373.5629985996175,
-   "peak_thruster_force_N": 22.843504574128776,
+   "propulsion_energy_Wh": 1.878976592352408,
+   "peak_propulsion_power_W": 373.56299859961734,
+   "peak_thruster_force_N": 22.843504574128772,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 3.1163319303187656e-15
+   "mean_wrench_residual_N": 1.6106008661132444e-14
   },
   {
    "scenario": "mission_0.2",
@@ -1331,7 +1331,7 @@
    "peak_propulsion_power_W": 221.09599634142293,
    "peak_thruster_force_N": 14.970847385078875,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.11140443484832e-16
+   "mean_wrench_residual_N": 7.617854346548537e-16
   },
   {
    "scenario": "mission_0.2",
@@ -1346,7 +1346,7 @@
    "peak_propulsion_power_W": 241.81835973076397,
    "peak_thruster_force_N": 15.826582632726204,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 9.187075981425628e-16
+   "mean_wrench_residual_N": 9.108161386684099e-16
   },
   {
    "scenario": "mission_0.2",
@@ -1361,7 +1361,7 @@
    "peak_propulsion_power_W": 268.47022735329716,
    "peak_thruster_force_N": 16.9230246046239,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.6554375904921772e-15
+   "mean_wrench_residual_N": 1.6542518419232471e-15
   },
   {
    "scenario": "mission_0.2",
@@ -1376,7 +1376,7 @@
    "peak_propulsion_power_W": 348.9554422462622,
    "peak_thruster_force_N": 20.16670941708637,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 3.4255000824303197e-15
+   "mean_wrench_residual_N": 3.4255000783706048e-15
   },
   {
    "scenario": "mission_0.2",
@@ -1387,11 +1387,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 2.0455202882571086,
+   "propulsion_energy_Wh": 2.045520288257108,
    "peak_propulsion_power_W": 414.44188449390873,
    "peak_thruster_force_N": 22.59954264604619,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.6184151796003138e-15
+   "mean_wrench_residual_N": 3.336510546114658e-15
   },
   {
    "scenario": "mission_0.2",
@@ -1406,7 +1406,7 @@
    "peak_propulsion_power_W": 511.30942251234495,
    "peak_thruster_force_N": 25.924518496869307,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.5529717702226033e-15
+   "mean_wrench_residual_N": 1.5901064185070326e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1421,7 +1421,7 @@
    "peak_propulsion_power_W": 511.04233415853247,
    "peak_thruster_force_N": 26.07505043981011,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.5449446608851196e-15
+   "mean_wrench_residual_N": 1.5497303915322278e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1436,7 +1436,7 @@
    "peak_propulsion_power_W": 511.04233415853247,
    "peak_thruster_force_N": 26.07505043981011,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.5449446608851196e-15
+   "mean_wrench_residual_N": 1.5497303915322278e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1448,10 +1448,10 @@
    "rank": 6,
    "duration_s": 66.99999999999737,
    "propulsion_energy_Wh": 3.8365011666207636,
-   "peak_propulsion_power_W": 511.04234105212714,
-   "peak_thruster_force_N": 26.07505056384997,
+   "peak_propulsion_power_W": 511.04234105212777,
+   "peak_thruster_force_N": 26.07505056385,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.089527932111815e-14
+   "mean_wrench_residual_N": 1.0775676786643696e-14
   },
   {
    "scenario": "mission_0.4",
@@ -1462,11 +1462,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 3.8366022090128724,
-   "peak_propulsion_power_W": 511.0423333902399,
-   "peak_thruster_force_N": 26.075050439810727,
+   "propulsion_energy_Wh": 3.8366022090128737,
+   "peak_propulsion_power_W": 511.0423333902401,
+   "peak_thruster_force_N": 26.075050439810713,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.927993742958794e-07
+   "mean_wrench_residual_N": 7.927993737355183e-07
   },
   {
    "scenario": "mission_0.4",
@@ -1477,11 +1477,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 3.8366022090128724,
-   "peak_propulsion_power_W": 511.0423333902399,
-   "peak_thruster_force_N": 26.075050439810727,
+   "propulsion_energy_Wh": 3.8366022090128737,
+   "peak_propulsion_power_W": 511.0423333902401,
+   "peak_thruster_force_N": 26.075050439810713,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.927993742958794e-07
+   "mean_wrench_residual_N": 7.927993737355183e-07
   },
   {
    "scenario": "mission_0.4",
@@ -1492,11 +1492,11 @@
    "actuators": 6,
    "rank": 5,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 3.8365018775673394,
-   "peak_propulsion_power_W": 511.04233339024256,
-   "peak_thruster_force_N": 26.0750505372427,
+   "propulsion_energy_Wh": 3.83650187756734,
+   "peak_propulsion_power_W": 511.04233339024245,
+   "peak_thruster_force_N": 26.075050537242692,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.927993614435479e-07
+   "mean_wrench_residual_N": 7.92799361669566e-07
   },
   {
    "scenario": "mission_0.4",
@@ -1507,11 +1507,11 @@
    "actuators": 4,
    "rank": 3,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 3.8366001327844446,
-   "peak_propulsion_power_W": 511.04228889044504,
-   "peak_thruster_force_N": 26.075050439810727,
+   "propulsion_energy_Wh": 3.8366001327844454,
+   "peak_propulsion_power_W": 511.04228889044526,
+   "peak_thruster_force_N": 26.075050439810713,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.79938255661554e-05
+   "mean_wrench_residual_N": 2.7993825565596643e-05
   },
   {
    "scenario": "mission_0.4",
@@ -1537,11 +1537,11 @@
    "actuators": 8,
    "rank": 6,
    "duration_s": 66.99999999999737,
-   "propulsion_energy_Wh": 4.839064787292793,
-   "peak_propulsion_power_W": 634.6920839880785,
+   "propulsion_energy_Wh": 4.839064787292792,
+   "peak_propulsion_power_W": 634.6920839880783,
    "peak_thruster_force_N": 32.48733687075654,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 6.46403524067418e-15
+   "mean_wrench_residual_N": 3.179420585629885e-14
   },
   {
    "scenario": "mission_0.4",
@@ -1554,9 +1554,9 @@
    "duration_s": 66.99999999999737,
    "propulsion_energy_Wh": 3.004045040290905,
    "peak_propulsion_power_W": 373.82318495188866,
-   "peak_thruster_force_N": 22.278170648232326,
+   "peak_thruster_force_N": 22.27817064823233,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.603572931311194e-15
+   "mean_wrench_residual_N": 1.7131451254491937e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1571,7 +1571,7 @@
    "peak_propulsion_power_W": 409.8225372114676,
    "peak_thruster_force_N": 22.510816026227957,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 1.7726358895446236e-15
+   "mean_wrench_residual_N": 1.8052384210736886e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1586,7 +1586,7 @@
    "peak_propulsion_power_W": 449.8889920660636,
    "peak_thruster_force_N": 24.070029116658702,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.903431252614793e-15
+   "mean_wrench_residual_N": 2.8993569138945637e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1601,7 +1601,7 @@
    "peak_propulsion_power_W": 595.7354066477043,
    "peak_thruster_force_N": 28.683062883211527,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 7.158181357899283e-15
+   "mean_wrench_residual_N": 7.158181360626425e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1613,10 +1613,10 @@
    "rank": 6,
    "duration_s": 66.99999999999737,
    "propulsion_energy_Wh": 5.212694872658574,
-   "peak_propulsion_power_W": 702.8456806813119,
+   "peak_propulsion_power_W": 702.8456806813118,
    "peak_thruster_force_N": 32.14303834374825,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.5542245465685824e-15
+   "mean_wrench_residual_N": 6.4840723561907974e-15
   },
   {
    "scenario": "mission_0.4",
@@ -1631,7 +1631,7 @@
    "peak_propulsion_power_W": 861.0212448123689,
    "peak_thruster_force_N": 36.87186769629733,
    "infeasible_time_fraction": 0.0,
-   "mean_wrench_residual_N": 2.8855735304110713e-15
+   "mean_wrench_residual_N": 3.028304815179157e-15
   }
  ],
  "E1b": [
@@ -1764,8 +1764,8 @@
    "geometry_grade": "C",
    "required_force_N": 7.178400000000001,
    "propulsion_power_W": 12.4,
-   "peak_thruster_force_N": 2.5379476590348164,
-   "residual_N": 4.4065645555256766e-14,
+   "peak_thruster_force_N": 2.5379476590348156,
+   "residual_N": 4.303900950328356e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -1774,9 +1774,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "C",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 12.42753966706535,
+   "propulsion_power_W": 12.427539667065348,
    "peak_thruster_force_N": 3.5892,
-   "residual_N": 1.8189410760071542e-15,
+   "residual_N": 1.7763800958167975e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -1785,9 +1785,9 @@
    "case": "current 0.2 m/s from 90 deg",
    "geometry_grade": "C",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 15.518090678195499,
-   "peak_thruster_force_N": 2.5379476590348182,
-   "residual_N": 4.35230548179813e-14,
+   "propulsion_power_W": 15.518090678195504,
+   "peak_thruster_force_N": 2.537947659034817,
+   "residual_N": 4.298389385973939e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -1796,9 +1796,9 @@
    "case": "current 0.4 m/s from 0 deg",
    "geometry_grade": "C",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 115.07025272635622,
-   "peak_thruster_force_N": 10.151790636139266,
-   "residual_N": 1.7626258222102706e-13,
+   "propulsion_power_W": 115.07025272635627,
+   "peak_thruster_force_N": 10.151790636139262,
+   "residual_N": 1.7215603801313423e-13,
    "feasible": true,
    "saturated": ""
   },
@@ -1807,9 +1807,9 @@
    "case": "current 0.4 m/s from 45 deg",
    "geometry_grade": "C",
    "required_force_N": 28.713600000000007,
-   "propulsion_power_W": 102.21427762661133,
+   "propulsion_power_W": 102.21427762661136,
    "peak_thruster_force_N": 14.3568,
-   "residual_N": 7.275764304028617e-15,
+   "residual_N": 7.10552038326719e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -1818,9 +1818,9 @@
    "case": "current 0.4 m/s from 90 deg",
    "geometry_grade": "C",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 139.11807112928304,
-   "peak_thruster_force_N": 10.151790636139273,
-   "residual_N": 1.740922192719252e-13,
+   "propulsion_power_W": 139.11807112928312,
+   "peak_thruster_force_N": 10.151790636139268,
+   "residual_N": 1.7193557543895757e-13,
    "feasible": true,
    "saturated": ""
   },
@@ -1851,9 +1851,9 @@
    "case": "current 0.3 m/s from 45 deg + vertical 0.1 m/s",
    "geometry_grade": "C",
    "required_force_N": 16.250794168901404,
-   "propulsion_power_W": 40.22017045239895,
+   "propulsion_power_W": 40.220170452398946,
    "peak_thruster_force_N": 8.075699999999998,
-   "residual_N": 2.8125926773537816e-15,
+   "residual_N": 2.5380468463472483e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -1887,8 +1887,8 @@
    "geometry_grade": "C",
    "required_force_N": 7.178400000000001,
    "propulsion_power_W": 12.4,
-   "peak_thruster_force_N": 2.5379476590348164,
-   "residual_N": 4.4065645555256766e-14,
+   "peak_thruster_force_N": 2.5379476590348156,
+   "residual_N": 4.303900950328356e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -1897,9 +1897,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "C",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 12.42753966706535,
+   "propulsion_power_W": 12.427539667065348,
    "peak_thruster_force_N": 3.5892,
-   "residual_N": 1.8189410760071542e-15,
+   "residual_N": 1.7763800958167975e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -1908,9 +1908,9 @@
    "case": "current 0.2 m/s from 90 deg",
    "geometry_grade": "C",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 15.518090678195499,
-   "peak_thruster_force_N": 2.5379476590348182,
-   "residual_N": 4.35230548179813e-14,
+   "propulsion_power_W": 15.518090678195504,
+   "peak_thruster_force_N": 2.537947659034817,
+   "residual_N": 4.298389385973939e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -1919,9 +1919,9 @@
    "case": "current 0.4 m/s from 0 deg",
    "geometry_grade": "C",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 115.07025272635622,
-   "peak_thruster_force_N": 10.151790636139266,
-   "residual_N": 1.7626258222102706e-13,
+   "propulsion_power_W": 115.07025272635627,
+   "peak_thruster_force_N": 10.151790636139262,
+   "residual_N": 1.7215603801313423e-13,
    "feasible": true,
    "saturated": ""
   },
@@ -1930,9 +1930,9 @@
    "case": "current 0.4 m/s from 45 deg",
    "geometry_grade": "C",
    "required_force_N": 28.713600000000007,
-   "propulsion_power_W": 102.21427762661133,
+   "propulsion_power_W": 102.21427762661136,
    "peak_thruster_force_N": 14.3568,
-   "residual_N": 7.275764304028617e-15,
+   "residual_N": 7.10552038326719e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -1941,9 +1941,9 @@
    "case": "current 0.4 m/s from 90 deg",
    "geometry_grade": "C",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 139.11807112928304,
-   "peak_thruster_force_N": 10.151790636139273,
-   "residual_N": 1.740922192719252e-13,
+   "propulsion_power_W": 139.11807112928312,
+   "peak_thruster_force_N": 10.151790636139268,
+   "residual_N": 1.7193557543895757e-13,
    "feasible": true,
    "saturated": ""
   },
@@ -1974,7 +1974,7 @@
    "case": "current 0.3 m/s from 45 deg + vertical 0.1 m/s",
    "geometry_grade": "C",
    "required_force_N": 16.250794168901404,
-   "propulsion_power_W": 38.480109696973805,
+   "propulsion_power_W": 38.4801096969738,
    "peak_thruster_force_N": 8.075699999999998,
    "residual_N": 1.7946000000000002,
    "feasible": false,
@@ -2132,9 +2132,9 @@
    "case": "current 0.2 m/s from 0 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 19.324683546543366,
+   "propulsion_power_W": 19.32468354654335,
    "peak_thruster_force_N": 3.1635094404531072,
-   "residual_N": 9.629887358035952e-16,
+   "residual_N": 6.754606028744408e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2143,9 +2143,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 18.09083656418953,
-   "peak_thruster_force_N": 3.492381313763764,
-   "residual_N": 2.875482991993394e-15,
+   "propulsion_power_W": 18.090836564189527,
+   "peak_thruster_force_N": 3.4923813137637634,
+   "residual_N": 2.7315015564346217e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2154,9 +2154,9 @@
    "case": "current 0.2 m/s from 90 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 23.290211030836158,
+   "propulsion_power_W": 23.290211030836154,
    "peak_thruster_force_N": 2.7008274864520625,
-   "residual_N": 3.665210382834202e-15,
+   "residual_N": 9.4789676923181e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2165,9 +2165,9 @@
    "case": "current 0.4 m/s from 0 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 146.67477660568574,
+   "propulsion_power_W": 146.67477660568568,
    "peak_thruster_force_N": 12.654037761812429,
-   "residual_N": 3.851954943214381e-15,
+   "residual_N": 2.7018424114977633e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -2176,9 +2176,9 @@
    "case": "current 0.4 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000007,
-   "propulsion_power_W": 125.99502667766987,
-   "peak_thruster_force_N": 13.969525255055055,
-   "residual_N": 1.1501931967973576e-14,
+   "propulsion_power_W": 125.99502667767,
+   "peak_thruster_force_N": 13.969525255055053,
+   "residual_N": 1.0926006225738487e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -2187,9 +2187,9 @@
    "case": "current 0.4 m/s from 90 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 207.6889688787857,
+   "propulsion_power_W": 207.6889688787859,
    "peak_thruster_force_N": 10.80330994580825,
-   "residual_N": 1.466084153133681e-14,
+   "residual_N": 3.79158707692724e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -2198,9 +2198,9 @@
    "case": "vertical transit 0.1 m/s",
    "geometry_grade": "D",
    "required_force_N": 1.7946000000000002,
-   "propulsion_power_W": 3.285543565692627,
-   "peak_thruster_force_N": 0.5724847340256829,
-   "residual_N": 4.670273819246496e-16,
+   "propulsion_power_W": 3.2855435656926244,
+   "peak_thruster_force_N": 0.5724847340256828,
+   "residual_N": 5.12444831491985e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2209,9 +2209,9 @@
    "case": "vertical transit 0.2 m/s",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 10.389812519208473,
-   "peak_thruster_force_N": 2.2899389361027316,
-   "residual_N": 1.8681095276985985e-15,
+   "propulsion_power_W": 10.38981251920845,
+   "peak_thruster_force_N": 2.289938936102731,
+   "residual_N": 2.04977932596794e-14,
    "feasible": true,
    "saturated": ""
   },
@@ -2220,9 +2220,9 @@
    "case": "current 0.3 m/s from 45 deg + vertical 0.1 m/s",
    "geometry_grade": "D",
    "required_force_N": 16.250794168901404,
-   "propulsion_power_W": 50.148369334419996,
-   "peak_thruster_force_N": 7.8802653286257645,
-   "residual_N": 5.431305899338612e-15,
+   "propulsion_power_W": 50.148369334420025,
+   "peak_thruster_force_N": 7.880265328625766,
+   "residual_N": 7.988547578470464e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2266,9 +2266,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 16.55867462916202,
-   "peak_thruster_force_N": 4.003232423167654,
-   "residual_N": 8.881784197001252e-16,
+   "propulsion_power_W": 16.558674629162027,
+   "peak_thruster_force_N": 4.003232423167656,
+   "residual_N": 1.790180836524724e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2277,9 +2277,9 @@
    "case": "current 0.2 m/s from 90 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 26.44930824158085,
-   "peak_thruster_force_N": 3.5892000000000013,
-   "residual_N": 9.909920833017797e-16,
+   "propulsion_power_W": 26.449308241580855,
+   "peak_thruster_force_N": 3.589200000000002,
+   "residual_N": 1.001226303200929e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2299,9 +2299,9 @@
    "case": "current 0.4 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000007,
-   "propulsion_power_W": 142.14151726363963,
-   "peak_thruster_force_N": 16.012929692670617,
-   "residual_N": 3.552713678800501e-15,
+   "propulsion_power_W": 142.14151726363968,
+   "peak_thruster_force_N": 16.012929692670625,
+   "residual_N": 7.160723346098895e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2311,8 +2311,8 @@
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
    "propulsion_power_W": 245.45704363354275,
-   "peak_thruster_force_N": 14.356800000000005,
-   "residual_N": 3.963968333207119e-15,
+   "peak_thruster_force_N": 14.356800000000009,
+   "residual_N": 4.004905212803716e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2343,9 +2343,9 @@
    "case": "current 0.3 m/s from 45 deg + vertical 0.1 m/s",
    "geometry_grade": "D",
    "required_force_N": 16.250794168901404,
-   "propulsion_power_W": 58.0649966092074,
-   "peak_thruster_force_N": 9.00727295212722,
-   "residual_N": 0.0,
+   "propulsion_power_W": 58.064996609207405,
+   "peak_thruster_force_N": 9.007272952127222,
+   "residual_N": 2.5510982866352577e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2389,9 +2389,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 14.132495527749612,
+   "propulsion_power_W": 14.13249552774961,
    "peak_thruster_force_N": 3.761519361677235,
-   "residual_N": 0.0,
+   "residual_N": 6.938893903907228e-17,
    "feasible": true,
    "saturated": ""
   },
@@ -2401,8 +2401,8 @@
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
    "propulsion_power_W": 21.981993571115545,
-   "peak_thruster_force_N": 3.128789619421623,
-   "residual_N": 4.395502291499681e-16,
+   "peak_thruster_force_N": 3.1287896194216236,
+   "residual_N": 4.92451226541373e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2424,7 +2424,7 @@
    "required_force_N": 28.713600000000007,
    "propulsion_power_W": 120.57964217961403,
    "peak_thruster_force_N": 15.04607744670894,
-   "residual_N": 0.0,
+   "residual_N": 2.7755575615628914e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2434,8 +2434,8 @@
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
    "propulsion_power_W": 197.95188629259678,
-   "peak_thruster_force_N": 12.515158477686493,
-   "residual_N": 1.7582009165998723e-15,
+   "peak_thruster_force_N": 12.515158477686494,
+   "residual_N": 1.969804906165492e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2446,7 +2446,7 @@
    "required_force_N": 1.7946000000000002,
    "propulsion_power_W": 3.1,
    "peak_thruster_force_N": 0.44865000000000005,
-   "residual_N": 0.0,
+   "residual_N": 2.2291027918243403e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2455,9 +2455,9 @@
    "case": "vertical transit 0.2 m/s",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 7.090019687036579,
+   "propulsion_power_W": 7.090019687036577,
    "peak_thruster_force_N": 1.7946000000000002,
-   "residual_N": 0.0,
+   "residual_N": 8.916411167297361e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2466,9 +2466,9 @@
    "case": "current 0.3 m/s from 45 deg + vertical 0.1 m/s",
    "geometry_grade": "D",
    "required_force_N": 16.250794168901404,
-   "propulsion_power_W": 48.30920363452449,
-   "peak_thruster_force_N": 8.463418563773775,
-   "residual_N": 2.5121479338940403e-15,
+   "propulsion_power_W": 48.3092036345245,
+   "peak_thruster_force_N": 8.463418563773777,
+   "residual_N": 2.582387466170645e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2692,7 +2692,7 @@
    "required_force_N": 1.7946000000000002,
    "propulsion_power_W": 3.1,
    "peak_thruster_force_N": 0.44865000000000005,
-   "residual_N": 2.225860458774576e-16,
+   "residual_N": 2.2291027918243403e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2701,9 +2701,9 @@
    "case": "vertical transit 0.2 m/s",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 7.090019687036575,
+   "propulsion_power_W": 7.090019687036577,
    "peak_thruster_force_N": 1.7946000000000002,
-   "residual_N": 8.903441835098303e-16,
+   "residual_N": 8.916411167297361e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2714,7 +2714,7 @@
    "required_force_N": 16.250794168901404,
    "propulsion_power_W": 43.92887379348344,
    "peak_thruster_force_N": 8.169076145849331,
-   "residual_N": 6.4302733925768264e-15,
+   "residual_N": 6.4302846241847896e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2730,7 +2730,7 @@
    "layout": "L8-HV-a50",
    "case": "max steady sway force",
    "geometry_grade": "D",
-   "required_force_N": 105.67894672105174,
+   "required_force_N": 105.67894672105172,
    "max_holdable_current_m_s": 0.7673798767148897,
    "max_vertical_speed_m_s": null
   },
@@ -2747,9 +2747,9 @@
    "case": "current 0.2 m/s from 0 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 19.255246846004827,
-   "peak_thruster_force_N": 3.128789619421623,
-   "residual_N": 0.0,
+   "propulsion_power_W": 19.255246846004823,
+   "peak_thruster_force_N": 3.1287896194216236,
+   "residual_N": 8.881784197001252e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2758,9 +2758,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 14.132495527749612,
-   "peak_thruster_force_N": 3.761519361677235,
-   "residual_N": 8.891536662303994e-16,
+   "propulsion_power_W": 14.13249552774961,
+   "peak_thruster_force_N": 3.7615193616772347,
+   "residual_N": 1.2567637595793301e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2771,7 +2771,7 @@
    "required_force_N": 7.178400000000001,
    "propulsion_power_W": 12.779310180943487,
    "peak_thruster_force_N": 2.1908020769913095,
-   "residual_N": 8.951019267161065e-16,
+   "residual_N": 8.836394390000306e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2780,9 +2780,9 @@
    "case": "current 0.4 m/s from 0 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 164.61830264297097,
-   "peak_thruster_force_N": 12.515158477686493,
-   "residual_N": 0.0,
+   "propulsion_power_W": 164.618302642971,
+   "peak_thruster_force_N": 12.515158477686494,
+   "residual_N": 3.552713678800501e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2791,9 +2791,9 @@
    "case": "current 0.4 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000007,
-   "propulsion_power_W": 116.80804581614875,
-   "peak_thruster_force_N": 15.04607744670894,
-   "residual_N": 3.5566146649215975e-15,
+   "propulsion_power_W": 116.80804581614873,
+   "peak_thruster_force_N": 15.046077446708939,
+   "residual_N": 5.0270550383173204e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2802,9 +2802,9 @@
    "case": "current 0.4 m/s from 90 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 107.66917105446356,
+   "propulsion_power_W": 107.66917105446355,
    "peak_thruster_force_N": 8.763208307965238,
-   "residual_N": 3.580407706864426e-15,
+   "residual_N": 3.5345577560001226e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2815,7 +2815,7 @@
    "required_force_N": 1.7946000000000002,
    "propulsion_power_W": 3.1,
    "peak_thruster_force_N": 0.44865000000000005,
-   "residual_N": 2.225860458774576e-16,
+   "residual_N": 2.2291027918243403e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2824,9 +2824,9 @@
    "case": "vertical transit 0.2 m/s",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 7.090019687036575,
+   "propulsion_power_W": 7.090019687036577,
    "peak_thruster_force_N": 1.7946000000000002,
-   "residual_N": 8.903441835098303e-16,
+   "residual_N": 8.916411167297361e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2837,7 +2837,7 @@
    "required_force_N": 16.250794168901404,
    "propulsion_power_W": 47.853515741106705,
    "peak_thruster_force_N": 8.463418563773775,
-   "residual_N": 1.7979770743540044e-15,
+   "residual_N": 2.522629128953423e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2881,9 +2881,9 @@
    "case": "current 0.2 m/s from 45 deg",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000002,
-   "propulsion_power_W": 15.781562797339857,
+   "propulsion_power_W": 15.781562797339856,
    "peak_thruster_force_N": 4.003232423167654,
-   "residual_N": 1.2563805882055718e-15,
+   "residual_N": 1.2573000033218179e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2894,7 +2894,7 @@
    "required_force_N": 7.178400000000001,
    "propulsion_power_W": 12.043967662199801,
    "peak_thruster_force_N": 2.0722255861754055,
-   "residual_N": 9.925456146081252e-16,
+   "residual_N": 9.97191687094753e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2916,7 +2916,7 @@
    "required_force_N": 28.713600000000007,
    "propulsion_power_W": 137.51841191851662,
    "peak_thruster_force_N": 16.012929692670617,
-   "residual_N": 5.025522352822287e-15,
+   "residual_N": 5.0292000132872715e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2925,9 +2925,9 @@
    "case": "current 0.4 m/s from 90 deg",
    "geometry_grade": "D",
    "required_force_N": 28.713600000000003,
-   "propulsion_power_W": 97.50096878571506,
+   "propulsion_power_W": 97.50096878571507,
    "peak_thruster_force_N": 8.288902344701622,
-   "residual_N": 3.970182458432501e-15,
+   "residual_N": 3.988766748379012e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -2938,7 +2938,7 @@
    "required_force_N": 1.7946000000000002,
    "propulsion_power_W": 3.1,
    "peak_thruster_force_N": 0.44865000000000005,
-   "residual_N": 2.225860458774576e-16,
+   "residual_N": 2.2291027918243403e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2947,9 +2947,9 @@
    "case": "vertical transit 0.2 m/s",
    "geometry_grade": "D",
    "required_force_N": 7.178400000000001,
-   "propulsion_power_W": 7.090019687036575,
+   "propulsion_power_W": 7.090019687036577,
    "peak_thruster_force_N": 1.7946000000000002,
-   "residual_N": 8.903441835098303e-16,
+   "residual_N": 8.916411167297361e-16,
    "feasible": true,
    "saturated": ""
   },
@@ -2960,7 +2960,7 @@
    "required_force_N": 16.250794168901404,
    "propulsion_power_W": 56.28140050092224,
    "peak_thruster_force_N": 9.00727295212722,
-   "residual_N": 5.469415586805847e-16,
+   "residual_N": 1.891558259922915e-15,
    "feasible": true,
    "saturated": ""
   },
@@ -3611,10 +3611,14 @@
     "measured_surge_load_N": 1.0,
     "holoocean_drag_N": 7.178400000000001,
     "ratio_holoocean_to_measured": 7.178400000000001,
+    "measured_above_zero_residual": false,
+    "von_benzon_identified_surge_N": 8.38,
+    "ratio_holoocean_to_identified": 0.8566109785202864,
+    "ratio_identified_to_measured": 8.38,
     "P_std_measured_W": 2.675894973103091,
-    "residual_std_measured_N": 6.146230787578956e-15,
+    "residual_std_measured_N": 5.991878523825691e-15,
     "P_std_holoocean_W": 12.4,
-    "residual_std_holoocean_N": 4.4065645555256766e-14,
+    "residual_std_holoocean_N": 4.303900950328356e-14,
     "P_heavy_measured_W": 2.6758949731030923,
     "residual_heavy_measured_N": 0.0,
     "P_heavy_holoocean_W": 12.4,
@@ -3625,10 +3629,14 @@
     "measured_surge_load_N": 6.4,
     "holoocean_drag_N": 28.713600000000003,
     "ratio_holoocean_to_measured": 4.4865,
+    "measured_above_zero_residual": true,
+    "von_benzon_identified_surge_N": 28.040000000000003,
+    "ratio_holoocean_to_identified": 1.0240228245363767,
+    "ratio_identified_to_measured": 4.3812500000000005,
     "P_std_measured_W": 12.4,
-    "residual_std_measured_N": 3.940935980887112e-14,
-    "P_std_holoocean_W": 115.07025272635622,
-    "residual_std_holoocean_N": 1.7626258222102706e-13,
+    "residual_std_measured_N": 3.827420411968639e-14,
+    "P_std_holoocean_W": 115.07025272635627,
+    "residual_std_holoocean_N": 1.7215603801313423e-13,
     "P_heavy_measured_W": 12.4,
     "residual_heavy_measured_N": 0.0,
     "P_heavy_holoocean_W": 115.07025272635633,
@@ -3639,10 +3647,14 @@
     "measured_surge_load_N": 16.4,
     "holoocean_drag_N": 64.6056,
     "ratio_holoocean_to_measured": 3.9393658536585368,
-    "P_std_measured_W": 48.79732698881531,
-    "residual_std_measured_N": 1.0083685805127413e-13,
+    "measured_above_zero_residual": true,
+    "von_benzon_identified_surge_N": 58.98,
+    "ratio_holoocean_to_identified": 1.095381485249237,
+    "ratio_identified_to_measured": 3.5963414634146345,
+    "P_std_measured_W": 48.79732698881532,
+    "residual_std_measured_N": 9.832364770130365e-14,
     "P_std_holoocean_W": 417.3423430551229,
-    "residual_std_holoocean_N": 3.9740004753601337e-13,
+    "residual_std_holoocean_N": 3.872060653755179e-13,
     "P_heavy_measured_W": 48.79732698881535,
     "residual_heavy_measured_N": 0.0,
     "P_heavy_holoocean_W": 417.3423430551231,
@@ -3653,10 +3665,14 @@
     "measured_surge_load_N": 28.8,
     "holoocean_drag_N": 114.85440000000001,
     "ratio_holoocean_to_measured": 3.9880000000000004,
-    "P_std_measured_W": 115.70138545411604,
-    "residual_std_measured_N": 1.7691089499791902e-13,
-    "P_std_holoocean_W": 1005.036537500873,
-    "residual_std_holoocean_N": 7.050503288841082e-13,
+    "measured_above_zero_residual": true,
+    "von_benzon_identified_surge_N": 101.20000000000002,
+    "ratio_holoocean_to_identified": 1.1349249011857707,
+    "ratio_identified_to_measured": 3.5138888888888893,
+    "P_std_measured_W": 115.70138545411606,
+    "residual_std_measured_N": 1.7264292886119623e-13,
+    "P_std_holoocean_W": 1005.0365375008735,
+    "residual_std_holoocean_N": 6.886241520525369e-13,
     "P_heavy_measured_W": 115.70138545411612,
     "residual_heavy_measured_N": 0.0,
     "P_heavy_holoocean_W": 1005.0365375008738,
@@ -3667,8 +3683,12 @@
     "measured_surge_load_N": 45.2,
     "holoocean_drag_N": 179.46,
     "ratio_holoocean_to_measured": 3.970353982300885,
-    "P_std_measured_W": 242.89494986453775,
-    "residual_std_measured_N": 2.7802112678207677e-13,
+    "measured_above_zero_residual": true,
+    "von_benzon_identified_surge_N": 154.7,
+    "ratio_holoocean_to_identified": 1.1600517129928896,
+    "ratio_identified_to_measured": 3.4225663716814156,
+    "P_std_measured_W": 242.8949498645378,
+    "residual_std_measured_N": 2.711960123799605e-13,
     "P_std_holoocean_W": 1172.993333333301,
     "residual_std_holoocean_N": 53.897025101621054,
     "P_heavy_measured_W": 242.89494986453792,
@@ -3681,8 +3701,12 @@
     "measured_surge_load_N": 46.9,
     "holoocean_drag_N": 179.46,
     "ratio_holoocean_to_measured": 3.826439232409382,
-    "P_std_measured_W": 258.7845071205038,
-    "residual_std_measured_N": 2.881153459117076e-13,
+    "measured_above_zero_residual": true,
+    "von_benzon_identified_surge_N": 154.7,
+    "ratio_holoocean_to_identified": 1.1600517129928896,
+    "ratio_identified_to_measured": 3.298507462686567,
+    "P_std_measured_W": 258.78450712050386,
+    "residual_std_measured_N": 2.813157052348338e-13,
     "P_std_holoocean_W": 1172.993333333301,
     "residual_std_holoocean_N": 53.897025101621054,
     "P_heavy_measured_W": 258.784507120504,
@@ -3695,9 +3719,13 @@
     "measured_surge_load_N": null,
     "holoocean_drag_N": 44.865,
     "ratio_holoocean_to_measured": null,
+    "measured_above_zero_residual": null,
+    "von_benzon_identified_surge_N": 42.1,
+    "ratio_holoocean_to_identified": 1.0656769596199525,
+    "ratio_identified_to_measured": null,
     "P_std_measured_W": null,
-    "P_std_holoocean_W": 240.28631561239354,
-    "residual_std_holoocean_N": 2.758080026135726e-13,
+    "P_std_holoocean_W": 240.28631561239362,
+    "residual_std_holoocean_N": 2.6898172202447197e-13,
     "P_heavy_measured_W": null,
     "P_heavy_holoocean_W": 240.2863156123937,
     "residual_heavy_holoocean_N": 0.0

@@ -1,0 +1,21 @@
+{
+  "record": "bluerov2_heavy.translational_damping_identified",
+  "description": "Diagonal translational damping identified from free-running open-loop tests",
+  "sources": [
+    "P004"
+  ],
+  "location": {
+    "section": "4.2 Hydrodynamic Damping; Appendix A",
+    "table": "A1 (origin column: Experimental); Table 4 (max surge 0.72 m/s at 85 N); Table 5 (A_u = 0.0877 m2)",
+    "figure": "6 (surge/sway model error about 10 %)"
+  },
+  "coefficients": {
+    "X_u_N_s_per_m": 13.7,
+    "X_uu_N_s2_per_m2": 141.0,
+    "Y_v_N_s_per_m": 0,
+    "Y_vv_N_s2_per_m2": 217.0,
+    "Z_w_N_s_per_m": 33.0,
+    "Z_ww_N_s2_per_m2": 190.0
+  },
+  "model": "surge resistance = X_u u + X_uu u|u|"
+}

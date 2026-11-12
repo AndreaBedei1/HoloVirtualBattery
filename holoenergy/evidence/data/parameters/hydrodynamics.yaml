@@ -1,0 +1,230 @@
+# BlueROV2 hydrodynamic evidence for the external comparison (audit 2026-11-12,
+# docs/bluerov2_hydrodynamic_external_comparison.md). External data are for comparison
+# only; HoloOcean literals are simulator-exact and are NOT physical vehicle data.
+# Tabular data live in holoenergy/profiles/hydrodynamics/*.json (dataset.path).
+sources:
+- id: GABL2021-OE
+  type: journal_article
+  title: Hydrodynamic loads on a restrained ROV under waves and current
+  authors:
+  - R. Gabl
+  - T. Davey
+  - Y. Cao
+  - Q. Li
+  - B. Li
+  - K. L. Walker
+  - F. Giorgio-Serchi
+  - S. Aracri
+  - A. Kiprakis
+  - A. A. Stokes
+  - D. M. Ingram
+  year: 2021
+  doi: 10.1016/j.oceaneng.2021.109279
+  url: http://hdl.handle.net/10397/92240
+  publisher: Elsevier (Ocean Engineering 234, 109279)
+  accessed: '2026-11-12'
+  revision: accepted manuscript (PolyU IRA pre-published version, CC BY-NC-ND 4.0); page numbers refer
+    to it
+  redistribution: reference_only
+  notes: Table 1 gives mean sum Fx versus nominal current speed for the restrained BlueROV2 (standard)
+    with and without an upstream cylinder. Published-version page numbers not checked.
+- id: GABL2020-DS
+  type: dataset
+  title: Dataset - Experimental Force Data of a Restrained ROV under Waves and Current
+  authors:
+  - R. Gabl
+  - T. Davey
+  - Y. Cao
+  - Q. Li
+  - B. Li
+  - K. L. Walker
+  - F. Giorgio-Serchi
+  - S. Aracri
+  - A. Kiprakis
+  - A. A. Stokes
+  - D. M. Ingram
+  year: 2020
+  doi: 10.7488/ds/2835
+  publisher: University of Edinburgh DataShare
+  redistribution: reference_only
+  notes: 178 txt files (raw and processed, 128 Hz). Not downloaded in the 2026-11-12 audit; run-level
+    means and standard deviations not extracted.
+- id: WU2018
+  type: thesis
+  title: 6-DoF Modelling and Control of a Remotely Operated Vehicle
+  authors:
+  - C.-J. Wu
+  year: 2018
+  url: https://flex.flinders.edu.au/file/27aa0064-9de2-441c-8a17-655405d5fc2e/1/ThesisWu2018.pdf
+  publisher: Flinders University (Master of Engineering thesis)
+  accessed: '2026-11-12'
+  redistribution: reference_only
+  notes: Section 5.2 states that the planned identification experiments were not performed; damping and
+    added mass were taken from Sandoy (2016, NTNU thesis on the original BlueROV).
+parameters:
+- id: bluerov2_standard.restrained_inline_load_head_on
+  component: bluerov2_standard
+  quantity: inline_restraint_force_vs_current_speed
+  unit: null
+  dataset:
+    path: profiles/hydrodynamics/gabl2021_restrained_bluerov2_head_on.json
+    description: Mean sum of x-components of the eight tether forces over the capture time, current from
+      180 deg (onto the bow, body surge axis), no obstacle (Table 1 column d = infinity).
+  bound: measured_mean
+  relation: representative
+  grade: B
+  sources:
+  - GABL2021-OE
+  - P003
+  location:
+    page: 9 (accepted manuscript)
+    table: 1 (columns flow speed and sum Fx for d = infinity)
+    section: 3.3-3.4; Gabl 2020 Sect. 2.1-2.4 and Table 6 for conditions
+    figure: 8 (means with standard-deviation error bars)
+  conditions:
+    facility: FloWave, 25 m diameter circular basin, 2 m water depth
+    vehicle: BlueROV2 standard, 6 T200, 0.457 x 0.338 x 0.254 m, about 0.2 kg net buoyancy, Jetson Nano
+      and Ping360 added; mass not reported
+    orientation: current at 180 deg travelling in -x; ROV forward = +x (head-on, surge axis)
+    speed_definition: nominal, from prior tank calibration (Noble et al. 2015); mean velocity at tank
+      centre, mid-depth; not measured at the model
+    restraint: eight Dyneema tethers with in-line load cells (6 x 100 N, 2 x 500 N rated) and turnbuckles
+      to a surface-piercing scaffold frame; ROV at mid-depth (about 1 m submergence)
+    force_convention: force needed to hold the ROV; still-water zero correction equalising preloads; rope,
+      load-cell and umbilical-segment loads not separated
+    thrusters: passive (windmilling state not stated)
+    umbilical: fixed to the support frame
+    water_density_temperature: not reported
+    waves: none
+    capture_time_s: 512 (Curr03-08)
+  uncertainty:
+    per_point: not tabulated; Fig. 8 shows standard deviation over the capture time
+    zero_residual_N: -0.6 (Table 1, 0 m/s); corrected zero sums within +/-1 (Gabl 2020 Sect. 3.2, Fig.
+      8)
+    load_cell_accuracy: < +/-0.15 % of rated capacity, 0.05 % typical (Gabl 2021 Sect. 2.2)
+  notes: Directly measured, but on the standard 6-thruster frame, not the Heavy configuration of the HoloOcean
+    BlueROV2 agent, hence relation representative. The 0.2 m/s value is of the order of the zero residual.
+    Comparable with HoloOcean drag on a vehicle held fixed in a current (quadratic term only; UE linear
+    damping acts on world-frame velocity, which is zero).
+- id: bluerov2_standard.restrained_equivalent_drag_area
+  component: bluerov2_standard
+  quantity: equivalent_drag_area
+  unit: m2
+  value_min: 0.09
+  value_max: 0.094
+  bound: derived
+  derivation: Cd A = 2 sum Fx / (rho U^2) from bluerov2_standard.restrained_inline_load_head_on at 0.6-1.0
+    m/s, rho = 997 kg/m3 assumed (not reported; 1000 kg/m3 changes the result by 0.3 %). At 0.2 and 0.4
+    m/s the same formula gives 0.050 and 0.080 m2.
+  relation: representative
+  grade: C
+  sources:
+  - GABL2021-OE
+  - P003
+  location:
+    page: 9 (accepted manuscript)
+    table: '1'
+  conditions:
+    speed_range_m_s: 0.6-1.0
+    orientation: head-on (surge)
+    reference_area_note: implied Cd 1.05-1.10 on the 0.338 x 0.254 m bounding frontal area
+  notes: Derived under an assumed density and a pure quadratic law that the data do not follow below 0.6
+    m/s; graded C for that reason. For comparison only; not a simulator parameter.
+- id: bluerov2_heavy.translational_damping_identified
+  component: bluerov2_heavy
+  quantity: linear_and_quadratic_damping_coefficients
+  unit: null
+  dataset:
+    path: profiles/hydrodynamics/vonbenzon2022_bluerov2_heavy_damping.json
+    description: Diagonal translational damping identified from free-running open-loop tests
+  bound: derived
+  derivation: Identified by the authors by matching model output to quasi-static velocities in open-loop
+    runs (20-100 % input in 10 % steps per DOF, each run repeated for validation), with thrust from a
+    regression of earlier force measurements (Pedersen et al. 2019).
+  relation: representative
+  grade: C
+  sources:
+  - P004
+  location:
+    section: 4.2 Hydrodynamic Damping; Appendix A
+    table: 'A1 (origin column: Experimental); Table 4 (max surge 0.72 m/s at 85 N); Table 5 (A_u = 0.0877
+      m2)'
+    figure: 6 (surge/sway model error about 10 %)
+  conditions:
+    vehicle: BlueROV2 Heavy, 8 T200, m = 13.5 kg (Table A1)
+    facility: pool 1.15 m deep, 6.1 m diameter
+    positioning: UAPS short-baseline
+    tether: attached; disturbance reduced by hand, not eliminated
+    speed_range_m_s: up to 0.72 in surge (Table 4)
+    water_density_kg_m3: 1000 (Table A1)
+  notes: Identified from motion data, not a direct force measurement; any thrust-map error at non-zero
+    advance speed and tether drag are absorbed into the coefficients. The quadratic surge term corresponds
+    to Cd A = 0.282 m2 (Cd = 3.2 on A_u). Surge resistance is 3.3-4.4 times the restrained load of Gabl
+    et al. (2021) at 0.4-1.0 m/s, and HoloOcean's 179.46 U^2 is 0.86-1.16 times it at 0.2-1.0 m/s; values
+    above 0.72 m/s are extrapolations.
+- id: bluerov2_heavy.translational_damping_wu2018
+  component: bluerov2_heavy
+  quantity: linear_and_quadratic_damping_coefficients
+  unit: null
+  dataset:
+    path: profiles/hydrodynamics/wu2018_bluerov2_heavy_damping.json
+    description: Damping adopted from literature on the original BlueROV (Sandoy 2016)
+  bound: nominal
+  relation: proxy
+  grade: D
+  sources:
+  - WU2018
+  location:
+    page: 48 (thesis numbering; PDF page 56)
+    section: '5.2'
+    table: '5.3'
+  conditions:
+    vehicle_of_origin: original BlueROV (Sandoy 2016), not BlueROV2
+    measured: 'no'
+  notes: Not measured on any BlueROV2. Sandoy (2016) was not consulted, so the provenance chain is unverified;
+    graded D. Surge resistance is 0.47-0.71 times the Gabl et al. (2021) restrained load at 0.4-1.0 m/s.
+    Do not use as validation evidence.
+- id: holoocean_bluerov2.drag_coefficient
+  component: holoocean_bluerov2
+  quantity: drag_coefficient
+  unit: '1'
+  value: 0.8
+  bound: exact
+  relation: exact
+  grade: A
+  sources:
+  - HO-SRC-2.3.0
+  location:
+    section: Agents/Private/BlueROV2.cpp
+    line: 23 CoefficientOfDrag = 0.8
+  notes: Used in F = -1/2 rho Cd A |v_rel|^2 v_rel/|v_rel| (HolodeckCore/Private/HolodeckBuoyantAgent.cpp
+    l. 86-97), v_rel relative to the ocean current, applied at the centre of mass, isotropic.
+- id: holoocean_bluerov2.drag_area
+  component: holoocean_bluerov2
+  quantity: drag_reference_area
+  unit: m2
+  value: 0.45
+  bound: exact
+  relation: exact
+  grade: A
+  sources:
+  - HO-SRC-2.3.0
+  location:
+    section: Agents/Private/BlueROV2.cpp
+    line: 24 AreaOfDrag = .45
+  notes: Same area in every direction. Separately, ABlueROV2::EnableDamping (BlueROV2.cpp l. 72-74, called
+    by the thruster and PD control schemes) sets UE linear damping 1.0 /s and angular damping 0.75; the
+    linear term acts on world-frame body velocity (about 11.5 v N), not on velocity relative to the current.
+- id: holoocean_bluerov2.water_density
+  component: holoocean_bluerov2
+  quantity: water_density
+  unit: kg/m3
+  value: 997
+  bound: exact
+  relation: exact
+  grade: A
+  sources:
+  - HO-SRC-2.3.0
+  location:
+    section: HolodeckCore/Public/HolodeckBuoyantAgent.h
+    line: 26 WaterDensity = 997

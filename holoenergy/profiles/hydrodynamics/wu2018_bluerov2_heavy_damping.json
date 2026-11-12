@@ -1,0 +1,21 @@
+{
+  "record": "bluerov2_heavy.translational_damping_wu2018",
+  "description": "Damping adopted from literature on the original BlueROV (Sandoy 2016)",
+  "sources": [
+    "WU2018"
+  ],
+  "location": {
+    "page": "48 (thesis numbering; PDF page 56)",
+    "section": "5.2",
+    "table": "5.3"
+  },
+  "coefficients": {
+    "X_u_N_s_per_m": -4.03,
+    "X_uu_N_s2_per_m2": -18.18,
+    "Y_v_N_s_per_m": -6.22,
+    "Y_vv_N_s2_per_m2": -21.66,
+    "Z_w_N_s_per_m": -5.18,
+    "Z_ww_N_s2_per_m2": -36.99
+  },
+  "sign_convention": "SNAME (negative = resistive)"
+}
