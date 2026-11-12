@@ -92,13 +92,27 @@ def base_row(run):
 
 
 def requested_feasible(run, tolerance=1e-3):
-    """A layout 'satisfies' the task only if the allocation residual stays negligible."""
-    return run["metrics"]["max_allocation_residual_norm"] < tolerance
+    """The request is met only if allocation, native clamp and power limit never cut it."""
+    m = run["metrics"]
+    return (
+        m["max_allocation_residual_norm"] < tolerance
+        and m["native_saturated_fraction"] == 0
+        and m["derated_tick_fraction"] == 0
+    )
 
 
-def fit_baselines(rows):
+def ground_speed(row):
+    return abs(row["speed_m_s"])
+
+
+def water_speed(row):
+    """Speed through the water |v_com - current| (what drag and thrust actually see)."""
+    return math.dist(row["com_velocity_m_s"], row["current_m_s"])
+
+
+def fit_baselines(rows, speed=ground_speed):
     """Least squares P = a + b|u|^3 and the constant mean, on calibration rows only."""
-    xs = [abs(r["speed_m_s"]) ** 3 for r in rows]
+    xs = [speed(r) ** 3 for r in rows]
     ys = [r["power_propulsion_W"] for r in rows]
     n = len(xs)
     mx, my = sum(xs) / n, sum(ys) / n
@@ -108,20 +122,31 @@ def fit_baselines(rows):
     return {"speed_cubic": {"a_W": a, "b_W_per_m3s3": b}, "constant": {"P_W": my}}
 
 
-def baseline_energy(rows, params, dt=0.1):
-    cubic = sum(
-        params["speed_cubic"]["a_W"]
-        + params["speed_cubic"]["b_W_per_m3s3"] * abs(r["speed_m_s"]) ** 3
-        for r in rows
-    )
+def baseline_energy(rows, params, dt=0.1, water=None):
+    def cubic(p, speed):
+        a, b = p["speed_cubic"]["a_W"], p["speed_cubic"]["b_W_per_m3s3"]
+        return sum(a + b * speed(r) ** 3 for r in rows) * dt / 3600
+
     return {
-        "speed_cubic_Wh": cubic * dt / 3600,
+        "speed_cubic_Wh": cubic(params, ground_speed),
+        "speed_cubic_water_Wh": cubic(water, water_speed) if water else None,
         "constant_Wh": params["constant"]["P_W"] * len(rows) * dt / 3600,
         "trace_propulsion_Wh": sum(r["power_propulsion_W"] for r in rows) * dt / 3600,
     }
 
 
-def main():
+def main(argv=None):
+    import argparse
+
+    global NATIVE, TABLES
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--native-dir", type=Path, default=NATIVE, help="native results to read")
+    parser.add_argument(
+        "--tables-dir", type=Path, default=None, help="default: <native-dir>/tables"
+    )
+    args = parser.parse_args(argv)
+    NATIVE = args.native_dir
+    TABLES = args.tables_dir or NATIVE / "tables"
     runs = load()
     groups = {}
     for run in runs.values():
@@ -160,6 +185,7 @@ def main():
     if CALIBRATION in runs:
         cal = trace(runs[CALIBRATION])
         params = fit_baselines(cal)
+        water = fit_baselines(cal, water_speed)  # identical speeds in calm water
         rows = []
         for label, run in runs.items():
             if label == CALIBRATION or run["spec"]["layout"] != "L8-HV" or run["spec"].get("suite"):
@@ -169,18 +195,22 @@ def main():
             if run["spec"]["mapping"] != "direct":  # same runs through the virtual mapping
                 continue
             t = trace(run)
-            e = baseline_energy(t, params)
+            e = baseline_energy(t, params, water=water)
             ref = run["metrics"]["propulsion_Wh"]
             rows.append(
                 {
                     "run": label,
-                    "role": "validation",
+                    "role": "hold-out comparison (model vs model)",
                     "plan": run["spec"]["plan"],
                     "current_m_s": math.hypot(*run["spec"]["current_m_s"][:2]),
                     "holoenergy_propulsion_Wh": ref,
                     "speed_cubic_Wh": e["speed_cubic_Wh"],
                     "constant_Wh": e["constant_Wh"],
                     "speed_cubic_relative_error": e["speed_cubic_Wh"] / ref - 1 if ref else None,
+                    "speed_cubic_water_Wh": e["speed_cubic_water_Wh"],
+                    "speed_cubic_water_relative_error": e["speed_cubic_water_Wh"] / ref - 1
+                    if ref
+                    else None,
                     "constant_relative_error": e["constant_Wh"] / ref - 1 if ref else None,
                     "trace_vs_summary_relative": e["trace_propulsion_Wh"] / ref - 1
                     if ref
@@ -207,7 +237,14 @@ def main():
             },
         )
         write_csv("baselines.csv", rows)
-        analysis["baselines"] = {"calibration_run": CALIBRATION, "parameters": params, "rows": rows}
+        analysis["baselines"] = {
+            "calibration_run": CALIBRATION,
+            "parameters_ground_speed": params,
+            "parameters_water_speed": water,
+            "note": "speed_cubic uses over-ground speed (blind to current); speed_cubic_water "
+            "uses speed through the water. Both are fitted on the calm-water transit only.",
+            "rows": rows,
+        }
 
     # Ablation: category decomposition of the native transit in current + model switches.
     ref = runs.get("N4-L8-HV-transit-c0.2")

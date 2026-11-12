@@ -1,0 +1,233 @@
+{
+  "mode": "native",
+  "scenario": "e04_congestion",
+  "messages": 8,
+  "identical": {
+    "events": true,
+    "deliveries": true,
+    "summary": true
+  },
+  "verdict": "PASS",
+  "observed_energy": {
+    "observed_events": 2776,
+    "event_counts": {
+      "position_applied": 2520,
+      "app_tx": 8,
+      "forward": 8,
+      "mac_specific_stats": 84,
+      "stats": 84,
+      "phy_tx_start": 8,
+      "phy_rx_start": 24,
+      "phy_tx_end": 8,
+      "rx": 8,
+      "phy_rx_end": 24
+    },
+    "rx_outcomes": {
+      "acoustic:synchronized": 24
+    },
+    "unmapped_interfaces": {},
+    "generated_messages": 0,
+    "deliveries": 0,
+    "delivery_ratio": null,
+    "mean_latency_s": null,
+    "delivered_bytes": 0,
+    "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+    "forwards": {
+      "auv_01": 2,
+      "auv_02": 2,
+      "auv_03": 2,
+      "auv_04": 2
+    },
+    "retransmissions": null,
+    "retransmissions_basis": null,
+    "communication_energy_Wh": 0.020454629629659257,
+    "energy_per_delivered_byte_J": null,
+    "energy_per_delivered_message_J": null,
+    "scope": "all observed nodes",
+    "interfaces": {
+      "comms.auv_01/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 0.8166666666666662,
+          "RX": 2.455,
+          "LISTEN": 17.695000000033332
+        },
+        "state_energy_Wh": {
+          "TX": 0.0006351851851851848,
+          "RX": 0.0005455555555555556,
+          "LISTEN": 0.00393222222222963
+        },
+        "energy_Wh": 0.0051129629629703705,
+        "tx_frames": 2,
+        "tx_bits": 3920,
+        "rx_frames": 6,
+        "rx_bits": 11784,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      },
+      "comms.auv_02/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 0.8183333333333329,
+          "RX": 2.453333333333333,
+          "LISTEN": 17.695000000033335
+        },
+        "state_energy_Wh": {
+          "TX": 0.000636481481481481,
+          "RX": 0.0005451851851851851,
+          "LISTEN": 0.0039322222222296305
+        },
+        "energy_Wh": 0.0051138888888962964,
+        "tx_frames": 2,
+        "tx_bits": 3928,
+        "rx_frames": 6,
+        "rx_bits": 11776,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      },
+      "comms.auv_03/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 0.8183333333333334,
+          "RX": 2.453333333333333,
+          "LISTEN": 17.695000000033332
+        },
+        "state_energy_Wh": {
+          "TX": 0.0006364814814814815,
+          "RX": 0.0005451851851851851,
+          "LISTEN": 0.00393222222222963
+        },
+        "energy_Wh": 0.005113888888896296,
+        "tx_frames": 2,
+        "tx_bits": 3928,
+        "rx_frames": 6,
+        "rx_bits": 11776,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      },
+      "comms.auv_04/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 0.8183333333333334,
+          "RX": 2.453333333333333,
+          "LISTEN": 17.695000000033332
+        },
+        "state_energy_Wh": {
+          "TX": 0.0006364814814814815,
+          "RX": 0.0005451851851851851,
+          "LISTEN": 0.00393222222222963
+        },
+        "energy_Wh": 0.005113888888896296,
+        "tx_frames": 2,
+        "tx_bits": 3928,
+        "rx_frames": 6,
+        "rx_bits": 11776,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      }
+    },
+    "last_stats": {
+      "auv_01": {
+        "time": 20,
+        "node": 1,
+        "app_sent": 2,
+        "app_received": 2,
+        "mac_queue": 0,
+        "mac_data_tx": 2,
+        "mac_data_rx": 2,
+        "mac_error_rx": 0,
+        "mac_discarded_tx": 0,
+        "phy_noise_errors": 0,
+        "phy_interference_errors": 0,
+        "observed_wall_time": 1794512284.8619034
+      },
+      "auv_02": {
+        "time": 20,
+        "node": 2,
+        "app_sent": 2,
+        "app_received": 2,
+        "mac_queue": 0,
+        "mac_data_tx": 2,
+        "mac_data_rx": 2,
+        "mac_error_rx": 0,
+        "mac_discarded_tx": 0,
+        "phy_noise_errors": 0,
+        "phy_interference_errors": 0,
+        "observed_wall_time": 1794512284.8619034
+      },
+      "auv_03": {
+        "time": 20,
+        "node": 3,
+        "app_sent": 2,
+        "app_received": 2,
+        "mac_queue": 0,
+        "mac_data_tx": 2,
+        "mac_data_rx": 2,
+        "mac_error_rx": 0,
+        "mac_discarded_tx": 0,
+        "phy_noise_errors": 0,
+        "phy_interference_errors": 0,
+        "observed_wall_time": 1794512284.8619034
+      },
+      "auv_04": {
+        "time": 20,
+        "node": 4,
+        "app_sent": 2,
+        "app_received": 2,
+        "mac_queue": 0,
+        "mac_data_tx": 2,
+        "mac_data_rx": 2,
+        "mac_error_rx": 0,
+        "mac_discarded_tx": 0,
+        "phy_noise_errors": 0,
+        "phy_interference_errors": 0,
+        "observed_wall_time": 1794512284.8619034
+      }
+    }
+  },
+  "scope": "native DESERT engine"
+}

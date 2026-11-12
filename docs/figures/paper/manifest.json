@@ -25,7 +25,7 @@
       "data": "F07_orientation_tradeoff.csv"
     },
     "F08_station_keeping_current": {
-      "caption": "Station keeping: speed-only baselines fitted on the calm-water transit cannot see current-induced effort.",
+      "caption": "Station keeping vs current. Baselines fitted on the calm-water transit: a cubic in over-ground speed misses the current; a cubic in speed through the water errs by -15 to +13 % in surge (it cannot represent layout, orientation or heave).",
       "data": "F08_station_keeping_current.csv"
     },
     "F09_payload_breakdown": {

@@ -530,6 +530,16 @@ def matrix():
     return runs
 
 
+def write_trace(path, rows):
+    """Deterministic gzip (mtime 0); returns the SHA256 of the uncompressed JSONL content."""
+    import hashlib
+
+    text = "".join(json.dumps(row) + "\n" for row in rows).encode("utf-8")
+    with path.open("wb") as raw, gzip.GzipFile(fileobj=raw, mode="wb", mtime=0) as handle:
+        handle.write(text)
+    return hashlib.sha256(text).hexdigest()
+
+
 def downsample(rows, every=10):
     return [r for i, r in enumerate(rows) if i % every == 0 or i == len(rows) - 1]
 
@@ -601,17 +611,20 @@ def main(argv=None):
             continue
         args.full_trace_dir.mkdir(parents=True, exist_ok=True)
         full = args.full_trace_dir / f"{label}.trace.jsonl.gz"
-        with gzip.open(full, "wt", encoding="utf-8") as handle:
-            for row in ticks:
-                handle.write(json.dumps(row) + "\n")
         small = out_dir / f"{label}.trace10.jsonl.gz"
-        with gzip.open(small, "wt", encoding="utf-8") as handle:
-            for row in downsample(ticks):
-                handle.write(json.dumps(row) + "\n")
+        content = {"full": write_trace(full, ticks), "small": write_trace(small, downsample(ticks))}
         result["provenance"] = provenance | {"started_utc": started}
         result["traces"] = {
-            "full_per_tick": {"path": str(full), "sha256": file_hash(full)},
-            "downsampled_0.1s": {"path": small.name, "sha256": file_hash(small)},
+            "full_per_tick": {
+                "path": str(full),
+                "sha256": file_hash(full),
+                "content_sha256": content["full"],
+            },
+            "downsampled_0.1s": {
+                "path": small.name,
+                "sha256": file_hash(small),
+                "content_sha256": content["small"],
+            },
         }
         summary_path.write_text(json.dumps(result, indent=2, default=str) + "\n", encoding="utf-8")
         m, c = result["metrics"], result["chain"]
