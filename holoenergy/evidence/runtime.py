@@ -31,6 +31,11 @@ class EvidenceMap:
         )
         self.hotel_grade, self.hotel_record = _graded(self.registry, evidence.get("hotel_constant"))
         self.vehicle_relation = evidence.get("vehicle_relation")
+        self.double_counting_policy = evidence.get("double_counting", "warn")
+        if self.double_counting_policy not in ("warn", "error"):
+            from .._validation import ConfigurationError
+
+            raise ConfigurationError("evidence.double_counting must be warn or error")
         self.actuators = list(propulsion.ids)
         self.devices, self.bounds, self.records = {}, {}, {}
         self.unconfigured, self.legacy_unlinked = [], []
@@ -49,14 +54,36 @@ class EvidenceMap:
                 )
             for capability in getattr(item, "includes", []):
                 capabilities.setdefault(capability, []).append(name)
-        self.double_counting = {
-            cap: names for cap, names in sorted(capabilities.items()) if len(names) > 1
-        }
+        self.capabilities = capabilities
+        self._update_double_counting()
         self.external = {}
 
-    def add_external(self, grades):
+    def _update_double_counting(self):
+        self.double_counting = {
+            cap: names for cap, names in sorted(self.capabilities.items()) if len(names) > 1
+        }
+        if self.double_counting and self.double_counting_policy == "error":
+            from .._validation import ConfigurationError
+
+            raise ConfigurationError(
+                "double counting rejected (evidence.double_counting: error): "
+                + "; ".join(f"'{c}' by {', '.join(n)}" for c, n in self.double_counting.items())
+            )
+
+    def add_external(self, grades, capabilities=(), owner=None):
+        """Register an attached load source; returns new double-counting warnings."""
         for device, states in (grades or {}).items():
             self.devices[device] = dict(states)
+        before = dict(self.double_counting)
+        owner = owner or ", ".join(sorted(grades or {})) or "external source"
+        for capability in capabilities or ():
+            self.capabilities.setdefault(capability, []).append(owner)
+        self._update_double_counting()
+        return [
+            f"possible double counting: '{cap}' provided by {', '.join(names)}"
+            for cap, names in self.double_counting.items()
+            if before.get(cap) != names
+        ]
 
     def warnings(self):
         result = [

@@ -257,10 +257,18 @@ class EnergyAwareEnv:
             )
         if any(s is source for s in self.load_sources):
             raise ConfigurationError("Load source already attached")
-        self.load_sources.append(source)
         grades = getattr(source, "grades", None)
-        if callable(grades):
-            self.evidence_map.add_external(grades())
+        capabilities = getattr(source, "capabilities", None)
+        # Registered before the source is accepted: with evidence.double_counting: error a
+        # conflicting source raises and is not attached.
+        self.warnings.extend(
+            self.evidence_map.add_external(
+                grades() if callable(grades) else {},
+                capabilities() if callable(capabilities) else (),
+                owner=getattr(source, "name", None),
+            )
+        )
+        self.load_sources.append(source)
         return source
 
     def _external_loads(self, dt):

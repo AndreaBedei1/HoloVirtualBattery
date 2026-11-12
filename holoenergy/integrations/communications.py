@@ -36,8 +36,13 @@ class ModemPowerProfile:
     grades: dict = field(default_factory=dict)
     medium: str | None = None
     notes: str | None = None
+    # Functions already inside this device's published electrical figure (the modem's own
+    # DSP/protocol processor). A separate compute load declaring the same capability is a
+    # double count (see docs/double_counting_policy.md).
+    includes: tuple = ("modem_signal_processing",)
 
     def __post_init__(self):
+        self.includes = tuple(str(c) for c in self.includes)
         clean = {}
         for state, value in self.powers_W.items():
             if state not in STATES:
@@ -103,6 +108,7 @@ class ModemPowerProfile:
             grades,
             data.get("medium"),
             data.get("notes"),
+            tuple(data.get("includes", ("modem_signal_processing",))),
         )
 
 
@@ -251,6 +257,13 @@ class CommunicationEnergyAdapter:
 
     def grades(self):
         return {self.device_name(k): dict(led.profile.grades) for k, led in self.ledgers.items()}
+
+    def capabilities(self):
+        """Functions covered by the attached interfaces' electrical figures."""
+        profiles = getattr(self, "interface_profiles", None) or {
+            k: led.profile for k, led in self.ledgers.items()
+        }
+        return sorted({c for p in profiles.values() for c in p.includes})
 
     def summary(self, t_end):
         t = t_end + self.time_offset_s

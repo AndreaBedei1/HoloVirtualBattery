@@ -3,6 +3,7 @@ name: dvl
 device: waterlinked_dvl_a50
 category: sensors
 simulation_sensor: DVLSensor
+includes: [dvl]
 states:
   ACTIVE: {evidence: waterlinked_dvl_a50.power_average}
 initial_state: ACTIVE
