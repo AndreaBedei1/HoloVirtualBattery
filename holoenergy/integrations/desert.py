@@ -198,21 +198,35 @@ class DesertEnergyAdapter(CommunicationEnergyAdapter):
                     ledger.add_rx(time, duration, bits)
         return events
 
-    def ensure_interfaces(self, keys):
-        """Create ledgers for interfaces that may stay silent (idle energy still accrues)."""
+    def ensure_interfaces(self, keys, nodes=None):
+        """Create ledgers for interfaces that may stay silent (idle energy still accrues).
+
+        With a single tracked node, ``keys`` are its interface profile keys.  When every
+        node is observed (``node=None``) a ledger is created per node and key; ``nodes``
+        defaults to all names of ``node_map``.  Without this, an interface that never sees
+        a PHY event (e.g. the unused optical modem of a hybrid node) would accrue no
+        LISTEN energy.
+        """
         from .communications import InterfaceLedger
 
+        if self.node is not None:
+            targets = [str(self.node)]
+        else:
+            targets = [str(n) for n in (nodes if nodes is not None else self.node_map.values())]
+            if not targets:
+                raise ConfigurationError(
+                    "ensure_interfaces with all nodes observed needs nodes=[...] or node_map"
+                )
         for key in keys:
             if key not in self.interface_profiles:
                 raise ConfigurationError(f"Unknown interface profile {key}")
-            ledger_key = key if self.node is not None else None
-            if ledger_key is None:
-                raise ConfigurationError("ensure_interfaces requires a single tracked node")
-            if ledger_key not in self.ledgers:
-                self.ledgers[ledger_key] = InterfaceLedger(
-                    self.interface_profiles[key], self.start_time_s
-                )
-                self._consumed[ledger_key] = {}
+            for node in targets:
+                ledger_key = self._ledger_key(node, key)
+                if ledger_key not in self.ledgers:
+                    self.ledgers[ledger_key] = InterfaceLedger(
+                        self.interface_profiles[key], self.start_time_s
+                    )
+                    self._consumed[ledger_key] = {}
 
     @classmethod
     def from_events_file(cls, path, interfaces, **kwargs):

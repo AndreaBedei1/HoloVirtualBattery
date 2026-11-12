@@ -120,6 +120,15 @@ def strip(events):
     return result
 
 
+def drop_wall_clock(value):
+    """Remove wall-clock metadata at any depth (e.g. mac_stats.<node>.observed_wall_time)."""
+    if isinstance(value, dict):
+        return {k: drop_wall_clock(v) for k, v in value.items() if "wall" not in k}
+    if isinstance(value, list):
+        return [drop_wall_clock(v) for v in value]
+    return value
+
+
 def run(observe, args, profile):
     import holo_desert
 
@@ -130,7 +139,9 @@ def run(observe, args, profile):
         backend = ScriptedPhyBackend()
         session = holo_desert.NetworkSession(scenario, backend=backend)
     else:
-        session = holo_desert.NetworkSession(scenario, port=args.port)
+        # The caller starts its own engine on --port; never let holo_desert manage Docker
+        # (its Compose project could otherwise recreate another user's service).
+        session = holo_desert.NetworkSession(scenario, port=args.port, manage_engine=False)
     adapter = DesertEnergyAdapter({"acoustic": profile}, node=None, node_map=scenario.node_map)
     target = adapter.observed(session) if observe else session
     events = []
@@ -141,7 +152,7 @@ def run(observe, args, profile):
             events += target.run_until(session.time + args.interval_s)
         events += target.run_until(session.time + 5.0)
         deliveries = {n: [d.message.payload for d in target.node(n).receive()] for n in names}
-        summary = {k: v for k, v in session.summary().items() if "wall" not in k}
+        summary = drop_wall_clock(session.summary())
     return {
         "backend_log": None if backend is None else backend.log,
         "events": strip(events),

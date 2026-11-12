@@ -74,6 +74,22 @@ def test_other_nodes_media_and_control_frames():
     assert "acoustic" not in excluded.ledgers
 
 
+def test_all_nodes_silent_interfaces_accrue_idle_energy():
+    """A hybrid node's unused optical modem still listens; it must not be silently free."""
+    optical = ModemPowerProfile("opt", {"TX": 25.0, "RX": 10.0, "LISTEN": 1.0}, medium="optical")
+    adapter = DesertEnergyAdapter(
+        {"acoustic": PROFILE, "optical": optical}, node=None, node_map={"auv0": 1, "buoy": 2}
+    )
+    adapter.ensure_interfaces(["acoustic", "optical"])
+    adapter.observe([tx(0.0, 1.0, node="auv0")])
+    e = adapter.energy_J(4.0)
+    assert set(e) == {f"comms.{n}/{m}" for n in ("auv0", "buoy") for m in ("acoustic", "optical")}
+    assert e["comms.buoy/optical"]["LISTEN"] == pytest.approx(4.0)
+    assert e["comms.auv0/acoustic"]["TX"] == pytest.approx(10.0)
+    with pytest.raises(ConfigurationError):
+        DesertEnergyAdapter({"acoustic": PROFILE}, node=None).ensure_interfaces(["acoustic"])
+
+
 def test_consume_charges_late_events_exactly():
     adapter = DesertEnergyAdapter({"acoustic": PROFILE}, node="auv0")
     adapter.ensure_interfaces(["acoustic"])

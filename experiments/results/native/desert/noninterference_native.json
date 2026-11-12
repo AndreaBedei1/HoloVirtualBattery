@@ -1,0 +1,141 @@
+{
+  "mode": "native",
+  "scenario": "e01_chat",
+  "messages": 6,
+  "identical": {
+    "events": true,
+    "deliveries": true,
+    "summary": true
+  },
+  "verdict": "PASS",
+  "observed_energy": {
+    "observed_events": 1130,
+    "event_counts": {
+      "position_applied": 1020,
+      "app_tx": 6,
+      "forward": 6,
+      "mac_specific_stats": 34,
+      "stats": 34,
+      "phy_tx_start": 6,
+      "phy_rx_start": 6,
+      "phy_tx_end": 6,
+      "rx": 6,
+      "phy_rx_end": 6
+    },
+    "rx_outcomes": {
+      "acoustic:synchronized": 6
+    },
+    "unmapped_interfaces": {},
+    "generated_messages": 0,
+    "deliveries": 0,
+    "delivery_ratio": null,
+    "mean_latency_s": null,
+    "delivered_bytes": 0,
+    "delivery_source": "host 'generated'/'delivered' events (events.jsonl); absent in raw step() events",
+    "forwards": {
+      "auv_01": 3,
+      "auv_02": 3
+    },
+    "retransmissions": null,
+    "retransmissions_basis": null,
+    "communication_energy_Wh": 0.008902777777792591,
+    "energy_per_delivered_byte_J": null,
+    "energy_per_delivered_message_J": null,
+    "scope": "all observed nodes",
+    "interfaces": {
+      "comms.auv_01/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 1.2249999999999994,
+          "RX": 1.2266666666666666,
+          "LISTEN": 14.515000000033334
+        },
+        "state_energy_Wh": {
+          "TX": 0.0009527777777777773,
+          "RX": 0.00027259259259259256,
+          "LISTEN": 0.0032255555555629634
+        },
+        "energy_Wh": 0.004450925925933333,
+        "tx_frames": 3,
+        "tx_bits": 5880,
+        "rx_frames": 3,
+        "rx_bits": 5888,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      },
+      "comms.auv_02/acoustic": {
+        "profile": "evologics_s2cm_18_34_1000m",
+        "medium": "acoustic",
+        "state_duration_s": {
+          "TX": 1.2266666666666661,
+          "RX": 1.2249999999999994,
+          "LISTEN": 14.515000000033334
+        },
+        "state_energy_Wh": {
+          "TX": 0.0009540740740740737,
+          "RX": 0.0002722222222222221,
+          "LISTEN": 0.0032255555555629634
+        },
+        "energy_Wh": 0.004451851851859259,
+        "tx_frames": 3,
+        "tx_bits": 5888,
+        "rx_frames": 3,
+        "rx_bits": 5880,
+        "evidence": {
+          "TX": "evologics_s2cm_18_34.tx_1000m",
+          "RX": "evologics_s2cm_18_34.rx",
+          "LISTEN": "evologics_s2cm_18_34.rx",
+          "SLEEP": "evologics_s2cm_18_34.standby"
+        },
+        "grades": {
+          "TX": "B",
+          "RX": "B",
+          "LISTEN": "B",
+          "SLEEP": "B"
+        }
+      }
+    },
+    "last_stats": {
+      "auv_01": {
+        "time": 16,
+        "node": 1,
+        "app_sent": 3,
+        "app_received": 3,
+        "mac_queue": 0,
+        "mac_data_tx": 3,
+        "mac_data_rx": 3,
+        "mac_error_rx": 0,
+        "mac_discarded_tx": 0,
+        "phy_noise_errors": 0,
+        "phy_interference_errors": 0,
+        "observed_wall_time": 1794507195.4714904
+      },
+      "auv_02": {
+        "time": 16,
+        "node": 2,
+        "app_sent": 3,
+        "app_received": 3,
+        "mac_queue": 0,
+        "mac_data_tx": 3,
+        "mac_data_rx": 3,
+        "mac_error_rx": 0,
+        "mac_discarded_tx": 0,
+        "phy_noise_errors": 0,
+        "phy_interference_errors": 0,
+        "observed_wall_time": 1794507195.4749026
+      }
+    }
+  },
+  "scope": "native DESERT engine"
+}
