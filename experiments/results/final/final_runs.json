@@ -1,0 +1,2902 @@
+{
+  "constants": {
+    "drag_k_N_s2_per_m2": 179.46,
+    "mass_kg": 11.5,
+    "linear_damping_1_per_s": 1.0
+  },
+  "runs": [
+    {
+      "label": "EXP3-L4-2H2V-headon0.2",
+      "group": "EXP3",
+      "layout": "L4-2H2V",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.45378615660360855,
+      "ocv_work_Wh": 0.45418045074382435,
+      "propulsion_Wh": 0.3100361566036034,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 7.894919286223336e-20,
+      "battery_losses_Wh": 0.00039429414021577725,
+      "steady_propulsion_W": 12.359202911081818,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 1.7763568394002505e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.776641805424962,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 1.8086531781591475e-05,
+      "final_speed_m_s": 9.863140803645365e-06,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 6.0548621049095015,
+      "terminal_interval_Wh": {
+        "nominal": 0.45378615660360855,
+        "low": 0.45378615660360855,
+        "high": 0.4638486566036095,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.008670500161018871,
+      "mean_damping_force_N": 0.06304706341215208,
+      "mean_drag_force_N": 7.208397748457086,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.06304706341215208,
+          "mean_drag_force_N": 7.208397748457086,
+          "damping_share": 0.008670500161018871
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-2H2V-headon0.2.summary.json",
+      "summary_sha256": "cc7886ba8cf764569f5b2b7bb097e29a7d622a2bdd18795f390c7d9b602353db"
+    },
+    {
+      "label": "EXP3-L4-2H2V-headon0.5",
+      "group": "EXP3",
+      "layout": "L4-2H2V",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 5.598767168100461,
+      "ocv_work_Wh": 5.663500219548122,
+      "propulsion_Wh": 5.455017168100455,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 8.635067969306769e-20,
+      "battery_losses_Wh": 0.06473305144766038,
+      "steady_propulsion_W": 209.663446902041,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 1.4210854715202004e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.496161038599602,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.48556544422963166,
+      "terminal_interval_Wh": {
+        "nominal": 5.598767168100461,
+        "low": 5.598767168100461,
+        "high": 5.608829668100462,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-2H2V-headon0.5.summary.json",
+      "summary_sha256": "702092b16f3d58f028842eeace49c368301deb9f5957e6d1631e52a27d7f03e8"
+    },
+    {
+      "label": "EXP3-L4-2H2V-oblique0.5",
+      "group": "EXP3",
+      "layout": "L4-2H2V",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.35355339059327373,
+        -0.35355339059327373,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 1.9817569692745742,
+      "ocv_work_Wh": 1.9897460533338869,
+      "propulsion_Wh": 1.838006969274569,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -4.860309685581238e-19,
+      "battery_losses_Wh": 0.007989084059312724,
+      "steady_propulsion_W": 70.44070407805343,
+      "request_met": false,
+      "steady_window_request_met": false,
+      "max_allocation_residual_N": 591.7868922650814,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.690273456144652,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 26.867761628424695,
+      "final_speed_m_s": 0.2994370482359622,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 1.3820859176435014,
+      "terminal_interval_Wh": {
+        "nominal": 1.9817569692745742,
+        "low": 1.9817569692745742,
+        "high": 1.9918194692745752,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.12954557180426127,
+      "mean_damping_force_N": 3.454038790252751,
+      "mean_drag_force_N": 23.208692649704762,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 3.454038790252751,
+          "mean_drag_force_N": 23.208692649704762,
+          "damping_share": 0.12954557180426127
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-2H2V-oblique0.5.summary.json",
+      "summary_sha256": "1de05b157b8826d6c59afa218cad447127be23372598a448db43528712dd0af5"
+    },
+    {
+      "label": "EXP3-L4-2H2V-sway0.5",
+      "group": "EXP3",
+      "layout": "L4-2H2V",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.1437500000000052,
+      "ocv_work_Wh": 0.14378894853961552,
+      "propulsion_Wh": 0.0,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 0.0,
+      "battery_losses_Wh": 3.894853961031402e-05,
+      "steady_propulsion_W": 0.0,
+      "request_met": false,
+      "steady_window_request_met": false,
+      "max_allocation_residual_N": 683.6221216619015,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.792596453328763,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 31.422420501708984,
+      "final_speed_m_s": 0.3495756685733795,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 19.125252864908745,
+      "terminal_interval_Wh": {
+        "nominal": 0.1437500000000052,
+        "low": 0.1437500000000052,
+        "high": 0.15381250000000618,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.49356431608492135,
+      "mean_damping_force_N": 4.0129564730646905,
+      "mean_drag_force_N": 4.117607958530547,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 4.0129564730646905,
+          "mean_drag_force_N": 4.117607958530547,
+          "damping_share": 0.49356431608492135
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-2H2V-sway0.5.summary.json",
+      "summary_sha256": "c6b027b9160dab221ce84cd3c84396e142e67dd212312ed5b017f15201284684"
+    },
+    {
+      "label": "EXP3-L4-H45-headon0.2",
+      "group": "EXP3",
+      "layout": "L4-H45",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "station",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.48966104076462413,
+      "ocv_work_Wh": 0.49012249553287,
+      "propulsion_Wh": 0.3459110407646189,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 1.480297366166875e-20,
+      "battery_losses_Wh": 0.00046145476824586626,
+      "steady_propulsion_W": 13.420491875822849,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 5.635254100547516e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.775086173329388,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 1.8086531781591475e-05,
+      "final_speed_m_s": 9.863140803645365e-06,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 5.6108422385502825,
+      "terminal_interval_Wh": {
+        "nominal": 0.48966104076462413,
+        "low": 0.48966104076462413,
+        "high": 0.4997235407646251,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.008670500161018871,
+      "mean_damping_force_N": 0.06304706341215208,
+      "mean_drag_force_N": 7.208397748457086,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.06304706341215208,
+          "mean_drag_force_N": 7.208397748457086,
+          "damping_share": 0.008670500161018871
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-H45-headon0.2.summary.json",
+      "summary_sha256": "943d6022b35308e6d1bebe741fc21a76386dd08a12b109611476076d66acd434"
+    },
+    {
+      "label": "EXP3-L4-H45-headon0.5",
+      "group": "EXP3",
+      "layout": "L4-H45",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 6.529537752936353,
+      "ocv_work_Wh": 6.617935086472487,
+      "propulsion_Wh": 6.385787752936347,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 7.45576440092717e-18,
+      "battery_losses_Wh": 0.08839733353613445,
+      "steady_propulsion_W": 245.90523838055742,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 3.753941017145813e-13,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.446406095852982,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.41553746962865934,
+      "terminal_interval_Wh": {
+        "nominal": 6.529537752936353,
+        "low": 6.529537752936353,
+        "high": 6.539600252936354,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-H45-headon0.5.summary.json",
+      "summary_sha256": "1d7342cd969a8616ec081c48ffc6d891dbfba6d9a7e8cb89e21d1aba7c410fe6"
+    },
+    {
+      "label": "EXP3-L4-H45-heave",
+      "group": "EXP3",
+      "layout": "L4-H45",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "heave",
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 20.0,
+      "terminal_Wh": 0.031944444444445295,
+      "ocv_work_Wh": 0.03195309853153405,
+      "propulsion_Wh": 0.0,
+      "sensors_Wh": 0.006111111111111221,
+      "compute_Wh": 0.025833333333334072,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 0.0,
+      "battery_losses_Wh": 8.654087088755746e-06,
+      "steady_propulsion_W": null,
+      "request_met": false,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 94.46457193252786,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.79481625033325,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 2.199999999999822,
+      "final_speed_m_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 19.125253549605628,
+      "terminal_interval_Wh": {
+        "nominal": 0.031944444444445295,
+        "low": 0.031944444444445295,
+        "high": 0.034180555555556484,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": null,
+      "mean_damping_force_N": 0.0,
+      "mean_drag_force_N": 0.0,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "ascend_ramp": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "ascend": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "ascend_stop": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-H45-heave.summary.json",
+      "summary_sha256": "a49d351ea2ab9408e2eb0fa43cc90d3c7c550132f79a27d99d39e296c34a6bd4"
+    },
+    {
+      "label": "EXP3-L4-H45-oblique0.5",
+      "group": "EXP3",
+      "layout": "L4-H45",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "station",
+      "current_m_s": [
+        -0.35355339059327373,
+        -0.35355339059327373,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 5.663554565977367,
+      "ocv_work_Wh": 5.73149430035011,
+      "propulsion_Wh": 5.519804565977361,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -4.934324553889579e-21,
+      "battery_losses_Wh": 0.06793973437274325,
+      "steady_propulsion_W": 203.97973654006435,
+      "request_met": false,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 3.261069518409082e-14,
+      "native_saturated_fraction": 0.21588888888888888,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.498390464681304,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.00012934880155702903,
+      "final_speed_m_s": 0.005438149252899447,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.47980506581529986,
+      "terminal_interval_Wh": {
+        "nominal": 5.663554565977367,
+        "low": 5.663554565977367,
+        "high": 5.673617065977368,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.009536888492406205,
+      "mean_damping_force_N": 0.43762906916997507,
+      "mean_drag_force_N": 45.45040553650246,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.43762906916997507,
+          "mean_drag_force_N": 45.45040553650246,
+          "damping_share": 0.009536888492406205
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L4-H45-oblique0.5.summary.json",
+      "summary_sha256": "9fb64014656cb4ad601aaf9ea99367f7fd4bd4dce6e046247cdfa2f4037ec68e"
+    },
+    {
+      "label": "EXP3-L6-STD-headon0.2",
+      "group": "EXP3",
+      "layout": "L6-STD",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "station",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.48966104076462413,
+      "ocv_work_Wh": 0.49012249553287,
+      "propulsion_Wh": 0.3459110407646189,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 1.480297366166875e-20,
+      "battery_losses_Wh": 0.00046145476824586626,
+      "steady_propulsion_W": 13.420491875822849,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 5.635254100547516e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.775086173329388,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 1.8086531781591475e-05,
+      "final_speed_m_s": 9.863140803645365e-06,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 5.6108422385502825,
+      "terminal_interval_Wh": {
+        "nominal": 0.48966104076462413,
+        "low": 0.48966104076462413,
+        "high": 0.4997235407646251,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.008670500161018871,
+      "mean_damping_force_N": 0.06304706341215208,
+      "mean_drag_force_N": 7.208397748457086,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.06304706341215208,
+          "mean_drag_force_N": 7.208397748457086,
+          "damping_share": 0.008670500161018871
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L6-STD-headon0.2.summary.json",
+      "summary_sha256": "1432eddefea7f700fb347a88d3531b7a0f140458e409ffaab73aae0b5f269901"
+    },
+    {
+      "label": "EXP3-L6-STD-headon0.5",
+      "group": "EXP3",
+      "layout": "L6-STD",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 6.529537752936353,
+      "ocv_work_Wh": 6.617935086472487,
+      "propulsion_Wh": 6.385787752936347,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 7.45576440092717e-18,
+      "battery_losses_Wh": 0.08839733353613445,
+      "steady_propulsion_W": 245.90523838055742,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 3.753941017145813e-13,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.446406095852982,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.41553746962865934,
+      "terminal_interval_Wh": {
+        "nominal": 6.529537752936353,
+        "low": 6.529537752936353,
+        "high": 6.539600252936354,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L6-STD-headon0.5.summary.json",
+      "summary_sha256": "4676e3a1fe23e032aa4e62dfd5080692daafc4b293a7fcf5bdd8f4a2345934f4"
+    },
+    {
+      "label": "EXP3-L6-STD-heave",
+      "group": "EXP3",
+      "layout": "L6-STD",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "heave",
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 20.0,
+      "terminal_Wh": 0.09383489524968593,
+      "ocv_work_Wh": 0.09393591111535092,
+      "propulsion_Wh": 0.06189045080524064,
+      "sensors_Wh": 0.006111111111111221,
+      "compute_Wh": 0.025833333333334072,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -4.6876083261951083e-20,
+      "battery_losses_Wh": 0.00010101586566499037,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 1.783695771592492e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.772759479535168,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.35318689346331267,
+      "final_speed_m_s": 0.02028691954910755,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 6.5056175413116755,
+      "terminal_interval_Wh": {
+        "nominal": 0.09383489524968593,
+        "low": 0.09383489524968593,
+        "high": 0.09607100636079711,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.25411250661872087,
+      "mean_damping_force_N": 1.4655018297729159,
+      "mean_drag_force_N": 4.3016359206401535,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "ascend_ramp": {
+          "mean_damping_force_N": 0.5752954575129893,
+          "mean_drag_force_N": 0.7736165145732222,
+          "damping_share": 0.4264885103089744
+        },
+        "ascend": {
+          "mean_damping_force_N": 2.271417100261897,
+          "mean_drag_force_N": 7.1623399104076,
+          "damping_share": 0.24077545114771812
+        },
+        "ascend_stop": {
+          "mean_damping_force_N": 2.356544817239046,
+          "mean_drag_force_N": 7.656445919544053,
+          "damping_share": 0.23534874636228212
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.8031384361562349,
+          "mean_drag_force_N": 1.249669490082082,
+          "damping_share": 0.39123895903303135
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L6-STD-heave.summary.json",
+      "summary_sha256": "d557374d621539e66d908f731e33bfd9636f52aa0a54588cfa4484756cffd302"
+    },
+    {
+      "label": "EXP3-L6-STD-oblique0.5",
+      "group": "EXP3",
+      "layout": "L6-STD",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "C",
+      "plan": "station",
+      "current_m_s": [
+        -0.35355339059327373,
+        -0.35355339059327373,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 5.663554565977367,
+      "ocv_work_Wh": 5.73149430035011,
+      "propulsion_Wh": 5.519804565977361,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 9.86864910777917e-21,
+      "battery_losses_Wh": 0.06793973437274325,
+      "steady_propulsion_W": 203.97973654006435,
+      "request_met": false,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 3.1824176335127837e-14,
+      "native_saturated_fraction": 0.21588888888888888,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.498390464681304,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.00012934880155702903,
+      "final_speed_m_s": 0.005438149252899447,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.47980506581529986,
+      "terminal_interval_Wh": {
+        "nominal": 5.663554565977367,
+        "low": 5.663554565977367,
+        "high": 5.673617065977368,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.009536888492406205,
+      "mean_damping_force_N": 0.43762906916997507,
+      "mean_drag_force_N": 45.45040553650246,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.43762906916997507,
+          "mean_drag_force_N": 45.45040553650246,
+          "damping_share": 0.009536888492406205
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L6-STD-oblique0.5.summary.json",
+      "summary_sha256": "b47cc48d9528419f08c27306a3d78b6a0b4ffd53cca26b834dc4d3bc18957a33"
+    },
+    {
+      "label": "EXP3-L8-HV-headon0.2",
+      "group": "EXP3",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.48966104076462413,
+      "ocv_work_Wh": 0.49012249553287,
+      "propulsion_Wh": 0.3459110407646189,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -8.388351741612289e-20,
+      "battery_losses_Wh": 0.0004614547682458663,
+      "steady_propulsion_W": 13.420491875822849,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 8.881784197001252e-16,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.775086173329388,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 1.8086531781591475e-05,
+      "final_speed_m_s": 9.863140803645365e-06,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 5.6108422385502825,
+      "terminal_interval_Wh": {
+        "nominal": 0.48966104076462413,
+        "low": 0.48966104076462413,
+        "high": 0.4997235407646251,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.008670500161018871,
+      "mean_damping_force_N": 0.06304706341215208,
+      "mean_drag_force_N": 7.208397748457086,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.06304706341215208,
+          "mean_drag_force_N": 7.208397748457086,
+          "damping_share": 0.008670500161018871
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-HV-headon0.2.summary.json",
+      "summary_sha256": "2378c6830a0f2062147f088e47414740172d3e64ae4b15d769accffdb1aa2696"
+    },
+    {
+      "label": "EXP3-L8-HV-headon0.5",
+      "group": "EXP3",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 6.529537752890159,
+      "ocv_work_Wh": 6.61793508642508,
+      "propulsion_Wh": 6.3857877528901525,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -1.6579330501068996e-18,
+      "battery_losses_Wh": 0.08839733353492135,
+      "steady_propulsion_W": 245.9052384221076,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.446406095852982,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035237599164248,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.41553746963163607,
+      "terminal_interval_Wh": {
+        "nominal": 6.529537752890159,
+        "low": 6.529537752890159,
+        "high": 6.53960025289016,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945267758767,
+      "mean_damping_force_N": 0.2877789496670296,
+      "mean_drag_force_N": 45.333883485790075,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.2877789496670296,
+          "mean_drag_force_N": 45.333883485790075,
+          "damping_share": 0.006307945267758767
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-HV-headon0.5.summary.json",
+      "summary_sha256": "1ceae7312c26413b5a1779e2adacc770038324865fc606150b8683ce61b247ed"
+    },
+    {
+      "label": "EXP3-L8-HV-headon0.8",
+      "group": "EXP3",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        -0.8,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 14.830879942240779,
+      "ocv_work_Wh": 15.294081546196189,
+      "propulsion_Wh": 14.687129942240775,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -1.652998725553011e-19,
+      "battery_losses_Wh": 0.4632016039554091,
+      "steady_propulsion_W": 608.8808968857608,
+      "request_met": false,
+      "steady_window_request_met": false,
+      "max_allocation_residual_N": 212.32383480825328,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.9268888888888889,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 15.9830579986263,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 12.0924711227417,
+      "final_speed_m_s": 0.12106103450059891,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.1798081167341138,
+      "terminal_interval_Wh": {
+        "nominal": 14.830879942240779,
+        "low": 14.830879942240779,
+        "high": 14.84094244224078,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.018910893790016658,
+      "mean_damping_force_N": 1.5440737144870644,
+      "mean_drag_force_N": 80.10588591366144,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 1.5440737144870644,
+          "mean_drag_force_N": 80.10588591366144,
+          "damping_share": 0.018910893790016658
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-HV-headon0.8.summary.json",
+      "summary_sha256": "d290c06ef74d74e394c1da5b186394673ee4c12a6ef4a503bd6f548f77429488"
+    },
+    {
+      "label": "EXP3-L8-HV-heave",
+      "group": "EXP3",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "heave",
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 20.0,
+      "terminal_Wh": 0.07558912082728719,
+      "ocv_work_Wh": 0.07564844370127104,
+      "propulsion_Wh": 0.0436446763828419,
+      "sensors_Wh": 0.006111111111111221,
+      "compute_Wh": 0.025833333333334072,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -1.110223024625156e-19,
+      "battery_losses_Wh": 5.932287398384009e-05,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 8.631762040888854e-17,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.77932309053727,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.35318689346331267,
+      "final_speed_m_s": 0.02028691954910755,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 8.078303811831802,
+      "terminal_interval_Wh": {
+        "nominal": 0.07558912082728719,
+        "low": 0.07558912082728719,
+        "high": 0.07782523193839838,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.25411250661872087,
+      "mean_damping_force_N": 1.4655018297729159,
+      "mean_drag_force_N": 4.3016359206401535,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "ascend_ramp": {
+          "mean_damping_force_N": 0.5752954575129893,
+          "mean_drag_force_N": 0.7736165145732222,
+          "damping_share": 0.4264885103089744
+        },
+        "ascend": {
+          "mean_damping_force_N": 2.271417100261897,
+          "mean_drag_force_N": 7.1623399104076,
+          "damping_share": 0.24077545114771812
+        },
+        "ascend_stop": {
+          "mean_damping_force_N": 2.356544817239046,
+          "mean_drag_force_N": 7.656445919544053,
+          "damping_share": 0.23534874636228212
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.8031384361562349,
+          "mean_drag_force_N": 1.249669490082082,
+          "damping_share": 0.39123895903303135
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-HV-heave.summary.json",
+      "summary_sha256": "4c7326c69ae94f761c02d6e5a41bb1f41a8d68359bcd222aa5a868b2172e0607"
+    },
+    {
+      "label": "EXP3-L8-HV-oblique0.5",
+      "group": "EXP3",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        -0.35355339059327373,
+        -0.35355339059327373,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 5.663554565975966,
+      "ocv_work_Wh": 5.731494300348665,
+      "propulsion_Wh": 5.51980456597596,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 7.40148683083438e-21,
+      "battery_losses_Wh": 0.06793973437269853,
+      "steady_propulsion_W": 203.9797365400647,
+      "request_met": false,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 14.740039250915114,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.21588888888888888,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.49839046468155,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.00012934880155702903,
+      "final_speed_m_s": 0.005438149252899447,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.4798050658154208,
+      "terminal_interval_Wh": {
+        "nominal": 5.663554565975966,
+        "low": 5.663554565975966,
+        "high": 5.673617065975967,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.009536888492406205,
+      "mean_damping_force_N": 0.43762906916997507,
+      "mean_drag_force_N": 45.45040553650246,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.43762906916997507,
+          "mean_drag_force_N": 45.45040553650246,
+          "damping_share": 0.009536888492406205
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-HV-oblique0.5.summary.json",
+      "summary_sha256": "c9f22f15315de54d21002c5e9430b38596a5e52a613751da5c3ec829a2f6ba0f"
+    },
+    {
+      "label": "EXP3-L8-HV-sway0.5",
+      "group": "EXP3",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 7.781173851155797,
+      "ocv_work_Wh": 7.907802253853209,
+      "propulsion_Wh": 7.637423851155791,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -4.1941758708061456e-20,
+      "battery_losses_Wh": 0.12662840269741168,
+      "steady_propulsion_W": 294.1162391467419,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 1.608574317228921e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.37067652833517,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035237599164248,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.34775781079496787,
+      "terminal_interval_Wh": {
+        "nominal": 7.781173851155797,
+        "low": 7.781173851155797,
+        "high": 7.791236351155798,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945267758767,
+      "mean_damping_force_N": 0.2877789496670296,
+      "mean_drag_force_N": 45.333883485790075,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.2877789496670296,
+          "mean_drag_force_N": 45.333883485790075,
+          "damping_share": 0.006307945267758767
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-HV-sway0.5.summary.json",
+      "summary_sha256": "72a1fe4df0a578dd4bdae5bf29534c711b177b797535232196d550dbd00c7699"
+    },
+    {
+      "label": "EXP3-L8-VEC30-headon0.2",
+      "group": "EXP3",
+      "layout": "L8-VEC30",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.6466888386768853,
+      "ocv_work_Wh": 0.6474906675254114,
+      "propulsion_Wh": 0.5029388386768802,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 7.401486830834378e-20,
+      "battery_losses_Wh": 0.0008018288485261131,
+      "steady_propulsion_W": 20.16039206957439,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 9.452711909409335e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.766613175912813,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 1.8086531781591475e-05,
+      "final_speed_m_s": 9.863140803645365e-06,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 4.2471654618737436,
+      "terminal_interval_Wh": {
+        "nominal": 0.6466888386768853,
+        "low": 0.6466888386768853,
+        "high": 0.6567513386768863,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.008670500161018871,
+      "mean_damping_force_N": 0.06304706341215208,
+      "mean_drag_force_N": 7.208397748457086,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.06304706341215208,
+          "mean_drag_force_N": 7.208397748457086,
+          "damping_share": 0.008670500161018871
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-VEC30-headon0.2.summary.json",
+      "summary_sha256": "009634e0a173d9026b27b2c98abe81d79b0a767e67a5edeb6293d7748fcb37df"
+    },
+    {
+      "label": "EXP3-L8-VEC30-headon0.5",
+      "group": "EXP3",
+      "layout": "L8-VEC30",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 8.039780083775069,
+      "ocv_work_Wh": 8.175091788069118,
+      "propulsion_Wh": 7.896030083775063,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -4.1941758708061466e-19,
+      "battery_losses_Wh": 0.13531170429404818,
+      "steady_propulsion_W": 302.29679847820427,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 6.099667130303934e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.358442944916746,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.3363876603823457,
+      "terminal_interval_Wh": {
+        "nominal": 8.039780083775069,
+        "low": 8.039780083775069,
+        "high": 8.04984258377507,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-VEC30-headon0.5.summary.json",
+      "summary_sha256": "a600cfc132b1538a2ce2127e2a2fd41a88a0b03eadfa4c91ba9d5f3693bfd74d"
+    },
+    {
+      "label": "EXP3-L8-VEC30-oblique0.5",
+      "group": "EXP3",
+      "layout": "L8-VEC30",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.35355339059327373,
+        -0.35355339059327373,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 6.922841030988264,
+      "ocv_work_Wh": 7.0249945531284075,
+      "propulsion_Wh": 6.779091030988258,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -1.7072762956457956e-18,
+      "battery_losses_Wh": 0.10215352214014348,
+      "steady_propulsion_W": 247.62971523585458,
+      "request_met": false,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 3.45714707973751e-14,
+      "native_saturated_fraction": 0.21588888888888888,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.430917069246277,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.00012934880155702903,
+      "final_speed_m_s": 0.005438149252899447,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.39145937825316246,
+      "terminal_interval_Wh": {
+        "nominal": 6.922841030988264,
+        "low": 6.922841030988264,
+        "high": 6.932903530988265,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.009536888492406205,
+      "mean_damping_force_N": 0.43762906916997507,
+      "mean_drag_force_N": 45.45040553650246,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.43762906916997507,
+          "mean_drag_force_N": 45.45040553650246,
+          "damping_share": 0.009536888492406205
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP3-L8-VEC30-oblique0.5.summary.json",
+      "summary_sha256": "e46e8c0cef8cfbbc44d71e7f7ea5ab9cbe649f939bb44ab785a3b0b1551488f5"
+    },
+    {
+      "label": "EXP4-a30-headon0.5",
+      "group": "EXP4",
+      "layout": "L8-HV-a30",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 4.808498827167376,
+      "ocv_work_Wh": 4.856055553737471,
+      "propulsion_Wh": 4.66474882716737,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -7.648203058528858e-20,
+      "battery_losses_Wh": 0.04755672657009587,
+      "steady_propulsion_W": 179.92774298446105,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.540088017390605,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.5663032412969325,
+      "terminal_interval_Wh": {
+        "nominal": 4.808498827167376,
+        "low": 4.808498827167376,
+        "high": 4.818561327167377,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP4-a30-headon0.5.summary.json",
+      "summary_sha256": "50e01f151e9b9c4bfb6c480740b5fb73959af3835c343ff4c4b4f169151a0e7a"
+    },
+    {
+      "label": "EXP4-a30-sway0.5",
+      "group": "EXP4",
+      "layout": "L8-HV-a30",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 13.184923500232461,
+      "ocv_work_Wh": 13.560106948318927,
+      "propulsion_Wh": 13.041173500232457,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 3.123427442612106e-18,
+      "battery_losses_Wh": 0.37518344808646537,
+      "steady_propulsion_W": 501.6474820924869,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 2.0030103422192867e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.06846555545607,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.20280076038341438,
+      "terminal_interval_Wh": {
+        "nominal": 13.184923500232461,
+        "low": 13.184923500232461,
+        "high": 13.194986000232461,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP4-a30-sway0.5.summary.json",
+      "summary_sha256": "dfaa6e016e7b12c4c362d67e7dc7c83f09caabf2ced851b587ff9386ad00d20b"
+    },
+    {
+      "label": "EXP4-a60-headon0.5",
+      "group": "EXP4",
+      "layout": "L8-HV-a60",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 10.919733835660685,
+      "ocv_work_Wh": 11.173677899540131,
+      "propulsion_Wh": 10.77598383566068,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 8.388351741612291e-20,
+      "battery_losses_Wh": 0.25394406387944574,
+      "steady_propulsion_W": 413.99429038287593,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 0.0,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.196886408533608,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.24611412864448864,
+      "terminal_interval_Wh": {
+        "nominal": 10.919733835660685,
+        "low": 10.919733835660685,
+        "high": 10.929796335660685,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP4-a60-headon0.5.summary.json",
+      "summary_sha256": "c4328fd24939c195c9e6297b4ffb58dc0b0e112392ea8fedfd8c498d000a981d"
+    },
+    {
+      "label": "EXP4-a60-sway0.5",
+      "group": "EXP4",
+      "layout": "L8-HV-a60",
+      "mapping": "wrench_equivalent",
+      "geometry_grade": "D",
+      "plan": "station",
+      "current_m_s": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 5.6996271072878795,
+      "ocv_work_Wh": 5.766812807860735,
+      "propulsion_Wh": 5.555877107287873,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -5.4771002548174395e-19,
+      "battery_losses_Wh": 0.0671857005728552,
+      "steady_propulsion_W": 212.83194122858504,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 1.4859058366609927e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.49116004444719,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0009035236435011029,
+      "final_speed_m_s": 0.0012469749199226499,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.47686652777266936,
+      "terminal_interval_Wh": {
+        "nominal": 5.6996271072878795,
+        "low": 5.6996271072878795,
+        "high": 5.70968960728788,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.006307945269741502,
+      "mean_damping_force_N": 0.28777894975766816,
+      "mean_drag_force_N": 45.33388348572843,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.28777894975766816,
+          "mean_drag_force_N": 45.33388348572843,
+          "damping_share": 0.006307945269741502
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP4-a60-sway0.5.summary.json",
+      "summary_sha256": "ff087cc716ecacffd3470a782390d216a27badce9108e9b7d70706412a1d6eef"
+    },
+    {
+      "label": "EXP5-station-c0",
+      "group": "EXP5",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        0,
+        0,
+        0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 90.0,
+      "terminal_Wh": 0.1437500000000052,
+      "ocv_work_Wh": 0.14378894853961552,
+      "propulsion_Wh": 0.0,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 0.0,
+      "battery_losses_Wh": 3.894853961031402e-05,
+      "steady_propulsion_W": 0.0,
+      "request_met": true,
+      "steady_window_request_met": true,
+      "max_allocation_residual_N": 0.0,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.792596453328763,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.0,
+      "final_speed_m_s": 0.0,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 19.125252864908745,
+      "terminal_interval_Wh": {
+        "nominal": 0.1437500000000052,
+        "low": 0.1437500000000052,
+        "high": 0.15381250000000618,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": null,
+      "mean_damping_force_N": 0.0,
+      "mean_drag_force_N": 0.0,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP5-station-c0.summary.json",
+      "summary_sha256": "6d14669d0897c448e19c2b68c8936be1ca721663b5081a3bcf9b025e72e1b49a"
+    },
+    {
+      "label": "EXP5-transit-c0.2",
+      "group": "EXP5",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 1.7626055372103697,
+      "ocv_work_Wh": 1.7826568105158773,
+      "propulsion_Wh": 1.639619426099254,
+      "sensors_Wh": 0.023527777777773817,
+      "compute_Wh": 0.09945833333334178,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -2.0970879354030853e-19,
+      "battery_losses_Wh": 0.020051273305507704,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.50535086996984,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 1.3198153250240687,
+      "terminal_interval_Wh": {
+        "nominal": 1.7626055372103697,
+        "low": 1.7626055372103697,
+        "high": 1.7712145649881483,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP5-transit-c0.2.summary.json",
+      "summary_sha256": "0ce2b81240d3eeb87844733fd78dbeb6f1101aa572cb3572c0d0c4c6c30e0f0e"
+    },
+    {
+      "label": "EXP5-transit-c0.4",
+      "group": "EXP5",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.4,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 5.219647063595412,
+      "ocv_work_Wh": 5.3309602461983125,
+      "propulsion_Wh": 5.096660952484296,
+      "sensors_Wh": 0.023527777777773817,
+      "compute_Wh": 0.09945833333334178,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -7.302800339756583e-19,
+      "battery_losses_Wh": 0.11131318260290059,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 1.6418781638926634e-14,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.262925968058713,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.23575508604040646,
+      "final_speed_m_s": 0.0688938945581454,
+      "max_abs_roll_pitch_deg": 0.0005723003996536136,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.44134221024349857,
+      "terminal_interval_Wh": {
+        "nominal": 5.219647063595412,
+        "low": 5.219647063595412,
+        "high": 5.22825609137319,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.05233006347384491,
+      "mean_damping_force_N": 1.968770196247168,
+      "mean_drag_force_N": 35.65339315601361,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 1.7721386256317297,
+          "mean_drag_force_N": 11.11242367544377,
+          "damping_share": 0.13753968386522575
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5745883265190059,
+          "mean_drag_force_N": 26.127317956128007,
+          "damping_share": 0.0215186256904968
+        },
+        "transit_out": {
+          "mean_damping_force_N": 2.5914713205536826,
+          "mean_drag_force_N": 70.57574469289952,
+          "damping_share": 0.035418476494680225
+        },
+        "stop": {
+          "mean_damping_force_N": 2.6833245109766724,
+          "mean_drag_force_N": 72.0246601158332,
+          "damping_share": 0.03591750633323508
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 2.0524893693625925,
+          "mean_drag_force_N": 60.08511054160765,
+          "damping_share": 0.03303135898881461
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.0719656309980719,
+          "mean_drag_force_N": 43.90743522625819,
+          "damping_share": 0.023832367941049128
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 0.4712525178274605,
+          "mean_drag_force_N": 24.468111279021834,
+          "damping_share": 0.018895931815509907
+        },
+        "return_transit": {
+          "mean_damping_force_N": 3.516296002035203,
+          "mean_drag_force_N": 2.531103997674946,
+          "damping_share": 0.5814558326229022
+        },
+        "return_stop": {
+          "mean_damping_force_N": 2.310668253131539,
+          "mean_drag_force_N": 7.39997628951525,
+          "damping_share": 0.2379520991612499
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.588933606141378,
+          "mean_drag_force_N": 31.024413420131953,
+          "damping_share": 0.01862927091054057
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP5-transit-c0.4.summary.json",
+      "summary_sha256": "8095b85aa1d20a228f201ab42fa8b711f1dd0187510d860fa1f33f4cf22ef9e8"
+    },
+    {
+      "label": "EXP5-transit-c0",
+      "group": "EXP5",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 0.6469102174103561,
+      "ocv_work_Wh": 0.6484082879579679,
+      "propulsion_Wh": 0.5239241062992406,
+      "sensors_Wh": 0.023527777777773817,
+      "compute_Wh": 0.09945833333334178,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 3.305997451106019e-19,
+      "battery_losses_Wh": 0.0014980705476117548,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 4.454252868160342e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.737849112700417,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 0.025160115216087468,
+      "final_speed_m_s": 0.004475621040913801,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 3.62854365293045,
+      "terminal_interval_Wh": {
+        "nominal": 0.6469102174103561,
+        "low": 0.6469102174103561,
+        "high": 0.6555192451881348,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.21363249761400568,
+      "mean_damping_force_N": 1.8166420154108167,
+      "mean_drag_force_N": 6.6869425782269545,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.0,
+          "mean_drag_force_N": 0.0,
+          "damping_share": null
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.7782974898849676,
+          "mean_drag_force_N": 1.3712809764307177,
+          "damping_share": 0.36206982070254307
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.0677329101599753,
+          "mean_drag_force_N": 12.96318823332047,
+          "damping_share": 0.19136348327729005
+        },
+        "stop": {
+          "mean_damping_force_N": 2.5509285455569626,
+          "mean_drag_force_N": 9.178130047637156,
+          "damping_share": 0.217487919025075
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 0.6561539204907604,
+          "mean_drag_force_N": 0.7690718260135915,
+          "damping_share": 0.4603859578737668
+        },
+        "yaw": {
+          "mean_damping_force_N": 0.5682589473248885,
+          "mean_drag_force_N": 0.6294251092950016,
+          "damping_share": 0.4744648174816919
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 0.7542378563306168,
+          "mean_drag_force_N": 1.3137014680310792,
+          "damping_share": 0.3647292004389079
+        },
+        "return_transit": {
+          "mean_damping_force_N": 3.059872624338552,
+          "mean_drag_force_N": 12.903648222793489,
+          "damping_share": 0.19167905712280753
+        },
+        "return_stop": {
+          "mean_damping_force_N": 2.554744718824396,
+          "mean_drag_force_N": 9.203562195722789,
+          "damping_share": 0.21727147772131272
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.5967576457319543,
+          "mean_drag_force_N": 0.6737194016181016,
+          "damping_share": 0.46971147332150825
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP5-transit-c0.summary.json",
+      "summary_sha256": "26c25042b35e34a93737dbcf9c64cad0bc8dd5864e88a9235a604cba3ab104fa"
+    },
+    {
+      "label": "EXP6-S0-propulsion-only",
+      "group": "EXP6",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": "S0-propulsion-only",
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 1.640004616356524,
+      "ocv_work_Wh": 1.659107823535843,
+      "propulsion_Wh": 1.640004616356524,
+      "sensors_Wh": 0.0,
+      "compute_Wh": 0.0,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 0.0,
+      "battery_losses_Wh": 0.019103207179318984,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.510651332327463,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.0,
+      "terminal_interval_Wh": {
+        "nominal": 1.640004616356524,
+        "low": 1.640004616356524,
+        "high": 1.640004616356524,
+        "open_low": [],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP6-S0-propulsion-only.summary.json",
+      "summary_sha256": "a278ebe3ea949a1918dcf0fc2225173868ca18aad68264223e6f580f7db1b917"
+    },
+    {
+      "label": "EXP6-S5-inspection-continuous",
+      "group": "EXP6",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": "S5-inspection",
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 3.146379669314541,
+      "ocv_work_Wh": 3.1818928713419727,
+      "propulsion_Wh": 1.6352546693146555,
+      "sensors_Wh": 0.7699999999999315,
+      "compute_Wh": 0.09945833333334178,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.6416666666666127,
+      "converters_Wh": 2.644797960884813e-18,
+      "battery_losses_Wh": 0.035513202027431606,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.445288135020185,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 41.67679946282186,
+      "terminal_interval_Wh": {
+        "nominal": 3.146379669314541,
+        "low": 2.9111018915367586,
+        "high": 3.1549886970923198,
+        "open_low": [
+          "bluerobotics-lumen_2.ACTIVE",
+          "camera_4k.ACTIVE",
+          "companion_computer.VIDEO",
+          "dvl.ACTIVE",
+          "light_1.ACTIVE",
+          "navigator.ACTIVE"
+        ],
+        "open_high": [
+          "dvl.ACTIVE"
+        ]
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP6-S5-inspection-continuous.summary.json",
+      "summary_sha256": "6cc4886f1c797a9b088466caaf42fe5d9e369878099d824112c85e039a904c3c"
+    },
+    {
+      "label": "EXP6-S5-inspection-scheduled",
+      "group": "EXP6",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": "S5-inspection",
+      "schedule": "inspection-at-site",
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 2.1163592251651275,
+      "ocv_work_Wh": 2.140210501478641,
+      "propulsion_Wh": 1.6385675584984953,
+      "sensors_Wh": 0.23666666666662264,
+      "compute_Wh": 0.09945833333334178,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.1416666666666677,
+      "converters_Wh": -5.147487374617689e-17,
+      "battery_losses_Wh": 0.023851276313513407,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.47485337077795,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 13.67985894730907,
+      "terminal_interval_Wh": {
+        "nominal": 2.1163592251651275,
+        "low": 2.0644147807206816,
+        "high": 2.124968252942906,
+        "open_low": [
+          "bluerobotics-lumen_2.ACTIVE",
+          "camera_4k.ACTIVE",
+          "companion_computer.VIDEO",
+          "dvl.ACTIVE",
+          "light_1.ACTIVE",
+          "navigator.ACTIVE"
+        ],
+        "open_high": [
+          "dvl.ACTIVE"
+        ]
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP6-S5-inspection-scheduled.summary.json",
+      "summary_sha256": "9e992fe5da5ecedb1e32bd0b47bfd9ceb11ca8766e0769732f348dfb239b5a19"
+    },
+    {
+      "label": "EXP6-S6-ai-continuous",
+      "group": "EXP6",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": "S6-ai-vision",
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 2.0358447927383074,
+      "ocv_work_Wh": 2.058254495143812,
+      "propulsion_Wh": 1.6387600705161347,
+      "sensors_Wh": 0.023527777777773817,
+      "compute_Wh": 0.37355694444439874,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 6.019875955745284e-19,
+      "battery_losses_Wh": 0.022409702405504574,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.493525544818805,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 1.1430937152467886,
+      "terminal_interval_Wh": {
+        "nominal": 2.0358447927383074,
+        "low": 2.0358447927383074,
+        "high": 2.044453820516086,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP6-S6-ai-continuous.summary.json",
+      "summary_sha256": "52c5242338b640082cada5b2a8cbf53579e83a48fb397c9f40f59fc0497629d1"
+    },
+    {
+      "label": "EXP6-S6-ai-scheduled",
+      "group": "EXP6",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": "S6-ai-vision",
+      "schedule": "ai-at-site",
+      "fidelity": "L1",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 1.8229440634739067,
+      "ocv_work_Wh": 1.84351508700548,
+      "propulsion_Wh": 1.639442674585013,
+      "sensors_Wh": 0.023527777777773817,
+      "compute_Wh": 0.1599736111111198,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": -8.684411214845668e-19,
+      "battery_losses_Wh": 0.02057102353157321,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 16.50535086996984,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 1.2762454695172123,
+      "terminal_interval_Wh": {
+        "nominal": 1.8229440634739067,
+        "low": 1.8229440634739067,
+        "high": 1.8315530912516853,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP6-S6-ai-scheduled.summary.json",
+      "summary_sha256": "7a95c157af946557f3ab60609a3a05071c6b2a1df2b22129c2913c2f25993bb4"
+    },
+    {
+      "label": "EXP8-L0-transit-c0.2",
+      "group": "EXP8",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "transit",
+      "current_m_s": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L0",
+      "initial_soc": null,
+      "duration_s": 77.0,
+      "terminal_Wh": 1.6940004793339225,
+      "ocv_work_Wh": 1.6940004793339225,
+      "propulsion_Wh": 1.5710143682228068,
+      "sensors_Wh": 0.023527777777773817,
+      "compute_Wh": 0.09945833333334178,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 2.1464311809419684e-19,
+      "battery_losses_Wh": 0.0,
+      "steady_propulsion_W": null,
+      "request_met": true,
+      "steady_window_request_met": null,
+      "max_allocation_residual_N": 7.105427357601002e-15,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.0,
+      "min_derating_factor": 1.0,
+      "battery_cutoff": false,
+      "min_voltage_V": 14.8,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 4.4994422268256796e-05,
+      "final_speed_m_s": 0.02380157448366538,
+      "max_abs_roll_pitch_deg": 0.0005723003414459527,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 1.3888884958890726,
+      "terminal_interval_Wh": {
+        "nominal": 1.6940004793339225,
+        "low": 1.6940004793339225,
+        "high": 1.7026095071117011,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.11844774302734774,
+      "mean_damping_force_N": 1.9361647207246648,
+      "mean_drag_force_N": 14.409986512208786,
+      "damping_by_phase": {
+        "hold_start": {
+          "mean_damping_force_N": 0.6195206205671032,
+          "mean_drag_force_N": 3.8844610403562134,
+          "damping_share": 0.13754954331676864
+        },
+        "accelerate": {
+          "mean_damping_force_N": 0.5025092562937061,
+          "mean_drag_force_N": 10.080912581517618,
+          "damping_share": 0.04748079250686149
+        },
+        "transit_out": {
+          "mean_damping_force_N": 3.1787311443360524,
+          "mean_drag_force_N": 41.41628340854938,
+          "damping_share": 0.07127996652106437
+        },
+        "stop": {
+          "mean_damping_force_N": 3.2124989042058587,
+          "mean_drag_force_N": 41.3839820069436,
+          "damping_share": 0.07203480719938846
+        },
+        "hold_turn": {
+          "mean_damping_force_N": 1.7612994650999705,
+          "mean_drag_force_N": 22.65853051902693,
+          "damping_share": 0.07212578737218198
+        },
+        "yaw": {
+          "mean_damping_force_N": 1.158610813369508,
+          "mean_drag_force_N": 3.105369627371559,
+          "damping_share": 0.2717204803050515
+        },
+        "return_accelerate": {
+          "mean_damping_force_N": 1.2213328092214764,
+          "mean_drag_force_N": 1.7961642163849638,
+          "damping_share": 0.4047502943191864
+        },
+        "return_transit": {
+          "mean_damping_force_N": 2.986955672588914,
+          "mean_drag_force_N": 0.6814042895033168,
+          "damping_share": 0.8142482481150293
+        },
+        "return_stop": {
+          "mean_damping_force_N": 1.995887006622652,
+          "mean_drag_force_N": 0.8567233352761944,
+          "damping_share": 0.6996703956748911
+        },
+        "hold_end": {
+          "mean_damping_force_N": 0.31830767946573496,
+          "mean_drag_force_N": 8.419324993137383,
+          "damping_share": 0.03642951030246327
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP8-L0-transit-c0.2.summary.json",
+      "summary_sha256": "7a63cffdf4f202ae19181568980316387607e00a11f601ae8fc716463a000243"
+    },
+    {
+      "label": "EXP8-lowsoc-headon0.5",
+      "group": "EXP8",
+      "layout": "L8-HV",
+      "mapping": "direct",
+      "geometry_grade": "A",
+      "plan": "station",
+      "current_m_s": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "suite": null,
+      "schedule": null,
+      "fidelity": "L1",
+      "initial_soc": 0.03,
+      "duration_s": 90.0,
+      "terminal_Wh": 5.0338117359075465,
+      "ocv_work_Wh": 5.141767954356456,
+      "propulsion_Wh": 4.8900617359075405,
+      "sensors_Wh": 0.027499999999995,
+      "compute_Wh": 0.1162500000000102,
+      "communications_Wh": 0.0,
+      "auxiliaries_Wh": 0.0,
+      "converters_Wh": 1.2163110025337824e-18,
+      "battery_losses_Wh": 0.10795621844890943,
+      "steady_propulsion_W": 101.66372168081163,
+      "request_met": false,
+      "steady_window_request_met": false,
+      "max_allocation_residual_N": 27.3944904542834,
+      "native_saturated_fraction": 0.0,
+      "allocation_saturated_fraction": 0.1511111111111111,
+      "min_derating_factor": 0.31266483625222463,
+      "battery_cutoff": false,
+      "min_voltage_V": 12.00000000000003,
+      "chain_status": "PASS",
+      "final_tracking_error_m": 2.8427529335021973,
+      "final_speed_m_s": 0.1141921654343605,
+      "max_abs_roll_pitch_deg": 0.0,
+      "proxy_share_percent": 0.0,
+      "upper_bound_share_percent": 0.5348354932410968,
+      "terminal_interval_Wh": {
+        "nominal": 5.0338117359075465,
+        "low": 5.0338117359075465,
+        "high": 5.0438742359075475,
+        "open_low": [
+          "camera.ACTIVE",
+          "companion_computer.VIDEO",
+          "navigator.ACTIVE"
+        ],
+        "open_high": []
+      },
+      "damping_share_of_resistance": 0.01566511456230321,
+      "mean_damping_force_N": 0.6382784343701222,
+      "mean_drag_force_N": 40.10693487585271,
+      "damping_by_phase": {
+        "station_keeping": {
+          "mean_damping_force_N": 0.6382784343701222,
+          "mean_drag_force_N": 40.10693487585271,
+          "damping_share": 0.01566511456230321
+        }
+      },
+      "commit": "81b91ea68eb4d139f1582fa2230e696497daba03",
+      "dirty": false,
+      "result_file": "EXP8-lowsoc-headon0.5.summary.json",
+      "summary_sha256": "e057669254f3d7b730b519be6f62167741538ab76e8a77063e5b433a0ff86633"
+    }
+  ],
+  "commits": [
+    "81b91ea68eb4d139f1582fa2230e696497daba03"
+  ],
+  "single_commit": true,
+  "any_dirty": false,
+  "definitions": {
+    "request_met": "whole run: max allocation residual < 1e-6 N, no native saturation, no derating, chain closure PASS; tracking is reported separately",
+    "steady_window_request_met": "station plans, last steady_window_s of the 0.1 s trace: no allocation residual, no allocation or native saturation, no derating",
+    "damping_share_of_resistance": "time-mean m c |v| / (m c |v| + 1/2 rho Cd A |v - v_c|^2) over the 0.1 s trace"
+  }
+}

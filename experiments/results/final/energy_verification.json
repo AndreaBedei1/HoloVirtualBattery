@@ -1,0 +1,4122 @@
+{
+  "tolerance_relative": 1e-09,
+  "runs": {
+    "EXP3-L4-2H2V-headon0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.3100361566036028,
+          "reported_Wh": 0.3100361566036034,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 7.894919286223336e-20,
+          "reported_Wh": 7.894919286223336e-20,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0003942941402157769,
+          "reported_Wh": 0.00039429414021577725,
+          "relative_error": 7.771561172376096e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.4537861566036028,
+          "reported_Wh": 0.45378615660360855,
+          "relative_error": 1.27675647831893e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.1550180783018014,
+          "reported_Wh": 0.1550180783018017,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.3100361566036028,
+          "reported_Wh": 0.3100361566036034,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.4537861566036086,
+          "reported_Wh": 0.45378615660360855,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.45418045074382435,
+          "reported_Wh": 0.45418045074382435,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0003942941402157769,
+          "reported_Wh": 0.00039429414021577725,
+          "relative_error": 7.771561172376096e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.4537861566036032,
+          "reported_Wh": 0.45378615660360855,
+          "relative_error": 1.176836406102666e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L4-2H2V-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 5.45501716810045,
+          "reported_Wh": 5.455017168100455,
+          "relative_error": 9.992007221626409e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 8.635067969306774e-20,
+          "reported_Wh": 8.635067969306769e-20,
+          "relative_error": 4.81482486096809e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.06473305144766045,
+          "reported_Wh": 0.06473305144766038,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.59876716810045,
+          "reported_Wh": 5.598767168100461,
+          "relative_error": 2.1094237467877974e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.727508584050225,
+          "reported_Wh": 2.7275085840502276,
+          "relative_error": 9.992007221626409e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 5.45501716810045,
+          "reported_Wh": 5.455017168100455,
+          "relative_error": 9.992007221626409e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.59876716810046,
+          "reported_Wh": 5.598767168100461,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.663500219548122,
+          "reported_Wh": 5.663500219548122,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.06473305144766045,
+          "reported_Wh": 0.06473305144766038,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.598767168100483,
+          "reported_Wh": 5.598767168100461,
+          "relative_error": 3.9968028886505635e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L4-2H2V-oblique0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.838006969274567,
+          "reported_Wh": 1.838006969274569,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -4.86030968558124e-19,
+          "reported_Wh": -4.860309685581238e-19,
+          "relative_error": 1.925929944387236e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.007989084059312746,
+          "reported_Wh": 0.007989084059312724,
+          "relative_error": 2.886579864025407e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 1.9817569692745671,
+          "reported_Wh": 1.9817569692745742,
+          "relative_error": 3.552713678800501e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.9190034846372838,
+          "reported_Wh": 0.9190034846372845,
+          "relative_error": 8.881784197001252e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.838006969274567,
+          "reported_Wh": 1.838006969274569,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 1.9817569692745742,
+          "reported_Wh": 1.9817569692745742,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 1.9897460533338869,
+          "reported_Wh": 1.9897460533338869,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.007989084059312746,
+          "reported_Wh": 0.007989084059312724,
+          "relative_error": 2.886579864025407e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 1.9817569692745631,
+          "reported_Wh": 1.9817569692745742,
+          "relative_error": 5.551115123125783e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L4-2H2V-sway0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 3.894853961031391e-05,
+          "reported_Wh": 3.894853961031402e-05,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.14375,
+          "reported_Wh": 0.1437500000000052,
+          "relative_error": 3.630429290524262e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.1437500000000052,
+          "reported_Wh": 0.1437500000000052,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.14378894853961552,
+          "reported_Wh": 0.14378894853961552,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 3.894853961031391e-05,
+          "reported_Wh": 3.894853961031402e-05,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.14374999999996935,
+          "reported_Wh": 0.1437500000000052,
+          "relative_error": 2.4946711363327267e-13
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 2.4946711363327267e-13,
+      "status": "PASS"
+    },
+    "EXP3-L4-H45-headon0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.3459110407646192,
+          "reported_Wh": 0.3459110407646189,
+          "relative_error": 8.881784197001252e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 1.4802973661668755e-20,
+          "reported_Wh": 1.480297366166875e-20,
+          "relative_error": 6.018531076210112e-36
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0004614547682458659,
+          "reported_Wh": 0.00046145476824586626,
+          "relative_error": 7.771561172376096e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.4896610407646192,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 1.0103029524088925e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.08647776019115572,
+          "reported_Wh": 0.08647776019115568,
+          "relative_error": 4.440892098500626e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.3459110407646192,
+          "reported_Wh": 0.3459110407646189,
+          "relative_error": 8.881784197001252e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.48966104076462413,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.49012249553287,
+          "reported_Wh": 0.49012249553287,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0004614547682458659,
+          "reported_Wh": 0.00046145476824586626,
+          "relative_error": 7.771561172376096e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.48966104076461775,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 1.2989609388114332e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L4-H45-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 6.385787752936367,
+          "reported_Wh": 6.385787752936347,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 7.455764400927162e-18,
+          "reported_Wh": 7.45576440092717e-18,
+          "relative_error": 7.703719777548943e-33
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.08839733353613426,
+          "reported_Wh": 0.08839733353613445,
+          "relative_error": 2.220446049250313e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 6.529537752936367,
+          "reported_Wh": 6.529537752936353,
+          "relative_error": 2.220446049250313e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.596446938234146,
+          "reported_Wh": 1.596446938234141,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 6.385787752936367,
+          "reported_Wh": 6.385787752936347,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 6.529537752936352,
+          "reported_Wh": 6.529537752936353,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 6.617935086472487,
+          "reported_Wh": 6.617935086472487,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.08839733353613426,
+          "reported_Wh": 0.08839733353613445,
+          "relative_error": 2.220446049250313e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 6.529537752936383,
+          "reported_Wh": 6.529537752936353,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L4-H45-heave": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.006111111111111112,
+          "reported_Wh": 0.006111111111111221,
+          "relative_error": 1.7763568394002505e-14
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.025833333333333337,
+          "reported_Wh": 0.025833333333334072,
+          "relative_error": 2.842170943040401e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 8.65408708875573e-06,
+          "reported_Wh": 8.654087088755746e-06,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.03194444444444444,
+          "reported_Wh": 0.031944444444445295,
+          "relative_error": 2.6756374893466273e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.006111111111111112,
+          "reported_Wh": 0.006111111111111221,
+          "relative_error": 1.7763568394002505e-14
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.021666666666666667,
+          "reported_Wh": 0.02166666666666736,
+          "relative_error": 3.197442310920451e-14
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.004166666666666667,
+          "reported_Wh": 0.004166666666666818,
+          "relative_error": 3.6415315207705135e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.031944444444445295,
+          "reported_Wh": 0.031944444444445295,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.03195309853153405,
+          "reported_Wh": 0.03195309853153405,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 8.65408708875573e-06,
+          "reported_Wh": 8.654087088755746e-06,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.03194444444444452,
+          "reported_Wh": 0.031944444444445295,
+          "relative_error": 2.4313884239290928e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 19.999999999999794,
+          "reported_s": 20.0,
+          "relative_error": 1.0325074129013956e-14
+        }
+      },
+      "worst_relative_error": 3.6415315207705135e-14,
+      "status": "PASS"
+    },
+    "EXP3-L4-H45-oblique0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 5.519804565977388,
+          "reported_Wh": 5.519804565977361,
+          "relative_error": 4.884981308350689e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -4.934324553889585e-21,
+          "reported_Wh": -4.934324553889579e-21,
+          "relative_error": 6.018531076210112e-36
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0679397343727433,
+          "reported_Wh": 0.06793973437274325,
+          "relative_error": 6.661338147750939e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.663554565977388,
+          "reported_Wh": 5.663554565977367,
+          "relative_error": 3.774758283725532e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.759902282988694,
+          "reported_Wh": 2.7599022829886803,
+          "relative_error": 4.884981308350689e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 5.519804565977388,
+          "reported_Wh": 5.519804565977361,
+          "relative_error": 4.884981308350689e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.663554565977366,
+          "reported_Wh": 5.663554565977367,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.73149430035011,
+          "reported_Wh": 5.73149430035011,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0679397343727433,
+          "reported_Wh": 0.06793973437274325,
+          "relative_error": 6.661338147750939e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.663554565977377,
+          "reported_Wh": 5.663554565977367,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L6-STD-headon0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.3459110407646192,
+          "reported_Wh": 0.3459110407646189,
+          "relative_error": 8.881784197001252e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 1.4802973661668755e-20,
+          "reported_Wh": 1.480297366166875e-20,
+          "relative_error": 6.018531076210112e-36
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0004614547682458659,
+          "reported_Wh": 0.00046145476824586626,
+          "relative_error": 7.771561172376096e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.4896610407646192,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 1.0103029524088925e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.08647776019115572,
+          "reported_Wh": 0.08647776019115568,
+          "relative_error": 4.440892098500626e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.3459110407646192,
+          "reported_Wh": 0.3459110407646189,
+          "relative_error": 8.881784197001252e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.48966104076462413,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.49012249553287,
+          "reported_Wh": 0.49012249553287,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0004614547682458659,
+          "reported_Wh": 0.00046145476824586626,
+          "relative_error": 7.771561172376096e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.48966104076461775,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 1.2989609388114332e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L6-STD-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 6.385787752936367,
+          "reported_Wh": 6.385787752936347,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 7.455764400927162e-18,
+          "reported_Wh": 7.45576440092717e-18,
+          "relative_error": 7.703719777548943e-33
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.08839733353613426,
+          "reported_Wh": 0.08839733353613445,
+          "relative_error": 2.220446049250313e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 6.529537752936367,
+          "reported_Wh": 6.529537752936353,
+          "relative_error": 2.220446049250313e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.596446938234146,
+          "reported_Wh": 1.596446938234141,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 6.385787752936367,
+          "reported_Wh": 6.385787752936347,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 6.529537752936352,
+          "reported_Wh": 6.529537752936353,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 6.617935086472487,
+          "reported_Wh": 6.617935086472487,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.08839733353613426,
+          "reported_Wh": 0.08839733353613445,
+          "relative_error": 2.220446049250313e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 6.529537752936383,
+          "reported_Wh": 6.529537752936353,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L6-STD-heave": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.061890450805240665,
+          "reported_Wh": 0.06189045080524064,
+          "relative_error": 4.440892098500626e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.006111111111111112,
+          "reported_Wh": 0.006111111111111221,
+          "relative_error": 1.7763568394002505e-14
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.025833333333333337,
+          "reported_Wh": 0.025833333333334072,
+          "relative_error": 2.842170943040401e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -4.6876083261951053e-20,
+          "reported_Wh": -4.6876083261951083e-20,
+          "relative_error": 3.009265538105056e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0001010158656649904,
+          "reported_Wh": 0.00010101586566499037,
+          "relative_error": 2.220446049250313e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.09383489524968512,
+          "reported_Wh": 0.09383489524968593,
+          "relative_error": 8.548717289613705e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 6.793787119058738e-19,
+          "reported_Wh": 6.793787119058744e-19,
+          "relative_error": 6.7407548053553255e-34
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.061890450805240665,
+          "reported_Wh": 0.06189045080524064,
+          "relative_error": 4.440892098500626e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.006111111111111112,
+          "reported_Wh": 0.006111111111111221,
+          "relative_error": 1.7763568394002505e-14
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.021666666666666667,
+          "reported_Wh": 0.02166666666666736,
+          "relative_error": 3.197442310920451e-14
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.004166666666666667,
+          "reported_Wh": 0.004166666666666818,
+          "relative_error": 3.6415315207705135e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.09383489524968593,
+          "reported_Wh": 0.09383489524968593,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.09393591111535092,
+          "reported_Wh": 0.09393591111535092,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0001010158656649904,
+          "reported_Wh": 0.00010101586566499037,
+          "relative_error": 2.220446049250313e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.09383489524968516,
+          "reported_Wh": 0.09383489524968593,
+          "relative_error": 8.104628079763643e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 19.999999999999794,
+          "reported_s": 20.0,
+          "relative_error": 1.0325074129013956e-14
+        }
+      },
+      "worst_relative_error": 3.6415315207705135e-14,
+      "status": "PASS"
+    },
+    "EXP3-L6-STD-oblique0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 5.519804565977388,
+          "reported_Wh": 5.519804565977361,
+          "relative_error": 4.884981308350689e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 9.86864910777917e-21,
+          "reported_Wh": 9.86864910777917e-21,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0679397343727433,
+          "reported_Wh": 0.06793973437274325,
+          "relative_error": 6.661338147750939e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.663554565977388,
+          "reported_Wh": 5.663554565977367,
+          "relative_error": 3.774758283725532e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.759902282988694,
+          "reported_Wh": 2.7599022829886803,
+          "relative_error": 4.884981308350689e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 5.519804565977389,
+          "reported_Wh": 5.519804565977361,
+          "relative_error": 5.10702591327572e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.663554565977366,
+          "reported_Wh": 5.663554565977367,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.73149430035011,
+          "reported_Wh": 5.73149430035011,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0679397343727433,
+          "reported_Wh": 0.06793973437274325,
+          "relative_error": 6.661338147750939e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.663554565977377,
+          "reported_Wh": 5.663554565977367,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-HV-headon0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.3459110407646192,
+          "reported_Wh": 0.3459110407646189,
+          "relative_error": 8.881784197001252e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -8.388351741612295e-20,
+          "reported_Wh": -8.388351741612289e-20,
+          "relative_error": 6.018531076210112e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.000461454768245866,
+          "reported_Wh": 0.0004614547682458663,
+          "relative_error": 6.661338147750939e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.4896610407646192,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 1.0103029524088925e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.0864777601911548,
+          "reported_Wh": 0.08647776019115473,
+          "relative_error": 8.881784197001252e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.3459110407646192,
+          "reported_Wh": 0.3459110407646189,
+          "relative_error": 8.881784197001252e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.48966104076462413,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.49012249553287,
+          "reported_Wh": 0.49012249553287,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.000461454768245866,
+          "reported_Wh": 0.0004614547682458663,
+          "relative_error": 6.661338147750939e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.48966104076461775,
+          "reported_Wh": 0.48966104076462413,
+          "relative_error": 1.2989609388114332e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-HV-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 6.385787752890152,
+          "reported_Wh": 6.3857877528901525,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -1.6579330501069004e-18,
+          "reported_Wh": -1.6579330501068996e-18,
+          "relative_error": 7.703719777548943e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0883973335349213,
+          "reported_Wh": 0.08839733353492135,
+          "relative_error": 6.661338147750939e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 6.5295377528901515,
+          "reported_Wh": 6.529537752890159,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.596446938222538,
+          "reported_Wh": 1.5964469382225381,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 6.385787752890152,
+          "reported_Wh": 6.3857877528901525,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 6.529537752890158,
+          "reported_Wh": 6.529537752890159,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 6.61793508642508,
+          "reported_Wh": 6.61793508642508,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0883973335349213,
+          "reported_Wh": 0.08839733353492135,
+          "relative_error": 6.661338147750939e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 6.529537752890188,
+          "reported_Wh": 6.529537752890159,
+          "relative_error": 4.440892098500626e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-HV-headon0.8": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 14.687129942240842,
+          "reported_Wh": 14.687129942240775,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -1.652998725553011e-19,
+          "reported_Wh": -1.652998725553011e-19,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.4632016039554089,
+          "reported_Wh": 0.4632016039554091,
+          "relative_error": 4.440892098500626e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 14.830879942240843,
+          "reported_Wh": 14.830879942240779,
+          "relative_error": 4.218847493575595e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 3.6717824855602106,
+          "reported_Wh": 3.6717824855601937,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 14.687129942240842,
+          "reported_Wh": 14.687129942240775,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 14.83087994224078,
+          "reported_Wh": 14.830879942240779,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 15.294081546196189,
+          "reported_Wh": 15.294081546196189,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.4632016039554089,
+          "reported_Wh": 0.4632016039554091,
+          "relative_error": 4.440892098500626e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 14.830879942240802,
+          "reported_Wh": 14.830879942240779,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-HV-heave": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.04364467638284187,
+          "reported_Wh": 0.0436446763828419,
+          "relative_error": 6.661338147750939e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.006111111111111112,
+          "reported_Wh": 0.006111111111111221,
+          "relative_error": 1.7763568394002505e-14
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.025833333333333337,
+          "reported_Wh": 0.025833333333334072,
+          "relative_error": 2.842170943040401e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -1.1102230246251566e-19,
+          "reported_Wh": -1.110223024625156e-19,
+          "relative_error": 4.81482486096809e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 5.932287398384008e-05,
+          "reported_Wh": 5.932287398384009e-05,
+          "relative_error": 2.220446049250313e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.07558912082728632,
+          "reported_Wh": 0.07558912082728719,
+          "relative_error": 1.1546319456101628e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 3.1011324949208735e-21,
+          "reported_Wh": 3.1011324949208746e-21,
+          "relative_error": 1.128474576789396e-36
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.04364467638284187,
+          "reported_Wh": 0.0436446763828419,
+          "relative_error": 6.661338147750939e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.006111111111111112,
+          "reported_Wh": 0.006111111111111221,
+          "relative_error": 1.7763568394002505e-14
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.021666666666666667,
+          "reported_Wh": 0.02166666666666736,
+          "relative_error": 3.197442310920451e-14
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.004166666666666667,
+          "reported_Wh": 0.004166666666666818,
+          "relative_error": 3.6415315207705135e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.07558912082728719,
+          "reported_Wh": 0.07558912082728719,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.07564844370127104,
+          "reported_Wh": 0.07564844370127104,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 5.932287398384008e-05,
+          "reported_Wh": 5.932287398384009e-05,
+          "relative_error": 2.220446049250313e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.0755891208272863,
+          "reported_Wh": 0.07558912082728719,
+          "relative_error": 1.176836406102666e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 19.999999999999794,
+          "reported_s": 20.0,
+          "relative_error": 1.0325074129013956e-14
+        }
+      },
+      "worst_relative_error": 3.6415315207705135e-14,
+      "status": "PASS"
+    },
+    "EXP3-L8-HV-oblique0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 5.519804565975985,
+          "reported_Wh": 5.51980456597596,
+          "relative_error": 4.440892098500626e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 7.401486830834377e-21,
+          "reported_Wh": 7.40148683083438e-21,
+          "relative_error": 3.009265538105056e-36
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0679397343726986,
+          "reported_Wh": 0.06793973437269853,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.663554565975985,
+          "reported_Wh": 5.663554565975966,
+          "relative_error": 3.3306690738754696e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.7599022829879925,
+          "reported_Wh": 2.75990228298798,
+          "relative_error": 4.440892098500626e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 5.519804565975985,
+          "reported_Wh": 5.51980456597596,
+          "relative_error": 4.440892098500626e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.663554565975965,
+          "reported_Wh": 5.663554565975966,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.731494300348665,
+          "reported_Wh": 5.731494300348665,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0679397343726986,
+          "reported_Wh": 0.06793973437269853,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.663554565975979,
+          "reported_Wh": 5.663554565975966,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-HV-sway0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 7.637423851155781,
+          "reported_Wh": 7.637423851155791,
+          "relative_error": 1.4432899320127035e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -4.1941758708061474e-20,
+          "reported_Wh": -4.1941758708061456e-20,
+          "relative_error": 1.8055593228630336e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.1266284026974118,
+          "reported_Wh": 0.12662840269741168,
+          "relative_error": 8.881784197001252e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 7.78117385115578,
+          "reported_Wh": 7.781173851155797,
+          "relative_error": 2.220446049250313e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.5926222930024536,
+          "reported_Wh": 1.5926222930024492,
+          "relative_error": 2.886579864025407e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 7.637423851155781,
+          "reported_Wh": 7.637423851155791,
+          "relative_error": 1.4432899320127035e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 7.781173851155796,
+          "reported_Wh": 7.781173851155797,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 7.907802253853209,
+          "reported_Wh": 7.907802253853209,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.1266284026974118,
+          "reported_Wh": 0.12662840269741168,
+          "relative_error": 8.881784197001252e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 7.781173851155779,
+          "reported_Wh": 7.781173851155797,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-VEC30-headon0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.502938838676879,
+          "reported_Wh": 0.5029388386768802,
+          "relative_error": 2.220446049250313e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 7.401486830834377e-20,
+          "reported_Wh": 7.401486830834378e-20,
+          "relative_error": 1.2037062152420224e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0008018288485261113,
+          "reported_Wh": 0.0008018288485261131,
+          "relative_error": 2.1094237467877974e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.6466888386768791,
+          "reported_Wh": 0.6466888386768853,
+          "relative_error": 9.658940314238862e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.08183450407114404,
+          "reported_Wh": 0.08183450407114413,
+          "relative_error": 1.2212453270876722e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.502938838676879,
+          "reported_Wh": 0.5029388386768802,
+          "relative_error": 2.220446049250313e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.6466888386768854,
+          "reported_Wh": 0.6466888386768853,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.6474906675254114,
+          "reported_Wh": 0.6474906675254114,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0008018288485261113,
+          "reported_Wh": 0.0008018288485261131,
+          "relative_error": 2.1094237467877974e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.6466888386768767,
+          "reported_Wh": 0.6466888386768853,
+          "relative_error": 1.3433698597964394e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-VEC30-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 7.89603008377506,
+          "reported_Wh": 7.896030083775063,
+          "relative_error": 3.3306690738754696e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -4.1941758708061466e-19,
+          "reported_Wh": -4.1941758708061466e-19,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.1353117042940486,
+          "reported_Wh": 0.13531170429404818,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 8.03978008377506,
+          "reported_Wh": 8.039780083775069,
+          "relative_error": 1.1102230246251565e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.3016747355408997,
+          "reported_Wh": 1.3016747355409035,
+          "relative_error": 2.886579864025407e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 7.89603008377506,
+          "reported_Wh": 7.896030083775063,
+          "relative_error": 3.3306690738754696e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 8.039780083775069,
+          "reported_Wh": 8.039780083775069,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 8.175091788069118,
+          "reported_Wh": 8.175091788069118,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.1353117042940486,
+          "reported_Wh": 0.13531170429404818,
+          "relative_error": 3.1086244689504383e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 8.039780083775065,
+          "reported_Wh": 8.039780083775069,
+          "relative_error": 4.440892098500626e-16
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP3-L8-VEC30-oblique0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 6.779091030988274,
+          "reported_Wh": 6.779091030988258,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -1.7072762956457963e-18,
+          "reported_Wh": -1.7072762956457956e-18,
+          "relative_error": 7.703719777548943e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.1021535221401433,
+          "reported_Wh": 0.10215352214014348,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 6.922841030988275,
+          "reported_Wh": 6.922841030988264,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.6312813053362145,
+          "reported_Wh": 2.631281305336208,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 6.779091030988274,
+          "reported_Wh": 6.779091030988258,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 6.9228410309882635,
+          "reported_Wh": 6.922841030988264,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 7.0249945531284075,
+          "reported_Wh": 7.0249945531284075,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.1021535221401433,
+          "reported_Wh": 0.10215352214014348,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 6.9228410309882875,
+          "reported_Wh": 6.922841030988264,
+          "relative_error": 3.3306690738754696e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP4-a30-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 4.664748827167338,
+          "reported_Wh": 4.66474882716737,
+          "relative_error": 6.8833827526759706e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -7.648203058528856e-20,
+          "reported_Wh": -7.648203058528858e-20,
+          "relative_error": 2.407412430484045e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.04755672657009561,
+          "reported_Wh": 0.04755672657009587,
+          "relative_error": 5.440092820663267e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 4.808498827167338,
+          "reported_Wh": 4.808498827167376,
+          "relative_error": 7.771561172376096e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.1661872067918344,
+          "reported_Wh": 1.1661872067918424,
+          "relative_error": 6.8833827526759706e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 4.664748827167338,
+          "reported_Wh": 4.66474882716737,
+          "relative_error": 6.8833827526759706e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 4.808498827167375,
+          "reported_Wh": 4.808498827167376,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 4.856055553737471,
+          "reported_Wh": 4.856055553737471,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.04755672657009561,
+          "reported_Wh": 0.04755672657009587,
+          "relative_error": 5.440092820663267e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 4.808498827167353,
+          "reported_Wh": 4.808498827167376,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP4-a30-sway0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 13.041173500232413,
+          "reported_Wh": 13.041173500232457,
+          "relative_error": 3.4416913763379853e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 3.123427442612107e-18,
+          "reported_Wh": 3.123427442612106e-18,
+          "relative_error": 1.1555579666323415e-33
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.375183448086464,
+          "reported_Wh": 0.37518344808646537,
+          "relative_error": 3.6637359812630166e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 13.184923500232413,
+          "reported_Wh": 13.184923500232461,
+          "relative_error": 3.6637359812630166e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.679432093840596,
+          "reported_Wh": 2.6794320938406035,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 13.041173500232413,
+          "reported_Wh": 13.041173500232457,
+          "relative_error": 3.4416913763379853e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 13.184923500232463,
+          "reported_Wh": 13.184923500232461,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 13.560106948318927,
+          "reported_Wh": 13.560106948318927,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.375183448086464,
+          "reported_Wh": 0.37518344808646537,
+          "relative_error": 3.6637359812630166e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 13.184923500232417,
+          "reported_Wh": 13.184923500232461,
+          "relative_error": 3.3306690738754696e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP4-a60-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 10.77598383566066,
+          "reported_Wh": 10.77598383566068,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 8.388351741612295e-20,
+          "reported_Wh": 8.388351741612291e-20,
+          "relative_error": 3.611118645726067e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.2539440638794451,
+          "reported_Wh": 0.25394406387944574,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 10.919733835660661,
+          "reported_Wh": 10.919733835660685,
+          "relative_error": 2.1094237467877974e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 2.693995958915165,
+          "reported_Wh": 2.69399595891517,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 10.77598383566066,
+          "reported_Wh": 10.77598383566068,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 10.919733835660686,
+          "reported_Wh": 10.919733835660685,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 11.173677899540131,
+          "reported_Wh": 11.173677899540131,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.2539440638794451,
+          "reported_Wh": 0.25394406387944574,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 10.919733835660663,
+          "reported_Wh": 10.919733835660685,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP4-a60-sway0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 5.5558771072878645,
+          "reported_Wh": 5.555877107287873,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -5.4771002548174395e-19,
+          "reported_Wh": -5.4771002548174395e-19,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.06718570057285556,
+          "reported_Wh": 0.0671857005728552,
+          "relative_error": 5.329070518200751e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.699627107287865,
+          "reported_Wh": 5.6996271072878795,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.1640526862552831,
+          "reported_Wh": 1.164052686255285,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 5.5558771072878645,
+          "reported_Wh": 5.555877107287873,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.699627107287879,
+          "reported_Wh": 5.6996271072878795,
+          "relative_error": 1.1102230246251565e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.766812807860735,
+          "reported_Wh": 5.766812807860735,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.06718570057285556,
+          "reported_Wh": 0.0671857005728552,
+          "relative_error": 5.329070518200751e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.699627107287844,
+          "reported_Wh": 5.6996271072878795,
+          "relative_error": 6.217248937900877e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    },
+    "EXP5-station-c0": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 3.894853961031391e-05,
+          "reported_Wh": 3.894853961031402e-05,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.14375,
+          "reported_Wh": 0.1437500000000052,
+          "relative_error": 3.630429290524262e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.1437500000000052,
+          "reported_Wh": 0.1437500000000052,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.14378894853961552,
+          "reported_Wh": 0.14378894853961552,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 3.894853961031391e-05,
+          "reported_Wh": 3.894853961031402e-05,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.14374999999996935,
+          "reported_Wh": 0.1437500000000052,
+          "relative_error": 2.4946711363327267e-13
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 2.4946711363327267e-13,
+      "status": "PASS"
+    },
+    "EXP5-transit-c0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.639619426099255,
+          "reported_Wh": 1.639619426099254,
+          "relative_error": 4.440892098500626e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.09945833333333336,
+          "reported_Wh": 0.09945833333334178,
+          "relative_error": 8.471001677889944e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -2.0970879354030733e-19,
+          "reported_Wh": -2.0970879354030853e-19,
+          "relative_error": 1.2037062152420224e-33
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.02005127330550777,
+          "reported_Wh": 0.020051273305507704,
+          "relative_error": 3.3306690738754696e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 1.7626055372103662,
+          "reported_Wh": 1.7626055372103697,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.4100266760447867,
+          "reported_Wh": 0.4100266760447859,
+          "relative_error": 1.9984014443252818e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.639619426099255,
+          "reported_Wh": 1.639619426099254,
+          "relative_error": 4.440892098500626e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 1.7626055372103697,
+          "reported_Wh": 1.7626055372103697,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 1.7826568105158773,
+          "reported_Wh": 1.7826568105158773,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.02005127330550777,
+          "reported_Wh": 0.020051273305507704,
+          "relative_error": 3.3306690738754696e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 1.762605537210366,
+          "reported_Wh": 1.7626055372103697,
+          "relative_error": 2.1094237467877974e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.6830981053317373e-13,
+      "status": "PASS"
+    },
+    "EXP5-transit-c0.4": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 5.096660952484299,
+          "reported_Wh": 5.096660952484296,
+          "relative_error": 6.661338147750939e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.09945833333333336,
+          "reported_Wh": 0.09945833333334178,
+          "relative_error": 8.471001677889944e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -7.302800339756585e-19,
+          "reported_Wh": -7.302800339756583e-19,
+          "relative_error": 1.925929944387236e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.111313182602901,
+          "reported_Wh": 0.11131318260290059,
+          "relative_error": 3.774758283725532e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.219647063595411,
+          "reported_Wh": 5.219647063595412,
+          "relative_error": 2.220446049250313e-16
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.2790930552782809,
+          "reported_Wh": 1.279093055278279,
+          "relative_error": 1.3322676295501878e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 5.096660952484299,
+          "reported_Wh": 5.096660952484296,
+          "relative_error": 6.661338147750939e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.219647063595412,
+          "reported_Wh": 5.219647063595412,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.3309602461983125,
+          "reported_Wh": 5.3309602461983125,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.111313182602901,
+          "reported_Wh": 0.11131318260290059,
+          "relative_error": 3.774758283725532e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.219647063595411,
+          "reported_Wh": 5.219647063595412,
+          "relative_error": 2.220446049250313e-16
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.6830981053317373e-13,
+      "status": "PASS"
+    },
+    "EXP5-transit-c0": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 0.5239241062992392,
+          "reported_Wh": 0.5239241062992406,
+          "relative_error": 2.55351295663786e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.09945833333333336,
+          "reported_Wh": 0.09945833333334178,
+          "relative_error": 8.471001677889944e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 3.305997451106022e-19,
+          "reported_Wh": 3.305997451106019e-19,
+          "relative_error": 2.8888949165808538e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0014980705476117513,
+          "reported_Wh": 0.0014980705476117548,
+          "relative_error": 2.3314683517128287e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 0.6469102174103504,
+          "reported_Wh": 0.6469102174103561,
+          "relative_error": 8.881784197001252e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.13083371516208545,
+          "reported_Wh": 0.13083371516208525,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 0.5239241062992392,
+          "reported_Wh": 0.5239241062992406,
+          "relative_error": 2.55351295663786e-15
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 0.6469102174103561,
+          "reported_Wh": 0.6469102174103561,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 0.6484082879579679,
+          "reported_Wh": 0.6484082879579679,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.0014980705476117513,
+          "reported_Wh": 0.0014980705476117548,
+          "relative_error": 2.3314683517128287e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 0.6469102174103508,
+          "reported_Wh": 0.6469102174103561,
+          "relative_error": 8.215650382226158e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.6830981053317373e-13,
+      "status": "PASS"
+    },
+    "EXP6-S0-propulsion-only": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.6400046163565265,
+          "reported_Wh": 1.640004616356524,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.019103207179318356,
+          "reported_Wh": 0.019103207179318984,
+          "relative_error": 3.2862601528904634e-14
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 1.6400046163565265,
+          "reported_Wh": 1.640004616356524,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.41012311938378593,
+          "reported_Wh": 0.41012311938378276,
+          "relative_error": 7.771561172376096e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.6400046163565265,
+          "reported_Wh": 1.640004616356524,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 1.640004616356524,
+          "reported_Wh": 1.640004616356524,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 1.659107823535843,
+          "reported_Wh": 1.659107823535843,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.019103207179318356,
+          "reported_Wh": 0.019103207179318984,
+          "relative_error": 3.2862601528904634e-14
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 1.6400046163565285,
+          "reported_Wh": 1.640004616356524,
+          "relative_error": 2.6645352591003757e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 3.2862601528904634e-14,
+      "status": "PASS"
+    },
+    "EXP6-S5-inspection-continuous": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.635254669314656,
+          "reported_Wh": 1.6352546693146555,
+          "relative_error": 2.220446049250313e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.77,
+          "reported_Wh": 0.7699999999999315,
+          "relative_error": 8.903988657493755e-14
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.09945833333333336,
+          "reported_Wh": 0.09945833333334178,
+          "relative_error": 8.471001677889944e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.6416666666666667,
+          "reported_Wh": 0.6416666666666127,
+          "relative_error": 8.415490526658687e-14
+        },
+        "category.converters": {
+          "recomputed_Wh": 2.6447979608848175e-18,
+          "reported_Wh": 2.644797960884813e-18,
+          "relative_error": 4.622231866529366e-33
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.03551320202743177,
+          "reported_Wh": 0.035513202027431606,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 3.146379669314656,
+          "reported_Wh": 3.146379669314541,
+          "relative_error": 3.6637359812630166e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.40893383463410754,
+          "reported_Wh": 0.408933834634106,
+          "relative_error": 3.774758283725532e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.635254669314656,
+          "reported_Wh": 1.6352546693146555,
+          "relative_error": 2.220446049250313e-16
+        },
+        "component.bluerobotics-lumen_2": {
+          "recomputed_Wh": 0.32083333333333336,
+          "reported_Wh": 0.3208333333333063,
+          "relative_error": 8.415490526658687e-14
+        },
+        "component.camera_4k": {
+          "recomputed_Wh": 0.10694444444444444,
+          "reported_Wh": 0.10694444444442779,
+          "relative_error": 1.5565326805244695e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.dvl": {
+          "recomputed_Wh": 0.08555555555555555,
+          "reported_Wh": 0.085555555555572,
+          "relative_error": 1.921796055626146e-13
+        },
+        "component.imaging_sonar": {
+          "recomputed_Wh": 0.5775,
+          "reported_Wh": 0.5775000000000114,
+          "relative_error": 1.9761969838327786e-14
+        },
+        "component.imaging_sonar_step_up_converter": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.32083333333333336,
+          "reported_Wh": 0.3208333333333063,
+          "relative_error": 8.415490526658687e-14
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 3.1463796693145416,
+          "reported_Wh": 3.146379669314541,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 3.1818928713419727,
+          "reported_Wh": 3.1818928713419727,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.03551320202743177,
+          "reported_Wh": 0.035513202027431606,
+          "relative_error": 4.6629367034256575e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 3.146379669314657,
+          "reported_Wh": 3.146379669314541,
+          "relative_error": 3.68594044175552e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.921796055626146e-13,
+      "status": "PASS"
+    },
+    "EXP6-S5-inspection-scheduled": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.6385675584984978,
+          "reported_Wh": 1.6385675584984953,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.23666666666666666,
+          "reported_Wh": 0.23666666666662264,
+          "relative_error": 1.8607337892717624e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.09945833333333336,
+          "reported_Wh": 0.09945833333334178,
+          "relative_error": 8.471001677889944e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.14166666666666666,
+          "reported_Wh": 0.1416666666666677,
+          "relative_error": 7.216449660063518e-15
+        },
+        "category.converters": {
+          "recomputed_Wh": -5.147487374617615e-17,
+          "reported_Wh": -5.147487374617689e-17,
+          "relative_error": 7.395570986446986e-31
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.02385127631351334,
+          "reported_Wh": 0.023851276313513407,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 2.1163592251651644,
+          "reported_Wh": 2.1163592251651275,
+          "relative_error": 1.7319479184152442e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.4097622592771461,
+          "reported_Wh": 0.40976225927714677,
+          "relative_error": 1.6653345369377348e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.6385675584984978,
+          "reported_Wh": 1.6385675584984953,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "component.bluerobotics-lumen_2": {
+          "recomputed_Wh": 0.07083333333333333,
+          "reported_Wh": 0.07083333333333384,
+          "relative_error": 7.216449660063518e-15
+        },
+        "component.camera_4k": {
+          "recomputed_Wh": 0.02361111111111111,
+          "reported_Wh": 0.02361111111111196,
+          "relative_error": 3.597122599785507e-14
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.dvl": {
+          "recomputed_Wh": 0.08555555555555555,
+          "reported_Wh": 0.085555555555572,
+          "relative_error": 1.921796055626146e-13
+        },
+        "component.imaging_sonar": {
+          "recomputed_Wh": 0.1275,
+          "reported_Wh": 0.12750000000000364,
+          "relative_error": 2.853273173286652e-14
+        },
+        "component.imaging_sonar_step_up_converter": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.07083333333333333,
+          "reported_Wh": 0.07083333333333384,
+          "relative_error": 7.216449660063518e-15
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 2.1163592251651275,
+          "reported_Wh": 2.1163592251651275,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 2.140210501478641,
+          "reported_Wh": 2.140210501478641,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.02385127631351334,
+          "reported_Wh": 0.023851276313513407,
+          "relative_error": 2.7755575615628914e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 2.1163592251651644,
+          "reported_Wh": 2.1163592251651275,
+          "relative_error": 1.7319479184152442e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.921796055626146e-13,
+      "status": "PASS"
+    },
+    "EXP6-S6-ai-continuous": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.6387600705161331,
+          "reported_Wh": 1.6387600705161347,
+          "relative_error": 9.992007221626409e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.3735569444444445,
+          "reported_Wh": 0.37355694444439874,
+          "relative_error": 1.2234657731369225e-13
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 6.019875955745293e-19,
+          "reported_Wh": 6.019875955745284e-19,
+          "relative_error": 9.62964972193618e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.02240970240550454,
+          "reported_Wh": 0.022409702405504574,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 2.0358447927383554,
+          "reported_Wh": 2.0358447927383074,
+          "relative_error": 2.353672812205332e-14
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.4098115119077264,
+          "reported_Wh": 0.409811511907727,
+          "relative_error": 1.4432899320127035e-15
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.6387600705161331,
+          "reported_Wh": 1.6387600705161347,
+          "relative_error": 9.992007221626409e-16
+        },
+        "component.ai_computer": {
+          "recomputed_Wh": 0.27409861111111106,
+          "reported_Wh": 0.2740986111110907,
+          "relative_error": 7.438494264988549e-14
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 2.0358447927383074,
+          "reported_Wh": 2.0358447927383074,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 2.058254495143812,
+          "reported_Wh": 2.058254495143812,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.02240970240550454,
+          "reported_Wh": 0.022409702405504574,
+          "relative_error": 1.5543122344752192e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 2.0358447927383545,
+          "reported_Wh": 2.0358447927383074,
+          "relative_error": 2.3092638912203256e-14
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.6830981053317373e-13,
+      "status": "PASS"
+    },
+    "EXP6-S6-ai-scheduled": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.639442674585016,
+          "reported_Wh": 1.639442674585013,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.15997361111111114,
+          "reported_Wh": 0.1599736111111198,
+          "relative_error": 5.417888360170764e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": -8.684411214845668e-19,
+          "reported_Wh": -8.684411214845668e-19,
+          "relative_error": 0.0
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.02057102353157322,
+          "reported_Wh": 0.02057102353157321,
+          "relative_error": 4.440892098500626e-16
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 1.822944063473905,
+          "reported_Wh": 1.8229440634739067,
+          "relative_error": 9.992007221626409e-16
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.40998220451372447,
+          "reported_Wh": 0.40998220451372486,
+          "relative_error": 9.992007221626409e-16
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.639442674585016,
+          "reported_Wh": 1.639442674585013,
+          "relative_error": 1.7763568394002505e-15
+        },
+        "component.ai_computer": {
+          "recomputed_Wh": 0.06051527777777777,
+          "reported_Wh": 0.06051527777777971,
+          "relative_error": 3.197442310920451e-14
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 1.8229440634739067,
+          "reported_Wh": 1.8229440634739067,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 1.84351508700548,
+          "reported_Wh": 1.84351508700548,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.02057102353157322,
+          "reported_Wh": 0.02057102353157321,
+          "relative_error": 4.440892098500626e-16
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 1.8229440634739045,
+          "reported_Wh": 1.8229440634739067,
+          "relative_error": 1.2212453270876722e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.6830981053317373e-13,
+      "status": "PASS"
+    },
+    "EXP8-L0-transit-c0.2": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 1.5710143682228057,
+          "reported_Wh": 1.5710143682228068,
+          "relative_error": 6.661338147750939e-16
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.09945833333333336,
+          "reported_Wh": 0.09945833333334178,
+          "relative_error": 8.471001677889944e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 2.1464311809419693e-19,
+          "reported_Wh": 2.1464311809419684e-19,
+          "relative_error": 9.62964972193618e-35
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 1.694000479333917,
+          "reported_Wh": 1.6940004793339225,
+          "relative_error": 3.3306690738754696e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 0.3928573094898715,
+          "reported_Wh": 0.39285730948985703,
+          "relative_error": 3.68594044175552e-14
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 1.5710143682228057,
+          "reported_Wh": 1.5710143682228068,
+          "relative_error": 6.661338147750939e-16
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.02352777777777778,
+          "reported_Wh": 0.023527777777773817,
+          "relative_error": 1.6830981053317373e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.08341666666666667,
+          "reported_Wh": 0.08341666666667638,
+          "relative_error": 1.1646239528317892e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.016041666666666666,
+          "reported_Wh": 0.01604166666666551,
+          "relative_error": 7.194245199571014e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 1.6940004793339225,
+          "reported_Wh": 1.6940004793339225,
+          "relative_error": 0.0
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 1.6940004793339225,
+          "reported_Wh": 1.6940004793339225,
+          "relative_error": 0.0
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 1.6940004793339158,
+          "reported_Wh": 1.6940004793339225,
+          "relative_error": 3.885780586188048e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 76.9999999999988,
+          "reported_s": 77.0,
+          "relative_error": 1.554312234475219e-14
+        }
+      },
+      "worst_relative_error": 1.6830981053317373e-13,
+      "status": "PASS"
+    },
+    "EXP8-lowsoc-headon0.5": {
+      "checks": {
+        "category.propulsion": {
+          "recomputed_Wh": 4.8900617359075405,
+          "reported_Wh": 4.8900617359075405,
+          "relative_error": 0.0
+        },
+        "category.sensors": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "category.compute": {
+          "recomputed_Wh": 0.11625000000000002,
+          "reported_Wh": 0.1162500000000102,
+          "relative_error": 8.759659664292485e-14
+        },
+        "category.communications": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.auxiliaries": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "category.converters": {
+          "recomputed_Wh": 1.2163110025337826e-18,
+          "reported_Wh": 1.2163110025337824e-18,
+          "relative_error": 1.925929944387236e-34
+        },
+        "category.battery_losses": {
+          "recomputed_Wh": 0.10795621844890917,
+          "reported_Wh": 0.10795621844890943,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "bus_terminal": {
+          "recomputed_Wh": 5.03381173590754,
+          "reported_Wh": 5.0338117359075465,
+          "relative_error": 1.2212453270876722e-15
+        },
+        "thruster.H1": {
+          "recomputed_Wh": 1.2225154339768851,
+          "reported_Wh": 1.2225154339768851,
+          "relative_error": 0.0
+        },
+        "thrusters.sum_vs_propulsion": {
+          "recomputed_Wh": 4.8900617359075405,
+          "reported_Wh": 4.8900617359075405,
+          "relative_error": 0.0
+        },
+        "component.camera": {
+          "recomputed_Wh": 0.027500000000000004,
+          "reported_Wh": 0.027499999999995,
+          "relative_error": 1.8185453143360064e-13
+        },
+        "component.companion_computer": {
+          "recomputed_Wh": 0.0975,
+          "reported_Wh": 0.09750000000001177,
+          "relative_error": 1.2068124277675452e-13
+        },
+        "component.esc_standby": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_1": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.light_2": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "component.navigator": {
+          "recomputed_Wh": 0.01875,
+          "reported_Wh": 0.018749999999998546,
+          "relative_error": 7.749356711883593e-14
+        },
+        "component.tether_interface": {
+          "recomputed_Wh": 0.0,
+          "reported_Wh": 0.0,
+          "relative_error": 0.0
+        },
+        "conservation.bus_equals_categories": {
+          "recomputed_Wh": 5.033811735907546,
+          "reported_Wh": 5.0338117359075465,
+          "relative_error": 2.220446049250313e-16
+        },
+        "conservation.ocv_equals_bus_plus_losses": {
+          "recomputed_Wh": 5.141767954356456,
+          "reported_Wh": 5.141767954356456,
+          "relative_error": 0.0
+        },
+        "battery_losses.I2R": {
+          "recomputed_Wh": 0.10795621844890917,
+          "reported_Wh": 0.10795621844890943,
+          "relative_error": 2.4424906541753444e-15
+        },
+        "phases.sum_terminal": {
+          "recomputed_Wh": 5.03381173590754,
+          "reported_Wh": 5.0338117359075465,
+          "relative_error": 1.2212453270876722e-15
+        },
+        "phases.sum_duration": {
+          "recomputed_s": 90.00000000000914,
+          "reported_s": 90.0,
+          "relative_error": 1.0147438445073931e-13
+        }
+      },
+      "worst_relative_error": 1.8185453143360064e-13,
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}
