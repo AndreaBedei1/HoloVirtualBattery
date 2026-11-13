@@ -1,5 +1,7 @@
 # HoloEnergy provenance-aware framework: final report of the native phase (2026-11-12)
 
+> **Superseded (2026-11-13).** The results and claims in this document predate the scientific hardening phase and the clean final reruns. Several of them are corrected or withdrawn (for example "at most 1.37 %", the baseline validation wording and layout equality as a design finding). The current statements and their conditions are in [CLAIM_EVIDENCE_MATRIX](paper/CLAIM_EVIDENCE_MATRIX.md), the results in [experiments/results/final](../experiments/results/final) and readiness in [FINAL_SIGNOFF](reviews/FINAL_SIGNOFF.md).
+
 ## Repository state
 
 | Item | Value |

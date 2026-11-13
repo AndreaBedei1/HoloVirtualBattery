@@ -1,5 +1,7 @@
 # HoloEnergy research status (v0.2 development, updated 2026-11-12)
 
+> **Superseded (2026-11-13).** The results and claims in this document predate the scientific hardening phase and the clean final reruns. Several of them are corrected or withdrawn (for example "at most 1.37 %", the baseline validation wording and layout equality as a design finding). The current statements and their conditions are in [CLAIM_EVIDENCE_MATRIX](paper/CLAIM_EVIDENCE_MATRIX.md), the results in [experiments/results/final](../experiments/results/final) and readiness in [FINAL_SIGNOFF](reviews/FINAL_SIGNOFF.md).
+
 Branch `feature/provenance-aware-energy-framework` (pushed to `origin`), created from
 `fix/verified-holoocean-drag-backend` (6965411). Tag `v0.1.0` (fdcd7ee) unchanged;
 `v0.2.0` tagged on the release commit (version 0.2.0) with the author's approval on
