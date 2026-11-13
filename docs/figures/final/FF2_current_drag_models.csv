@@ -1,0 +1,17 @@
+source,drag_model,current_m_s,propulsion_W
+offline steady allocation,HoloOcean 2.3.0 literals,0.2,12.4
+offline steady allocation,HoloOcean 2.3.0 literals,0.4,115.07025272622211
+offline steady allocation,HoloOcean 2.3.0 literals,0.5,240.2863156121702
+offline steady allocation,HoloOcean 2.3.0 literals,0.6,417.34234305483113
+offline steady allocation,von Benzon et al. 2022 identified damping (Heavy),0.2,16.042969975146846
+offline steady allocation,von Benzon et al. 2022 identified damping (Heavy),0.4,108.1945584231044
+offline steady allocation,von Benzon et al. 2022 identified damping (Heavy),0.5,216.79926853436237
+offline steady allocation,von Benzon et al. 2022 identified damping (Heavy),0.6,362.7291081510863
+offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.2,2.6758949731013812
+offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.4,12.4
+offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.5,27.358849323452862
+offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.6,48.79732698876364
+offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.8,115.7013854539815
+native closed loop (steady window),HoloOcean 2.3.0,0.0,0.0
+native closed loop (steady window),HoloOcean 2.3.0,0.2,13.420491875822849
+native closed loop (steady window),HoloOcean 2.3.0,0.5,245.9052384221076

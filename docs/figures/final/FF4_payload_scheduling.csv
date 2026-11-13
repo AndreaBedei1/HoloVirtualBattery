@@ -1,0 +1,6 @@
+suite,mode,terminal_Wh,run
+inspection (S5),continuous,3.146379669314541,EXP6-S5-inspection-continuous
+AI vision (S6),continuous,2.0358447927383074,EXP6-S6-ai-continuous
+inspection (S5),scheduled,2.1163592251651275,EXP6-S5-inspection-scheduled
+AI vision (S6),scheduled,1.8229440634739067,EXP6-S6-ai-scheduled
+propulsion only (S0),-,1.640004616356524,EXP6-S0-propulsion-only

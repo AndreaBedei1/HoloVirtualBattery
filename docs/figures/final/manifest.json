@@ -1,0 +1,62 @@
+{
+  "inputs": {
+    "final_runs.json": "087bcbb2c1a92c70639427a2536a19ea975f2afe8d2f512074e11b68934b0ea9",
+    "sensitivity.json": "84b078155866dfd04a1720ec8f848d39a73bf7f1ee97e3b02a294b4f8add45aa",
+    "crosslayer.json": "ea043b5adee468ee6c1790c566f22a74eed3674e74151b098b11ee42a9f27960",
+    "comm_matrix.json": "84eb67d7aa98d02411783e528015d617475bba2133001d97e0a5725a766f7081"
+  },
+  "figures": {
+    "FF1_layout_orientation": {
+      "caption": "Steady propulsion power (last 30 s of 90 s) holding position in a 0.5 m/s current, by layout and current direction. HoloOcean body and isotropic drag; 'not held' means the steady window had allocation residual or saturation; 'not run' marks cases outside the final matrix. L8-HV, L6-STD and L4-H45 coincide because only the four vectored horizontals work on the decoupled simulated body.",
+      "data": "FF1_layout_orientation.csv",
+      "sources": [
+        "final_runs.json"
+      ]
+    },
+    "FF2_current_drag_models": {
+      "caption": "Station-keeping propulsion power of the 8-thruster BlueROV2 Heavy versus head-on current, under three published, mutually inconsistent surge-resistance descriptions (steady allocation, T200 tables at 15.5 V), with the native closed-loop steady values (HoloOcean drag). Points beyond the identified range or the thruster clamp are omitted.",
+      "data": "FF2_current_drag_models.csv",
+      "sources": [
+        "final_runs.json",
+        "sensitivity.json"
+      ]
+    },
+    "FF3_transit_categories": {
+      "caption": "Energy of the same settled transit (out, stop, yaw, return, hold) by category at three head-on currents. 'damping' is the share of Unreal's ground-referenced linear damping in the time-mean resistance; it has no physical counterpart in current.",
+      "data": "FF3_transit_categories.csv",
+      "sources": [
+        "final_runs.json"
+      ]
+    },
+    "FF4_payload_scheduling": {
+      "caption": "Mission energy on the 0.2 m/s transit with the payload powered for the whole mission or only in the inspection phases (stop, hold, yaw). The sonar's step-up converter is unconfigured, so the inspection values are lower bounds with respect to conversion loss.",
+      "data": "FF4_payload_scheduling.csv",
+      "sources": [
+        "final_runs.json"
+      ]
+    },
+    "FF5_acoustic_share_sensitivity": {
+      "caption": "Share of the acoustic modem (EvoLogics S2C M 18/34, direct link, 2 s period) in the energy of the 0.2 m/s transit, recomputed from the simulated state durations for every published TX setting, RS-232 or Ethernet interface, and airtime from the DESERT PHY or the device bitrate. RX/listen at the published upper bound; 24 V conversion not modelled.",
+      "data": "FF5_acoustic_share_sensitivity.csv",
+      "sources": [
+        "sensitivity.json",
+        "crosslayer.json"
+      ]
+    },
+    "FF6_crosslayer_strategies": {
+      "caption": "Modem energy on the vehicle and over all nodes for each communication strategy on the same 0.2 m/s transit (one seed per strategy). Relays move energy from the vehicle to other nodes.",
+      "data": "FF6_crosslayer_strategies.csv",
+      "sources": [
+        "crosslayer.json"
+      ]
+    }
+  },
+  "code_commit": "955e56772c420145f3a1145951964b21c3fb3b5b",
+  "result_commits": {
+    "native": [
+      "81b91ea68eb4d139f1582fa2230e696497daba03"
+    ],
+    "crosslayer": "b73ae9f8a4e2e7691dfd270d6286f82a248c0582",
+    "comm_matrix": "81b91ea68eb4d139f1582fa2230e696497daba03"
+  }
+}
