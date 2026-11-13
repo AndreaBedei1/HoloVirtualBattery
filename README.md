@@ -18,13 +18,19 @@ vehicle (see [external comparison](docs/bluerov2_hydrodynamic_external_compariso
 
 Propulsion power follows the effort the controller commands against the simulated
 environment, not the vehicle's speed over ground. A vehicle holding station in a current
-moves at ~0 m/s and still spends most of its energy: a cubic in over-ground speed, fitted
-on a calm-water transit, underestimates station-keeping propulsion energy by 89 % at
-0.2 m/s and 98.7 % at 0.5 m/s. Using speed through the water removes most of that error in
-surge and sway (-15 % to +13 % here, because HoloOcean's drag is an isotropic quadratic
-law), but a speed model still cannot represent which actuators work: it overestimates a
-heave mission by 68 % and cannot distinguish actuator layouts or orientations
-([baselines](experiments/results/native/tables/baselines.csv)).
+barely moves and still spends most of its energy. A model in speed through the water does
+better, but it cannot say which actuators work, so it cannot separate layouts, orientations
+or heave from surge. The earlier comparison with such baselines is model versus model, not
+validation. Its error follows the current direction (forward or reverse T200 branch) and
+Unreal's ground-referenced damping, not drag isotropy (review B-06).
+
+## Usage modes
+
+| Mode | Use it for | What to read in the output |
+| --- | --- | --- |
+| **Engineering** | Comparing design and mission alternatives with the packaged profiles: layouts, payload schedules, link choices | Relative differences between runs on the same backend. Absolute energies follow the simulator's hydrodynamics. Check `evidence["scientific_warnings"]` before quoting a number. |
+| **Evidence-backed** | Estimates that must state their basis, such as reports or proposals | Link every load to a registry record. Set `evidence: {double_counting: error}`. Report the energy share per grade, the proxy and upper-bound shares, the unconfigured loads and the EnergyReport intervals together with the result. |
+| **Validation research** | Comparing simulated with measured energy | Use the verified backend (`holoenergy check-backend` PASS at 100 Hz) and runners that refuse a dirty tree. Recompute energies from the per-tick traces. Replace proxy and grade D values with measured ones, and keep calibration and hold-out data separate. HoloEnergy does not provide a validated vehicle model. |
 
 ## What is in v0.2 (branch `feature/provenance-aware-energy-framework`)
 
@@ -54,34 +60,35 @@ with EnergyAwareEnv(base_env, vehicle_profile="bluerov2-standard", control_contr
 More examples (Heavy, 6T, custom 4T layout, sensor suite, compute, DESERT, custom
 battery, proxy AUV) run without a simulator: `python examples/api_examples.py`.
 
-## Native results (verified backend, 100 Hz)
+## Final results (hardening phase, verified backend, 100 Hz)
 
-The drag-patched HoloOcean 2.3.0 package was rebuilt and verified on this machine
-(observed/expected drag 1.0000000, control rebuild 0.0100 like the official binary;
-[build](docs/holoocean_patched_build.md)). 42 closed-loop runs close the chain
-dynamics -> requested wrench -> allocation -> actuator force -> electrical power ->
-battery -> derating -> applied thrust tick by tick (force residual < 1e-4 N)
-([campaign](experiments/run_native_campaign.py), [tables](experiments/results/native/tables),
-[figures](docs/figures/paper)). Selected results:
+The final experiment set was fixed before the runs ([design](docs/paper/FINAL_EXPERIMENTS.md)).
+It ran from a clean commit: 36 native runs, a communication matrix with 20 seeds and
+8 cross-layer strategies ([results](experiments/results/final), [figures](docs/figures/final)).
+Every energy is recomputed independently from the 100 Hz traces (worst relative error 1.9e-13).
+The statements below are listed, with their conditions, in the
+[claim–evidence matrix](docs/paper/CLAIM_EVIDENCE_MATRIX.md). All of them are conditional on
+HoloOcean's BlueROV2 body and drag, which are not a validated vehicle model.
 
-* Virtual layouts on the HoloOcean BlueROV2 Heavy body (wrench-equivalent actuation;
-  only L8-HV is simulator-exact): layouts sharing the four vectored horizontals cost the
-  same in surge current; 2 verticals need 42 % more heave energy than 4; 4 horizontals
-  cannot heave; no layout holds station at 0.8 m/s, where HoloOcean's drag exceeds the
-  clamp-limited thrust (4.2-5.2 m drift).
-* Horizontal angle: 30 deg costs 2.32 / 4.67 Wh (surge / sway current, 0.5 m/s,
-  30 s), 60 deg 5.47 / 1.99 Wh, the latter at the 60 A pack limit.
-* An inspection payload adds 86 % to propulsion-only energy on a transit in
-  0.2 m/s current; in that transit an acoustic modem adds at most 1.37 % (upper-bound
-  receive/listen power), an optical one 0.57 %
-  ([cross-layer](experiments/results/native/crosslayer.json)).
-* At 0.4-1.0 m/s HoloOcean's BlueROV2 drag is 3.8-4.5x the mean restrained load
-  measured on a modified standard BlueROV2 (Gabl et al. 2021); its still-water resistance
-  is 1.13-1.21x the damping identified on a free-running Heavy at 0.2-0.6 m/s
-  (von Benzon et al. 2022): the external references disagree with each other by 3-4x.
-* Energy shares by evidence grade describe the electrical-model parameters only (not
-  geometry, dynamics or the placeholder-OCV bus voltage); T200 curves are static bollard
-  data applied with inflow and are graded B.
+* In head-on current, L8-HV, L6-STD and L4-H45 need the same energy (6.53 Wh over 90 s at
+  0.5 m/s). This is a property of the decoupled simulated body.
+* L4-2H2V needs 14 % less in head-on current but cannot hold sway or oblique current;
+  L8-VEC30 needs 23 % more.
+* The horizontal-thruster angle trades head-on cost against sway cost. The size of the trade-off
+  depends on the drag law: the sway/head-on ratio is 1.20 with HoloOcean drag and 1.77 with the
+  identified anisotropic damping.
+* Published BlueROV2 resistance data would change station-keeping propulsion power to
+  0.11–0.22× (Gabl et al. 2021) or 0.87–1.29× (von Benzon et al. 2022) of the HoloOcean value.
+* Transit energies (0.65 / 1.76 / 5.22 Wh at 0 / 0.2 / 0.4 m/s) include Unreal's
+  ground-referenced linear damping, which is 21 % of the time-mean resistance in calm water.
+* Switching the payload on only at the inspection site saves 33 % (inspection suite) and
+  10 % (AI suite) of mission energy.
+* The acoustic modem's share of mission energy is 1.45 % as simulated (lowest published TX
+  setting, RS-232, DESERT PHY). Over the published settings, interfaces and airtime bases it
+  ranges from 0.96 % to 13.2 %. It is not an upper bound.
+
+Readiness: [final sign-off](docs/reviews/FINAL_SIGNOFF.md) (not ready for submission). Reviews:
+[consolidation](docs/reviews/REVIEW_CONSOLIDATION.md).
 
 How to run native HoloOcean and DESERT next to other simulations:
 [docs/native_runs.md](docs/native_runs.md). Research status and open gaps:
