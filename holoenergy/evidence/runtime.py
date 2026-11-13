@@ -73,6 +73,10 @@ class EvidenceMap:
             self.registry, evidence.get("converters")
         )
         self.hotel_grade, self.hotel_record = _graded(self.registry, evidence.get("hotel_constant"))
+        self.category_relations = {
+            category: (evidence.get(category) or {}).get("relation")
+            for category in ("battery_losses", "converters")
+        }
         self.vehicle_relation = evidence.get("vehicle_relation")
         battery = config.get("battery") or {}
         ocv_record = ((battery.get("metadata") or {}).get("evidence") or {}).get("ocv_curve")
@@ -299,16 +303,27 @@ class EvidenceMap:
     def summarize(self, device_state_energy_Wh, category_energy_Wh):
         by_grade = {g: 0.0 for g in GRADES}
         upper_bound_Wh = proxy_Wh = 0.0
+        flagged = {}  # (kind, subject) -> [energy_Wh, states]
         for device, states in device_state_energy_Wh.items():
             relation = (
                 self.propulsion_relation if device in self.actuators else self.relations.get(device)
             )
             for state, wh in states.items():
-                by_grade[self.grade(device, state)] += wh
+                grade = self.grade(device, state)
+                by_grade[grade] += wh
+                kinds = []
                 if self.bounds.get(device, {}).get(state) == "upper_bound":
                     upper_bound_Wh += wh
+                    kinds.append("upper_bound_only")
                 if relation == "proxy":
                     proxy_Wh += wh
+                    kinds.append("proxy")
+                if grade == "D":
+                    kinds.append("grade_D")
+                for kind in kinds if wh > 0 else ():
+                    entry = flagged.setdefault((kind, device), [0.0, set()])
+                    entry[0] += wh
+                    entry[1].add(state)
         by_grade[self.converter_grade] += category_energy_Wh.get("converters", 0.0)
         by_grade[self.battery_loss_grade] += category_energy_Wh.get("battery_losses", 0.0)
         result = coverage(by_grade)
@@ -334,4 +349,52 @@ class EvidenceMap:
                 "vehicle hydrodynamics (simulator-owned, not validated) and unconfigured loads"
             ),
         )
+        result["scientific_warnings"] = self._scientific_warnings(
+            flagged, category_energy_Wh, total
+        )
         return result
+
+    EFFECTS = {
+        "unknown": "excluded from the bus: the estimate is low by an unknown amount",
+        "grade_D": "user value or placeholder without published evidence",
+        "proxy": "evidence for a different but related device or condition",
+        "upper_bound_only": "published maximum used as the value: biases the estimate upward",
+    }
+
+    def _scientific_warnings(self, flagged, category_energy_Wh, total):
+        """Structured, non-blocking warnings (brief section 51): what in the estimate is unknown,
+        grade D, proxy or upper-bound only, with the energy it carries."""
+
+        def item(kind, subject, energy, states=()):
+            return {
+                "kind": kind,
+                "subject": subject,
+                "states": sorted(states),
+                "energy_Wh": energy,
+                "share_percent": 100 * energy / total if total and energy is not None else None,
+                "effect": self.EFFECTS[kind],
+            }
+
+        out = [item("unknown", u["component"], None) for u in self.unconfigured]
+        out += [
+            item(kind, device, wh, states)
+            for (kind, device), (wh, states) in sorted(flagged.items())
+        ]
+        for category, grade in (
+            ("battery_losses", self.battery_loss_grade),
+            ("converters", self.converter_grade),
+        ):
+            wh = category_energy_Wh.get(category, 0.0)
+            if grade == "D" and wh > 0:
+                out.append(item("grade_D", category, wh))
+            elif self.category_relations.get(category) == "proxy" and wh > 0:
+                out.append(item("proxy", category, wh))
+        if self.ocv_grade == "D":
+            out.append(
+                {
+                    **item("grade_D", "battery OCV curve", None),
+                    "effect": "bus voltage, and through it propulsion power and battery loss, "
+                    "follow a placeholder OCV curve",
+                }
+            )
+        return out

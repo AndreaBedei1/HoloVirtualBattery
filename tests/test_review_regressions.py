@@ -325,3 +325,21 @@ def test_power_irls_allocation_runs_in_the_env():
     assert irls["actuation"]["allocation_residual_norm"] < 1e-6
     assert math.isfinite(irls["power_propulsion_W"]) and irls["power_propulsion_W"] > 0
     assert irls["power_propulsion_W"] <= rows["redistributed"]["power_propulsion_W"] * 1.001
+
+
+def test_scientific_warnings_are_structured_and_non_blocking():
+    """Brief section 51: unknown / grade D / proxy / upper-bound-only evidence is reported as
+    structured data with the energy it carries; the run is not blocked."""
+    env = make()
+    for _ in range(50):
+        env.step([0, 0, 0, 0, 10.0, 10.0, 10.0, 10.0])
+    evidence = env.energy.summary()["evidence"]
+    items = evidence["scientific_warnings"]
+    assert items, "the default profile carries flagged evidence"
+    kinds = {"unknown", "grade_D", "proxy", "upper_bound_only"}
+    for w in items:
+        assert w["kind"] in kinds
+        assert set(w) >= {"kind", "subject", "states", "energy_Wh", "share_percent", "effect"}
+    flagged_ub = sum(w["energy_Wh"] for w in items if w["kind"] == "upper_bound_only")
+    assert flagged_ub == pytest.approx(evidence["upper_bound_energy_Wh"])
+    env.close()
