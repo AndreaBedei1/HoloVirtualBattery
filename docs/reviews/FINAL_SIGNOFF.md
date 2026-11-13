@@ -47,9 +47,11 @@ Everything in the "Claims removed or rewritten" table of the claim matrix. Also:
 
 1. Read S3 (LOTUSim-Energy) and S8 (Danielis et al. 2021) in full; check the S2 and S11 records.
    Rewrite the related work around DESERT's existing TX/RX counters.
-3. Close or explicitly defer the remaining major findings in `REVIEW_CONSOLIDATION.md` section 3a.
-4. Draft under `paper/` following the claim matrix. Then run Reviewer I (SIMPAT rejection
+2. Resolve the two open judgements in `REVIEW_CONSOLIDATION.md` section 4: G-11 (T200 grade in
+   inflow) and G-16 (journal framing). Every other blocking finding there is resolved, withdrawn or
+   deferred with a stated limitation.
+3. Draft under `paper/` following the claim matrix. Then run Reviewer I (SIMPAT rejection
    perspective) and Reviewer J (methods reproducibility).
-5. Optional, pending the user's approval to download:
+4. Optional, pending the user's approval to download:
    - the 30Q OCV dataset, to replace the grade D OCV curve (C-02);
    - Lam et al. 2023, for T200 data at advance speed (A-02).

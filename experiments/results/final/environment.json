@@ -1,0 +1,23 @@
+{
+  "purpose": "interpreter and engines used for the final native and DESERT runs (review H-02)",
+  "python": "3.10.20",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "interpreter": "F:/Andrea/HoloWithDesertCommunications/.venv (Python 3.10)",
+  "packages": {
+    "holoocean": "2.3.0",
+    "numpy": "1.26.4",
+    "scipy": "1.14.1",
+    "pydantic": "2.14.1",
+    "matplotlib": "3.9.4",
+    "holoenergy": "0.2.0",
+    "holo_desert": "1.1.0"
+  },
+  "holoocean_binary": "C:/HOB/packages/patched-after (sha256 recorded per run in provenance.backend)",
+  "desert_engine_image": {
+    "tag": "holo-desert-engine:4.0.0-v2",
+    "id": "sha256:dce313c460a09439d47c5fd42a4c36ef97823a63182a51ce8a2ec509d08a7a57"
+  },
+  "desert_container": "holoenergy-desert-5571 on 127.0.0.1:5571, NetworkSession(manage_engine=False)",
+  "physics_rate_hz": 100,
+  "holo_desert_source": "F:/Andrea/HoloWithDesertCommunications at 635b99a (editable install)"
+}
