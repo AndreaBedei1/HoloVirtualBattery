@@ -53,7 +53,9 @@ cross-layer run.
   feasibility, tracking, Unreal damping share.
 - **Comm matrix.** 9 configurations × 20 seeds. 8 of the 9 are identical across seeds. B2 delivers
   61/200 (Wilson 95 % interval 0.245–0.372).
-- **Cross-layer.** 8 strategies, running into `experiments/results/final/crosslayer.json`.
+- **Cross-layer.** 8 strategies, from commit b73ae9f (clean). Direct acoustic share is 1.45 % as simulated; the range over published settings is 0.96–13.2 % (EXP10 part 2).
+- **Claims and sign-off.** `docs/paper/CLAIM_EVIDENCE_MATRIX.md` (C1–C20) and `docs/reviews/FINAL_SIGNOFF.md`. Verdict: NOT READY for submission; drafting may start under the claim matrix.
+- **Cleanup.** The own DESERT container `holoenergy-desert-5571` is stopped, not removed (`docker start holoenergy-desert-5571`).
 
 ## Next steps
 
