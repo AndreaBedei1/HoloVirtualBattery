@@ -1,0 +1,3553 @@
+{
+  "voltage_V": 15.5,
+  "native_clamp_N": 28.75,
+  "window_s": 60.0,
+  "part1_drag_model": [
+    {
+      "drag_model": "HoloOcean 2.3.0 literals",
+      "current_m_s": 0.2,
+      "surge_force_N": 7.178400000000001,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 8.881784197001252e-16,
+      "propulsion_power_W": 12.4,
+      "propulsion_Wh_per_60s": 0.20666666666666667,
+      "note": "in range",
+      "ratio_to_holoocean": 1.0
+    },
+    {
+      "drag_model": "HoloOcean 2.3.0 literals",
+      "current_m_s": 0.4,
+      "surge_force_N": 28.713600000000003,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 3.552713678800501e-15,
+      "propulsion_power_W": 115.07025272622211,
+      "propulsion_Wh_per_60s": 1.917837545437035,
+      "note": "in range",
+      "ratio_to_holoocean": 1.0
+    },
+    {
+      "drag_model": "HoloOcean 2.3.0 literals",
+      "current_m_s": 0.5,
+      "surge_force_N": 44.865,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 240.2863156121702,
+      "propulsion_Wh_per_60s": 4.004771926869504,
+      "note": "in range",
+      "ratio_to_holoocean": 1.0
+    },
+    {
+      "drag_model": "HoloOcean 2.3.0 literals",
+      "current_m_s": 0.6,
+      "surge_force_N": 64.6056,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 417.34234305483113,
+      "propulsion_Wh_per_60s": 6.9557057175805195,
+      "note": "in range",
+      "ratio_to_holoocean": 1.0
+    },
+    {
+      "drag_model": "HoloOcean 2.3.0 literals",
+      "current_m_s": 0.8,
+      "surge_force_N": 114.85440000000001,
+      "feasible_within_clamp": false,
+      "allocation_residual_N": 33.53712016349502,
+      "propulsion_power_W": 600.5305418841864,
+      "propulsion_Wh_per_60s": 10.00884236473644,
+      "note": "in range",
+      "ratio_to_holoocean": 1.0
+    },
+    {
+      "drag_model": "Gabl et al. 2021 restrained load (standard BlueROV2)",
+      "current_m_s": 0.2,
+      "surge_force_N": 1.0000000000000004,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 2.6758949731013812,
+      "propulsion_Wh_per_60s": 0.04459824955168969,
+      "note": "interpolated",
+      "ratio_to_holoocean": 0.2157979817017243
+    },
+    {
+      "drag_model": "Gabl et al. 2021 restrained load (standard BlueROV2)",
+      "current_m_s": 0.4,
+      "surge_force_N": 6.4,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 12.4,
+      "propulsion_Wh_per_60s": 0.20666666666666667,
+      "note": "interpolated",
+      "ratio_to_holoocean": 0.10776025694062197
+    },
+    {
+      "drag_model": "Gabl et al. 2021 restrained load (standard BlueROV2)",
+      "current_m_s": 0.5,
+      "surge_force_N": 11.399999999999999,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 1.7763568394002505e-15,
+      "propulsion_power_W": 27.358849323452862,
+      "propulsion_Wh_per_60s": 0.4559808220575477,
+      "note": "interpolated",
+      "ratio_to_holoocean": 0.11385937336361227
+    },
+    {
+      "drag_model": "Gabl et al. 2021 restrained load (standard BlueROV2)",
+      "current_m_s": 0.6,
+      "surge_force_N": 16.4,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 48.79732698876364,
+      "propulsion_Wh_per_60s": 0.8132887831460607,
+      "note": "interpolated",
+      "ratio_to_holoocean": 0.1169239781220871
+    },
+    {
+      "drag_model": "Gabl et al. 2021 restrained load (standard BlueROV2)",
+      "current_m_s": 0.8,
+      "surge_force_N": 28.8,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 3.552713678800501e-15,
+      "propulsion_power_W": 115.7013854539815,
+      "propulsion_Wh_per_60s": 1.9283564242330251,
+      "note": "interpolated",
+      "ratio_to_holoocean": 0.1926652807548542
+    },
+    {
+      "drag_model": "von Benzon et al. 2022 identified damping (Heavy)",
+      "current_m_s": 0.2,
+      "surge_force_N": 8.38,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 16.042969975146846,
+      "propulsion_Wh_per_60s": 0.26738283291911413,
+      "note": "in identified range",
+      "ratio_to_holoocean": 1.2937879012215199
+    },
+    {
+      "drag_model": "von Benzon et al. 2022 identified damping (Heavy)",
+      "current_m_s": 0.4,
+      "surge_force_N": 28.040000000000003,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 108.1945584231044,
+      "propulsion_Wh_per_60s": 1.8032426403850734,
+      "note": "in identified range",
+      "ratio_to_holoocean": 0.9402478560686182
+    },
+    {
+      "drag_model": "von Benzon et al. 2022 identified damping (Heavy)",
+      "current_m_s": 0.5,
+      "surge_force_N": 42.1,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 216.79926853436237,
+      "propulsion_Wh_per_60s": 3.6133211422393727,
+      "note": "in identified range",
+      "ratio_to_holoocean": 0.90225391313704
+    },
+    {
+      "drag_model": "von Benzon et al. 2022 identified damping (Heavy)",
+      "current_m_s": 0.6,
+      "surge_force_N": 58.98,
+      "feasible_within_clamp": true,
+      "allocation_residual_N": 0.0,
+      "propulsion_power_W": 362.7291081510863,
+      "propulsion_Wh_per_60s": 6.045485135851438,
+      "note": "in identified range",
+      "ratio_to_holoocean": 0.8691404411448141
+    },
+    {
+      "drag_model": "von Benzon et al. 2022 identified damping (Heavy)",
+      "current_m_s": 0.8,
+      "surge_force_N": 101.20000000000002,
+      "feasible_within_clamp": false,
+      "allocation_residual_N": 19.882720163495023,
+      "propulsion_power_W": 600.5305418841864,
+      "propulsion_Wh_per_60s": 10.00884236473644,
+      "note": "extrapolated beyond 0.72 m/s",
+      "ratio_to_holoocean": 1.0
+    }
+  ],
+  "part2_acoustic_modem": {
+    "rows": [
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.025989814814814775,
+        "share_of_terminal": 0.014531510786099959,
+        "as_simulated": true
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.04907444444444429,
+        "share_of_terminal": 0.027089022681364015,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.16893694444444368,
+        "share_of_terminal": 0.08746586497340675,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.2577239814814803,
+        "share_of_terminal": 0.12757043797754644,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.036684259259259215,
+        "share_of_terminal": 0.02038910682822976,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.05976888888888873,
+        "share_of_terminal": 0.032798719349779695,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.17963138888888816,
+        "share_of_terminal": 0.09249071686620164,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.26841842592592474,
+        "share_of_terminal": 0.13216443687340212,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.020177138289368506,
+        "share_of_terminal": 0.011318292441368479,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.02814880895283773,
+        "share_of_terminal": 0.01571967877887099,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.06954017585931256,
+        "share_of_terminal": 0.037957271600602145,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.1002004476418865,
+        "share_of_terminal": 0.053792401645022914,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.030871582733812953,
+        "share_of_terminal": 0.017214035046535407,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.03884325339728218,
+        "share_of_terminal": 0.02156320034215337,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.080234620303757,
+        "share_of_terminal": 0.043540482391243716,
+        "as_simulated": false
+      },
+      {
+        "strategy": "direct",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.11089489208633094,
+        "share_of_terminal": 0.059193842841916935,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.025989814814814775,
+        "share_of_terminal": 0.014531509521721098,
+        "as_simulated": true
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.04907444444444429,
+        "share_of_terminal": 0.027089020354397378,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.16893694444444368,
+        "share_of_terminal": 0.08746585792629055,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.2577239814814803,
+        "share_of_terminal": 0.12757042815092695,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.036684259259259215,
+        "share_of_terminal": 0.02038910506472952,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.05976888888888873,
+        "share_of_terminal": 0.03279871654888058,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.17963138888888816,
+        "share_of_terminal": 0.09249070945526773,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.981666666666587,
+        "rx_listen_s": 61.018333333333416,
+        "communication_Wh": 0.26841842592592474,
+        "share_of_terminal": 0.13216442674651957,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.020177138289368506,
+        "share_of_terminal": 0.011318291453358968,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.02814880895283773,
+        "share_of_terminal": 0.01571967741275937,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.06954017585931256,
+        "share_of_terminal": 0.03795726837646828,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.1002004476418865,
+        "share_of_terminal": 0.05379239715104346,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.030871582733812953,
+        "share_of_terminal": 0.017214033552828654,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.03884325339728218,
+        "share_of_terminal": 0.021563198479338432,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.080234620303757,
+        "share_of_terminal": 0.04354047871432909,
+        "as_simulated": false
+      },
+      {
+        "strategy": "ack",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.518848920863309,
+        "rx_listen_s": 71.4811510791367,
+        "communication_Wh": 0.11089489208633094,
+        "share_of_terminal": 0.05919383792491473,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.025762037037036997,
+        "share_of_terminal": 0.014405985159174614,
+        "as_simulated": true
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.048254444444444294,
+        "share_of_terminal": 0.026648437847294353,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.16504194444444373,
+        "share_of_terminal": 0.08562189854040886,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.2515512037037026,
+        "share_of_terminal": 0.12489656484843252,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.036456481481481444,
+        "share_of_terminal": 0.020265067274827915,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.05894888888888874,
+        "share_of_terminal": 0.03236329001350913,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.17573638888888815,
+        "share_of_terminal": 0.09066702077254203,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.57166666666659,
+        "rx_listen_s": 61.42833333333341,
+        "communication_Wh": 0.262245648148147,
+        "share_of_terminal": 0.129518690772534,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.02009848121502798,
+        "share_of_terminal": 0.011274664010073243,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.027865643485211835,
+        "share_of_terminal": 0.015564001645998105,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.06819513988808953,
+        "share_of_terminal": 0.03725044426764318,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.0980688409272582,
+        "share_of_terminal": 0.05270835410895324,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.030792925659472423,
+        "share_of_terminal": 0.017170923570057894,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.03856008792965628,
+        "share_of_terminal": 0.021409364506757643,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.07888958433253397,
+        "share_of_terminal": 0.04284183662601123,
+        "as_simulated": false
+      },
+      {
+        "strategy": "multihop",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.37726618705036,
+        "rx_listen_s": 71.62273381294965,
+        "communication_Wh": 0.10876328537170263,
+        "share_of_terminal": 0.058122141905851576,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.025797222222222218,
+        "share_of_terminal": 0.014425377628714387,
+        "as_simulated": true
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.048381111111111104,
+        "share_of_terminal": 0.02671652216184254,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.1656436111111111,
+        "share_of_terminal": 0.08590722669991778,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.2525047222222222,
+        "share_of_terminal": 0.12531067381893457,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.036491666666666665,
+        "share_of_terminal": 0.02028423025040721,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.05907555555555555,
+        "share_of_terminal": 0.03243057758868191,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.17633805555555554,
+        "share_of_terminal": 0.09094920981309675,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 15.634999999999996,
+        "rx_listen_s": 61.365,
+        "communication_Wh": 0.2631991666666666,
+        "share_of_terminal": 0.1299284381368504,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.02011063149480416,
+        "share_of_terminal": 0.01128140380619041,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.027909384492406077,
+        "share_of_terminal": 0.01558805281131717,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.06840290967226219,
+        "share_of_terminal": 0.037359697398569494,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.09839811350919264,
+        "share_of_terminal": 0.05287597162348174,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.030805075939248604,
+        "share_of_terminal": 0.01717758360722339,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.03860382893685052,
+        "share_of_terminal": 0.02143313128576088,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.07909735411670664,
+        "share_of_terminal": 0.04294982485373823,
+        "as_simulated": false
+      },
+      {
+        "strategy": "flooding",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.399136690647482,
+        "rx_listen_s": 71.60086330935252,
+        "communication_Wh": 0.10909255795363709,
+        "share_of_terminal": 0.058287849543625855,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.025306481481481444,
+        "share_of_terminal": 0.014154829350610658,
+        "as_simulated": true
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.04661444444444431,
+        "share_of_terminal": 0.025766054917800752,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.1572519444444438,
+        "share_of_terminal": 0.08191147413793112,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.23920564814814715,
+        "share_of_terminal": 0.11949928358683315,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.03600092592592588,
+        "share_of_terminal": 0.020016881725398634,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.05730888888888876,
+        "share_of_terminal": 0.03149123562853605,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.16794638888888827,
+        "share_of_terminal": 0.0869975040631067,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 14.751666666666601,
+        "rx_listen_s": 62.2483333333334,
+        "communication_Wh": 0.2499000925925916,
+        "share_of_terminal": 0.12417844181577153,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.019941167066346924,
+        "share_of_terminal": 0.011187388675364947,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.027299312549960035,
+        "share_of_terminal": 0.015252490385337323,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.0655050679456435,
+        "share_of_terminal": 0.03583364858297686,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.09380562749800161,
+        "share_of_terminal": 0.05053276180145183,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.030635611510791364,
+        "share_of_terminal": 0.017084678721335487,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.03799375699440448,
+        "share_of_terminal": 0.021101534883591413,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.07619951239008793,
+        "share_of_terminal": 0.04144145483766612,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-vehicle",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 5.0941007194244605,
+        "rx_listen_s": 71.90589928057554,
+        "communication_Wh": 0.10450007194244604,
+        "share_of_terminal": 0.055971367048958415,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": true
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "DESERT PHY as simulated",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "RS-232",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 0.8,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.01711111111111111,
+        "share_of_terminal": 0.009614803900225477,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_1000m",
+        "tx_W": 2.8,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_2000m",
+        "tx_W": 8.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_3500m",
+        "tx_W": 35.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      },
+      {
+        "strategy": "relay-fixed",
+        "airtime": "device bitrate (payload bits only)",
+        "interface": "Ethernet",
+        "tx_record": "evologics_s2cm_18_34.tx_max",
+        "tx_W": 55.0,
+        "rx_listen_W": 1.3,
+        "tx_s": 0.0,
+        "rx_listen_s": 77.0,
+        "communication_Wh": 0.02780555555555556,
+        "share_of_terminal": 0.015530728271144685,
+        "as_simulated": false
+      }
+    ],
+    "share_min": 0.009614803900225477,
+    "share_max": 0.13216443687340212,
+    "notes": [
+      "RX/LISTEN is the published upper bound (<0.8 W, RS-232); no lower value is assumed",
+      "tx_max (55 W) is an upper bound ('max. available')",
+      "battery-loss change and 24 V DC/DC conversion are not modelled"
+    ]
+  },
+  "part3_allocator": [
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 240.2863156123937,
+      "residual_N": 0.0,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 240.2863156123937,
+      "residual_N": 0.0,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 240.2863156123937,
+      "residual_N": 0.0,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 289.4758085340196,
+      "residual_N": 7.119291619286993e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 289.4758085340196,
+      "residual_N": 7.119291619286993e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 289.4758085340197,
+      "residual_N": 7.95651227888113e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000002
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 1.0053695202710967e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 1.0053695202710967e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-HV",
+      "geometry_grade": "A",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 204.5857403023796,
+      "residual_N": 2.563437407172453e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 0.9999999999999996
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 240.28631561239354,
+      "residual_N": 2.758080026135726e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 240.28631561239354,
+      "residual_N": 2.758080026135726e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 240.2863156123937,
+      "residual_N": 8.973679357151162e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000007
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 289.4758085340196,
+      "residual_N": 2.723425733261626e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 289.4758085340196,
+      "residual_N": 2.723425733261626e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 289.4758085340197,
+      "residual_N": 7.119291619286993e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000002
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 1.139785215825445e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 1.139785215825445e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L6-STD",
+      "geometry_grade": "C",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 204.5857403023798,
+      "residual_N": 1.1252915634548135e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000007
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 240.28631561239354,
+      "residual_N": 2.758080026135726e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 240.28631561239354,
+      "residual_N": 2.758080026135726e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 240.2863156123937,
+      "residual_N": 8.973679357151162e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000007
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 289.4758085340196,
+      "residual_N": 2.723425733261626e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 289.4758085340196,
+      "residual_N": 2.723425733261626e-13,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 289.4758085340197,
+      "residual_N": 7.119291619286993e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000002
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 1.139785215825445e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 1.139785215825445e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-H45",
+      "geometry_grade": "C",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 204.5857403023798,
+      "residual_N": 1.1252915634548135e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000007
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 7.105427357601002e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 204.5857403023797,
+      "residual_N": 7.105427357601002e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 204.58574030237972,
+      "residual_N": 4.440892098500626e-16,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0000000000000002
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 0.0,
+      "residual_N": 44.865,
+      "feasible": false,
+      "ratio_to_redistributed": null
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 0.0,
+      "residual_N": 44.865,
+      "feasible": false,
+      "ratio_to_redistributed": null
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 0.0,
+      "residual_N": 44.865,
+      "feasible": false,
+      "ratio_to_redistributed": null
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 120.14315780619685,
+      "residual_N": 31.72434573793446,
+      "feasible": false,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 120.14315780619685,
+      "residual_N": 31.72434573793446,
+      "feasible": false,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L4-2H2V",
+      "geometry_grade": "D",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 120.14315780619691,
+      "residual_N": 31.72434573793446,
+      "feasible": false,
+      "ratio_to_redistributed": 1.0000000000000004
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 297.345560026033,
+      "residual_N": 6.145964433128293e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 297.345560026033,
+      "residual_N": 6.145964433128293e-15,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "head-on",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 297.74646996107515,
+      "residual_N": 2.0022743166419448e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0013482963559537
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 423.7861468406395,
+      "residual_N": 2.3144355824873483e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 423.7861468406395,
+      "residual_N": 2.3144355824873483e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "sway",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 423.5115003882422,
+      "residual_N": 3.560147864357502e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 0.9993519220615285
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "pseudoinverse",
+      "propulsion_power_W": 253.30170749641826,
+      "residual_N": 1.848831788967659e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "redistributed",
+      "propulsion_power_W": 253.30170749641826,
+      "residual_N": 1.848831788967659e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0
+    },
+    {
+      "layout": "L8-VEC30",
+      "geometry_grade": "D",
+      "case": "oblique 45 deg",
+      "current_m_s": 0.5,
+      "method": "power_irls",
+      "propulsion_power_W": 253.4618409151331,
+      "residual_N": 1.3544728009947486e-14,
+      "feasible": true,
+      "ratio_to_redistributed": 1.0006321845213662
+    }
+  ],
+  "part4_drag_anisotropy": {
+    "rows": [
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 12.4
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 8.899114524108741e-16,
+        "propulsion_power_W": 15.5180906781955
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 7.178400000000003,
+        "feasible": true,
+        "residual_N": 1.2586237604968663e-15,
+        "propulsion_power_W": 12.42753966706535
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 7.090019687036579
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 4.4065645555256766e-14,
+        "propulsion_power_W": 12.4
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 4.352980466692758e-14,
+        "propulsion_power_W": 15.518090678195499
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000003,
+        "feasible": true,
+        "residual_N": 2.831686995966613e-15,
+        "propulsion_power_W": 12.427539667065352
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 8.910010513038765e-16,
+        "propulsion_power_W": 12.427539667065346
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 4.4065645555256766e-14,
+        "propulsion_power_W": 12.4
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 4.352980466692758e-14,
+        "propulsion_power_W": 15.518090678195499
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000003,
+        "feasible": true,
+        "residual_N": 2.831686995966613e-15,
+        "propulsion_power_W": 12.427539667065352
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 7.178400000000001,
+        "feasible": false,
+        "residual_N": 7.178400000000001,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 1.7763568394002505e-15,
+        "propulsion_power_W": 12.427539667065346
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": false,
+        "residual_N": 7.178400000000001,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000003,
+        "feasible": false,
+        "residual_N": 5.075895318069515,
+        "propulsion_power_W": 6.2
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 4.441239029644353e-15,
+        "propulsion_power_W": 12.42753966706535
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 9.629887358035952e-16,
+        "propulsion_power_W": 19.324683546543366
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 3.692013241362374e-15,
+        "propulsion_power_W": 23.290211030836158
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000003,
+        "feasible": true,
+        "residual_N": 3.5831997303830105e-15,
+        "propulsion_power_W": 18.09083656418953
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 1.8681095276985985e-15,
+        "propulsion_power_W": 10.389812519208473
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 8.881784197001252e-16,
+        "propulsion_power_W": 11.551313433360445
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 8.881784197001252e-16,
+        "propulsion_power_W": 26.44930824158085
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000003,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 16.558674629162027
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 7.090019687036579
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 24.855079334130693
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 8.899114524108741e-16,
+        "propulsion_power_W": 12.043967662199801
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000003,
+        "feasible": true,
+        "residual_N": 9.036560719766055e-16,
+        "propulsion_power_W": 15.781562797339863
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 7.178400000000001,
+        "feasible": true,
+        "residual_N": 8.903441835098303e-16,
+        "propulsion_power_W": 7.090019687036575
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 240.2863156123937
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 7.119291619286993e-15,
+        "propulsion_power_W": 289.4758085340196
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 44.86500000000001,
+        "feasible": true,
+        "residual_N": 1.0053695202710967e-14,
+        "propulsion_power_W": 204.5857403023797
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 133.12324967661942
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 2.758080026135726e-13,
+        "propulsion_power_W": 240.28631561239354
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 2.723425733261626e-13,
+        "propulsion_power_W": 289.4758085340196
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 44.86500000000001,
+        "feasible": true,
+        "residual_N": 1.139785215825445e-14,
+        "propulsion_power_W": 204.5857403023797
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 7.12864389155857e-15,
+        "propulsion_power_W": 204.58574030237972
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 2.758080026135726e-13,
+        "propulsion_power_W": 240.28631561239354
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 2.723425733261626e-13,
+        "propulsion_power_W": 289.4758085340196
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 44.86500000000001,
+        "feasible": true,
+        "residual_N": 1.139785215825445e-14,
+        "propulsion_power_W": 204.5857403023797
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 44.865,
+        "feasible": false,
+        "residual_N": 44.865,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 7.105427357601002e-15,
+        "propulsion_power_W": 204.5857403023797
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": false,
+        "residual_N": 44.865,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 44.86500000000001,
+        "feasible": false,
+        "residual_N": 31.72434573793446,
+        "propulsion_power_W": 120.14315780619685
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 2.1320907500235726e-14,
+        "propulsion_power_W": 204.58574030237986
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 6.145964433128293e-15,
+        "propulsion_power_W": 297.345560026033
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 2.3144355824873483e-14,
+        "propulsion_power_W": 423.7861468406395
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 44.86500000000001,
+        "feasible": true,
+        "residual_N": 1.848831788967659e-14,
+        "propulsion_power_W": 253.30170749641826
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 1.458792497701479e-14,
+        "propulsion_power_W": 170.82663736474774
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 175.95842267000347
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 496.9871741297339
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 44.86500000000001,
+        "feasible": true,
+        "residual_N": 5.0242958677880805e-15,
+        "propulsion_power_W": 281.43466593949273
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 133.12324967661942
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 409.1714806047594
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 7.53644380168212e-15,
+        "propulsion_power_W": 209.480200355752
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 44.86500000000001,
+        "feasible": true,
+        "residual_N": 3.794299872214038e-15,
+        "propulsion_power_W": 268.910688361795
+      },
+      {
+        "drag_law": "HoloOcean isotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 44.865,
+        "feasible": true,
+        "residual_N": 7.122753468078643e-15,
+        "propulsion_power_W": 133.12324967661937
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 16.042969975183528
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 8.680000000000001,
+        "feasible": true,
+        "residual_N": 1.7763568394002505e-15,
+        "propulsion_power_W": 21.206502884426662
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 6.439654133083892,
+        "feasible": true,
+        "residual_N": 1.2566536097757672e-15,
+        "propulsion_power_W": 10.95112374733083
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 14.200000000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 24.8
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 5.1556562589973386e-14,
+        "propulsion_power_W": 16.042969975183496
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 8.680000000000001,
+        "feasible": true,
+        "residual_N": 5.25435845655669e-14,
+        "propulsion_power_W": 21.206502884426666
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 6.439654133083892,
+        "feasible": true,
+        "residual_N": 4.112891444688345e-15,
+        "propulsion_power_W": 10.951123747330822
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 14.200000000000001,
+        "feasible": true,
+        "residual_N": 1.778968282183128e-15,
+        "propulsion_power_W": 32.32217652848952
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 5.1556562589973386e-14,
+        "propulsion_power_W": 16.042969975183496
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 8.680000000000001,
+        "feasible": true,
+        "residual_N": 5.25435845655669e-14,
+        "propulsion_power_W": 21.206502884426666
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 6.439654133083892,
+        "feasible": true,
+        "residual_N": 4.112891444688345e-15,
+        "propulsion_power_W": 10.951123747330822
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 14.200000000000001,
+        "feasible": false,
+        "residual_N": 14.200000000000001,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 1.7763568394002505e-15,
+        "propulsion_power_W": 14.97557179802993
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 8.680000000000001,
+        "feasible": false,
+        "residual_N": 8.680000000000001,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 6.439654133083892,
+        "feasible": false,
+        "residual_N": 4.340000000000002,
+        "propulsion_power_W": 6.2
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 14.200000000000001,
+        "feasible": true,
+        "residual_N": 8.882478059288706e-15,
+        "propulsion_power_W": 32.322176528489564
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 1.2995568353223983e-15,
+        "propulsion_power_W": 22.799874424872858
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 8.680000000000001,
+        "feasible": true,
+        "residual_N": 5.736816300150009e-15,
+        "propulsion_power_W": 32.165269564968156
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 6.439654133083892,
+        "feasible": true,
+        "residual_N": 2.834162313463335e-15,
+        "propulsion_power_W": 14.940475413991004
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 14.200000000000001,
+        "feasible": true,
+        "residual_N": 3.716786636073586e-15,
+        "propulsion_power_W": 30.05372947206823
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 12.4
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 8.680000000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 36.6911175125129
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 6.439654133083892,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 13.950000000000001
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 14.200000000000001,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 24.8
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 8.38,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 29.95114359605986
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "sway",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 8.680000000000001,
+        "feasible": true,
+        "residual_N": 1.790180836524724e-15,
+        "propulsion_power_W": 15.178604770208231
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 6.439654133083892,
+        "feasible": true,
+        "residual_N": 2.7755575615628914e-17,
+        "propulsion_power_W": 15.027844932335421
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.2,
+        "case": "heave",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 14.200000000000001,
+        "feasible": true,
+        "residual_N": 1.7798229048217483e-15,
+        "propulsion_power_W": 24.8
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 216.79926853460026
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 54.25,
+        "feasible": true,
+        "residual_N": 3.580361673049448e-15,
+        "propulsion_power_W": 384.294915993256
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 35.22225533880897,
+        "feasible": true,
+        "residual_N": 5.0353234783744615e-15,
+        "propulsion_power_W": 145.62847622961118
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "required_force_N": 64.0,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 243.32194043166783
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 2.5847670646496936e-13,
+        "propulsion_power_W": 216.7992685346001
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 54.25,
+        "feasible": true,
+        "residual_N": 3.2862601528904634e-13,
+        "propulsion_power_W": 384.29491599325604
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 35.22225533880897,
+        "feasible": true,
+        "residual_N": 3.051659588756663e-14,
+        "propulsion_power_W": 145.62847622961112
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L6-STD",
+        "geometry_grade": "C",
+        "required_force_N": 64.0,
+        "feasible": true,
+        "residual_N": 4.440892098500626e-16,
+        "propulsion_power_W": 351.04377105368053
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 2.5847670646496936e-13,
+        "propulsion_power_W": 216.7992685346001
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 54.25,
+        "feasible": true,
+        "residual_N": 3.2862601528904634e-13,
+        "propulsion_power_W": 384.29491599325604
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 35.22225533880897,
+        "feasible": true,
+        "residual_N": 3.051659588756663e-14,
+        "propulsion_power_W": 145.62847622961112
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L4-H45",
+        "geometry_grade": "C",
+        "required_force_N": 64.0,
+        "feasible": false,
+        "residual_N": 64.0,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 7.105427357601002e-15,
+        "propulsion_power_W": 184.16062308004572
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 54.25,
+        "feasible": false,
+        "residual_N": 54.25,
+        "propulsion_power_W": 0.0
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 35.22225533880897,
+        "feasible": false,
+        "residual_N": 27.125000000000004,
+        "propulsion_power_W": 66.72701455357475
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "required_force_N": 64.0,
+        "feasible": true,
+        "residual_N": 2.8435583831733384e-14,
+        "propulsion_power_W": 351.04377105368087
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 6.216505440526576e-15,
+        "propulsion_power_W": 270.11511736238526
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 54.25,
+        "feasible": true,
+        "residual_N": 2.951544145610095e-14,
+        "propulsion_power_W": 575.514117419723
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 35.22225533880897,
+        "feasible": true,
+        "residual_N": 1.448992578273942e-14,
+        "propulsion_power_W": 178.30084396708642
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-VEC30",
+        "geometry_grade": "D",
+        "required_force_N": 64.0,
+        "feasible": true,
+        "residual_N": 1.523070615373935e-14,
+        "propulsion_power_W": 299.3933717357458
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 154.8000950624498
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 54.25,
+        "feasible": true,
+        "residual_N": 7.105427357601002e-15,
+        "propulsion_power_W": 665.7735772822635
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 35.22225533880897,
+        "feasible": true,
+        "residual_N": 3.552713678800501e-15,
+        "propulsion_power_W": 216.46001928283556
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-HV-a30",
+        "geometry_grade": "D",
+        "required_force_N": 64.0,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 243.32194043166783
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 42.1,
+        "feasible": true,
+        "residual_N": 0.0,
+        "propulsion_power_W": 368.32124616009145
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "sway",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 54.25,
+        "feasible": true,
+        "residual_N": 2.5121479338940403e-15,
+        "propulsion_power_W": 284.3568359883012
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 35.22225533880897,
+        "feasible": true,
+        "residual_N": 1.1102230246251565e-16,
+        "propulsion_power_W": 171.2998988237886
+      },
+      {
+        "drag_law": "von Benzon 2022 anisotropic",
+        "current_m_s": 0.5,
+        "case": "heave",
+        "layout": "L8-HV-a60",
+        "geometry_grade": "D",
+        "required_force_N": 64.0,
+        "feasible": true,
+        "residual_N": 4.965068306494546e-16,
+        "propulsion_power_W": 243.32194043166783
+      }
+    ],
+    "ranking_comparison": [
+      {
+        "current_m_s": 0.2,
+        "case": "head-on",
+        "ranking_isotropic": [
+          [
+            "L8-HV-a30"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L4-2H2V"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a60"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L8-HV-a30"
+          ],
+          [
+            "L4-2H2V"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a60"
+          ]
+        ],
+        "same_ranking": false
+      },
+      {
+        "current_m_s": 0.2,
+        "case": "sway",
+        "ranking_isotropic": [
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a30"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a30"
+          ]
+        ],
+        "same_ranking": true
+      },
+      {
+        "current_m_s": 0.2,
+        "case": "oblique 45 deg",
+        "ranking_isotropic": [
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L8-HV-a30"
+          ],
+          [
+            "L8-VEC30"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-HV-a30"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a60"
+          ]
+        ],
+        "same_ranking": false
+      },
+      {
+        "current_m_s": 0.2,
+        "case": "heave",
+        "ranking_isotropic": [
+          [
+            "L8-HV",
+            "L8-HV-a30",
+            "L8-HV-a60"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L4-2H2V",
+            "L6-STD"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L8-HV",
+            "L8-HV-a30",
+            "L8-HV-a60"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L4-2H2V",
+            "L6-STD"
+          ]
+        ],
+        "same_ranking": true
+      },
+      {
+        "current_m_s": 0.5,
+        "case": "head-on",
+        "ranking_isotropic": [
+          [
+            "L8-HV-a30"
+          ],
+          [
+            "L4-2H2V"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a60"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L8-HV-a30"
+          ],
+          [
+            "L4-2H2V"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a60"
+          ]
+        ],
+        "same_ranking": true
+      },
+      {
+        "current_m_s": 0.5,
+        "case": "sway",
+        "ranking_isotropic": [
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a30"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a30"
+          ]
+        ],
+        "same_ranking": true
+      },
+      {
+        "current_m_s": 0.5,
+        "case": "oblique 45 deg",
+        "ranking_isotropic": [
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L8-HV-a30"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L4-H45",
+            "L6-STD",
+            "L8-HV"
+          ],
+          [
+            "L8-HV-a60"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L8-HV-a30"
+          ]
+        ],
+        "same_ranking": false
+      },
+      {
+        "current_m_s": 0.5,
+        "case": "heave",
+        "ranking_isotropic": [
+          [
+            "L8-HV",
+            "L8-HV-a30",
+            "L8-HV-a60"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L4-2H2V",
+            "L6-STD"
+          ]
+        ],
+        "ranking_anisotropic": [
+          [
+            "L8-HV",
+            "L8-HV-a30",
+            "L8-HV-a60"
+          ],
+          [
+            "L8-VEC30"
+          ],
+          [
+            "L4-2H2V",
+            "L6-STD"
+          ]
+        ],
+        "same_ranking": true
+      }
+    ],
+    "direction_ratio": [
+      {
+        "current_m_s": 0.2,
+        "layout": "L8-HV",
+        "sway_over_head_on HoloOcean isotropic": 1.2514589256609274,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.3218564216744453
+      },
+      {
+        "current_m_s": 0.2,
+        "layout": "L6-STD",
+        "sway_over_head_on HoloOcean isotropic": 1.2514589256609272,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.3218564216744482
+      },
+      {
+        "current_m_s": 0.2,
+        "layout": "L4-H45",
+        "sway_over_head_on HoloOcean isotropic": 1.2514589256609272,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.3218564216744482
+      },
+      {
+        "current_m_s": 0.2,
+        "layout": "L4-2H2V",
+        "sway_over_head_on HoloOcean isotropic": null,
+        "sway_over_head_on von Benzon 2022 anisotropic": null
+      },
+      {
+        "current_m_s": 0.2,
+        "layout": "L8-VEC30",
+        "sway_over_head_on HoloOcean isotropic": 1.2052052999854743,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.4107652071047547
+      },
+      {
+        "current_m_s": 0.2,
+        "layout": "L8-HV-a30",
+        "sway_over_head_on HoloOcean isotropic": 2.289723016708617,
+        "sway_over_head_on von Benzon 2022 anisotropic": 2.9589610897187826
+      },
+      {
+        "current_m_s": 0.2,
+        "layout": "L8-HV-a60",
+        "sway_over_head_on HoloOcean isotropic": 0.48456766121286005,
+        "sway_over_head_on von Benzon 2022 anisotropic": 0.506778805341009
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L8-HV",
+        "sway_over_head_on HoloOcean isotropic": 1.2047120028298806,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.7725840063520515
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L6-STD",
+        "sway_over_head_on HoloOcean isotropic": 1.2047120028298814,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.7725840063520533
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L4-H45",
+        "sway_over_head_on HoloOcean isotropic": 1.2047120028298814,
+        "sway_over_head_on von Benzon 2022 anisotropic": 1.7725840063520533
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L4-2H2V",
+        "sway_over_head_on HoloOcean isotropic": null,
+        "sway_over_head_on von Benzon 2022 anisotropic": null
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L8-VEC30",
+        "sway_over_head_on HoloOcean isotropic": 1.4252311243643134,
+        "sway_over_head_on von Benzon 2022 anisotropic": 2.1306253535140565
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L8-HV-a30",
+        "sway_over_head_on HoloOcean isotropic": 2.824457997454292,
+        "sway_over_head_on von Benzon 2022 anisotropic": 4.300860261188313
+      },
+      {
+        "current_m_s": 0.5,
+        "layout": "L8-HV-a60",
+        "sway_over_head_on HoloOcean isotropic": 0.5119618797628277,
+        "sway_over_head_on von Benzon 2022 anisotropic": 0.7720348444539771
+      }
+    ]
+  },
+  "scope": "steady station keeping in head-on current, simulator-exact 8T layout; electrical model T200 static tables (grade B); no model is a validated BlueROV2 Heavy"
+}
