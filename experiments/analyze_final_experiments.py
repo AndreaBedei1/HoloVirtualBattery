@@ -155,7 +155,9 @@ def summarise(path, const):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--results-dir", type=Path, default=ROOT / "experiments/results/final/native")
+    parser.add_argument(
+        "--results-dir", type=Path, default=ROOT / "experiments/results/final/native"
+    )
     parser.add_argument("--output-dir", type=Path, default=ROOT / "experiments/results/final")
     args = parser.parse_args(argv)
     const = constants()
