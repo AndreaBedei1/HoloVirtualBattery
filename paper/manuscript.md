@@ -25,8 +25,8 @@ Case studies on a simulated BlueROV2 Heavy cover thruster layout, current, paylo
 fidelity and communication strategy. The results show which conclusions depend on unvalidated inputs:
 - Replacing the simulator's surge resistance with published BlueROV2 measurements scales
   station-keeping propulsion power by 0.11 to 1.29.
-- The acoustic-modem share of mission energy ranges from 0.96 % to 13.2 % over published device
-  settings.
+- On the direct link, the acoustic-modem share of mission energy ranges from 1.1 % to 13.2 % over
+  published device settings.
 
 No result is validated against a physical vehicle.
 
@@ -77,8 +77,9 @@ The contributions are:
   learning for 6-DOF position control [S4] and current-harnessing model predictive control on a
   BlueROV2 [S16].
 
-None of these sources states the evidence behind individual parameters or how strongly a result
-depends on it.
+None of the sources we could read in full states the evidence behind individual parameters or how
+strongly a result depends on it. S3 and S8 were read at abstract level only, so the statement does
+not extend to them.
 
 **Communication energy.**
 - DESERT Underwater accumulates transmit and receive energy in its physical layer from configured
@@ -180,6 +181,9 @@ stays open instead of being filled with an assumed value.
 
 The grades are a convention of this work. They describe traceability and relation to the modelled
 device, not measured accuracy, and they have not been validated as an uncertainty metric [C4].
+The grade shares cover the electrical models only. The hydrodynamic load that sets the thrust is
+owned by the simulator and is outside them. In the final missions most of the energy is propulsion
+with grade B tables, so a high grade-B share says nothing about the accuracy of the load.
 
 ## 5 Verification
 
@@ -189,11 +193,12 @@ reviews. Examples:
 - energy charged for thrust a virtual layout could not apply;
 - a power-weighted allocator that raised an error at every step.
 
-**Accounting.** An independent script recomputes every category, thruster and component energy,
+**Accounting.** A separate script recomputes every category, thruster and component energy,
 battery loss and phase sum of the 36 final runs from the 100 Hz traces. The worst relative difference
 from the reported values is 1.9e-13, against a tolerance of 1e-9 [C2]. In the cross-layer runs, the
-communication energy on the bus differs from the modem adapter's own sum by at most 1e-15 Wh. This is
-a check of the implementation against its own equations, not a validation.
+communication energy on the bus differs from the modem adapter's own sum by at most 1e-15 Wh. Both checks
+are self-consistency of the implementation with its own equations: the recomputation uses the same
+power model, so it can find accounting errors but not model errors. They are not a validation.
 
 **Backend.** HoloOcean computes drag as $\tfrac12\rho C_D A|v_r|v_r$ in SI units but applies it
 without the conversion to engine units. A one-line patch fixes this. Our check drives a known thruster
@@ -260,19 +265,21 @@ phases:
 ### 7.1 Layout and orientation
 
 Figure FF1 gives the steady propulsion power in a 0.5 m/s current. In head-on current L8-HV, L6-STD
-and L4-H45 need the same energy (0.4897 Wh at 0.2 m/s and 6.5295 Wh at 0.5 m/s over 90 s; 245.9 W
-steady). In the simulated body only the four vectored horizontals work, because drag acts at the
+and L4-H45 need the same energy. Over 90 s the mission (terminal) energy is 0.4897 Wh at 0.2 m/s
+and 6.5295 Wh at 0.5 m/s; this includes 0.144 Wh of hotel load. Steady propulsion, the mean of the last 30 s,
+is 249.2 W at 0.5 m/s. In the simulated body only the four vectored horizontals work, because drag acts at the
 centre of mass and the horizontal thrust lines lie in its plane. The equality is therefore a
 property of the simulated body, not a design result [C5].
 
-L4-2H2V needs 14 % less energy in head-on current (5.5988 Wh) but cannot hold sway or oblique
-current. Its final position error reaches 31.4 and 26.9 m [C6]. L8-VEC30 needs 23 % more (8.0398 Wh)
+L4-2H2V needs 14 % less mission energy in head-on current (5.5988 Wh) but cannot hold sway or oblique
+current. Its final position error reaches 31.4 and 26.9 m [C6]. L8-VEC30 needs 23 % more (8.0398 Wh). The propulsion-only differences are −15 % and +24 %
 [C7]. All other layouts hold the oblique current in the steady window. During the start-up transient
-they saturate for 21.6 % of the run [C9]. L8-HV cannot hold 0.8 m/s: the required 115 N exceeds the
+they saturate for 21.6 % of the run, and they are still settling in the window: the last 10 s
+mean is 6 to 7 % below the 30 s mean [C9]. L8-HV cannot hold 0.8 m/s: the required 115 N exceeds the
 81.3 N its clamped thrusters provide [C11]. The choice of allocator changes steady power by at most
 0.13 % [C10].
 
-Thruster angle trades head-on against sway cost. At 0.5 m/s over 90 s:
+Thruster angle trades head-on against sway cost. Mission energy at 0.5 m/s over 90 s:
 - 30°: 4.81 Wh head-on, 13.18 Wh sway;
 - 45°: 6.53 Wh head-on, 7.78 Wh sway;
 - 60°: 10.92 Wh head-on, 5.70 Wh sway.
@@ -283,8 +290,8 @@ direction of the trade-off and not its magnitude [C8].
 
 ### 7.2 Current and surge resistance
 
-Station-keeping propulsion grows steeply with current: 13.4 W at 0.2 m/s, 245.9 W at 0.5 m/s and
-608.9 W at 0.8 m/s, the last being infeasible. In still water only the hotel loads consume energy
+Station-keeping propulsion (mean of the last 30 s) grows steeply with current: 13.4 W at 0.2 m/s,
+249.2 W at 0.5 m/s and 610.2 W at 0.8 m/s, the last being infeasible. In still water only the hotel loads consume energy
 (0.1438 Wh in 90 s) [C12].
 
 These values follow HoloOcean's drag. Figure FF2 repeats the steady allocation with the two published
@@ -325,7 +332,8 @@ battery loss (0.0201 Wh) is a separate term. The comparison does not measure bat
 accuracy, and the voltage effect changes sign during a discharge [C15].
 
 From SOC 0.03, the L1 pack operates voltage-limited at the 12.0 V cutoff. It derates the thrusters to
-0.313 and delivers 101.7 W instead of the requested 245.9 W, without latching off [C16]. The
+0.313 without latching off. Propulsion falls with the voltage: 125.1 W over the last 30 s and
+101.7 W over the last 10 s, against 249.2 W for the same request at full charge [C16]. The
 open-circuit curve is a placeholder (grade D), so no endurance figure is given.
 
 ### 7.6 Communication
@@ -338,7 +346,7 @@ As simulated, the acoustic modem takes 1.45 % of the transit energy. That figure
 - one message every 2 s.
 
 Recomputing the recorded state durations for every published transmit setting, both interfaces and
-both airtime bases gives 0.96 % to 13.2 % (Figure FF5). The as-simulated value is a conditional point
+both airtime bases gives 1.1 % to 13.2 % on the direct link (Figure FF5). The as-simulated value is a conditional point
 estimate, not a bound [C17].
 
 Relays move modem energy between nodes (Figure FF6). The vehicle spends:
@@ -351,7 +359,7 @@ delivery drops from 39/39 to 37/39 and 34/39 [C18]. The optical link uses 0.0111
 0.0260 Wh for the acoustic one [C20].
 
 In the communication matrix, 8 of 9 configurations give the same delivery and energy for all
-20 seeds, because nothing in those scenarios is stochastic. Multi-hop with MAC acknowledgements
+20 seeds; the seed changes only latency there. Multi-hop with MAC acknowledgements
 delivers 61 of 200 messages (Wilson 95 % interval 0.245 to 0.372) [C19].
 
 ## 8 Threats to validity
@@ -383,9 +391,9 @@ traceable source and a grade, and in which the share of energy resting on proxie
 placeholders is reported with the result. The accounting and the backend were verified.
 
 The case studies show how far conclusions depend on unvalidated inputs:
-- Under the identified anisotropic damping, the direction of the orientation trade-off holds and
-  the layout ranking within each current direction holds in five of eight cases. The magnitudes do
-  not hold.
+- Under the identified anisotropic damping, the direction of the orientation trade-off holds, but
+  the layout ranking within a horizontal current direction holds in only 3 of 6 cases, and the
+  magnitudes change.
 - Absolute propulsion energies change several-fold with the choice of published resistance data.
 - The communication share depends on device settings that a simulation must state.
 
@@ -395,8 +403,10 @@ Physical validation of mission energy remains open.
 
 Code, evidence registry, final results (per-run summaries, 0.1 s traces, verification), figures with
 their plotted data, and the environment record are in the HoloEnergy repository
-(branch `feature/provenance-aware-energy-framework`). The 100 Hz traces are regenerated from the
-recorded commit and identified by SHA256.
+(branch `feature/provenance-aware-energy-framework`). The 100 Hz traces (74 MB) are not in the repository; each
+summary records their SHA256, and rerunning the recorded commit regenerates them. The cross-layer
+run started from a clean commit, but its per-strategy reports record later documentation commits
+made while it ran; no code path changed.
 
 ## References
 

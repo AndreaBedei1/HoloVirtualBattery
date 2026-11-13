@@ -253,3 +253,40 @@ Confirmed? yes: 116; partly: 51; not reproduced: 0.
 A-07, A-08, A-09, A-10, A-11, A-12, A-13, A-14, A-15, A-16, A-17, A-18, A-19, A-20, A-21, A-22, A-23, A-24, A-25, B-14, B-15, B-16, B-17, C-07, C-08, C-09, C-10, C-11, C-12, C-13, C-14, C-15, C-16, D-13, D-14, D-15, D-16, D-17, D-18, D-20, D-21, D-22, E-11, E-12, E-13, E-14, E-15, E-16, E-17, E-18, E-19, E-20, E-21, E-22, E-23, E-24, F-11, F-12, F-13, F-14, F-15, F-16, F-17, F-18, F-19, F-20, F-21, G-18, G-19, G-20, G-21, G-22, G-23, G-24, G-25, H-04, H-05, H-06, H-07, H-08, H-09, H-10, H-11, H-12, H-13, H-14, H-15
 
 Open total: 123 (blocking 36, non-blocking 87). The split is the drafter's judgement from the finding text.
+
+## 4. Disposition of the blocking findings after the final reruns
+
+These are the findings of section 3a that remain after D-11, F-09, G-17, H-01 and H-03 were resolved by
+the clean reruns. "Resolved" means the cited result, commit or wording is in the repository. "Deferred"
+means no paper claim depends on the finding and the limitation is stated.
+
+| ID | Disposition | Where |
+| --- | --- | --- |
+| A-02 | Claim rewritten: one source (Lam et al. 2023) reports non-bollard T200 data and was not accessed. Access pending user approval. | CLAIM_EVIDENCE_MATRIX, removed claims |
+| B-09 | Resolved by design: 90 s station keeping with a separate 30 s steady window. | FINAL_EXPERIMENTS.md; `final_runs.csv` |
+| B-10 | Resolved by design: head-on and oblique currents keep the horizontals on the forward branch. The old percentages are withdrawn. | FINAL_EXPERIMENTS.md; C5–C8 |
+| B-11 | Deferred: no claim about the proxy AUV profiles is made. | CLAIM_EVIDENCE_MATRIX (no proxy-profile claim) |
+| B-12 | Resolved for the final set: maximum roll/pitch over all 36 runs is 5.7e-4°. The allocation residual is reported per tick, and the steady-window flags make an unmet wrench visible. | `final_runs.csv` (`max_abs_roll_pitch_deg`, `steady_window_request_met`) |
+| B-13, F-10 | Resolved: chain closure PASS is reported apart from `request_met` (whole run) and `steady_window_request_met`. | `analyze_final_experiments.py` (65a06da) |
+| C-02 | Deferred limitation: no endurance or available-energy claim. The fix needs the 30Q discharge data (download pending approval). | C16 |
+| C-06 | Deferred: no thermal result is claimed. | CLAIM_EVIDENCE_MATRIX (no thermal claim) |
+| D-02 | Resolved: relay strategies in which the vehicle forwards, or a fixed relay forwards and the vehicle overhears, change vehicle modem energy (0.0253 / 0.0171 vs 0.0260 Wh). | C18; `crosslayer.json` |
+| D-04 | Resolved: mission-phase scheduling. | C14 |
+| D-09 | Partly: the Gemini supply gap is declared and modem conversion from 24 V is stated as not modelled. A general supply-voltage domain check is not implemented. | C14, C17; A-04 fix |
+| D-12 | Stated limitation: RX = LISTEN follows the EvoLogics note for modems without a wake-up module, and RX/LISTEN is priced at the published upper bound. | C17 |
+| D-19 | Wording resolved: the recomputation verifies the accounting from per-tick traces of the same power model. It is a numerical verification, not an independent model. | C2 |
+| F-05 | Partly: 20 seeds for the comm matrix. Native runs are one deterministic run per condition with one controller; stated in the threats to validity. | C18, C19 conditions |
+| F-07 | Withdrawn: no ablation claim. | CLAIM_EVIDENCE_MATRIX |
+| F-08 | Resolved: the three allocators agree within 0.13 % (EXP10 part 3). | C10 |
+| G-05 | Stated limitation: the grading is a convention of this work, not a validated uncertainty metric. | C4 |
+| G-06 | Claim narrowed: the closed loop provides feasibility, drift and derating detection (C9, C11, C16). Layout energy differences come from allocation and the T200 tables. | C5–C11 |
+| G-07 | Withdrawn: baselines are not in the final set and are not presented as validation. | removed claims |
+| G-08, G-15 | Claims are conditional on the simulated body and drag. No general conclusion is drawn. | CLAIM_EVIDENCE_MATRIX header and conditions |
+| G-09 | Partly: EnergyReport intervals (published ranges, open sides stay open) plus EXP10 sensitivity. Called interval and sensitivity analysis, not uncertainty quantification. | `sensitivity.json`; EnergyReport `intervals` |
+| G-10 | Claims limited to C15 and C16, with their caveats. | C15, C16 |
+| G-11 | Open judgement: T200 static tables are kept as relation representative (grade B) with the inflow condition stated. The reviewer argues for a lower grade; the paper must give both. | MODEL_EQUATIONS; audit `DOMAIN_NOTES` |
+| G-12 | Partly: DESERT TX/RX counters are verified (S6). The contribution is restated as listen/idle states, evidence grading and coupling to battery and dynamics. The related-work rewrite is for the manuscript. | RELATED_WORK_VERIFICATION.md |
+| G-13 | Wording resolved: C2 is self-consistency of the accounting. The backend check (EXP1) tests the simulator independently of HoloEnergy. | C1, C2 |
+| G-14 | Partly: confirmed in 2.3.0 by EXP1 (unpatched ×0.0100) and in 2.4.0 by source reading. Not reported upstream (needs user approval). | C1 |
+| G-16 | Open: manuscript framing (methodology and verification). | FINAL_SIGNOFF |
+| H-02 | Resolved: interpreter, packages, holo_desert commit and DESERT image id are recorded. | `experiments/results/final/environment.json`, `environment_freeze.txt` |

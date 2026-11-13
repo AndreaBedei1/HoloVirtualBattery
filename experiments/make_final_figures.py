@@ -400,8 +400,14 @@ def fig_crosslayer(cross):
     )
 
 
-def main():
+def main(argv=None):
+    import argparse
     import subprocess
+
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--output-dir", type=Path, default=OUT)
+    OUT = parser.parse_args(argv).output_dir
 
     r = runs()
     sens = load("sensitivity.json")

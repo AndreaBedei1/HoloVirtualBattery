@@ -13,5 +13,5 @@ offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0
 offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.6,48.79732698876364
 offline steady allocation,Gabl et al. 2021 restrained load (standard BlueROV2),0.8,115.7013854539815
 native closed loop (steady window),HoloOcean 2.3.0,0.0,0.0
-native closed loop (steady window),HoloOcean 2.3.0,0.2,13.420491875822849
-native closed loop (steady window),HoloOcean 2.3.0,0.5,245.9052384221076
+native closed loop (steady window),HoloOcean 2.3.0,0.2,13.421338160238799
+native closed loop (steady window),HoloOcean 2.3.0,0.5,249.24690219662244

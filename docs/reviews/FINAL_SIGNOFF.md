@@ -22,7 +22,8 @@ several required deliverables are missing.
 | Figures and tables regenerated from the final results, with a manifest | met | `docs/figures/final/` FF1–FF6 with plotted CSVs and `manifest.json` (input SHA256, result commits). `final_runs.csv` and `docs/paper/tables/` hold the tables |
 | Related work verified (G's prior-art list) | partly | `docs/paper/RELATED_WORK_VERIFICATION.md`. Read at the source: S1, S3 (abstract only), S4, S6, S7, S8 (abstract only; 2021, not 2022), S13 (Blattnig et al. 2008, not NASA-STD-7009 itself), S16. S12 and S14 must not be cited as described; S2 and S11 need their records checked. No source found grades parameter provenance. |
 | README with three usage modes; structured API scientific warnings (brief §50–51) | met | README "Usage modes"; `evidence["scientific_warnings"]` (unknown, grade D, proxy, upper-bound only; non-blocking; test `test_scientific_warnings_are_structured_and_non_blocking`) |
-| Hostile and methods reviews of the manuscript (Reviewers I, J) | **not met** | Require a draft |
+| Hostile and methods reviews of the manuscript (Reviewers I, J) | done; not passed | **Reviewer I** (SIMPAT): reject in present form; 3 fatal, 11 major, 6 minor. About 25 numbers spot-checked, no mismatch. **Reviewer J** (methods): partly reproducible; 6 major, 7 minor. Offline outputs and figures are byte-identical on rerun. |
+| Reviewer I/J findings fixed in the text | partly | Fixed: I-05 (terminal vs propulsion energy), I-06 (ranking 3 of 6), I-03, I-04, I-07 wording; J-01 (steady values now the 30 s window mean, with a drift column), J-02 (cross-layer provenance disclosed), J-08, J-09, J-12 (figure CLI), J-04 to J-07 (rerun procedure documented). Open: I-01 (no measurement), I-02 (show that grading changes a decision), I-03 (graded coverage excludes hydrodynamics), I-08/G-16 (V&V framing), I-12/G-11 (T200 grade), J-05 to J-07 (patched build and 100 Hz traces not public). |
 
 ## What can be claimed now
 
@@ -50,8 +51,12 @@ Everything in the "Claims removed or rewritten" table of the claim matrix. Also:
 2. Resolve the two open judgements in `REVIEW_CONSOLIDATION.md` section 4: G-11 (T200 grade in
    inflow) and G-16 (journal framing). Every other blocking finding there is resolved, withdrawn or
    deferred with a stated limitation.
-3. Draft under `paper/` following the claim matrix. Then run Reviewer I (SIMPAT rejection
-   perspective) and Reviewer J (methods reproducibility).
-4. Optional, pending the user's approval to download:
+3. Revise `paper/manuscript.md` against Reviewer I's fatal findings. The most actionable is I-02: a
+   case in which the evidence report changes a design or mission decision, or shows that it does
+   not. Add a formal V&V framing (I-08) and a comparison with an existing tool's energy output on the
+   same mission.
+4. Publish the 100 Hz traces and a recipe for the patched build, or state why they cannot be
+   published (J-05 to J-07). This needs the author's decision.
+5. Optional, pending the user's approval to download:
    - the 30Q OCV dataset, to replace the grade D OCV curve (C-02);
    - Lam et al. 2023, for T200 data at advance speed (A-02).

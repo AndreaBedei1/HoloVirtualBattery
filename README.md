@@ -85,7 +85,7 @@ HoloOcean's BlueROV2 body and drag, which are not a validated vehicle model.
   10 % (AI suite) of mission energy.
 * The acoustic modem's share of mission energy is 1.45 % as simulated (lowest published TX
   setting, RS-232, DESERT PHY). Over the published settings, interfaces and airtime bases it
-  ranges from 0.96 % to 13.2 %. It is not an upper bound.
+  ranges from 1.1 % to 13.2 % on the direct link. It is not an upper bound.
 
 Readiness: [final sign-off](docs/reviews/FINAL_SIGNOFF.md) (not ready for submission). Reviews:
 [consolidation](docs/reviews/REVIEW_CONSOLIDATION.md).

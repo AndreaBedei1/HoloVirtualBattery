@@ -95,11 +95,14 @@ def summarise(path, const):
         and min_derating >= 1.0
         and s["chain"]["status"] == "PASS"
     )
-    steady_met = None
+    steady_met = steady_power = None
     if spec["plan"] == "station":
         window = s["provenance"]["steady_window_s"]
         t_end = rows[-1]["time_s"]
         tail = [r for r in rows if r["time_s"] >= t_end - window - 1e-9]
+        # Review J-01: the steady value is the mean over the declared steady window, computed
+        # here from the 0.1 s trace (the summary's mean_tail_propulsion_W is a last-10 s mean).
+        steady_power = sum(r["power_propulsion_W"] for r in tail) / len(tail)
         steady_met = all(
             r["allocation_residual_norm"] < RESIDUAL_TOL
             and not r["allocation_saturated"]
@@ -126,7 +129,14 @@ def summarise(path, const):
         "terminal_Wh": m["terminal_Wh"],
         "ocv_work_Wh": s["summary"]["total_ocv_work_Wh"],
         **{f"{k}_Wh": v for k, v in m["category_energy_Wh"].items()},
-        "steady_propulsion_W": m["mean_tail_propulsion_W"] if spec["plan"] == "station" else None,
+        "steady_propulsion_W": steady_power,
+        "last_10s_propulsion_W": m["mean_tail_propulsion_W"],
+        # Stationarity of the steady window: last-10 s mean relative to the window mean.
+        "steady_window_drift_percent": (
+            100 * (m["mean_tail_propulsion_W"] - steady_power) / steady_power
+            if steady_power
+            else None
+        ),
         "request_met": request_met,
         "steady_window_request_met": steady_met,
         "max_allocation_residual_N": m["max_allocation_residual_norm"],

@@ -1,7 +1,6 @@
 # Final results (hardening phase)
 
-All native runs come from commit 81b91ea with a clean tree, on the drag-patched HoloOcean 2.3.0 build at
-100 Hz. The design is in `docs/paper/FINAL_EXPERIMENTS.md`.
+All native runs come from commit 81b91ea with a clean tree. The comm matrix comes from 81b91ea; the cross-layer run started from commit b73ae9f with a clean tree. Documentation and result files were committed while it ran, so the per-strategy EnergyReports record HEAD at report time (b73ae9f, 275e226, 5d9e102) with a dirty tree; between b73ae9f and 5d9e102 the only code change is the new analysis script, which the run does not use (review J-02). All runs use the drag-patched HoloOcean 2.3.0 build at 100 Hz. The design is in `docs/paper/FINAL_EXPERIMENTS.md`.
 
 | Path | Content | Producer |
 | --- | --- | --- |

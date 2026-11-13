@@ -65,3 +65,33 @@ are not a validated BlueROV2 model (EXP9, EXP10 part 1 and part 4).
 - The comparison with simple baselines (speed-cubic and constant power) is model versus model.
 - Equal energy of layouts that share the four vectored horizontals is a property of the decoupled,
   neutrally buoyant simulated body (review B-03).
+
+## Reproducing the final runs (review J-04 to J-07)
+
+What a third party needs, and what is not yet public:
+
+1. **HoloOcean.** HoloOcean 2.3.0, rebuilt with the drag-units patch (`patches/`, procedure in
+   `docs/holoocean_patched_build.md`, `tools/build_patched_holoocean.py --engine-kind launcher`, Unreal
+   Engine 5.3.2). The built package is local and not distributed. Its SHA256 is recorded in every
+   summary (`provenance.backend`). Before any run, `tools/check_holoocean_backend.py` must report PASS
+   at 100 Hz (EXP1).
+2. **Interpreter.** Python 3.10 with HoloOcean 2.3.0, `holo_desert` 1.1.0 (HoloWithDesertCommunications
+   at 635b99a) and numpy 1.26.4. See `experiments/results/final/environment.json` and
+   `environment_freeze.txt`. Figures use matplotlib 3.9.4: other versions change the bytes, not the
+   data.
+3. **DESERT.** The `holo-desert-engine:4.0.0-v2` image (id in `environment.json`), built from
+   HoloWithDesertCommunications. Run it as a separate container on a non-default port, and use
+   `NetworkSession(manage_engine=False)`.
+4. **Commands**, from a clean checkout of the recorded commit:
+   - `run_final_experiments.py --binary <patched Holodeck.exe> --source-dir <patched sources>`. Use
+     `--runs <labels>` to split the run list over at most two processes.
+   - `run_comm_matrix.py --port <port> --seeds 1 ... 20 --output experiments/results/final/comm_matrix.json`.
+   - `run_crosslayer.py --binary <patched> --port <port> --output experiments/results/final/crosslayer.json`.
+   - `verify_final_energy.py` (needs the 100 Hz traces in `logs/final/full`).
+   - `analyze_final_experiments.py`.
+   - `run_sensitivity.py`.
+   - `make_final_figures.py --output-dir <dir>`.
+   Default seeds and ports are in each script's `--help`.
+5. **Not public yet.** The 100 Hz traces (74 MB) are git-ignored, so the energy verification can be
+   repeated only by rerunning or from an archive. Publishing them, for example as a release asset,
+   needs the author's decision.

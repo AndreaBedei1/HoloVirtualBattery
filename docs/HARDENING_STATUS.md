@@ -41,7 +41,7 @@ cross-layer run.
 | 1, drag model | Propulsion power relative to HoloOcean drag: Gabl et al. 2021 gives 0.11–0.22×; von Benzon et al. 2022 gives 0.87–1.29× (beyond 0.72 m/s it is flagged as extrapolated). |
 | 2, acoustic share | 1.37 % as simulated (2.8 W TX, RS-232, DESERT 4.8 kbit/s). 2.6 / 8.3 / 12.1 % at 8 / 35 / 55 W. 1.07–5.6 % at the device bitrate. Ethernet adds 0.5–0.6 points. "At most 1.37 %" is therefore not supported. |
 | 3, allocator | Pseudoinverse, redistributed and power-IRLS agree within 0.13 % on all final layouts in steady currents. IRLS is not better on L8-VEC30 (+0.13 % head-on). |
-| 4, drag anisotropy (von Benzon vs isotropic) | The ranking of layouts within each current direction is unchanged in 5 of 8 cases. The changes are a load crossover at 0.2 m/s head-on (L4-2H2V) and the ordering of the angle variants under oblique current. The sway/head-on cost ratio changes strongly (L8-HV at 0.5 m/s: 1.20 → 1.77; a30: 2.82 → 4.30). Orientation conclusions are conditional on the drag law. |
+| 4, drag anisotropy (von Benzon vs isotropic) | Excluding the trivial heave cases, the layout ranking within a horizontal current direction is unchanged in 3 of 6 cases (final sensitivity.json; review I-06). The changes are a load crossover at 0.2 m/s head-on (L4-2H2V) and the ordering of the angle variants under oblique current. The sway/head-on cost ratio changes strongly (L8-HV at 0.5 m/s: 1.20 → 1.77; a30: 2.82 → 4.30). Orientation conclusions are conditional on the drag law. |
 
 ## Final runs (from clean commit 81b91ea; results committed in b73ae9f and 65a06da)
 
@@ -53,7 +53,7 @@ cross-layer run.
   feasibility, tracking, Unreal damping share.
 - **Comm matrix.** 9 configurations × 20 seeds. 8 of the 9 are identical across seeds. B2 delivers
   61/200 (Wilson 95 % interval 0.245–0.372).
-- **Cross-layer.** 8 strategies, from commit b73ae9f (clean). Direct acoustic share is 1.45 % as simulated; the range over published settings is 0.96–13.2 % (EXP10 part 2).
+- **Cross-layer.** 8 strategies, from commit b73ae9f (clean). Direct acoustic share is 1.45 % as simulated; the range over published settings is 1.13–13.2 % on the direct link (EXP10 part 2; 0.96 % is the fixed-relay case).
 - **Claims and sign-off.** `docs/paper/CLAIM_EVIDENCE_MATRIX.md` (C1–C20) and `docs/reviews/FINAL_SIGNOFF.md`. Verdict: NOT READY for submission; drafting may start under the claim matrix.
 - **Cleanup.** The own DESERT container `holoenergy-desert-5571` is stopped, not removed (`docker start holoenergy-desert-5571`).
 
