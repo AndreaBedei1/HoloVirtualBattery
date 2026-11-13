@@ -19,9 +19,9 @@ several required deliverables are missing.
 | Review findings reproduced and resolved or declared | partly | 167 findings (`REVIEW_CONSOLIDATION.md`). The critical and major findings that affect the final numbers are resolved or turned into stated conditions. Many minor findings remain open. |
 | External validation against a physical vehicle | **not met** | No measured BlueROV2 mission energy exists in the evidence (G-01, critical). It cannot be resolved by software. |
 | Hydrodynamics behind the dominant energy term | **not met** | Propulsion follows HoloOcean drag. Published BlueROV2 resistance changes it to 0.11–0.22× or 0.87–1.29× (G-03, EXP10 part 1). Every absolute energy is simulator-conditional. |
-| Figures and tables regenerated from the final results, with a manifest | **not met** | `make_paper_figures.py` still reads the superseded campaign layout |
-| Related work verified (G's prior-art list: Gazebo battery, UUV Simulator, LOTUSim-Energy, Stonefish T200 energy, Danielis 2022, ns-3 modem energy, provenance standards) | **not met** | References not yet read. DESERT's TX/RX energy counters are verified (G-04). |
-| README with three usage modes; structured API scientific warnings (brief §50–51) | **not met** | Not done in this phase |
+| Figures and tables regenerated from the final results, with a manifest | met | `docs/figures/final/` FF1–FF6 with plotted CSVs and `manifest.json` (input SHA256, result commits). `final_runs.csv` and `docs/paper/tables/` hold the tables |
+| Related work verified (G's prior-art list) | partly | `docs/paper/RELATED_WORK_VERIFICATION.md`. Read at the source: S1, S3 (abstract only), S4, S6, S7, S8 (abstract only; 2021, not 2022), S13 (Blattnig et al. 2008, not NASA-STD-7009 itself), S16. S12 and S14 must not be cited as described; S2 and S11 need their records checked. No source found grades parameter provenance. |
+| README with three usage modes; structured API scientific warnings (brief §50–51) | met | README "Usage modes"; `evidence["scientific_warnings"]` (unknown, grade D, proxy, upper-bound only; non-blocking; test `test_scientific_warnings_are_structured_and_non_blocking`) |
 | Hostile and methods reviews of the manuscript (Reviewers I, J) | **not met** | Require a draft |
 
 ## What can be claimed now
@@ -45,13 +45,11 @@ Everything in the "Claims removed or rewritten" table of the claim matrix. Also:
 
 ## Required before submission
 
-1. Regenerate the figures from `experiments/results/final/`, with a figure and table manifest.
-2. Read and verify every prior-art reference before citing it. Rewrite the related work around
-   DESERT's existing TX/RX counters.
+1. Read S3 (LOTUSim-Energy) and S8 (Danielis et al. 2021) in full; check the S2 and S11 records.
+   Rewrite the related work around DESERT's existing TX/RX counters.
 3. Close or explicitly defer the remaining major findings in `REVIEW_CONSOLIDATION.md` section 3a.
-4. Write the README modes and the API scientific warnings.
-5. Draft under `paper/` following the claim matrix. Then run Reviewer I (SIMPAT rejection
+4. Draft under `paper/` following the claim matrix. Then run Reviewer I (SIMPAT rejection
    perspective) and Reviewer J (methods reproducibility).
-6. Optional, pending the user's approval to download:
+5. Optional, pending the user's approval to download:
    - the 30Q OCV dataset, to replace the grade D OCV curve (C-02);
    - Lam et al. 2023, for T200 data at advance speed (A-02).
