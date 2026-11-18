@@ -196,6 +196,20 @@ def _normalize_generic(config):
         thermal.setdefault("initial_temperature_C", thermal.get("water_temperature_C"))
 
 
+EVIDENCE_KEYS = {
+    "propulsion",
+    "actuators",
+    "battery_losses",
+    "converters",
+    "hotel_constant",
+    "geometry",
+    "vehicle_relation",
+    "double_counting",
+    "sources",
+    "records",
+}
+
+
 def load_config(path=None, *, data=None):
     """Return a resolved independent mapping, validating top-level fields.
 
@@ -238,6 +252,12 @@ def load_config(path=None, *, data=None):
     config.setdefault("schema_version", 1)
     if config.get("schema_version") != 1:
         raise ConfigurationError("schema_version must be 1")
+    evidence = config.get("evidence")
+    if evidence is not None:
+        if not isinstance(evidence, dict):
+            raise ConfigurationError("evidence must be a mapping")
+        # A mistyped link would otherwise be silently graded D.
+        keys(evidence, EVIDENCE_KEYS, "evidence")
     _normalize_generic(config)
     for section in ("battery", "thermal", "propulsion"):
         if section not in config:

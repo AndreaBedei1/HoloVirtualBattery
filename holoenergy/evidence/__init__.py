@@ -334,6 +334,24 @@ class EvidenceRegistry:
             )
         return rows
 
+    def extended(self, sources=(), records=()):
+        """A NEW registry: this one plus user sources and records.
+
+        The packaged (cached) registry is never mutated. User ids cannot shadow existing ids
+        (duplicate ids are rejected), and user records are validated like packaged ones
+        (grade capped by relation, units, sources). Sources may be papers, datasheets,
+        datasets, own measurements or engineering assumptions (``type: user``).
+        """
+        new = EvidenceRegistry(version=self.version)
+        new.sources = dict(self.sources)
+        new.records = dict(self.records)
+        new.literature = self.literature
+        added_sources = [new.add_source(s).id for s in sources]
+        added_records = [new.add_record(r).id for r in records]
+        new.user_source_ids = tuple(getattr(self, "user_source_ids", ())) + tuple(added_sources)
+        new.user_record_ids = tuple(getattr(self, "user_record_ids", ())) + tuple(added_records)
+        return new
+
     @classmethod
     def from_mappings(cls, sources_doc, parameter_docs, version=None):
         registry = cls(version=version)
@@ -405,6 +423,18 @@ def default_registry():
     )
     registry.literature = literature
     return registry
+
+
+def registry_for(config):
+    """Registry for one run: the packaged evidence plus the configuration's own
+    ``evidence.sources`` and ``evidence.records`` (none: the packaged registry itself)."""
+    evidence = (config or {}).get("evidence") or {}
+    sources = evidence.get("sources") or []
+    records = evidence.get("records") or []
+    if not isinstance(sources, list) or not isinstance(records, list):
+        raise ConfigurationError("evidence.sources and evidence.records must be lists")
+    base = default_registry()
+    return base.extended(sources, records) if (sources or records) else base
 
 
 def coverage(energy_by_grade_Wh):

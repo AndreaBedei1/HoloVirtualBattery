@@ -13,7 +13,7 @@ class ComponentState(str):
 class ElectricalComponent(PayloadComponent):
     """Reuse established rail/brownout policy; arbitrary states need no core changes."""
 
-    def __init__(self, name, config):
+    def __init__(self, name, config, *, registry=None):
         keys(
             config,
             {
@@ -85,7 +85,7 @@ class ElectricalComponent(PayloadComponent):
                 raise ConfigurationError("Component states must be nonempty uppercase strings")
             if isinstance(value, dict) and "evidence" in value:
                 keys(value, {"evidence", "use"}, f"{name}.{state}")
-                record = default_registry().get(value["evidence"])
+                record = (registry or default_registry()).get(value["evidence"])
                 use = value.get("use", "value")
                 if use not in ("value", "value_min", "value_max"):
                     raise ConfigurationError(
@@ -242,7 +242,7 @@ class ElectricalComponent(PayloadComponent):
 
 
 class ComponentModel(PayloadModel):
-    def __init__(self, legacy=None, components=None):
+    def __init__(self, legacy=None, components=None, *, registry=None):
         super().__init__(legacy or {})
         from ..sensor_policy import REGISTRY, check_component_mapping
 
@@ -265,7 +265,7 @@ class ComponentModel(PayloadModel):
                 raise ConfigurationError(
                     "Component names must be unique nonempty strings, including legacy sensors"
                 )
-            self.components[name] = ElectricalComponent(name, config)
+            self.components[name] = ElectricalComponent(name, config, registry=registry)
 
     def set_input(self, name, input_name=None, value=None, **inputs):
         item = self.components[name]

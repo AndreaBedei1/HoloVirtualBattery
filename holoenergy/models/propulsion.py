@@ -21,8 +21,15 @@ _NO_DATA = {
 
 class ThrusterModel:
     def __init__(self, config):
-        keys(config, {"model", "voltage_tables"}, "thruster profile")
+        keys(config, {"model", "voltage_tables", "voltage_policy"}, "thruster profile")
         self.name = required(config, "model")
+        # "measured": power only inside the measured voltage range (default).
+        # "table_voltage": outside that range the nearest table is used, i.e. power at a given
+        # thrust is assumed independent of the bus voltage there (a single-voltage datasheet on
+        # a varying pack). Declared, reported as a scientific warning, never silent.
+        self.voltage_policy = config.get("voltage_policy", "measured")
+        if self.voltage_policy not in ("measured", "table_voltage"):
+            raise ConfigurationError("voltage_policy must be measured or table_voltage")
         self.tables = []
         raw = required(config, "voltage_tables")
         for table in raw:
@@ -71,8 +78,18 @@ class ThrusterModel:
             self.tables.append((v, directions))
         if not self.tables:
             raise ConfigurationError("Thruster profile needs at least one voltage table")
-        self.min_voltage = self.tables[0][0]
-        self.max_voltage = self.tables[-1][0]
+        self.table_voltage_range = (self.tables[0][0], self.tables[-1][0])
+        if self.voltage_policy == "table_voltage":
+            self.min_voltage, self.max_voltage = 0.0, float("inf")
+        else:
+            self.min_voltage, self.max_voltage = self.table_voltage_range
+
+    def _clamp(self, voltage):
+        """Voltage at which the tables are read (the nearest table outside its range)."""
+        if self.voltage_policy != "table_voltage":
+            return voltage
+        low, high = self.table_voltage_range
+        return min(max(voltage, low), high)
 
     def _voltage_check(self, voltage):
         number(voltage, "thruster voltage", positive=True)
@@ -83,6 +100,7 @@ class ThrusterModel:
             )
 
     def _bracket(self, voltage):
+        voltage = self._clamp(voltage)
         index = bisect_left([v for v, _ in self.tables], voltage)
         if index == len(self.tables):
             return self.tables[-1:]
@@ -107,7 +125,7 @@ class ThrusterModel:
             (v, interpolate(data[direction][key], abs(action)))
             for v, data in self._bracket(voltage)
         )
-        return interpolate(values, voltage)
+        return interpolate(values, self._clamp(voltage))
 
     def max_force(self, voltage, direction):
         self._voltage_check(voltage)
@@ -124,7 +142,7 @@ class ThrusterModel:
                 (v, interpolate(data[direction]["command_force"], abs(command)))
                 for v, data in self.tables
             ),
-            voltage,
+            self._clamp(voltage),
         )
         return f if command > 0 else -f
 

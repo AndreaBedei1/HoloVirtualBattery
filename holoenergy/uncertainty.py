@@ -38,12 +38,13 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
     ``used_values`` maps (device, state) -> value (SI) actually used by the model; by
     default it is read from the component evidence records (``use: value``).
     """
-    registry = registry or default_registry()
+    registry = registry or getattr(evidence_map, "registry", None) or default_registry()
     device_states = summary["device_state_energy_Wh"]
     nominal_terminal = summary["terminal_energy_Wh"]
     nominal_total = summary["total_ocv_work_Wh"]
     low_delta = high_delta = 0.0
     open_low, open_high, rows = [], [], []
+    points, opens = [], []  # complete the contribution list for paired comparisons
     for device, states in device_states.items():
         for state, wh in states.items():
             if wh == 0:
@@ -53,6 +54,9 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 if device not in evidence_map.actuators:
                     open_low.append(f"{device}.{state}")
                     open_high.append(f"{device}.{state}")
+                    opens.append({"device": device, "state": state, "energy_Wh": wh})
+                else:
+                    points.append({"device": device, "state": state, "energy_Wh": wh})
                 continue
             record = registry.get(record_id)
             used = (used_values or {}).get((device, state))
@@ -123,6 +127,10 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
         "total_ocv_work_Wh_nominal": nominal_total,
         "battery_losses": battery,
         "contributions": rows,
+        # Actuator energy is a point value (no published uncertainty; dynamics excluded);
+        # loads without a record have both sides open.
+        "point_contributions": points,
+        "open_contributions": opens,
         "excluded": (
             "propulsion (manufacturer curve without published measurement uncertainty) and "
             "dynamics (simulator-owned); unconfigured loads and unmodelled conversion open the "

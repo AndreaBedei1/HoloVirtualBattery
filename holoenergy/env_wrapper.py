@@ -62,6 +62,10 @@ class EnergyAwareEnv:
             raise ConfigurationError("battery_profile/components/overrides need vehicle_profile")
         self.env = env
         self.config = load_config(config_path, data=config)
+        from .evidence import registry_for
+
+        # One registry per run: packaged evidence plus the configuration's own records.
+        self.evidence_registry = registry_for(self.config)
         self.dt_s = self.config["simulation"]["dt_s"]
         manager = self.config.get("power_manager", {})
         keys(manager, {"apply_derating_to_actions"}, "power_manager")
@@ -78,7 +82,9 @@ class EnergyAwareEnv:
                 "Battery nominal_voltage_V is incompatible with the actuator voltage domain"
             )
         self.payload = ComponentModel(
-            self.config.get("sensors", {}), self.config.get("components", [])
+            self.config.get("sensors", {}),
+            self.config.get("components", []),
+            registry=self.evidence_registry,
         )
         if "hotel_load" not in self.config:
             raise ConfigurationError("Supply explicit hotel_load.constant_W (zero is allowed)")
@@ -109,7 +115,9 @@ class EnergyAwareEnv:
         self.warnings = model_warnings(self.config)
         from .evidence.runtime import EvidenceMap
 
-        self.evidence_map = EvidenceMap(self.config, self.payload, self.propulsion)
+        self.evidence_map = EvidenceMap(
+            self.config, self.payload, self.propulsion, registry=self.evidence_registry
+        )
         self.warnings.extend(self.evidence_map.warnings())
         if self.dynamics_status == "descriptive_only_not_applied":
             self.warnings.append(

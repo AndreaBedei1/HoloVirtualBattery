@@ -78,7 +78,12 @@ class EnergyReport:
             }
         from .evidence import default_registry
 
-        provenance["evidence_registry_version"] = default_registry().version
+        registry = getattr(owner, "evidence_registry", None) or default_registry()
+        provenance["evidence_registry_version"] = registry.version
+        provenance["user_evidence"] = {
+            "sources": list(getattr(registry, "user_source_ids", ())),
+            "records": list(getattr(registry, "user_record_ids", ())),
+        }
         provenance["actuation"] = owner.actuation.describe()
         provenance["fidelity_level"] = owner.config.get("fidelity_level")
         provenance["dt_s"] = owner.dt_s

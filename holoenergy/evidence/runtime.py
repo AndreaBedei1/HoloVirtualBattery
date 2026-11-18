@@ -35,8 +35,15 @@ def _dataset_tables(record):
     path = (record.dataset or {}).get("path")
     if not path or not path.endswith((".json", ".yaml", ".yml")):
         return None
+    from pathlib import Path
+
     try:
-        text = importlib.resources.files("holoenergy").joinpath(path).read_text(encoding="utf-8")
+        local = Path(path)
+        # Packaged datasets are package-relative; a user's own dataset may be an absolute path.
+        source = (
+            local if local.is_absolute() else importlib.resources.files("holoenergy").joinpath(path)
+        )
+        text = source.read_text(encoding="utf-8")
         data = json.loads(text) if path.endswith(".json") else yaml.safe_load(text)
     except (FileNotFoundError, OSError, ValueError, yaml.YAMLError):
         return None
@@ -46,6 +53,17 @@ def _dataset_tables(record):
         if key in data:
             return key, data[key]
     return None
+
+
+def _actuator_ids(propulsion):
+    count = propulsion.get("thruster_count") or len(propulsion.get("thrusters") or [])
+    return list(propulsion.get("actuator_ids") or [f"T{i + 1}" for i in range(count)])
+
+
+def _actuator_models(propulsion):
+    ids = _actuator_ids(propulsion)
+    models = propulsion.get("thrusters")
+    return list(models) if models else [propulsion.get("thruster")] * len(ids)
 
 
 def _graded(registry, entry):
@@ -107,6 +125,11 @@ class EvidenceMap:
             self.ocv_grade = None  # L0: nominal voltage, no OCV curve
         self.propulsion_relation = (evidence.get("propulsion") or {}).get("relation")
         self.stale_links = self._check_links(config)
+        (
+            self.actuator_grades,
+            self.actuator_records,
+            self.actuator_relations,
+        ) = self._actuator_links(config, list(propulsion.ids))
         self.double_counting_policy = evidence.get("double_counting", "warn")
         if self.double_counting_policy not in ("warn", "error"):
             from .._validation import ConfigurationError
@@ -142,6 +165,11 @@ class EvidenceMap:
         self.capabilities = capabilities
         self._update_double_counting()
         self.external = {}
+        self.voltage_independent_actuators = [
+            aid
+            for aid, model in zip(propulsion.ids, propulsion.thrusters, strict=True)
+            if getattr(model, "voltage_policy", "measured") == "table_voltage"
+        ]
         self.rail_verified = self._rail_verification(config, converters)
         self.bus_voltage_range = _bus_voltage_range(battery)
         self.supply_mismatches = self._supply_mismatches(payload)
@@ -231,18 +259,66 @@ class EvidenceMap:
                 if key.endswith("_efficiency") and not _matches(record, actual):
                     drop("converter", record.id, f"converters.{key}={actual}")
                     break
+        self.propulsion_mismatch_ids = []
         if self.propulsion_record:
             record = self.registry.get(self.propulsion_record)
             found = _dataset_tables(record)
             propulsion = config.get("propulsion") or {}
-            models = propulsion.get("thrusters") or [propulsion.get("thruster")]
+            ids = _actuator_ids(propulsion)
+            own = set((config.get("evidence") or {}).get("actuators") or {})
             if found is not None:
                 key, tables = found
-                if any(not isinstance(m, dict) or m.get(key) != tables for m in models):
+                models = _actuator_models(propulsion)
+                differ = [
+                    aid
+                    for aid, m in zip(ids, models, strict=True)
+                    if aid not in own and (not isinstance(m, dict) or m.get(key) != tables)
+                ]
+                if differ and len(differ) == len([a for a in ids if a not in own]):
                     drop(
                         "propulsion", record.id, "actuator tables differ from the record's dataset"
                     )
+                elif differ:
+                    # Review H2: only the actuators that do not match lose the link.
+                    self.propulsion_mismatch_ids = differ
+                    stale.append(
+                        f"stale evidence link: propulsion -> {record.id} for {', '.join(differ)} "
+                        "(their tables differ from the record's dataset); those actuators graded D"
+                    )
         return stale
+
+    def _actuator_links(self, config, ids):
+        """Per-actuator evidence (``evidence.actuators: {id: {record, relation}}``), falling back
+        to the shared ``evidence.propulsion`` link."""
+        links = (config.get("evidence") or {}).get("actuators") or {}
+        unknown = sorted(set(links) - set(ids))
+        if unknown:
+            from .._validation import ConfigurationError
+
+            raise ConfigurationError(f"evidence.actuators names unknown actuators {unknown}")
+        models = dict(zip(ids, _actuator_models(config.get("propulsion") or {}), strict=True))
+        grades, records, relations = {}, {}, {}
+        for aid in ids:
+            if aid in links:
+                grade, record_id = _graded(self.registry, links[aid])
+                relation = links[aid].get("relation", "exact")
+                found = _dataset_tables(self.registry.get(record_id)) if record_id else None
+                model = models.get(aid)
+                if found is not None and (
+                    not isinstance(model, dict) or model.get(found[0]) != found[1]
+                ):
+                    self.stale_links.append(
+                        f"stale evidence link: actuator {aid} -> {record_id} (tables differ "
+                        "from the record's dataset); graded D"
+                    )
+                    grade, record_id, relation = "D", None, "user"
+            elif aid in self.propulsion_mismatch_ids:
+                grade, record_id, relation = "D", None, "user"
+            else:
+                grade, record_id = self.propulsion_grade, self.propulsion_record
+                relation = self.propulsion_relation
+            grades[aid], records[aid], relations[aid] = grade, record_id, relation
+        return grades, records, relations
 
     def efficiency_for(self, device):
         """Converter efficiency of the rail that serves ``device``."""
@@ -310,7 +386,7 @@ class EvidenceMap:
 
     def grade(self, device, state):
         if device in self.actuators:
-            return self.propulsion_grade
+            return self.actuator_grades.get(device, self.propulsion_grade)
         if device == "hotel_constant":
             return self.hotel_grade
         return self.devices.get(device, {}).get(state, "D")
@@ -358,7 +434,9 @@ class EvidenceMap:
         flagged = {}  # (kind, subject) -> [energy_Wh, states]
         for device, states in device_state_energy_Wh.items():
             relation = (
-                self.propulsion_relation if device in self.actuators else self.relations.get(device)
+                self.actuator_relations.get(device, self.propulsion_relation)
+                if device in self.actuators
+                else self.relations.get(device)
             )
             for state, wh in states.items():
                 grade = self.grade(device, state)
@@ -416,8 +494,25 @@ class EvidenceMap:
         return rails
 
     def _domain_warnings(self, device_state_energy_Wh, total):
-        """Structured warnings for unmodelled conversion (review D-09)."""
+        """Structured warnings for unmodelled conversion (review D-09) and actuator tables
+        read outside their measured voltage range."""
         out = []
+        if self.voltage_independent_actuators:
+            energy = sum(
+                sum(device_state_energy_Wh.get(a, {}).values())
+                for a in self.voltage_independent_actuators
+            )
+            out.append(
+                {
+                    "kind": "voltage_independent_table",
+                    "subject": ", ".join(self.voltage_independent_actuators),
+                    "states": [],
+                    "energy_Wh": energy,
+                    "share_percent": 100 * energy / total if total else None,
+                    "effect": "actuator power read at the nearest measured table voltage when "
+                    "the bus is outside it (power assumed independent of bus voltage there)",
+                }
+            )
         for name, info in sorted(self.supply_mismatches.items()):
             energy = sum(device_state_energy_Wh.get(name, {}).values())
             out.append(
@@ -456,6 +551,7 @@ class EvidenceMap:
         "upper_bound_only": "published maximum used as the value: biases the estimate upward",
         "supply_domain_mismatch": "device supply domain does not contain the bus voltage",
         "conversion_unverified": "conversion loss not modelled",
+        "voltage_independent_table": "actuator table used outside its measured voltage range",
     }
 
     def _scientific_warnings(self, flagged, category_energy_Wh, total):

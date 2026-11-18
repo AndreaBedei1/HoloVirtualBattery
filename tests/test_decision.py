@@ -7,7 +7,7 @@ import pytest
 from holoenergy import EnergyAwareEnv
 from holoenergy.catalog import profile_reference, vehicle_config
 from holoenergy.config import load_config
-from holoenergy.decision import assess_energy_requirement
+from holoenergy.decision import assess_energy_requirement, compare_energy
 
 CONTRACT = {
     "agent_type": "BlueROV2",
@@ -114,3 +114,42 @@ def test_assessment_propagates_a_dynamics_factor_range():
     assert wide.supported_high_Wh == pytest.approx(base.supported_high_Wh + propulsion)
     assert wide.supported_low_Wh == pytest.approx(base.supported_low_Wh - 0.5 * propulsion)
     assert "propulsion factor" in wide.dynamics
+
+
+def oculus():
+    return {
+        "name": "imaging_sonar",
+        "device": "blueprint_oculus_m750d",
+        "category": "sensors",
+        "relation": "representative",
+        "states": {
+            "ACTIVE": {"evidence": "blueprint_oculus_m750d.power_range", "use": "value_max"}
+        },
+        "initial_state": "ACTIVE",
+    }
+
+
+def ping360():
+    return {"profile": profile_reference("bluerobotics-ping360", "component")}
+
+
+def test_paired_comparison_cancels_identical_contributions():
+    a, b = run(components=[sonar()]), run(components=[sonar()])
+    result = compare_energy(a, b)
+    assert result.verdict == "RANKING_NOT_SUPPORTED"
+    assert result.differing == ()
+
+
+def test_published_ranges_decide_or_withhold_a_ranking():
+    gemini, oc, scan = (
+        run(components=[sonar()]),
+        run(components=[oculus()]),
+        run(components=[ping360()]),
+    )
+    # Ping360 (<= 5 W) is below the Gemini's published minimum (16 W): supported.
+    assert compare_energy(scan, gemini).verdict == "A_LOWER_SUPPORTED"
+    # Gemini [16, 27] W (+ unmodelled step-up loss) vs Oculus family [10, 35] W: the nominal
+    # values (27 vs 35 W) favour the Gemini, the evidence does not.
+    nominal_favours_gemini = gemini.terminal_energy_Wh < oc.terminal_energy_Wh
+    assert nominal_favours_gemini
+    assert compare_energy(gemini, oc).verdict == "RANKING_NOT_SUPPORTED"
