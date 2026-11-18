@@ -10,6 +10,40 @@
     "gazebo_power_load_W_per_thruster": 6.372049941477352,
     "active_thrusters": 4
   },
+  "provenance": {
+    "git": {
+      "commit": "de15e7ccd5b6b40efa6d1fb29a04c43233a45159",
+      "dirty": true
+    },
+    "inputs": {
+      "experiments/results/final/crosslayer.json": "ea043b5adee468ee6c1790c566f22a74eed3674e74151b098b11ee42a9f27960",
+      "experiments/results/final/native/EXP3/EXP3-L4-2H2V-headon0.2.summary.json": "cc7886ba8cf764569f5b2b7bb097e29a7d622a2bdd18795f390c7d9b602353db",
+      "experiments/results/final/native/EXP3/EXP3-L4-2H2V-headon0.5.summary.json": "702092b16f3d58f028842eeace49c368301deb9f5957e6d1631e52a27d7f03e8",
+      "experiments/results/final/native/EXP3/EXP3-L4-2H2V-oblique0.5.summary.json": "1de05b157b8826d6c59afa218cad447127be23372598a448db43528712dd0af5",
+      "experiments/results/final/native/EXP3/EXP3-L4-2H2V-sway0.5.summary.json": "c6b027b9160dab221ce84cd3c84396e142e67dd212312ed5b017f15201284684",
+      "experiments/results/final/native/EXP3/EXP3-L4-H45-headon0.2.summary.json": "943d6022b35308e6d1bebe741fc21a76386dd08a12b109611476076d66acd434",
+      "experiments/results/final/native/EXP3/EXP3-L4-H45-headon0.5.summary.json": "1d7342cd969a8616ec081c48ffc6d891dbfba6d9a7e8cb89e21d1aba7c410fe6",
+      "experiments/results/final/native/EXP3/EXP3-L4-H45-heave.summary.json": "a49d351ea2ab9408e2eb0fa43cc90d3c7c550132f79a27d99d39e296c34a6bd4",
+      "experiments/results/final/native/EXP3/EXP3-L4-H45-oblique0.5.summary.json": "9fb64014656cb4ad601aaf9ea99367f7fd4bd4dce6e046247cdfa2f4037ec68e",
+      "experiments/results/final/native/EXP3/EXP3-L6-STD-headon0.2.summary.json": "1432eddefea7f700fb347a88d3531b7a0f140458e409ffaab73aae0b5f269901",
+      "experiments/results/final/native/EXP3/EXP3-L6-STD-headon0.5.summary.json": "4676e3a1fe23e032aa4e62dfd5080692daafc4b293a7fcf5bdd8f4a2345934f4",
+      "experiments/results/final/native/EXP3/EXP3-L6-STD-heave.summary.json": "d557374d621539e66d908f731e33bfd9636f52aa0a54588cfa4484756cffd302",
+      "experiments/results/final/native/EXP3/EXP3-L6-STD-oblique0.5.summary.json": "b47cc48d9528419f08c27306a3d78b6a0b4ffd53cca26b834dc4d3bc18957a33",
+      "experiments/results/final/native/EXP3/EXP3-L8-HV-headon0.2.summary.json": "2378c6830a0f2062147f088e47414740172d3e64ae4b15d769accffdb1aa2696",
+      "experiments/results/final/native/EXP3/EXP3-L8-HV-headon0.5.summary.json": "1ceae7312c26413b5a1779e2adacc770038324865fc606150b8683ce61b247ed",
+      "experiments/results/final/native/EXP3/EXP3-L8-HV-headon0.8.summary.json": "d290c06ef74d74e394c1da5b186394673ee4c12a6ef4a503bd6f548f77429488",
+      "experiments/results/final/native/EXP3/EXP3-L8-HV-heave.summary.json": "4c7326c69ae94f761c02d6e5a41bb1f41a8d68359bcd222aa5a868b2172e0607",
+      "experiments/results/final/native/EXP3/EXP3-L8-HV-oblique0.5.summary.json": "c9f22f15315de54d21002c5e9430b38596a5e52a613751da5c3ec829a2f6ba0f",
+      "experiments/results/final/native/EXP3/EXP3-L8-HV-sway0.5.summary.json": "72a1fe4df0a578dd4bdae5bf29534c711b177b797535232196d550dbd00c7699",
+      "experiments/results/final/native/EXP3/EXP3-L8-VEC30-headon0.2.summary.json": "009634e0a173d9026b27b2c98abe81d79b0a767e67a5edeb6293d7748fcb37df",
+      "experiments/results/final/native/EXP3/EXP3-L8-VEC30-headon0.5.summary.json": "a600cfc132b1538a2ce2127e2a2fd41a88a0b03eadfa4c91ba9d5f3693bfd74d",
+      "experiments/results/final/native/EXP3/EXP3-L8-VEC30-oblique0.5.summary.json": "e46e8c0cef8cfbbc44d71e7f7ea5ab9cbe649f939bb44ab785a3b0b1551488f5",
+      "experiments/results/final/native/EXP5/EXP5-station-c0.summary.json": "6d14669d0897c448e19c2b68c8936be1ca721663b5081a3bcf9b025e72e1b49a",
+      "experiments/results/final/native/EXP5/EXP5-transit-c0.2.summary.json": "0ce2b81240d3eeb87844733fd78dbeb6f1101aa572cb3572c0d0c4c6c30e0f0e",
+      "experiments/results/final/native/EXP5/EXP5-transit-c0.4.summary.json": "8095b85aa1d20a228f201ab42fa8b711f1dd0187510d860fa1f33f4cf22ef9e8",
+      "experiments/results/final/native/EXP5/EXP5-transit-c0.summary.json": "26c25042b35e34a93737dbcf9c64cad0bc8dd5864e88a9235a604cba3ab104fa"
+    }
+  },
   "propulsion": [
     {
       "mission": "transit calm",

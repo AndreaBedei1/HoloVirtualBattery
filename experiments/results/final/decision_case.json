@@ -13,6 +13,18 @@
       "yaw"
     ]
   },
+  "provenance": {
+    "git": {
+      "commit": "de15e7ccd5b6b40efa6d1fb29a04c43233a45159",
+      "dirty": true
+    },
+    "inputs": {
+      "experiments/results/final/final_runs.json": "e642239c97ef90157bb85b2581b240982dae6d8d2fc7d092b6c6280a4fee9911",
+      "experiments/results/final/sensitivity.json": "9b79742b01034e49e146713438e383afae6ead249253519940e7a05712cd96fd",
+      "experiments/results/final/crosslayer.json": "ea043b5adee468ee6c1790c566f22a74eed3674e74151b098b11ee42a9f27960",
+      "experiments/results/final/native/EXP6/EXP6-S5-inspection-scheduled.summary.json": "9e992fe5da5ecedb1e32bd0b47bfd9ceb11ca8766e0769732f348dfb239b5a19"
+    }
+  },
   "part_a_payload": {
     "mission": "EXP6-S5-inspection-scheduled",
     "trace": "100 Hz trace (content SHA256 verified)",
@@ -546,8 +558,8 @@
             "holds": true
           },
           "steady, HoloOcean drag + T200 inflow bias (W)": {
-            "L4-2H2V": 13.503840857683592,
-            "L8-HV": 13.282830762683208,
+            "L4-2H2V": 14.44320304260698,
+            "L8-HV": 14.04685661302923,
             "holds": false
           }
         },
@@ -573,8 +585,8 @@
             "holds": true
           },
           "steady, HoloOcean drag + T200 inflow bias (W)": {
-            "L4-2H2V": 222.30412075177108,
-            "L8-HV": 257.39374716678304,
+            "L4-2H2V": 237.76817181603082,
+            "L8-HV": 272.1989856032565,
             "holds": true
           }
         },
