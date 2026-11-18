@@ -241,3 +241,22 @@ patched binaries differ only in the executable.
 Delete `C:\HOB\packages\patched-after` (or point tools back to the installed
 package by omitting `--binary`). The patch itself is reversed with
 `git apply --reverse patches/holoocean-2.3-drag-units.patch` in a source checkout.
+
+## Binary used for the final runs (hardening phase, 2026-11-13)
+
+Rebuilt on 2026-11-12 with the recipe above (`patched-after`). Every final summary records the
+following identity in `provenance.backend`. A rebuild should reproduce the backend check (EXP1: drag
+observed/expected 1.000000, step ratio 1.000000). It is not expected to reproduce the binary hash
+bit-for-bit, because the toolchain timestamps the binary.
+
+| Item | SHA256 |
+| --- | --- |
+| `Holodeck.exe` (255722496 bytes) | `9575fb022403130844a5758bb72168402cb872e61ddf8146995510a97b064120` |
+| `Holodeck.pdb` | `5b550ef34763ed0a1ac19701a48ec11e371c243731a1fe83ecdd70a5c156bf7e` |
+| `config.json` | `f9830d1a259645a8671e26a614c5e8be8750afe7c0ccba4612ed84e01d660bcd` |
+| `holoenergy_build_manifest.json` | `219b74d4925a5fa1a4e9ad58e2a2031d60d47e6a2730d6b2715976b815dc234a` |
+| Patch (`patches/holoocean-2.3-drag-units.patch`) | `00f1b30383f4f40544a44c8660b84c4ade31c25bf6409b0d662a21728ab488fa` |
+| HoloOcean source commit | `49e70552dfd97273b7dfbe755fbe65d7738b24b7` (tag v2.3.0) |
+
+The 100 Hz traces of the final runs can be packed with `tools/make_trace_archive.py`. The archive
+is ready for Zenodo and has not been uploaded; publishing it is the author's decision.
