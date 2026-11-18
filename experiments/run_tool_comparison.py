@@ -149,6 +149,22 @@ CAPABILITIES = {
 }
 
 
+def provenance(inputs):
+    """Commit, dirty flag and SHA256 of every input file of a derived result (review R6)."""
+    import hashlib
+
+    from holoenergy.provenance import git_state
+
+    git = git_state()
+    return {
+        "git": {"commit": git.get("commit"), "dirty": git.get("dirty")},
+        "inputs": {
+            str(p.relative_to(ROOT)).replace("\\", "/"): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in inputs
+        },
+    }
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--output", type=Path, default=FINAL / "tool_comparison.json")
@@ -163,6 +179,9 @@ def main(argv=None):
             "gazebo_power_load_W_per_thruster": power_load,
             "active_thrusters": n_active,
         },
+        "provenance": provenance(
+            [FINAL / "crosslayer.json"] + sorted((FINAL / "native").glob("EXP[35]/*.summary.json"))
+        ),
         "propulsion": compare(psm, power_load, n_active),
         "communication": communication(),
         "capabilities": {

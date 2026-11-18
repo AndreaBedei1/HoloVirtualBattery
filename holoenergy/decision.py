@@ -87,6 +87,19 @@ def _bus_energy(intervals):
     return out
 
 
+def _placeholder_loss(intervals, rails, skip):
+    """Conversion loss that the lower bound credits to rails without converter evidence."""
+    loss = 0.0
+    for key in ("contributions", "point_contributions"):
+        for row in intervals.get(key, []):
+            if row.get("rail") not in rails or f"{row['device']}.{row['state']}" in skip:
+                continue
+            ratio = row.get("ratio")
+            low = row["energy_Wh"] * (ratio[0] if ratio and ratio[0] is not None else 1.0)
+            loss += low * (row.get("scale", 1.0) - 1.0)
+    return loss
+
+
 def assess_energy_requirement(
     report,
     max_energy_wh,
@@ -103,6 +116,10 @@ def assess_energy_requirement(
     an assumption and is recorded as such.
     """
     limit = number(max_energy_wh, "max_energy_wh", positive=True)
+    if isinstance(assume_verified, str) or not all(
+        r in ("payload", "hotel") for r in assume_verified
+    ):
+        raise ConfigurationError('assume_verified must be a sequence of "payload" and/or "hotel"')
     intervals = _intervals(report)
     terminal = intervals["terminal_energy_Wh"]
     evidence = _get(report, "evidence") or {}
@@ -120,6 +137,15 @@ def assess_energy_requirement(
     # A contribution with no published lower bound can be as small as zero, together with the
     # conversion loss it causes (adversarial H1).
     low = float(terminal["low"]) - sum(bus.get(item, 0.0) for item in open_low)
+    # On a rail without converter evidence the true scale may be 1 even if a placeholder
+    # efficiency below 1 was configured: its conversion loss is not part of the lower bound
+    # (review R4-01).
+    unverified = {
+        r
+        for r, ok in intervals.get("rail_verified", {}).items()
+        if not ok and r not in assume_verified
+    }
+    low -= _placeholder_loss(intervals, unverified, set(open_low))
     high = None if open_high else float(terminal["high"])
     propulsion = sum(
         r["energy_Wh"] * r.get("scale", 1.0) for r in intervals.get("point_contributions", [])
@@ -239,9 +265,10 @@ def _close(p, q, tolerance):
     return abs(p - q) <= tolerance * max(abs(p), abs(q), 1.0)
 
 
-def _same(xa, xb, tolerance):
-    """Identical in both runs: same record, rail, energy, bounds and conversion scale."""
-    if xa is None or xb is None or "unknown" in (xa[1], xb[1]):
+def _same(xa, xb, tolerance, verified_a=True, verified_b=True):
+    """Identical in both runs: same record, rail, energy, bounds and conversion scale, and the
+    same converter-evidence state of the rail (review R4-02)."""
+    if xa is None or xb is None or "unknown" in (xa[1], xb[1]) or verified_a != verified_b:
         return False
     return (
         xa[1] == xb[1]
@@ -250,17 +277,21 @@ def _same(xa, xb, tolerance):
     )
 
 
-def _rail_sums(contribs, keys):
-    """Per rail: [bus-side low, bus-side high or None] over the differing contributions."""
+def _rail_sums(contribs, keys, unverified=()):
+    """Per rail: [bus-side low, bus-side high or None] over the differing contributions.
+
+    On a rail without converter evidence the scale is taken as 1, its smallest admissible
+    value; a placeholder efficiency below 1 is not evidence (review R4-01)."""
     sums = {r: [0.0, 0.0] for r in RAILS}
     for key in keys:
         x = contribs.get(key)
         if x is None:
             continue
         rail = x[5] if x[5] in sums else "payload"
-        sums[rail][0] += x[2] * x[4]
+        scale = 1.0 if rail in unverified else x[4]
+        sums[rail][0] += x[2] * scale
         sums[rail][1] = (
-            None if sums[rail][1] is None or x[3] is None else sums[rail][1] + x[3] * x[4]
+            None if sums[rail][1] is None or x[3] is None else sums[rail][1] + x[3] * scale
         )
     return sums
 
@@ -299,12 +330,23 @@ def compare_energy(report_a, report_b, *, tolerance=1e-9):
     ia, ib = _intervals(report_a), _intervals(report_b)
     unverified_a = {r for r, ok in ia.get("rail_verified", {}).items() if not ok}
     unverified_b = {r for r, ok in ib.get("rail_verified", {}).items() if not ok}
+
+    def verified(contribs, unverified_rails, key):
+        x = contribs.get(key)
+        return x is None or x[5] not in unverified_rails
+
     differing = tuple(
         key
         for key in sorted(set(ca) | set(cb), key=str)
-        if not _same(ca.get(key), cb.get(key), tolerance)
+        if not _same(
+            ca.get(key),
+            cb.get(key),
+            tolerance,
+            verified(ca, unverified_a, key),
+            verified(cb, unverified_b, key),
+        )
     )
-    sa, sb = _rail_sums(ca, differing), _rail_sums(cb, differing)
+    sa, sb = _rail_sums(ca, differing, unverified_a), _rail_sums(cb, differing, unverified_b)
     a_lower, d_high = _lower_supported(sa, sb, unverified_a, unverified_b)
     b_lower, d_neg = _lower_supported(sb, sa, unverified_b, unverified_a)
     assumptions = []

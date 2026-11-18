@@ -2,6 +2,15 @@
   "voltage_V": 15.5,
   "native_clamp_N": 28.75,
   "window_s": 60.0,
+  "provenance": {
+    "git": {
+      "commit": "9d4d657b80da238924f58ee0b8c190022dcd43e8",
+      "dirty": true
+    },
+    "inputs": {
+      "experiments/results/final/crosslayer.json": "ea043b5adee468ee6c1790c566f22a74eed3674e74151b098b11ee42a9f27960"
+    }
+  },
   "part1_drag_model": [
     {
       "drag_model": "HoloOcean 2.3.0 literals",
@@ -3574,8 +3583,8 @@
         "geometry_grade": "A",
         "current_m_s": 0.2,
         "static_power_W": 12.4,
-        "inflow_corrected_power_W": 13.282830762683208,
-        "factor": 1.0711960292486458,
+        "inflow_corrected_power_W": 14.04685661302923,
+        "factor": 1.1328110171797765,
         "advance_ratio_range": [
           0.13864605320387907,
           0.13864605320387907
@@ -3587,8 +3596,8 @@
         "geometry_grade": "A",
         "current_m_s": 0.5,
         "static_power_W": 240.2863156123937,
-        "inflow_corrected_power_W": 257.39374716678304,
-        "factor": 1.0711960292486458,
+        "inflow_corrected_power_W": 272.1989856032565,
+        "factor": 1.1328110171797765,
         "advance_ratio_range": [
           0.13864605320387904,
           0.13864605320387904
@@ -3600,8 +3609,8 @@
         "geometry_grade": "D",
         "current_m_s": 0.2,
         "static_power_W": 12.427539667065346,
-        "inflow_corrected_power_W": 13.503840857683592,
-        "factor": 1.0866061360053905,
+        "inflow_corrected_power_W": 14.44320304260698,
+        "factor": 1.1621932763476437,
         "advance_ratio_range": [
           0.1648788729370988,
           0.1648788729370988
@@ -3613,8 +3622,8 @@
         "geometry_grade": "D",
         "current_m_s": 0.5,
         "static_power_W": 204.5857403023797,
-        "inflow_corrected_power_W": 222.30412075177108,
-        "factor": 1.0866061360053905,
+        "inflow_corrected_power_W": 237.76817181603082,
+        "factor": 1.1621932763476437,
         "advance_ratio_range": [
           0.16487887293709877,
           0.16487887293709877

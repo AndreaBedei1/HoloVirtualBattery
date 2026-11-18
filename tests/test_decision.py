@@ -5,6 +5,7 @@ import warnings
 import pytest
 
 from holoenergy import EnergyAwareEnv
+from holoenergy._validation import ConfigurationError
 from holoenergy.catalog import profile_reference, vehicle_config
 from holoenergy.config import load_config
 from holoenergy.decision import assess_energy_requirement, compare_energy
@@ -208,3 +209,77 @@ def test_attached_modem_states_are_bounded_by_their_records():
     assert not any(x.startswith("comms.acoustic") for x in open_high)
     # TX at 2.8 W is exact; LISTEN at the 0.8 W upper bound opens only the lower side.
     assert "comms.acoustic.LISTEN" in report.intervals["terminal_energy_Wh"]["open_low"]
+
+
+def _rep(rows, verified, open_high=(), unknown=()):
+    """Minimal report dict (review R4 probes)."""
+    nominal = sum(r["energy_Wh"] * r["scale"] for r in rows)
+    return {
+        "intervals": {
+            "terminal_energy_Wh": {
+                "nominal": nominal,
+                "low": nominal,
+                "high": nominal,
+                "open_low": [],
+                "open_high": list(open_high),
+                "unknown_contributions": list(unknown),
+            },
+            "contributions": rows,
+            "point_contributions": [],
+            "open_contributions": [],
+            "rail_verified": verified,
+        },
+        "evidence": {},
+    }
+
+
+def _row(dev, energy, ratio=(1.0, 1.0), scale=1.0):
+    return {
+        "device": dev,
+        "state": "ACTIVE",
+        "energy_Wh": energy,
+        "ratio": ratio,
+        "scale": scale,
+        "rail": "payload",
+        "record": "r",
+    }
+
+
+def test_placeholder_efficiency_is_not_part_of_the_lower_bound():
+    """R4-01: efficiency 0.5 configured without evidence; the true scale may be 1."""
+    report = _rep(
+        [_row("dvl", 1.0, scale=2.0)],
+        {"payload": False},
+        open_high=["conversion:payload"],
+        unknown=["conversion:payload"],
+    )
+    assessment = assess_energy_requirement(report, 1.5)
+    assert assessment.supported_low_Wh == pytest.approx(1.0)
+    assert assessment.verdict == "INDETERMINATE"
+
+
+def test_identical_load_does_not_cancel_when_only_one_rail_is_verified():
+    """R4-02: the same DVL energy, but A's rail scale is unknown (s >= 1, unbounded)."""
+    a = _rep([_row("dvl", 1.0)], {"payload": False})
+    b = _rep([_row("dvl", 1.0), _row("sonar", 0.5, ratio=(0.8, 1.2))], {"payload": True})
+    assert compare_energy(a, b).verdict == "RANKING_NOT_SUPPORTED"
+
+
+def test_shared_unverified_rail_keeps_the_sign():
+    lower = compare_energy(
+        _rep([_row("x", 0.9)], {"payload": False}), _rep([_row("y", 1.0)], {"payload": False})
+    )
+    higher = compare_energy(
+        _rep([_row("x", 1.1)], {"payload": False}), _rep([_row("y", 1.0)], {"payload": False})
+    )
+    assert lower.verdict == "A_LOWER_SUPPORTED" and higher.verdict == "B_LOWER_SUPPORTED"
+
+
+@pytest.mark.parametrize("bad", ["payload", ("payloads",), ("Payload",)])
+def test_assume_verified_is_validated(bad):
+    """R4-03: a bare string or a typo must not be silently accepted."""
+    report = _rep(
+        [_row("dvl", 1.0)], {"payload": False}, ["conversion:payload"], ["conversion:payload"]
+    )
+    with pytest.raises(ConfigurationError):
+        assess_energy_requirement(report, 10.0, assume_verified=bad)

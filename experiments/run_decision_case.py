@@ -309,6 +309,22 @@ def part_b(registry):
     return out
 
 
+def provenance(inputs):
+    """Commit, dirty flag and SHA256 of every input file of a derived result (review R6)."""
+    import hashlib
+
+    from holoenergy.provenance import git_state
+
+    git = git_state()
+    return {
+        "git": {"commit": git.get("commit"), "dirty": git.get("dirty")},
+        "inputs": {
+            str(p.relative_to(ROOT)).replace("\\", "/"): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in inputs
+        },
+    }
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--output", type=Path, default=FINAL / "decision_case.json")
@@ -320,6 +336,14 @@ def main(argv=None):
             "legs_per_charge": LEGS,
             "inspection_phases": INSPECTION_PHASES,
         },
+        "provenance": provenance(
+            [
+                FINAL / "final_runs.json",
+                FINAL / "sensitivity.json",
+                FINAL / "crosslayer.json",
+                FINAL / f"native/EXP6/{MISSION}.summary.json",
+            ]
+        ),
         "part_a_payload": part_a(registry),
         "part_b_communication": part_b(registry),
         "part_c_layout": part_c(),

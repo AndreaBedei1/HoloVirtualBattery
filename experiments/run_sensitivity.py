@@ -65,6 +65,7 @@ from run_offline_campaign import (  # noqa: E402
 from holoenergy.allocation import ThrustAllocator  # noqa: E402
 from holoenergy.evidence import default_registry  # noqa: E402
 
+FINAL = ROOT / "experiments/results/final"
 VOLTAGE_V = 15.5  # fixed bus voltage inside the T200 table range (same as offline E4)
 CLAMP_N = 28.75  # holoocean_bluerov2.thruster_clamp
 CURRENTS = (0.2, 0.4, 0.5, 0.6, 0.8)
@@ -377,8 +378,8 @@ def part4(voltage=VOLTAGE_V, currents=(0.2, 0.5)):
 
 
 def lam_factor_function(registry):
-    """Electrical power per newton at a fixed command, relative to J = 0, from the Lam et al.
-    2023 tow-tank series (record bluerobotics_t200.advance_ratio_series_34p5rps)."""
+    """Electrical power at fixed thrust relative to J = 0, from the Lam et al. 2023 tow-tank
+    series at a fixed command (record bluerobotics_t200.advance_ratio_series_34p5rps)."""
     data = dataset(registry, "bluerobotics_t200.advance_ratio_series_34p5rps")
     rows = data["rows"]
     j = [r[0] for r in rows]
@@ -394,9 +395,12 @@ def lam_factor_function(registry):
     intercept = mean_i - slope * mean_j
 
     def factor(advance_ratio):
+        # Power at FIXED THRUST relative to J = 0 (review R2-01): with propeller similarity the
+        # rotational speed must rise as (T0/T)^0.5 to hold thrust, so power rises as
+        # (T0/T)^1.5 times the fixed-speed electrical change I/I0.
         t_rel = 1 + thrust["slope_per_J"] * advance_ratio / thrust["intercept"]
         i_rel = 1 + slope * advance_ratio / intercept
-        return i_rel / t_rel
+        return i_rel / t_rel**1.5
 
     return factor, {
         "thrust_fit": thrust,
@@ -468,6 +472,22 @@ def part5(registry, voltage=VOLTAGE_V, currents=(0.2, 0.5), diameter_m=0.076):
     }
 
 
+def provenance(inputs):
+    """Commit, dirty flag and SHA256 of every input file of a derived result (review R6)."""
+    import hashlib
+
+    from holoenergy.provenance import git_state
+
+    git = git_state()
+    return {
+        "git": {"commit": git.get("commit"), "dirty": git.get("dirty")},
+        "inputs": {
+            str(p.relative_to(ROOT)).replace("\\", "/"): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in inputs
+        },
+    }
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
@@ -482,6 +502,7 @@ def main(argv=None):
         "voltage_V": VOLTAGE_V,
         "native_clamp_N": CLAMP_N,
         "window_s": WINDOW_S,
+        "provenance": provenance([FINAL / "crosslayer.json"] if args.crosslayer.exists() else []),
         "part1_drag_model": part1(registry),
         "part2_acoustic_modem": part2(registry, args.crosslayer),
         "part3_allocator": part3(),
