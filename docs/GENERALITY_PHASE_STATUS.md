@@ -55,16 +55,51 @@ framing), G-11 (T200 grade), C-02 (OCV), D-09 (converters), a tool comparison an
   exactly. They miss the current effect (0.4 m/s transit 0.52 vs 5.10 Wh; 0.5 m/s station keeping
   0.05 / 0.64 vs 6.39 Wh).
 
-## In progress / remaining
+## Reviews of the new code (all addressed in 701757b and 15d8826)
 
-- Code reviews running: adversarial-coach, integration-enforcer, test-authenticator. Apply the
-  confirmed fixes, then regenerate decision_case.json, tool_comparison.json and sensitivity.json.
-- Dashboard: show `scientific_warnings` and `dynamics_evidence`; fix the comms-panel modem
-  classification; add an actuator legend. Profile-builder page if feasible.
-- Docs: generic_framework.md (builder, evidence workflow §30), README update.
-- Claim matrix (decision relevance, generic configuration, tool comparison, V&V); manuscript
-  restructure (RQ1–RQ6, sections §37).
-- Reviewers 1–6 and the final gate.
+- **Integration:** modem records now reach the intervals; `serves` names are checked; the summary
+  exports per-actuator records; the dashboard and text report show the warnings and the dynamics
+  evidence.
+- **Adversarial:**
+  - C1–C3: bus-side, rail-aware paired comparison; unknown contributions never cancel;
+  - H1–H8: open-low and propulsion factor on the bus side; a rail is verified only by a matching
+    efficiency record; actuator links validated; an unreadable dataset makes the link stale;
+    reference relations cap the grade;
+  - M2–M7 fixed.
+- **Test audit:** weak tests strengthened. 355 tests pass at 15d8826.
+
+## Final EXP11 numbers (15d8826, `experiments/results/final/decision_case.json`)
+
+- **A. Payload:**
+  - Replay equals the native run (difference 0.0).
+  - Nominal legs per charge (30 % reserve, 186.5 Wh): Gemini 88, Oculus 86, Ping360 92.
+  - Every leg target 40–100 is INDETERMINATE.
+  - Blocking contributions: the payload rail has no converter evidence; the DVL's typical value
+    is unbounded; for the Gemini, also its step-up converter.
+  - What-if (hypothetical measurement of the payload rail efficiency at 0.80–0.95): Oculus
+    certifiable for 81–85 legs, Ping360 for 88–91; the Gemini stays blocked.
+  - Rankings: Gemini < Oculus is nominally true but NOT supported; Ping360 is supported as lower
+    than both (Gemini − Ping360 ≥ 0.0516 Wh).
+- **B. Communication:** "optical < acoustic" is supported (optical [0.01082, 0.01108] Wh vs
+  acoustic [0.01243, 0.02599] Wh).
+- **C. Layout (L4-2H2V < L8-HV, head-on):** supported at 0.5 m/s under all four alternatives
+  (native, isotropic, von Benzon, inflow-corrected); not supported at 0.2 m/s (reversed under
+  isotropic steady and inflow-corrected). L4-2H2V cannot hold sway or oblique current; L8-HV can.
+
+## Remaining (in order)
+
+1. Docs: `docs/generic_framework.md` and README (builder API, evidence workflow §30, decision
+   API, `evidence.dynamics/sources/records/actuators`, `voltage_policy`, `supply_V`/`serves`,
+   isothermal thermal model).
+2. Claim matrix: add claims for decision relevance (EXP11), generic configuration (tests +
+   example), tool comparison, V&V, T200 inflow bias (+7.1 / +8.7 %), dynamics evidence; remove or
+   adjust obsolete claims.
+3. Manuscript restructure per brief §35–37 (RQ1–RQ6, 14 sections), bound to the claim matrix.
+4. Reviewers 1–6, run independently: literature/evidence, physics, electrical, numerical/V&V,
+   hostile SIMPAT (with the 10 questions of §41), reproducibility.
+5. FINAL_SIGNOFF update with the §42 gate; final report per §43; push; CI.
+6. Still pending user decisions: 30Q dataset download (OCV stays D), trace archive upload,
+   upstream HoloOcean issue, merge to main, the OpenEI 18 GB ROS-bag dataset.
 
 ## Planned work (original order)
 
