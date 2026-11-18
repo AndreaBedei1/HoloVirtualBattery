@@ -1,4 +1,43 @@
-# Final sign-off (hardening phase, 2026-11-13)
+# Final sign-off
+
+## Generality and V&V phase (2026-11-18, HEAD after bce982b)
+
+**Verdict: NOT READY for submission.** The work is close to READY WITH LIMITATIONS. The items below
+that are marked partly are what remains.
+
+| Gate item (brief §42) | State | Evidence |
+| --- | --- | --- |
+| I-02 resolved (decision relevance) | yes, in software; still contested | EXP11 (C23–C25): a nominal ranking the evidence does not support; certification blocked by named contributions; grade (`min_grade`) and strict-dynamics policies change verdicts. Reviewer 5 still finds the case narrow (0.02–0.05 Wh margins on a 2 Wh mission); the policies were added after that review and have not been re-reviewed. |
+| Formal V&V added | yes | VERIFICATION_VALIDATION_FRAMEWORK.md; EXP9 relabelled as an external consistency check (R4-08) |
+| T200 inflow judgement resolved | yes | Grade B kept. Bias quantified at +13–16 % at fixed thrust (C26, R2-01). Lam et al. 2023 is insufficient for an inflow-aware model. |
+| Battery placeholder reduced or excluded from the main conclusions | excluded | No 30Q OCV data are available (the download needs the author's decision). No endurance claim; C15 and C16 carry the caveat. |
+| Hydrodynamic evidence treated explicitly | yes | `dynamics_evidence` reported apart from the electrical grades (C22); `dynamics_policy="strict"` |
+| Related work verified | partly | Comparators read in full (Danielis, LOTUSim-Energy, Tun, Lam). Reviewer 1: prior art in the local library not discussed (R1-05) and references missing for headline records (R1-02). |
+| Existing-tool comparison complete | yes, as a model comparison | COMPARATOR_MATRIX.md, C27. Tool execution was not possible; reviewer 1 asks for less general wording (R1-04). |
+| Custom robot configurability demonstrated | yes | Builder API, 5- and 7-actuator robots, user evidence (C21); 363 tests |
+| Paper-critical outputs reproducible | partly | Offline chain byte-identical (reviewers 3 and 6); clean provenance stamps. The patched HoloOcean binary and the 100 Hz traces are not deposited (archive ready, upload is the author's decision). |
+| Hostile reviewer has no fatal finding fixable in software/evidence | partly | R5-01 (no measurement) needs data. R5-02 and R5-03 were addressed in software after the review and need a re-review. |
+
+## Remaining before READY WITH LIMITATIONS
+
+1. Related work (R1-05): read and position De Carolis 2018, Potokar 2024 (JOE), the HoloOcean 2.0
+   preview, the ICAR 2025 survey and parameter-pedigree schemes. Add the missing references (R1-02)
+   and the Oculus and Ping360 records to the audit (R1-03).
+2. Re-review the decision case with the grade and dynamics policies (reviewers 3 and 5). Add a
+   headroom column for each leg target (R3, minor).
+3. Optional: a per-rail converter model (R3-02), so that 5 V loads and pack-voltage loads can carry
+   different efficiencies.
+4. Author decisions:
+   - deposit the trace archive (`tools/make_trace_archive.py`);
+   - download the 30Q OCV dataset;
+   - obtain a measured mission-energy dataset (OpenEI MHKDR 646, 18 GB of ROS bags, battery topics
+     unverified);
+   - the upstream HoloOcean issue;
+   - the merge to `main`.
+
+---
+
+## Previous sign-off (hardening phase, 2026-11-13)
 
 **Verdict: NOT READY for submission.** Drafting the manuscript may start, restricted to
 `docs/paper/CLAIM_EVIDENCE_MATRIX.md`.
