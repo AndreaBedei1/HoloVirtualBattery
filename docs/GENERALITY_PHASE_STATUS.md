@@ -126,3 +126,14 @@ framing), G-11 (T200 grade), C-02 (OCV), D-09 (converters), a tool comparison an
    with hashes.
 10. **Reruns** only if models change; claim matrix; manuscript restructure (RQ1–RQ6).
 11. **Reviewers 1–6** and the final gate.
+
+## Round-2 independent reviews (docs/reviews/round2_*.md)
+
+| Reviewer | Verdict | Fatal | Key findings | Status |
+| --- | --- | --- | --- | --- |
+| 1 Literature/evidence | major revision | 0 | R1-01: the EXP11 nominal values are published maxima (say so); R1-02: references missing (Gemini, Oculus, Ping360, DVL, RPi, Wu 2018); R1-03: audit lacks the Oculus and Ping360 records; R1-04: comparison generalised from reproductions; R1-05: prior art in the local library not discussed (De Carolis 2018, Cruz, Tethys, Potokar 2024 JOE, HoloOcean 2.0, ICAR 2025) | text fixes pending |
+| 2 Physics | major (§12.3) | 0 | R2-01: inflow correction at fixed thrust, (I/I0)/(T/T0)^1.5 | **fixed de15e7c**: factors 1.133 (L8-HV) and 1.162 (L4-2H2V), 0.5 m/s ranking holds. R2-04 (m c u excluded), R2-05 (Gabl range includes noise/infeasible points), R2-06 (oblique windows not stationary), R2-07 (added mass): text pending |
+| 3 Electrical | running | – | – | – |
+| 4 Numerical/V&V | major | 0 | R4-01/02/03 | **fixed de15e7c**. R4-06: closure 2.49e-13, not 1.9e-13 (fix numbers); R4-07 wording ("separate", tolerance rationale); R4-08: EXP9 is an "external consistency check" | text pending |
+| 5 Hostile SIMPAT | major (reject without an empirical anchor) | 3 | R5-01: no measurement (needs data); R5-02: decision case "constructed", decision.py ignores grades, propulsion at nominal; R5-03: dynamics evidence not consumed by the verdicts | software fix planned: `min_grade` and a dynamics policy in decision.py; EXP11 with the propulsion range [0.11, 1.50]. Also: "52–100 %" wrong (three runs at 0 %); 1.9e-13 → 2.49e-13 |
+| 6 Reproducibility | partly | 0 | provenance stamps (**fixed**, but outputs regenerated while review files were untracked show dirty=True: commit them and regenerate); procedure omits decision/tool/archive steps; availability section incomplete | pending |
