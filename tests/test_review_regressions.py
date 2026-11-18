@@ -336,7 +336,14 @@ def test_scientific_warnings_are_structured_and_non_blocking():
     evidence = env.energy.summary()["evidence"]
     items = evidence["scientific_warnings"]
     assert items, "the default profile carries flagged evidence"
-    kinds = {"unknown", "grade_D", "proxy", "upper_bound_only"}
+    kinds = {
+        "unknown",
+        "grade_D",
+        "proxy",
+        "upper_bound_only",
+        "supply_domain_mismatch",
+        "conversion_unverified",
+    }
     for w in items:
         assert w["kind"] in kinds
         assert set(w) >= {"kind", "subject", "states", "energy_Wh", "share_percent", "effect"}

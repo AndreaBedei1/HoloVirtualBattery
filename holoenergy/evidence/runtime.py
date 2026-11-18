@@ -57,6 +57,21 @@ def _graded(registry, entry):
     return cap_grade(record.grade, entry.get("relation", "exact")), record.id
 
 
+def _bus_voltage_range(battery):
+    """Range of the bus voltage the pack can present: [cutoff, maximum OCV] (L1) or the
+    nominal voltage (L0). (None, None) when the battery does not state it."""
+    nominal = battery.get("nominal_voltage_V")
+    curve = battery.get("ocv_curve") or []
+    voltages = [float(p[1]) for p in curve if isinstance(p, (list, tuple)) and len(p) == 2]
+    if battery.get("model") == "rint" and voltages:
+        cutoff = battery.get("cutoff_voltage_V")
+        low = float(cutoff) if cutoff is not None else min(voltages)
+        return (low, max(voltages))
+    if nominal is not None:
+        return (float(nominal), float(nominal))
+    return (None, None)
+
+
 class EvidenceMap:
     """Evidence grade per device/state plus category-level grades for losses."""
 
@@ -127,6 +142,43 @@ class EvidenceMap:
         self.capabilities = capabilities
         self._update_double_counting()
         self.external = {}
+        self.rail_verified = self._rail_verification(config, converters)
+        self.bus_voltage_range = _bus_voltage_range(battery)
+        self.supply_mismatches = self._supply_mismatches(payload)
+
+    def _rail_verification(self, config, converters):
+        """Whether the converter efficiency of the payload and hotel rails rests on evidence.
+
+        A rail charged at efficiency 1.0 without a configured record has its conversion loss
+        unmodelled: the energy of its loads is then a lower bound (open upper side). The
+        propulsion rail is not checked: actuator tables give battery-side (ESC input) power.
+        """
+        linked = ((converters.get("metadata") or {}).get("evidence")) or {}
+        verified = {}
+        for rail in ("payload", "hotel"):
+            record_id = linked.get(f"{rail}_efficiency")
+            has_evidence = bool(self.converter_record) and self.converter_grade != "D"
+            if record_id is not None and record_id in self.registry.records:
+                has_evidence = has_evidence or self.registry.get(record_id).configured
+            # An efficiency below 1 is a modelled (if user-graded) loss, not an open side.
+            verified[rail] = has_evidence or self.efficiencies[rail] < 1.0
+        return verified
+
+    def _supply_mismatches(self, payload):
+        """Components whose declared supply domain does not contain the bus voltage range and
+        that no converter component declares to serve."""
+        served = {
+            name for item in payload.components.values() for name in getattr(item, "serves", [])
+        }
+        low, high = self.bus_voltage_range
+        result = {}
+        for name, item in payload.components.items():
+            supply = getattr(item, "supply_V", None)
+            if supply is None or low is None or name in served:
+                continue
+            if low < supply[0] - 1e-9 or high > supply[1] + 1e-9:
+                result[name] = {"supply_V": list(supply), "bus_V": [low, high]}
+        return result
 
     def _update_double_counting(self):
         self.double_counting = {
@@ -351,14 +403,59 @@ class EvidenceMap:
         )
         result["scientific_warnings"] = self._scientific_warnings(
             flagged, category_energy_Wh, total
-        )
+        ) + self._domain_warnings(device_state_energy_Wh, total)
         return result
+
+    def rail_energy_Wh(self, device_state_energy_Wh):
+        """Energy drawn through the payload and hotel rails."""
+        rails = {"payload": 0.0, "hotel": 0.0}
+        for device, states in device_state_energy_Wh.items():
+            if device in self.actuators:
+                continue
+            rails["hotel" if device == "hotel_constant" else "payload"] += sum(states.values())
+        return rails
+
+    def _domain_warnings(self, device_state_energy_Wh, total):
+        """Structured warnings for unmodelled conversion (review D-09)."""
+        out = []
+        for name, info in sorted(self.supply_mismatches.items()):
+            energy = sum(device_state_energy_Wh.get(name, {}).values())
+            out.append(
+                {
+                    "kind": "supply_domain_mismatch",
+                    "subject": name,
+                    "states": [],
+                    "energy_Wh": energy,
+                    "share_percent": 100 * energy / total if total else None,
+                    "effect": (
+                        f"{name} requires {info['supply_V'][0]:g}-{info['supply_V'][1]:g} V but the "
+                        f"bus spans {info['bus_V'][0]:g}-{info['bus_V'][1]:g} V; no converter is "
+                        "configured, so the reported energy excludes conversion loss"
+                    ),
+                }
+            )
+        for rail, energy in self.rail_energy_Wh(device_state_energy_Wh).items():
+            if energy > 0 and not self.rail_verified.get(rail, True):
+                out.append(
+                    {
+                        "kind": "conversion_unverified",
+                        "subject": f"{rail} rail",
+                        "states": [],
+                        "energy_Wh": energy,
+                        "share_percent": 100 * energy / total if total else None,
+                        "effect": "converter efficiency 1.0 without evidence: conversion loss is "
+                        "not modelled and the rail's energy is a lower bound",
+                    }
+                )
+        return out
 
     EFFECTS = {
         "unknown": "excluded from the bus: the estimate is low by an unknown amount",
         "grade_D": "user value or placeholder without published evidence",
         "proxy": "evidence for a different but related device or condition",
         "upper_bound_only": "published maximum used as the value: biases the estimate upward",
+        "supply_domain_mismatch": "device supply domain does not contain the bus voltage",
+        "conversion_unverified": "conversion loss not modelled",
     }
 
     def _scientific_warnings(self, flagged, category_energy_Wh, total):

@@ -87,6 +87,18 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 open_high.append(f"{device}.{state}")
             else:
                 high_delta += wh * (hi - 1) * scale
+    # Unmodelled conversion and unconfigured loads open the upper side (reviews D-09, I-02):
+    # their energy is not zero, it is unknown.
+    unknown = []
+    for name in sorted(getattr(evidence_map, "supply_mismatches", {})):
+        if sum(device_states.get(name, {}).values()) > 0:
+            unknown.append(f"{name}.supply_conversion")
+    if hasattr(evidence_map, "rail_energy_Wh"):
+        for rail, energy in evidence_map.rail_energy_Wh(device_states).items():
+            if energy > 0 and not evidence_map.rail_verified.get(rail, True):
+                unknown.append(f"conversion:{rail}")
+    unknown += [f"{u['component']}.unconfigured" for u in getattr(evidence_map, "unconfigured", [])]
+    open_high += unknown
     battery = {"record": evidence_map.battery_loss_record, "interval_Wh": None}
     loss = summary["category_energy_Wh"].get("battery_losses", 0.0)
     if evidence_map.battery_loss_record and loss:
@@ -106,12 +118,14 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
             "high": nominal_terminal + high_delta,
             "open_low": sorted(set(open_low)),
             "open_high": sorted(set(open_high)),
+            "unknown_contributions": unknown,
         },
         "total_ocv_work_Wh_nominal": nominal_total,
         "battery_losses": battery,
         "contributions": rows,
         "excluded": (
             "propulsion (manufacturer curve without published measurement uncertainty) and "
-            "dynamics (simulator-owned); unconfigured loads are absent, not bounded"
+            "dynamics (simulator-owned); unconfigured loads and unmodelled conversion open the "
+            "upper side (unknown_contributions)"
         ),
     }

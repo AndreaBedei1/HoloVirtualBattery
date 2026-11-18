@@ -4,6 +4,8 @@ device: tritech_gemini_720is
 category: sensors
 simulation_sensor: ImagingSonar
 active_is_upper_bound: true
+# 19-74 Vdc (datasheet 0703-SOM-00001, p. 2; record tritech_gemini_720is.power_range conditions).
+supply_V: [19, 74]
 states:
   ACTIVE: {evidence: tritech_gemini_720is.power_range, use: value_max}
 initial_state: ACTIVE

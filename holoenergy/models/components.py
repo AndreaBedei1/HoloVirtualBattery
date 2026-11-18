@@ -36,9 +36,27 @@ class ElectricalComponent(PayloadComponent):
                 "device",
                 "includes",
                 "notes",
+                "supply_V",
+                "serves",
             },
             f"component {name}",
         )
+        # Supply-voltage domain of the device (V) and, for a converter component, the
+        # components it powers. Used only to check the bus against the device's domain.
+        self.supply_V = None
+        if config.get("supply_V") is not None:
+            supply = config["supply_V"]
+            if not isinstance(supply, (list, tuple)) or len(supply) != 2:
+                raise ConfigurationError(f"{name}.supply_V must be [min, max] in volts")
+            low = number(supply[0], f"{name}.supply_V min", positive=True)
+            high = number(supply[1], f"{name}.supply_V max", positive=True)
+            if low > high:
+                raise ConfigurationError(f"{name}.supply_V min exceeds max")
+            self.supply_V = (low, high)
+        serves = config.get("serves", [])
+        if not isinstance(serves, list) or not all(isinstance(x, str) and x for x in serves):
+            raise ConfigurationError(f"{name}.serves must be a list of component names")
+        self.serves = list(serves)
         from ..evidence import RELATION_MAX_GRADE, cap_grade, default_registry
 
         self.relation = config.get("relation", "exact")
