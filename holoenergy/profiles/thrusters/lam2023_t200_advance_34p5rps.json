@@ -1,0 +1,27 @@
+{
+  "record": "bluerobotics_t200.advance_ratio_series_34p5rps",
+  "description": "T200 in a tow tank at a fixed PWM command of 1700 us (34.5 rev/s, open-loop, no speed feedback), 14.8 V nominal LiPo supply, advance ratio J = Va/(n D), D = 0.076 m. Thrust and battery current versus J. Points are read from Figs. 16 and 17 (approximate, reading uncertainty about 0.2 N and 0.05 A); the linear fits are as printed.",
+  "sources": ["P001"],
+  "location": {"page": 7, "figure": "16 (thrust), 17 (current)", "section": "IV"},
+  "measured_vs_derived": "thrust, carriage speed and battery current measured; rotational speed taken from the bench PWM-to-rpm map, not measured during towing",
+  "fits": {
+    "thrust_N": {"slope_per_J": -12.8, "intercept": 16.77, "as_printed": true},
+    "current_A": {"slope_per_J": -1.091, "intercept": 4.51, "as_printed": true,
+                  "note": "the printed intercept 4.51 A does not match the plotted line or the markers (about 4.15 A at J = 0); use the points"}
+  },
+  "columns": ["advance_ratio", "thrust_N_read", "current_A_read"],
+  "rows": [
+    [0.06, 16.2, 4.05],
+    [0.12, 15.1, 4.08],
+    [0.19, 14.1, 4.00],
+    [0.25, 13.4, 3.97],
+    [0.31, 13.0, 3.70]
+  ],
+  "limitations": [
+    "single command level usable (the 11.6 rev/s series is anomalous, efficiency above 1)",
+    "single supply voltage (14.8 V nominal), no voltage measurement series reported",
+    "no uncertainty or repeat statistics for the dynamic runs",
+    "electrical power versus J not plotted; current only",
+    "reverse thrust not tested"
+  ]
+}

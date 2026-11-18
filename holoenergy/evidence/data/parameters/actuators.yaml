@@ -42,8 +42,11 @@ parameters:
     relation: unsupported
     grade: D
     notes: >-
-      No published T200 thrust/power data at non-zero advance speed were identified
-      (see docs/EVIDENCE_GAPS.md). Only the static/bollard mode is available.
+      Review A-02: one peer-reviewed source (Lam et al. 2023, P001) reports tow-tank T200 thrust and
+      current at non-zero advance ratio, for one command level (34.5 rev/s) and one supply voltage, J up
+      to 0.31, without uncertainty (record bluerobotics_t200.advance_ratio_series_34p5rps). These data
+      do not determine P = f(T, V, Va), so no inflow-aware power model is configured; the static
+      (bollard) tables remain the propulsion model, applied in inflow as relation representative.
   - id: bluerobotics_t200.esc_idle_power
     component: bluerobotics_t200
     quantity: electrical_power

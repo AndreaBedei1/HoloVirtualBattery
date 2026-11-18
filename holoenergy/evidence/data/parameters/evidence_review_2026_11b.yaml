@@ -1,0 +1,25 @@
+# Evidence added in the generality/V&V phase (2026-11-18) from sources read in full
+# (docs/literature/). Values as stated; figure readings are labelled.
+sources: []
+
+parameters:
+- id: bluerobotics_t200.advance_ratio_series_34p5rps
+  component: bluerobotics_t200
+  quantity: thrust_and_current_vs_advance_ratio
+  unit: null
+  dataset:
+    path: profiles/thrusters/lam2023_t200_advance_34p5rps.json
+    description: Tow-tank thrust and battery current versus advance ratio J (0.06-0.31) at a fixed
+      1700 us command (34.5 rev/s), 14.8 V nominal supply; points read from Figs. 16-17.
+  bound: measured_mean
+  relation: representative
+  grade: B
+  sources: [P001]
+  location: {page: 7, figure: "16, 17", section: "IV"}
+  conditions: {facility: MIT tow tank, supply_V: 14.8 nominal LiPo, command_us: 1700, rotational_speed_rev_s: 34.5, J_range: "0.06-0.31"}
+  notes: >-
+    At a fixed command, thrust falls by about 20 % and current by about 8 % between J = 0.06 and
+    0.31, so electrical power per newton rises by about 5-8 % at J = 0.10-0.13 and about 20 % at
+    J = 0.3 relative to J = 0. One series, one voltage, no uncertainty: sufficient to bound the bias of
+    the static (bollard) tables in inflow as a sensitivity case, not to build an inflow-aware power
+    model P(T, V, Va) (docs/literature/lam2023_t200.md).
