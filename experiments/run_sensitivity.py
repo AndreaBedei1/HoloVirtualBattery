@@ -26,6 +26,11 @@ currents of 0.5 m/s) are allocated on each final layout with the three implement
 converted to electrical power. Component one-at-a-time ranges are reported by the EnergyReport
 interval of each final run (holoenergy.uncertainty), not here.
 
+Part 5 (T200 inflow bias, review G-11). The static (bollard) T200 tables are applied in inflow.
+With the Lam et al. 2023 tow-tank series (one command level, 14.8 V), propeller similarity and
+the stated inflow assumptions, the electrical power of head-on station keeping is corrected per
+thruster by the measured change of power per newton with advance ratio.
+
 Part 4 (drag anisotropy, review B-04). HoloOcean applies one isotropic C_D A. The registry's
 identified BlueROV2 Heavy damping (von Benzon et al. 2022) is anisotropic (Y_vv/X_uu = 1.54,
 Z_ww/X_uu = 1.35). Steady station keeping at 0.2 and 0.5 m/s (inside the identified range) is
@@ -371,6 +376,98 @@ def part4(voltage=VOLTAGE_V, currents=(0.2, 0.5)):
     return {"rows": rows, "ranking_comparison": comparison, "direction_ratio": direction}
 
 
+def lam_factor_function(registry):
+    """Electrical power per newton at a fixed command, relative to J = 0, from the Lam et al.
+    2023 tow-tank series (record bluerobotics_t200.advance_ratio_series_34p5rps)."""
+    data = dataset(registry, "bluerobotics_t200.advance_ratio_series_34p5rps")
+    rows = data["rows"]
+    j = [r[0] for r in rows]
+    thrust = data["fits"]["thrust_N"]
+    # Current: least-squares line through the plotted points (the printed intercept is
+    # inconsistent with the markers, see the dataset note).
+    n = len(rows)
+    mean_j = sum(j) / n
+    mean_i = sum(r[2] for r in rows) / n
+    slope = sum((a - mean_j) * (r[2] - mean_i) for a, r in zip(j, rows, strict=True)) / sum(
+        (a - mean_j) ** 2 for a in j
+    )
+    intercept = mean_i - slope * mean_j
+
+    def factor(advance_ratio):
+        t_rel = 1 + thrust["slope_per_J"] * advance_ratio / thrust["intercept"]
+        i_rel = 1 + slope * advance_ratio / intercept
+        return i_rel / t_rel
+
+    return factor, {
+        "thrust_fit": thrust,
+        "current_fit": {"slope_per_J": slope, "intercept": intercept},
+        "J_range": [min(j), max(j)],
+        "bollard_rev_s": 34.5,
+        "bollard_thrust_N": thrust["intercept"],
+    }
+
+
+def part5(registry, voltage=VOLTAGE_V, currents=(0.2, 0.5), diameter_m=0.076):
+    """Inflow bias of the static T200 tables in head-on station keeping (review G-11).
+
+    Assumptions (stated, not evidence): propeller similarity (K_T, K_Q depend on J only), the
+    rotational speed scales from the Lam bollard point as n = n0 sqrt(T / T0), the axial inflow
+    is the current component along the thruster axis (no hull wake or blockage), and the
+    electrical response of the single 34.5 rev/s series holds at the other speeds.
+    """
+    factor, basis = lam_factor_function(registry)
+    k = 0.5 * HOLOOCEAN_DRAG["rho"] * HOLOOCEAN_DRAG["cd"] * HOLOOCEAN_DRAG["area"]
+    rows = []
+    for name, (acts, _desc, grade) in layouts().items():
+        if name not in ("L8-HV", "L4-2H2V"):
+            continue
+        lo, hi = t200_bounds(len(acts), voltage)
+        allocator = ThrustAllocator(acts)
+        for u in currents:
+            result = allocator.allocate([k * u * u, 0, 0, 0, 0, 0], lower=lo, upper=hi)
+            static = corrected = 0.0
+            js = []
+            for act, force in zip(acts, result.forces_N, strict=True):
+                if abs(force) < 1e-9:
+                    continue
+                p = T200.power(max(min(force, hi[0]), lo[0]), voltage)
+                axial = abs(act.direction[0]) * u
+                n = basis["bollard_rev_s"] * (abs(force) / basis["bollard_thrust_N"]) ** 0.5
+                advance = axial / (n * diameter_m)
+                js.append(advance)
+                static += p
+                corrected += p * factor(advance)
+            rows.append(
+                {
+                    "layout": name,
+                    "geometry_grade": grade,
+                    "current_m_s": u,
+                    "static_power_W": static,
+                    "inflow_corrected_power_W": corrected,
+                    "factor": corrected / static,
+                    "advance_ratio_range": [min(js), max(js)],
+                    "within_lam_J_range": max(js) <= basis["J_range"][1],
+                }
+            )
+    by = {(r["layout"], r["current_m_s"]): r for r in rows}
+    ranking = [
+        {
+            "current_m_s": u,
+            "L4-2H2V_lower_static": by[("L4-2H2V", u)]["static_power_W"]
+            < by[("L8-HV", u)]["static_power_W"],
+            "L4-2H2V_lower_inflow_corrected": by[("L4-2H2V", u)]["inflow_corrected_power_W"]
+            < by[("L8-HV", u)]["inflow_corrected_power_W"],
+        }
+        for u in currents
+    ]
+    return {
+        "basis": basis,
+        "assumptions": part5.__doc__.split("Assumptions")[1].strip(),
+        "rows": rows,
+        "ranking": ranking,
+    }
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
@@ -389,6 +486,7 @@ def main(argv=None):
         "part2_acoustic_modem": part2(registry, args.crosslayer),
         "part3_allocator": part3(),
         "part4_drag_anisotropy": part4(),
+        "part5_t200_inflow_bias": part5(registry),
         "scope": "steady station keeping in head-on current, simulator-exact 8T layout; "
         "electrical model T200 static tables (grade B); no model is a validated BlueROV2 Heavy",
     }
