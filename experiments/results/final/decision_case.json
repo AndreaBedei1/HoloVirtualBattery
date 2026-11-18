@@ -15,7 +15,7 @@
   },
   "provenance": {
     "git": {
-      "commit": "de15e7ccd5b6b40efa6d1fb29a04c43233a45159",
+      "commit": "2033ecaacecc3113c5c66ae1412b9e095a7430d8",
       "dirty": true
     },
     "inputs": {
@@ -114,7 +114,7 @@
           }
         },
         "what_if": {
-          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence)",
+          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence); applied to every payload load (one rail is modelled, so pack-voltage loads are also scaled); the declared-unknown ESC standby and tether interface are not in this suite and are not bounded",
           "still_blocked_by": [
             "imaging_sonar.supply_conversion",
             "imaging_sonar_step_up_converter.unconfigured"
@@ -137,6 +137,12 @@
               "max_legs_certifiable": null
             }
           }
+        },
+        "legs_strict_dynamics": {
+          "40": "INDETERMINATE",
+          "60": "INDETERMINATE",
+          "80": "INDETERMINATE",
+          "100": "INDETERMINATE"
         }
       },
       "Oculus M750d (multibeam)": {
@@ -211,7 +217,7 @@
           }
         },
         "what_if": {
-          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence)",
+          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence); applied to every payload load (one rail is modelled, so pack-voltage loads are also scaled); the declared-unknown ESC standby and tether interface are not in this suite and are not bounded",
           "still_blocked_by": [],
           "eta": {
             "0.8": {
@@ -231,6 +237,12 @@
               "max_legs_certifiable": 85
             }
           }
+        },
+        "legs_strict_dynamics": {
+          "40": "INDETERMINATE",
+          "60": "INDETERMINATE",
+          "80": "INDETERMINATE",
+          "100": "INDETERMINATE"
         }
       },
       "Ping360 (scanning, lower capability)": {
@@ -305,7 +317,7 @@
           }
         },
         "what_if": {
-          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence)",
+          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence); applied to every payload load (one rail is modelled, so pack-voltage loads are also scaled); the declared-unknown ESC standby and tether interface are not in this suite and are not bounded",
           "still_blocked_by": [],
           "eta": {
             "0.8": {
@@ -325,6 +337,12 @@
               "max_legs_certifiable": 91
             }
           }
+        },
+        "legs_strict_dynamics": {
+          "40": "INDETERMINATE",
+          "60": "INDETERMINATE",
+          "80": "INDETERMINATE",
+          "100": "INDETERMINATE"
         }
       }
     },
@@ -377,7 +395,8 @@
         "assumptions": [
           "rails without converter evidence in both runs (hotel, payload): the same converter, with a load-independent efficiency, is assumed in both"
         ],
-        "verdict": "RANKING_NOT_SUPPORTED"
+        "verdict": "RANKING_NOT_SUPPORTED",
+        "verdict_min_grade_A": "RANKING_NOT_SUPPORTED"
       },
       {
         "a": "Gemini 720is (multibeam)",
@@ -426,7 +445,8 @@
         "assumptions": [
           "rails without converter evidence in both runs (hotel, payload): the same converter, with a load-independent efficiency, is assumed in both"
         ],
-        "verdict": "B_LOWER_SUPPORTED"
+        "verdict": "B_LOWER_SUPPORTED",
+        "verdict_min_grade_A": "B_LOWER_SUPPORTED"
       },
       {
         "a": "Oculus M750d (multibeam)",
@@ -467,7 +487,8 @@
         "assumptions": [
           "rails without converter evidence in both runs (hotel, payload): the same converter, with a load-independent efficiency, is assumed in both"
         ],
-        "verdict": "B_LOWER_SUPPORTED"
+        "verdict": "B_LOWER_SUPPORTED",
+        "verdict_min_grade_A": "RANKING_NOT_SUPPORTED"
       }
     ]
   },
