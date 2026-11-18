@@ -244,3 +244,24 @@ def test_user_record_cannot_shadow_a_packaged_record(tmp_path):
     )
     with pytest.raises(ConfigurationError, match="Duplicate evidence id"):
         EnergyAwareEnv(Backend(), config=bad, control_contract=CONTRACT)
+
+
+def test_dynamics_evidence_is_reported_apart_from_electrical_grades(env):
+    """Review I-03: a robot that declares nothing about its dynamics gets 'unsupported',
+    'not_assessed' and 'absent', and the propulsion share is labelled as dynamics-dependent."""
+    for _ in range(50):
+        env.step([20.0, 0.0, 10.0, 0.0, 0.0, 0.0])
+    dyn = env.energy.summary()["evidence"]["dynamics_evidence"]
+    assert (dyn["source"], dyn["external_consistency"], dyn["validation"]) == (
+        "unsupported",
+        "not_assessed",
+        "absent",
+    )
+    assert dyn["dependent_share_percent"] > 50
+
+
+def test_invalid_dynamics_label_is_rejected(tmp_path):
+    bad = config(tmp_path / "x.json")
+    bad["evidence"]["dynamics"] = {"source": "validated_by_feel"}
+    with pytest.raises(ConfigurationError, match="evidence.dynamics.source"):
+        EnergyAwareEnv(Backend(), config=bad, control_contract=CONTRACT)

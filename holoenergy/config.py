@@ -207,6 +207,7 @@ EVIDENCE_KEYS = {
     "double_counting",
     "sources",
     "records",
+    "dynamics",
 }
 
 

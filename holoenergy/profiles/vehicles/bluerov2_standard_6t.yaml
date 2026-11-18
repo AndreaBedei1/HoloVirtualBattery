@@ -43,6 +43,13 @@ evidence:
   # y from the Blue Robotics 2D drawing (A); x undimensioned -> the layout stays a proxy.
   geometry: {record: bluerov2_standard.vertical_thruster_lateral_spacing, relation: proxy}
   vehicle_relation: proxy
+  # Review I-03: evidence for the physical (dynamics) model, separate from the electrical grades.
+  dynamics:
+    source: simulator_literal
+    records: [holoocean_bluerov2.drag_coefficient, holoocean_bluerov2.drag_area, holoocean_bluerov2.water_density, holoocean_bluerov2.linear_damping, holoocean_bluerov2.mass]
+    external_consistency: conflicting
+    validation: absent
+    notes: EXP9 - published BlueROV2 resistance gives 0.11-0.22x (restrained standard) or 0.87-1.29x (identified Heavy) the HoloOcean propulsion power; the two references disagree by 6-9x.
 metadata:
   profile_id: bluerov2-standard
   profile_version: 0.2.0

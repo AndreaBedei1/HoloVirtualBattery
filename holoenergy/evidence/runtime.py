@@ -55,6 +55,50 @@ def _dataset_tables(record):
     return None
 
 
+DYNAMICS_SOURCES = (
+    "simulator_literal",  # coefficients of the simulator's own model (exact for the simulator)
+    "published_measurement",  # measured on a physical vehicle (e.g. restrained load in a basin)
+    "identified_model",  # model identified from vehicle data
+    "proxy",  # a different vehicle or condition
+    "unsupported",
+)
+DYNAMICS_CONSISTENCY = ("consistent", "weak", "conflicting", "not_assessed")
+DYNAMICS_VALIDATION = ("validated", "partial", "absent")
+
+
+def _dynamics_evidence(entry, registry):
+    """Evidence for the physical (dynamics) model, kept apart from the electrical grades
+    (review I-03): one label each for source, external consistency and validation."""
+    from .._validation import ConfigurationError, keys
+
+    entry = dict(entry or {})
+    keys(
+        entry,
+        {"source", "records", "external_consistency", "validation", "notes"},
+        "evidence.dynamics",
+    )
+    source = entry.get("source", "unsupported")
+    consistency = entry.get("external_consistency", "not_assessed")
+    validation = entry.get("validation", "absent")
+    for value, allowed, name in (
+        (source, DYNAMICS_SOURCES, "source"),
+        (consistency, DYNAMICS_CONSISTENCY, "external_consistency"),
+        (validation, DYNAMICS_VALIDATION, "validation"),
+    ):
+        if value not in allowed:
+            raise ConfigurationError(f"evidence.dynamics.{name} must be one of {allowed}")
+    records = list(entry.get("records") or [])
+    for record_id in records:
+        registry.get(record_id)  # every cited record must exist
+    return {
+        "source": source,
+        "records": records,
+        "external_consistency": consistency,
+        "validation": validation,
+        "notes": entry.get("notes"),
+    }
+
+
 def _actuator_ids(propulsion):
     count = propulsion.get("thruster_count") or len(propulsion.get("thrusters") or [])
     return list(propulsion.get("actuator_ids") or [f"T{i + 1}" for i in range(count)])
@@ -111,6 +155,7 @@ class EvidenceMap:
             for category in ("battery_losses", "converters")
         }
         self.vehicle_relation = evidence.get("vehicle_relation")
+        self.dynamics = _dynamics_evidence(evidence.get("dynamics"), self.registry)
         battery = config.get("battery") or {}
         ocv_record = ((battery.get("metadata") or {}).get("evidence") or {}).get("ocv_curve")
         self.bus_voltage_model = battery.get("model")
@@ -479,6 +524,18 @@ class EvidenceMap:
                 "vehicle hydrodynamics (simulator-owned, not validated) and unconfigured loads"
             ),
         )
+        propulsion_Wh = sum(
+            sum(states.values())
+            for device, states in device_state_energy_Wh.items()
+            if device in self.actuators
+        )
+        result["dynamics_evidence"] = {
+            **self.dynamics,
+            "dependent_energy_Wh": propulsion_Wh,
+            "dependent_share_percent": 100 * propulsion_Wh / total if total else None,
+            "meaning": "energy whose value follows the dynamics model (the thrust demand); "
+            "the grade shares above describe the electrical models only",
+        }
         result["scientific_warnings"] = self._scientific_warnings(
             flagged, category_energy_Wh, total
         ) + self._domain_warnings(device_state_energy_Wh, total)

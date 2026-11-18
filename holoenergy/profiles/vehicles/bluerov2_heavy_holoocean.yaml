@@ -70,6 +70,13 @@ evidence:
   battery_losses: {record: bluerobotics_4s_18ah.dc_resistance_cell_derived, relation: proxy}
   geometry: {record: holoocean_bluerov2.actuator_geometry, relation: exact}
   vehicle_relation: representative
+  # Review I-03: evidence for the physical (dynamics) model, separate from the electrical grades.
+  dynamics:
+    source: simulator_literal
+    records: [holoocean_bluerov2.drag_coefficient, holoocean_bluerov2.drag_area, holoocean_bluerov2.water_density, holoocean_bluerov2.linear_damping, holoocean_bluerov2.mass]
+    external_consistency: conflicting
+    validation: absent
+    notes: EXP9 - published BlueROV2 resistance gives 0.11-0.22x (restrained standard) or 0.87-1.29x (identified Heavy) the HoloOcean propulsion power; the two references disagree by 6-9x.
 power_manager: {apply_derating_to_actions: true}
 metadata:
   profile_id: bluerov2-heavy
