@@ -289,6 +289,10 @@ def load_config(path=None, *, data=None):
 def model_warnings(config):
     result = ["placeholder: " + key for key in sorted(set(_placeholders(config)))]
     metadata = config.get("battery", {}).get("metadata", {})
+    if (config.get("thermal") or {}).get("model") == "isothermal":
+        result.append(
+            "thermal.model isothermal: battery temperature and thermal limits not modelled"
+        )
     if config.get("fidelity_level") == "L0":
         result.append("L0 temperature is a fixed reference, not a thermal prediction")
         battery = config.get("battery", {})

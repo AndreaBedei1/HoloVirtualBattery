@@ -91,6 +91,11 @@ def components():
     return _discover("components")
 
 
+def actuators():
+    """Packaged actuator models (e.g. ``bluerobotics-t200``), usable on any robot."""
+    return _discover("actuators")
+
+
 def modems():
     return _discover("communications")
 
@@ -100,6 +105,7 @@ def list_profiles():
         "vehicles": {k: {kk: v[kk] for kk in ("relation", "summary")} for k, v in VEHICLES.items()},
         "batteries": sorted(BATTERIES),
         "components": sorted(components()),
+        "actuators": sorted(actuators()),
         "modems": sorted(modems()),
     }
 
@@ -119,6 +125,7 @@ def profile_reference(name, kind):
         "vehicle": VEHICLES,
         "battery": BATTERIES,
         "component": components(),
+        "actuator": actuators(),
         "modem": modems(),
     }[kind]
     return "package:" + _lookup(table, name, kind)

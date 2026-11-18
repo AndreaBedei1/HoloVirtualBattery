@@ -34,13 +34,24 @@ class EnergyAwareEnv:
         control_contract=None,
         dynamics_adapter=None,
         telemetry=None,
+        energy_profile=None,
     ):
         """Wrap a direct-actuator backend with energy, battery and power-limit coupling.
 
-        Configuration comes from exactly one of ``config_path``, ``config`` or a named
-        ``vehicle_profile`` (see :func:`holoenergy.catalog.list_profiles`), optionally with
-        ``battery_profile``, extra ``components`` and ``overrides``.
+        Configuration comes from exactly one of ``config_path``, ``config``, a named
+        ``vehicle_profile`` (see :func:`holoenergy.catalog.list_profiles`, optionally with
+        ``battery_profile``, extra ``components`` and ``overrides``) or an ``energy_profile``
+        (any object with ``to_config()``, e.g. :class:`holoenergy.robot.RobotEnergyProfile`).
         """
+        if energy_profile is not None:
+            if config_path is not None or config is not None or vehicle_profile is not None:
+                raise ConfigurationError(
+                    "Use energy_profile alone, not with config/vehicle_profile"
+                )
+            to_config = getattr(energy_profile, "to_config", None)
+            if not callable(to_config):
+                raise ConfigurationError("energy_profile must provide to_config()")
+            config = to_config()
         if holoocean_env is not None:
             if env is not None:
                 raise ConfigurationError("Pass env or holoocean_env, not both")
@@ -73,8 +84,14 @@ class EnergyAwareEnv:
         if not isinstance(self.apply_derating, bool):
             raise ConfigurationError("apply_derating_to_actions must be a boolean")
         self.battery = make_battery(self.config["battery"])
-        thermal_type = IdealThermalModel if self.config["fidelity_level"] == "L0" else ThermalModel
-        self.thermal = thermal_type(self.config["thermal"])
+        thermal_config = dict(self.config["thermal"])
+        thermal_kind = thermal_config.pop("model", "lumped")
+        if thermal_kind not in ("lumped", "isothermal"):
+            raise ConfigurationError("thermal.model must be lumped or isothermal")
+        # isothermal: no thermal prediction or limits (declared, never filled with constants).
+        isothermal = self.config["fidelity_level"] == "L0" or thermal_kind == "isothermal"
+        thermal_type = IdealThermalModel if isothermal else ThermalModel
+        self.thermal = thermal_type(thermal_config)
         self.propulsion = PropulsionModel(self.config["propulsion"])
         self.actuation = ActuationLayer(self.propulsion, self.config.get("actuation"))
         if not self.propulsion.min_voltage <= self.battery.nominal_V <= self.propulsion.max_voltage:
