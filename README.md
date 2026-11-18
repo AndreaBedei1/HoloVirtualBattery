@@ -75,7 +75,7 @@ battery, proxy AUV) run without a simulator: `python examples/api_examples.py`.
 The final experiment set was fixed before the runs ([design](docs/paper/FINAL_EXPERIMENTS.md)).
 It ran from a clean commit: 36 native runs, a communication matrix with 20 seeds and
 8 cross-layer strategies ([results](experiments/results/final), [figures](docs/figures/final)).
-Every energy is recomputed independently from the 100 Hz traces (worst relative error 1.9e-13).
+Every energy is recomputed independently from the 100 Hz traces (worst relative error 2.5e-13).
 The statements below are listed, with their conditions, in the
 [claim–evidence matrix](docs/paper/CLAIM_EVIDENCE_MATRIX.md). All of them are conditional on
 HoloOcean's BlueROV2 body and drag, which are not a validated vehicle model.

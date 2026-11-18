@@ -17,7 +17,7 @@ capped by its relation to the modelled device, and electrical-model evidence is 
 the evidence for the dynamics. Published ranges are propagated to intervals whose unsupported sides
 stay open, and decision rules return supported, unsupported or indeterminate verdicts. The method is
 implemented with HoloOcean as the dynamics backend and DESERT network activity on the same electrical
-bus. The accounting closes with a worst relative error of 1.9e-13 over 36 runs [C2], and a backend
+bus. The accounting closes with a worst relative error of 2.5e-13 over 36 runs [C2], and a backend
 check separates a drag-patched HoloOcean 2.3.0 build from the unpatched one, which applies 0.01 of the
 declared drag [C1]. On a simulated BlueROV2 Heavy inspection mission, the nominal values rank one
 imaging sonar below another, but the published ranges do not support that ranking, and no payload
@@ -322,7 +322,7 @@ the backend. A high grade-B share of the electrical energy therefore says nothin
 of the thrust demand [C22]. The dynamics receive three separate labels: source (simulator literal,
 published measurement, identified model, proxy or unsupported), external consistency (consistent,
 weak, conflicting or not assessed) and validation (validated, partial or absent). For the BlueROV2
-profile they are simulator literal, conflicting and absent. In the final missions 52–100 % of
+profile they are simulator literal, conflicting and absent. In the final missions with non-zero propulsion, 52–100 % of
 mission energy is propulsion (78–98 % for the transits and the scheduled payload missions), so the
 dominant term rests on dynamics that are simulator-literal, conflict with the published external
 measurements and have no physical validation [C22].
@@ -445,7 +445,7 @@ separately. Table 1 classifies every activity of this work [C28].
 | Activity | Category | Result | Limits |
 | --- | --- | --- | --- |
 | Automated tests, with regression tests for each defect found by internal reviews | Code verification | 355 tests pass [C21] | Implementation checked against its own equations |
-| Recomputation of every category, thruster and component energy, battery loss and phase sum from the 100 Hz traces | Code and model verification (accounting) | 36/36 runs; worst relative error 1.9e-13, tolerance 1e-9 [C2] | Same power model: finds accounting errors, not model errors |
+| Recomputation of every category, thruster and component energy, battery loss and phase sum from the 100 Hz traces | Code and model verification (accounting) | 36/36 runs; worst relative error 2.5e-13, tolerance 1e-9 [C2] | Same power model: finds accounting errors, not model errors |
 | Closure identities of Eq. (2); bus energy against modem adapter | Model verification (conservation) | ≤ 1e-15 Wh for all 8 cross-layer strategies [C2] | Identities of the model |
 | Replay of the native mission through the energy-only backend | Model verification (replay equivalence) | Relative difference 0.0 [C23] | Valid without derating |
 | Backend check, patched and unpatched HoloOcean | Code verification of the simulator backend | 1.000000 (pass); ×0.0100 (fail) [C1] | Does not validate drag coefficients |
@@ -535,7 +535,7 @@ change in between is an analysis script the run does not use.
 ### 9.1 Accounting closure
 
 Every reported energy of the 36 native runs is recomputed from the 100 Hz traces with a worst relative
-error of 1.9e-13 against a tolerance of 1e-9; bus energy equals the sum of the categories, OCV work
+error of 2.5e-13 against a tolerance of 1e-9; bus energy equals the sum of the categories, OCV work
 equals bus energy plus battery loss, and in the cross-layer runs bus and modem-adapter energy differ by
 at most 1e-15 Wh [C2].
 
@@ -663,7 +663,7 @@ acknowledgements (B2) delivers 61 of 200 messages (Wilson 95 % interval 0.245–
 acknowledgements and backoff make delivery seed-dependent; this is a property of that configuration,
 not a general result [C19].
 
-**Answer to RQ3.** Propulsion takes 52–100 % of mission energy in the final missions [C22], so the
+**Answer to RQ3.** Propulsion takes 52–100 % of mission energy in the final missions where it is non-zero [C22], so the
 other loads matter most where propulsion is small, as in still water [C12]. Phase scheduling saves
 33 % (inspection) and 10 % (AI vision) of the 0.2 m/s transit energy [C14]. The acoustic modem takes
 1.45 % as simulated and 1.13–13.2 % across published settings [C17], and relays shift modem energy
@@ -728,6 +728,17 @@ Oculus, L4-2H2V at 0.2 m/s) and from indeterminate requirements, and it named th
 block certification [C23, C24, C25]. Propulsion has no published uncertainty and enters at its nominal
 value or through a supplied factor range [C29]. Whether engineers use such verdicts well has not been
 tested.
+
+**Stricter evidence policies.** The verdicts above accept every published bound. Two
+stricter policies change them, and both are implemented in the decision API. If only grade A
+evidence is accepted, the ranking of the Ping360 below the Oculus M750d is withdrawn, because the
+Oculus figure is a family range of relation representative (grade B); the Ping360-below-Gemini
+ranking survives [C23]. If the dynamics are treated strictly, propulsion enters with the range
+[0.11, 1.50] given by the published resistance alternatives and the inflow bias (Section 12), and
+every leg target stays INDETERMINATE [C23]. The what-if is limited in scope: the rail efficiency
+applies to every payload load, including those at pack voltage, because one rail is modelled.
+The ESC standby and the tether interface, both declared unknown, are not part of this suite
+[C23].
 
 ## 11 Comparison with Existing Approaches
 
@@ -814,8 +825,8 @@ The tow-tank series of Lam et al. (2023) gives thrust and current against the ad
 $$J = \frac{V_a}{n D}, \tag{24}$$
 
 with advance speed $V_a$, rotational speed $n$ and propeller diameter $D$. Applied to head-on station
-keeping, it indicates that the static tables under-predict propulsion by about 7–9 %, with factors of
-1.071 for L8-HV at $J = 0.139$ and 1.087 for L4-2H2V at $J = 0.165$; the 0.5 m/s layout ranking
+keeping, it indicates that the static tables under-predict propulsion by about 13–16 % at fixed thrust, with factors of
+1.133 for L8-HV at $J = 0.139$ and 1.162 for L4-2H2V at $J = 0.165$; the 0.5 m/s layout ranking
 survives the correction [C26]. The estimate assumes one tow-tank series (one command level, 14.8 V),
 propeller similarity and axial inflow without hull wake, and the tables keep their grade B
 (representative) with the bias now quantified [C26].
@@ -845,7 +856,7 @@ listening at the published upper bound; 24 V conversion not modelled [C17].
 | Absolute station-keeping propulsion | Gabl et al.; von Benzon et al. | Scaled by 0.11–0.22 or 0.87–1.29 | [C12] |
 | Angle trade-off | Anisotropic damping | Ratio at 45° from 1.20 to 1.77; direction reported only | [C8] |
 | Layout ranking per horizontal current direction | Anisotropic damping | Same in 3 of 6 cases | [C8] |
-| Static T200 tables | Inflow series of Lam et al. | Under-prediction of 7–9 % | [C26] |
+| Static T200 tables | Inflow series of Lam et al. | Under-prediction of 13–16 % | [C26] |
 | L4-2H2V below L8-HV, head-on, 0.5 m/s | Four dynamics alternatives | Supported | [C25, C26] |
 | L4-2H2V below L8-HV, head-on, 0.2 m/s | Four dynamics alternatives | Not supported | [C25] |
 | Allocator choice | Three allocators | At most 0.13 % | [C10] |
@@ -880,7 +891,7 @@ The method has been exercised only with HoloOcean and DESERT; other backends are
 - **No physical validation.** No estimate has been compared with measured electrical energy or power
   of a vehicle at component, battery or mission level, and no suitable public dataset was found
   [C28]. Agreement of the implementation with its own equations is verification only [C2].
-- **Simulator hydrodynamics.** Propulsion takes 52–100 % of mission energy and follows the
+- **Simulator hydrodynamics.** Propulsion takes up to 100 % of mission energy and follows the
   simulator's dynamics [C22]. Isotropic drag at the centre of mass of a decoupled, neutrally buoyant
   body produces the equality of three layouts and zero still-water propulsion [C5, C12];
   ground-referenced damping is part of transit resistance [C13]; the published alternatives disagree
@@ -911,7 +922,7 @@ The method has been exercised only with HoloOcean and DESERT; other backends are
 
 This paper presented a simulation methodology for evidence-traceable mission-energy estimates within
 explicitly stated model assumptions and evidence bounds, for configurable marine robots. Implemented
-with HoloOcean and DESERT, its accounting closes to a worst relative error of 1.9e-13 [C2], and its
+with HoloOcean and DESERT, its accounting closes to a worst relative error of 2.5e-13 [C2], and its
 backend check exposed a drag-units defect in HoloOcean 2.3.0 [C1].
 
 The answers to the research questions are conditional on the simulator. The accounting is closed and

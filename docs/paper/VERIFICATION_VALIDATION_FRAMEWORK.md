@@ -22,15 +22,15 @@ none is cited yet. The credibility-scale paper that has been verified is Blattni
 
 | Activity / experiment | Category | Result | Limits |
 | --- | --- | --- | --- |
-| 344 automated tests, including the regression tests for review findings | Code verification | Pass (CI) | Tests check the implementation against its own equations |
-| `verify_final_energy.py`: recomputation of every energy from the 100 Hz traces | Code verification / model verification (accounting) | 36/36 runs, worst relative error 1.9e-13 | Same power model, so it detects accounting errors, not model errors (D-19) |
+| 363 automated tests, including the regression tests for review findings | Code verification | Pass (CI) | Tests check the implementation against its own equations |
+| `verify_final_energy.py`: recomputation of every energy from the 100 Hz traces | Code verification / model verification (accounting) | 36/36 runs, worst relative error 2.5e-13 | Same power model, so it detects accounting errors, not model errors (D-19) |
 | Bus energy = Σ categories; OCV work = bus + losses; cross-layer bus = modem adapter | Model verification (conservation) | Closed to ≤ 1e-15 Wh | Identities of the model |
 | Chain closure (force residual of the requested → applied wrench) | Model verification (coupling) | Residual < 1e-4 N per tick | Dynamics owned by the simulator |
 | EXP11 replay of the native mission (energy-only backend) | Model verification (determinism, replay equivalence) | Relative difference 0.0 | Valid when payload does not feed back (no derating) |
 | EXP1 backend check (patched vs unpatched HoloOcean) | Code verification **of the simulator backend** (is the declared drag equation applied?) | PASS 1.000000 / FAIL ×0.0100 | Does not validate the drag coefficients |
 | Timestep audit at 20–200 Hz (`holoocean_timestep_report.md`) | Calculation verification | 100 Hz used; 20 Hz rejected | Simulator integrator |
 | Parameter audit (54 records), unit conversion, stale-link detection | Input verification | Every final parameter traced to a record with location | Manufacturer tables are **inputs**, not validation (A-01) |
-| EXP9: HoloOcean surge resistance vs published BlueROV2 measurements | Sub-model validation attempt (drag) | Restrained-load data give 0.11–0.22×; identified damping 0.87–1.29× | Different vehicles and conditions; the references disagree with each other by a factor of 6–9. Not validated. |
+| EXP9: HoloOcean surge resistance vs published BlueROV2 measurements | External consistency check of the drag sub-model (not a validation: different vehicles and conditions; review R4-08) | Restrained-load data give 0.11–0.22×; identified damping 0.87–1.29× | Different vehicles and conditions; the references disagree with each other by a factor of 6–9. Not validated. |
 | Lam et al. 2023 tow-tank series | Input evidence for a sensitivity case (inflow bias of the static T200 tables) | About +5–8 % power per newton at J ≈ 0.1–0.13 | One command level, one voltage, no uncertainty |
 | Tun et al. 2026 | **Not** validation | Energy reconstructed from the static T200 curve | Usable only as a parameter comparison |
 | EXP10: drag model, modem settings, allocator, anisotropy | Uncertainty quantification (sensitivity analysis) | See CLAIM_EVIDENCE_MATRIX C8, C10, C12, C17 | One-at-a-time, deterministic; not probabilistic UQ |
@@ -41,8 +41,8 @@ none is cited yet. The credibility-scale paper that has been verified is Blattni
 
 ## Consequences for the claims
 
-- Nothing in this work is called validation except the drag sub-model comparison of EXP9, and that
-  comparison does **not** validate the sub-model.
+- Nothing in this work is called validation. The EXP9 drag comparison is an external consistency
+  check, and its result is conflicting.
 - Manufacturer tables used directly as model inputs are input evidence (traceability), not validation.
 - Agreement of the energy recomputation is verification of the accounting.
 - The contribution is a verified, evidence-traceable modelling method with simulator-conditional

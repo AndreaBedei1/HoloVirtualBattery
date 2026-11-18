@@ -48,7 +48,7 @@ cross-layer run.
 - **EXP1.** Patched build PASS: drag 1.000000, step ratio 1.000000. Unpatched control build FAIL:
   drag ×0.0100.
 - **Native matrix.** 36 runs, all with chain closure PASS. The independent energy recomputation
-  agrees to ≤ 1.9e-13 relative.
+  agrees to ≤ 2.5e-13 relative.
 - **Analysis.** `experiments/results/final/final_runs.{json,csv}`: whole-run and steady-window
   feasibility, tracking, Unreal damping share.
 - **Comm matrix.** 9 configurations × 20 seeds. 8 of the 9 are identical across seeds. B2 delivers

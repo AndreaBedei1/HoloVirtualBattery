@@ -12,7 +12,7 @@ several required deliverables are missing.
 | Gate item | State | Evidence |
 | --- | --- | --- |
 | Final results from a clean commit | met | Native runs from 81b91ea, cross-layer from b73ae9f, all `dirty: false` |
-| Independent recomputation of every energy | met | `energy_verification.json`: 36/36, ≤ 1.9e-13 |
+| Independent recomputation of every energy | met | `energy_verification.json`: 36/36, ≤ 2.5e-13 |
 | Backend check discriminates patched from unpatched | met | EXP1 PASS / FAIL (×0.0100) |
 | Seeds for stochastic experiments | met | 20 seeds, Wilson intervals |
 | Parameter audit and traceability | met | 54 records, grades capped by relation |
