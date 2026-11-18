@@ -49,6 +49,10 @@ MISSION = "EXP6-S5-inspection-scheduled"
 RESERVE = 0.30
 LEGS = (40, 60, 80, 100)
 HYPOTHETICAL_ETA = (0.80, 0.85, 0.90, 0.95)
+# Propulsion range from the published alternatives (EXP10): surge resistance 0.11-1.29 x the
+# HoloOcean value (part 1) times the T200 inflow factor up to 1.162 (part 5).
+PROPULSION_RANGE = (0.11, 1.50)
+PROPULSION_RANGE_SOURCE = "EXP10 parts 1 and 5 (published resistance x T200 inflow bias)"
 SHARED_SCHEDULED = ("bluerobotics_4k_camera", "bluerobotics_lumen")
 
 OCULUS = {
@@ -142,6 +146,7 @@ def part_a(registry):
             "b": y,
             "nominal_a_lower": reports[x].terminal_energy_Wh < reports[y].terminal_energy_Wh,
             **compare_energy(reports[x], reports[y]).to_dict(),
+            "verdict_min_grade_A": compare_energy(reports[x], reports[y], min_grade="A").verdict,
         }
         for x in reports
         for y in reports
@@ -178,12 +183,22 @@ def summarize_config(report, available):
         "legs": {},
         "what_if": {
             "assumption": "typical values confirmed as upper bounds; payload rail efficiency "
-            "measured at eta (hypothetical outcomes, not evidence)",
+            "measured at eta (hypothetical outcomes, not evidence); applied to every payload load "
+            "(one rail is modelled, so pack-voltage loads are also scaled); the declared-unknown "
+            "ESC standby and tether interface are not in this suite and are not bounded",
             "still_blocked_by": blocking,
             "eta": {},
         },
     }
     for legs in LEGS:
+        strict = assess_energy_requirement(
+            report,
+            available / legs,
+            dynamics_policy="strict",
+            propulsion_factor_range=PROPULSION_RANGE,
+            dynamics_source=PROPULSION_RANGE_SOURCE,
+        )
+        row.setdefault("legs_strict_dynamics", {})[legs] = strict.verdict
         a = assess_energy_requirement(report, available / legs)
         row["legs"][legs] = {
             "requirement_Wh": a.requirement_Wh,
