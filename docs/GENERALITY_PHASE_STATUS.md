@@ -16,7 +16,57 @@ framing), G-11 (T200 grade), C-02 (OCV), D-09 (converters), a tool comparison an
 | Comparators | Danielis 2021: constant-power state machines, no propulsion physics. LOTUSim-Energy: effort-linked battery plugin, no equations in the paper; code on GitHub. | docs/literature/ |
 | D-grade review | 15 parameters: 1 structural, 9 non-critical, 5 important (OCV, ESC idle, 5 V BEC and hotel/payload converter efficiencies). Unconfigured converter efficiency becomes an open upper side of the interval. | docs/paper/D_GRADE_PARAMETER_REVIEW.md |
 
-## Planned work (in order)
+## Done (commits b6312d7 … 52787ac)
+
+- **Literature:** notes and the Lam T200 record (b6312d7). D-grade/upper-bound review (904ee70).
+- **Decision API** (6a16a1c):
+  - `assess_energy_requirement`;
+  - supply-domain check (`supply_V`/`serves`);
+  - unverified-conversion open bounds;
+  - unconfigured loads become unknown contributions.
+- **User evidence and actuators** (dc3aa23):
+  - one registry per run (packaged + `evidence.sources/records`);
+  - per-actuator links (`evidence.actuators`);
+  - actuator `voltage_policy: table_voltage`;
+  - user dataset paths;
+  - `compare_energy` (paired); EXP11 script.
+- **Builder** (e95a899): `holoenergy.robot` (RobotEnergyProfile and the component, thruster, battery,
+  converter and evidence specs), `EnergyAwareEnv(energy_profile=)`, `thermal: {model: isothermal}`,
+  catalog `actuators()`.
+- **V&V framework and comparison** (e3b2d24): `docs/paper/VERIFICATION_VALIDATION_FRAMEWORK.md`;
+  `experiments/run_tool_comparison.py`.
+- **Dynamics evidence** (de69564): `evidence.dynamics`, reported apart from the electrical grades.
+  BlueROV2: simulator_literal / conflicting / absent.
+- **Reproducibility** (5c2092a): `tools/make_trace_archive.py` builds a Zenodo-ready archive of 77 MB,
+  locally in `dist/`, not uploaded; final-run backend hashes are in `holoocean_patched_build.md`.
+- **Example** (594d3ca): `examples/custom_robot_from_components.py` (five actuators, user evidence).
+  **Comparator matrix** (95999c2).
+- **EXP10 part 5** (52787ac): T200 inflow bias +7.1 % (L8-HV, J = 0.139) and +8.7 % (L4-2H2V,
+  J = 0.165). The 0.5 m/s ranking survives.
+- **EXP11 results** (from a draft run, to be regenerated after the code reviews):
+  - Gemini < Oculus is nominally true but not supported by the evidence.
+  - Ping360 is supported as cheaper than both.
+  - Every feasibility verdict is INDETERMINATE (5 V rail conversion, DVL typical value, Gemini
+    step-up converter).
+  - What-if, payload rail efficiency 0.80–0.95: Oculus 69–82 legs, Ping360 74–88 legs, Gemini
+    still blocked.
+  - "Optical uses less than acoustic" is supported.
+- **Same-mission comparison:** state-machine and Gazebo-style models reproduce the calm calibration
+  exactly. They miss the current effect (0.4 m/s transit 0.52 vs 5.10 Wh; 0.5 m/s station keeping
+  0.05 / 0.64 vs 6.39 Wh).
+
+## In progress / remaining
+
+- Code reviews running: adversarial-coach, integration-enforcer, test-authenticator. Apply the
+  confirmed fixes, then regenerate decision_case.json, tool_comparison.json and sensitivity.json.
+- Dashboard: show `scientific_warnings` and `dynamics_evidence`; fix the comms-panel modem
+  classification; add an actuator legend. Profile-builder page if feasible.
+- Docs: generic_framework.md (builder, evidence workflow §30), README update.
+- Claim matrix (decision relevance, generic configuration, tool comparison, V&V); manuscript
+  restructure (RQ1–RQ6, sections §37).
+- Reviewers 1–6 and the final gate.
+
+## Planned work (original order)
 
 1. **Registry threading and builder API** (`holoenergy.builder`). It compiles to the existing config, so
    there is no second model path. User EvidenceRecords reach components, modems and links.
