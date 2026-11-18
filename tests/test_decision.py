@@ -283,3 +283,30 @@ def test_assume_verified_is_validated(bad):
     )
     with pytest.raises(ConfigurationError):
         assess_energy_requirement(report, 10.0, assume_verified=bad)
+
+
+def test_min_grade_makes_low_grade_bounds_unacceptable():
+    """R5-02: grades enter the decision. The Oculus family range is relation representative (B),
+    the Ping360 maximum is exact (A); requiring grade A withholds the Oculus bounds."""
+    oc, scan = run(components=[oculus()]), run(components=[ping360()])
+    assert compare_energy(scan, oc).verdict == "A_LOWER_SUPPORTED"
+    assert compare_energy(scan, oc, min_grade="A").verdict == "RANKING_NOT_SUPPORTED"
+    strict = assess_energy_requirement(
+        oc, 100.0, assume_verified=("payload", "hotel"), min_grade="A"
+    )
+    assert strict.supported_high_Wh is None and any("grade A" in a for a in strict.assumptions)
+
+
+def test_strict_dynamics_policy_refuses_a_pass_on_unvalidated_dynamics():
+    """R5-03: with dynamics validation 'absent' a pass is certifiable only with a stated
+    propulsion range."""
+    report = run(components=[], converters={"payload_efficiency": 1.0})
+    limit = 10 * report.terminal_energy_Wh
+    kwargs = {"assume_verified": ("payload", "hotel")}
+    assert assess_energy_requirement(report, limit, **kwargs).verdict == "SUPPORTED_PASS"
+    strict = assess_energy_requirement(report, limit, dynamics_policy="strict", **kwargs)
+    assert strict.verdict == "INDETERMINATE" and "dynamics:propulsion" in strict.open_high
+    ranged = assess_energy_requirement(
+        report, limit, dynamics_policy="strict", propulsion_factor_range=(0.11, 1.5), **kwargs
+    )
+    assert ranged.verdict == "SUPPORTED_PASS"

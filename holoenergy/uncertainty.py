@@ -59,7 +59,14 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 continue
             rail = rail_of(device)
             scale = 1.0 / evidence_map.efficiency_for(device)
-            base = {"device": device, "state": state, "energy_Wh": wh, "rail": rail, "scale": scale}
+            base = {
+                "device": device,
+                "state": state,
+                "energy_Wh": wh,
+                "rail": rail,
+                "scale": scale,
+                "grade": evidence_map.grade(device, state),
+            }
             record_id = evidence_map.records.get(device, {}).get(state)
             if record_id is None:
                 if rail != "propulsion":

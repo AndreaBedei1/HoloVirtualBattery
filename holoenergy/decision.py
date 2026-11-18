@@ -28,6 +28,36 @@ from dataclasses import asdict, dataclass
 from ._validation import ConfigurationError, number
 
 VERDICTS = ("SUPPORTED_PASS", "SUPPORTED_FAIL", "INDETERMINATE")
+GRADE_ORDER = ("A", "B", "C", "D")
+
+
+def _below(grade, min_grade):
+    return (
+        min_grade is not None
+        and grade in GRADE_ORDER
+        and GRADE_ORDER.index(grade) > GRADE_ORDER.index(min_grade)
+    )
+
+
+def _grade_exclusions(intervals, min_grade):
+    """Bounded rows whose evidence grade is below ``min_grade`` (review R5-02): their published
+    bounds are not accepted, so they count as open on both sides. Returns (keys, low_bus, high_bus)."""
+    keys, low, high = [], 0.0, 0.0
+    if min_grade is None:
+        return keys, low, high
+    if min_grade not in GRADE_ORDER:
+        raise ConfigurationError(f"min_grade must be one of {GRADE_ORDER}")
+    for row in intervals.get("contributions", []):
+        ratio = row.get("ratio")
+        if ratio is None or not _below(row.get("grade"), min_grade):
+            continue
+        scale = row.get("scale", 1.0)
+        keys.append(f"{row['device']}.{row['state']}")
+        low += row["energy_Wh"] * (ratio[0] or 0.0) * scale if ratio[0] is not None else 0.0
+        high += row["energy_Wh"] * ratio[1] * scale if ratio[1] is not None else 0.0
+    return keys, low, high
+
+
 RAILS = ("propulsion", "payload", "hotel")
 
 
@@ -107,8 +137,16 @@ def assess_energy_requirement(
     propulsion_factor_range=None,
     dynamics_source=None,
     assume_verified=(),
+    min_grade=None,
+    dynamics_policy="conditional",
 ):
     """Assess ``terminal energy <= max_energy_wh`` for an :class:`EnergyReport` (or its dict).
+
+    ``min_grade`` (e.g. ``"B"``) refuses the published bounds of contributions graded below it:
+    they become open on both sides, so the decision rests only on evidence of that quality.
+    ``dynamics_policy="strict"`` refuses a supported pass when the dynamics evidence is not
+    validated and no ``propulsion_factor_range`` is given (propulsion is then unbounded above);
+    the default ``"conditional"`` keeps propulsion at its nominal value and says so.
 
     ``propulsion_factor_range`` = (low, high) scales the propulsion energy (bus side) to
     propagate physical-model evidence (``dynamics_source`` names it). ``assume_verified`` lists
@@ -147,10 +185,27 @@ def assess_energy_requirement(
     }
     low -= _placeholder_loss(intervals, unverified, set(open_low))
     high = None if open_high else float(terminal["high"])
+    excluded, ex_low, ex_high = _grade_exclusions(intervals, min_grade)
+    if excluded:
+        low -= ex_low
+        high = None
+        open_high = tuple(sorted(set(open_high) | set(excluded)))
+        assumptions.append(f"bounds below grade {min_grade} not accepted: " + ", ".join(excluded))
+    if dynamics_policy not in ("conditional", "strict"):
+        raise ConfigurationError('dynamics_policy must be "conditional" or "strict"')
+    validation = (evidence.get("dynamics_evidence") or {}).get("validation", "absent")
     propulsion = sum(
         r["energy_Wh"] * r.get("scale", 1.0) for r in intervals.get("point_contributions", [])
     )
-    if propulsion_factor_range is None:
+    if (
+        propulsion_factor_range is None
+        and dynamics_policy == "strict"
+        and validation != "validated"
+    ):
+        dynamics = f"strict: dynamics validation '{validation}', propulsion unbounded above"
+        high = None
+        open_high = tuple(sorted(set(open_high) | {"dynamics:propulsion"}))
+    elif propulsion_factor_range is None:
         dynamics = "excluded: propulsion follows the simulator's dynamics"
     else:
         lo_f, hi_f = (
@@ -214,7 +269,7 @@ class EnergyComparison:
         return result
 
 
-def _contributions(report):
+def _contributions(report, min_grade=None):
     """key -> (energy, record, low_dev, high_dev, scale, rail); None marks an open side.
 
     Device-side bounds; ``scale`` converts to the bus side. Unknown contributions (unconfigured
@@ -226,6 +281,8 @@ def _contributions(report):
         energy, ratio = row["energy_Wh"], row["ratio"]
         low = 0.0 if ratio is None or ratio[0] is None else energy * ratio[0]
         high = None if ratio is None or ratio[1] is None else energy * ratio[1]
+        if _below(row.get("grade"), min_grade):
+            low, high = 0.0, None  # bounds below the required grade are not accepted
         out[(row["device"], row["state"])] = (
             energy,
             row["record"],
@@ -318,7 +375,7 @@ def _lower_supported(x_sums, y_sums, x_unverified, y_unverified):
     return delta < 0.0, delta
 
 
-def compare_energy(report_a, report_b, *, tolerance=1e-9):
+def compare_energy(report_a, report_b, *, tolerance=1e-9, min_grade=None):
     """Is the terminal energy of configuration A lower than that of B, given the evidence?
 
     Paired comparison on the same mission, on the bus side. A contribution identical in both
@@ -326,7 +383,7 @@ def compare_energy(report_a, report_b, *, tolerance=1e-9):
     contribution enters with its supported interval (no lower bound -> zero, no upper bound ->
     open). Rails without converter evidence are handled by :func:`_lower_supported`.
     """
-    ca, cb = _contributions(report_a), _contributions(report_b)
+    ca, cb = _contributions(report_a, min_grade), _contributions(report_b, min_grade)
     ia, ib = _intervals(report_a), _intervals(report_b)
     unverified_a = {r for r, ok in ia.get("rail_verified", {}).items() if not ok}
     unverified_b = {r for r, ok in ib.get("rail_verified", {}).items() if not ok}
