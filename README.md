@@ -14,6 +14,16 @@ a requirement: other vehicles, batteries and backends use the same API.
 that does not make HoloOcean's BlueROV2 hydrodynamics a validated model of the real
 vehicle (see [external comparison](docs/bluerov2_hydrodynamic_external_comparison.md)).
 
+## Configure your own robot
+
+Any vehicle can be described with the typed builder (`RobotEnergyProfile`, `ThrusterProfile`,
+`BatteryProfile`, component profiles, `EvidenceSourceSpec`, `EvidenceRecordSpec`, `Ref`),
+without a built-in vehicle profile. Each parameter is linked to an evidence record, and
+`validate()` reports the scientific warnings before a run. See
+[docs/generic_framework.md](docs/generic_framework.md) (builder, YAML evidence keys, decision
+helpers, new-hardware workflow, what is not modelled) and the runnable
+[examples/custom_robot_from_components.py](examples/custom_robot_from_components.py).
+
 ## Why actuator effort
 
 Propulsion power follows the effort the controller commands against the simulated

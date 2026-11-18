@@ -235,6 +235,109 @@ water_temperature_C, phase, component_states JSON, component_inputs JSON.
 Replay energetico non determina posizione, successo missione o corrente fisica.
 La suite di sensitivity, calibrazione e validazione separata rimane invariata.
 
+## Costruire un robot con il builder tipizzato
+
+`holoenergy/robot.py` (esportato da `holoenergy`) assembla la stessa configurazione
+della via YAML: `RobotEnergyProfile.to_config()` produce il mapping e il loader
+lo valida, senza un secondo percorso di modello. Esempi funzionanti:
+[examples/custom_robot_from_components.py](../examples/custom_robot_from_components.py)
+e [tests/test_robot_profile.py](../tests/test_robot_profile.py).
+
+| Classe | Campi principali |
+| --- | --- |
+| `RobotEnergyProfile` | `name, battery, thrusters, dt_s, components, converters, sources, records, water_temperature_C, thermal, action_mode, allocation, backend, propulsion_evidence, hotel_W, allow_placeholders`; metodi `to_config()`, `to_yaml(path)`, `validate()` |
+| `ThrusterProfile` | `id, position_m, direction`, e `catalog=` oppure `model=` con `voltage_tables=`; `voltage_policy` (`measured` o `table_voltage`), `evidence=Ref` |
+| `BatteryProfile` | `nominal_voltage_V, capacity_Ah, model` (`rint` o `energy_bucket`), `initial_soc, max_current_A, internal_resistance_ohm, cutoff_voltage_V, ocv_curve, losses=Ref` |
+| `SensorProfile`, `ComputeProfile`, `CommunicationProfile`, `AuxiliaryProfile` | `name`, `states` (lista di `State`), `initial_state`, `device`, `supply_V`, `includes`; `catalog=` sceglie un componente impacchettato senza alcun profilo veicolo |
+| `State` | `name` e una sola tra `power_W`, `current_A` con `at_V` (potenza costante, grado D) o `evidence=Ref` |
+| `ConverterProfile` | `name, serves, input_V, quiescent, efficiency, efficiency_evidence` |
+| `EvidenceSourceSpec` | `id, kind, title`, `doi, url, authors, year, local_file, sha256, notes`; `kind` in paper, conference, thesis, datasheet, manufacturer_dataset, dataset, measurement, assumption, simulator, standard |
+| `EvidenceRecordSpec` | `id, component, quantity, unit`, `value` oppure `value_min`/`value_max`, `bound, relation, grade, sources, location, conditions, derivation, dataset, notes` |
+| `Ref` | `record`, `use` (`value`, `value_min`, `value_max`), `relation` |
+
+`thermal` è `"isothermal"` (default) o un mapping di valori misurati;
+`water_temperature_C` è obbligatoria. `validate()` esegue un passo con backend
+solo-energia, controlla che ogni attuatore sia valutabile a spinta massima su
+tutto il range di tensione del bus e restituisce `scientific_warnings`.
+
+```python
+from holoenergy import EnergyAwareEnv, RobotEnergyProfile
+robot = RobotEnergyProfile(name="my-rov", battery=..., thrusters=[...], dt_s=0.05,
+                           water_temperature_C=10.0, sources=[...], records=[...])
+warnings = robot.validate()
+env = EnergyAwareEnv(holoocean_env=base_env, energy_profile=robot, control_contract=contract)
+```
+
+## Chiavi di configurazione YAML per l'evidenza
+
+Equivalenti della via builder; le chiavi sconosciute sotto `evidence` sono rifiutate.
+
+- `evidence.sources` e `evidence.records`: evidenza dell'utente, validata come i
+  record impacchettati. Gli id non possono coincidere con id impacchettati.
+- `evidence.actuators: {id: {record, relation}}`: collegamento per attuatore; il
+  record deve essere evidenza di attuatore (quantità o id con force, thrust, propul, table).
+- `evidence.dynamics`: `source` (`simulator_literal`, `published_measurement`,
+  `identified_model`, `proxy`, `unsupported`), `records`, `external_consistency`
+  (`consistent`, `weak`, `conflicting`, `not_assessed`), `validation` (`validated`,
+  `partial`, `absent`), `notes`. Default: `unsupported`, `not_assessed`, `absent`.
+- Componenti: `supply_V: [min, max]` (dominio di alimentazione) e `serves: [nomi]`
+  (un convertitore che alimenta altri componenti).
+- Attuatori: `voltage_policy: measured` (default) o `table_voltage` (fuori dal range
+  misurato si usa la tabella più vicina; dichiarato e segnalato).
+- `thermal: {model: isothermal, ...}`.
+
+## Risultati con evidenza
+
+`env.energy.summary()["evidence"]` contiene:
+
+- `share_percent`: quota di energia per grado, solo modelli elettrici;
+- `dynamics_evidence`: source, records, external_consistency, validation e quota di
+  energia che segue la dinamica (`dependent_share_percent`), separata dai gradi;
+- `actuator_grades`, `actuator_records`;
+- `scientific_warnings`, con `kind` in `unknown`, `grade_D`, `proxy`,
+  `upper_bound_only`, `supply_domain_mismatch`, `conversion_unverified`,
+  `voltage_independent_table`.
+
+`EnergyReport.intervals` riporta `terminal_energy_Wh` (nominal, low, high, `open_low`,
+`open_high`, `unknown_contributions`), `rail_efficiency` e `rail_verified`.
+
+`holoenergy.assess_energy_requirement(report, max_energy_wh, propulsion_factor_range=None,
+dynamics_source=None, assume_verified=())` valuta "energia terminale <= limite" sul lato
+bus. Verdetti: `SUPPORTED_PASS` (esiste un limite superiore supportato entro il limite),
+`SUPPORTED_FAIL` (il limite inferiore supportato lo supera), `INDETERMINATE`. Carichi non
+configurati e conversione non verificata aprono il lato superiore. La propulsione entra
+al valore nominale, salvo un `propulsion_factor_range` giustificato; `assume_verified`
+(`"payload"`, `"hotel"`) è un'assunzione registrata nel risultato.
+
+`holoenergy.compare_energy(report_a, report_b)` confronta due run sulla stessa missione,
+sul lato bus: i contributi identici (stesso device, stato, record, energia, limiti e scala di
+conversione) si annullano, gli altri entrano con l'intervallo supportato. Verdetti:
+`A_LOWER_SUPPORTED`, `B_LOWER_SUPPORTED`, `RANKING_NOT_SUPPORTED`.
+
+Gli adapter di comunicazione (`holoenergy.integrations.communications`, `desert`)
+accettano `registry=env.evidence_registry`, così i record dell'utente sono risolti.
+
+## Nuovo hardware: dal componente all'evidenza
+
+1. Creare il profilo del componente o dell'attuatore (`SensorProfile`, `ThrusterProfile`, ...).
+2. Aggiungere una `EvidenceSourceSpec` (`datasheet`, `measurement`, `assumption`) e una
+   `EvidenceRecordSpec` con valore o range, `bound`, `relation` (il grado è limitato
+   dalla relazione) e `location` nella fonte.
+3. Collegare il record con `Ref` (stato, `propulsion_evidence`, `thrusters[].evidence`,
+   `battery.losses`).
+4. Eseguire `robot.validate()` e leggere `scientific_warnings`.
+5. Eseguire la missione; leggere `env.energy.report()`, `intervals` e
+   `assess_energy_requirement`.
+
+## Cosa non è modellato
+
+- Una sola efficienza per il rail payload (un solo rail; i convertitori devono
+  condividere l'efficienza). Senza evidenza l'efficienza vale 1.0 e il rail è un
+  limite inferiore (`conversion_unverified`).
+- Il modello termico è illustrativo (isothermal o valori forniti dall'utente).
+- La dinamica appartiene al simulatore e non è validata; l'energia di propulsione la segue.
+- Valori senza evidenza restano non configurati e aprono il lato superiore degli intervalli.
+
 ## Estensioni future
 
 Il pack è isolato dai carichi e il distributore separato dai modelli: un futuro
