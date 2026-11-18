@@ -202,7 +202,9 @@ def test_user_evidence_reaches_components_actuators_report_and_intervals(env):
     # Per-actuator links: the user thrusters carry their own (exact, A) record, the T200s the
     # shared representative link (B).
     m = env.evidence_map
-    assert m.actuator_grades["V1"] == "A" and m.actuator_grades["S1"] == "B"
+    # The user table read outside its measured voltage is capped at representative (B).
+    assert m.actuator_grades["V1"] == "B" and m.actuator_relations["V1"] == "representative"
+    assert m.actuator_grades["S1"] == "B"
     assert report.provenance["user_evidence"]["records"] == [
         "acme_fls.power",
         "acme_cpu.power_measured",
@@ -218,7 +220,8 @@ def test_user_evidence_reaches_components_actuators_report_and_intervals(env):
     assessment = assess_energy_requirement(
         report, max_energy_wh=100.0, assume_verified=("payload",)
     )
-    assert assessment.verdict in ("SUPPORTED_PASS", "INDETERMINATE")
+    assert assessment.verdict == "SUPPORTED_PASS"  # every load bounded by the user's records
+    assert assess_energy_requirement(report, max_energy_wh=100.0).verdict == "INDETERMINATE"
 
 
 def test_mistyped_evidence_key_is_rejected(tmp_path):
@@ -265,3 +268,37 @@ def test_invalid_dynamics_label_is_rejected(tmp_path):
     bad["evidence"]["dynamics"] = {"source": "validated_by_feel"}
     with pytest.raises(ConfigurationError, match="evidence.dynamics.source"):
         EnergyAwareEnv(Backend(), config=bad, control_contract=CONTRACT)
+
+
+def test_actuator_link_must_point_to_actuator_evidence(tmp_path):
+    bad = config(tmp_path / "x.json")
+    bad["evidence"]["actuators"]["V1"] = {"record": "acme_fls.power", "relation": "exact"}
+    with pytest.raises(ConfigurationError, match="not actuator evidence"):
+        EnergyAwareEnv(Backend(), config=bad, control_contract=CONTRACT)
+    bad["evidence"]["actuators"]["V1"] = "acme_q16.bench_table"
+    with pytest.raises(ConfigurationError, match="must be"):
+        EnergyAwareEnv(Backend(), config=bad, control_contract=CONTRACT)
+
+
+def test_unreadable_actuator_dataset_is_stale_not_grade_a(tmp_path):
+    warnings.simplefilter("ignore", UserWarning)
+    e = EnergyAwareEnv(
+        Backend(), config=config(tmp_path / "missing.json"), control_contract=CONTRACT
+    )
+    assert e.evidence_map.actuator_grades["V1"] == "D"
+    assert any("could not be read" in w for w in e.evidence_map.stale_links)
+    e.close()
+
+
+def test_rail_efficiency_needs_a_matching_efficiency_record(tmp_path):
+    warnings.simplefilter("ignore", UserWarning)
+    cfg = config(tmp_path / "x.json")
+    cfg["converters"] = {
+        "payload_efficiency": 0.9999,
+        "metadata": {"evidence": {"payload_efficiency": "acme_fls.power"}},
+    }
+    e = EnergyAwareEnv(Backend(), config=cfg, control_contract=CONTRACT)
+    assert (
+        e.evidence_map.rail_verified["payload"] is False
+    )  # a power record is not efficiency evidence
+    e.close()

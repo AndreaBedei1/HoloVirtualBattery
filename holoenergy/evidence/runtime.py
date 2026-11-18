@@ -99,6 +99,20 @@ def _dynamics_evidence(entry, registry):
     }
 
 
+ACTUATOR_QUANTITY_TOKENS = ("force", "thrust", "propul", "table")
+
+
+def _check_actuator_record(record, where):
+    """An actuator link must point to actuator evidence (adversarial H7)."""
+    from .._validation import ConfigurationError
+
+    text = f"{record.quantity} {record.id}".lower()
+    if not any(token in text for token in ACTUATOR_QUANTITY_TOKENS):
+        raise ConfigurationError(
+            f"{where}: record {record.id} ({record.quantity}) is not actuator evidence"
+        )
+
+
 def _actuator_ids(propulsion):
     count = propulsion.get("thruster_count") or len(propulsion.get("thrusters") or [])
     return list(propulsion.get("actuator_ids") or [f"T{i + 1}" for i in range(count)])
@@ -123,8 +137,17 @@ def _bus_voltage_range(battery):
     """Range of the bus voltage the pack can present: [cutoff, maximum OCV] (L1) or the
     nominal voltage (L0). (None, None) when the battery does not state it."""
     nominal = battery.get("nominal_voltage_V")
-    curve = battery.get("ocv_curve") or []
-    voltages = [float(p[1]) for p in curve if isinstance(p, (list, tuple)) and len(p) == 2]
+    curves = [battery.get("ocv_curve") or []] + [
+        c.get("curve") or []
+        for c in battery.get("ocv_temperature_curves") or []
+        if isinstance(c, dict)
+    ]
+    voltages = [
+        float(p[1])
+        for curve in curves
+        for p in curve
+        if isinstance(p, (list, tuple)) and len(p) == 2
+    ]
     if battery.get("model") == "rint" and voltages:
         cutoff = battery.get("cutoff_voltage_V")
         low = float(cutoff) if cutoff is not None else min(voltages)
@@ -232,9 +255,16 @@ class EvidenceMap:
             record_id = linked.get(f"{rail}_efficiency")
             has_evidence = bool(self.converter_record) and self.converter_grade != "D"
             if record_id is not None and record_id in self.registry.records:
-                has_evidence = has_evidence or self.registry.get(record_id).configured
-            # An efficiency below 1 is a modelled (if user-graded) loss, not an open side.
-            verified[rail] = has_evidence or self.efficiencies[rail] < 1.0
+                record = self.registry.get(record_id)
+                # Only an efficiency record that matches the configured value verifies the rail
+                # (adversarial H3); an efficiency without evidence stays open (H4).
+                has_evidence = has_evidence or (
+                    record.configured
+                    and "efficiency" in record.quantity
+                    and record.grade != "D"
+                    and _matches(record, self.efficiencies[rail])
+                )
+            verified[rail] = has_evidence
         return verified
 
     def _supply_mismatches(self, payload):
@@ -307,7 +337,11 @@ class EvidenceMap:
         self.propulsion_mismatch_ids = []
         if self.propulsion_record:
             record = self.registry.get(self.propulsion_record)
+            _check_actuator_record(record, "evidence.propulsion")
             found = _dataset_tables(record)
+            if found is None and (record.dataset or {}).get("path"):
+                # A declared but unreadable dataset is not evidence (adversarial H6).
+                drop("propulsion", record.id, "its dataset could not be read")
             propulsion = config.get("propulsion") or {}
             ids = _actuator_ids(propulsion)
             own = set((config.get("evidence") or {}).get("actuators") or {})
@@ -335,35 +369,54 @@ class EvidenceMap:
     def _actuator_links(self, config, ids):
         """Per-actuator evidence (``evidence.actuators: {id: {record, relation}}``), falling back
         to the shared ``evidence.propulsion`` link."""
+        from .._validation import ConfigurationError
+
         links = (config.get("evidence") or {}).get("actuators") or {}
         unknown = sorted(set(links) - set(ids))
         if unknown:
-            from .._validation import ConfigurationError
-
             raise ConfigurationError(f"evidence.actuators names unknown actuators {unknown}")
         models = dict(zip(ids, _actuator_models(config.get("propulsion") or {}), strict=True))
         grades, records, relations = {}, {}, {}
         for aid in ids:
             if aid in links:
-                grade, record_id = _graded(self.registry, links[aid])
-                relation = links[aid].get("relation", "exact")
-                found = _dataset_tables(self.registry.get(record_id)) if record_id else None
-                model = models.get(aid)
-                if found is not None and (
-                    not isinstance(model, dict) or model.get(found[0]) != found[1]
-                ):
-                    self.stale_links.append(
-                        f"stale evidence link: actuator {aid} -> {record_id} (tables differ "
-                        "from the record's dataset); graded D"
-                    )
-                    grade, record_id, relation = "D", None, "user"
+                grade, record_id, relation = self._own_actuator_link(
+                    aid, links[aid], models.get(aid)
+                )
             elif aid in self.propulsion_mismatch_ids:
                 grade, record_id, relation = "D", None, "user"
             else:
                 grade, record_id = self.propulsion_grade, self.propulsion_record
                 relation = self.propulsion_relation
+            model = models.get(aid)
+            if isinstance(model, dict) and model.get("voltage_policy") == "table_voltage":
+                # A table read outside its measured voltage range is at best representative.
+                if relation in ("exact", None):
+                    relation = "representative"
+                    grade = grade if grade == "D" else cap_grade(grade, relation)
             grades[aid], records[aid], relations[aid] = grade, record_id, relation
         return grades, records, relations
+
+    def _own_actuator_link(self, aid, link, model):
+        from .._validation import ConfigurationError
+
+        if not isinstance(link, dict) or not isinstance(link.get("record"), str):
+            raise ConfigurationError(f"evidence.actuators.{aid} must be {{record, relation}}")
+        record = self.registry.get(link["record"])
+        _check_actuator_record(record, f"evidence.actuators.{aid}")
+        grade, record_id = _graded(self.registry, link)
+        relation = link.get("relation", "exact")
+        found = _dataset_tables(record)
+        why = None
+        if found is None and (record.dataset or {}).get("path"):
+            why = "dataset could not be read"
+        elif found is not None and (not isinstance(model, dict) or model.get(found[0]) != found[1]):
+            why = "tables differ from the record's dataset"
+        if why:
+            self.stale_links.append(
+                f"stale evidence link: actuator {aid} -> {record.id} ({why}); graded D"
+            )
+            return "D", None, "user"
+        return grade, record_id, relation
 
     def efficiency_for(self, device):
         """Converter efficiency of the rail that serves ``device``."""

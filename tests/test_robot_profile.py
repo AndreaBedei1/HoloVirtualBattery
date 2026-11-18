@@ -173,7 +173,7 @@ def test_builder_robot_runs_with_user_evidence_and_closes_the_supply_gap(tmp_pat
         for _ in range(100):
             env.step([15.0, 4.0, 12.0, 0.0, 0.0, 0.5])
         report = env.energy.report()
-        assert env.evidence_map.actuator_grades["V1"] == "A"
+        assert env.evidence_map.actuator_grades["V1"] == "B"  # table_voltage: representative
         assert env.evidence_map.actuator_grades["H1"] == "B"
     kinds = {(w["kind"], w["subject"]) for w in report.evidence["scientific_warnings"]}
     assert ("supply_domain_mismatch", "imaging_sonar") not in kinds  # the boost converter serves it
@@ -186,13 +186,25 @@ def test_yaml_round_trip_gives_the_same_resolved_configuration(tmp_path):
     warnings.simplefilter("ignore", UserWarning)
     profile = with_dataset(robot(), tmp_path)
     path = profile.to_yaml(tmp_path / "robot.yaml")
-    assert load_config(path) == load_config(data=profile.to_config())
+    loaded = load_config(path)
+    assert loaded == load_config(data=profile.to_config())
+    # Independent expectations, not derived from to_config():
+    assert loaded["simulation"]["dt_s"] == 0.05
+    assert loaded["battery"]["capacity_Ah"] == 20
+    assert loaded["propulsion"]["thruster_count"] == 7
+    geometry = {g["id"]: g for g in loaded["actuation"]["geometry"]}
+    assert geometry["V2"]["position_m"] == [-0.25, 0.15, 0.05]
+    assert geometry["H1"]["direction"][0] == pytest.approx(math.cos(math.radians(30)))
+    assert loaded["evidence"]["battery_losses"]["record"] == "lab_pack.resistance"
+    assert loaded["hotel_load"]["constant_W"] == 0.0
 
 
 def test_validate_reports_structured_warnings(tmp_path):
     warnings.simplefilter("ignore", UserWarning)
     found = with_dataset(robot(), tmp_path).validate()
-    assert isinstance(found, list) and all("kind" in w for w in found)
+    kinds = {w["kind"] for w in found}
+    assert "voltage_independent_table" in kinds  # V1-V3 read their 15 V table on a 12-16.8 V bus
+    assert "supply_domain_mismatch" not in kinds  # the boost converter serves the sonar
 
 
 def test_builder_never_fills_missing_values():
@@ -204,3 +216,32 @@ def test_builder_never_fills_missing_values():
         State("ACTIVE", current_A=1.0).to_entry()
     unknown = ComputeProfile(name="x", states=(State("ACTIVE"),)).to_entry()
     assert unknown["status"] == "unconfigured"
+
+
+def test_builder_guards_against_invalid_choices():
+    import dataclasses
+
+    import numpy as np
+
+    with pytest.raises(ConfigurationError, match="thermal"):
+        dataclasses.replace(robot(), thermal="lumped").to_config()
+    with pytest.raises(ConfigurationError, match="cannot serve itself"):
+        ConverterProfile(name="c", serves=("c",), input_V=(9, 36)).to_entry()
+    bucket = BatteryProfile(nominal_voltage_V=14.8, capacity_Ah=10, model="energy_bucket")
+    assert bucket.to_section()["capacity_Wh"] == pytest.approx(148.0)
+    numpy_robot = dataclasses.replace(robot(), dt_s=np.float64(0.05))
+    assert "dt_s: 0.05" in numpy_robot.to_yaml(tmp_path_factory_dir()).read_text(encoding="utf-8")
+
+
+def tmp_path_factory_dir():
+    import tempfile
+    from pathlib import Path
+
+    return Path(tempfile.mkdtemp()) / "numpy_robot.yaml"
+
+
+def test_ref_relation_caps_the_component_grade():
+    entry = ComputeProfile(
+        name="cpu", states=(State("ACTIVE", evidence=Ref("lab_boost.quiescent", relation="proxy")),)
+    ).to_entry()
+    assert entry["relation"] == "proxy"

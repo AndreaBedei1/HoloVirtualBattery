@@ -80,7 +80,8 @@ class ThrusterModel:
             raise ConfigurationError("Thruster profile needs at least one voltage table")
         self.table_voltage_range = (self.tables[0][0], self.tables[-1][0])
         if self.voltage_policy == "table_voltage":
-            self.min_voltage, self.max_voltage = 0.0, float("inf")
+            # Positive lower limit: the allocation voltage U - I_max R may reach zero (M2).
+            self.min_voltage, self.max_voltage = 1e-9, float("inf")
         else:
             self.min_voltage, self.max_voltage = self.table_voltage_range
 

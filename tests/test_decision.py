@@ -95,6 +95,7 @@ def test_assessment_passes_when_every_contribution_is_bounded():
         report, max_energy_wh=10 * report.terminal_energy_Wh, assume_verified=("payload", "hotel")
     )
     assert assessment.verdict == "SUPPORTED_PASS"
+    assert "conversion treated as verified for: hotel, payload" in assessment.assumptions
     assert assessment.supported_high_Wh is not None
     assert assessment.dynamics == "excluded: propulsion follows the simulator's dynamics"
 
@@ -134,10 +135,35 @@ def ping360():
 
 
 def test_paired_comparison_cancels_identical_contributions():
-    a, b = run(components=[sonar()]), run(components=[sonar()])
+    a, b = run(components=[oculus()]), run(components=[oculus()])
     result = compare_energy(a, b)
     assert result.verdict == "RANKING_NOT_SUPPORTED"
     assert result.differing == ()
+
+
+def test_unknown_contributions_never_cancel():
+    """Adversarial C3: an unknown load (here the sonar's unmodelled supply conversion) has
+    unknown energy in both runs, so it cannot cancel and blocks a supported ranking."""
+    a, b = run(components=[sonar()]), run(components=[sonar()])
+    result = compare_energy(a, b)
+    assert ("imaging_sonar.supply_conversion", "unknown") in result.differing
+    assert result.verdict == "RANKING_NOT_SUPPORTED"
+
+
+def test_b_lower_path_and_difference_bounds():
+    scan, gemini = run(components=[ping360()]), run(components=[sonar()])
+    result = compare_energy(gemini, scan)
+    assert result.verdict == "B_LOWER_SUPPORTED"
+    assert result.difference_low_Wh is not None and result.difference_low_Wh > 0
+    assert result.difference_high_Wh is None  # the Gemini's conversion loss is unbounded
+
+
+def test_open_low_items_are_removed_from_the_supported_lower_bound():
+    report = run(components=[ping360()])
+    a = assess_energy_requirement(report, max_energy_wh=1.0)
+    ping = sum(report.device_state_energy_Wh["scanning_sonar"].values())
+    assert "scanning_sonar.ACTIVE" in a.open_low
+    assert a.supported_low_Wh <= report.intervals["terminal_energy_Wh"]["low"] - ping + 1e-12
 
 
 def test_published_ranges_decide_or_withhold_a_ranking():

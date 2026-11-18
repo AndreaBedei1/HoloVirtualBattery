@@ -36,7 +36,9 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
     """Interval of terminal and total energy from evidence ranges.
 
     ``used_values`` maps (device, state) -> value (SI) actually used by the model; by
-    default it is read from the component evidence records (``use: value``).
+    default it is read from the component evidence records (``use: value``). Every contribution
+    row states its rail and its bus-side scale (1 / converter efficiency of that rail), so that
+    a consumer can compare configurations on the bus side (reviews I-02, adversarial C1).
     """
     registry = registry or getattr(evidence_map, "registry", None) or default_registry()
     device_states = summary["device_state_energy_Wh"]
@@ -45,18 +47,27 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
     low_delta = high_delta = 0.0
     open_low, open_high, rows = [], [], []
     points, opens = [], []  # complete the contribution list for paired comparisons
+
+    def rail_of(device):
+        if device in evidence_map.actuators:
+            return "propulsion"
+        return "hotel" if device == "hotel_constant" else "payload"
+
     for device, states in device_states.items():
         for state, wh in states.items():
             if wh == 0:
                 continue
+            rail = rail_of(device)
+            scale = 1.0 / evidence_map.efficiency_for(device)
+            base = {"device": device, "state": state, "energy_Wh": wh, "rail": rail, "scale": scale}
             record_id = evidence_map.records.get(device, {}).get(state)
             if record_id is None:
-                if device not in evidence_map.actuators:
+                if rail != "propulsion":
                     open_low.append(f"{device}.{state}")
                     open_high.append(f"{device}.{state}")
-                    opens.append({"device": device, "state": state, "energy_Wh": wh})
+                    opens.append(base)
                 else:
-                    points.append({"device": device, "state": state, "energy_Wh": wh})
+                    points.append(base)
                 continue
             record = registry.get(record_id)
             used = (used_values or {}).get((device, state))
@@ -67,22 +78,13 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 if used is None:
                     used = record.si("value_max")
             ratio = _ratio_interval(record, used)
-            rows.append(
-                {
-                    "device": device,
-                    "state": state,
-                    "energy_Wh": wh,
-                    "record": record_id,
-                    "ratio": ratio,
-                }
-            )
+            rows.append({**base, "record": record_id, "ratio": ratio})
             if ratio is None:
                 open_low.append(f"{device}.{state}")
                 open_high.append(f"{device}.{state}")
                 continue
             lo, hi = ratio
             # Converter losses scale with the load they serve (review E-01).
-            scale = 1.0 / evidence_map.efficiency_for(device)
             if lo is None:
                 open_low.append(f"{device}.{state}")
             else:
@@ -97,9 +99,10 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
     for name in sorted(getattr(evidence_map, "supply_mismatches", {})):
         if sum(device_states.get(name, {}).values()) > 0:
             unknown.append(f"{name}.supply_conversion")
+    rail_verified = dict(getattr(evidence_map, "rail_verified", {}))
     if hasattr(evidence_map, "rail_energy_Wh"):
         for rail, energy in evidence_map.rail_energy_Wh(device_states).items():
-            if energy > 0 and not evidence_map.rail_verified.get(rail, True):
+            if energy > 0 and not rail_verified.get(rail, True):
                 unknown.append(f"conversion:{rail}")
     unknown += [f"{u['component']}.unconfigured" for u in getattr(evidence_map, "unconfigured", [])]
     open_high += unknown
@@ -131,6 +134,8 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
         # loads without a record have both sides open.
         "point_contributions": points,
         "open_contributions": opens,
+        "rail_efficiency": dict(getattr(evidence_map, "efficiencies", {})),
+        "rail_verified": rail_verified,
         "excluded": (
             "propulsion (manufacturer curve without published measurement uncertainty) and "
             "dynamics (simulator-owned); unconfigured loads and unmodelled conversion open the "

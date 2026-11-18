@@ -267,9 +267,12 @@ class ComponentModel(PayloadModel):
                 )
             self.components[name] = ElectricalComponent(name, config, registry=registry)
         for name, item in self.components.items():
-            unknown = sorted(set(getattr(item, "serves", [])) - set(self.components))
+            serves = set(getattr(item, "serves", []))
+            unknown = sorted(serves - set(self.components))
             if unknown:
                 raise ConfigurationError(f"{name}.serves names unknown components {unknown}")
+            if name in serves:
+                raise ConfigurationError(f"{name} cannot serve itself")
 
     def set_input(self, name, input_name=None, value=None, **inputs):
         item = self.components[name]

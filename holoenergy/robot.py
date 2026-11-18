@@ -39,6 +39,24 @@ SOURCE_KINDS = {
 }
 
 
+RELATION_ORDER = ("exact", "representative", "proxy", "user", "unsupported")
+
+
+def _strictest(relations):
+    return max(relations, key=lambda r: RELATION_ORDER.index(r) if r in RELATION_ORDER else 0)
+
+
+def _plain(value):
+    """Plain Python scalars and containers (numpy values are not YAML-safe; M7)."""
+    if isinstance(value, dict):
+        return {str(k): _plain(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_plain(v) for v in value]
+    if hasattr(value, "item") and callable(value.item):
+        return value.item()
+    return value
+
+
 @dataclass(frozen=True)
 class EvidenceSourceSpec:
     """A paper, datasheet, dataset, own measurement or engineering assumption."""
@@ -186,7 +204,13 @@ class ComponentProfile:
             if self.relation != "exact":
                 entry["relation"] = self.relation
             return entry
-        entry = {"name": self.name, "category": self.category, "relation": self.relation}
+        # The strictest relation among the component and its evidence references (H8).
+        refs = [s.evidence.relation for s in self.states if s.evidence is not None]
+        entry = {
+            "name": self.name,
+            "category": self.category,
+            "relation": _strictest([self.relation, *refs]),
+        }
         states = {s.name: s.to_entry() for s in self.states}
         if states:
             entry["states"] = states
@@ -235,6 +259,8 @@ class ConverterProfile:
     efficiency_evidence: str | None = None
 
     def to_entry(self):
+        if self.name in self.serves:
+            raise ConfigurationError(f"converter {self.name} cannot serve itself")
         entry = {
             "name": self.name,
             "category": "auxiliaries",
@@ -299,10 +325,14 @@ class BatteryProfile:
     def to_section(self):
         section = {
             "model": self.model,
-            "capacity_Ah": self.capacity_Ah,
             "nominal_voltage_V": self.nominal_voltage_V,
             "initial_soc": self.initial_soc,
         }
+        if self.model == "energy_bucket":
+            # L0 takes energy; capacity_Ah x nominal voltage is the rated energy (M5).
+            section["capacity_Wh"] = self.capacity_Ah * self.nominal_voltage_V
+        else:
+            section["capacity_Ah"] = self.capacity_Ah
         for key in ("max_current_A", "internal_resistance_ohm", "cutoff_voltage_V"):
             if getattr(self, key) is not None:
                 section[key] = getattr(self, key)
@@ -375,11 +405,14 @@ class RobotEnergyProfile:
     def to_config(self):
         if self.water_temperature_C is None:
             raise ConfigurationError("water_temperature_C is required (measured or explicit)")
-        thermal = (
-            {"model": "isothermal", "initial_temperature_C": self.water_temperature_C}
-            if self.thermal == "isothermal"
-            else dict(self.thermal)
-        )
+        if isinstance(self.thermal, str):
+            if self.thermal != "isothermal":
+                raise ConfigurationError(
+                    'thermal must be "isothermal" or a mapping of measured values'
+                )
+            thermal = {"model": "isothermal", "initial_temperature_C": self.water_temperature_C}
+        else:
+            thermal = dict(self.thermal)
         backend = self.backend or {
             "mapping": "direct",
             "backend_index": list(range(len(self.thrusters))),
@@ -411,7 +444,7 @@ class RobotEnergyProfile:
 
     def to_yaml(self, path):
         path = Path(path)
-        path.write_text(yaml.safe_dump(self.to_config(), sort_keys=False), encoding="utf-8")
+        path.write_text(yaml.safe_dump(_plain(self.to_config()), sort_keys=False), encoding="utf-8")
         return path
 
     def validate(self):
@@ -433,5 +466,14 @@ class RobotEnergyProfile:
             "dt_s": self.dt_s,
         }
         with EnergyAwareEnv(_Null(), energy_profile=self, control_contract=contract) as env:
+            # Every actuator must be evaluable at full thrust over the whole bus voltage range
+            # (a zero action alone would not reach the voltage domain; M4).
+            low, high = env.evidence_map.bus_voltage_range
+            for aid, model in zip(env.propulsion.ids, env.propulsion.thrusters, strict=True):
+                for v in {low, high} - {None}:
+                    try:
+                        model.power(model.max_force(v, "forward"), v)
+                    except ValueError as exc:
+                        raise ConfigurationError(f"actuator {aid} at {v:g} V: {exc}") from exc
             env.step([0.0] * (6 if self.action_mode == "wrench" else len(self.thrusters)))
             return env.energy.summary()["evidence"]["scientific_warnings"]

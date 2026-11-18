@@ -328,7 +328,7 @@
         "nominal_a_lower": true,
         "nominal_a_Wh": 2.1163592251651275,
         "nominal_b_Wh": 2.1540259698941795,
-        "difference_low_Wh": -0.08961118902589216,
+        "difference_low_Wh": null,
         "difference_high_Wh": null,
         "a_lower_supported": false,
         "b_lower_supported": false,
@@ -363,7 +363,7 @@
           ]
         ],
         "assumptions": [
-          "conversion:payload: same load-independent efficiency in both configurations"
+          "rails without converter evidence in both runs (hotel, payload): the same converter, with a load-independent efficiency, is assumed in both"
         ],
         "verdict": "RANKING_NOT_SUPPORTED"
       },
@@ -373,7 +373,7 @@
         "nominal_a_lower": false,
         "nominal_a_Wh": 2.1163592251651275,
         "nominal_b_Wh": 2.0127752188925436,
-        "difference_low_Wh": 0.0516395614230758,
+        "difference_low_Wh": 0.051639561423075866,
         "difference_high_Wh": null,
         "a_lower_supported": false,
         "b_lower_supported": true,
@@ -412,7 +412,7 @@
           ]
         ],
         "assumptions": [
-          "conversion:payload: same load-independent efficiency in both configurations"
+          "rails without converter evidence in both runs (hotel, payload): the same converter, with a load-independent efficiency, is assumed in both"
         ],
         "verdict": "B_LOWER_SUPPORTED"
       },
@@ -422,8 +422,8 @@
         "nominal_a_lower": false,
         "nominal_a_Wh": 2.1540259698941795,
         "nominal_b_Wh": 2.0127752188925436,
-        "difference_low_Wh": 0.02319519489341393,
-        "difference_high_Wh": 0.16486186156007987,
+        "difference_low_Wh": 0.023195194893413863,
+        "difference_high_Wh": null,
         "a_lower_supported": false,
         "b_lower_supported": true,
         "differing": [
@@ -453,7 +453,7 @@
           ]
         ],
         "assumptions": [
-          "conversion:payload: same load-independent efficiency in both configurations"
+          "rails without converter evidence in both runs (hotel, payload): the same converter, with a load-independent efficiency, is assumed in both"
         ],
         "verdict": "B_LOWER_SUPPORTED"
       }
