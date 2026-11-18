@@ -148,7 +148,9 @@ class EnergyReport:
         for name, wh in self.category_energy_Wh.items():
             lines.append(f"  {name:<22}{_sig(wh)} Wh")
         if self.evidence:
-            lines.append("Evidence (share of predicted energy by parameter grade):")
+            lines.append(
+                "Electrical-model evidence (share of predicted energy by parameter grade):"
+            )
             for grade, share in self.evidence["share_percent"].items():
                 lines.append(f"  Grade {grade}:                {_sig(share, 2)} %")
             lines.append(
@@ -169,6 +171,15 @@ class EnergyReport:
                 "INCOMPLETE configuration (excluded loads): "
                 + ", ".join(u["component"] for u in self.incomplete)
             )
+        dyn = (self.evidence or {}).get("dynamics_evidence")
+        if dyn:
+            lines.append(
+                f"Dynamics evidence: {dyn['source']}, external consistency "
+                f"{dyn['external_consistency']}, validation {dyn['validation']} "
+                f"({_sig(dyn['dependent_share_percent'] or 0, 3)} % of energy follows the dynamics)"
+            )
+        for w in (self.evidence or {}).get("scientific_warnings", []):
+            lines.append(f"WARNING [{w['kind']}] {w['subject']}: {w['effect']}")
         lines.extend(self.notes)
         return "\n".join(lines)
 

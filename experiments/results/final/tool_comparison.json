@@ -1,0 +1,104 @@
+{
+  "kind": "model comparison (published model structures reproduced), not tool execution",
+  "calibration": {
+    "mission": "EXP5-transit-c0",
+    "psm_state_power_W": {
+      "hover": 2.102360034743333,
+      "moving": 39.75095249359292,
+      "manoeuvre": 14.230213459636708
+    },
+    "gazebo_power_load_W_per_thruster": 6.372049941477352,
+    "active_thrusters": 4
+  },
+  "propulsion": [
+    {
+      "mission": "transit calm",
+      "run": "EXP5-transit-c0",
+      "holoenergy_propulsion_Wh": 0.5239241062992406,
+      "psm_propulsion_Wh": 0.5239241062992416,
+      "gazebo_style_propulsion_Wh": 0.5239241062992406,
+      "psm_over_holoenergy": 1.000000000000002,
+      "gazebo_over_holoenergy": 1.0
+    },
+    {
+      "mission": "transit 0.2 m/s",
+      "run": "EXP5-transit-c0.2",
+      "holoenergy_propulsion_Wh": 1.639619426099254,
+      "psm_propulsion_Wh": 0.5239241062992416,
+      "gazebo_style_propulsion_Wh": 0.5451642727708317,
+      "psm_over_holoenergy": 0.31954007006716567,
+      "gazebo_over_holoenergy": 0.33249439723205026
+    },
+    {
+      "mission": "transit 0.4 m/s",
+      "run": "EXP5-transit-c0.4",
+      "holoenergy_propulsion_Wh": 5.096660952484296,
+      "psm_propulsion_Wh": 0.5239241062992416,
+      "gazebo_style_propulsion_Wh": 0.5451642727708317,
+      "psm_over_holoenergy": 0.10279752002021286,
+      "gazebo_over_holoenergy": 0.10696498704805918
+    },
+    {
+      "mission": "station calm",
+      "run": "EXP5-station-c0",
+      "holoenergy_propulsion_Wh": 0.0,
+      "psm_propulsion_Wh": 0.05255900086858866,
+      "gazebo_style_propulsion_Wh": 0.0,
+      "psm_over_holoenergy": null,
+      "gazebo_over_holoenergy": null
+    },
+    {
+      "mission": "station 0.2 m/s head-on",
+      "run": "EXP3-L8-HV-headon0.2",
+      "holoenergy_propulsion_Wh": 0.3459110407646189,
+      "psm_propulsion_Wh": 0.05255900086858866,
+      "gazebo_style_propulsion_Wh": 0.6372049941477999,
+      "psm_over_holoenergy": 0.15194369266852437,
+      "gazebo_over_holoenergy": 1.8421065506879755
+    },
+    {
+      "mission": "station 0.5 m/s head-on",
+      "run": "EXP3-L8-HV-headon0.5",
+      "holoenergy_propulsion_Wh": 6.3857877528901525,
+      "psm_propulsion_Wh": 0.05255900086858866,
+      "gazebo_style_propulsion_Wh": 0.6372049941477999,
+      "psm_over_holoenergy": 0.008230621326993042,
+      "gazebo_over_holoenergy": 0.09978486896301969
+    }
+  ],
+  "communication": {
+    "holoenergy_modem_Wh": 0.025989814814814712,
+    "holoenergy_basis": "DESERT PHY airtime (4.8 kbit/s); TX 2.8 W; RX/LISTEN 0.8 W upper bound",
+    "psm_modem_Wh": 0.024148313349320542,
+    "psm_basis": "airtime bits/13.9 kbit/s; TX 2.8 W; Active 1 W (paper: below 1 W)",
+    "tx_bits": 76712,
+    "duration_s": 77.0
+  },
+  "capabilities": {
+    "thruster effort": {
+      "HoloEnergy": "yes: allocation + T200 tables per tick",
+      "PSM (Danielis)": "no: state power",
+      "Gazebo/UUV style": "no: constant power_load while commanded"
+    },
+    "station keeping in current": {
+      "HoloEnergy": "yes: effort follows the current",
+      "PSM (Danielis)": "no: hover power is current-independent",
+      "Gazebo/UUV style": "partly: on/off only, magnitude-independent"
+    },
+    "battery voltage coupling": {
+      "HoloEnergy": "yes: L1 Rint, voltage-dependent tables, derating",
+      "PSM (Danielis)": "no",
+      "Gazebo/UUV style": "yes: linear battery; loads constant"
+    },
+    "communication energy": {
+      "HoloEnergy": "yes: PHY events from DESERT",
+      "PSM (Danielis)": "yes: modem state machine",
+      "Gazebo/UUV style": "no (not in the battery plugin)"
+    },
+    "evidence per parameter": {
+      "HoloEnergy": "yes",
+      "PSM (Danielis)": "no (handbook values, not cited per parameter)",
+      "Gazebo/UUV style": "no"
+    }
+  }
+}

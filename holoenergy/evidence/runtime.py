@@ -373,8 +373,14 @@ class EvidenceMap:
             return self.efficiencies["hotel"] or 1.0
         return self.efficiencies["payload"] or 1.0
 
-    def update_grades(self, grades, relations=None, bounds=None):
+    def update_grades(self, grades, relations=None, bounds=None, records=None, used_powers=None):
         """Grades/relations/bounds of devices an attached source created after attach()."""
+        for device, states in (records or {}).items():
+            for record_id in states.values():
+                self.registry.get(record_id)  # must resolve in this run's registry
+            self.records[device] = dict(states)
+        for device, states in (used_powers or {}).items():
+            self.used_powers[device] = dict(states)
         for device, states in (grades or {}).items():
             self.devices[device] = dict(states)
         for device, relation in (relations or {}).items():
@@ -382,7 +388,16 @@ class EvidenceMap:
         for device, states in (bounds or {}).items():
             self.bounds[device] = dict(states)
 
-    def add_external(self, grades, capabilities=(), owner=None, relations=None, bounds=None):
+    def add_external(
+        self,
+        grades,
+        capabilities=(),
+        owner=None,
+        relations=None,
+        bounds=None,
+        records=None,
+        used_powers=None,
+    ):
         """Register an attached load source; returns new double-counting warnings.
 
         A source rejected by ``double_counting: error`` leaves no trace (state rolled back).
@@ -393,10 +408,12 @@ class EvidenceMap:
             dict(self.relations),
             {k: dict(v) for k, v in self.bounds.items()},
             dict(self.double_counting),
+            {k: dict(v) for k, v in self.records.items()},
+            {k: dict(v) for k, v in self.used_powers.items()},
         )
         before = dict(self.double_counting)
         try:
-            self.update_grades(grades, relations, bounds)
+            self.update_grades(grades, relations, bounds, records, used_powers)
             owner = owner or ", ".join(sorted(grades or {})) or "external source"
             for capability in capabilities or ():
                 self.capabilities.setdefault(capability, []).append(owner)
@@ -408,6 +425,8 @@ class EvidenceMap:
                 self.relations,
                 self.bounds,
                 self.double_counting,
+                self.records,
+                self.used_powers,
             ) = saved
             raise
         return [
@@ -427,6 +446,18 @@ class EvidenceMap:
             for u in self.unconfigured
         ]
         result += list(self.stale_links)
+        for name, info in sorted(getattr(self, "supply_mismatches", {}).items()):
+            result.append(
+                f"{name} requires a {info['supply_V'][0]:g}-{info['supply_V'][1]:g} V supply but the "
+                f"bus spans {info['bus_V'][0]:g}-{info['bus_V'][1]:g} V; no converter is configured, so "
+                "its reported energy excludes conversion loss"
+            )
+        for rail, ok in sorted(getattr(self, "rail_verified", {}).items()):
+            if not ok:
+                result.append(
+                    f"{rail} rail efficiency 1.0 has no evidence: conversion loss is not modelled "
+                    "and the energy of its loads is a lower bound"
+                )
         return result
 
     def grade(self, device, state):
@@ -515,6 +546,8 @@ class EvidenceMap:
                 "expected to be lower, so these shares bias the prediction upward"
             ),
             propulsion_record=self.propulsion_record,
+            actuator_records=dict(self.actuator_records),
+            actuator_grades=dict(self.actuator_grades),
             battery_loss_record=self.battery_loss_record,
             vehicle_relation=self.vehicle_relation,
             unconfigured_components=list(self.unconfigured),

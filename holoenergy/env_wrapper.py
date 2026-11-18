@@ -287,6 +287,8 @@ class EnergyAwareEnv:
         capabilities = getattr(source, "capabilities", None)
         relations = getattr(source, "relations", None)
         bounds = getattr(source, "bounds", None)
+        records = getattr(source, "records", None)
+        used = getattr(source, "used_powers", None)
         # Registered before the source is accepted: with evidence.double_counting: error a
         # conflicting source raises, is not attached and leaves no evidence state behind.
         self.warnings.extend(
@@ -296,6 +298,8 @@ class EnergyAwareEnv:
                 owner=getattr(source, "name", None),
                 relations=relations() if callable(relations) else None,
                 bounds=bounds() if callable(bounds) else None,
+                records=records() if callable(records) else None,
+                used_powers=used() if callable(used) else None,
             )
         )
         self.load_sources.append(source)
@@ -346,7 +350,8 @@ class EnergyAwareEnv:
                 if sum(clean.values()) < -1e-9:
                     raise ConfigurationError(f"{device}: negative energy from load source")
                 if device not in self.evidence_map.devices:  # created after attach()
-                    get = {n: getattr(source, n, None) for n in ("grades", "relations", "bounds")}
+                    names = ("grades", "relations", "bounds", "records", "used_powers")
+                    get = {n: getattr(source, n, None) for n in names}
                     self.evidence_map.update_grades(
                         *(get[n]() if callable(get[n]) else None for n in get)
                     )

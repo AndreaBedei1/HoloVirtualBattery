@@ -3549,5 +3549,91 @@
       }
     ]
   },
+  "part5_t200_inflow_bias": {
+    "basis": {
+      "thrust_fit": {
+        "slope_per_J": -12.8,
+        "intercept": 16.77,
+        "as_printed": true
+      },
+      "current_fit": {
+        "slope_per_J": -1.2764350453172193,
+        "intercept": 4.197416918429003
+      },
+      "J_range": [
+        0.06,
+        0.31
+      ],
+      "bollard_rev_s": 34.5,
+      "bollard_thrust_N": 16.77
+    },
+    "assumptions": "(stated, not evidence): propeller similarity (K_T, K_Q depend on J only), the\n    rotational speed scales from the Lam bollard point as n = n0 sqrt(T / T0), the axial inflow\n    is the current component along the thruster axis (no hull wake or blockage), and the\n    electrical response of the single 34.5 rev/s series holds at the other speeds.",
+    "rows": [
+      {
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "current_m_s": 0.2,
+        "static_power_W": 12.4,
+        "inflow_corrected_power_W": 13.282830762683208,
+        "factor": 1.0711960292486458,
+        "advance_ratio_range": [
+          0.13864605320387907,
+          0.13864605320387907
+        ],
+        "within_lam_J_range": true
+      },
+      {
+        "layout": "L8-HV",
+        "geometry_grade": "A",
+        "current_m_s": 0.5,
+        "static_power_W": 240.2863156123937,
+        "inflow_corrected_power_W": 257.39374716678304,
+        "factor": 1.0711960292486458,
+        "advance_ratio_range": [
+          0.13864605320387904,
+          0.13864605320387904
+        ],
+        "within_lam_J_range": true
+      },
+      {
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "current_m_s": 0.2,
+        "static_power_W": 12.427539667065346,
+        "inflow_corrected_power_W": 13.503840857683592,
+        "factor": 1.0866061360053905,
+        "advance_ratio_range": [
+          0.1648788729370988,
+          0.1648788729370988
+        ],
+        "within_lam_J_range": true
+      },
+      {
+        "layout": "L4-2H2V",
+        "geometry_grade": "D",
+        "current_m_s": 0.5,
+        "static_power_W": 204.5857403023797,
+        "inflow_corrected_power_W": 222.30412075177108,
+        "factor": 1.0866061360053905,
+        "advance_ratio_range": [
+          0.16487887293709877,
+          0.16487887293709877
+        ],
+        "within_lam_J_range": true
+      }
+    ],
+    "ranking": [
+      {
+        "current_m_s": 0.2,
+        "L4-2H2V_lower_static": false,
+        "L4-2H2V_lower_inflow_corrected": false
+      },
+      {
+        "current_m_s": 0.5,
+        "L4-2H2V_lower_static": true,
+        "L4-2H2V_lower_inflow_corrected": true
+      }
+    ]
+  },
   "scope": "steady station keeping in head-on current, simulator-exact 8T layout; electrical model T200 static tables (grade B); no model is a validated BlueROV2 Heavy"
 }

@@ -119,15 +119,6 @@ def replay(config, rows, scheduled):
     return report
 
 
-def payload_rail_energy(report):
-    actuators = set(report.provenance.get("actuator_ids", []))
-    return sum(
-        sum(states.values())
-        for device, states in report.device_state_energy_Wh.items()
-        if device not in actuators and device != "hotel_constant" and not device.startswith("T")
-    )
-
-
 def part_a(registry):
     summary, rows, resolution = load_trace(MISSION)
     config, _ = layout_config("L8-HV", "direct", suite="S5-inspection")
@@ -161,10 +152,11 @@ def part_a(registry):
 
 def summarize_config(report, available):
     t = report.intervals["terminal_energy_Wh"]
+    actuators = set(report.evidence.get("actuator_grades", {}))
     rail = sum(
         sum(v.values())
         for d, v in report.device_state_energy_Wh.items()
-        if not d.startswith("T") and d != "hotel_constant"
+        if d not in actuators and d != "hotel_constant"
     )
     blocking = [x for x in t["unknown_contributions"] if x != "conversion:payload"]
     row = {
@@ -206,6 +198,64 @@ def summarize_config(report, available):
             "max_legs_certifiable": None if high is None else int(available // high),
         }
     return row
+
+
+def part_c():
+    """Layout choice: is "L4-2H2V needs less propulsion than L8-HV in head-on station keeping"
+    supported under every defensible dynamics alternative, and is the layout feasible?"""
+    runs = {
+        r["label"]: r
+        for r in json.loads((FINAL / "final_runs.json").read_text(encoding="utf-8"))["runs"]
+    }
+    sens = json.loads((FINAL / "sensitivity.json").read_text(encoding="utf-8"))
+    p4 = {
+        (r["drag_law"], r["current_m_s"], r["layout"], r["case"]): r
+        for r in sens["part4_drag_anisotropy"]["rows"]
+        if r["feasible"]
+    }
+    p5 = {(r["layout"], r["current_m_s"]): r for r in sens["part5_t200_inflow_bias"]["rows"]}
+    out = []
+    for u in (0.2, 0.5):
+        tag = f"headon{u:g}"
+        cases = {
+            "HoloOcean native run (propulsion Wh)": (
+                runs[f"EXP3-L4-2H2V-{tag}"]["propulsion_Wh"],
+                runs[f"EXP3-L8-HV-{tag}"]["propulsion_Wh"],
+            ),
+        }
+        for law in ("HoloOcean isotropic", "von Benzon 2022 anisotropic"):
+            a, b = p4.get((law, u, "L4-2H2V", "head-on")), p4.get((law, u, "L8-HV", "head-on"))
+            if a and b:
+                cases[f"steady allocation, {law} (W)"] = (
+                    a["propulsion_power_W"],
+                    b["propulsion_power_W"],
+                )
+        a, b = p5.get(("L4-2H2V", u)), p5.get(("L8-HV", u))
+        if a and b:
+            cases["steady, HoloOcean drag + T200 inflow bias (W)"] = (
+                a["inflow_corrected_power_W"],
+                b["inflow_corrected_power_W"],
+            )
+        holds = {k: v[0] < v[1] for k, v in cases.items()}
+        out.append(
+            {
+                "current_m_s": u,
+                "claim": "L4-2H2V needs less propulsion than L8-HV (head-on station keeping)",
+                "cases": {
+                    k: {"L4-2H2V": v[0], "L8-HV": v[1], "holds": holds[k]} for k, v in cases.items()
+                },
+                "supported_under_all_alternatives": all(holds.values()),
+            }
+        )
+    feasibility = {
+        "L4-2H2V sway 0.5 m/s held": runs["EXP3-L4-2H2V-sway0.5"]["steady_window_request_met"],
+        "L4-2H2V oblique 0.5 m/s held": runs["EXP3-L4-2H2V-oblique0.5"][
+            "steady_window_request_met"
+        ],
+        "L8-HV sway 0.5 m/s held": runs["EXP3-L8-HV-sway0.5"]["steady_window_request_met"],
+        "L8-HV oblique 0.5 m/s held": runs["EXP3-L8-HV-oblique0.5"]["steady_window_request_met"],
+    }
+    return {"ranking": out, "feasibility": feasibility}
 
 
 def interval_of(record):
@@ -272,6 +322,7 @@ def main(argv=None):
         },
         "part_a_payload": part_a(registry),
         "part_b_communication": part_b(registry),
+        "part_c_layout": part_c(),
     }
     args.output.write_text(json.dumps(out, indent=2, default=str) + "\n", encoding="utf-8")
     a = out["part_a_payload"]

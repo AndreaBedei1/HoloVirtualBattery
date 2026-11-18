@@ -71,9 +71,13 @@ class DesertEnergyAdapter(CommunicationEnergyAdapter):
         start_time_s=0.0,
         time_offset_s=0.0,
         communication_backend=None,
+        registry=None,
     ):
+        # ``registry``: the run's registry (env.evidence_registry) so that user records resolve.
         self.interface_profiles = {
-            k: v if isinstance(v, ModemPowerProfile) else ModemPowerProfile.from_mapping(v)
+            k: v
+            if isinstance(v, ModemPowerProfile)
+            else ModemPowerProfile.from_mapping(v, registry=registry)
             for k, v in interfaces.items()
         }
         self.node = node

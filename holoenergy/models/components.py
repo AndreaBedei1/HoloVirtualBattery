@@ -266,6 +266,10 @@ class ComponentModel(PayloadModel):
                     "Component names must be unique nonempty strings, including legacy sensors"
                 )
             self.components[name] = ElectricalComponent(name, config, registry=registry)
+        for name, item in self.components.items():
+            unknown = sorted(set(getattr(item, "serves", [])) - set(self.components))
+            if unknown:
+                raise ConfigurationError(f"{name}.serves names unknown components {unknown}")
 
     def set_input(self, name, input_name=None, value=None, **inputs):
         item = self.components[name]

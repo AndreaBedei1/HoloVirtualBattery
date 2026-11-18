@@ -180,6 +180,11 @@ class ComponentProfile:
             entry = {"profile": profile_reference(self.catalog, "component"), "name": self.name}
             if self.initial_state:
                 entry["initial_state"] = self.initial_state
+            # Explicit overrides of the library profile (defaults are not written).
+            if self.supply_V is not None:
+                entry["supply_V"] = list(self.supply_V)
+            if self.relation != "exact":
+                entry["relation"] = self.relation
             return entry
         entry = {"name": self.name, "category": self.category, "relation": self.relation}
         states = {s.name: s.to_entry() for s in self.states}

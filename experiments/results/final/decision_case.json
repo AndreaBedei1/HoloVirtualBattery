@@ -1,0 +1,591 @@
+{
+  "scenario_choices": {
+    "reserve": 0.3,
+    "legs_per_charge": [
+      40,
+      60,
+      80,
+      100
+    ],
+    "inspection_phases": [
+      "stop",
+      "hold_turn",
+      "yaw"
+    ]
+  },
+  "part_a_payload": {
+    "mission": "EXP6-S5-inspection-scheduled",
+    "trace": "100 Hz trace (content SHA256 verified)",
+    "available_Wh": 186.47999999999996,
+    "configs": {
+      "Gemini 720is (multibeam)": {
+        "nominal_Wh": 2.1163592251651275,
+        "open_high": [
+          "conversion:payload",
+          "dvl.ACTIVE",
+          "imaging_sonar.supply_conversion",
+          "imaging_sonar_step_up_converter.unconfigured"
+        ],
+        "unknown_contributions": [
+          "imaging_sonar.supply_conversion",
+          "conversion:payload",
+          "imaging_sonar_step_up_converter.unconfigured"
+        ],
+        "open_typical_values": [
+          "dvl.ACTIVE"
+        ],
+        "upper_bound_energy_Wh": 0.2927777777777833,
+        "warnings": [
+          [
+            "unknown",
+            "imaging_sonar_step_up_converter"
+          ],
+          [
+            "upper_bound_only",
+            "bluerobotics-lumen_2"
+          ],
+          [
+            "upper_bound_only",
+            "camera_4k"
+          ],
+          [
+            "upper_bound_only",
+            "imaging_sonar"
+          ],
+          [
+            "upper_bound_only",
+            "light_1"
+          ],
+          [
+            "proxy",
+            "battery_losses"
+          ],
+          [
+            "grade_D",
+            "battery OCV curve"
+          ],
+          [
+            "supply_domain_mismatch",
+            "imaging_sonar"
+          ],
+          [
+            "conversion_unverified",
+            "payload rail"
+          ]
+        ],
+        "payload_rail_Wh": 0.4777916666666972,
+        "max_legs_nominal": 88,
+        "legs": {
+          "40": {
+            "requirement_Wh": 4.661999999999999,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.714123114053988
+          },
+          "60": {
+            "requirement_Wh": 3.107999999999999,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.714123114053988
+          },
+          "80": {
+            "requirement_Wh": 2.3309999999999995,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.714123114053988
+          },
+          "100": {
+            "requirement_Wh": 1.8647999999999996,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": false,
+            "supported_low_Wh": 1.714123114053988
+          }
+        },
+        "what_if": {
+          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence)",
+          "still_blocked_by": [
+            "imaging_sonar.supply_conversion",
+            "imaging_sonar_step_up_converter.unconfigured"
+          ],
+          "eta": {
+            "0.8": {
+              "upper_Wh": null,
+              "max_legs_certifiable": null
+            },
+            "0.85": {
+              "upper_Wh": null,
+              "max_legs_certifiable": null
+            },
+            "0.9": {
+              "upper_Wh": null,
+              "max_legs_certifiable": null
+            },
+            "0.95": {
+              "upper_Wh": null,
+              "max_legs_certifiable": null
+            }
+          }
+        }
+      },
+      "Oculus M750d (multibeam)": {
+        "nominal_Wh": 2.1540259698941795,
+        "open_high": [
+          "conversion:payload",
+          "dvl.ACTIVE"
+        ],
+        "unknown_contributions": [
+          "conversion:payload"
+        ],
+        "open_typical_values": [
+          "dvl.ACTIVE"
+        ],
+        "upper_bound_energy_Wh": 0.3305555555555552,
+        "warnings": [
+          [
+            "upper_bound_only",
+            "bluerobotics-lumen_2"
+          ],
+          [
+            "upper_bound_only",
+            "camera_4k"
+          ],
+          [
+            "upper_bound_only",
+            "imaging_sonar"
+          ],
+          [
+            "upper_bound_only",
+            "light_1"
+          ],
+          [
+            "proxy",
+            "battery_losses"
+          ],
+          [
+            "grade_D",
+            "battery OCV curve"
+          ],
+          [
+            "conversion_unverified",
+            "payload rail"
+          ]
+        ],
+        "payload_rail_Wh": 0.5155694444444692,
+        "max_legs_nominal": 86,
+        "legs": {
+          "40": {
+            "requirement_Wh": 4.661999999999999,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.685678747671932
+          },
+          "60": {
+            "requirement_Wh": 3.107999999999999,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.685678747671932
+          },
+          "80": {
+            "requirement_Wh": 2.3309999999999995,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.685678747671932
+          },
+          "100": {
+            "requirement_Wh": 1.8647999999999996,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": false,
+            "supported_low_Wh": 1.685678747671932
+          }
+        },
+        "what_if": {
+          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence)",
+          "still_blocked_by": [],
+          "eta": {
+            "0.8": {
+              "upper_Wh": 2.282918331005297,
+              "max_legs_certifiable": 81
+            },
+            "0.85": {
+              "upper_Wh": 2.245008813031439,
+              "max_legs_certifiable": 83
+            },
+            "0.9": {
+              "upper_Wh": 2.211311463721343,
+              "max_legs_certifiable": 84
+            },
+            "0.95": {
+              "upper_Wh": 2.1811612038123096,
+              "max_legs_certifiable": 85
+            }
+          }
+        }
+      },
+      "Ping360 (scanning, lower capability)": {
+        "nominal_Wh": 2.0127752188925436,
+        "open_high": [
+          "conversion:payload",
+          "dvl.ACTIVE"
+        ],
+        "unknown_contributions": [
+          "conversion:payload"
+        ],
+        "open_typical_values": [
+          "dvl.ACTIVE"
+        ],
+        "upper_bound_energy_Wh": 0.1888888888888916,
+        "warnings": [
+          [
+            "upper_bound_only",
+            "bluerobotics-lumen_2"
+          ],
+          [
+            "upper_bound_only",
+            "camera_4k"
+          ],
+          [
+            "upper_bound_only",
+            "light_1"
+          ],
+          [
+            "upper_bound_only",
+            "scanning_sonar"
+          ],
+          [
+            "proxy",
+            "battery_losses"
+          ],
+          [
+            "grade_D",
+            "battery OCV curve"
+          ],
+          [
+            "conversion_unverified",
+            "payload rail"
+          ]
+        ],
+        "payload_rail_Wh": 0.3739027777778055,
+        "max_legs_nominal": 92,
+        "legs": {
+          "40": {
+            "requirement_Wh": 4.661999999999999,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.6388724411147382
+          },
+          "60": {
+            "requirement_Wh": 3.107999999999999,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.6388724411147382
+          },
+          "80": {
+            "requirement_Wh": 2.3309999999999995,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": true,
+            "supported_low_Wh": 1.6388724411147382
+          },
+          "100": {
+            "requirement_Wh": 1.8647999999999996,
+            "verdict": "INDETERMINATE",
+            "nominal_pass": false,
+            "supported_low_Wh": 1.6388724411147382
+          }
+        },
+        "what_if": {
+          "assumption": "typical values confirmed as upper bounds; payload rail efficiency measured at eta (hypothetical outcomes, not evidence)",
+          "still_blocked_by": [],
+          "eta": {
+            "0.8": {
+              "upper_Wh": 2.106250913336995,
+              "max_legs_certifiable": 88
+            },
+            "0.85": {
+              "upper_Wh": 2.0787580620298036,
+              "max_legs_certifiable": 89
+            },
+            "0.9": {
+              "upper_Wh": 2.0543199719789667,
+              "max_legs_certifiable": 90
+            },
+            "0.95": {
+              "upper_Wh": 2.0324543124597967,
+              "max_legs_certifiable": 91
+            }
+          }
+        }
+      }
+    },
+    "replay_check": {
+      "native_terminal_Wh": 2.1163592251651275,
+      "replay_terminal_Wh": 2.1163592251651275,
+      "relative_difference": 0.0
+    },
+    "ranking": [
+      {
+        "a": "Gemini 720is (multibeam)",
+        "b": "Oculus M750d (multibeam)",
+        "nominal_a_lower": true,
+        "nominal_a_Wh": 2.1163592251651275,
+        "nominal_b_Wh": 2.1540259698941795,
+        "difference_low_Wh": -0.08961118902589216,
+        "difference_high_Wh": null,
+        "a_lower_supported": false,
+        "b_lower_supported": false,
+        "differing": [
+          [
+            "H1",
+            "THRUST"
+          ],
+          [
+            "H2",
+            "THRUST"
+          ],
+          [
+            "H3",
+            "THRUST"
+          ],
+          [
+            "H4",
+            "THRUST"
+          ],
+          [
+            "imaging_sonar",
+            "ACTIVE"
+          ],
+          [
+            "imaging_sonar.supply_conversion",
+            "unknown"
+          ],
+          [
+            "imaging_sonar_step_up_converter.unconfigured",
+            "unknown"
+          ]
+        ],
+        "assumptions": [
+          "conversion:payload: same load-independent efficiency in both configurations"
+        ],
+        "verdict": "RANKING_NOT_SUPPORTED"
+      },
+      {
+        "a": "Gemini 720is (multibeam)",
+        "b": "Ping360 (scanning, lower capability)",
+        "nominal_a_lower": false,
+        "nominal_a_Wh": 2.1163592251651275,
+        "nominal_b_Wh": 2.0127752188925436,
+        "difference_low_Wh": 0.0516395614230758,
+        "difference_high_Wh": null,
+        "a_lower_supported": false,
+        "b_lower_supported": true,
+        "differing": [
+          [
+            "H1",
+            "THRUST"
+          ],
+          [
+            "H2",
+            "THRUST"
+          ],
+          [
+            "H3",
+            "THRUST"
+          ],
+          [
+            "H4",
+            "THRUST"
+          ],
+          [
+            "imaging_sonar",
+            "ACTIVE"
+          ],
+          [
+            "imaging_sonar.supply_conversion",
+            "unknown"
+          ],
+          [
+            "imaging_sonar_step_up_converter.unconfigured",
+            "unknown"
+          ],
+          [
+            "scanning_sonar",
+            "ACTIVE"
+          ]
+        ],
+        "assumptions": [
+          "conversion:payload: same load-independent efficiency in both configurations"
+        ],
+        "verdict": "B_LOWER_SUPPORTED"
+      },
+      {
+        "a": "Oculus M750d (multibeam)",
+        "b": "Ping360 (scanning, lower capability)",
+        "nominal_a_lower": false,
+        "nominal_a_Wh": 2.1540259698941795,
+        "nominal_b_Wh": 2.0127752188925436,
+        "difference_low_Wh": 0.02319519489341393,
+        "difference_high_Wh": 0.16486186156007987,
+        "a_lower_supported": false,
+        "b_lower_supported": true,
+        "differing": [
+          [
+            "H1",
+            "THRUST"
+          ],
+          [
+            "H2",
+            "THRUST"
+          ],
+          [
+            "H3",
+            "THRUST"
+          ],
+          [
+            "H4",
+            "THRUST"
+          ],
+          [
+            "imaging_sonar",
+            "ACTIVE"
+          ],
+          [
+            "scanning_sonar",
+            "ACTIVE"
+          ]
+        ],
+        "assumptions": [
+          "conversion:payload: same load-independent efficiency in both configurations"
+        ],
+        "verdict": "B_LOWER_SUPPORTED"
+      }
+    ]
+  },
+  "part_b_communication": {
+    "direct": {
+      "nominal_Wh": 0.025989814814814712,
+      "interval_Wh": [
+        0.012430185185185124,
+        0.02598981481481477
+      ],
+      "states": [
+        {
+          "interface": "comms.acoustic",
+          "state": "TX",
+          "s": 15.981666666666587,
+          "record": "evologics_s2cm_18_34.tx_1000m",
+          "power_interval_W": [
+            2.8,
+            2.8
+          ]
+        },
+        {
+          "interface": "comms.acoustic",
+          "state": "LISTEN",
+          "s": 61.018333333333416,
+          "record": "evologics_s2cm_18_34.rx",
+          "power_interval_W": [
+            0.0,
+            0.8
+          ]
+        }
+      ]
+    },
+    "optical": {
+      "nominal_Wh": 0.01107800444444512,
+      "interval_Wh": [
+        0.010822297777777786,
+        0.01107800444444447
+      ],
+      "states": [
+        {
+          "interface": "comms.optical",
+          "state": "TX",
+          "s": 0.3068480000000201,
+          "record": "hydromea_luma250lp.tx",
+          "power_interval_W": [
+            2.0,
+            5.0
+          ]
+        },
+        {
+          "interface": "comms.optical",
+          "state": "LISTEN",
+          "s": 76.69315199999998,
+          "record": "hydromea_luma250lp.rx",
+          "power_interval_W": [
+            0.5,
+            0.5
+          ]
+        }
+      ]
+    },
+    "claim": {
+      "statement": "the optical link uses less modem energy than the acoustic link",
+      "nominal": true,
+      "evidence_supported": true
+    }
+  },
+  "part_c_layout": {
+    "ranking": [
+      {
+        "current_m_s": 0.2,
+        "claim": "L4-2H2V needs less propulsion than L8-HV (head-on station keeping)",
+        "cases": {
+          "HoloOcean native run (propulsion Wh)": {
+            "L4-2H2V": 0.3100361566036034,
+            "L8-HV": 0.3459110407646189,
+            "holds": true
+          },
+          "steady allocation, HoloOcean isotropic (W)": {
+            "L4-2H2V": 12.427539667065346,
+            "L8-HV": 12.4,
+            "holds": false
+          },
+          "steady allocation, von Benzon 2022 anisotropic (W)": {
+            "L4-2H2V": 14.97557179802993,
+            "L8-HV": 16.042969975183528,
+            "holds": true
+          },
+          "steady, HoloOcean drag + T200 inflow bias (W)": {
+            "L4-2H2V": 13.503840857683592,
+            "L8-HV": 13.282830762683208,
+            "holds": false
+          }
+        },
+        "supported_under_all_alternatives": false
+      },
+      {
+        "current_m_s": 0.5,
+        "claim": "L4-2H2V needs less propulsion than L8-HV (head-on station keeping)",
+        "cases": {
+          "HoloOcean native run (propulsion Wh)": {
+            "L4-2H2V": 5.455017168100455,
+            "L8-HV": 6.3857877528901525,
+            "holds": true
+          },
+          "steady allocation, HoloOcean isotropic (W)": {
+            "L4-2H2V": 204.5857403023797,
+            "L8-HV": 240.2863156123937,
+            "holds": true
+          },
+          "steady allocation, von Benzon 2022 anisotropic (W)": {
+            "L4-2H2V": 184.16062308004572,
+            "L8-HV": 216.79926853460026,
+            "holds": true
+          },
+          "steady, HoloOcean drag + T200 inflow bias (W)": {
+            "L4-2H2V": 222.30412075177108,
+            "L8-HV": 257.39374716678304,
+            "holds": true
+          }
+        },
+        "supported_under_all_alternatives": true
+      }
+    ],
+    "feasibility": {
+      "L4-2H2V sway 0.5 m/s held": false,
+      "L4-2H2V oblique 0.5 m/s held": false,
+      "L8-HV sway 0.5 m/s held": true,
+      "L8-HV oblique 0.5 m/s held": true
+    }
+  }
+}

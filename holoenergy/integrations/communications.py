@@ -222,7 +222,15 @@ class CommunicationEnergyAdapter:
 
     category = "communications"
 
-    def __init__(self, interfaces, *, name="communications", start_time_s=0.0, time_offset_s=0.0):
+    def __init__(
+        self,
+        interfaces,
+        *,
+        name="communications",
+        start_time_s=0.0,
+        time_offset_s=0.0,
+        registry=None,
+    ):
         if not interfaces:
             raise ConfigurationError("At least one communication interface profile is required")
         self.name = name
@@ -230,7 +238,7 @@ class CommunicationEnergyAdapter:
         self.ledgers = {}
         for key, profile in interfaces.items():
             if not isinstance(profile, ModemPowerProfile):
-                profile = ModemPowerProfile.from_mapping(profile)
+                profile = ModemPowerProfile.from_mapping(profile, registry=registry)
             self.ledgers[str(key)] = InterfaceLedger(profile, start_time_s)
         self._consumed = {k: {} for k in self.ledgers}
         self.unmatched = 0
@@ -273,6 +281,16 @@ class CommunicationEnergyAdapter:
     def relations(self):
         """Relation of each ledger's electrical profile to the real device (for proxy shares)."""
         return {self.device_name(k): led.profile.relation for k, led in self.ledgers.items()}
+
+    def records(self):
+        """Per device, the evidence record behind each state's power (for intervals)."""
+        return {
+            self.device_name(k): dict(p.evidence) for k, p in self._profiles().items() if p.evidence
+        }
+
+    def used_powers(self):
+        """Per device, the power (W) the adapter charges in each state."""
+        return {self.device_name(k): dict(p.powers_W) for k, p in self._profiles().items()}
 
     def bounds(self):
         """Per device, the states whose power is an upper bound."""

@@ -153,3 +153,32 @@ def test_published_ranges_decide_or_withhold_a_ranking():
     nominal_favours_gemini = gemini.terminal_energy_Wh < oc.terminal_energy_Wh
     assert nominal_favours_gemini
     assert compare_energy(gemini, oc).verdict == "RANKING_NOT_SUPPORTED"
+
+
+def test_attached_modem_states_are_bounded_by_their_records():
+    """Integration review: an attached modem's record ids must reach the intervals, otherwise any
+    requirement with a modem is forced INDETERMINATE."""
+    from holoenergy.catalog import modem_profile
+    from holoenergy.integrations import ModemPowerProfile
+    from holoenergy.integrations.communications import CommunicationEnergyAdapter
+
+    warnings.simplefilter("ignore", UserWarning)
+    data = load_config(data=vehicle_config("bluerov2-heavy"))
+    data["components"] = []
+    env = EnergyAwareEnv(Backend(), config=data, control_contract=CONTRACT)
+    profile = ModemPowerProfile.from_mapping(
+        modem_profile("evologics-s2cm-18-34-1000m"), registry=env.evidence_registry
+    )
+    adapter = CommunicationEnergyAdapter({"acoustic": profile}, name="comms")
+    env.attach(adapter)
+    adapter.ledger("acoustic").add_tx(0.5, 0.4, bits=1920)
+    for _ in range(300):
+        env.step([0, 0, 0, 0, 5.0, 5.0, 5.0, 5.0])
+    report = env.energy.report()
+    env.close()
+    rows = {(r["device"], r["state"]) for r in report.intervals["contributions"]}
+    assert ("comms.acoustic", "TX") in rows and ("comms.acoustic", "LISTEN") in rows
+    open_high = report.intervals["terminal_energy_Wh"]["open_high"]
+    assert not any(x.startswith("comms.acoustic") for x in open_high)
+    # TX at 2.8 W is exact; LISTEN at the 0.8 W upper bound opens only the lower side.
+    assert "comms.acoustic.LISTEN" in report.intervals["terminal_energy_Wh"]["open_low"]
