@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>HoloEnergy</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#/overview">Holo<span>Energy</span></a>
+    <span class="status" id="live-status" data-state="waiting" aria-live="polite"><i aria-hidden="true"></i><span>No live run</span></span>
+  </header>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#/overview">Overview</a>
+    <a href="#/robot">Robot</a>
+    <a href="#/mission">Mission</a>
+    <a href="#/run">Run</a>
+    <a href="#/results">Results</a>
+    <a href="#/compare">Compare</a>
+    <a href="#/library">Hardware</a>
+    <a href="#/evidence">Evidence</a>
+  </nav>
+  <main id="main" tabindex="-1"><p class="muted">Loading…</p></main>
+  <dialog id="dialog" aria-labelledby="dialog-title"></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript><p>HoloEnergy needs JavaScript to talk to its local Python API.</p></noscript>
+</body>
+</html>
