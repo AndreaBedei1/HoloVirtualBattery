@@ -142,11 +142,43 @@ class DashboardStore:
             }
 
 
+STATIC = {
+    "/": ("index.html", "text/html; charset=utf-8"),
+    "/index.html": ("index.html", "text/html; charset=utf-8"),
+    "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+    "/app.css": ("app.css", "text/css; charset=utf-8"),
+}
+MAX_BODY = 4_000_000
+
+
 class DashboardServer:
-    def __init__(self, http_port=8765, telemetry_port=8766, *, history_s=120, reports_dir=None):
+    """Local web application: live telemetry (UDP) plus the JSON API of :mod:`.api`.
+
+    Bound to 127.0.0.1 only. POST requests must be ``application/json`` from the same origin
+    (a cross-site page cannot send them without a CORS preflight, which is never answered), and
+    the Host header must name the loopback address (DNS-rebinding guard).
+    """
+
+    def __init__(
+        self,
+        http_port=8765,
+        telemetry_port=8766,
+        *,
+        history_s=120,
+        reports_dir=None,
+        runs_dir=None,
+    ):
         self.store = DashboardStore(history_s)
         self.reports_dir = None if reports_dir is None else Path(reports_dir)
+        self.runs_dir = (
+            Path(runs_dir)
+            if runs_dir is not None
+            else (
+                self.reports_dir if self.reports_dir is not None else Path.cwd() / "holoenergy_runs"
+            )
+        )
         reports_dir_ = self.reports_dir
+        runs_dir_ = self.runs_dir
         self.stop = threading.Event()
         self.udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.http = None
@@ -155,35 +187,144 @@ class DashboardServer:
             self.udp.bind(("127.0.0.1", telemetry_port))
             self.udp.settimeout(0.2)
             store = self.store
-            html = files("holoenergy.dashboard").joinpath("index.html").read_bytes()
+            static_root = files("holoenergy.dashboard").joinpath("static")
+            from . import api
 
             class Handler(BaseHTTPRequestHandler):
-                def do_GET(self):
-                    if self.path in ("/", "/index.html"):
-                        content, kind = html, "text/html; charset=utf-8"
-                    elif self.path == "/api/state":
-                        content, kind = (
-                            json.dumps(store.snapshot(), allow_nan=False).encode(),
-                            "application/json",
-                        )
-                    elif self.path == "/api/reports":
-                        content, kind = (
-                            json.dumps(compare_reports(reports_dir_), default=str).encode(),
-                            "application/json",
-                        )
-                    else:
-                        self.send_error(404)
-                        return
-                    self.send_response(200)
+                def _send(self, status, content, kind):
+                    self.send_response(status)
                     self.send_header("Content-Type", kind)
                     self.send_header("Content-Length", str(len(content)))
                     self.send_header("Cache-Control", "no-store")
                     self.send_header("X-Content-Type-Options", "nosniff")
+                    self.send_header("Referrer-Policy", "no-referrer")
+                    self.send_header(
+                        "Content-Security-Policy",
+                        "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; "
+                        "script-src 'self'; connect-src 'self'; frame-ancestors 'none'",
+                    )
                     self.end_headers()
                     try:
                         self.wfile.write(content)
                     except (BrokenPipeError, ConnectionResetError):
                         pass
+
+                def _json(self, status, payload):
+                    body = json.dumps(payload, allow_nan=False, default=str).encode()
+                    self._send(status, body, "application/json")
+
+                def _host_ok(self):
+                    host = (self.headers.get("Host") or "").rsplit(":", 1)[0].strip("[]")
+                    return host in ("127.0.0.1", "localhost", "::1")
+
+                def _call(self, func, *args):
+                    try:
+                        self._json(200, func(*args))
+                    except api.ApiError as exc:
+                        self._json(exc.status, {"error": exc.payload})
+                    except Exception as exc:  # noqa: BLE001 - report without a stack trace
+                        self._json(
+                            500,
+                            {
+                                "error": {
+                                    "summary": "Internal error in HoloEnergy.",
+                                    "fix": None,
+                                    "technical": type(exc).__name__,
+                                }
+                            },
+                        )
+
+                def do_GET(self):
+                    if not self._host_ok():
+                        self.send_error(403)
+                        return
+                    path = self.path.split("?", 1)[0]
+                    if path in STATIC:
+                        name, kind = STATIC[path]
+                        self._send(200, static_root.joinpath(name).read_bytes(), kind)
+                    elif path == "/api/state":
+                        self._json(200, store.snapshot())
+                    elif path == "/api/reports":
+                        self._json(200, compare_reports(reports_dir_))
+                    elif path == "/api/catalog":
+                        self._call(api.catalog)
+                    elif path.startswith("/api/catalog/") and path.count("/") == 4:
+                        _, _, _, kind, key = path.split("/")
+                        self._call(api.catalog_item, kind, key)
+                    elif path == "/api/templates":
+                        self._call(api.templates)
+                    elif path == "/api/runs":
+                        self._call(api.list_runs, runs_dir_)
+                    elif path.startswith("/api/runs/") and path.count("/") == 3:
+                        self._call(api.load_run, runs_dir_, path.rsplit("/", 1)[1])
+                    else:
+                        self.send_error(404)
+
+                def do_POST(self):
+                    if not self._host_ok():
+                        self.send_error(403)
+                        return
+                    origin = self.headers.get("Origin")
+                    if origin and origin.split("://", 1)[-1].rsplit(":", 1)[0] not in (
+                        "127.0.0.1",
+                        "localhost",
+                        "[::1]",
+                    ):
+                        self.send_error(403)
+                        return
+                    if not (self.headers.get("Content-Type") or "").startswith("application/json"):
+                        self.send_error(415)
+                        return
+                    try:
+                        length = int(self.headers.get("Content-Length") or 0)
+                    except ValueError:
+                        length = -1
+                    if length < 0 or length > MAX_BODY:
+                        self.send_error(413)
+                        return
+                    try:
+                        body = json.loads(self.rfile.read(length) or b"{}")
+                    except ValueError:
+                        self._json(
+                            400,
+                            {
+                                "error": {
+                                    "summary": "Request body is not JSON.",
+                                    "fix": None,
+                                    "technical": "invalid JSON",
+                                }
+                            },
+                        )
+                        return
+                    if not isinstance(body, dict):
+                        self._json(
+                            400,
+                            {
+                                "error": {
+                                    "summary": "Request body must be an object.",
+                                    "fix": None,
+                                    "technical": "not an object",
+                                }
+                            },
+                        )
+                        return
+                    routes = {
+                        "/api/robot/summary": (api.robot_summary,),
+                        "/api/preflight": (api.preflight_check,),
+                        "/api/export": (api.to_yaml,),
+                        "/api/import": (api.import_document,),
+                        "/api/run": (api.run_energy_only, runs_dir_),
+                        "/api/compare": (api.compare, runs_dir_),
+                        "/api/component/custom": (api.custom_component,),
+                    }
+                    route = routes.get(self.path)
+                    if route is None:
+                        self.send_error(404)
+                        return
+                    func, *extra = route
+                    if func in (api.run_energy_only,):
+                        Path(runs_dir_).mkdir(parents=True, exist_ok=True)
+                    self._call(func, body, *extra)
 
                 def log_message(self, *args):
                     pass
@@ -248,11 +389,18 @@ def main():
         "--reports", type=Path, help="Directory of EnergyReport JSON files for 'Compare runs'"
     )
     parser.add_argument(
+        "--runs", type=Path, help="Directory where energy-only runs from the app are saved"
+    )
+    parser.add_argument(
         "--open", action="store_true", help="Open the local dashboard in your browser"
     )
     args = parser.parse_args()
     with DashboardServer(
-        args.port, args.telemetry_port, history_s=args.history_seconds, reports_dir=args.reports
+        args.port,
+        args.telemetry_port,
+        history_s=args.history_seconds,
+        reports_dir=args.reports,
+        runs_dir=args.runs,
     ) as server:
         print(
             f"HoloEnergy dashboard: {server.url}; telemetry UDP {server.telemetry_port}", flush=True

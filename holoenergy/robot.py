@@ -188,8 +188,15 @@ class ComponentProfile:
     simulation_sensor: str | None = None
     status: str = "configured"
     notes: str | None = None
+    rail: str | None = None
 
     def to_entry(self):
+        entry = self._entry()
+        if self.rail is not None:
+            entry["rail"] = self.rail
+        return entry
+
+    def _entry(self):
         if self.catalog is not None:
             from .catalog import profile_reference
 
@@ -244,6 +251,29 @@ class CommunicationProfile(ComponentProfile):
 @dataclass(frozen=True)
 class AuxiliaryProfile(ComponentProfile):
     category: str = "auxiliaries"
+
+
+@dataclass(frozen=True)
+class RailProfile:
+    """A named supply rail: ``direct`` (pack bus, no converter) or ``converter`` with an
+    output voltage and, only when evidence exists, an efficiency (``holoenergy.models.rails``)."""
+
+    name: str
+    kind: str = "converter"
+    output_V: float | None = None
+    efficiency: float | None = None
+    efficiency_evidence: str | None = None
+    relation: str = "exact"
+    notes: str | None = None
+
+    def to_mapping(self):
+        out = {"name": self.name, "kind": self.kind}
+        for key in ("output_V", "efficiency", "efficiency_evidence", "notes"):
+            if getattr(self, key) is not None:
+                out[key] = getattr(self, key)
+        if self.relation != "exact":
+            out["relation"] = self.relation
+        return out
 
 
 @dataclass(frozen=True)
@@ -354,6 +384,7 @@ class RobotEnergyProfile:
     dt_s: float
     components: tuple = ()
     converters: tuple = ()
+    rails: tuple = ()
     sources: tuple = ()
     records: tuple = ()
     water_temperature_C: float | None = None
@@ -437,6 +468,8 @@ class RobotEnergyProfile:
         converters = self._converters()
         if converters:
             config["converters"] = converters
+        if self.rails:
+            config["rails"] = [r.to_mapping() for r in self.rails]
         evidence = self._evidence()
         if evidence:
             config["evidence"] = evidence
@@ -477,3 +510,85 @@ class RobotEnergyProfile:
                         raise ConfigurationError(f"actuator {aid} at {v:g} V: {exc}") from exc
             env.step([0.0] * (6 if self.action_mode == "wrench" else len(self.thrusters)))
             return env.energy.summary()["evidence"]["scientific_warnings"]
+
+
+# Grade a user-supplied value from its source type (brief: user evidence must propagate).
+# A manufacturer datasheet or the user's own measurement of the same device is first-hand
+# evidence (A); a peer-reviewed paper or an experimental dataset about it is B; an engineering
+# assumption is D; an unknown source gives no value (the component is unconfigured).
+USER_SOURCE_GRADES = {
+    "datasheet": "A",
+    "measurement": "A",
+    "paper": "B",
+    "dataset": "B",
+    "assumption": "D",
+    "unknown": None,
+}
+
+
+def user_component(
+    name,
+    category,
+    states,
+    *,
+    source_type,
+    citation=None,
+    locator=None,
+    relation="exact",
+    rail=None,
+    supply_V=None,
+    simulation_sensor=None,
+):
+    """Component entry plus the evidence source and records for user-supplied state powers.
+
+    ``states`` maps uppercase state names to watts (``None`` = unknown). Returns
+    ``{"component", "sources", "records", "grade"}`` ready for the configuration's
+    ``components`` and ``evidence.sources/records``.
+    """
+    if source_type not in USER_SOURCE_GRADES:
+        raise ConfigurationError(f"source_type must be one of {sorted(USER_SOURCE_GRADES)}")
+    if not isinstance(name, str) or not name.strip() or not name.replace("_", "").isalnum():
+        raise ConfigurationError("component name: letters, digits and underscores only")
+    grade = USER_SOURCE_GRADES[source_type]
+    if grade in ("A", "B") and not (isinstance(citation, str) and citation.strip()):
+        raise ConfigurationError(
+            f"a {source_type} source needs a citation (title, document or notebook reference)"
+        )
+    entry = {"name": name, "category": category, "relation": relation}
+    if rail:
+        entry["rail"] = rail
+    if supply_V:
+        entry["supply_V"] = list(supply_V)
+    if simulation_sensor:
+        entry["simulation_sensor"] = simulation_sensor
+    known = {s: w for s, w in states.items() if w is not None}
+    if grade is None or not known:
+        entry["status"] = "unconfigured"
+        entry["notes"] = "no defensible power value supplied"
+        return {"component": entry, "sources": [], "records": [], "grade": None}
+    source_id = f"USER-{name}"
+    source = EvidenceSourceSpec(source_id, source_type, citation or f"{source_type} for {name}")
+    records, entry_states = [], {}
+    for state, watts in known.items():
+        record = EvidenceRecordSpec(
+            f"user.{name}.{state.lower()}",
+            name,
+            "electrical_power",
+            "W",
+            value=float(watts),
+            bound="measured_mean" if source_type == "measurement" else "nominal",
+            relation=relation,
+            grade=grade,
+            sources=(source_id,) if grade != "D" else (),
+            location={"note": locator} if locator else {},
+        )
+        records.append(record.to_mapping())
+        entry_states[state] = {"evidence": record.id}
+    entry["states"] = entry_states
+    entry["initial_state"] = next(iter(entry_states))
+    return {
+        "component": entry,
+        "sources": [source.to_mapping()] if grade != "D" else [],
+        "records": records,
+        "grade": grade,
+    }

@@ -133,6 +133,9 @@ def run_mission(
                     if not completion:
                         completion, completion_time = True, rows[-1]["time_s"]
         metadata = env.logger.metadata
+        from ..report import EnergyReport
+
+        report = EnergyReport.from_runtime(env.energy).to_dict()
     finally:
         base.step = original_step
         # Covers constructor failures as well as normal context-managed shutdown.
@@ -165,7 +168,13 @@ def run_mission(
     )
     write_json(output_dir / "energy.jsonl.metadata.json", metadata)
     write_json(output_dir / "metrics.json", metrics)
-    return {"metrics": metrics, "provenance": metadata, "output_dir": str(output_dir)}
+    write_json(output_dir / "report.json", report)
+    return {
+        "metrics": metrics,
+        "provenance": metadata,
+        "output_dir": str(output_dir),
+        "report": report,
+    }
 
 
 def compare_models(config, commands, output_dir, *, levels=("L0", "L1"), **kwargs):

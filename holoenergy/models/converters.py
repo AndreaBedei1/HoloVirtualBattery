@@ -1,5 +1,7 @@
 """Per-rail lumped efficiency, eta=Pout/Pin (S9, TI SLVA390A Eq.13)."""
 
+import copy
+
 from .._validation import keys, number
 
 
@@ -25,3 +27,9 @@ class ConverterModel:
 
     def input_power(self, propulsion_W, payload_W, hotel_W):
         return propulsion_W / self.propulsion + payload_W / self.payload + hotel_W / self.hotel
+
+    def with_payload_efficiency(self, efficiency):
+        """Copy whose payload rail has ``efficiency`` (the tick's rail mix; see rails.py)."""
+        other = copy.copy(self)
+        other.payload = number(efficiency, "payload mix efficiency", positive=True, maximum=1)
+        return other

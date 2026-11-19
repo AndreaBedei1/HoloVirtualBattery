@@ -1,0 +1,25 @@
+# Source: Lv et al. 2020, Electronics 9(9):1425, doi 10.3390/electronics9091425. Section 2.2.1, Table 2 (PDF page 5).
+# Cell: Samsung 30Q INR18650 (Table 1, p.4); the test object is stated as a battery of 10 parallel cells (p.4). Temperature 25 degC stated for the pulse-discharge identification (p.7, text under Fig. 5).
+# OCV obtained by the "static method" after 1 C pulsed discharge, 3 min pulses with 2 h rests (p.4). Absolute current of the "1 C" pulse is not printed.
+# Values copied verbatim. soc is a fraction as printed (1 = full). The printed table is two side-by-side column pairs; rows below are in descending SOC order.
+soc,ocv_V
+1,4.1617
+0.9503,4.0913
+0.9007,4.0749
+0.8510,4.0606
+0.8013,4.0153
+0.7517,3.9592
+0.7020,3.9164
+0.6524,3.8687
+0.6027,3.8163
+0.5530,3.7735
+0.5034,3.7317
+0.4537,3.6892
+0.4040,3.6396
+0.3543,3.5677
+0.3046,3.5208
+0.2550,3.4712
+0.2053,3.3860
+0.1556,3.2880
+0.1059,3.2037
+0.0563,3.0747

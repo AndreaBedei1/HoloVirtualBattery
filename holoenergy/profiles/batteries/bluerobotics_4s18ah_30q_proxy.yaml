@@ -1,0 +1,46 @@
+# Blue Robotics 14.8 V 18 Ah (4S6P) with a cell-level OCV proxy: pack OCV = 4 x Samsung
+# INR18650-30Q cell OCV (Song and Lee 2023, Table A1; checked against Lv et al. 2020, Table 2).
+# Grade C (proxy: the cell identity of the pack is implied, not proven). Everything else is the
+# v2 profile unchanged: ratings A, resistance a cell-derived lower-bound proxy (C).
+model: rint
+chemistry: Li-ion (INR18650-30Q NCA cells implied by the linked datasheet)
+cells: {series: 4, parallel: 6, cell_model: Samsung INR18650-30Q (implied)}
+capacity_Ah: 18.0
+nominal_voltage_V: 14.8
+initial_soc: 1.0
+cutoff_voltage_V: 12.0
+max_current_A: 60.0
+internal_resistance_ohm: 0.01329
+low_soc_threshold: 0.2
+ocv_curve:
+  - [0.0, 11.3108]
+  - [0.1, 12.8076]
+  - [0.2, 13.4052]
+  - [0.3, 14.08]
+  - [0.4, 14.5288]
+  - [0.5, 14.9344]
+  - [0.6, 15.2816]
+  - [0.7, 15.6672]
+  - [0.8, 16.0628]
+  - [0.9, 16.306]
+  - [1.0, 16.6728]
+capacity_temperature_curve: [[25.0, 1.0]]
+resistance_temperature_curve: [[25.0, 1.0]]
+max_current_temperature_curve: [[25.0, 1.0]]
+metadata:
+  evidence:
+    capacity_Ah: bluerobotics_4s_18ah.capacity
+    nominal_voltage_V: bluerobotics_4s_18ah.nominal_voltage
+    cutoff_voltage_V: bluerobotics_4s_18ah.minimum_voltage
+    max_current_A: bluerobotics_4s_18ah.max_continuous_current
+    internal_resistance_ohm: bluerobotics_4s_18ah.dc_resistance_cell_derived
+    ocv_curve: bluerobotics_4s_18ah.ocv_curve_30q_cell_proxy
+  temperature_characterized: false
+  placeholders:
+    - capacity_temperature_curve
+    - resistance_temperature_curve
+    - max_current_temperature_curve
+  notes: >-
+    Temperature curves are identities (no temperature dependence modelled), not measurements.
+    Resistance excludes interconnect/wiring; a pack pulse test is required. The OCV is a
+    25 degC fresh-cell table; below the 12.0 V cutoff the curve is not used.

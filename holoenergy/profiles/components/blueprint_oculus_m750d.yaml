@@ -1,0 +1,13 @@
+# Blueprint Subsea Oculus M750d multibeam imaging sonar. The datasheet gives only the M/MT/MD
+# family range 10-35 W (model and range dependent; record blueprint_oculus_m750d.power_range):
+# ACTIVE uses the published maximum and is labelled an upper bound. No supply range is
+# recorded, so none is declared. No HoloOcean sensor is mapped: the electrical load is modelled,
+# the sonar measurement is not simulated.
+name: imaging_sonar_oculus
+device: blueprint_oculus_m750d
+category: sensors
+relation: representative
+active_is_upper_bound: true
+states:
+  ACTIVE: {evidence: blueprint_oculus_m750d.power_range, use: value_max}
+initial_state: ACTIVE

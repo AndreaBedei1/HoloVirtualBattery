@@ -15,6 +15,7 @@ from .models.converters import ConverterModel
 from .models.hotel_load import HotelLoad
 from .models.power_manager import PowerManager
 from .models.propulsion import PropulsionModel
+from .models.rails import RailSet
 from .models.thermal import IdealThermalModel, ThermalModel
 from .models.vehicle import VehicleProfile, vector3
 
@@ -107,6 +108,9 @@ class EnergyAwareEnv:
             raise ConfigurationError("Supply explicit hotel_load.constant_W (zero is allowed)")
         self.hotel = HotelLoad(self.config["hotel_load"])
         self.converters = ConverterModel(self.config.get("converters", {}))
+        self.rails = RailSet(
+            self.config.get("rails"), self.converters.payload, self.payload.components
+        )
         self.power_manager = PowerManager(
             self.battery, self.thermal, self.propulsion, self.converters
         )
@@ -490,6 +494,7 @@ class EnergyAwareEnv:
             self.hotel.power_W,
             dt,
             action_factor_limit=self._backend_action_limit(action),
+            payload_efficiency=self.rails.mix_efficiency(sensor_requested, external_total_W),
         )
         # Monotone shedding: never reconnect a tripped rail within the same tick.
         for _ in range(len(sensor_requested)):
@@ -510,6 +515,7 @@ class EnergyAwareEnv:
                 self.hotel.power_W,
                 dt,
                 action_factor_limit=self._backend_action_limit(action),
+                payload_efficiency=self.rails.mix_efficiency(sensor_requested, external_total_W),
             )
         forces_out = plan.action if self.apply_derating else action
         backend_residual, backend_info = 0.0, {}
@@ -590,10 +596,10 @@ class EnergyAwareEnv:
             "power_battery_loss_W": point.resistive_loss_W,
             "heat_generated_W": point.heat_W,
             "requested_power_W": plan.requested_power_W
-            + sum(sensor_demand[name] for name in disconnected) / self.converters.payload,
+            + self.rails.bus_power_W({name: sensor_demand[name] for name in disconnected}),
             "available_power_W": plan.available_power_W,
             "unmet_power_W": max(0, plan.requested_power_W - point.power_W)
-            + sum(sensor_demand[name] for name in disconnected) / self.converters.payload,
+            + self.rails.bus_power_W({name: sensor_demand[name] for name in disconnected}),
             "temperature_C": self.thermal.temperature_C,
             "water_temperature_C": self.thermal.ambient_C,
             "thermal_derating_factor": self.thermal.derating_factor,

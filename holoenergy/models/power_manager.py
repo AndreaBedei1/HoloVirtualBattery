@@ -29,7 +29,9 @@ class PowerManager:
         self.propulsion = propulsion
         self.converters = converters or ConverterModel({})
 
-    def plan(self, action, payload_W, hotel_W, dt_s, *, action_factor_limit=1.0):
+    def plan(
+        self, action, payload_W, hotel_W, dt_s, *, action_factor_limit=1.0, payload_efficiency=None
+    ):
         action_factor_limit = number(
             action_factor_limit, "action_factor_limit", minimum=0, maximum=1
         )
@@ -58,6 +60,8 @@ class PowerManager:
         v_min = u - i_max * r
         available = i_max * v_min
         c = self.converters
+        if payload_efficiency is not None:
+            c = c.with_payload_efficiency(payload_efficiency)
         fixed = c.input_power(0, payload_W, hotel_W)
         requested_prop = (
             sum(self.propulsion.powers(self.propulsion.bounded_request(action, u), u))

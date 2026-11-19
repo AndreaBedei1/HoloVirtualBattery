@@ -192,7 +192,30 @@ class EvidenceMap:
         else:
             self.ocv_grade = None  # L0: nominal voltage, no OCV curve
         self.propulsion_relation = (evidence.get("propulsion") or {}).get("relation")
+        # Identity of the battery voltage model: two runs with the same signature present the
+        # same bus voltage for the same current history (review R5-02 follow-up).
+        import hashlib
+        import json as _json
+
+        voltage_keys = (
+            "model",
+            "ocv_curve",
+            "ocv_temperature_curves",
+            "internal_resistance_ohm",
+            "resistance_temperature_curve",
+            "resistance_soc_temperature_curves",
+            "capacity_Ah",
+            "capacity_Wh",
+            "nominal_voltage_V",
+            "initial_soc",
+        )
+        self.battery_signature = hashlib.sha256(
+            _json.dumps(
+                {k: battery.get(k) for k in voltage_keys}, sort_keys=True, default=str
+            ).encode()
+        ).hexdigest()[:16]
         self.stale_links = self._check_links(config)
+        self._check_ocv_link(battery)
         (
             self.actuator_grades,
             self.actuator_records,
@@ -212,6 +235,14 @@ class EvidenceMap:
             "payload": float(converters.get("payload_efficiency", 1.0)),
             "hotel": float(converters.get("hotel_efficiency", 1.0)),
         }
+        from ..models.rails import RailSet
+
+        # Named rails (review R3-02): the same RailSet the energy model uses.
+        self.rail_set = RailSet(
+            config.get("rails"), self.efficiencies["payload"], payload.components
+        )
+        for rail_name, rail in self.rail_set.rails.items():
+            self.efficiencies[rail_name] = rail.model_efficiency
         self.unconfigured, self.legacy_unlinked = [], []
         capabilities = {}
         for name, item in payload.components.items():
@@ -265,7 +296,47 @@ class EvidenceMap:
                     and _matches(record, self.efficiencies[rail])
                 )
             verified[rail] = has_evidence
+        for name, rail in self.rail_set.rails.items():
+            if rail.kind == "direct":
+                verified[name] = True  # no converter: there is no conversion loss to model
+                continue
+            ok = False
+            if rail.efficiency is not None and rail.efficiency_evidence is not None:
+                record = self.registry.get(rail.efficiency_evidence)
+                ok = (
+                    record.configured
+                    and "efficiency" in record.quantity
+                    and cap_grade(record.grade, rail.relation) != "D"
+                    and _matches(record, rail.efficiency)
+                )
+            verified[name] = ok
         return verified
+
+    def rail_of(self, device):
+        """Rail that supplies ``device``: propulsion, hotel, a named rail or the payload rail."""
+        if device in self.actuators:
+            return "propulsion"
+        if device == "hotel_constant":
+            return "hotel"
+        return self.rail_set.rail_of(device)
+
+    def rail_energy_candidates(self, rail):
+        """Components on ``rail`` with a positive configured power (pre-run view)."""
+        if rail == "hotel":
+            return [
+                d
+                for d in ("hotel_constant",)
+                if any(v > 0 for v in (self.used_powers.get(d) or {}).values())
+            ]
+        return [
+            name
+            for name, assigned in self.rail_set.assignment.items()
+            if assigned == rail and any(v > 0 for v in (self.used_powers.get(name) or {}).values())
+        ]
+
+    def rails_in_use(self):
+        used = {"payload", "hotel"} | set(self.rail_set.assignment.values())
+        return {r: ok for r, ok in self.rail_verified.items() if r in used}
 
     def _supply_mismatches(self, payload):
         """Components whose declared supply domain does not contain the bus voltage range and
@@ -277,11 +348,37 @@ class EvidenceMap:
         result = {}
         for name, item in payload.components.items():
             supply = getattr(item, "supply_V", None)
-            if supply is None or low is None or name in served:
+            if supply is None or name in served:
+                continue
+            rail = self.rail_set.rails.get(self.rail_set.rail_of(name))
+            if rail is not None and rail.kind == "converter":
+                out = rail.output_V
+                if out < supply[0] - 1e-9 or out > supply[1] + 1e-9:
+                    result[name] = {"supply_V": list(supply), "rail": rail.name, "rail_V": out}
+                continue
+            if low is None:
                 continue
             if low < supply[0] - 1e-9 or high > supply[1] + 1e-9:
                 result[name] = {"supply_V": list(supply), "bus_V": [low, high]}
+                if rail is not None:
+                    result[name]["rail"] = rail.name
         return result
+
+    @staticmethod
+    def supply_message(name, info):
+        """Plain-language statement of a supply-domain mismatch and what would fix it."""
+        need = f"{info['supply_V'][0]:g}-{info['supply_V'][1]:g} V"
+        if "rail_V" in info:
+            return (
+                f"{name} requires {need}; rail {info['rail']} supplies {info['rail_V']:g} V. "
+                "Move it to a rail inside its supply range."
+            )
+        where = f"rail {info['rail']} (pack direct)" if info.get("rail") else "the pack bus"
+        return (
+            f"{name} requires {need}; {where} spans {info['bus_V'][0]:g}-{info['bus_V'][1]:g} V. "
+            "Add a converter rail inside its supply range or choose another supply; until then "
+            "its reported energy excludes conversion loss."
+        )
 
     def _update_double_counting(self):
         self.double_counting = {
@@ -294,6 +391,25 @@ class EvidenceMap:
                 "double counting rejected (evidence.double_counting: error): "
                 + "; ".join(f"'{c}' by {', '.join(n)}" for c, n in self.double_counting.items())
             )
+
+    def _check_ocv_link(self, battery):
+        """An OCV record that carries its curve verifies only that curve (stale-link rule)."""
+        if not self.ocv_record or self.ocv_record not in self.registry.records:
+            return
+        points = (self.registry.get(self.ocv_record).dataset or {}).get("points")
+        if not points:
+            return
+        configured = [[float(a), float(b)] for a, b in battery.get("ocv_curve") or []]
+        expected = [[float(a), float(b)] for a, b in points]
+        if len(configured) != len(expected) or any(
+            abs(a[0] - b[0]) > 1e-12 or abs(a[1] - b[1]) > 1e-9
+            for a, b in zip(configured, expected, strict=True)
+        ):
+            self.stale_links.append(
+                f"stale evidence link: battery.ocv_curve -> {self.ocv_record} (curve differs "
+                "from the record); graded D"
+            )
+            self.ocv_grade = "D"
 
     def _check_links(self, config):
         """Drop evidence links whose record no longer describes the configured value.
@@ -419,12 +535,8 @@ class EvidenceMap:
         return grade, record_id, relation
 
     def efficiency_for(self, device):
-        """Converter efficiency of the rail that serves ``device``."""
-        if device in self.actuators:
-            return self.efficiencies["propulsion"] or 1.0
-        if device == "hotel_constant":
-            return self.efficiencies["hotel"] or 1.0
-        return self.efficiencies["payload"] or 1.0
+        """Converter efficiency of the rail that serves ``device`` (as charged by the model)."""
+        return self.efficiencies.get(self.rail_of(device)) or 1.0
 
     def update_grades(self, grades, relations=None, bounds=None, records=None, used_powers=None):
         """Grades/relations/bounds of devices an attached source created after attach()."""
@@ -500,18 +612,24 @@ class EvidenceMap:
         ]
         result += list(self.stale_links)
         for name, info in sorted(getattr(self, "supply_mismatches", {}).items()):
-            result.append(
-                f"{name} requires a {info['supply_V'][0]:g}-{info['supply_V'][1]:g} V supply but the "
-                f"bus spans {info['bus_V'][0]:g}-{info['bus_V'][1]:g} V; no converter is configured, so "
-                "its reported energy excludes conversion loss"
-            )
-        for rail, ok in sorted(getattr(self, "rail_verified", {}).items()):
+            result.append(self.supply_message(name, info))
+        for rail, ok in sorted(self.rails_in_use().items()):
             if not ok:
-                result.append(
-                    f"{rail} rail efficiency 1.0 has no evidence: conversion loss is not modelled "
-                    "and the energy of its loads is a lower bound"
-                )
+                result.append(self._rail_text(rail))
         return result
+
+    def _rail_text(self, rail):
+        efficiency = self.efficiencies.get(rail)
+        named = self.rail_set.rails.get(rail)
+        if named is not None and named.efficiency is None:
+            return (
+                f"{rail} rail converter efficiency is unknown: charged at 1.0, so the bus-side "
+                "energy of its loads is a lower bound"
+            )
+        return (
+            f"{rail} rail efficiency {efficiency:g} has no evidence: conversion loss is not "
+            "modelled from evidence and the energy of its loads is a lower bound"
+        )
 
     def grade(self, device, state):
         if device in self.actuators:
@@ -628,12 +746,13 @@ class EvidenceMap:
         return result
 
     def rail_energy_Wh(self, device_state_energy_Wh):
-        """Energy drawn through the payload and hotel rails."""
-        rails = {"payload": 0.0, "hotel": 0.0}
+        """Load-side energy drawn through each non-propulsion rail."""
+        rails = {"payload": 0.0, "hotel": 0.0, **dict.fromkeys(self.rail_set.rails, 0.0)}
         for device, states in device_state_energy_Wh.items():
             if device in self.actuators:
                 continue
-            rails["hotel" if device == "hotel_constant" else "payload"] += sum(states.values())
+            rail = self.rail_of(device)
+            rails[rail] = rails.get(rail, 0.0) + sum(states.values())
         return rails
 
     def _domain_warnings(self, device_state_energy_Wh, total):
@@ -665,11 +784,7 @@ class EvidenceMap:
                     "states": [],
                     "energy_Wh": energy,
                     "share_percent": 100 * energy / total if total else None,
-                    "effect": (
-                        f"{name} requires {info['supply_V'][0]:g}-{info['supply_V'][1]:g} V but the "
-                        f"bus spans {info['bus_V'][0]:g}-{info['bus_V'][1]:g} V; no converter is "
-                        "configured, so the reported energy excludes conversion loss"
-                    ),
+                    "effect": self.supply_message(name, info),
                 }
             )
         for rail, energy in self.rail_energy_Wh(device_state_energy_Wh).items():
@@ -681,8 +796,7 @@ class EvidenceMap:
                         "states": [],
                         "energy_Wh": energy,
                         "share_percent": 100 * energy / total if total else None,
-                        "effect": "converter efficiency 1.0 without evidence: conversion loss is "
-                        "not modelled and the rail's energy is a lower bound",
+                        "effect": self._rail_text(rail),
                     }
                 )
         return out

@@ -111,6 +111,51 @@ parameters:
       No OCV-SOC data published for the pack or the INR18650-30Q cell (datasheet gives
       discharge curves under load only). The v0.1 illustrative curve remains a declared
       placeholder; L1 voltage predictions inherit grade D.
+  - id: bluerobotics_4s_18ah.ocv_curve_30q_cell_proxy
+    component: bluerobotics_4s_18ah
+    quantity: open_circuit_voltage_curve
+    unit: null
+    bound: typical
+    relation: proxy
+    grade: C
+    sources: [SONG2023, LV2020]
+    location:
+      table: SONG2023 Appendix A Table A1; LV2020 Table 2
+      page: SONG2023 pp. 16-17; LV2020 p. 5
+      section: LV2020 Section 2.2.1
+    conditions:
+      cell: Samsung INR18650-30Q
+      temperature_C: 25
+      SONG2023_c_rate: 0.5 C
+      LV2020_method: static OCV after 1 C pulses (3 min pulses, 2 h rests), 10-parallel block
+    derivation: >-
+      Pack OCV = 4 x cell OCV (4S6P; parallel strings do not change the OCV). Cell values from
+      SONG2023 Table A1 (11 points, SOC 0-1). LV2020 Table 2 is an independent measured check:
+      largest difference 0.0363 V per cell at SOC 0.0563 (linear
+      interpolation of the SONG2023 table).
+    uncertainty:
+      cross_source_max_abs_V_per_cell: 0.0363
+    dataset:
+      path: profiles/batteries/bluerobotics_4s18ah_30q_proxy.yaml
+      description: ocv_curve of the profile (pack = 4 x cell, SONG2023 Table A1)
+      transformation: pack = 4 x cell
+      points:
+          - [0.0, 11.3108]
+          - [0.1, 12.8076]
+          - [0.2, 13.4052]
+          - [0.3, 14.08]
+          - [0.4, 14.5288]
+          - [0.5, 14.9344]
+          - [0.6, 15.2816]
+          - [0.7, 15.6672]
+          - [0.8, 16.0628]
+          - [0.9, 16.306]
+          - [1.0, 16.6728]
+    notes: >-
+      Proxy: the pack's cell identity is implied by the 30Q datasheet linked from the Blue
+      Robotics product page, not proven. Single temperature (25 degC), fresh cells, no
+      hysteresis, no ageing, no cell-to-cell spread and no interconnect effects. Cell-level
+      grade B capped at C by the proxy relation.
   - id: bluerobotics_4s_15_6ah.capacity
     component: bluerobotics_4s_15_6ah
     quantity: nominal_capacity

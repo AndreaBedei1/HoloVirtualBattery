@@ -31,7 +31,7 @@ Repository = "https://github.com/AndreaBedei1/HoloVirtualBattery"
 include = ["holoenergy*"]
 
 [tool.setuptools.package-data]
-holoenergy = ["profiles/*.json", "profiles/*.yaml", "profiles/**/*.yaml", "profiles/**/*.json", "dashboard/*.html", "evidence/data/*.yaml", "evidence/data/**/*.yaml"]
+holoenergy = ["profiles/*.json", "profiles/*.yaml", "profiles/**/*.yaml", "profiles/**/*.json", "dashboard/*.html", "dashboard/static/*", "evidence/data/*.yaml", "evidence/data/**/*.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

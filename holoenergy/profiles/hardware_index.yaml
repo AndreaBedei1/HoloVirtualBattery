@@ -1,0 +1,50 @@
+# Display metadata for the hardware library (names only; no physical values).
+# Every number shown in the library comes from the profile and its evidence records.
+components:
+  bluerobotics-4k-camera: {manufacturer: Blue Robotics, model: 4K USB camera, type: Camera}
+  bluerobotics-lowlight-usb-camera: {manufacturer: Blue Robotics, model: Low-Light HD USB Camera, type: Camera}
+  bluerobotics-lumen: {manufacturer: Blue Robotics, model: Lumen Subsea Light, type: Light}
+  bluerobotics-navigator: {manufacturer: Blue Robotics, model: Navigator flight controller, type: Flight controller}
+  bluerobotics-ping360: {manufacturer: Blue Robotics, model: Ping360, type: Scanning sonar}
+  bluerobotics-ping-sonar: {manufacturer: Blue Robotics, model: Ping2 echosounder, type: Echosounder}
+  blueprint-oculus-m750d: {manufacturer: Blueprint Subsea, model: Oculus M750d, type: Imaging sonar}
+  cerulean-surveyor-240-16: {manufacturer: Cerulean Sonar, model: Surveyor 240-16, type: Profiling sonar}
+  edgetech-2205: {manufacturer: EdgeTech, model: 2205, type: Side-scan sonar}
+  jetson-orin-nx-16gb: {manufacturer: NVIDIA, model: Jetson Orin NX 16GB, type: Computer}
+  kongsberg-m3-500m: {manufacturer: Kongsberg, model: M3 Sonar (500 m), type: Multibeam sonar}
+  raspberry-pi-4b: {manufacturer: Raspberry Pi, model: Raspberry Pi 4 Model B, type: Computer}
+  seabird-sbe49: {manufacturer: Sea-Bird Scientific, model: SBE 49 FastCAT, type: CTD}
+  sonardyne-sprint-nav-mini: {manufacturer: Sonardyne, model: SPRINT-Nav Mini, type: DVL + INS}
+  te-ms5837-30ba: {manufacturer: TE Connectivity, model: MS5837-30BA, type: Depth sensor}
+  tritech-gemini-720is: {manufacturer: Tritech, model: Gemini 720is, type: Imaging sonar}
+  tritech-micron: {manufacturer: Tritech, model: Micron, type: Scanning sonar}
+  ublox-zed-f9p: {manufacturer: u-blox, model: ZED-F9P, type: GNSS}
+  vectornav-vn100-rugged: {manufacturer: VectorNav, model: VN-100 Rugged, type: IMU / AHRS}
+  waterlinked-dvl-a50: {manufacturer: Water Linked, model: DVL A50, type: DVL}
+actuators:
+  bluerobotics-t200: {manufacturer: Blue Robotics, model: T200, type: Thruster}
+  demo-auv-propulsor: {manufacturer: demonstration, model: AUV propulsor (user numbers), type: Propulsor}
+  demo-compact-thruster: {manufacturer: demonstration, model: Compact thruster (user numbers), type: Thruster}
+  proxy-alr6000-propulsor: {manufacturer: literature proxy, model: Autosub Long Range 6000 propulsor, type: Propulsor}
+  proxy-mares-thruster: {manufacturer: literature proxy, model: MARES thruster, type: Thruster}
+  proxy-remus-propulsor: {manufacturer: literature proxy, model: REMUS propulsor, type: Propulsor}
+  proxy-tethys-propulsor: {manufacturer: literature proxy, model: Tethys propulsor, type: Propulsor}
+batteries:
+  bluerobotics-4s-18ah: {manufacturer: Blue Robotics, model: Lithium-ion 14.8 V 18 Ah, type: Battery}
+  bluerobotics-4s-18ah-30q-proxy: {manufacturer: Blue Robotics, model: Lithium-ion 14.8 V 18 Ah (30Q cell OCV proxy), type: Battery}
+  bluerobotics-4s-18ah-v0.1: {manufacturer: Blue Robotics, model: Lithium-ion 14.8 V 18 Ah (v0.1 placeholder), type: Battery}
+  demo-24v30ah: {manufacturer: demonstration, model: 24 V 30 Ah (user numbers), type: Battery}
+modems:
+  ahoi-bridge-max: {manufacturer: TUHH ahoi, model: ahoi modem (bridge, max), type: Acoustic modem}
+  benthos-atm900-level8: {manufacturer: Teledyne Benthos, model: ATM-900 (level 8), type: Acoustic modem}
+  evologics-s2cm-18-34-1000m: {manufacturer: EvoLogics, model: S2CM 18/34 (1000 m), type: Acoustic modem}
+  evologics-s2cm-18-34-2000m: {manufacturer: EvoLogics, model: S2CM 18/34 (2000 m), type: Acoustic modem}
+  evologics-s2cm-18-34-3500m: {manufacturer: EvoLogics, model: S2CM 18/34 (3500 m), type: Acoustic modem}
+  evologics-s2cm-18-34-max: {manufacturer: EvoLogics, model: S2CM 18/34 (max), type: Acoustic modem}
+  hydromea-luma250lp-max: {manufacturer: Hydromea, model: LUMA 250LP, type: Optical modem}
+  hydromea-lumax-max: {manufacturer: Hydromea, model: LUMA X, type: Optical modem}
+  semtech-sx1276-14dbm-upper: {manufacturer: Semtech, model: SX1276 (14 dBm, upper bound), type: RF modem}
+  sonardyne-bluecomm200: {manufacturer: Sonardyne, model: BlueComm 200, type: Optical modem}
+  subnero-wnc-m25mso4: {manufacturer: Subnero, model: WNC M25MSO4, type: Acoustic modem}
+  wfs-seatooth-s100-max: {manufacturer: WFS Technologies, model: Seatooth S100, type: EM modem}
+  whoi-micromodem2-25khz: {manufacturer: WHOI, model: Micro-Modem 2 (25 kHz), type: Acoustic modem}

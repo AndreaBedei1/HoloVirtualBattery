@@ -30,7 +30,7 @@ def test_start_live_reset_end_and_clean_shutdown():
     with DashboardServer(0, 0) as server:
         url, port = server.url, server.telemetry_port
         with urllib.request.urlopen(url, timeout=2) as response:
-            assert b"Mission monitor" in response.read()
+            assert b"HoloEnergy" in response.read()
         assert snapshot(server)["status"] == "waiting"
         with TelemetryPublisher(port, 100) as publisher:
             publisher.publish(

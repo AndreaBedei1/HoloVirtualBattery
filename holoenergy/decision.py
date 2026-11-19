@@ -269,11 +269,18 @@ class EnergyComparison:
         return result
 
 
-def _contributions(report, min_grade=None):
+def _worse(a, b):
+    grades = [g for g in (a, b) if g in GRADE_ORDER]
+    return max(grades, key=GRADE_ORDER.index) if grades else None
+
+
+def _contributions(report, min_grade=None, open_voltage_below=None):
     """key -> (energy, record, low_dev, high_dev, scale, rail); None marks an open side.
 
     Device-side bounds; ``scale`` converts to the bus side. Unknown contributions (unconfigured
     loads, unmodelled supply conversion) have unknown energy and never cancel (adversarial C3).
+    A voltage-dependent actuator contribution is opened when its bus-voltage evidence
+    (``voltage_grade``) is below ``min_grade`` or below ``open_voltage_below``.
     """
     intervals = _intervals(report)
     out = {}
@@ -293,11 +300,15 @@ def _contributions(report, min_grade=None):
         )
     for row in intervals.get("point_contributions", []):
         e = row["energy_Wh"]
+        vg = row.get("voltage_grade")
+        refused = _below(_worse(row.get("grade"), vg), min_grade) or (
+            open_voltage_below is not None and _below(vg, open_voltage_below)
+        )
         out[(row["device"], row["state"])] = (
             e,
             "point",
-            e,
-            e,
+            0.0 if refused else e,
+            None if refused else e,
             row.get("scale", 1.0),
             row.get("rail", "propulsion"),
         )
@@ -344,7 +355,8 @@ def _rail_sums(contribs, keys, unverified=()):
         x = contribs.get(key)
         if x is None:
             continue
-        rail = x[5] if x[5] in sums else "payload"
+        rail = x[5] or "payload"
+        sums.setdefault(rail, [0.0, 0.0])
         scale = 1.0 if rail in unverified else x[4]
         sums[rail][0] += x[2] * scale
         sums[rail][1] = (
@@ -362,8 +374,9 @@ def _lower_supported(x_sums, y_sums, x_unverified, y_unverified):
     unverified, X's contribution on it must be zero. If only Y's is, s = 1 is Y's worst case.
     """
     delta = 0.0
-    for rail in RAILS:
-        x_hi, y_lo = x_sums[rail][1], y_sums[rail][0]
+    for rail in sorted(set(x_sums) | set(y_sums)):
+        x_hi = x_sums.get(rail, [0.0, 0.0])[1]
+        y_lo = y_sums.get(rail, [0.0, 0.0])[0]
         if x_hi is None:
             return False, None
         term = x_hi - y_lo
@@ -383,8 +396,14 @@ def compare_energy(report_a, report_b, *, tolerance=1e-9, min_grade=None):
     contribution enters with its supported interval (no lower bound -> zero, no upper bound ->
     open). Rails without converter evidence are handled by :func:`_lower_supported`.
     """
-    ca, cb = _contributions(report_a, min_grade), _contributions(report_b, min_grade)
     ia, ib = _intervals(report_a), _intervals(report_b)
+    va, vb = ia.get("battery_voltage") or {}, ib.get("battery_voltage") or {}
+    same_battery = va.get("signature") is not None and va.get("signature") == vb.get("signature")
+    # Different battery voltage models: a propulsion difference rests on their OCV evidence, so
+    # a grade-D (placeholder) curve cannot support it. A shared model is a common assumption.
+    open_below = None if same_battery else "C"
+    ca = _contributions(report_a, min_grade, open_below)
+    cb = _contributions(report_b, min_grade, open_below)
     unverified_a = {r for r, ok in ia.get("rail_verified", {}).items() if not ok}
     unverified_b = {r for r, ok in ib.get("rail_verified", {}).items() if not ok}
 
@@ -407,6 +426,15 @@ def compare_energy(report_a, report_b, *, tolerance=1e-9, min_grade=None):
     a_lower, d_high = _lower_supported(sa, sb, unverified_a, unverified_b)
     b_lower, d_neg = _lower_supported(sb, sa, unverified_b, unverified_a)
     assumptions = []
+    if (
+        same_battery
+        and va.get("ocv_grade") in ("C", "D")
+        and any(x[5] == "propulsion" for x in (ca.get(k) or cb.get(k) for k in differing) if x)
+    ):
+        assumptions.append(
+            f"same battery voltage model in both runs (OCV grade {va.get('ocv_grade')}): "
+            "voltage-dependent actuator differences are conditional on it"
+        )
     shared = sorted(unverified_a & unverified_b)
     if shared:
         assumptions.append(

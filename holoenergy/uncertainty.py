@@ -49,9 +49,10 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
     points, opens = [], []  # complete the contribution list for paired comparisons
 
     def rail_of(device):
-        if device in evidence_map.actuators:
-            return "propulsion"
-        return "hotel" if device == "hotel_constant" else "payload"
+        return evidence_map.rail_of(device)
+
+    # Bus-voltage evidence behind voltage-dependent actuator power (None for an L0 pack).
+    voltage_grade = getattr(evidence_map, "ocv_grade", None)
 
     for device, states in device_states.items():
         for state, wh in states.items():
@@ -67,6 +68,10 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
                 "scale": scale,
                 "grade": evidence_map.grade(device, state),
             }
+            if rail == "propulsion" and voltage_grade is not None:
+                # Actuator power is read from tables at the bus voltage, which follows the
+                # battery OCV model: the contribution also rests on that evidence.
+                base["voltage_grade"] = voltage_grade
             record_id = evidence_map.records.get(device, {}).get(state)
             if record_id is None:
                 if rail != "propulsion":
@@ -143,6 +148,11 @@ def energy_intervals(summary, evidence_map, registry=None, used_values=None):
         "open_contributions": opens,
         "rail_efficiency": dict(getattr(evidence_map, "efficiencies", {})),
         "rail_verified": rail_verified,
+        "battery_voltage": {
+            "signature": getattr(evidence_map, "battery_signature", None),
+            "ocv_grade": voltage_grade,
+            "ocv_record": getattr(evidence_map, "ocv_record", None),
+        },
         "excluded": (
             "propulsion (manufacturer curve without published measurement uncertainty) and "
             "dynamics (simulator-owned); unconfigured loads and unmodelled conversion open the "

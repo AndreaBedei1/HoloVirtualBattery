@@ -232,6 +232,7 @@ def load_config(path=None, *, data=None):
             "sensors",
             "hotel_load",
             "converters",
+            "rails",
             "logging",
             "simulation",
             "power_manager",

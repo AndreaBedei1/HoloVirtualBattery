@@ -38,6 +38,7 @@ class ElectricalComponent(PayloadComponent):
                 "notes",
                 "supply_V",
                 "serves",
+                "rail",
             },
             f"component {name}",
         )
@@ -57,6 +58,10 @@ class ElectricalComponent(PayloadComponent):
         if not isinstance(serves, list) or not all(isinstance(x, str) and x for x in serves):
             raise ConfigurationError(f"{name}.serves must be a list of component names")
         self.serves = list(serves)
+        # Supply rail (holoenergy.models.rails); None keeps the legacy payload rail.
+        self.rail = config.get("rail")
+        if self.rail is not None and (not isinstance(self.rail, str) or not self.rail):
+            raise ConfigurationError(f"{name}.rail must be a rail name")
         from ..evidence import RELATION_MAX_GRADE, cap_grade, default_registry
 
         self.relation = config.get("relation", "exact")

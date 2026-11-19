@@ -12,7 +12,7 @@ from importlib.resources import files
 from pathlib import Path
 
 from ._validation import ConfigurationError
-from .config import _read, load_config
+from .config import _read, _resolve, load_config
 
 VEHICLES = {
     "bluerov2-heavy": {
@@ -69,6 +69,7 @@ VEHICLES = {
 }
 BATTERIES = {
     "bluerobotics-4s-18ah": "batteries/bluerobotics_4s18ah_v2.yaml",
+    "bluerobotics-4s-18ah-30q-proxy": "batteries/bluerobotics_4s18ah_30q_proxy.yaml",
     "bluerobotics-4s-18ah-v0.1": "batteries/bluerobotics_4s18ah.yaml",
     "demo-24v30ah": "batteries/demo_24v30ah.yaml",
 }
@@ -135,7 +136,12 @@ def vehicle_config(vehicle_profile, *, battery_profile=None, components=None, ov
     """Compose a configuration mapping from named profiles (no numbers are added here)."""
     data = {"profile": profile_reference(vehicle_profile, "vehicle")}
     if battery_profile is not None:
-        data["battery"] = {"profile": profile_reference(battery_profile, "battery")}
+        # Replace the vehicle's battery wholesale. A {"profile": ...} overlay would be merged
+        # under the vehicle's already-resolved battery fields, which would then win.
+        data = load_config(data=data)
+        data["battery"] = _resolve(
+            {"profile": profile_reference(battery_profile, "battery")}, Path.cwd()
+        )
     if components is not None:
         resolved = load_config(data=copy.deepcopy(data))
         existing = list(resolved.get("components", []))
